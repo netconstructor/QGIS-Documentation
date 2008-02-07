@@ -1,0 +1,548 @@
+% vim:autoindent:set textwidth=78:
+\section{Getting Started}\label{label_getstarted}
+
+Dieses Kapitel gibt einen Überblick, wie man QGIS startet und 
+erste Beispieldaten von der QGIS Webseite lädt und erkundet. 
+
+
+\subsection{Installation}\label{label_installation}
+\index{installation}
+
+Die Installation von QGIS ist in Appendix \ref{label_installation} dokumentiert. 
+Das Installationshandbuch wird mit den QGIS-Quellen bereitgestellt und ist auch 
+zugänglich unter \url{http://qgis.org}. Für Windows und Mac OS X steht QGIS als
+Standard-Installationspaket bereit.
+%XXX rewrite next sentence
+Binärpakete und aktuelle Informationen für verschiedene GNU/Linux Distributionen 
+gibt es auch auf der QGIS Webseite unter \url{http://qgis.org}.
+
+\subsection{Beispieldaten}\label{label_sampledata}
+\index{data!sample} 
+
+Wenn Sie keine GIS-Daten zur Hand haben, können Sie die Alaska Beispieldaten von
+der QGIS Webseite \url{http://qgis.org} herunterladen. Um das GRASS Plugin zu
+nutzen, kann eine Beispieldatenbank (z.B. spearfish60) von der Webseite des
+GRASS GIS Projektes \url{http://grass.itc.it/download/data.php} heruntergeladen 
+werden.
+
+Diese Datensätze werden auch als Basis für zahlreiche Beispiele und Screenshots in
+diesem Handbuch benutzt.
+
+\subsection{QGIS starten}\label{label_startinqgis}
+
+Wenn Sie QGIS bereits installiert haben, kann das Programm gestartet werden,
+indem Sie in der Kommandozeile eines Terminals den Befehl \textbf{qgis}
+eintippen oder unter MS Windows auf das QGIS Icon auf dem Desktop doppelklicken.
+Unter Mac OSX liegt das QGIS Icon im Programmordner.  
+
+\subsubsection{Optionen der Kommandozeile}\index{command line options}
+\label{label_commandline}
+
+QGIS unterstützt eine Reihe von Optionen, wenn es aus der Kommandozeile
+gestartet wird. Um eine Liste der vorhandenen Optionen anzuzeigen, geben Sie 
+\texttt{qgis --help} im Terminal ein. Die Ausgabe ist:
+
+\small
+\begin{verbatim}
+holl@bim:~ > qgis --help
+Quantum GIS - 0.8.0 'TITAN'
+Quantum GIS (QGIS) is a viewer for spatial data sets, including
+raster and vector data.
+Usage: qgis [options] [FILES]
+  options:
+        [--snapshot filename]   emit snapshot of loaded datasets to given file
+        [--lang language]       use language for interface text
+        [--project projectfile] load the given QGIS project
+        [--extent xmin,ymin,xmax,ymax]  set initial map extent
+        [--help]                this text
+
+  FILES:
+    Files specified on the command line can include rasters,
+    vectors, and QGIS project files (.qgs):
+     1. Rasters - Supported formats include GeoTiff, DEM
+        and others supported by GDAL
+     2. Vectors - Supported formats include ESRI Shapefiles
+        and others supported by OGR and PostgreSQL layers using
+        the PostGIS extension
+\end{verbatim}
+\normalsize
+
+\begin{Tip} \caption{\textsc{Beispiel zur Benutzung der Kommandozeile}}
+\qgistip{Beim Starten von QGIS können zu ladende Datensätze bereits mit
+angegeben werden. Wenn Sie sich z.B. in Ihrem Datenverzeichnis mit einer 
+Raster- und einer Vektordatei befinden, können diese beim Starten von QGIS 
+durch folgenden Befehl mitgeladen werden:    
+\ttfamily{qgis ak\_shade.tif alaska.shp majrivers.shp}
+}
+\end{Tip}
+
+\minisec{Option \texttt{--snapshot}}
+Diese Option ermöglicht es, einen Snapshot des aktuellen Kartenausschnitts in
+QGIS zu erstellen. Dies ist besonders dann nützlich, wenn Sie schnell eine
+Vielzahl von Snapshots generieren möchten.  
+% FIXME: this is currently broken in SVN Head (SH 22-06-2006)
+
+Dabei wird ein PNG mit einer Auflösung von 800x600 Pixeln generiert. Ein
+Dateiname wird vom Anwender festgelegt.
+
+\minisec{Option \texttt{--lang}}
+Auf Basis der Systemsprache Ihres PCs wird auch die Sprache der QGIS-Oberfläche 
+eingestellt. Wenn Sie diese ändern möchten, können Sie das mit der Option 
+\texttt{--lang} erreichen.
+
+\minisec{Option \texttt{--project}}
+Es ist auch möglich, beim Starten von QGIS ein Projekt zu laden. Fügen Sie dazu
+die Option \texttt{--project} mit dem Namen ihres Projektes hinzu und QGIS lädt
+alle darin enthaltenen Daten direkt beim Start.  
+
+\minisec{Option \texttt{--extent}}
+Um QGIS in einem bestimmten Ausschnitt Ihrer Daten zu starten, kann diese Option
+genutzt werden. Dazu wird durch die Eingabe von Eckkoordinaten eine 'Bounding
+Box' eingestellt. Die Koordinaten müssen durch Komma getrennt angegeben werden.  
+\begin{verbatim}
+--extent xmin,ymin,xmax,ymax
+\end{verbatim}
+
+\subsection{QGIS GUI}\index{main window}
+\label{label_qgismainwindow}
+
+Beim Starten von QGIS öffnet sich die grafische Benutzeroberfläche (GUI) wie in
+der folgenden Abbildung zu sehen. Die blauen Nummern von 1 bis 6 beziehen sich auf
+die sechs Hauptbereiche des Interfaces und werden unten genauer beschrieben.
+
+\begin{figure}[ht]
+   \begin{center}
+   \caption{Hauptfenster mit Spearfish Beispieldatensatz}\label{fig:startup}
+   \includegraphics[clip=true, width=17cm]{startup08}
+\end{center} 
+\end{figure}
+
+\textbf{Note:} Das Aussehen einzelner Bereiche (Menüleiste, etc.) kann abweichen
+in Abhängigkeit vom Betriebssystem und weiteren Einstellungen.
+
+Die QGIS GUI ist in sechs Bereiche unterteilt:
+
+\begin{enumerate}
+\item Menüleiste
+\item Werkzeugleiste
+\item Kartenlegende
+\item Kartenfenster
+\item Kartenübersicht
+\item Statusleiste
+\end{enumerate}
+
+Diese sechs Komponenten des QGIS Interfaces werden im folgenden Abschnitt 
+detailliert beschrieben.
+
+\subsubsection{Menüleiste}\label{label_menubar}
+\index{menus}
+
+Die Menüleiste bietet Zugriff auf verschiedene Anwendungen mit Hilfe eines
+hierarchischen Menüs. Das Hauptmenü mit einer kurzen Beschreibung der
+enthaltenen Funktionen finden Sie hier: 
+
+\begin{itemize}
+
+\item \textbf{Datei}
+\begin{itemize}
+\item \textbf{Neues Projekt}          - vgl. Abschnitt \ref{sec:projects}
+\item \textbf{Projekt öffnen}         - vgl. Abschnitt \ref{sec:projects}
+\item \textbf{Öffne aktuelle Projekte} - vgl. Abschnitt \ref{sec:projects}
+\item \textbf{Speichere Projekt}         - vgl. Abschnitt \ref{sec:projects}
+\item \textbf{Speichere Projekt als}      - vgl. Abschnitt \ref{sec:projects}
+\item Speichere Bild als
+\item Exportiere als MapServer Datei
+\item Drucken
+\item Beenden
+\end{itemize}
+
+\item Ansicht
+\begin{itemize}
+\item Volle Ausdehnung
+\item Auf die Auswahl zoomen
+\item Auf die Ebene zoomen
+\item Zur vorherigen Zoomeinstellung zurückkehren
+\item Erneuern
+\item Zeige Lesezeichen
+\item Neues Lesezeichen
+\end{itemize}
+
+\item Ebene
+\begin{itemize}
+\item \textbf{Füge eine Vektorebene hinzu}       - vgl. Abschnitt \ref{label_workingvector}
+\item \textbf{Füge eine Rasterebene hinzu}       - vgl. Abschnitt \ref{label_raster}
+\item \textbf{Füge eine PostGIS-Ebene hinzu}      - vgl. Abschnitt \ref{label_postgis}
+\item \textbf{WMS-Ebene hinzufügen}          - vgl. Abschnitt \ref{sec:ogc-wms}
+\item Ebene löschen
+\item Neue Vektorebene
+\item In Übersicht anziegen
+\item Alle zur Übersicht hinzufügen
+\item Alle von Übersicht entfernen
+\item Alle Ebenen ausblenden
+\item Alle Ebenen anzeigen
+\end{itemize}
+
+\item \textbf{Einstellungen}
+\begin{itemize}
+\item \textbf{Projekt Einstellungen}  - vgl. Abschnitt \ref{sec:projects}
+\item \textbf{Eigene Projektionen}   - vgl. Abschnitt \ref{sec:customprojections}
+\item \textbf{Optionen}             - vgl. Abschnitt \ref{subsec:gui_options}
+\end{itemize}
+
+\item \textbf{Plugins} - (Weitere Menüeinträge können durch Hinzuladen von
+Plugins ergänzt werden.)
+\begin{itemize}
+\item Plugin Manager
+\end{itemize}
+
+\item Hilfe
+\begin{itemize}
+\item Hilfe Übersicht
+\item QGIS Heimatseite
+\item QGIS Sourceforge
+\item Überprüfe die QGIS Version
+\item Über
+
+\end{itemize}
+
+\end{itemize}
+
+%See Appendix \ref{app_menu} for complete descriptions of the menu items.
+
+\subsubsection{Werkzeugleiste}\label{label_toolbars}
+\index{toolbars}
+
+Die Werkzeugleiste bietet mit Hilfe von Icons Zugriff auf alle Funktionen aus der
+Menüleiste sowie ein paar zusätzliche Tools, um mit der Karte zu interagieren.
+Jedes Icon der Werkzeugleiste bietet eine kurze Beschreibung ihrer Funktion. Indem 
+Sie mit der Maus über das Icon fahren, erscheint es.
+ 
+%%You can also use the \textit{Whats
+%%This?} tool (the arrow with a question mark next to it) to get more
+%%information about the tools and other components of the QGIS interface. To use
+%%it, click on the \textit{Whats This?} button and then click on the item of
+%%interest to display the information. 
+
+Jedes Untermenü der Werkzeugleiste kann nach eigenen Wünschen verschoben werden
+und jedes Untermenü kann auch an bzw. ausgeschaltet werden, indem 
+Sie mit der Maus in den Bereich der Werkzeugleiste fahren und auf den rechten 
+Mausknopf drücken.
+
+\begin{Tip}
+\caption{\textsc{Werkzeugleiste zurückholen}} \index{layout!toolbars}
+\qgistip{Wenn sie aus Versehen alle Untermenüs der Werkzeugleiste ausgeblendet
+haben, können Sie diese über den Knopf \texttt{Alle Werkzeugleisten anzeigen} 
+aus dem Menü Ansicht -> Werkzeugleisten wieder einblenden.}
+\end{Tip}
+
+%See Appendix \ref{app_toolbar} for complete
+%descriptions and illustrations of the various toolbars.  
+
+\subsubsection{Kartenlegende}\label{label_legend}
+\index{legend}
+
+% TODO The new legend features need to be described here briefly.
+% Marco, would you make a start what is new in the legend?!
+Die Kartenlegende wird dazu benutzt, die Sichtbarkeit und die Z-Anordnung der 
+Kartenebenen festzulegen. Z-Anordnung bedeutet, dass eine weiter oben in der
+Legende angeordnete Ebene über einer weiter unten angeordneten Ebene im
+Kartenfenster angezeigt wird. Mit der 'Checkbox' kann ausgewählt werden, ob eine
+Ebene angezeigt werden soll, oder nicht.\index{layer!visibility}
+
+Einzelne Ebenen können in der Legende zu Gruppen zusammengefasst werden. Gehen
+Sie dazu in den Bereich der Kartenlegende, klicken auf die rechte Maustaste und
+wählen Sie 'Gruppe hinzufügen'. Ein neuer Ordner erscheint und sie können Ebenen
+mit der Maus in diesen Ordner per 'drag and drop' verschieben. Um Ebenen wieder
+zurück in die Haupebene zu holen, gehen Sie mit der Maus in den Order
+ihrer Gruppe, wählen Sie eine Ebene aus, klicken auf den rechten Mausknopf und
+wählen 'Als Top-Level Objekt machen' aus. Um dem Gruppenordner einen anderen
+Namen zu geben, wählen Sie mit der Maus einen Ordner aus, klicken auf die 
+rechte Maustaste und wählen 'Umbenennen'.
+
+Wenn Sie Vektorebenen mit identischen Attributen anzeigen, kann die Darstellung
+der Symbole gruppiert werden. Dies bewirkt, dass bei Veränderung der Symbologie
+einer Ebene entsprechend auch die Symbologie der anderen Ebenen in der
+Gruppe angepasst wird. Um die Darstellung von Symbolen gleicher Ebenen zu
+gruppieren, gehen Sie mit der Maus in die Kartenlegende, klicken auf die rechte
+Maustaste und wählen 'Zeige Dateigruppen'. Diese können von einer Gruppe
+nun mit der Maus in eine andere verschoben werden. Dadurch wird die Darstellung
+der Symbole gruppiert. Bitte beachten Sie, dass dies nur möglich ist, wenn zwei
+Vektorebenen vom gleichen Typ (Punkt, Linie oder Polygon) sind und gleiche
+Attribute beinhalten.   
+
+%% isn't included in Titan anymore, except for an "toggle overview"
+%Each legend entry can show the following mini icons:
+%
+%\includegraphics[width=0.7cm]{pyramid} This is a raster
+%that has pyramids built for it to improve rendering efficiency (see
+%Section \ref{raster_pyramids}).\\
+%\includegraphics[width=0.7cm]{no_pyramid} This is a
+%raster that has no pyramid layers (see Section \ref{raster_pyramids}).\\
+%\includegraphics[width=0.7cm]{inoverview} This layer is
+%shown in the overview map area as well as in the main map window.\\
+%\includegraphics[width=0.7cm]{editable} This is a vector
+%layer that is currently enabled for editing.\\
+
+\subsubsection{Kartenfenster}\label{label_mapview}
+\index{map!view}
+
+Dies ist der Ergebnisbereich von QGIS - hier werden die Daten visualisiert. Die
+Karten, die hier angezeigt werden, hängen davon ab, welche Raster- und
+Vektorebenen Sie ausgewählt haben (vgl. folgende Abschnitte). Innerhalb des
+Kartenfensters können Sie 'zoomen', verschieben ('pan') und eine Vielzahl weiterer
+Funktionen aus der Werkzeugleiste anwenden. Das Kartenfenster und die
+Kartenlegende sind miteinander verknüpft. Ebenen im Kartenfenster spiegeln
+Veränderungen in der Kartenlegende wider.    
+
+\begin{Tip}\caption{\textsc{Zoomen in der Ebene mit dem Mausrad}}\index{zoom!mouse wheel}
+\qgistip{Sie können das Mausrad benutzen, um im Kartenfenster in Ebenen hinein-
+bzw. aus Ebenen herauszuzoomen. Plazieren Sie dazu den Mauszeiger in das
+Kartenfenster und drehen Sie das Mausrad nach vorne (herauszoomen) oder nach
+hinten hineinzoomen. Der Mauszeiger bildet dabei das Zentrum. Sie können das
+Verhalten des Mausrades in der Menüleiste \texttt{Einstellungen -> Optionen} unter
+\texttt{Kartenwerkzeuge} einstellen}
+\end{Tip}
+
+\subsubsection{Kartenübersicht}\label{label_mapoverview}
+\index{map!overview}
+
+Im Bereich Kartenübersicht wird die Gesamtausdehnung eines Gebietes anhand einer
+ausgewählten Ebene als Übersicht dargestellt. Dadurch ist es sehr einfach, einen
+schnellen Überblick über die genaue Position im Kartenfenster zu bekommen. Beschriftungen
+werden nicht in der Kartenübersicht angezeigt. Sie können einen einzelnen Layer
+in der Kartenübersicht anzeigen lassen, indem Sie eine Ebene mit der Maus
+auswählen und mit der rechten Maustaste auf \texttt{Zur Übersicht hinzufügen} klicken.
+Dazu können auch die entsprechenden Icons der Werkzeugleiste genutzt werden.
+
+Sie können mit der Maus auch das rote Rechteck, welches für den aktuell
+angezeigten Ausschnitt steht, in der Kartenübersicht verschieben. Dadurch wird 
+automatisch der Ausschnitt im Kartenfenster angepasst.
+
+\subsubsection{Statusleiste}\label{label_statusbar}
+
+Die Statusleiste zeigt die aktuelle Position des Mauszeigers als Koordinate 
+(z.B. in Meter oder Dezimalgrad). Außerdem werden die aktuellen Ausmasse des
+Kartenfensters angezeigt, wenn sie zoomen oder verschieben. Für einige
+Funktionen, z.B.: das Messen von Längen oder Flächen, wird das Ergebnis in 
+der Statusleiste angezeigt. Mit der 'Checkbox' auf der rechten Seite der
+Statusleiste kann eingestellt werden, ob Ebenen angezeigt werden sollen oder
+nicht (vgl. Abschnitt \ref{subsec:redraw_events}). Rechts außen befindet sich
+ein Kamera-Icon. Wenn Sie es anklicken, öffnet sich das Menü für die
+Projektionseigenschaften des aktuellen Projektes.
+
+\subsection{Wiedergabe}\label{subsec:redraw_events}\index{rendering}
+
+Im Normalfall findet eine Wiedergabe der ausgewählten Ebenen immer dann statt,
+wenn eine 'Erneuerung' notwendig ist. Die Abläufe, die eine 'Erneuerung' der
+Wiedergabe verursachen sind:
+
+\begin{itemize}
+\item Eine Ebene hinzufügen
+\item Karten verschieben, hinein- oder herauszoomen
+\item Größe des QGIS-Fensters verändern
+\item Ebenen ein- oder ausblenden
+\end{itemize}
+
+QGIS ermöglicht es, den Wiedergabeprozess auf verschiedene Arten zu 
+kontrollieren
+
+\subsubsection{Maßstabsabhängige Wiedergabe}\index{rendering!scale dependent}
+\label{label_scaledepend}
+
+
+Die maßstabsabhängige Wiedergabe erlaubt es, einen mini- und maximalen Maßstab
+anzugeben, in dessen Rahmen eine Ebene angezeigt wird. Um die maßstababhängige 
+Wiedergabe einzustellen, öffnen Sie die Eigenschaften einer Ebene, indem Sie
+diese in der Kartenlegende doppelt anklicken, im Reiter \textit{Allgemein} die
+entsprechenden Einstellungen vornehmen und die Checkbox \textit{Benutze 
+maßstabsabhängiges Zeichnen} aktivieren.   
+
+Sie können es einstellen, in dem Sie erst mit der Maus im Kartenfenster den
+gewünschten Maßstab wählen und dann die Werte aus der Statusleiste übernehmen. \index{scale}
+
+\subsubsection{Kartenwiedergabe kontrollieren}\label{label_controlmap}
+
+Die Kartenwiedergabe kann auf folgende Art kontrolliert werden:
+
+\begin{itemize}
+%\item Stopping rendering during drawing of the map canvas 
+\item Zeitweise die Wiedergabe unterdrücken
+\item Visualisierung einer Ebene einstellen, wenn sie geladen wird
+\end{itemize}
+
+%\subsubsection{Stopping Rendering}\index{rendering!halting}
+%\label{label_stoprender}
+%
+%To stop the map drawing, press the ESC key. This will halt the refresh of
+%the map canvas and leave the map partially drawn. It may take a bit of time
+%between pressing ESC and the time the map drawing is halted.
+%
+%\textbf{NOTE}: It is currently not possible to stop rendering - this was disabled 
+%in qt4 port because of User Interface (UI) problems and crashes.
+%
+\subsubsection{Wiedergabe unterdrücken}\index{rendering!suspending}
+\label{label_suspendrender}
+
+Um die Wiedergabe einer Karte zu unterdrücken, klicken Sie auf die Checkbox
+\textit{Zeichnen} auf der rechten Seite der Statusleiste. Wenn die Checkbox
+nicht aktiv ist, führt QGIS keine Erneuerung der Wiedergabe des Kartenfensters
+durch, wie in Abschnitt \ref{subsec:redraw_events} beschrieben. Beispiele, bei
+denen das Unterdrücken der Wiedergabe angewendet wird, sind:
+
+\begin{itemize}
+\item Viele Ebenen hinzufügen und ihre Symbologie vor der Visualisierung
+einstellen
+\item Eine oder mehrere große Ebenen hinzufügen und erst die maßstabsabhängige
+Wiedergabe einstellen
+\item Eine oder mehrere große Ebenen hinzufügen und erst in ein bestimmtes
+Gebiet hineinzoomen
+\item Eine Kombination aus den oben genannten Punkten
+\end{itemize}
+
+Wenn Sie die Checkbox \textit{Zeichnen} aktivieren, findet automatisch eine 
+Erneuerung der Wiedergabe des Kartenfensters statt.
+
+\subsubsection{Option für Ebene hinzufügen}\label{label_settinglayer}
+\index{rendering!options}\index{layers!initial visibility}
+
+Sie können für das Hinzuladen neuer Ebenen eine Einstellung vornehmen, die
+bewirkt, dass diese beim Laden ersteinmal nicht angezeigt werden. Um diese
+Option zu nutzen, deaktivieren Sie in der Menüleiste unter
+\textit{Einstellungen}->\textit{Optionen}->\textit{Darstellung} die Checkbox
+\textit{Standardmäßig
+werden alle neuen Ebenen in der Karte angezeigt}. 
+
+\subsubsection{Anpassen des Kartenfensters bei der Wiedergabe}
+\label{label_updatemap}\index{rendering!update during drawing}
+
+Normalerweise werden in QGIS Inhalte von Ebenen erst visualisiert, wenn
+sämtliche Daten geladen sind. Um zu bewirken, dass die Inhalte von Ebenen
+direkt beim Lesen angezeigt werden, verändern Sie in der Menüleiste unter
+\textit{Einstellungen}->\textit{Optionen}->\textit{Darstellung} den Wert 
+\textit{Aktualisieren während des Zeichnens}. Der Wert 0 (Standard) verhindert die Aktualisierung
+während des Zeichnens. Bei zu niedrigem Wert leidet die Leistung, da ständig ein
+Update der Widergabe stattfindet. Zu Beginn ist daher ein Wert von 500 sinnvoll. 
+
+\textbf{Achtung}: Diese Funktion ist derzeit abgeschaltet, da sie unter Qt 4.2 
+nicht wie erwartet arbeitet.
+
+\subsection{Messen}\label{sec:measure}\index{measure}
+
+\subsubsection{Strecken messen}\index{measure:line length}
+\includegraphics[width=0.7cm]{measureline} QGIS kann Distanzen zwischen Punkten
+messen. Das Tool ermöglicht es, Punkte im Kartenfenster auszuwählen. Jedes
+Längensegment wird in einem Popup angezeigt und zusätzlich auch die Gesamtlänge
+aller Längensegmente.
+Um das Messen von Strecken zu beenden, klicken Sie auf die rechte Maustaste.
+% FIXME
+% we need to add some words how to measure based on a given ellipsoid.
+
+\subsubsection{Flächen messen}\index{measure:areas}
+\includegraphics[width=0.7cm]{measurearea} Auch Flächengrößen können gemessen
+werden. Das Popup zeigt dabei die akkumulierte Flächengrösse (vgl. Bild \ref{fig:measure}).
+
+% measure-tools side by side
+\begin{figure}[h]
+\caption{Messwerkzeuge in Aktion} \label{fig:measure}
+\centering
+   \subfigure[Strecken messen] {\label{subfig:measure_line}\includegraphics[clip=true, width=0.4\textwidth]{measure_line}}\goodgap
+   \subfigure[Flächen messen]{\label{subfig:measure_area}\includegraphics[clip=true, width=0.4\textwidth]{measure_area}}
+\end{figure}
+
+\subsection{Projekte}\label{sec:projects}\index{projects}
+
+Der Status einer gerade laufenden QGIS-Sitzung wird als Projekt bezeichnet. Die
+können in QGIS immer nur an einem Projekt zur Zeit arbeiten. Einstellungen
+beziehen sich daher immer auf ein bestimmtes Projekt oder dienen als
+Standard-Einstellung für ein neues Projekt (vgl. Abschnitt \ref{subsec:gui_options}).
+
+QGIS kann den aktuellen Status eines Projektes in einer Projektdatei speichern.
+Wählen Sie dazu in der Menüleiste \textit{Datei} -> \textit{Speichere Projekt}.
+Das Laden eines existierenden Projektes funktioniert entsprechend.
+
+In einer Projektdatei sind folgenden Informationen gespeichert:
+
+\begin{itemize}
+\item Hinzugefügte Ebenen
+\item Einstellungen der Ebenen, inklusive Symbologie
+\item Projektion für das Kartenfenster
+\item Zuletzt gewählte Ausdehnung im Kartenfenster
+\end{itemize}
+
+Die Projektdatei wird im XML-Format gespeichert. Dadurch können Sie die Datei
+auch außerhalb von QGIS editieren, wenn Sie wissen, was Sie tun. Im Vergleich
+zu früheren QGIS Version ist das Datenformat in Version \CURRENT neu.
+
+
+%
+%  QGIS options
+%
+\subsection{GUI Optionen}
+\label{subsec:gui_options}
+\includegraphics[width=0.7cm,clip=true]{options} Einige grundlegende Optionen
+für QGIS können unter Optionen eingestellt werden. Wählen Sie dazu unter
+\textsl{Einstellungen} den \textsl{Optionen}-Dialog (Alt-O). Einige der Optionen
+sind:
+\begin{itemize}
+\item Erscheinungsbild
+\item Wiedergabe
+\item Auswahl und Messen
+\item Projektion
+\item Hilfe Webbrowser
+\end{itemize}
+
+Passen Sie die Optionen entsprechend Ihren Wünschen an. Einige Änderungen können
+einen Neustart von QGIS notwendig machen, bevor sie aktiv werden.
+
+Unter GNU/Linux Distributionen ist alles gespeichert unter:
+\begin{verbatim}
+$HOME/.config/QuantumGIS/qgis.conf
+\end{verbatim}
+Dies ist eine Textdatei, in der QGIS die aktuellen Optionen, PostGIS und WMS
+Verbindungen sowie andere Einstellungen speichert.
+
+Unter MS Windows ist alles gespeichert unter:
+\begin{verbatim}
+\\HKEY_CURRENT_USER\Software\QuantumGIS\qgis
+\end{verbatim}
+
+Unter Mac OS ist alles gespeichert unter:
+\begin{verbatim}
+$HOME/Library/Preferences/org.qgis.qgis.plist
+\end{verbatim}
+
+\subsection{Räumliche Lesezeichen}\label{sec:bookmarks}
+\index{bookmarks}
+\index{spatial bookmarks|\see{bookmarks}}
+
+Räumliche Lesezeichen ermöglichen es, geografische Orte zu markieren und als
+Lesezeichen abzuspeichern, um dorthin später zurückzufinden.
+
+\subsubsection{Ein Lesezeichen erstellen}
+Um ein Lesezeichen zu erstellen:
+\begin{enumerate}
+\item Zoomen Sie in einen Kartenausschnitt Ihrer Wahl.
+\item Wählen Sie in der Menüleiste \textit{Ansicht}->\textit{Neues Lesezeichen}
+oder tippen Sie [Ctrl-B].
+\item Geben Sie eine Beschreibung für das Lesezeichen ein (bis zu 255 Zeichen).
+\item Klicken Sie auf \textit{OK}, um das Lesezeichen zu speichern oder \textit{Cancel} 
+um kein Lesezeichen zu erstellen.
+\end{enumerate}
+
+Sie können mehrere Lesezeichen mit demselben Namen erstellen.
+
+\subsubsection{Arbeiten mit Lesezeichen}
+Um ein bestehendes Lesezeichen zu editieren, wählen Sie in der Menüleiste 
+\textit{Ansicht}->\textit{Zeige Lesezeichen}. Das Dialogfenster erlaubt es, auf
+ein Lesezeichen zu zoomen oder es zu löschen. Sie können die Koordinaten oder
+den Namen des Lesezeichens nicht verändern.
+
+\subsubsection{Auf ein Lesezeichen zoomen}
+Im Lesezeichen-Dialogfenster klicken Sie auf das gewünschte Lesezeichen und
+wählen dann den Knopf \textit{Zoomen auf}. Sie können auch auf ein Lesezeichen
+zoomen, indem Sie es mit einem Doppelklick auswählen.
+
+\subsubsection{Ein Lesezeichen löschen}
+Um ein Lesezeichen aus dem Lesezeichen-Dialogfenster zu löschen, klicken 
+Sie auf das gewünschte Lesezeichen, dann auf den Knopf \textit{Löschen} und
+bestätigen Sie es mit \textit{Ja} oder \textit{Nein}.
