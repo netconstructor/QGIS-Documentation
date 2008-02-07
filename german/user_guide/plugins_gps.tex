@@ -33,7 +33,7 @@ Sie auf den Knopf, um den Dialog \emph{GPS Werkzeuge} zu starten (vgl. Abbildung
 
 Benutzen Sie den Knopf {[}...{]}, um eine GPX-Datei auszuwählen und mit der
 Checkbox den Dateityp zu bestimmen, der aus der GPX-Datei geladen werden soll.
-Jeder Dateityp (Wegpunkte, Routen und Spuren) wird in einem eigenen Layer
+Jeder Dateityp (Wegpunkte, Routen und Spuren) wird in einen eigenen Layer
 geladen, wenn Sie auf den Knopf \emph{OK} klicken. 
 
 \subsubsection{GPSBabel}
@@ -74,7 +74,7 @@ QGIS kann mit dem Programm GPSBabel GPS-Daten direkt von einem GPS-Empfänger in
 einen Vektorlayer laden. Dazu können Sie das Programm \emph{Von GPS herunterladen}
 verwenden (vgl. Abbildung \ref{figure_download}), indem Sie den Typ Ihres
 GPS-Empfängers angeben, den Verbindungsport, den Namen der GPX-Datei, in die die
-Daten konvertiert werden sollen und schliesslich den Namen des neuen Vektorlayer
+Daten konvertiert werden sollen und schließlich den Namen des neuen Vektorlayers
 in QGIS.
 
 \begin{figure}[ht]
@@ -91,7 +91,7 @@ funktioniert, können Sie einen eigenen, neuen Typ erstellen (vgl. Abschnitt
 
 Der Verbindungsport ist ein Dateiname oder ein anderer Name, den Ihr System als
 Referenz für den physischen Port benutzt, über den eine Verbindung zum
-GPS-Empfänger hergestellt wird. Unter GNU/Linux ist das etwas wie /dev/ttyS0
+GPS-Empfänger hergestellt wird. Unter GNU/Linux ist das etwa wie /dev/ttyS0
 oder /dev/ttyS1 und unter Windows ist es COM1 oder COM2.
 
 Wenn Sie auf \emph{OK} klicken, werden die Daten vom GPS-Empfängers
@@ -113,8 +113,8 @@ Routen digitalisieren und es dann auf Ihren GPS-Empfänger hochladen.
 \subsubsection{\label{sec:Defining-new-device}Neue GPS-Gerätetypen definieren}
 
 Es gibt eine große Vielfalt an GPS-Empfängern, und die QGIS-Entwickler können nicht
-alle testen. Wenn Sie also ein Gerät haben, dass nicht mit einem der bereits
-vorhandenen Gerätetypen funktioniert, können Sie einen selbst erstellen. Dazu
+alle testen. Wenn Sie also ein Gerät haben, das nicht mit einem der bereits
+vorhandenen Gerätetypen funktioniert, können Sie selbst einen erstellen. Dazu
 klicken Sie auf den Knopf \emph{Editiere Geräte} in den Programmen \emph{In GPS
 hochladen} oder \emph{Von GPS herunterladen}.
 
@@ -128,19 +128,19 @@ Verfügung stehen.
 Das Kommando zum hinunterladen der unterschiedlichen Datentypen wird benutzt, um
 die Daten von Ihrem GPS-Empfänger in eine GPX-Datei zu transferieren. Es wird
 wahrscheinlich ein GPSBabel Kommando sein, kann aber auch ein anderes
-Kommandozeilenprogramm sein, das diese Aufgabe erfällt. QGIS wird die
+Kommandozeilenprogramm sein, das diese Aufgabe erfüllt. QGIS wird die
 Schlüsselwörter \emph{\%type}, \emph{\%in} und \emph{\%out} ersetzen, wenn das
 Kommando ausgeführt wird.
 
 \emph{\%type} wird ersetzt durch {}``-w'', wenn Sie Wegpunkte herunterladen,
 {}``-r'' wenn es eine Route ist und {}``-t'', wenn es sich um Spuren handelt.
-GPSBabel erführt dadurch, um welchen GPS-Datentyp es sich handelt.  
+GPSBabel erfährt dadurch, um welchen GPS-Datentyp es sich handelt.  
 
 \emph{\%in} wird ersetzt durch den Namen des Verbindungsports und \emph{\%out}
 durch den Namen, den Sie für die GPX-Datei gewählt haben. Wenn Sie also einen
-neuen Gerätetyp definieren mit dem Kommando {}``gpsbabel \%type -i garmin -o gpx
+neuen Gerätetyp mit dem Kommando {}``gpsbabel \%type -i garmin -o gpx
 \%in \%out'' (es handelt sich hierbei um das Standard Kommando für einen ``Garmin
-Serial'') und diesen benutzen, um Wegpunkte von Port {}``/dev/ttyS0'' in die Datei
+Serial'') definieren und diesen benutzen, um Wegpunkte von Port {}``/dev/ttyS0'' in die Datei
 {}``output.gpx'' zu schreiben, dann ersetzt QGIS die Schlüsselworte und startet
 das Kommando {}``gpsbabel -w -i garmin -o gpx /dev/ttyS0 output.gpx''.
 

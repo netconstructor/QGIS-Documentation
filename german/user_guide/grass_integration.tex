@@ -1,8 +1,11 @@
 \section{GRASS Integration}\label{sec:grass}\index{GRASS}
 
-Das GRASS~\cite{GRASSweb} Plugin ermöglicht es, auf GRASS Datenbanken von QGIS aus zuzugreifen. Dies umfasst das Visualisieren, Editieren und Datenerstellen sowie die Analyse von GRASS Daten mit den in GRASS vorhanden Modulen.
+Das GRASS~\cite{GRASSweb} Plugin ermöglicht es, auf GRASS Datenbanken von QGIS
+aus zuzugreifen. Dies umfasst das Visualisieren, Editieren und Datenerstellen
+sowie die Analyse von GRASS Daten mit den in GRASS vorhandenen Modulen.
 
-In diesem Kapitel bekommen Sie eine kurze Einführung in das Plugin und dessen Verwendung. Folgende Funktionen stehen über das GRASS Plugin zur Verfügung:
+In diesem Kapitel bekommen Sie eine kurze Einführung in das Plugin und dessen
+Verwendung. Folgende Funktionen stehen über das GRASS Plugin zur Verfügung:
 
 \begin{itemize}
 \item \includegraphics[width=0.7cm]{add_grass_vector} GRASS Vektorlayer hinzufügen
@@ -12,7 +15,8 @@ In diesem Kapitel bekommen Sie eine kurze Einführung in das Plugin und dessen Ve
 \item \includegraphics[width=0.7cm]{grass_edit} GRASS Vektorlayer bearbeiten
 \item \includegraphics[width=0.7cm]{grass_open_mapset} Mapset öffnen
 \item \includegraphics[width=0.7cm]{grass_new_mapset} Neues Mapset
-\item \includegraphics[width=0.7cm]{grass_new_vector_layer} Neuen GRASS Vektorlayer anlgen
+\item \includegraphics[width=0.7cm]{grass_new_vector_layer} Neuen GRASS
+Vektorlayer anlegen
 \item \includegraphics[width=0.7cm]{grass_close_mapset} Schliesse Mapset
 \end{itemize}
 
@@ -30,16 +34,16 @@ entsprechenden Knöpfen in der Werkzeugleiste laden. Als Beispiel benutzen wir de
 
 \begin{enumerate}
   \item Laden Sie die Datei spearfish\_grass60data-0.3.zip herunter
-  \item Erstellen Sie einen neuen Ordner \textsl{grassdata} und entpacken Sie 
+  \item Erstellen Sie einen neuen Ordner \texttt{grassdata} und entpacken Sie 
   die Datei spearfish\_grass60data-0.3.zip in diesen Ordner. 
   \item Starten Sie QGIS
-  \item In der GRASS-Werkzeugleiste klicken Sie auf das Icon \textsl{Mapset öffnen}, um den \textsl{Wählen Sie ein GRASS Mapset} Dialog zu öffnen.
-  \item Für \textsl{Gisdbase} geben Sie den Pfad zu dem gerade erstellten Ordner  \textsl{grassdata} ein.
-  \item Sie können nun die Location \textsl{spearfish60} und das Mapset 
-  \textsl{PERMANENT} oder \textsl{user1} auswählen. 
-  \item Klicken Sie \textsl{OK}. Einige Werkzeuge des GRASS-Plugins, die vorher grau hinterlegt waren, sind nun auch aktiv und können benutzt werden.
-  \item Klicken Sie auf \textsl{GRASS Rasterlayer hinzufügen}, wählen die Karte \textsl{geology} und klicken auf \textsl{OK}. Die Karte geology wird nun angezeigt 
-  \item Klicken Sie auf das Icon \textsl{GRASS Vektorlayer hinzufügen}, wählen die Karte \textsl{roads} roads und klicken wieder auf \textsl{OK}. Nun wird die Karte roads über der Karte geology angezeigt.
+  \item In der GRASS-Werkzeugleiste klicken Sie auf das Icon \texttt{Mapset öffnen}, um den \texttt{Wählen Sie ein GRASS Mapset} Dialog zu öffnen.
+  \item Für \texttt{Gisdbase} geben Sie den Pfad zu dem gerade erstellten Ordner  \texttt{grassdata} ein.
+  \item Sie können nun die Location \texttt{spearfish60} und das Mapset 
+  \texttt{PERMANENT} oder \texttt{user1} auswählen. 
+  \item Klicken Sie \texttt{OK}. Einige Werkzeuge des GRASS-Plugins, die vorher grau hinterlegt waren, sind nun auch aktiv und können benutzt werden.
+  \item Klicken Sie auf \texttt{GRASS Rasterlayer hinzufügen}, wählen die Karte \texttt{geology} und klicken auf \texttt{OK}. Die Karte geology wird nun angezeigt 
+  \item Klicken Sie auf das Icon \texttt{GRASS Vektorlayer hinzufügen}, wählen die Karte \texttt{roads} und klicken wieder auf \texttt{OK}. Nun wird die Karte roads über der Karte geology angezeigt.
 \end{enumerate}
 
 Wie man sehen kann, ist es sehr einfach sich Raster- und Vektordaten aus einer existierenden GRASS-Datenbank in QGIS anzeigen zu lassen. Lesen Sie die folgenden Kapitel, um zu lernen, wie man GRASS Daten editiert und eine neue Location erstellt.
@@ -53,7 +57,11 @@ GRASS-Plugin korrekt geladen ist (siehe Abschnitt \ref{sec:starting_grass}).
 
 \subsection{Erstellen einer Location}\label{sec:create_loc}
 
-GRASS speichert Daten in einer sog. ``Location'', die ein durch den Benutzer festgelegtes Gebiet mit einer definierten Projektion darstellt. Damit Daten mit dem GRASS-Plugin bearbeitet werden können, müssen diese in eine \textsl{location} importiert werden.\footnote{This is not strictly true - you can also view external data sets without importing them}
+GRASS speichert Daten in einer sog. ``Location'', die ein durch den Benutzer
+festgelegtes Gebiet mit einer definierten Projektion darstellt. Damit Daten mit dem 
+GRASS-Plugin bearbeitet werden können, müssen diese in eine \texttt{location} 
+importiert werden.\footnote{Dies ist nicht ganz korrekt. Sie können mit dem 
+Modul v.external auch Daten anzeigen, die nicht nach GRASS importiert wurden.}
 
 \begin{figure}[ht]
    \begin{center}
@@ -67,27 +75,33 @@ An dieser Stelle sehen Sie ein Beispiel, wie eine GRASS Location mit der Projekt
 \begin{enumerate}
   \item Starten Sie QGIS
   \item Laden Sie das GRASS Plugin, falls dies noch nicht geschehen ist
-  \item Laden Sie das Shape \textsl{alaska.shp} (vgl. Kapitel \ref{sec:load_shapefile}).
-  \item Klicken Sie auf das Icon \textsl{Neues Mapset} in der GRASS-Werkzeugleiste, um den Mapset Dialog zu starten
+  \item Laden Sie das Shape \texttt{alaska.shp} (vgl. Kapitel \ref{sec:load_shapefile}).
+  \item Klicken Sie auf das Icon \texttt{Neues Mapset} in der GRASS-Werkzeugleiste, um den Mapset Dialog zu starten
   \item Alle GRASS locations sind in einem Ordner, der GRASS Datenbank abgelegt (meist grassdata). Wählen Sie einen existierenden Ordner mit bereits vorhandenen Locations oder erstellen Sie einen neuen für die zu erstellende Location
-  \item Klicken Sie auf \textsl{Next} 
-  \item Mit dem Dialog kann eine bereits vorhandene Location durch eine weitere Mapset ergänzt werden, oder eine neue Location mit neuen Mapsets erstellt werden. Klicken Sie auf den knopf ``Erstelle neue Location'' 
+  \item Klicken Sie auf \texttt{Next} 
+  \item Mit dem Dialog kann eine bereits vorhandene Location durch eine weitere
+  Mapset ergänzt werden, oder eine neue Location mit neuen Mapsets erstellt
+  werden. Klicken Sie auf den Knopf ``Erstelle neue Location'' 
   \item Geben Sie einen Namen für die neue Location ein - wir nehmen Alaska
-  \item Klicken Sie auf \textsl{Next} 
-  \item Definieren Sie die Projection in dem Sie auf den Knopf ``Projektion'' klicken, um eine Liste auswählbarer Projektion angezeigt zu bekommen.
+  \item Klicken Sie auf \texttt{Next} 
+  \item Definieren Sie die Projektion in dem Sie auf den Knopf ``Projektion'' klicken, um eine Liste auswählbarer Projektion angezeigt zu bekommen.
   \item Wir benutzen die Albers Equal Area Alaska (meters) Projektion. Da wir wissen, dass es sich hierbei um den PostGIS SRID 5000 handelt, geben wir die Zahl in das Suchfenster ein. (Wenn Sie dies für einen anderen Layer wiederholen wollen, aber nicht den SRID kennen, klicken Sie einfach auf das Kamera Icon unten rechts in der Statusleiste (vgl. Kapitel \ref{label_projstart}).)
-  \item Klicken Sie auf \textsl{Suchen}, um die Projektion auszuwählen
-  \item Klicken Sie auf \textsl{Next} 
-  \item Um die Standardausdehnung der Location zu definieren, müssen wir die Eckkoordinaten der Umrandung angeben. Da wir einen Layer geladen haben, klicken wir einfach auf den Knopf \textsl{Setze aktuelle QGIS Ausdehung}, um die Ausdehnung der Karte als Standardausdehnung für die Location zu verwenden. 
-  \item Klicken Sie auf \textsl{Next} 
+  \item Klicken Sie auf \texttt{Suchen}, um die Projektion auszuwählen
+  \item Klicken Sie auf \texttt{Next} 
+  \item Um die Standardausdehnung der Location zu definieren, müssen wir die Eckkoordinaten der Umrandung angeben. Da wir einen Layer geladen haben, klicken wir einfach auf den Knopf \texttt{Setze aktuelle QGIS Ausdehung}, um die Ausdehnung der Karte als Standardausdehnung für die Location zu verwenden. 
+  \item Klicken Sie auf \texttt{Next} 
   \item Wir müssen nun noch eine Mapset für die Location definieren. Der Name ist egal, sie können z.B. ihren Benutzernamen wählen.
   \item Prüfen Sie alles, damit alles wie gewünscht ist
-  \item Klicken Sie auf \textsl{Finish} 
+  \item Klicken Sie auf \texttt{Finish} 
   \item Die Mapset und Location sind nun erstellt worden und sind als aktuelle Arbeitsumgebung definiert
   \item Beachten Sie, dass einige Werkzeuge des GRASS Plugins grau hinterlegt waren und nun auch zur Verfügung stehen.
 \end{enumerate}
 
-Auch wenn es recht kompliziert aussieht, ist dies doch ein sehr einfacher Weg, eine neue GRASS Location zu erstellen. Unsere Location ``Alaska'' ist nun bereit für den Import von Daten. Um die Standardausdehnung zu sehen, zoomen Sie ein Stück heraus und klicken dann auf das Icon \textsl{Aktuelle GRASS Region darstellen}. Die Umrandung der Region kann an- nud ausgeschaltet werden.
+Auch wenn es recht kompliziert aussieht, ist dies doch ein sehr einfacher Weg, 
+eine neue GRASS Location zu erstellen. Unsere Location ``Alaska'' ist nun bereit
+für den Import von Daten. Um die Standardausdehnung zu sehen, zoomen Sie ein
+Stück heraus und klicken dann auf das Icon \texttt{Aktuelle GRASS Region
+darstellen}. Die Umrandung der Region kann an- und ausgeschaltet werden.
 
 \subsection{Vektordatenmodell}\label{label_vectmodel}\index{GRASS!vector data
 model}
@@ -146,8 +160,8 @@ Informationsquellen in unterschiedlichen Sprachen vorhanden.
 
 %\includegraphics[width=0.7cm]{grass_edit} 
 Die Digitalisierwerkzeuge für GRASS-Vektorlayer werden über den Knopf
-\textsl{Bearbeiten von GRASS-Vektorlayern} in der GRASS-Werkzeugleiste
-gestarten.
+\texttt{Bearbeiten von GRASS-Vektorlayern} in der GRASS-Werkzeugleiste
+gestartet.
 Stellen Sie sicher, dass der zu bearbeitende Layer geladen und ausgewählt ist,
 bevor Sie auf den Editier-Knopf drücken.
 Falls Sie einen neuen Vektordatensatz erzeugen wollen, benutzen Sie den
@@ -188,10 +202,10 @@ wählen)\\
 Digitalisiert einen neuen Zentroid (Labelpunkt für eine existierende Fläche)\\
 \hline \includegraphics[width=0.7cm]{grass_move_vertex} & Verschiebe
 Stützpunkt &
-Wählt einen Stützpunkt einer exisiterenden Linie oder Umrandung und setzt diesen
+Wählt einen Stützpunkt einer existierenden Linie oder Umrandung und setzt diesen
 an eine neue Position \\
 \hline \includegraphics[width=0.7cm]{grass_add_vertex} & Füge Stützpunkt hinzu &
-Fügt einen Stützpunkt zu einer exisitierenden Linie hinzu\\
+Fügt einen Stützpunkt zu einer existierenden Linie hinzu\\
 \hline \includegraphics[width=0.7cm]{grass_delete_vertex} & Löscht Stützpunkt
 & Löscht einen Stützpunkt von einer existierenden Linie (Bestätigung der
 Auswahl durch einen weiteren Klick nötig.)\\
@@ -279,10 +293,10 @@ definiert Nord-, Süd-, Ost- und Westausdehnung sowie Anzahl der Spalten, Anzahl
 der Reihen und die horizontale und vertikale räumliche Pixelauflösung.
 
 Es ist auch möglich, die Region mit einem Schalter aus und ein zu schalten.
-Benutzen Sie dazu den Knopf \textsl{Zeige aktuelle GRASS-Region}\index{GRASS!region!display}
+Benutzen Sie dazu den Knopf \texttt{Zeige aktuelle GRASS-Region}\index{GRASS!region!display}
 
 Um die aktuelle GRASS-Region zu ändern, benutzen Sie den Knopf
-\textsl{Aktuelle GRASS-Region editieren}.
+\texttt{Aktuelle GRASS-Region editieren}.
 Dort haben Sie die Möglichkeit, die Region zu verändern sowie das Aussehen der
 Regionsdarstellung. Wenn der Dialog sichtbar ist, können Sie die Region neben
 der einfachen Koordinateneingabe auch interaktiv mit der Maus im Kartenbild
@@ -308,7 +322,7 @@ Falls Sie QGIS aus einer laufenden GRASS-Sitzung heraus gestartet haben, wird
 das aktuelle Mapset genutzt, da Sie ja dafür Schreibberechtigung besitzen.
 
 Eine weitere Option besteht darin, dass Sie ein schreibbares Mapset über das
-Menu \textsl{Plugins}->\textsl{GRASS}->\textsl{Öffne Mapset} auswählen.
+Menu \texttt{Plugins}->\texttt{GRASS}->\texttt{Öffne Mapset} auswählen.
  
 Falls Sie einen ausgegrauten GRASS Werkzeugkasten in der Menüleiste vorfinden,
 stellen Sie sicher, dass Sie ein beschreibbares Mapset geöffnet haben bzw.
@@ -352,8 +366,8 @@ finished}.
 
 \minisec{Handbuch}
 
-Dieser Reiter enthält die Hilfeseite zu jedem GRASS-Modul. Falls Sie tiefere
-Informationen zum gewählten Modul benötigten, schauen Sie in diese Hilfeseite.
+Dieser Reiter enthält die Hilfeseite zu jedem GRASS-Modul. Falls Sie
+weitergehende Informationen zum gewählten Modul benötigten, schauen Sie in diese Hilfeseite.
 Dabei werden Sie feststellen, dass viele Module mehr Parameter haben, als im
 Reiter {\em Optionen} zu sehen sind. Das ist korrekt so, und auch so gewollt.
 Um die GUI möglichst einfach zu halten, sind nur die nötigsten Optionen in den
@@ -370,12 +384,9 @@ Sie den Knopf {\em Ergebnis ansehen} am Ende des Modulreiters.
 
 \subsubsection{GRASS Datei-Browser} \index{GRASS!toolbox!Browser}
 
-Eine schöne Funktion ist der GRASS Datei-Browser.
-In Abbildung \ref{subfig:grass_browser} sehen Sie die aktuelle Location mit
-ihren enthaltenen Mapsets.
-
-In der linken Hälfte des Datei-Browsers können Sie sich alle in der Location
-enthaltenden Mapsets anschauen.
+Eine schöne Funktion ist der GRASS Datei-Browser. In der linken Hälfte des 
+Datei-Browsers können Sie sich alle in der Location enthaltenen Mapsets 
+anschauen.
 
 In der rechten Hälfte des Fensters sehen Sie weitere Metainformationen zum
 ausgewählten Datensatz wie beispielsweise Auflösung, BoundingBox,
@@ -391,7 +402,7 @@ um
 \item \includegraphics[width=0.7cm]{grass_delete_map} Lösche ausgewählte Karte
 \item \includegraphics[width=0.7cm]{grass_set_region} Setze die Region auf die
 Ausdehnung der ausgewählten Karte
-\item \includegraphics[width=0.7cm]{grass_refresh} Erneuer die Ansicht des
+\item \includegraphics[width=0.7cm]{grass_refresh} Erneuere die Ansicht des
 Browsers
 \end{itemize}
 
@@ -438,15 +449,15 @@ dargestellt:
 \end{figure}
 
 Der XML-Auswerter liest diese Definition und erstellt einen neuen Reiter im
-Werkzeugkasten, wenn Sie das Modul auswählen: 
+Werkzeugkasten, wenn Sie das Modul auswählen. 
 
 \subsection{Neue GRASS-Vektoren erzeugen}\label{sec:creating_new_grass_vectors}\index{GRASS!Creating new vectors|see{editing!creating a new layer}}
 
 Mit dieser Version von QGIS können Sie sehr einfach neue Vektordatensätze mit
 GRASS erzeugen.
 
-Wählen Sie im Menü \textsl{Plugins->GRASS->Neuen Layer erstellen} aus,
-geben Sie einen Namen für den Datensatz ein starten Sie mit der
+Wählen Sie im Menü \texttt{Plugins->GRASS->Neuen Layer erstellen} aus,
+geben Sie einen Namen für den Datensatz ein und starten Sie mit der
 Digitalisierung.
 Falls der gewünschte Menüeintrag ausgegraut ist, überprüfen Sie, ob Sie in dem
 ausgewählten Mapset schreiben dürfen. Falls Sie vergessen haben, wie
@@ -462,14 +473,14 @@ Einige Hinweise zum Digitalisieren:
 Attributspalten enthalten ist, bevor Sie mit der Digitalisierung starten.
 Wählen Sie dazu den 'Tabellen'-Reiter im Digitalisierdialog.
 \item Wenn Sie einen Polygondatensatz erzeugen wollen, erwägen Sie evtl.,  den
-Modus auf \textsl{No category} zu stellen, denn die Umrandungen der Flächen
+Modus auf \texttt{No category} zu stellen, denn die Umrandungen der Flächen
 benötigen in der Regel keinen Eintrag in der Attributtabelle. Wenn Sie alle
-Umrandungen digitalisiert haben, stellen Sie den Modus wieder auf \textsl{Next
+Umrandungen digitalisiert haben, stellen Sie den Modus wieder auf \texttt{Next
 not used}  und starten Sie mit der Digitalisierung der Zentroiden, über die 
 die Informationen zu jeder Fläche mit der Attributtabelle verknüpft werden.
 \end{itemize}
 
 %\section{The GRASS Toolbar}
 %The GRASS toolbar is displayed when the GRASS plugin is loaded using the
-% Plugin Manager (see Section \ref{sec:managing_plugins}, \textsl{Managing
+% Plugin Manager (see Section \ref{sec:managing_plugins}, \texttt{Managing
 % Plugins}). Figure  shows the toolbar with each function annotated.
