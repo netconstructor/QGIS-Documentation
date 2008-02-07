@@ -1,0 +1,238 @@
+%% Style definitions
+
+% wichtig für hübsche acroread-ausgabe als pdf.
+% important for nice acroread-visualization as pdf.
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc} 
+
+% damit bei mir (SH) die GRASS-Befehle auch schick aussehen:
+% hier gefunden: http://www.open4me.de/pdfprobleme.html
+% To make all GRASS commands appear smooth
+\usepackage{ae,aecompl}
+
+% Veraendern der Caption Schrift und Groesse
+% Change of Caption font and size
+\usepackage[bf]{caption2}
+\renewcommand{\captionfont}{\small}
+
+% HTML-Einbindungen, in der Hoffnung, dass alles toll ist mit latex2html
+% http://irb.cs.tu-berlin.de/leitfaden/manuale/latex-local/html/node20.html
+% Include HTML package for latex2html
+\usepackage{html}
+
+% Serif-Schrift
+%\usepackage{palatino}	
+% mathpazo sind die mathefonts für formeln in palatinoschrift
+%\usepackage{mathpazo}
+
+% neudefinition, damit alles serifenlos ist (Helvetica) laut FAQ 10.2.2
+% change serif to helvetica
+\usepackage{helvet}
+\renewcommand{\sfdefault}{phv}  % switch \sf to Helvetica T1
+\renewcommand*{\familydefault}{\sfdefault} 
+
+% neu kommandos, um die Appendix-captions zu unterdrücken
+% new command to suppress appendix captions
+\def\afterfi#1\fi{\fi#1}
+\let\ORIGaddtocontents\addtocontents
+\newcommand*\dontaddtolof[2]{\edef\temp{#1}%
+  \ifx\temp\ext@figure\else\afterfi\ORIGaddtocontents{#1}{#2}\fi}
+\newcommand*\ignorelof{\let\addtocontents\dontaddtolof}
+\newcommand*\obeylof{\let\addtocontents\ORIGaddtocontents}
+
+% graficx-paket für dvips und dvipdf, und standardverzeichnis für includegraphics
+% /usr/share/doc/texmf/latex/graphics/grfguide.ps.gz gibt als manual auskunft, wie 
+% die graphicx-parameter zu setzen sind.
+% graficx-package for dvips and dvipdf and includegraphics 
+\usepackage[dvips,dvipdf]{graphicx}
+	\graphicspath{{./finalpix/}{../finalpix/}}
+
+% farbpaket für dvips
+% color package for dvips
+\usepackage[dvips]{color}
+
+% author-year-citation paket natbib (notwendig fuer Literaturverzeichnis)
+\usepackage[round,sort]{natbib}		
+%  \bibpunct{(}{)}{,}{a}{}{;}
+
+%not needed for US letter:
+% seitenbreite und -höhe erzeugen: US letter
+%\usepackage{typearea}                    
+%   \areaset[12mm]{8.5in}{11in}
+
+% A4:
+\usepackage{typearea}                    
+   \areaset[12mm]{17cm}{22cm}
+\topmargin-0.2cm % A4
+
+% Bilder mit Text umfliessen lassen sowie
+% Tabellen innerhalb eines Textes, der die Tabelle umfließt
+% For floating texts around images and tables
+\usepackage{floatflt}
+
+
+% to allow hyphenation for re-projection (composita)
+\usepackage{hyphenat}
+
+% kopfzeilen und fusszeilen paket fancyhdr
+% header and footer package
+\usepackage{fancyhdr}
+% \setlength{\unitlength}{1mm}
+\pagestyle{fancy}
+\fancyhead{} %clear all fields
+\fancyfoot{} %clear all fields
+
+% \rhead{\it{\nouppercase{\leftmark}}}
+% \chead{}
+% \lhead{}
+% \lfoot{QGIS Installation Guide}
+% \cfoot{}
+% \rfoot{\hbox{}\hfill\thepage}                               
+% \renewcommand{\footrulewidth}{0.3pt}		%liniendicke Fusszeile
+% \renewcommand{\headrulewidth}{0.3pt}           %liniendicke Kopfzeile
+
+%% fancy positions
+%% +-------------+-----------------+
+%% | LE  CE   RE | LO    CO     RO |   <- head
+%% |  even  left | odd page  right |
+%% | LE  CE   RE | LO    CO     RO |   <- foot
+%% +-------------+-----------------+
+
+\fancyhead[RO]{\rightmark}  % print section right on odd
+\fancyhead[LE]{\leftmark}   % print chapter left on even page
+\fancyhead[CE,RE]{}         % empty
+\fancyhead[LO,CO]{}         % empty
+%Doppelseiten-Footer:
+%\fancyfoot[LE,RO]{\thepage}
+%\fancyfoot[RE,LO]{QGIS Installation Guide}
+%Einseiten-Footer:
+\fancyfoot[RE,RO]{\thepage} % pages in footer, single sided
+\fancyfoot[LE,LO]{QGIS Installation Guide}
+
+\renewcommand{\headrulewidth}{0.3pt}  %  ruler at top
+\renewcommand{\footrulewidth}{0.3pt}  %  ruler at bottom
+
+%define plain for chapter's first page:
+\fancypagestyle{plain}{%
+\fancyhf{}                 %clear all fields
+\fancyfoot[C]{\thepage}    %put page into center footer
+\renewcommand{\headrulewidth}{0pt}  % no ruler at top
+\renewcommand{\footrulewidth}{0pt}} % no ruler at bottom
+
+\pagenumbering{roman}
+ 
+% Tabellenpaket für lange Tabellen
+% for extra long tables
+\usepackage{supertabular}
+
+% Erstellen eines automatischen Index
+% create an automatic index
+\usepackage{makeidx}
+
+% Tabellenpaket für seitenbreite Tabellen
+% for page-width tables
+\usepackage{tabularx}
+
+% Tabellen drehen
+% rotate tables
+\usepackage{rotating}
+
+% zeilen und spalten in tabellen grau hinterlegen
+% table rows and cols with grey background color
+\usepackage{colortbl}
+% Spaltenlinien nicht ueberdecken
+% don't cover column lines
+\usepackage{hhline}
+
+% Fußnotenformatierungspaket
+% footer formating
+\usepackage[bottom]{footmisc}
+
+% Zeilenabstand
+% row distance
+\renewcommand{\baselinestretch}{1.1}             
+\small\normalsize
+
+% silbentrennung nicht so eng nehmen.
+\sloppy
+
+% abstand zwischen absätzen
+\parskip1.5ex              
+
+% Einzug am Satzanfang, hier 0
+\parindent0ex
+
+% auch im article-style 5 gliederungsebenen haben!
+% 3 reichen... sonst wird's zu detailliert
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+% die gliederungsebenen paragraph und subparagraph neu definieren
+% paragraph
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+				{-3.25ex\@plus -1ex \@minus -.2ex}%
+				{1ex \@plus .2ex}%
+			{\normalfont\normalsize\bfseries}}
+% subparagraph
+\renewcommand\subparagraph{\@startsection{subparagraph}{5}{\z@}%
+				{-3.25ex\@plus -1ex \@minus -.2ex}%
+				{1ex \@plus .2ex}%
+			{\normalfont\normalsize\bfseries}}
+
+% mehrere Bilder nebeneinander durchnummeriert setzen
+% several graphics next to eachother counting  
+\usepackage[normal]{subfigure}
+
+% neuer command für subfigure, der die optimale abstandsbreite zwischen den abbildungen ausgibt.
+\newcommand{\goodgap}{%
+ \hspace{\subfigtopskip}%
+ \hspace{\subfigbottomskip}}
+
+% float-grafiken innerhalb einer sektion halten.
+% keep float-grafics in a section
+\usepackage[below]{placeins}
+
+% Umgebung fürs kartenverzeichnis
+\usepackage{float}
+% neue umgebung "karte" generiert.
+\newfloat{karte}{H}{maps}
+ \floatstyle{plain}
+ \floatname{karte}{Karte}
+
+% neues commando zur erstellung von hoch und tiefgestellten Formlen.
+\newfont{\tensy}{cmsy10}
+\newcommand{\hoch}[1]{{$\fontdimen16\tensy=3.0pt
+                     \fontdimen17\tensy=3.0pt \mathrm{#1}$}}
+
+% Fuer 2 separate Bib Verzeichnisse (Buch und Web)
+\usepackage{bibtopic}
+
+%Font fuer alle GRASS/Unix Kommandos
+\newcommand{\qgis}{\texttt}
+
+% using xspace
+\usepackage{xspace}
+
+%Macros QGIS Versions
+\def\CURRENT{0.8\xspace}
+\def\OLD{0.7\xspace}
+\def\VERYOLD{0.6\xspace}
+
+% Skriptversion
+\def\SKRIPTVERSION{1.0\xspace}
+
+% GRASS-Version:
+\def\GRASSVERSION{6.0.x\xspace}
+
+% Release Monat:
+\def\RELEASEMONTH{January 2006\xspace}
+
+
+% bookmarksnumbered=true macht im Literturverzeichnis die Abschnitte kenntlich,
+% wo die Quelle im Text steht.
+% das paket immer zum Schluss laden, damit man sichergeht, dass nichts mehr
+% von jemandem anderen ueberdefiniert wird
+\usepackage[bookmarks=true, bookmarksnumbered=false, pdftitle={QGIS Documentation}, pdfauthor={QGIS Project}, pdfsubject={QGIS Installation Guide}, breaklinks=true, colorlinks=false, linkcolor=black,dvips]{hyperref}
+%bei colorlinks=false sollte man pdfborder={0 0 0} reinmachen (keine link-Boxen)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+

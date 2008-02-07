@@ -1,0 +1,193 @@
+\section{Plugins benutzen}\index{plugins}
+
+\subsection{Eine Einführung in das Nutzen der Plugins}\label{label_introplugin}
+
+QGIS wurde mit einer Plugin-Architektur geplant. Dies erlaubt das Einfügen
+weiterer Features/Funktionalitäten in das Programm. Viele der Funktionalitäten
+in QGIS sind bereits als Plugins implementiert.
+
+Es wird zwischen 2 Arten von Plugins in QGIS unterschieden: die Kernplugins
+sowie die durch Benutzer beigesteuerten.
+\index{plugins!types} 
+Ein Kernplugin wird durch das QGIS Entwicklerteam betreut und ist Teil jeder
+QGIS Distribution. Ein von Benutzern beigesteuertes Plugin ist ein externes
+Plugin, das durch einen individuellen Autor gepflegt und betreut wird.
+Das SVN-Archiv von QGIS enthält auch einige beigesteuerte Plugins.
+(\url{http://svn.qgis.org}) 
+
+\subsubsection{Ein Plugin finden und installieren}
+Wenn Sie QGIS installieren werden alle Kernplugins mit installiert (vgl.
+Abschnitt \ref{sec:core_plugins}). \index{plugins!installing}
+% Additional user-contributed
+% plugins may be available on the QGIS Community site. To see what
+% user-contributed plugins are available, see the plugins page on the Community
+% site (\url{http://community.qgis.org/plugins}).\index{plugins!user
+% contributed}
+
+Typischerweise werden die durch Benutzer beisgesteuerten Plugins nur als
+Quellpaket verteilt und müssen selbst kompiliert werden.
+Grundsätzlich sind im Quellpaket Anleitungen zum Kompilieren und Installieren
+enthalten.
+
+\subsubsection{Plugins verwalten}\label{sec:managing_plugins}
+\index{plugins!managing} 
+Das Verwalten von Plugins bedeutet maßgeblich das Laden und Entladen der
+Module in QGIS.
+Geladene Plugins werden sich von QGIS 'gemerkt' und beim nächsten Starten der
+Anwendung erneut geladen.
+
+Um die Plugins zu verwalten, öffnen Sie den \textsl{Plugin Manager} aus dem
+Menueintrag  \textsl{Plugins}.\index{plugins!manager}
+Der Pluginmanager zeigt alle verfügbaren Plugins und ihren Status (geladen
+oder nicht geladen). Abb. \ref{fig:pluginmanager} zeigt den Dialog mit dem
+Pluginmanager
+
+\begin{figure}[ht]
+   \begin{center}
+   \caption{Plugin Manager}\label{fig:pluginmanager}\smallskip
+   \includegraphics[clip=true, width=14cm]{pluginmanager1}
+\end{center}  
+\end{figure}
+
+Typischerweise werden alle QGIS-Plugins im gleichen Ordner installiert. Dieser
+Ordner steht im Text des Plugin-Ordners. Sie können jedoch QGIS auch unter
+Angabe eines anderen Ordners zum Laden von Plugins von einer anderen Stelle
+bringen.
+
+\begin{Tip}\caption{\textsc{Abstürzende Plugins}}\index{crashes}
+\qgistip{Falls QGIS während des Startens abstürzt, kann der Grund ein kaputtes
+Plugin sein.
+Um kein Plugin zu laden, können Sie auch die gespeicherten Einstellungen
+direkt editieren (vgl. Abschnitt \ref{subsec:gui_options}).
+Finden Sie dazu den Block der Plugins und ändern Sie alle Werte auf 'false';
+dann wird das entsprechende Plugin nicht mehr geladen.
+
+Auf einem GNU/Linux-System können Sie unter
+\$HOME/.config/QuantumGIS/qgis.conf beispielsweise das Plugin zum Hinzufügen
+von Kommaseparierten Textdateien (CSV) wie folgt deaktivieren:\\
+\ttfamily{Add Delimited Text Layer=false}.\normalfont
+Tun Sie dies nun für alle Plugins im Block [Plugins] stehen. Danach können Sie
+vom Plugin Manager aus jedes einzelne Plugin laden und herausfinden, welches
+das Probleme machende Plugin ist.
+}
+\end{Tip} 
+
+\subsubsection{Datenprovider}\index{data providers}
+
+Datenprovider sind 'spezielle' Plugins, welche die Verbindung zur Datenquelle
+erstellen. Standardmäßig unterstützt QGIS Postgis-Ebenen und disk-basierte
+Datenquellen, die von der Bibliothek GDAL/OGR unterstützt werden (siehe Anhang
+\ref{appdx_ogr}). Ein Datenprovider Plugin erweitert QGIS beim Nutzen von
+anderen Datenquellen.
+
+Datenprovider Plugins werden automatisch beim Starten im System registriert.
+Sie werden nicht durch den Pluginmanager verwaltet, werden jedoch im
+Hintergrund benutzt, wenn eine entsprechende Datenebene in QGIS angezeigt
+werden soll.
+
+\subsubsection{Kernplugins}\label{sec:core_plugins}\index{plugins!core}
+
+Derzeit enthält QGIS 9 Kernplugins, welche über den Pluginmanager geladen
+werden können.
+Tabelle \ref{tab:core_plugins} listet jedes Kernplugin mit einer kleinen
+Beschreibung des Nutzens sowie des Werkzeugleistensymbols auf.
+Beachten Sie, dass das GRASS-Plugin in der Tabelle nicht enthalten ist, da es
+seine eigene Werkzeugleiste installiert (vgl. Abschnitt \ref{sec:grass} um
+Näheres über die Funktionalität des GRASS-Plugins zu erfahren.).
+
+% minipage is needed to appear the footnote under the table
+% SH
+\begin{minipage}{\textwidth}
+\begin{table}[H]
+\centering
+\caption{QGIS Kernplugins}\label{tab:core_plugins}\medskip
+\small
+ \begin{tabular}{|l|l|p{4in}|}
+\hline \textbf{Symbol} & \textbf{Plugin} & \textbf{Beschreibung} \\
+\hline 
+\includegraphics[width=0.7cm]{copyright} & Copyrightschild
+\index{plugins!copyright}& Zeigt ein Copyrightschild im Kartenbild\\
+\hline 
+\includegraphics[width=0.7cm]{delim_text} & CSV-Text \index{plugins!delimited
+text}& Lädt eine kommaseparierte Textdatei (CSV) mit X- und Y-Koordinaten als
+eine Punktebene \\
+\hline 
+\includegraphics[width=0.7cm]{gps} & GPS Werkzeuge \index{plugins!gps}& Lädt
+und stellt GPS-Daten dar \\
+\hline 
+\includegraphics[width=0.7cm]{gridmaker} & Gradnetzgenerator
+\index{plugins!graticule}& Erzeugt ein Gradnetz (Lat/Long) und speichert es in
+ein Shapefile\\
+\hline 
+\includegraphics[width=0.7cm]{scalebar} & Maßstabsbalken
+\index{plugins!scalebar}& Fügt einen Maßstabsbalken dem Kartenbild hinzu\\
+\hline 
+\includegraphics[width=0.7cm]{northarrow}& Nordpfeil
+\index{plugins!northarrow}& Fügt einen Nordpfeil dem Kartenbild hinzu\\
+\hline 
+\includegraphics[width=0.7cm]{buffer} & PostgreSQL Geoverarbeitung
+\index{plugins!geoprocessing}& Puffert eine PostGIS-Ebene \\
+\hline 
+\includegraphics[width=0.7cm]{spiticon} & SPIT \index{plugins!SPIT}& Shapefile
+nach PostGIS Import Werkzeug - importiert Shapefiles in PostgreSQL\\
+\hline
+\includegraphics[width=0.7cm]{georeferencer} &
+Georeferenzierwerkzeug\footnote{Das Georeferenzier-Plugin steht nur zur
+Verfügung, wenn die gsl-Bibliotheken und Header-Dateien beim Kompilieren von
+QGIS installiert haben. 
+Bitte überprüfen Sie Details im Kapitel
+\ref{label_installation_source}}\index{plugin!Georeferencer} & Georeferenziert
+Rasterdatenebenen \\
+\hline
+\end{tabular}
+\end{table}
+\end{minipage}
+
+\normalsize
+
+\begin{Tip}\caption{\textsc{Plugineinstellungen in einem Projekt speichern.}}\index{plugins
+settings}
+\qgistip{Wenn Sie ein .qgs-Projekt abspeichert, werden alle Einstellungen, die
+Sie am Nordpfeil, Maßstab, Copyright imt in dem Projekt abgespeichert. Beim
+nächsten Laden werden die Einstellungen wieder hergestellt.
+}
+\end{Tip}
+
+%
+% External Plugins
+%
+\subsubsection{Externe Plugins}\label{sec:external_plugins}\index{plugins!external}
+
+QGIS enthält auch ein paar extern entwickelte Plugins. Diese befinden sich nicht
+in der Standardversion, können aber bei Bedarf kompiliert und in QGIS integriert
+werden.
+
+Derzeit sind die extern entwickelten Plugins nur über SVN zugänglich. Alle
+aktuell verfügbaren Plugins können Sie hier auschecken:
+
+\begin{verbatim}
+svn co https://svn.qgis.org/repos/qgis/trunk/external_plugins external_qgis_plugins
+\end{verbatim}
+
+Mit diesem Befehl wird ein Ordner \texttt{external\_qgis\_plugins} in Ihrem
+aktuellen Verzeichnis erstellt. Jeder Unterordner enthält eigene Instruktionen
+zum Kompilieren und Installieren. Lesen Sie diese sorgfältig, um das jeweilige
+Plugin zu erstellen.
+
+%
+% Plugin template
+%
+\subsubsection{Plugin-Vorlagen}\label{sec:plugin_template}\index{plugins!template}
+
+Wenn Sie Ihr eigenes QGIS-Plugin erstellen wollen, beinhaltet QGIS ein Skript, 
+welches Sie bei der Integration Ihres Plugins und der Erstellung der
+Verzeichnisstruktur innerhalb des QGIS-Quellbaums unterstützt.
+Das Skript finden Sie unter \texttt{QGIS/src/plugins/plugin\_builder.pl}.
+
+Sie müssen lediglich noch die neuen Funktionen in Ihr Plugin hineinprogrammieren
+(und das Plugin natürlich dem QGIS Entwicklerteam zur Verfügung stellen).
+
+Daneben hält das QGIS-Wiki (\url{http://wiki.qgis.org}) und der QGIS-Blog
+(\url{http://blog.qgis.org}) weitere nützliche Artikel zum Schreiben eigener
+Plugins bereit. Besuchen Sie die Webseite für weitere Details!
+

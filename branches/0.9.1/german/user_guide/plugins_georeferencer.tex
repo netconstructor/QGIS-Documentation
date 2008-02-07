@@ -1,0 +1,99 @@
+\subsection{Die Benutzung des Georeferenzierungs-Plugin} 
+
+Das Georeferenzierungs-Plugin erlaubt die Erstellung von world-files für Rasterkarten. Damit das Plugin die world-file Parameter berechnen kann, wählen sie auf einer Rasterkarte Punkte aus und ordnen diesen Punkten die entsprechenden Koordinaten zu. Das Ergebnis der Georeferenzierung wird umso genauer, je mehr Koordinaten Sie dem Plugin zur Verfügung stellen.
+
+Als Beispiel hierfür werden wir nun ein world-file für eine topografische Karte aus der Gegend Süd-Dakotas erstellen, welche aus dem Spearfish-Datensatz stammt. Diese Karte kann später zusammen mit den erstellten Daten in der GRASS spearfish60 location dargestellt werden. Die topopgrafische Karte steht unter folgender Adresse zum Download bereit.
+\url{http://grass.itc.it/sampledata/spearfish\_toposheet.tar.gz}
+
+Als erstes laden wir die Datei herunter und entpacken diese mit dem tar-Befehl.
+
+\begin{verbatim}
+wget http://grass.itc.it/sampledata/spearfish_toposheet.tar.gz
+tar xvzf spearfish_toposheet.tar.gz
+cd spearfish_toposheet
+\end{verbatim}
+
+Als nächstes starten wir QGIS, laden dort das Georeferenzierungs-Plugin und wählen dann die spearfish\_topo24.tif aus.
+
+\begin{figure}[ht]
+\begin{center}
+  \caption{Ein Bild für die Georeferenzierung auswählen}\label{fig:select_image}\smallskip
+  \includegraphics[clip=true]{select_image}
+\end{center}
+\end{figure}
+
+Dann klicken Sie auf die Schaltfläche \textsl{Fenster anordnen} um das ausgewählte Bild im Georeferenzierer zu öffnen und auf dem Desktop gemeinsam mit dem QGIS Kartenfenster optimal anzuordnen.
+
+\begin{figure}[ht]
+\begin{center}
+  \caption{Optimales Anordnen des QGIS Kartenfensters mit dem Georeferenzierer}\label{fig:georeferencer}\smallskip
+  \includegraphics[clip=true,width=0.8\textwidth]{georeferencer}
+\end{center}
+\end{figure}
+
+Über die Schaltfläche \textsl{Add Point} können Sie nun damit beginnen dem Rasterbild Punkte und die dazugehörigen Koordinaten hinzuzufügen. Aus diesen Punktkoordinaten errechnet das Plugin dann die entsprechenden world-file Parameter. Je mehr Koordinaten Sie dem Plugin zur Berechnung zur Verfügung stellen, desto genauer wird das Ergebnis. Für die Angabe der nötigen Punktkoordinaten stehen Ihnen zwei unterschiedliche Vorgehensweisen zur Verfügung.
+
+\begin{enumerate}
+\item Sie klicken auf einen Punkt in der Rasterkarte und geben die X- und Y-Koordinaten von Hand ein.
+\item Sie klicken auf einen Punkt in der Rasterkarte und wählen die Schaltfläche
+\textsl{from map canvas} um die x und y Koordinaten mit Hilfe einer georeferenzierten und bereits in QGIS geladenen Karte hinzuzzufügen.
+\end{enumerate}
+
+\begin{figure}[ht]
+\begin{center}
+  \caption{Koordinaten für die Georeferenzierung setzen}\label{fig:choose_points}\smallskip
+  \includegraphics[clip=true,width=0.8\textwidth]{choose_points}
+\end{center}
+\end{figure}
+
+In unserem Beispiel nutzen wir die zweite Option und geben die Koordinaten der ausgewählten Punkte mit Hilfe der Karte \textsl{roads} 
+aus der \textsl{spearfish60} location ein. Diese Daten stehen unter folgender Adresse zum Download bereit: \\
+\url{http://grass.itc.it/sampledata/spearfish\_grass60data-0.3.tar.gz}
+
+Für den Fall, dass Sie nicht wissen, wie Sie die spearfish60 location über das GRASS Plugin benutzen können, 
+finden Sie im Abschnitt \ref{sec:grass} weitere Informationen. 
+
+Wie Sie in der Abbildung \ref{fig:choose_points} sehen können, stellt Ihnen das Georeferenzierungs-Werkzeug Schaltflächen zum Vergrößern/Verkleinern, zum Verschieben, sowie zum Hinzufügen und Löschen von Punkten in der Karte zur Verfügung. 
+
+Nachdem Sie dem Bild eine ausreichende Zahl an Punkten hinzugefügt haben, gilt es nun, für den Georeferenzierungs-Vorgang die gewünschte Koordinaten-Transformationsmethode auszuwählen und die daraus errechneten world-file Daten zusammen mit dem Tiff zu speichern. In unserem Beispiel entscheiden wir uns für eine lineare Transformation, wobei ebensogut eine Helmert-Transformation verwendet werden könnte.
+
+\begin{Tip}\caption{\textsc{Wahl der Projektion}}
+\qgistip{Die lineare (affine) Koordinaten-Transformationsmethode ist eine
+Transformation erster Ordnung und wird zur Skalierung, Umwandlung und
+Drehung von geometrisch fehlerfreien Bildern verwendet. Im Falle der
+Helmert-Transformation werden einem Bild - wie beim geokodieren - einfach
+Koordinaten-Informationen hinzugefügt. Ist ihr Bild verzerrt, so benötigen
+Sie Programme, die eine polynome Transformation zweiter 
+und dritter Ordnung ermöglichen, wie z.B. GRASS GIS.
+}
+\end{Tip} 
+
+Die von uns hinzugefügten Punkte werden zusammen mit dem Rasterbild in der Datei \textsl{spearfish\_topo24.tif.points} gespeichert. Dies erlaubt es uns, das Georeferenzierungs-Plugin wieder zu öffnen und neue Punkte hinzuzufügen oder bestehende Punkte zu löschen, um dadurch 
+das Ergebnis zu verbessern. Die Datei \textsl{spearfish\_topo24.tif.points} zeigt beispielsweise folgende Punkte an:
+
+\begin{verbatim}
+mapX    		mapY    		pixelX  pixelY
+591630.196867999969982  4927104.309682800434530 591647  4.9271e+06
+608453.589164100005291  4924878.995150799863040 608458  4.92487e+06
+602554.903929700027220  4915579.220743400044739 602549  4.91556e+06
+591511.138448899961077  4915952.302661700174212 591563  4.91593e+06
+602649.526155399973504  4919088.353569299913943 602618  4.91907e+06
+\end{verbatim} 
+
+Um das Rasterbild zu georeferenzieren, liegen uns 5 Koordinatenpunkte vor. Um möglichst genaue Resultate zu erhalten, ist es wichtig, die verschiedenen Punkte gleichmäßig innerhalb des Bildes zu verteilen. Zum Abschluss überprüfen wir das Ergebnis, laden die neue 
+georeferenzierte Karte \textsl{spearfish\_topo24.tif} und überlagern diese mit der Karte \textsl{roads} 
+aus der spearfish60 location.
+
+\begin{figure}[ht]
+\begin{center}
+  \caption{Georeferenziete Karte mit überlagerter Vektorkarte der spearfish location}\label{fig:result_map}\smallskip
+  \includegraphics[clip=true,width=0.8\textwidth]{result_map}
+\end{center}
+\end{figure}
+
+
+
+
+
+
+

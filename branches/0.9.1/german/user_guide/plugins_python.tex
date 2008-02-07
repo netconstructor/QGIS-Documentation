@@ -1,0 +1,315 @@
+\subsection{Die Benutzung des Python Plugins}
+
+Das Schreiben von Plugins lässt sich mit der Programmiersprache Python wesentlich einfacher bewerkstelligen als über die Benutzung von C++. Um ein Plugin für QGIS - im folgenden als PyQGIS Plugin bezeichnet - zu erstellen, benötigen Sie QGIS 0.9, Python, PyQt und die Qt Entwickler Werkzeuge (developer tools).
+\cite{sherman07}.
+
+Wird QGIS gestartet, so überprüft das Programm auf der Suche nach C++
+und den Python Plugins bestimmte Verzeichisse. Damit eine Datei (shared
+library, DLL (=dynamic link library), oder Python Skript) als Plugin
+erkannt wird, muss diese eine bestimmte Signatur aufweisen. Im Falle von
+diesem Python Skript ist dies sehr einfach. QGIS überprüft hierfür im Installationsverzeichnis die folgenden Verzeichnisse:
+
+\begin{itemize}
+\item \textbf{Linux und andere UNIX Systeme}: ./share/qgis/python/plugins
+\item \textbf{Mac OS X}: ./Contents/MacOS/share/qgis/python/plugins
+\item \textbf{Windows}: .\textbackslash share\textbackslash QGIS\textbackslash
+python\textbackslash plugins
+\end{itemize}
+
+Jedes Python Plugin befindet sich dabei in einem eigenen Verzeichnis.
+Beim Programmstart überprüft QGIS sämtliche Unterverzeichnisse im Pfad
+\textsl{share/qgis/python/plugins} und initialsiert dabei sämtliche
+gefundenen Plugins. Nachdem dies durchgeführt wurde, erscheinen die
+gefundenen Plugins im QGIS-eigenen Plugin-Manager.  
+
+Lassen Sie uns nun ein Plugin erstellen, um damit eine bestehende Lücke im QGIS
+Interface zu schließen. Dieses Plugin wird es uns erlauben einen neuen PostGIS
+Layer zu erstellen und diesen in digitaler Form darzustellen. Zwar handelt es sich hierbei um ein sehr einfaches und nicht sonderlich elegantes Plugin, doch vermittelt es einen recht guten ersten Einblick darin, wie Sie in Zukunft Ihre eigenen PyQGIS Plugins erstellen können. 
+
+\subsubsection{Die Erstellung einer Plugin-Struktur}
+Als erstes müssen wir uns Gedanken über den Aufbau unseres Plugins machen und dessen Struktur festlegen. In diesem Beispiel werden wir unser Plugin unter Linux erstellen, doch ist das Prinzip auf den anderen Plattformen dasselbe; es gilt lediglich einige der Systembefehle an das jeweilige System anzupassen. QGIS ist in unserem home-Verzeichnis in einem Verzeichnis mit dem Namen \textsl{qgis\_09} installiert. Lassen Sie uns nun das Verzeichnis für unser Plugin erstellen.
+
+\begin{verbatim}
+mkdir ~/qgis_09/share/qgis/python/plugins/new_layer
+\end{verbatim}
+
+Für den Anfang müssen wir im Verzeichnis \textsl{new\_layer} die folgenden
+Dateien erstellen (Etwas später werden wir dann noch einige andere Dateien benötigen):
+
+\begin{verbatim}
+__init__.py 
+resources.py
+resources.qrc
+newlayer.py
+\end{verbatim} 
+
+\subsubsection{Das Plugin für QGIS sichtbar machen}
+
+Das Erkennbarmachen des Plugins erfolgt mit dem \textsl{\_\_init\_\_.py} Skript. Im Falle unseres \textsl{NewLayer} Plugins hat das Skript folgenden Inhalt:
+
+\begin{verbatim}
+1 # load NewLayer class from file newlayer.py
+2 from newlayer import NewLayer
+3 def name():
+4   return 'New PostGIS layer'
+5 def description():
+6   return 'Creates a new empty Postgis layer'
+7 def version():
+8   return 'Version 0.1'
+9 def classFactory(iface):
+10   return NewLayer(iface)
+\end{verbatim} 
+
+Diejenigen Dinge, die ein Plugin zwingend enthalten muss, sind ein Name, eine Beschreibung und eine Versionsnummer, also sämtliche Punkte die unser oben stehendes Skript beinhaltet.  Jedem Schritt folgt dabei eine einfache Zeichenfolge mit den dazu passenden Informationen. Notwendig ist außerdem der sogenannte  \textsl{classFactory} Schritt, der eine Verbindung zum Plugin selbst herstellen muss (Zeile 10), nachdem der  \textbf{iface}-Befehl erschienen ist. Mit Hilfe dieses einfachen Programmcodes, wird QGIS unser Skript als ein Plugin erkennen.
+
+\subsubsection{Quellen}
+
+Um für unser Plugin nun ein schickes kleines Symbol zu erhalten, müssen wir eine Qelldatei erstellen, der wir den Namen \textsl{resources.qrc} geben. Hierbei handelt es sich lediglich um eine einfache XML-Datei, die angibt wo sich das entsprechende Symbol befindet:
+
+\begin{verbatim}
+ <RCC>
+    <qresource prefix='/plugins/newlayer'>
+        <file>icon.png</file>
+    </qresource>
+</RCC> 
+\end{verbatim} 
+
+Um Namenskonflikte mit anderen Plugins zu vermeiden, nutzt die Quelldatei ein Präfix. Hierbei ist die Verwendung des Pluginnamens normalerweise ausreichend. Bei der Datei \textsl{icon.png} handelt es sich um ein PNG-Bild, das in der Werkzeugleiste angezeigt wird, wenn das Plugin aktiviert ist. Für diesen Zweck können sie auch jedes Bild benutzen, sofern es eine Größe von 22x22 Pixeln besitzt und dadurch in die Werkzeugleiste passt.
+
+Um die Quelldatei in etwas umzuwandeln, was vom Plugin genutzt werden kann, gilt es diese mit dem PyQt-Quellcompilierprogramm umzuwandeln:
+
+\begin{verbatim}
+  pyrcc4 -o resources.py resources.qrc
+\end{verbatim}
+
+Der \textsl{-o} Parameter wird zur Festlegung der Ausgabedatei verwendet. Da
+wir unsere Quellen erstellt haben, müssen wir einen Weg finden, um die
+notwendigen Information einzuholen, die für die Erstellung eines neuen Layers erforderlich sind.
+
+\subsubsection{Erstellen der grafischen Benutzeroberfläche (GUI)}
+
+Normalerweise würden wir das gleiche Programm benutzen, das auch C++
+Entwickler für die Erstellung einer GUI benutzen: den Qt Designer. Hierbei
+handelt es sich um ein visuelles Designprogramm, das es Ihnen erlaubt, Dialog- und Hauptfenster mit Hilfe von \textit{drag \& drop} Grafikobjekten zu erstellen und deren Eigenschaften festzulegen.
+
+Für die Gestaltung unseres 'Neuer Layer' Plugins könnten wir einen großen
+Aufwand betreiben und Grafikobjekte für Typenfelder und andere Optionen
+erstellen. Da unsere Zeit hierfür jedoch begrenzt ist, werden wir uns einer
+anderen Möglichkeit bedienen, um die erforderlichen Informationen für das Erstellen einer Tabelle einzuholen. Dabei wird der konzeptionelle Aufbau anschaulich dargestellt und Sie können sich dann daran wagen, die Übungen des QGIS Internet Blogs zu meistern.
+
+Um die Nutzerdaten zu erhalten, benutzen wir den \textsl{QInputDialog} Befehl aus der Qt Bibliothek. Dieser verlangt vom Nutzer die Eingabe von einer Kommandozeile.  Auch wenn unser Plugin hierdurch etwas weniger elegant wird, so dient diese Methode jedoch der Veranschaulichung der einzelnen Arbeitsschritte. 
+
+Alles was wir nun noch benötigen, ist der Python Code um die Eingabedaten abzufragen und die entsprechende Tabelle zu erstellen.
+
+\subsubsection{Die Erstellung des Plugins}
+
+Nun, wo wir sämtliche Vorbereitungen abgeschlossen haben, können wir mit mit
+dem Schreiben des Codes beginnen, der dann die eigentliche Arbeit
+verrrichten soll. Beginnen wir damit, uns in der Datei \textsl{newlayer.py} einen Überblick darüber zu verschaffen, was importiert und was für das Funktionieren des Plugins bereitgestellt werden muss.
+ 
+\begin{verbatim}
+1 # Import the PyQt and QGIS libraries
+2 from PyQt4.QtCore import *
+3 from PyQt4.QtGui import *
+4 from qgis.core import *
+5 import psycopg
+6 # Initialize Qt resources from file resources.py
+7 import resources
+8
+9 # Our main class for the plugin
+10 class NewLayer:
+11
+12  def __init__(self, iface):
+13    # Save reference to the QGIS interface
+14    self.iface = iface
+15
+16  def initGui(self):
+17    # Create action that will start plugin configuration
+18    self.action = QAction(QIcon(':/plugins/newlayer/icon.png'),\
+19      'New PosGIS Layer', self.iface.getMainWindow())
+20    QObject.connect(self.action, SIGNAL('activated()'), self.run)
+21
+22    # Add toolbar button and menu item
+23    self.iface.addToolBarIcon(self.action)
+24    self.iface.addPluginMenu('&New PostGIS Layer...', self.action)
+25
+26  def unload(self):
+27    # Remove the plugin menu item and icon
+28    self.iface.removePluginMenu('&New PostGIS Layer...',self.action)
+29    self.iface.removeToolBarIcon(self.action)
+\end{verbatim}
+
+In den Zeilen 2 bis 7 importieren wir die Bibliotheken, die wir für das
+Plugin benötigen. Hierzu gehören die PyQt Bibliotheken, die QGIS
+Kernbibliothek und die Python PostgreSQL Bibliothek psycopg. Bei jedem
+Python Skript, das die QGIS Bbliotheken und PyQt benutzt, müssen die QtCore und die QtGui Bibliotheken, sowie die QGIS Kernbibliothek importiert werden. Auf diese Weise erhalten wir Zugang zu den sogenannten PyQt-Wrappern für unsere Qt-Objekte (wie etwa unseren Eingabedialog) sowie auf die QGIS Kernbibliotheken.  Zudem müssen wir die zuvor erstellte Datei \textsl{resources.py} importieren, welche die genaue Symbol/Icon-Beschreibung enthält.
+
+In Zeile 10 legen wir die Kategorie \textbf{NewLayer} fest. Mit dem \textsl{\_\_init\_\_} 
+Befehl (Zeile 12 bis 14) wird unsere Kategorie festgelegt und mittels des ClassFactory Befehls in Zeile 10 von \_\_init\_\_.py an das iface-Objekt von QGIS angepasst. Um \textbf{iface} auch später nutzen zu können, speichern wir dieses als sogenannte 'Membervariable' ab.
+
+In den Zeilen 16 bis 24 legen wir für das Plugin die Bestandteile der
+grafischen Benutzeroberfläche (GUI) fest. In Qt wird \textbf{QAction}
+benutzt, um eine Funktion für die Benutzeroberflächen zu erstellen, die
+sowohl für das Erschaffen eines Menü- als auch eines
+Werkzeugleisten-Elements verwendet werden kann. Im Falle unseres Plugins
+nutzen wir diese Funktion für beides. In Zeile 18 erstellen wir eine
+Funktion, die auf unsere Symbol/Icon-Quelle zurückgreift (achten Sie dabei
+auf das Präfix, das wir in der Datei \textsl{resources.qrc} angegeben
+haben). Desweiteren geben wir auch etwas Text an, der in einem Menüeintrag
+oder bei einem Mouseover erscheint. Abschließend gilt es noch das sogenannte
+'parent' anzugeben. Im Falle eines Plugins ist dieses 'parent' das
+Hauptfenster von QGIS.  Das \textbf{iface} Objekt, das wir während der Initialisierung gespeichert haben, ermöglicht es uns in Zeile 19 die Quellenangabe für das Hauptfensters zu erhalten.
+
+Nachdem dieser erste Teil des Plugins nun erstellt ist, können wir diesen
+der Werkzeugleiste und dem \textsl{Plugins} Menü (Zeile 23 und 24)
+hinzufügen. Damit wird die grafische Benutzeroberfläche für das Plugin
+vorbereitet. Als weiteren Schritt müssen wir 'hinter uns aufräumen', wobei
+unser Plugin dabei nicht geladen sein darf. Um dieses Aufräumen kümmert sich der \textsl{unload} Befehl, der den Menüpunkt und das Werkzeug aus der Werkzeugleiste entfernt (Zeile 28 und 29).
+
+Dieser erste Teil sorgt also nun für die Initialisierung und ein sauberes Starten und Beenden unseres Plugins. Lassen Sie uns nun einen Blick auf den Programmcode werfen, der die eigtentliche Aufgabe verrichtet. Alle Informationen hierzu sind im \textsl{run} Programmabschnitt enthalten.
+
+\begin{verbatim}
+30 def run(self): 
+31   # Get the user input, starting with the table name
+32   table_name = QInputDialog.getText(None, 'Table Name?', \
+33     'Name for new PostGIS layer')
+34   if table_name[0].length() > 0:
+35     # Get the field names and types
+36     fields = QInputDialog.getText(None, 'Field Names', \
+37      'Fields (separate with a comma)')
+38     parts = fields[0].split(',')
+39     # Create the SQL statement
+40     sql = 'create table ' + table_name[0] + ' (id int4 primary key, '
+41     for fld in parts:
+42      sql += fld + ' varchar(10), '
+43     sql = sql[0:-2]
+44     sql += ')'
+45     # Connect to the database
+46     # First get the DSN
+47     dsn = QInputDialog.getText(None, 'Database DSN', \
+48      'Enter the DSN for connecting to the database (dbname=db user=user)')
+49     if dsn[0].length() > 0:
+50      con = psycopg.connect(str(dsn[0]))
+51      curs = con.cursor()
+52      curs.execute(str(sql))
+53      con.commit()
+54      # add the geometry column
+55      curs.execute('select AddGeometryColumn('' + str(table_name[0]) + \
+56        '', 'the_geom', 4326, 'POLYGON', 2)')
+57      con.commit()
+58      # create the GIST index
+59      curs.execute('create index sidx_' + str(table_name[0]) + ' on ' + \
+60        str(table_name[0]) + ' USING GIST(the_geom GIST_GEOMETRY_OPS)')
+61        con.commit()
+\end{verbatim}
+
+Als erstes müssen wir den  \textbf{QInputDialog} benutzen um den Namen der zu erstellenden Tabelle zu erhalten. Die Abfrage des Namens erfolgt in Zeile 32.
+
+\begin{figure}[ht]
+\begin{center}
+  \caption{Geben Sie einen neuen PostGIS Tabellennamen ein}\label{fig:gettablename}\smallskip
+  \includegraphics[scale=0.8]{gettablename}
+\end{center}
+\end{figure}
+
+Bevor wir fortfahren überprüfen wir in Zeile 34  ob der Anwender auch tatsächlich etwas eingegeben hat.
+
+Als nächstes müssen wir die Feldnamen abfragen. In unserem Beispiel
+gestalten wir diesen Punkt sehr einfach. Jedes Feld wird als varchar(10)
+definiert, d. h. dass jedes Feld bis zu 10 Zeichen enthalten kann. Um das
+Plugin voll nutzbar zu machen, müssten wir dem Anwender allerdings eine
+Möglichkeit bieten, die Art des Feldtyps bestimmen zu können. In Zeile 36 fordern wir den Nutzer zur Eingabe einer kommagetrennten Feldnamensliste auf.
+
+\begin{figure}[ht]
+\begin{center}
+  \caption{Geben sie die Feldnamen für die neue PostGIS Tabelle ein}\label{fig:getfieldname}\smallskip
+  \includegraphics[scale=0.8]{getfieldname}
+\end{center}
+\end{figure}
+
+Dann teilen wir diese Liste in ihre Bestandteile auf, um daraus die sogenannten SQL Statements zu erstellen (Zeile 38).
+
+Zeile 40 enthält den ersten Teil des SQL Statements. Beachten Sie, dass wir die Tabelle mit einem Integer-ID Feld erstellen, das als Primärschlüssel fungiert. Dann wiederholen wir diesen Schritt für die Feldliste und hängen den entsprechenden Code an das SQL Statement (Zeile 41).
+
+Nachdem wir sämtliche Felder zum SQL Statement hinzugefügt haben, trennen wir die ungewünschten Zeichen ab (Zeile 43) und fügen dann eine geschlossene runde Klammer ein, um damit das Statement abzuschließen (Zeile 44).
+
+Nun sind wir soweit, um uns mit der Datenbank zu verbinden und die Tabelle zu erstellen. Um Zugang zur Datenbank zu erhalten benutzen wir psycopg (\url{http://www.initd.org}). Für den Verbindungsaufbau müssen wir den Namen der Datenquelle (DSN) mit dem Namen der Datenbank, den Nutzer und ein eventuell notwendiges Passwort angeben. Wenn wir sowohl QGIS als auch PostgreSQL auf demselben Rechner laufen haben müssen wir nomalerweise kein Passwort festlegen. In solch einem Falle sieht der DSN in etwa folgendermaßen aus:
+
+\begin{center}
+  \textsl{dbname=gis\_data user=gsherman}
+\end{center}
+
+Um den DSN zu erhalten, fragen wir diesen in Zeile 47 vom Anwender mit einem \textbf{QInputDialog} ab.
+
+\begin{figure}[ht]
+\begin{center}
+  \caption{Geben Sie den DSN für die Verbindung mit der PostGIS Datenbank ein}\label{fig:getdsn}\smallskip
+  \includegraphics[scale=0.8]{getdsn}
+\end{center}
+\end{figure}
+
+Wenn der Nutzer einen DSN eingibt, können wir in Zeile 50 mit der Verbindung zur
+Datenbank fortfahren. In Zeile 51 erhalten wir von dieser Verbindung einen
+Cursor und führen dann das SQL Statement für die Tabellenerstellung aus und
+geben diese Änderung in den Zeilen 52 bis 53 an. Auf diese Weise wird zwar die
+Tabelle erstellt, damit diese jedoch auch als ein gültiger und nutzbarer Layer funkioniert, bedarf es aber noch einiger weiterer Dinge.   
+
+Als erstes ist eine Geometriespalte erforderlich. Ganz bewusst haben wir eine solche Spalte bei der Anlage der Tabelle noch nicht eingefügt, um diese nun mit der Funktion \textsl{AddGeometryColumn} erstellen zu können. Diese Funktion fügt der Tabelle eine Geomtriespalte hinzu und legt für uns in der \textsl{geometry\_columns} Tabelle einen Einrag an. In Zeile 55 legen wir den Tabellennamen, den Namen der Geomeriespalte, die SRID, den Feature-Typ und dessen Ausdehnung fest.
+
+Als letztes müssen wir der Tabelle nun einen so genannten 'spatial index' zufügen, damit bei der Abfrage und Darstellung räumlicher Daten in QGIS eine möglichst hohe Geschwindigkeit erzielt werden kann. In Zeile 59 haben wir das SQL so 'zusammengebastelt', dass dieser Index erstellt wird. Die eigentliche Anweisung sieht dann folgendermaßen aus:
+
+\begin{verbatim}
+create index sidx_park_land on park_land 
+   USING GIST(the_geom GIST_GEOMETRY_OPS);
+\end{verbatim}
+
+\subsubsection{Fragen und Probleme}
+
+Unser Plugin ist nun fertig. Lassen Sie uns nun einen Blick darauf werfen, was daran noch falsch ist und verbessert und optimiert werden kann: 
+
+\begin{itemize}
+\item Wir könnten ein verbessertes GUI nutzen, welches es dem Nutzer erlauben würde sämtliche erforderlichen Informationen in einem einzigen Programmdialog einzugeben.
+\item Der Nutzer kann keine Feldtypen festlegen.
+\item Die Fehlerprüfung im Dialogfenster ist begrenzt.
+  \begin{itemize}
+    \item Das Plugin funktioniert nur, wenn sämtliche Felder eingeben werden.
+    \item Es findet keinerlei Fehlerprüfung der Datenbankoperationen statt.
+  \end{itemize} 
+\item Man erhält keine Rückmeldung wenn das Plugin die Arbeitsprozedur abgeschlossen hat. 
+\end{itemize} 
+Trotz all dieser Mängel dient es jedoch als ein ganz ursprüngliches Plugin, anhand dessen der konzeptionelle Ablauf einer Pluginerstellung recht passend dargestellt wird und das Ihnen bei den ersten Schritten ihrer eigenen Plugin Entwicklungen weiterhilft. 
+
+\subsubsection{Hinzufügen einer Rückmeldung}
+
+Lassen Sie uns eines dieser kleinen Probleme dadurch lösen, indem wir an das
+Ende des Arbeitsvorgangs einige Rückmeldungen hinzufügen. Hierfür werden wir
+ganz einfach ein Nachrichtenfenster einfügen, welches den Nutzer darüber
+aufklärt, dass alle Prozesse abgeschlossen sind und zu prüfen ist, ob die entsprechende Tabelle in der Datenbank erstellt wurde. 
+
+Um dies zu bewerkstelligen geben wir nach  derZeile 61 einfach den folgenden Programmcode ein:
+
+\begin{verbatim}
+# show the user what happened
+QMessageBox.information(None, 'Results', 'Table ' + str(table_name[0]) + \
+' has been created. Check your database to confirm.')
+\end{verbatim}
+
+Sobald die Tabelle erstellt worden ist, erhält der Nutzer dann die folgende Meldung:
+
+\begin{figure}[ht]
+\begin{center}
+  \caption{Nachrichtenfenster mit den Plugin-Ergebnissen}\label{fig:plugin_results}\smallskip
+  \includegraphics[scale=0.8]{plugin_results}
+\end{center}
+\end{figure}
+
+\subsubsection{Zusammenfassung}
+Das Schreiben eines QGIS Plugins in Python ist relativ einfach. Einige Plugins erfordern nicht einmal eine Grafische Benutzeroberfläche (GUI). Sie könnten beispielsweise ein Plugin schreiben das die Koordinaten eines Punktes wiedergibt auf den sie in der Karte klicken. Eine solches Plugin würde keinerlei Nutzereingabe erfordern und es könnte für die Darstellung der Ergebnisse auf eine bereits vorhandene Qt \textbf{QMessageBox} zurückgegriffen werden. 
+
+Sie können Plugins für QGIS auch in C++ schreiben, dies ist allerdings ein anderes Thema. Tutorials darüber, wie man QGIS Plugins sowohl in C++ als auch in Python schreibt, finden sie im QGIS-Blog auf:
+
+\begin{center}
+  \url{http://blog.qgis.org} 
+\end{center}
+
+% vim:tw=76:autoindent

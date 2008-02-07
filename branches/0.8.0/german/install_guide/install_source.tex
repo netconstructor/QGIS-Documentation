@@ -1,0 +1,732 @@
+% vim:textwidth=76:autoindent
+
+\section{Installation}\label{label_installation_source}
+
+Das hier beschriebene Vorgehen zeigt das Erstellen von QGIS aus dem Quellcode
+unter *NIX-Systemen.
+\begin{verbatim}
+./configure
+make
+sudo make install
+\end{verbatim}
+
+Für Betriebssysteme wie GNU/Linux, MS Windows und Mac OSX gibt es vorkompilierte
+Binärpakete. Sie brauchen in diesem Fall nicht mehr als die folgenden drei
+Unterkapitel lesen. Aktuelle Links zu Binärpaketen finden Sie im Abschnitt \ref{sec:getqgis}.
+
+\subsection{Eine GNU/Linux Version installieren}
+Für GNU/Linux stehen verschiedene Binärpakete für Debian, Ubuntu, Fedora,
+Mandriva oder SuSE bereit. Sie können die .rpm oder .deb Pakete einfach mit dem
+entsprechenden Paketmanager installieren.
+
+\subsection{Eine Windows Version installieren}
+Um QGIS unter MS Windows zu installieren brauchen Sie nur den
+benutzerfreundlichen 'Setup Wizard' zu starten. Lesen Sie dazu die README.WIN32
+Datei. In der Version \OLD war das GRASS-Plugin für Windows noch nicht
+enthalten, weil keine native GRASS-Verbindung existierte. 
+
+% FIXME: needs to be verified before releasing! (SH)
+Seitdem GRASS GIS fast vollständig nach Windows portiert wurde, enthält QGIS
+\CURRENT nun auch das GRASS-Plugin.
+
+
+\subsection{Eine Mac OS X Version installieren}
+Um das Image mit der OSX Version von QGIS zu installieren, doppelklicken Sie
+auf das Icon, um das Paket zu entpacken und einzubinden. Danach ziehen Sie die
+QGIS Applikation auf Ihre Festplatte. Wenn Sie QGIS aus den Quellen unter Mac OS
+X erstellen wollen, informieren Sie sich bitte unter 
+\url{http://wiki.qgis.org/qgiswiki/BuildingOnMacOsX}.
+Die Installation des Images ist die einfachste Variante und stellt die volle
+Funktionalität mit allen Plugins bereit, inklusive GRASS. Lesen Sie die
+README-Datei im Image für weitere Informationen.
+
+Zusätzliche Informationen über die aktuelle QGIS Version und dafür erstellte
+Images finden Sie auch unter \url{http://mrcc.com/wiki/index.php/Building_QGIS_on_OS_X}.
+
+%This document does not contain instructions for building the GRASS 
+%plugins. Information on building the GRASS plugin with raster and vector 
+%support can be found in the \textit{Building QGIS with GRASS Support}
+% document, available at \url{http://community.qgis.org/grass_plugin}. 
+
+\subsection{Erstellen aus dem Quellcode}\label{label_sources}
+
+Der weitere Teil dieses Dokuments handelt vom Kompilieren und Installieren von
+QGIS aus dem Quellcode bezogen auf GNU/Linux und Unix Systeme.
+
+Für QGIS~\CURRENT gibt es zwei Abhängigkeiten: SQLite3 and Proj.4. Diese müssen
+erstellt und installiert sein, um QGIS zu bauen.
+
+QGIS kann installiert werden mit Unterstützung für vier Datenmodelle: 
+
+\begin{enumerate}
+\item Allgemeiner Raster- und Vektorsupport (GDAL- und OGR-Formate)
+\item PostgreSQL/GEOS/PostGIS 
+\item GRASS Raster- und Vektorsupport
+\item OGC WMS-Support
+\end{enumerate} 
+
+Der Allgemeine Support für Raster- und Vektordaten nutzt die
+GDAL-/OGR-Bibliotheken. Für weitere Informationen vergleichen Sie
+\url{http://gdal.maptools.org/formats_list.html} und
+\url{http://gdal.maptools.org/ogr/ogr_formats.html}.
+
+PostgreSQL/PostGIS Support ermöglicht es, räumliche Daten in einer PostgreSQL
+Datenbank zu speichern. GRASS-Support bietet Zugriff auf GRASS Locations und GRASS
+Module, um Datenanalysen durchzuführen. 
+
+\textbf{Bemerkung:} Wenn Sie QGIS mit GRASS-Support benutzen möchten, müssen
+Sie eine GDAL-Version 1.2.6 oder höher verwenden. Bevorzugt sollten Sie eine
+Version höher 1.3.1 verwenden, in der GDAL und GDAL-GRASS in unterschiedlichen
+Dateien abgelegt ist. Sie werden im laufenden Betrieb von der
+GDAL-/OGR-Bilbliothek geladen. 
+
+Alle für QGIS notwendigen Programme werden im unteren Abschnitt angesprochen.
+Beachten Sie, dass die Informationen aus den einzelnen Installationsanleitungen
+der Programme entnommen und abstrahiert wurden. Für detailierte Informationen
+beziehen Sie sich bitte auf die Informationen der einzelnen Programme. Die in
+dieser Dokumentation benutzten Dateien sind Beispiele.
+
+Wenn Sie QGIS ohne PostgreSQL- oder GRASS-Support erstellen, überspringen Sie den
+Teil über die Installation von GDAL/OGR.
+
+%
+% Getting QGIS
+%
+\section{QGIS herunterladen}\label{sec:getqgis}
+
+QGIS können Sie als Quellcode oder Binärpaket von der offiziellen QGIS Webseite
+herunterladen \url{http://qgis.org} \cite{QGISweb} oder \url{http://download.qgis.org}. 
+
+Zusätzlich können Sie Pakete für zahlreiche GNU/Linux Distributionen von verschiedenen
+anderen Bereitstellern herunterladen. Eine zum Zeitpunkt der Erstellung dieses
+Handbuches aktuelle Liste finden Sie im Menü
+\textit{Download} unter \url{http://qgis.org}.
+
+Für das Erstellen von QGIS notwendige Pakete finden Sie für fast alle
+Betriebssysteme im Internet. Oft ist es ohne Probleme möglich, das Erstellen aus
+den Quellen mit der Installation von bereits fertigen Paketen zu kombinieren. 
+Manchmal ist dies aber auch schwierig. Mit den folgenden Schritten können Sie 
+diese Probleme meist umgehen.   
+
+\subsection{Binärpakete}\label{label_binaries}
+
+Binärpakete (meist inoffiziell) werden unter folgenden URLs bereitgestellt:
+
+\textbf{SuSE}
+
+\begin{itemize}
+% seems to be broken ? [OD] \item LinGIS \url{ftp://ftp.lingis.org}
+\item nature-consult \url{http://www.nature-consult.de/software/suse}
+\item GDF Hannover \url{http://www.gdf-hannover.de/software}
+\end{itemize}
+
+\textbf{Mandriva (Mandrake)}
+
+\begin{itemize}
+\item Mandrivaclub \url{http://rpms.mandrivaclub.com/search.php?query=qgis&submit=Search+...}
+\item GDF Hannover \url{http://www.gdf-hannover.de/software}
+\end{itemize}
+
+\textbf{Fedora (redhat)}
+
+\begin{itemize}
+\item Intevation GmbH \url{http://ftp.gwdg.de/pub/misc/freegis/intevation/freegis/fedora/}
+\item MPA \url{http://mpa.itc.it/markus/grass61/fc4/}
+\item Mappinghacks \url{http://www.mappinghacks.com/rpm/fedora/3/}
+\end{itemize}
+
+\textbf{Debian}
+
+\begin{itemize}
+\item DebianGIS Project \url{http://pkg-grass.alioth.debian.org/cgi-bin/wiki.pl}
+\item Bullhorn.org \url{http://bullhorn.org/debian/qgis/}
+\end{itemize}
+
+\textbf{MS-Windows}
+
+\begin{itemize}
+\item Sourceforge \url{http://prdownloads.sourceforge.net/qgis/}
+\end{itemize}
+
+\textbf{Mac OSX}
+
+\begin{itemize}
+\item Sourceforge \url{http://rpms.mandrivaclub.com/search.php?query=qgis&submit=Search+...}
+\end{itemize}
+
+\textbf{Verschiedene Systeme über BitTorrent}
+
+\begin{itemize}
+\item MRCC BitTorrent \url{http://gisalaska.com/torrents/}
+\end{itemize}
+
+%For information on installing dependencies and building QGIS on FreeBSD,
+%see \textit{Building QGIS on FreeBSD} on \url{http://community.qgis.org}.
+
+\section{Abhängigkeiten}\label{label_dependencies}
+
+Um Abhängigkeiten zwischen QGIS und anderen Programmen zu entsprechen, müssen
+Sie folgende Pakete vor dem Bauen von QGIS installieren. Im Normalfall ist
+diese Abfolge bei der Installation zu beachten:
+\begin{itemize}
+\item PROJ.4
+\item GEOS
+\item PostgreSQL
+\item PostGIS
+\item SQLite3
+\item GDAL/OGR
+\item GRASS
+\item GDAL-GRASS
+\item QT4
+\item QGIS
+\end{itemize}
+
+Optional brauchen Sie auch Python, um den neuen UMN Mapfile Export zu
+kompilieren.
+
+%
+% PROJ.4
+%
+\subsection{Proj.4}\label{label_proj4}
+
+Proj.4 bietet die Funktionalität für on-the-fly (OTF) Projektion von
+Kartenebenen seit QGIS~\OLD. Um Proj4 zu erstellen und zu installieren, laden
+Sie die aktuellste Version von der URL \url{http://proj.maptools.org} herunter,
+entpacken das Paket und: 
+
+\begin{verbatim}
+  ./configure
+  make
+  make install
+\end{verbatim}
+
+%
+% GEOS
+%
+\subsection{GEOS}\label{label_geos}
+
+\textbf{Bemerkung:} Seit QGIS Version 0.6 wird GEOS für das Kompilieren von QGIS
+benötigt.
+
+QGIS benutzt GEOS, um Objekte bei Abfragen oder Selektionen aus der Datenbank zu
+holen. Zum Zeitpunkt der Erstellung dieser Dokumentation wird nur GEOS 2.x.x
+unterstützt.
+
+Um GEOS zu installieren:
+  
+\begin{enumerate}
+\item Laden Sie GEOS herunter von \url{http://geos.refractions.net} \cite{GEOSweb}
+\item Entpacken Sie GEOS
+\begin{verbatim}
+tar -xzf geos-2.x.x.tar.gz
+\end{verbatim}
+\item Wechseln Sie in den GEOS Quellordner
+\begin{verbatim}
+cd geos-2.x.x
+\end{verbatim}
+\item Folgen Sie den Instruktionen der README-Datei, um die Installation
+erfolgreich abzuschliessen, normalerweise so:
+\begin{verbatim}
+./configure
+make
+sudo make install
+\end{verbatim}
+
+\end{enumerate}
+
+
+%
+% PostgreSQL
+%
+\subsection{PostgreSQL}\label{label_postgresql}
+
+QGIS benutzt die aktuellste Version von PostgreSQL. Aus diesem Grund wird Version
+8.x.x oder aktueller mit der QGIS Version~\CURRENT empfohlen. Wenn Sie
+PostgreSQL brauchen, müssen Sie auch PostGIS installieren (vgl. Abschnitt \ref{label_postgis_source}).
+
+\textbf{Bemerkung:} Die folgenden Schritte sind nur notwendig, wenn Sie
+PostgreSQL aus den Quellen installieren. Die meisten GNU/Linux Distributionen
+haben die folgenden Schritte bereits in ihre Installationen integriert.
+
+\begin{enumerate}
+\item Laden Sie die PostgreSQL Quellen von www.postgresql.org \cite{Postgreweb}
+herunter. 
+\item Extrahieren Sie die Quellen
+\begin{verbatim}
+tar -xzf postgresql-8.x.x.tar.gz
+\end{verbatim}
+
+\item  Wechseln Sie in den Quellordner
+\begin{verbatim}
+cd postgresql-8.x.x
+\end{verbatim}
+
+\item Konfigurieren Sie PostgreSQL:
+\begin{verbatim}
+./configure --prefix=/usr/local/pgsql 
+\end{verbatim}
+
+\item Kompilieren
+\begin{verbatim}
+make
+\end{verbatim}
+
+\item Installieren
+\begin{verbatim}
+make install
+\end{verbatim}
+
+\item Als root, erstellen Sie den \textbf{postgres} Benutzer und erstellen Sie
+die Datenbank (abgewandelt aus der PostgreSQL INSTALL Datei entnommen)
+\begin{itemize} 
+\item Erstellen des PostgreSQL-Benutzers 
+\begin{verbatim}
+adduser postgres
+\end{verbatim}
+
+\item Erstellen des PostgreSQL Datenbankverzeichnisses 
+\begin{verbatim}
+mkdir /usr/local/pgsql/data
+\end{verbatim}
+
+\item Benutzerwechsel für das PostgreSQL Datenbankverzeichnis
+\begin{verbatim}
+chown postgres /usr/local/pgsql/data
+\end{verbatim}
+
+\item Wechsel zum PostgreSQL-Benutzer (oder Anmelden als postgres)
+\begin{verbatim}
+su - postgres
+\end{verbatim}
+
+\item In den PostgreSQL Installationsordner wechseln 
+\begin{verbatim}
+cd /usr/local/pgsql
+\end{verbatim}
+
+\item Datenbank initialisieren 
+\begin{verbatim}
+./bin/initdb -D /usr/local/pgsql/data
+\end{verbatim}
+
+\item Starten des PostgreSQL Dämon 
+\small
+\begin{verbatim}
+./bin/pg_ctl start  -o "-i" -D /usr/local/pgsql/data -l
+/home/postgres/serverlog 
+\end{verbatim} 
+  
+\item Eine Testdatenbenk erstellen
+\begin{verbatim}
+./bin/createdb test
+\end{verbatim}
+\normalsize
+\end{itemize}
+\item PostgreSQL sollte nun laufen. Melden Sie sich nun als Benutzer postgres an
+(oder benutzen Sie \textbf{su - postgres}). Sie sollten sich bei der
+Testdatenbank anmelden können und eine Testabfrage ausführen können: 
+
+\begin{verbatim}
+psql test
+select version();
+version
+
+----------------------------------------------------------------------
+PostgreSQL 8.x.x on i686-pc-linux-gnu, compiled by GCC gcc (GCC) 3.3.1
+(SuSE Linux)
+(1 row)
+
+\q
+\end{verbatim}
+
+
+\item PostgreSQL Installation ist beendet
+\end{enumerate}
+
+%
+% PostGIS
+%
+\subsection{PostGIS}\label{label_postgis_source}
+
+\textbf{Bemerkung:}: Sie müssen den PostGIS Makefile anpassen und sicherstellen,
+dass \textbf{USE\_GEOS=1} gesetzt ist. Passen Sie auch \textbf{GEOS\_DIR} an,
+damit es auf den GEOS Installationsordner verweist.
+  
+\begin{enumerate}
+\item PostGIS Quellen herunterladen von \url{http://postgis.refractions.net} \cite{PostGISweb} 
+\item Entpacken Sie PostGIS in den contrib Unterordner des
+PostgreSQL-Quellordners. Der contrib Unterordner befindet sich innerhalb des
+Ordners, den Sie in Schritt 3 bei der PostgreSQL-Installation erstellt haben.
+\item Wechseln Sie in den PostGIS Unterordner
+\item Editieren Sie den Makefile, um GEOS-Support zu ermöglichen (vgl. Bemerkung
+oben)
+\item PostGIS bietet ein Manual im doc/html Unterordner, das die Erstellung
+beschreibt (vgl. Abschnitt Installation)
+\item Einfach gesagt sind die Schritte:
+  
+\begin{verbatim}
+   cd contrib
+   gunzip postgis-1.x.x.tar.gz 
+   tar xvf postgis-1.x.x.tar 
+   cd postgis-1.x.x 
+   make 
+   sudo make install 
+   createlang plpgsql yourtestdatabase 
+   psql -d yourtestdatabase -f lwpostgis.sql 
+   psql -d yourtestdatabase -f spatial_ref_sys.sql 
+\end{verbatim}
+\end{enumerate}
+
+Der \textbf{bessere Weg}, um PostGIS zu installieren, besteht darin, die
+Instruktionen des PostGIS Manuals sorgsam zu lesen. Online finden Sie die
+Anleitung unter \url{http://postgis.refractions.net/docs}.
+
+% 
+% SQLite3
+%
+\subsection{SQLite3}\label{label_sqlite}
+
+SQLite3 wird benutzt, um die Projektionsdatenbank und bleibende Daten wie die
+räumlichen Lesezeichen zu verwalten. Laden Sie die neueste Version (3.x) hier
+herunter: \url{http://www.sqlite.org/} \cite{SQliteweb}. Entpacken Sie diese und:
+
+\begin{verbatim}
+  ./configure
+  make
+  make install
+\end{verbatim}
+
+\textbf{Note:} SQLite 3.x ist enthalten in Mac OS X 10.4.
+
+%
+% GDAL/OGR
+%
+\subsection{GDAL/OGR}\label{label_gdal}
+
+Die GDAL- und OGR-Bibliotheken bieten Support für zahlreiche Raster- und
+Vektorformate. QGIS benutzt beide Bibliotheken, die zusammen in einer
+Distribution enthalten sind.
+
+\textbf{Bemerkung:} Ein GNU/Linux Binärpaket von GDAL finden Sie unter \url{http://www.gdal.org}. 
+Wenn Sie das Binärpaket benutzen wollen, müssen Sie auch die Quellen
+herunterladen, da QGIS die Header-Dateien beim Erstellen benötigt.
+  
+GDAL/OGR aus den Quellen installieren:
+
+\begin{enumerate}
+\item GDAL Quellen herunterladen von \url{http://www.gdal.org} \cite{OGRweb}. 
+Sie sollten unbedingt die aktuellsten Quellen benutzen. Das Minimum ist Version 1.3.1. 
+
+\item Entpacken Sie die Quellen
+\begin{verbatim}
+tar xfvz /path/to/gdal-x.x.x.tar.gz
+\end{verbatim}
+
+\item Wechseln Sie in den gdal-x.x.x Unterordner, den Sie mit Schritt 2 erstellt
+haben
+\begin{verbatim}
+cd gdal-x.x.x
+\end{verbatim}
+
+\item Konfigurieren Sie GDAL
+\begin{verbatim}
+./configure 
+\end{verbatim}
+% commented since the new GRASS-plugin will be compiled lateron SH(15.06.06)
+% or if you want GRASS support
+% \begin{verbatim}
+% ./configure --with-grass=<full path to grass install>
+% \end{verbatim}
+Da GDAL eine Vielzahl unterschiedlicher Datenformate unterstützt, sollten Sie
+die Internetseite \cite{OGRweb} durchlesen, um weitere Abhängigkeiten von
+GDAL zu erkunden. Es ist möglich, dass Sie weitere Programme und ihre
+Header-Dateien benötigen, um GDAL erfolgreich mit den von Ihnen erwünschten
+Dateiformaten zu erstellen.
+
+% Depending on the GDAL version you are building, it may be necessary to
+% specify --without-ogdi when running configure if you don't have the OGDI
+% library available on your system.
+
+\item Kompilieren und Installieren von GDAL:
+\begin{verbatim}
+make
+sudo make install
+\end{verbatim}
+
+\item Damit GDAL nach der Installation funktioniert, ist es notwendig, dass die
+'shared library' gefunden wird. Dies kann meist dadurch erreicht werden, dass
+Sie den LD\_LIBRARY\_PATH anpassen und /usr/local/lib ergänzen. Unter GNU/Linux
+können Sie auch /usr/local/lib (oder welcher Pfad notwendig ist) in der Datei 
+\textbf{/etc/ld.so.conf} ergänzen und dann das Kommando \textbf{ldconfig}
+ausführen.
+
+\item Vergewissern Sie sich, dass \textbf{gdal-config} im bin Unterordner 
+Ihrer GDAL-Installation vorhanden und im Pfad ergänzt ist. Falls notwendig, 
+ergänzen Sie es zu der PATH-Variablen.
+  
+\begin{verbatim}
+export PATH=/Pfad/zu/gdal-config:$PATH
+\end{verbatim}
+
+\item Testen Sie die Installation mit dem Kommando:
+\begin{verbatim}
+gdal-config --formats
+\end{verbatim}
+
+\end{enumerate}
+
+Wenn Sie Probleme bei der Installation haben, schauen Sie sich folgendes Manual
+an: \url{http://www.gdal.org/gdal\_building.html} 
+
+\textbf{Bemerkung:} Um GRASS-Support zu erreichen, müssen Sie auch das GDAL-GRASS-plugin
+für GDAL und OGR erstellen. Vergleichen Sie dazu Abschnitt \ref{label_gdal_GRASS}.
+
+%
+% GRASS
+%
+\subsection{GRASS}\label{label_grass}
+
+Wenn Sie möchten, dass QGIS auch GRASS Raster- und Vektorebenen unterstützt,
+muss GRASS im Vorfeld erstellt werden. Folgen Sie dazu der Anleitung auf der
+GRASS Webseite und verwenden Sie am besten eine GRASS Version 6.2.x. Zusätzliche
+Informationen finden Sie unter \url{http://grass.itc.it}.
+ 
+Die GRASS Software können Sie herunterladen unter der URL:
+\url{http://grass.itc.it/download/index.php}.
+
+%
+% GDAL-GRASS-Plugins
+%
+\subsection{GDAL-GRASS-Plugin}\label{label_gdal_GRASS}
+Um GRASS Raster-Support in QGIS zu ermöglichen, muss das GDAL-Plugin für GRASS
+erstellt werden. Dazu brauchen Sie auch die Header-Dateien von GRASS und GDAL/OGR.
+
+\begin{enumerate}
+\item Laden Sie die GDAL-GRASS Quellen herunter von
+\url{http://www.gdal.org/dl/} \cite{OGRweb}. Das Minimum ist Version 1.3.1.
+
+\item Entpacken Sie die Quellen 
+\begin{verbatim}
+tar xfvz /path/to/gdal-grass-1.3.x.x.tar.gz
+\end{verbatim}
+
+\item Wechseln Sie in den gdal-grass-1.3.x.x Unterordner
+\begin{verbatim}
+cd gdal-grass-1.3.x.x
+\end{verbatim}
+
+\item Konfigurieren Sie GDAL-GRASS
+\begin{verbatim}
+./configure \
+  --with-grass=/Pfad/zu/der/GRASS-Installation \
+  --with-gdal=/Pfad/zu/gdal-config
+\end{verbatim}
+
+\item Kompilieren und installieren Sie GDAL-GRASS:
+\begin{verbatim}
+make
+sudo make install
+\end{verbatim}
+
+\item Prüfen Sie, ob das GRASS-Format von GDAL/OGR unterstützt wird:
+\begin{verbatim}
+gdalinfo --formats
+ogrinfo --formats
+\end{verbatim}
+
+\end{enumerate}
+
+%
+% QT4
+%
+\subsection{Qt4}\label{label_qt}
+
+Qt 4.2.2 oder höher wird benötigt, um QGIS zu kompilieren. Wenn Qt bereits
+installiert ist, können Sie prüfen, ob es eine Version 4.2.2 oder neuer ist mit
+dem Kommando:
+
+\begin{verbatim}
+find ./ -name qglobal.h 2>/dev/null | xargs grep QT_VERSION_STR
+\end{verbatim}
+  
+Wenn das Programm 'locate' installiert ist, können Sie es auch testen mit:
+
+\begin{verbatim}
+locate qglobal.h | xargs grep QT_VERSION_STR
+\end{verbatim}
+  
+In beiden Fällen sollte das Resultat etwa so aussehen:
+
+\begin{verbatim}
+#define QT_VERSION_STR   "4.2.2"
+\end{verbatim} 
+	
+Im oberen Beispiel ist Qt 4.2.2 installiert.
+   
+Wenn Qt nicht installiert ist, müssen Sie das Qt-Entwicklerpaket Ihrer
+Distribution installieren. Wenn das nicht vorhanden ist, müssen Sie Qt aus den
+Quellen installieren.
+ 
+\minisec{Qt aus den Quellen installieren}
+  
+\begin{enumerate}
+\item Qt herunterladen von \url{http://www.trolltech.com/developer} (wählen Sie
+die Qt/X11 Free Edition)
+\item Entpacken Sie die Quellen
+\item Folgen Sie den Anweisungen in doc/html/install-x11.html
+\item Benutzen  Sie die gewünschten configure Options aber ergänzen Sie auf
+jeden Fall -thread für QGIS. Sie können Qt mit minimalen Optionen konfigurieren:
+\begin{verbatim}
+	./configure -thread
+\end{verbatim}
+\item Beenden Sie die Installation anhand der Anweisungen der Qt-Dokumentation
+(vgl. Schritt 3)
+\end{enumerate}
+
+\section{QGIS erstellen}
+
+Nachdem Sie alle notwendigen Programme für das Erstellen von QGIS installiert
+gaben, können Sie sich nun QGIS widmen. Laden Sie die aktuellen QGIS-Quellen
+heruntern und wechseln Sie in den Quellordner. Sie haben nun zwei Optionen:
+
+\textbf{Kurz und einfach} oder \textbf{den ausführlichen Weg}.
+  
+\subsection{Kurz und einfach}
+  
+Wenn Sie keinen PostgreSQL-Support benötigen und bereits GDAL installiert ist,
+können Sie einfach in den QGIS Quellordner wechseln und eingeben:
+
+\begin{verbatim}
+./configure
+make
+sudo make install
+\end{verbatim}
+
+Dies setzt voraus, dass das gdal-config Programm im Pfad ist. Lesen Sie den
+nächsten Abschnitt für die komplette Anleitung.
+
+\subsection{Der ausführliche Weg}
+  
+Um die möglichen Konfigurationsoptionen zu sehen, wechseln Sie in den
+QGIS-Quellordner und geben Sie folgendes Kommando ein:
+
+\begin{verbatim}
+./configure --help
+\end{verbatim}
+  
+Neben weiteren gibt es hier sechs wichtige Optionen:
+
+\begin{verbatim}
+    --with-qtdir=dir         qt installation directory default=$qtdir
+    --with-gdal=path         full path to 'gdal-config' script,e.g.
+                             '--with-gdal=/usr/local/bin/gdal-config'
+    --with-postgresql=path   PostgreSQL (PostGIS) support
+                             (full path to pg_config)
+    --with-grass=dir         grass support (full path to grass binary 
+                             package)
+    --with-geos=path         Full path to 'geos-config' script, e.g.
+                             '--with-geos=/usr/local/bin/geos-config'
+    --with-sqlite3dir=dir    sqlite3 installation directory, e.g.
+                             '--with-sqlite3=/usr/local'
+\end{verbatim}
+
+\subsubsection{Qt4}
+  
+Das Konfigurationsskript wird Qt erkennen, wenn es in einem Standardverzeichnis 
+installiert wurde. Indem Sie die Qt-Umgebungsvariable setzen, erreichen Sie, 
+dass Qt auf jeden Fall erkannt wird. Sie können auch den Pfad definieren mit 
+der --with-qt-dir Option.
+  
+\subsubsection{GDAL/OGR}
+ 
+Wenn sich das gdal-config Skript im Pfad befindet, wird configure automatisch GDAL 
+erkennen und entsprechend GDAL-Support konfigurieren. Wenn es nicht im Pfad ist, 
+können Sie den absoluten Pfad zu gdal-config mit der Option --with-gdal angeben: 
+
+\begin{verbatim}
+./configure --with-gdal=/usr/mystuff/bin/gdal-config
+\end{verbatim}
+
+\subsubsection{PostgreSQL}
+  
+Wenn sich das pg\_config Skript im Pfad befindet, wird configure automatisch PostgreSQL 
+erkennen und entsprechend PostgresSQL-Support konfigurieren. Wenn es nicht im Pfad ist, 
+können Sie den absoluten Pfad zu pg\_config mit der Option --with-postgresql angeben:
+
+\begin{verbatim}
+./configure --with-postgresql=/usr/local/psql/bin/pg_config
+\end{verbatim}
+
+\subsubsection{GRASS}
+
+Um QGIS mit GRASS-Support zu erstellen, müssen Sie den absoluten Pfad zum installierten 
+GRASS Binärpaket angeben:
+
+\begin{verbatim}
+./configure --with-grass=/usr/local/grass-6.2.1
+\end{verbatim}
+
+Hier wird angenommen, dass GRASS im Standardverzeichnis installiert ist. Passen Sie 
+den Pfad an, wenn GRASS woanders installiert ist.
+
+\subsubsection{Python}
+
+Um QGIS mit dem neuen UMN MapServer Mapfile Exporttool zu kompilieren, müssen Sie 
+Python in QGIS konfigurieren. Dafür müssen Sie folgenden Parameter angeben:
+
+\begin{verbatim}
+./configure --with-python
+\end{verbatim}
+
+\subsubsection{Beispiel einer Konfiguration}
+  
+Ein Beispiel für die Angabe aller Optionen bei der Konfiguration von QGIS:
+
+\begin{verbatim}
+./configure \
+--with-qtdir=/usr/share/qt4 \
+--prefix=/usr/local/qgis \
+--with-gdal=/usr/local/gdal/bin/gdal-config \
+--with-postgresql=/usr/local/psql/bin/pg_config \
+--with-geos=/usr/local/bin/geos-config \
+--with-sqlite3dir=/usr/local \
+--with-grass=/usr/local/grass-6.2.1 \
+--with-python 
+\end{verbatim}
+ 
+Hiermit wird QGIS mit GDAL-, GRASS- und PostgreSQL-Support konfiguriert. Zusätzlich 
+soll es mit Qt4 im Verzeichnis /usr/share/qt4 konfiguriert und schliesslich im Ordner 
+/usr/local/qgis installiert werden.
+
+Wenn gdal-config and pg\_config beide im Pfad liegen, brauchen Sie die Optionen 
+--with-gdal und --with-postgresql nicht angeben. Das Konfigurationsskript wird die 
+Bibliotheken finden und konfigurieren. Sie müssen aber die --with-grass Option benutzen, 
+wenn Sie GRASS-Support wünschen. Um die Python-Anbindung zu ermöglichen, benutzen Sie 
+die Option --with-python.
+  
+\subsubsection{QGIS kompilieren und installieren}
+  
+Wenn Sie QGIS sauber konfiguriert haben, müssen Sie nur noch folgendes Kommando ausführen:
+  
+\begin{verbatim}
+make
+sudo make install
+\end{verbatim}
+
+\textbf{Bemerkung:} Sie müssen das Kommando \textit{sudo make install} ausführen und 
+können dann QGIS starten. Im oberen Beispiel werden QGIS Binärpakete nun in dem Ordner 
+/usr/local/qgis installiert. Die ausführende Datei qgis liegt im Ordner 
+/usr/local/qgis/bin.
+
+Für weitere Informationen zur Benutzung von QGIS lesen Sie bitte das Benutzerhandbuch.
+
+\section{Plugins erstellen}
+
+Der QGIS Quellcode enthält eine Reihe von ''Kern''-Plugins. Diese werden automatisch durch die 
+oben angebene Beschreibung erstellt. Zusätzliche Plugins finden Sie im QGIS SVN Repository 
+unter \url{http://svn.qgis.org/WebSVN/}. 
+% FIXME: are the build instruction on the wiki up-to-date
+Instruktionen zum Erstellen eines externen Plugins finden Sie unter der URL:
+\url{http://wiki.qgis.org/qgiswiki/StepByStepBuildInstructions}.
+Einige externe Plugins enthalten Installationsanweisungen. Falls ja, benutzen Sie diese 
+Anweisungen statt der im Wiki.

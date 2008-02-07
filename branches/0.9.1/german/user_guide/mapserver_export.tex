@@ -1,0 +1,137 @@
+\section{Erstellen einer Mapserver Map-Datei}\label{sec:mapserver_export}
+
+QGIS kann benutzt werden, um eine Map-Datei für MapServer zu erstellen. Sie nutzen QGIS 
+um die Karten zu arrangieren, zu beschriften und die Farben nach ihren Wünschen anzupassen.
+
+Damit sie das MapServer Exportmodul benutzen können, muss Python auf Ihrem System installiert 
+und QGIS muss mit Python-Support gebaut worden sein.
+
+\subsection{Erstellen einer QGIS Projektdatei}
+
+Um eine MapServer Map-Datei zu erstellen:
+
+\begin{enumerate}
+\item Laden Sie die gewünschten Layer in QGIS
+\item Beschriften Sie die Layer und definieren Sie die Farben
+\item Arrangieren Sie die Layer in der Reihenfolge, in der Sie auch im MapServer erscheinen sollen
+\item Speichern Sie alles in einer QGIS Projektdatei
+\end{enumerate} 
+
+Damit sind wir nun an dem Punkt, an dem wir die Map-Datei erstellen können.
+
+\begin{Tip}\caption{\textsc{MapServer Export benötigt eine QGIS Projekt-Datei}}
+\qgistip{Dies ist für viele Anwender verwirrend gewesen. Das MapServer Exportmodul 
+arbeitet auf Basis einer QGIS Projekt-Datei, \textbf{nicht} der aktuelle Inhalt 
+des Kartenfensters und der Legende wird benutzt. Wenn Sie das MapServer Exportmodul 
+benutzen, geben Sie eine QGIS Projekt-Datei als Eingabedatei an.
+}
+\end{Tip} 
+
+\subsection{Export einer QGIS Projektdatei als Map-Datei}
+
+Das Export-Werkzeug (\textsl{msexport}) ist im QGIS Programmordner und kann unabhängig 
+von QGIS benutzt werden. 
+
+Von QGIS aus können Sie das Modul \textsl{Exportiere als MapServer Map...} über das Menü 
+\textsl{Datei} erreichen.
+
+  Hier ist eine Zusammenfassung der Eingabefelder:
+  \begin{description}
+
+    \item [Kartendatei] \mbox{}\\
+Tragen Sie hier den Namen der Map-Datei ein, die erstellt werden soll. Sie können mit dem 'Speichern unter' Knopf auswählen, wo die Datei gespeichert werden soll.
+
+\item [QGIS Projektdatei] \mbox{}\\
+Geben Sie den kompletten Pfad zur QGIS Projektdatei (.qgs) an, die Sie exportieren möchten. Sie können mit dem 'Durchsuchen' Knopf nach der Projektdatei suchene.
+\item [Name] \mbox{}\\
+Ein Name für die Karte. Dieser Name wird als Prefix für alle durch den MapServer erstellten Karten verwendet.
+\item [Breite] \mbox{}\\
+Breite des Ausgabebildes in Pixeln.
+
+\item [Höhe] \mbox{}\\
+Höhe des Ausgabebildes in Pixeln.
+\item [Einheiten] \mbox{}\\
+Maßeinheiten für die Ausgabe
+\item [Bildtyp] \mbox{}\\
+Bildformat, das vom MapServer erstellt wird
+\item [Vorlage] \mbox{}\\
+Kompletter Pfad zur MapServer Template-Datei, die mit der Map-Datei benutzt wird
+\item [Kopfzeile] \mbox{}\\
+Kompletter Pfad zur MapServer Header-Datei, die mit der Map-Datei benutzt wird
+\item [Fusszeile] \mbox{}\\
+Kompletter Pfad zur MapServer Footer-Datei, die mit der Map-Datei benutzt wird
+\end{description}
+
+Nur die QGIS Projektdatei Eingaben sind notwendig, um eine Map-Datei zu erstellen. 
+Es kann aber sein, dass diese nicht auf anhieb funktioniert, abhängig davon, was sie 
+sich vorstellen. Auch wenn QGIS durchaus geeignet ist, eine Map-Datei zu erstellen, 
+ist es häufig doch notwendig, die Map-Datei manuell nachzubearbeiten. man sollte es 
+daher eher als eine Hilfe betrachten, um die Map-Datei nicht komplett neu erstellen 
+zu müssen.
+
+\textbf{Beispiel zum Erstellen einer Map-Datei}
+
+Nun wollen wir das Erstellen einer Map-Datei einmal praktisch durchführen mit den 
+Shapes \textsl{alaska}, \textsl{lakes} und \textsl{rivers} aus den QGIS-Beispieldaten:
+
+\begin{enumerate}
+  \item Laden Sie die Shapes \textsl{alaska}, \textsl{rivers} und \textsl{lakes} in QGIS
+  \item Verändern Sie die Farben und Beschriftungen nach Ihren Wünschen
+  \item Speichern Sie alles als Projekt mit dem Modul \textsl{Speicher Projekt} in Menü 
+  \textsl{Datei}
+  \item Öffnen Sie das Exportmodul, indem Sie auf \textsl{Exportiere als MapServer Map...} 
+  im Menü \textsl{Datei} auswählen
+  \item Geben Sie einen Namen für die Map-Datei ein
+  \item Suchen Sie nach der gerade gespeicherten QGIS-Projektdatei
+  \item Geben Sie einen Namen für die Karte ein
+  \item Geben Sie die Werte 600 für die Breite und 400 für die Höhe ein
+  \item Die Layer liegen mit den Einheiten Dezimalgrad vor, daher müssen wir die Maßeinheiten nicht 
+  ändern
+  \item Wählen Sie ``png'' als Bildtyp
+  \item Klicken Sie auf \textsl{OK} um die Map-Datei zu erstellen
+\end{enumerate}
+
+
+\begin{figure}[ht]
+\begin{center}
+  \caption{Das 'Exportiere als MapServer Map' Module in QGIS}\label{fig:mapserver_export}\smallskip
+  \includegraphics[clip=true, width=0.8\textwidth]{mapserver_export}
+\end{center}
+\end{figure}
+
+In dieser QGIS-Version wird nicht angezeigt, ob der Export erfolgreich war oder nicht. Dies 
+wird ein einer nächsten Version folgen.
+
+Sie können sich die Map-Datei in einem Texteditor anschauen oder einfach das Konsolen-Tool \textsl{less} 
+benutzen. Sie werden sehen, dass das Exportmodul alle Metadaten hinzugefügt hat, um die 
+Map-Datei für WMS zu aktivieren. 
+
+\subsection{Testen der Map-Datei}
+
+Wir können die Map-Datei testen, indem wir ein Bild mit dem Tool \textsl{shp2img} erzeugen. 
+Das \textsl{shp2img} Programm ist Teil der MapServer Installation aber es ist auch in dem 
+Programm FWTools vorhanden. Um ein Testbild zu erstellen:
+
+\begin{itemize}
+\item Öffnen wir eine Shell, damit wir das Programm shp2img aus der Kommandozeile starten können.
+\item Wenn die Map-Datei nicht im aktuellen Verzeichnis gespeichert wurde, wechseln Sie bitte in 
+das entsprechende Verzeichnis mit der Map-Datei
+\item starten Sie shp2img 
+\item Schauen Sie sich das erstellte Bild mit einem Bildbetrachter an 
+\end{itemize}
+ 
+Unter der Annahme, dass die Map-Datei \textsl{mapserver\_test.map} genannt wurde, lautet das 
+shp2img Kommando:
+
+\begin{verbatim}
+shp2img -m mapserver_test.map -o mapserver_test.png
+\end{verbatim}
+
+Das somit erstellte PNG enthält alle Layer, die wir als QGIS-Projekt abgespeichert haben. Ausserdem 
+ist die Ausdehnung des Bildes exakt diejenige, die wir in der QGIS-Projektdatei abgespeichert haben.
+
+Wenn Sie vorhaben, die Map-Datei auch für WMS-Anfragen zu nutzen, dann brauchen Sie wahrscheinlich 
+nichts weiter zu machen. Wenn Sie es als Kartenvorlage oder individuelle Oberfläche nutzen wollen, 
+ist wahrscheinlich noch ein bischen handarbeit notwendig. Um zu sehen, wie einfach es ist, Karten aus 
+QGIS ins Internet zu stellen, schauen Sie sich das 5-minütige Flashvideo von Christopher Schmidt's an.
+\footnote{\url{http://openlayers.org/presentations/mappingyourdata/}}

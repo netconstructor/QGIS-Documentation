@@ -1,0 +1,195 @@
+\section{Arbeiten mit Rasterdaten}\label{label_raster}
+\index{raster layers|(}
+
+QGIS unterstützt eine Vielzahl von Rasterformaten. Dieses Kapitel beschreibt die
+Arbeit mit Rasterdaten in QGIS.
+
+\subsection{Was ist eine Rasterdatei?}\label{label_whatsraster}
+\index{raster layers!definition}
+
+Rasterdaten in QGIS sind Gitter aus diskreten Zellen oder Pixeln, die Objekte
+über, auf oder unter der Erdoberfläche beschreiben. Jede Zelle eines Rasters hat
+die gleiche Größe und ist meistens rechteckig (in QGIS ist dies immer so).
+Typische Rasterdaten sind Fernerkungsdaten wie Luft- oder Satellitenbilddaten
+oder modellierte Daten wie Höhenmodelle.
+
+Im Gegensatz zu Vektordaten haben Rasterdaten keine Verknüpfung zu einer
+Attributtabelle mit Werten für jede Zelle.
+
+In Geographischen Informationssystemen (GIS) ist ein Raster eine georeferenzierte Datei mit Informationen, die
+räumlich korrekt mit anderen Vektorebenen oder Rasterdaten überlagert werden
+kann. QGIS kann Rasterdaten also korrekt visualisieren aber nicht analysieren.
+\index{raster layers!georeferenced} 
+	
+\subsection{Durch QGIS unterstützte Rasterformate}\label{label_rastformats}
+
+QGIS unterstützt eine Vielzahl von Rasterformaten. Aktuell getestete Formate
+sind:\index{raster layers!data formats}
+
+\begin{itemize}
+\item Arc/Info Binary Grid
+\item Arc/Info ASCII Grid
+\item GRASS Raster
+\item GeoTIFF
+\item Spatial Data Transfer Standard Grids (mit einigen Einschränkungen)
+\item USGS ASCII DEM
+\item Erdas Imagine
+\end{itemize}
+
+Da die Rasterimplementation in QGIS auf der GDAL-Bibliothek basiert, ist es
+wahrscheinlich, dass auch andere durch GDAL unterstützte Rasterformate
+unterstützt aber noch nicht getestet wurden. Vergleichen Sie dazu
+\ref{appdx_gdal} für weitere Details.\index{raster layers!GDAL implementation}
+	
+\subsection{Rasterdaten in QGIS laden}\label{label_loadraster}
+
+\includegraphics[width=0.7cm]{addraster} Rasterdaten können durch klicken 
+auf das \textsl{Füge eine Rasterebene hinzu} Icon oder über die Menüleiste unter
+\textsl{Ebene~->~Füge eine Rasterebene hinzu} geladen werden. Mehrere Raster
+können gleichzeitig geladen werden, indem die Control-Taste bei der Auswahl der
+Karten gedrückt gehalten wird.\index{raster layers!loading}
+
+Informieren Sie sich in Abschnitt \ref{sec:load_grassdata} über das Darstellen von
+GRASS Rasterdaten.
+	
+\subsection{Eigenschaften von Rasterdaten}\label{label_rasterprop}
+
+Um die Optionen von Rasterdaten anzusehen oder anzupassen, klicken Sie
+mit der rechten Maustaste auf den Ebenennamen in der Kartenlegende. Dadurch
+erscheint ein Popupmenue für Rasterebenen und bietet eine Vielzahl von
+Optionen:\index{raster layers!context menu}
+
+\begin{figure}[ht]
+   \begin{center}
+   \caption{Popupmenü für Rasterebenen}\label{fig:raster_contextmenu}\smallskip
+   \includegraphics[clip=true, width=5cm]{rastercontextmenu}
+\end{center}  
+\end{figure}
+
+\begin{itemize}
+\item Eigenschaften
+\item Auf die Ebenenausdehnung zoomen
+\item Zur Übersicht hinzufügen
+\item Aus Übersicht entfernen
+\item Entfernen
+\item Umbenennen 
+\item Gruppe hinzufügen
+\item Alles ausklappen
+\item Alles zusammenfalten
+\item Zeige Dateigruppen
+\end{itemize}
+
+Wähle \textsl{Eigenschaften} aus dem Popupmenü, um die
+Rasterebeneneigenschaften\index{raster layers!properties} anzuzeigen. 
+Abbildung \ref{fig:raster_properties} zeigt das Dialogfenster mit den
+Rastereigenschaften. Es gibt fünf Reiter: \textsl{Bezeichnungen},
+\textsl{Generell}, \textsl{Metadaten}, \textsl{Pyramiden} und \textsl{Histogramm}.
+
+\begin{figure}[h]
+   \begin{center}
+   \caption{Dialog mit den Rastereigenschaften}\label{fig:raster_properties}\smallskip
+   \includegraphics[clip=true, width=14cm]{raster_properties}
+\end{center}  
+\end{figure}
+
+\subsubsection{Bezeichnungen}\label{label_sombology}
+
+QGIS unterstützt drei Arten von Rasterebenen:\index{raster layers!supported channels}
+
+\begin{itemize}
+\item Einkanal Graustufen Raster
+\item Farbbild RGB Raster
+\item Mehrkanal RGB Raster
+\end{itemize}
+
+Aus diesen drei Ebenentypen können acht Arten von Rastern dargestellt werden:
+\index{raster layers!rendering interpretation}
+
+\begin{itemize}
+\item Einkanal Graustufen
+\item Einkanal Pseudofarbe
+\item Graustufen Palette (nur die Rot-, Grün- oder Blaukomponenten wird
+angezeigt)
+\item Pseudofarben Palette (nur die Rot-, Grün- oder Blaukomponenten wird
+angezeigt mit Hilfe eines Pseudofarben-Algorithmus)
+\item RGB Palette
+\item Mehrkanal Graustufen (nur ein Kanal wird angezeigt)
+\item Mehrkanal Pseudofarben (nur ein Kanal wird angezeigt in Pseudofarben angezeigt)
+\item Mehrkanal RGB (ein Kombination der 3 Kanäle wird angezeigt)
+\end{itemize}
+
+\smallskip
+
+QGIS kann die Farbwerte einer Ebene invertieren, so dass helle Farben dunkel und
+dunkle Farben hell werden. Benutzen Sie dazu die \textsl{Farben invertieren}
+Checkbox, um diese Eigenschaft zu aktivieren oder zu deaktivieren.\index{raster layers!icolor map inversion}
+
+QGIS kann Rasterebenen in unterschiedlicher Transparenz darstellen.
+\index{raster layers!transparency} Benutzen Sie dazu den Transparenz Schieber,
+um festzulegen, wieviel unter der aktuellen Rasterebene sichtbar sein soll.
+
+% FIXME: Is this still correct? I cannot verify (SH)
+QGIS kann so eingestellt werden, dass nur Rasterzellen gezeigt werden, die
+Werte innerhalb einer definierten Standarbweichung zum Mittelwert der Ebene
+enthalten. \index{raster layers!standard deviation} Dies ist nützlich, wenn man
+Daten anzeigen lassen möchte, bei denen einzelne Zellen extrem vom Mittelwert
+abweichende Werte haben, was einen negativen Einfluss auf die Darstellung in
+QGIS hat. Diese Option ist nur für Pseudofarben Bilder anwendbar.   
+
+\subsubsection{Generell}\label{label_generaltab}
+
+Im Reiter Generell werden allgemeine Informationen zum ausgewählten Raster
+angezeigt, wie dem Namen und Quellpfad des Rasters (kann geändert werden).
+Außerdem wird ein Thumbnail der Karte gezeigt, die Legende und die
+Farbpalette.\index{raster layers!properties}
+
+Zusätzlich kann eine skalenabhängige Sichtbarkeit eingestellt werden. Dazu
+muss die Checkbox \textit{Skalenabhängige Sichtbarkeit} aktiviert und ein
+entsprechender Maßstab eingetragen werden.
+
+Im Feld \textit{räumliches Referenzsystem} kann die Projektion abgelesen und mit
+dem Knopf \textsl{Wechseln} verändert werden.
+
+\subsubsection{Metadaten}\label{label_metatab}
+
+Der Reiter Metadaten zeigt eine Anzahl von Informationen über das
+Raster, inklusive Statistiken über jeden Kanal innerhalb der Ebene. Statistiken
+werden nach dem Prinzip 'was brauche ich' erstellt. Es kann also gut sein, dass
+für eine Rasterebene keine Statistik zur Verfügung steht oder gesammelt wurde.
+\index{raster layers!metadata}
+
+\begin{Tip}\caption{\textsc{Raster-Statistiken sammeln}}
+\qgistip{Um statistische Daten zu einer Ebene zu sammeln, wählen Sie Pseudofarbe
+und klicken auf \textsl{Anwenden}. Dieser Vorgang kann zeitaufwendig
+sein. Bitte seien Sie geduldig, während QGIS Daten sammelt!\index{raster layers!statistics}
+}
+\end{Tip}
+
+\subsubsection{Pyramiden}\label{raster_pyramids}
+
+Hochaufgelöste Rasterdaten können das Navigieren in QGIS verlangsamen. Indem
+geringer aufgelöste Kopien (Pyramiden) erstellt werden, kann die Darstellung
+optimiert werden. QGIS wählt dann ensprechend des Zoom-Levels die passende 
+Auflösung.  
+\index{raster layers!pyramids}
+\index{raster layers!resolution pyramids}
+
+Sie brauchen dazu Schreibrecht in dem Ordner, in dem sich sie Originaldaten befinden.
+Zwischen verschiedenen Resampling-Methoden kann gewählt werden: 
+\begin{itemize}
+\item Durchschnitt
+\item Nächster Nachbar
+\end{itemize}
+
+Beachten Sie, dass das Bilden von Pyramiden die Originaldaten verändern und
+dieser Schritt nicht mehr rückgängig gemacht werden kann. Wenn Sie eine 'nicht
+pyramidisierte' Version der Daten wünschen, erstellen Sie vorher eine Kopie.
+
+\subsubsection{Histogramm}\label{raster_histogram}
+
+Der Histogramm-Reiter erlaubt es, ein Histogramm der Werteverteilung eines
+Rasters zu erstellen, und damit die Pixelverteilung darzustellen.\index{raster layers!histogram}
+Es gibt zwei Arten der Visualisierung: Balkendiagramm und Liniengrafik. 
+
+\index{raster layers|)}
+

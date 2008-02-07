@@ -1,0 +1,879 @@
+% vim:autoindent:set textwidth=78:
+
+\section{Arbeiten mit Vektordaten}\label{label_workingvector}
+\index{vector layers|(}
+
+QGIS unterstützt eine Vielzahl unterschiedlicher Vektorformate, inklusive 
+allen Formaten, die durch die OGR-Bibliothek unterstützt werden, wie etwa 
+das ESRI Shape,
+\index{shapefiles}
+\index{ESRI!shapefiles}
+\index{SHP files}
+MapInfo MIF (Austauschformat)\index{MIF files}\index{MapInfo!MIF files} 
+und MapInfo TAB (Natives Format).
+\index{TAB files}
+\index{MapInfo!TAB files}
+QGIS unterstützt auch PostGIS-Ebenen\index{PostGIS}\index{PostgreSQL!PostGIS}
+in einer PostgreSQL Datenbank mit Hilfe des PostGIS-Plugins.
+Unterstützung für weitere Datenformate (z.B.: ASCII-Tabellen oder GPS-Daten)
+sind mittels weiterer Plugins realisiert.\index{delimited text}
+
+In diesem Abschnitt wird beispielhaft beschrieben, wie man mit ESRI Shapes und
+PostGIS-Ebenen arbeitet. Viele Funktionen in QGIS sind unabhängig vom
+verwendeten Datenformat und verhalten sich daher identisch. Dies ist gewollt und
+bezieht sich u.A. auf Abfrage, Selektion, Beschriftung und Attributfunktionen.
+
+Das Arbeiten mit GRASS Vektordaten bildet an manchen Stellen eine Ausnahme und
+wird daher in Abschnitt \ref{sec:grass} explizit beschrieben.
+
+\subsection{ESRI Shapes}
+\index{vector layers!ESRI shapefiles}
+\index{shapefiles}
+\index{ESRI!shapefiles}
+\index{SHP files}
+
+ESRI Shape Unterstützung wird duch die OGR Simple Feature Library 
+\url{http://www.gdal.org/ogr}\index{OGR} bereitgestellt. Vergleichen Sie im 
+Appendix \ref{appdx_ogr} die Liste mit den unterstützen Datenformaten.
+
+Ein Shape besteht aus mindestens drei Dateien:\index{shapefile!format}
+
+\begin{itemize}
+\item .shp Datei (enthält die Geometrien)
+\item .dbf Datei (enthält die Attribute im dBase-Format)
+\item .shx Datei (enthält den räumlichen Index)
+\end{itemize}
+
+Idealerweise existiert noch eine weitere Datei mit .prj Endung. Diese enthält
+die Projektionsinformationen des Shapes. 
+
+Es können noch weitere Dateien zu einem Shape gehören. Weitere Details finden
+sich in der technischen Spezifikation unter \url{http://www.esri.com/library/whitepapers/pdfs/shapefile.pdf}
+\index{shapefile!specification}.
+
+\subsubsection{Shape laden}
+{\includegraphics[width=0.7cm]{addshapefile}} Um ein Shape zu laden, starten Sie
+QGIS und klicken auf das Icon \textit{Füge eine Vektorebene hinzu} in der
+Werkzeugleiste\index{shapefile!loading}. Mit demselben Tool können Sie auch alle
+anderen durch OGR unterstützten Formate laden.
+
+Beim Öffnen des Tools öffnet sich ein Standard-Dialog (Abbildung \ref{fig:openshapefile}), 
+mit dessen Hilfe Sie in Ihrem Dateisystem navigieren und die entsprechenden zu
+ladenden Dateien auswählen können.  Die Auswahlbox \textsl{Files of type} 
+ermöglicht es, bereits ein Format vorauszuwählen.
+
+Sie können auch die Kodierung der Datei auswählen, wenn benötigt.
+
+\begin{figure}[h]
+   \begin{center}
+   \caption{Dialog zum Öffnen einer OGR-Vektordatenebene}\label{fig:openshapefile}\smallskip
+   \includegraphics[clip=true, width=14cm]{shapefileopendialog}
+\end{center} 
+\end{figure}
+
+Durch Auswahl eines Shapes und Anklicken von 'Open' wird die Datei in QGIS geladen.
+In Abbildung \ref{fig:loadedshapefile} sehen Sie das Ergebnis, nachdem die Beispieldatei 
+country.shp geladen wurde.
+
+\begin{figure}[ht]
+   \begin{center}
+   \caption{QGIS mit vmap0 Shape von Spanien}\label{fig:loadedshapefile}\smallskip
+   \includegraphics[clip=true, width=17cm]{shapefileloaded08}
+\end{center} 
+\end{figure}
+
+\begin{Tip}\caption{\textsc{Farben von Vektorebenen}}
+\qgistip{Wenn Sie eine neue Ebene in QGIS laden, werden Farben zufällig
+zugewiesen. Wenn Sie mehrere neue Ebenen laden, werden jeweils unterschiedliche
+Farben zugewiesen. }
+\end{Tip}
+
+Nach dem Laden können Sie mit den Navigationstools aus der Werkzeugleiste
+beliebig zoomen oder die Karte verschieben. Um die Symbologie einer Ebene zu
+verändern, doppelklicken Sie auf den Ebenennamen in der Kartenlegende oder
+zeigen Sie mit der Maus auf den Ebenennamen und klicken Sie auf die rechte
+Maustaste und wählen \textsl{Eigenschaften}. Vergleichen Sie Abschnitt 
+\ref{sec:symbology} für weitere Informationen zum Editieren der Eigenschaften
+von Vektorebenen. 
+  
+\subsubsection{Darstellungsgeschwindigkeit optimieren}
+
+Um die Darstellungsgeschwindigkeit zu optimieren, kann ein räumlicher Index
+erstellt werden. Ein \index{spatial index!shapefiles} räumlicher Index erhöht die
+Geschwindigkeit beim Zoomen und Verschieben. Räumliche Indizes haben in QGIS die
+Endung \textsl{.qix}.
+
+Benutzen Sie folgende Schritte zum Erstellen eines räumlichen Index:
+
+\begin{itemize}
+\item Laden Sie ein Shape
+\item Öffnen Sie den \textit{Eigenschaften}-Dialog der Ebene, indem Sie auf den
+Namen der Ebene doppelklicken oder mit der rechten Maustaste
+\textit{Eigenschaften} auswählen.
+\item In dem Reiter \textit{Allgemein} klicken Sie den \textit{Erstellen}-Knopf
+im Bereich 'Räumlichen Index erstellen'
+\end{itemize}
+
+\subsubsection{MapInfo Datei laden}
+\index{vector layers!MapInfo}
+
+Um eine MapInfo Datei zu laden, klicken Sie auf das Icon \textit{Füge eine
+Vektorebene hinzu} in der Werkzeugleiste\index{shapefile!loading}, ändern Sie
+die Auswahlbox \textsl{Files of type} nach \textit{MapInfo (*.mif
+*.tab *.MIF *.TAB)} und wählen die gewünschte Datei. 
+
+\subsubsection{ArcInfo Coverage laden}
+\index{vector layers!ArcInfo Coverage}
+
+Um ein ArcInfo Coverage zu laden, klicken Sie auf das Icon \textit{Füge eine
+Vektorebene hinzu} in der Werkzeugleiste\index{shapefile!loading}, ändern Sie
+die Auswahlbox \textsl{Files of type} nach \textit{All files (*.*)} und wählen 
+die gewünschte Datei. 
+
+\begin{itemize}
+\item .lab - Attributebene laden (Flächenattribute oder Punktdaten)
+\item .cnt - Polygon-Centroid-Ebene laden 
+\item .arc - Linienebene laden
+\item .pal - Polygonebene laden
+\end{itemize}
+
+\subsection{PostGIS-Ebene laden}
+\index{vector layers!PostGIS|see{PostGIS}}
+\index{PostGIS!layers}
+\label{label_postgis} 
+
+PostGIS-Ebenen sind in einer PostgreSQL Datenbank gespeichert. Der Vorteil von
+PostGIS liegt in der Fähigkeitkeit, räumliche Indizes, Filterungen und Abfragen
+bereitszustellen. Vektorfunktionen wie Selektieren und Abfragen funktionieren
+besser als bei Ebenen, die durch die OGR-Bibliothek geladen wurden.
+
+Um PostGIS benutzen zu können, brauchen Sie folgende Schritte:\index{PostgreSQL!loading layers}
+
+\begin{itemize}
+\item Verknüpfen Sie QGIS mit einer PostgreSQL Datenbank (falls dies noch
+nicht geschehen ist)\index{PostgreSQL!connection}
+\item Stellen Sie eine Verbindung zur Datenbank her
+\item Wählen Sie eine PostGIS-Ebene zum laden
+\item Optional nutzen Sie eine SQL-Abfrage, um zu
+definieren, welche Objekte der Ebene angezeigt werden sollen.
+\item Laden Sie die Ebene
+\end{itemize}
+
+\subsubsection{Erstellen einer Verknüpfung}\index{PostgreSQL!connection}\label{sec:postgis_stored}
+
+\includegraphics[width=0.7cm]{addpostgis} Beim ersten Einbinden einer
+PostGIS~-Datenquelle muss eine Verknüpfung erstellt und gespeichert werden. Klicken Sie
+dazu auf den Knopf \textit{PostGIS-Ebene hinzufügen} in der Werkzeugleiste. Der 
+\textsl{PostGIS Tabellen hinzufügen}-Dialog erscheint daraufhin. Um eine neue
+Verbindung zu erstellen, klicken Sie auf den Knopf \textsl{Neu}, um den Dialog 
+\textsl{Neue PostGIS-Verbindung erzeugen} zu öffnen. Die notwendigen Parameter
+sind in Tabelle \ref{tab:postgis_connection_parms} dargestellt.
+
+\begin{table}[h]\index{PostgreSQL!connection parameters}
+\centering
+\caption{PostGIS Verbindungsparameter}\label{tab:postgis_connection_parms}\medskip
+ \begin{tabular}{|l|p{5in}|}
+\hline Name & Ein Name für die Verbindung. Kann derselbe wie für die Datanbank sein \textsl{Database}
+\\
+\hline Host \index{PostgreSQL!host}
+& Name des Datenbank-Hosts. Dies muss ein auflösbarer Name für den HOST sein,
+genau wie beim Benutzen von telnet oder ping \\
+\hline Datenbank \index{PostgreSQL!database} & Name der Datenbank  \\
+\hline Port \index{PostgreSQL!port}& Port Nummer der PostgreSQL Datenbank auf
+dem Server. Standard ist Port 5432.\\
+\hline Benutzername \index{PostgreSQL!username}& Benutzername, um sich bei der
+Datenbank anzumelden \\
+\hline Passwort \index{PostgreSQL!password}& Passwort, um sich mit dem Benutzer
+mit der Datenbank zu verbinden\\
+\hline
+\end{tabular}
+\end{table}
+
+Wenn alle Parameter eingetragen sind, kann die Verbindung getestet werden, indem
+Sie auf den Knopf \textsl{Teste Verbindung} drücken\index{PostgreSQL!connection!testing}. 
+Um das Passwort zusammen mit den Verbindungsdetails zu speichern, aktivieren Sie 
+\textsl{Speichere Passwort}.
+
+\begin{Tip}\caption{\textsc{QGIS Benutzereinstellungen und Sicherheit}}
+\index{settings}\index{security} \qgistip{Ihre Einstellungen für QGIS werden 
+abhängig von Ihrem Betriebssystem gespeichert. Unter Linux/Unix ist dies in
+Ihrem Homeverzeichnis unter .qt/qgisrc. Unter MS Windows ist dies in der
+Registry. Abhängig von Ihrer Arbeitsumgebung kann das Speichern von Passworten in
+den QGIS-Einstellungen ein Sicherheitsrisiko darstellen.
+}
+\end{Tip}
+
+\subsubsection{PostGIS-Ebene laden}\index{PostgreSQL!loading layers}
+
+\includegraphics[width=0.7cm]{addpostgis} Nachdem Sie eine oder mehrere
+Verbindungen definiert und gespeichert haben, können Sie einzelne Ebenen aus
+PostGIS laden. Natürlich brauchen Sie dazu Daten in PostgreSQL/PostGIS. Eine
+Beschreibung zum Import von Daten nach PostgreSQL/PostGIS lesen Sie Abschnitt
+\ref{sec:loading_postgis_data}. 
+
+Um eine Ebene aus PostGIS zu laden, führen Sie folgende Schritte durch:
+
+\begin{itemize}
+\item Wenn der \textsl{PostGIS Tabellen hinzufügen}-Dialog noch nicht geöffnet
+ist, klicken Sie auf den Knopf \textit{PostGIS-Ebene hinzufügen} in der Werkzeugleiste
+\item Wählen Sie eine Verbindung aus dem drop-down Menü und klicken auf
+\textsl{Verbinden}
+\item Suchen Sie eine Ebene, die sie laden möchten
+\item Wählen Sie die Ebene durch doppelklicken aus. Sie können mehrere Ebenen
+auswählen, indem Sie die Shift-Taste beim Auswählen gedrückt halten. Weitere
+Informationen zum Umgang mit dem PostgreSQL Query-Builder finden Sie in
+Abschnitt \ref{sec:query_builder}.
+\item Klicken Sie auf den \textsl{Hinzufügen}-Knopf, um die Ebene zu laden
+\end{itemize}
+
+\begin{Tip}\caption{\textsc{PostGIS-Ebenen}}
+\qgistip{Normalwerweise ist eine PostGIS-Ebene über einen Eintrag in der 
+geometry\_columns Tabelle definiert. Seit Version \OLD ist QGIS in der Lage,
+Ebenen zu laden, die keinen Eintrag in der geometry\_columns Tabelle besitzen.
+Dies bezieht sich auf Tabellen und Views. Um einen 'spatial view' zu definieren,
+brauchen Sie ein kraftvolles System, um die Daten zu visualisieren. Beziehen Sie 
+sich auf das PostgreSQL Handbuch, um weitere Informationen über die Erstellung von
+Views zu erhalten.}
+\end{Tip}
+
+\subsubsection{Einige Details zu PostGIS-Ebenen}\label{sec:postgis_details}
+\index{PostgreSQL!layer details}
+
+Dieser Abschnitt enthält einige Details, wie QGIS auf PostgreSQL zugreift.
+Meistens soll QGIS eine Liste mit ein paar Datenbanktabellen bereitstellen, die
+bei Bedarf geladen werden können. Wenn Sie Probleme mit dem Laden von Ebenen
+aus PostgreSQL haben, können die nun folgenden Informationen vielleicht eine
+Hilfe sein, die Fehlermeldungen von QGIS besser zu verstehen und eine Lösung zu
+finden, die PostgreSQL Tabellen- oder Viewdefinition anzupassen und somit die Ebenen
+laden zu können.
+
+QGIS braucht eine Spalte in der PostgreSQL Tabelle, die als eindeutiger
+Schlüssel für die Ebene genutzt werden kann. Für Tabellen bedeutet dies, dass
+die Tabelle normalerweise einen Primärschlüssel braucht oder eine Spalte mit
+eindeutiger Zuordnung. Für QGIS muss diese Spalte außerdem vom Typ int4 sein
+(Integer mit 4 Bytes). Wenn eine Tabelle diese Voraussetzungen nicht
+erfüllt, wird die oid-Spalte genutzt. Die Performanz steigt, wenn für die Spalte
+ein Index erstellt wurde (für Primärschlüssel wird in PostgreSQL automatisch ein
+Index erstellt).    
+
+Wenn die PostGIS-Ebene ein View ist, gelten dieselben Anforderungen, aber Views
+besitzen keinen Primärschlüssel oder Spalten mit eindeutiger Zuordnung. In
+diesem Fall wird QGIS versuchen, eine passende Spalte zu finden, die aus der
+Tabellenspalte erstellt wurde. Wenn so eine Spalte nicht existiert, wird die 
+Ebene nicht geladen. In diesem Fall ist eine Lösung, den View anzupassen, damit
+er eine entsprechende Spalte vom Typ int4 enthält, entweder mit einem
+Primärschlüssel oder eindeutiger Zuordnung und bevorzugt natürlich mit Index.
+
+\subsubsection{PostGIS-Ebene importieren}\label{sec:loading_postgis_data}
+\index{PostGIS!SPIT!importing data}
+
+\minisec{shp2pgsql}
+Ebenen können auf unterschiedliche Art nach PostGIS importiert werden. PostGIS
+selbst stellt ein Tool \textsl{shp2pgsql} bereit, das genutzt werden kann, um
+Shapes nach PostGIS zu importieren. Um ein Shape mit dem Namen 'lakes' in eine
+PostgreSQL/PostGIS Datenbank zu importieren, wird folgendes Kommando benutzt: 
+
+\begin{verbatim} 
+  shp2pgsql -s 2964 lakes.shp lakes_new | psql gis_data
+\end{verbatim}
+
+Dieser Befehl erzeugt eine neue Tabelle mit dem Namen 'lakes\_new' in der 
+PostgreSQL/PostGIS Datenbank 'gis\_data'. Die neue Ebene wird die ID 2964 als 
+'spatial reference identifier' (SRID) tragen. Weitere Informationen zu
+räumlichen Referenzsystemen finden Sie in Abschnitt \ref{label_projections}. 
+
+\begin{Tip}
+\caption{\textsc{PostGIS-Ebenen exportieren}\index{PostGIS!Exporting}}
+\qgistip{Entsprechend dem Importtool \textsl{shp2pgsql} gibt es auch ein
+Exporttool, um Daten von PostGIS ins Shapeformat zu exportieren: 
+\textsl{pgsql2shp}. Dies ist in der PostGIS-Installation enthalten.} 
+\end{Tip}
+
+\minisec{SPIT Plugin}
+\includegraphics[width=0.7cm]{spiticon} QGIS bietet ein Plugin mit dem Namen  
+SPIT (Shapefile to PostGIS Import Tool)\index{PostGIS!SPIT}.
+SPIT kann dazu benutzt werden, gleichzeitig mehrere Shapes zu laden und
+bietet dabei auch Support für Schemas. Um das Plugin zu benutzen, öffnen Sie den
+Pluginmanager, wählen SPIT aus und laden es. Das SPIT-Icon wird
+nun in der Plugin-Werkzeugleiste angezeigt\index{PostGIS!SPIT!loading}. 
+
+Um ein Shape zu importieren, klicken Sie auf das SPIT-Icon in der
+Plugin-Werkzeugleiste, um den Dialog zu öffnen. Sie können ein oder mehrere
+Shapes in die Liste laden, indem Sie auf den Knopf \textsl{Hinzufügen} klicken.
+Der Ablauf der Imports sowie Warnungen oder Fehlermeldungen werden für jedes
+Shape angezeigt.
+
+\begin{Tip}\caption{\textsc{Shapes mit für PostgreSQL reservierten 
+Ausdrücken importieren}}\index{PostGIS!SPIT!reserved words}
+\qgistip{Wenn Sie ein Shape in der Liste zu importierender Daten haben, welches 
+Felder mit für PostgreSQL reservierten Ausdrücken enthält, erscheint ein Popup
+mit dem jeweiligen Status der Felder. Sie können die Namen der Felder 
+\index{PostGIS!SPIT!editing field names} dann vor dem Import editieren und 
+anpassen. Der Versuch die Datei ohne Änderung zu importieren, wird fehlschlagen.}
+\end{Tip} 
+
+\minisec{ogr2ogr}
+Abgesehen von \textit{shp2pgsql} und \textit{SPIT} gibt es noch ein weiteres
+Tool, um Daten nach PostGIS zu importieren: \textit{ogr2ogr}. Dieses Tool ist
+Teil der GDAL-Installation. Um ein Shape nach PostGIS zu importieren, kann
+folgendes Kommando verwendet werden:
+\begin{verbatim}
+  ogr2ogr -f "PostgreSQL" PG:"dbname=postgis host=myhost.de user=postgres \
+  password=topsecret" alaska.shp
+\end{verbatim}
+
+Damit wird das Shape alaska.shp vom Benutzer \textit{postgres} mit dem Passwort 
+\textit{topsecret} in die PostGIS Datenbank \textit{postgis} auf dem Server 
+\textit{myhost.de} importiert.
+
+Wichtig ist, dass GDAL gegen PostgreSQL kompiliert sein muss, damit der Import
+nach PostGIS möglich ist. Dies kann mit folgendem Kommando getestet werden: 
+\begin{verbatim}
+ogrinfo --formats | grep -i post
+\end{verbatim}
+
+\subsubsection{Geschwindigkeit optimieren}\label{label_improve}
+
+Der Datentransfer von einer PostgreSQL/PostGIS Datenbank kann langsam sein, besonders
+über ein Netzwerk. Die Geschwindigkeit kann optimiert werden, indem für alle
+Ebenen in PostgreSQL ein räumlicher Index\index{PostGIS!spatial index} erstellt wird.
+PostGIS unterstützt das Erstellen eines GiST (Generalized Search Tree) Index, um
+den Zugriff auf die Ebenen zu beschleunigen.
+
+Die Syntax zur Erstellung eines GiST\footnote{GiST Index Informationen wurden 
+aus der PostGIS Dokumentation übernommen unter: http://postgis.refractions.net}
+Index ist:
+
+\begin{verbatim}
+    CREATE INDEX [indexname] ON [tablename] 
+      USING GIST ( [geometryfield] GIST_GEOMETRY_OPS );
+\end{verbatim}
+
+Bedenken Sie, dass das Erstellen eines Index bei großen Datenmengen zeitaufwendig ist. 
+Nachdem der Index erstellt ist, sollte ein \textit{VACUUM ANALYZE} durchgeführt
+werden (vgl. PostGIS Dokumentation \cite{PostGISweb}).
+
+Beispiel zur Erstellung eines GiST Index:
+
+\begin{verbatim}
+gsherman@madison:~/current$ psql gis_data
+Welcome to psql 8.0.0, the PostgreSQL interactive terminal.
+
+Type:  \copyright for distribution terms
+        \h for help with SQL commands
+        \? for help with psql commands
+        \g or terminate with semicolon to execute query
+        \q to quit
+
+gis_data=# CREATE INDEX sidx_alaska_lakes ON alaska_lakes
+gis_data-# USING GIST (the_geom GIST_GEOMETRY_OPS);
+CREATE INDEX
+gis_data=# VACUUM ANALYZE alaska_lakes;
+VACUUM
+gis_data=# \q
+gsherman@madison:~/current$
+\end{verbatim}
+
+\subsection{Dialog für Ebeneneigenschaften}\label{sec:vectorprops}
+\index{vector layers!properties dialog}
+
+Der Dialog für die Ebeneneigenschaften von Vektordaten gibt Informationen über
+die Vektorebene, ihre Symbologie, Eigenschaften und Beschriftungsoptionen. Wenn
+eine Vektorebene aus einer PostgreSQL/PostGIS Datenbank geladen wurde, können
+auf diese SQL-Abfragen angewendet werden - entweder manuell im \textit{Allgemein}
+Reiter des Dialogs oder indem der Query Builder im Reiter \textit{Allgemein} 
+genutzt wird. Um den Dialog für die Ebeneneigenschaften zu öffnen, doppelklicken
+Sie auf den Namen der Ebene in der Kartenlegende oder wählen mit der rechten
+Maustaste 'Eigenschaften' aus.   
+
+\subsubsection{Vektor Symbologie}\label{sec:symbology}
+\index{vector layers!symbology}
+
+QGIS bietet eine Vielzahl von Symbolfunktionen, um die Darstellung von Vektoren
+zu kontrollieren. Derzeit sind folgende Optionen vorhanden: 
+
+\begin{description}
+    \item[Einfaches Symbol] - eine definierte Symbologie wird allen 
+    Objekten der Ebene zugewiesen.\index{vector layers!renderers!single symbol}
+    \item[Abgestuftes Symbol] - Objekten einer Ebene wird in Abhängigkeit von einer
+    Attributspalte und einer definierten Anzahl von Klassen eine Symbologie zugewiesen.
+    \index{vector layers!renderers!graduated symbol}
+    \item[Fortlaufende Farbe] - Objekten einer Ebene wird anhand von
+    definierten, numerischen Werten eine fortlaufende Farbe zugewiesen.
+    \index{vector layers!renderers!continuous color}
+    \item[Individueller Wert] - eine definierte Symbologie wird jeder  
+    Objektklasse einer Ebene anhand einer definierten Attributspalte zugewiesen.
+    \index{vector layers!renderers!unique value}
+\end{description}
+
+Um die Symbologie einer Ebene zu ändern, doppelklicken Sie auf den Namen der 
+Ebene in der Kartenlegende.\index{symbology!changing}
+\begin{figure}[H]
+   \begin{center}
+   \caption{Dialog für Ebeneneingenschaften}\label{fig:vector_symbology}\smallskip
+   \includegraphics[clip=true, width=14cm]{vectorLayerSymbology} 
+\end{center}  
+\end{figure}
+%force all figures to be printed
+
+\subsubsection{Transparenz für Vektorebenen} \label{sec:vect_transparency} \index{vector layers!transparency}
+
+QGIS \CURRENT ermöglicht es, eine Vektorebene transparent darzustellen. Dies kann
+mit dem Schieber unterhalb des Legendentyps (vgl. Abbildung 
+\ref{fig:vector_symbology}) erreicht werden. Dies ist sehr nützlich, um mehrere
+Vektorebenen übereinander darzustellen.
+
+\subsection{Aktionen auf Basis von Attributen}\index{actions}\label{label_actions}
+
+QGIS bietet die Möglichkeit, Aktionen auf Basis von Attributen einer Ebene
+durchzuführen. Dies kann für eine Vielzahl von Aktionen genutzt werden, z.B. um
+ein Programm mit Abfragen aus der Attributdatenbank zu füttern oder Ergebnisse
+einer Attributabfrage für ein statistisches Tool bereitzustellen.   
+
+Aktionen auf Basis von Attributen sind sinnvoll, wenn sie mit externen
+Applikationen auf Ergebnisse einer oder mehrerer Attributabfragen von Vektorebenen
+zugreifen möchten. Ein Beispiel finden Sie im nächsten Abschnitt.
+
+\subsubsection{Aktionen definieren}\index{actions!defining}
+
+Attribut-Aktionen werden im Dialog für die Ebeneneigenschaften im Reiter 
+\textit{Aktionen} definiert. Sie brauchen einen Namen für die Aktion und das
+externe Programm, das während der Aktion gestartet werden soll. Sie können ein oder
+mehrere Attributfelder einbinden. Alle Zeichen, die mit \% und dem Namen eines
+Feldes beginnen, werden durch den Wert dieses Feldes ersetzt. Die Spezialfelder 
+\%\% \index{\%\%} werden ersetzt durch den Wert des Feldes, der auf Basis von
+Abfrageergebnissen selektiert wird (vgl. Abschnitt Aktionen anwenden).
+Doppelte Anführungsstriche können dazu benutzt werden, um mehrere Worte als ein
+Ausdruck gruppiert zu übergeben. Doppelte Anführungsstriche werden ignoriert,
+wenn davor ein Backslash steht.    
+
+Zur besseren Erläuterung zwei Beispiele:\index{actions!examples}
+
+\begin{itemize}
+  \item \texttt{konqueror http://www.google.com/search?q=\%nam}
+  \item \texttt{konqueror http://www.google.com/search?q=\%\%}
+\end{itemize}
+
+Im ersten Beispiel wird an den Webbrowser Konqueror eine Google URL
+übergeben mit dem Wert eines Feldes \textit{nam} einer Vektorebene.
+Beachten Sie, dass sich das bei einer Aktion aufgerufene Programm im Pfad
+befinden muss. Ansonsten müssen Sie den gesamten Pfad angeben: 
+(\texttt{/opt/kde3/bin/konqueror http://www.google.com/search?q=\%nam}).
+
+Das zweite Beispiel nutzt den Ausdruck \%\%, welcher unabhängig ist von einem
+speziellen Feld. Beim Ausführen des Befehls wird der Ausdruck \%\% durch den
+Wert des jeweils selektierten Feldes ersetzt.
+
+\subsubsection{Aktionen anwenden}\index{actions!using}\label{label_usingactions}
+
+Aktionen können entweder über den Dialog \textit{Abfrageergebnisse} oder die 
+geöffnete \textit{Attributtabelle} gestartet werden. Um eine Aktion aufzurufen,
+klicken Sie mit der rechten Maustaste auf einen Eintrag in der Attributtabelle
+und wählen die gewünschte Aktion aus der Liste aus. 
+
+Wenn eine Aktion mit dem Ausdruck \%\% gestartet werden soll, klicken Sie mit der 
+rechten Maustaste auf einen Eintrag in der \textit{Attributtabelle} oder im
+Dialog \textit{Abfrageergebnisse} und wählen die gewünschte Aktion aus der Liste aus.
+
+In einem weiteren Beispiel soll gezeigt werden, wie Attributwerte aus einer Vektorebene 
+abgefragt und in eine Textdatei mit Hilfe der Bash und des 'echo' Kommandos
+geschrieben werden (funktioniert also nur unter GNU/Linux und evtl. Mac OSX).
+Die Abfrageebene enthält die Felder Art (taxon\_name), Latitude (lat) und Longitude (long). Um
+eine räumliche Abfrage eines Ortes zu erstellen und die Werte der drei Felder in
+eine Textdatei zu schreiben, wird folgende Aktion erstellt:  
+
+\begin{verbatim}
+  bash -c "echo \"%taxon_name %lat %long\" >> /tmp/species_localities.txt"
+\end{verbatim} 
+
+Nachdem ein paar Orte auf dem Bildschirm ausgewählt wurden (diese erscheinen gelb 
+hinterlegt), starten wir die Aktion mit der rechten Maustaste über den Dialog 
+\textit{Abfrageergebnisse} und können danach in der Textdatei die Ergebnisse 
+ansehen:
+
+\begin{verbatim}
+  Acacia mearnsii -34.0800000000 150.0800000000
+  Acacia mearnsii -34.9000000000 150.1200000000
+  Acacia mearnsii -35.2200000000 149.9300000000
+  Acacia mearnsii -32.2700000000 150.4100000000
+\end{verbatim} 
+
+
+\subsection{Editieren}\index{editing}
+
+QGIS bietet einfache Editierfunktionen für räumliche Daten. Bevor Sie
+weiterlesen sollten Sie sich bewusst sein, dass derzeit nicht alle 
+Funktionen ausgereift sind. Bevor Sie also anfangen, Vektorebenen zu
+editieren, sollten Sie die Daten sichern. 
+
+\textbf{Bemerkung} - die Vorgehensweise um GRASS-Ebenen zu editieren
+unterscheidet sich - vgl. Abschnitt \ref{grass_digitising} für weitere
+Informationen dazu.
+
+\subsubsection{Editieren einer existierenden Ebene}
+\index{vector layers!editing}
+\index{editing!an existing layer}
+\label{sec:edit_existing_layer}
+
+Standardmäßig lädt QGIS Vektorebenen im 'read-only' Modus, um ungewolltes
+Editieren zu verhindern. Ansonsten können aber alle Ebenen editiert werden, wenn
+es der Datenanbieter erlaubt bzw. die Rechte entsprechend gesetzt sind. 
+
+Das Editieren von Vektorebenen ist am vielseitigsten bei PostgreSQL/PostGIS Daten.
+
+\begin{Tip}[h]\caption{\textsc{Daten-Integrität}}
+\qgistip{Bitte beachten Sie, Daten vor und während des Editierens regelmäßig 
+zu sichern, um bei Fehlern keine unnötigen Verluste zu erleiden.
+
+QGIS befindet sich noch immer in einem Entwicklungsstadium unterhalb der
+Versionsnummer 1.0. Es kann daher noch zu unerwarteten Fehlern kommen.
+}
+\end{Tip}
+
+\index{Editieren erlauben}
+Vor jedem Editieren einer Vektorebene muss die Option \textit{Editieren erlauben} 
+aktiviert sein. Dazu klicken Sie mit der rechten Maustaste auf den Namen der
+Ebene in der Kartenlegende. Alternativ können Sie auch die Icons\index{Start Editing}
+\includegraphics[width=0.4cm, clip=true]{StartEditing} \textit{Starte die
+Digitalisierung für die aktuelle Ebene} oder\index{Stop Editing} 
+\includegraphics[width=0.4cm, clip=true]{StopEditing} \textit{Stoppe Digitalisierung 
+für die aktuelle Ebene} aus der Werkzeugleiste benutzen.\index{editing!icons}
+
+\begin{Tip}[h]\caption{\textsc{Das Editieren von Geometrien unterscheidet sich
+vom Editieren von Werten in der Attributtabelle}}
+\qgistip{In dieser QGIS Version agieren die Knöpfe zum Editieren von Geometrien in der 
+Werkzeugleiste unabhängig von den Knöpfen \textit{Digitalisieren starten} und 
+\textit{Bearbeitung stoppen} in der geöffneten Attributtabelle. 
+}
+\end{Tip}
+
+\begin{Tip}[h]\caption{\textsc{Regelmäßiges Sichern der Daten}}
+\qgistip{Bitte schließen Sie die Option \textit{Editieren erlauben} oder
+klicken auf das Icon \textit{Bearbeitung stoppen} regelmäßig. Dadurch werden
+alle bis dahin gemachten Änderungen gespeichert und es ist sichergestellt, dass die
+Änderungen auch akzeptiert werden.
+}
+\end{Tip}
+
+\begin{Tip}[h]\caption{\textsc{Zeitgleiches Editieren}}
+\qgistip{Diese QGIS Version kontrolliert nicht, ob zwei Personen gleichzeitig an
+einer Vektorebene arbeiten. Die zuletzt schreibende Person gewinnt.
+}
+\end{Tip}
+
+Wenn eine Vektorebene im Editiermodus ist, erscheinen Kreuze für die
+Knotenpunkte der Geometrien im Kartenfenster.
+
+\begin{Tip}[h]\caption{\textsc{Zoomen zum letzten Editierstand}}
+\qgistip{Vor dem Editieren einer Vektorebene sollten Sie in den Bereich zoomen,
+den Sie verändern möchten. Dadurch wird die zeitaufwendige Darstellung
+sämtlicher Knotenpunkte der Vektorebene im Kartenfenster verhindert.
+}
+\end{Tip}
+
+\begin{Tip}[h]\caption{\textsc{Knotenpunkt Kreuze}}
+\qgistip{Diese QGIS Version ermöglicht es nicht, das Kreuzsymbol für die
+Knotenpunkte zu ändern.
+}
+\end{Tip}
+
+Folgende Editierfunktionen stehen zur Verfügung:
+
+\begin{itemize}
+\item Objekt hinzufügen
+\item Knotenpunkt zu einem Objekt hinzufügen
+\item Knotenpunkte eines Objektes verschieben
+\item Knotenpunkte eines Objektes löschen
+\item Selektiertes Objekt ausschneiden
+\item Selektiertes Objekt kopieren
+\item Selektiertes Objekt übergeben (paste)
+\item Selektiertes Objekt löschen
+\end{itemize}
+
+\minisec{Objekt hinzufügen}
+\index{vector layers!adding!feature}
+
+Vor dem Editieren zoomen Sie in den Bereich, den Sie verändern möchten.
+
+Danach können Sie mit den Icons \textit{Punkt digitalisieren}, 
+\textit{Linie digitalisieren} oder \textit{Polygon digitalisieren} in der 
+Werkzeugleiste den Mauszeiger in den Digitalisiermodus bringen.
+
+Für jedes Objekt wird erst die Geometrie digitalisiert und dann das Attribut
+hinzugefügt.
+
+Um eine Geometrie zu digitalisieren, klicken Sie mit der linken Maustaste an
+eine gewünschte Stelle im Kartenfenster, um den ersten Punkt zu erstellen.
+
+Für Linien und Polygone klicken Sie für jeden weiteren Knotenpunkt wieder die linke 
+Maustaste. Zum Beenden klicken Sie irgendwo im Kartenfenster auf die rechte
+Maustaste, um anzuzeigen, dass die Geometrie ihres Objektes fertig gestellt ist. 
+
+Dadurch wird das Attributfenster geöffnet und ermöglicht die Attribute für
+das neue Objekt einzutragen. In Abbildung \ref{fig:vector_digitising} ist ein
+Beispiel für einen fiktiven Fluss in England gezeigt.
+
+\begin{figure}[ht]
+   \begin{center}
+   \caption{Dialog zum Digitalisieren von Vektor-Attributen}\label{fig:vector_digitising}\smallskip
+   \includegraphics[clip=true, width=16cm]{digitising_attributes08}
+\end{center}  
+\end{figure}
+
+\begin{Tip}[h]\caption{\textsc{Datentyp der Attribute}}
+\qgistip{Die aktuelle QGIS Version kontrolliert nicht, ob die eingetragenen
+Werte dem Datentyp der Attributspalte entspricht (z.B.: Zahl oder Text),
+
+Versichern Sie sich dessen, bevor Sie auf \textit{Ok} drücken, sonst werden
+später Fehler auftreten, wenn Sie versuchen, die Daten zu speichern und
+anderweitig zu nutzen.
+}
+\end{Tip}
+
+\newpage
+
+\minisec{Knotenpunkte eines Objektes editieren}
+\index{vector layers!editing!vertex}
+\textbf{Neu in Version \CURRENT}
+
+Für PostgreSQL/PostGIS und Shape-basierte Vektorebenen können die Knotenpunkte von
+Objekten editiert werden.
+
+Knotenpunkte können direkt editiert werden, ohne vorher auszuwählen, welches Objekt 
+gemeint ist. In einigen Fällen teilen sich Objekte dieselben Knotenpunkte. Folgende
+Regeln kommen daher zum Einsatz:
+
+\begin{itemize}
+\item \textbf{Linien}    - Die zum Mauszeiger nächste Linie wird als Zielobjekt 
+			  benutzt. Beim verschieben oder löschen eines
+			  Knotenpunktes wird der zum Mauszeiger nächste Knotenpunkt auf 
+			  einer Linie editiert.
+
+\item \textbf{Polygone} - Wenn der Mauszeiger sich innerhalb eines Polygons 
+			  befindet, ist dies das Zielobjekt, ansonsten wird das 
+			  zum Mauszeiger nächstliegende Objekt benutzt. Beim 
+			  verschieben oder löschen eines Knotenpunktes 
+			  wird der zum Mauszeiger nächste Knotenpunkt auf dem Polygon 
+			  editiert.
+\end{itemize}
+
+Sie sollten den Suchradius beim Digitalisieren über die Menüleiste unter
+\textit{Einstellungen}->\textit{Projekt
+Eigenschaften}->\textit{Allgemein}->\textit{Suchradius} größer 0 einstellen.
+Ansonsten ist QGIS nicht in der Lage, ein Objekt auszuwählen.
+
+\minisec{Knotenpunkt zu einem Objekt hinzufügen}
+\index{vector layers!adding!vertex}
+\textbf{Neu in Version \CURRENT}
+
+Sie können einen Knotenpunkt zu einem Objekt hinzufügen, indem Sie das Icon
+\textit{Knotenpunkt hinzufügen} aus der Werkzeugleiste auswählen.
+
+Beachten Sie, es macht wenig Sinn, weitere Knotenpunkte zu einem Punktobjekt zu
+ergänzen.
+
+In dieser QGIS Version können Knotenpunkte nur zu \textit{bereits vorhandenen}
+Liniensegmenten einer Linie hinzugefügt werden. Wenn Sie eine Linie über ihr
+Ende hinaus verlängern möchten, müssen Sie erst den letzten Knotenpunkt
+verschieben und dann weitere Knotenpunkte ergänzen.
+
+\minisec{Knotenpunkte eines Objektes verschieben}
+\index{vector layers!moving!vertex}
+\textbf{Neu in Version \CURRENT}
+
+Sie können Knotenpunkte mit dem Icon \textit{Knotenpunkt
+verschieben} aus der Werkzeugleiste verschieben.
+
+\minisec{Knotenpunkte eines Objektes löschen}
+\index{vector layers!deleting!vertex}
+\textbf{Neu in Version \CURRENT}
+
+Sie können einen Knotenpunkt aus einem Objekt löschen, indem Sie das Icon
+\textit{Knotenpunkt löschen} aus der Werkzeugleiste auswählen.
+
+Beachten Sie, es macht keinen Sinn, einen Knotenpunkt aus einem Punktobjekt zu
+löschen. Löschen Sie in dem Fall das Objekt.
+
+Ebenso ist eine Linie, die aus einem Knotenpunkt besteht oder ein Polygon, das
+aus zwei Knotenpunkten besteht sinnlos und führt zu fehlerhaften Ergebnissen. 
+
+\textbf{Warnung:} Ein Knotenpunkt ist zum löschen ausgewählt, 
+sobald Sie mit der Maus in die Nähe des Knotenpunktes klicken. Um dies
+rückgänggig zu machen, müssen Sie den Editiermodus verlassen und bei der
+Nachfrage, ob die Veränderungen gespeichert werden sollen \textit{Nein}
+auswählen (Dadurch werden natürlich alle bis dahin vorgenommenen Änderungen 
+verworfen.)
+
+\minisec{Ausschneiden, kopieren und übergeben von Objekten}
+\index{vector layers!cut!feature}
+\index{vector layers!copy!feature}
+\index{vector layers!paste!feature}
+\index{editing!cutting features}
+\index{editing!copying features}
+\index{editing!pasting features}
+\textbf{Neu in Version \CURRENT}
+
+Ausgewählte Objekte können ausgeschnitten, kopiert und an andere Ebenen im
+aktuellen QGIS~-Projekt übergeben werden, wenn die Zielebenen sich auch im
+Editiermodus befinden.
+
+Objekte können auch als Text an externe Applikationen übergeben werden: Dabei
+wird ein Objekt im .csv Format mit ihrer Geometrie im OGC Well-Known Text (WKT) 
+Format erzeugt.
+
+In dieser QGIS Version können Textobjekte außerhalb von QGIS nicht in eine
+geladene Ebene eingefügt werden.
+
+\begin{Tip}[h]\caption{\textsc{Deckungsgleichheit übergebener Objekte}}
+\qgistip{Wenn die Quell- und Zielebene die gleiche Projektion nutzen, hat das
+übergebene Objekt die identische Geometrie wie in der Quellebene.
+
+Wenn die Quell- und Zielebene eine unterschiedliche Projektion nutzen, kann das
+übergebene Objekt eine andere Geometrie wie in der Quellebene besitzen. Der
+Grund liegt in auftretenden Rundungsabweichungen bei der Konvertierung zwischen
+Projektionen.
+}
+\end{Tip}
+
+
+\minisec{Ausgewählte Objekte löschen}
+\index{vector layers!deleting!feature}
+
+Um Objekte zu löschen, wählen Sie das Icon \textit{Ausgewähltes löschen} 
+aus der Werkzeugleiste.
+
+\begin{Tip}[h]\caption{\textsc{Unterstützung zum Löschen von Objekten}}
+\qgistip{Wenn Sie Shapes editieren wird das Löschen von Objekten nur 
+unterstützt, wenn QGIS zu einer GDAL Version 1.3.2 or höher verlinkt ist. 
+Die OS X, Windows und GNU/Linux Versionen von QGIS auf der Downloadseite von
+QGIS wurden mit GDAL Version 1.3.2 oder höher erstellt.
+}
+\end{Tip}
+
+\minisec{Suchradius einstellen}
+\index{editing!snap}
+QGIS ermöglicht es, digitalisierte Knotenpunkte an andere Knotenpunkte derselben
+Ebene anzubinden. Dazu müssen Sie den Suchradius als Karteneinheit in der
+Menüleiste unter \textit{Einstellungen}->\textit{Projekt Eigenschaften}->
+\textit{Allgemein}->\textit{Suchradius} entsprechend einstellen.
+
+\minisec{Editierte Ebenen speichern}
+\index{editing!saving changes}
+
+Wenn sich eine Vektorebene im Editiermodus befindet, werden alle Änderungen im
+Speicher von QGIS abgelegt. Sie werden also nicht direkt auf den Datenträger
+oder die Festplatte geschrieben. Wenn Sie den Editiermodus oder QGIS selbst
+beenden, werden Sie gefragt, ob sie die aktuellen Änderungen speichern möchten.
+
+Wenn die Änderungen nicht gespeichert werden können (z.B.: weil die Festplatte
+voll ist) bleibt der QGIS 'im-memory' Status erhalten. Sie können somit
+Veränderungen vornehmen und das Speichern erneut versuchen. 
+
+\subsubsection{Neue Vektorebene erstellen}\label{sec:create shape}\index{editing!creating a new layer}
+
+Um eine neue Vektorebene zu erstellen, wählen Sie in der Menüleiste \textit{Neue Vektorebene}
+aus dem Menü \textit{Ebene}. Dadurch startet der \textit{Neue Vektorebene}
+Dialog (vgl. Abb. \ref{fig:newvectorlayer}). Wählen Sie hier den Typ der neuen
+Ebene (Punkt, Linie oder Polygon).
+
+\begin{figure}[ht]
+   \begin{center}
+   \caption{Dialog zum Erstellen einer neuen Vektorebene}\label{fig:newvectorlayer}\smallskip
+   \includegraphics[clip=true, width=7cm]{newvectorlayer}
+\end{center} 
+\end{figure}
+
+QGIS kann derzeit noch keine 2,5D Objekte erstellen (z.B. Objekte mit X,Y,Z
+Koordinaten). Im Moment können nur Shapes erstellt werden. In zukünftigen
+Versionen werden auch andere durch OGR oder PostgreSQL unterstützte Datenformate
+erstellt werden können.
+
+Das Erstellen einer GRASS Vektorebene ist mit dem GRASS-Plugin möglich. Weitere
+Information dazu finden Sie im Abschnitt \ref{sec:creating_new_grass_vectors}.
+
+Um die Erstellung einer neuen Vektorebene abzuschließen, ergänzen Sie die
+gewünschten Attributfelder, indem Sie auf den Knopf \textit{Hinzufügen} klicken
+und den Namen und Datentyp angeben. Es werden nur die Datentypen 
+\textit{real, integer und string} unterstützt. Wenn dies getan ist, bestätigen
+Sie mit \textit{Ok} und geben einen Namen für die Vektorebene ein. Die neue
+Ebene wird automatisch in die Kartenlegende eingefügt und Sie können
+diese entsprechend dem Abschnitt \ref{sec:edit_existing_layer} editieren. 
+
+\subsection{Query Builder}\label{sec:query_builder}
+\index{Query Builder}
+
+Der Query Builder ermöglicht es, eine Auswahl einer Attributtabelle zu
+erstellen und die dazu gehörigen Geometrien im Kartenfenster anzuzeigen. Er kann
+für alle OGR-unterstützten Formate, GRASS- und PostGIS-Ebenen verwendet werden.
+Wenn Sie beispielsweise eine Ebene 'Städte' haben, können Sie alle Städte mit
+einer \textsl{Einwohnerzahl > 100000} auswählen und anzeigen lassen. Abbildung 
+\ref{fig:query_builder} zeigt eine Beispielanwendung des Query Builder mit einer
+PostGIS-Ebene.
+
+\begin{figure}[ht]
+  \begin{center}
+    \caption{Query Builder}\label{fig:query_builder}\smallskip
+    \includegraphics[clip=true, width=14cm]{querybuilder}
+  \end{center}  
+\end{figure}
+
+Der Query Builder\index{Query Builder} listet die vorhandenen Attributspalten
+einer Vektorebene in der linken oberen Box (Felder). Sie können einen Ausschnitt der
+vorhanden Attributwerte im rechten oberen Feld (Werte) anzeigen, indem Sie eine 
+Attributspalte auswählen und auf den Knopf \textit{Stichprobe}\index{Query
+Builder!generating sample list} klicken. Dadurch werden die ersten 25
+unterschiedlichen Werte der Attributspalte angezeigt. Um eine vollständige Liste
+zu bekommen, klicken Sie auf den Knopf \textit{Alle}\index{Query Builder!getting all
+values}. Um eine Attributspalte in das untere Fenster (SQL where clause) zu
+kopieren, doppelklicken sie auf den Namen in der Box (Felder)\index{Query
+Builder!adding fields}. Um eine Abfrage zu erstellen können Sie die
+verschiedenen Operatoren benutzen.
+
+Um eine Abfrage zu testen, klicken Sie auf den Knopf \textit{Test}\index{Query Builder!testing
+queries}. Dies erzeugt ein Fenster, in dem die Anzahl der für diese Abfrage
+zutreffenden Objekte angezeigt wird. Nach erfolgreichem Testen klicken Sie auf
+den Knopf \textit{Ok}. Das SQL-Kommando wird in der SQL-Spalte der Ebenenliste
+angezeigt werden.
+
+\begin{Tip}\caption{\textsc{Ändern der Ebenen-Definition}}\index{Query
+Builder!changing layer definitions}
+\qgistip{Sie können die Definition der Ebene ändern nachdem sie geladen ist,
+indem sie die SQL-Abfrage anders starten. Dazu öffnen Sie den Dialog Ebeneneigenschaften 
+durch Doppelklicken auf den Ebenennamen in der Kartenlegende. Im Reiter
+\textit{Allgemein} befindet sich der Knopf \textit{Query Builder}. Weitere
+Informationen können Sie im Abschnitt \ref{sec:vectorprops} finden.}
+\end{Tip}
+
+\subsubsection{PostGIS-Ebenen abfragen}\label{sec:query_builder_postgis}
+\index{PostgreSQL!query builder}
+\index{PostGIS!query builder}
+\index{query builder!PostgreSQL}
+\index{query builder!PostGIS}
+
+Um eine geladene PostGIS-Ebene abzufragen, gibt es zwei Optionen. Die erste
+besteht darin, auf den Knopf \textit{Öffne Attributtabelle} in der Werkzeugleste
+zu klicken und im Dialogfenster auf den Knopf \textit{Erweitert}. Dadurch wird
+der Query Builder gestartet und ermöglicht Abfragen wie in Abschnitt
+\ref{sec:query_builder} beschrieben. 
+
+Eine zweite Option besteht darin, das Dialogfenster Ebeneneigenschaften zu
+öffnen, indem Sie mit der rechten Maustaste auf den Ebenennamen in der
+Kartenlegende klicken und unter \textit{Eigenschaften} im Reiter \textit{Allgemein}
+den Knopf \textit{Query Builder} auswählen.
+
+\subsubsection{OGR- und GRASS-Ebenen abfragen}\label{sec:query_builder_ogrgrass}
+\index{OGR!query builder}
+\index{GRASS!query builder}
+\index{query builder!OGR}
+\index{query builder!GRASS}
+
+Um eine geladene OGR- oder GRASS-Ebene abzufragen, klicken Sie auf den Knopf 
+\textit{Öffne Attributtabelle} in der Werkzeugleiste und im Dialogfenster auf 
+den Knopf \textit{Erweitert}. Dadurch wird der Query Builder gestartet und 
+ermöglicht Abfragen wie in Abschnitt \ref{sec:query_builder} beschrieben.  
+
+Die zweite Option, wie im Abschnitt PostGIS-Ebenen 
+\ref{sec:query_builder_postgis} beschrieben, wird in der aktuellen Version 
+nicht unterstützt.
+
+\index{vector layers|)}

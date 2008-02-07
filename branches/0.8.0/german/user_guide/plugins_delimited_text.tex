@@ -1,0 +1,129 @@
+% vim: set textwidth=78 autoindent:
+    
+\subsection{Das CSV-Plugin benutzen}\label{label_dltext}    
+
+Mit dem 'CSV'-Plugin\footnote{CSV steht für comma-separated-value, also
+Textdateien, dessen Spalten mit einem definierten Trennzeichen versehen
+sind} können Datenspalten aus einer Textdatei als eine Ebene
+in QGIS geladen werden. 
+    
+\subsubsection{Anforderungen}
+
+Um Datenspalten aus einer Textdatei in QGIS zu laden, muss diese Textdatei
+bestimmte Eigenschaften haben:
+
+\begin{enumerate}      
+\item Eine Kopfzeile mit den Spaltennamen. Diese Kopfzeile muss die erste Zeile 
+der Datei sein   
+\item Die Textdatei muss mindestens eine Spalte mit X- und eine mit Y-Koordinaten enthalten. 
+Die Bezeichnungen in der Kopfzeile für diese Spalten können beliebig sein.
+\item Die X- und Y-Koordinaten müssen als Zahlen angegeben sein. Das
+Koordinatensystem spielt keine Rolle.
+\end{enumerate}
+
+Ein Beispiel für einen Textdatei könnte so aussehen:
+
+\begin{verbatim} 
+name|latdec|longdec|cell|
+196 mile creek|61.89806|-150.0775|tyonek d-1 ne|
+197 1/2 mile creek|61.89472|-150.09972|tyonek d-1 ne|
+a b mountain|59.52889|-135.28333|skagway c-1 sw|
+apw dam number 2|60.53|-145.75167|cordova c-5 sw|
+apw reservoir|60.53167|-145.75333|cordova c-5 sw|
+apw reservoir|60.53|-145.75167|cordova c-5 sw|
+aaron creek|56.37861|-131.96556|bradfield canal b-6|
+aaron island|58.43778|-134.81944|juneau b-3 ne|
+aats bay|55.905|-134.24639|craig d-7|
+\end{verbatim}
+
+Einige weitere Anmerkungen zu Textdateien: 
+
+\begin{enumerate}        
+\item  Die Beispieldatei verwendet \mbox{$|$} als Trennzeichen. Es können auch
+andere Zeichen zum Trennen der Spalten verwendet werden.
+\item Die erste Zeile ist die Kopfzeile. Sie enthält die Spaltennamen name, latdec,
+longdec und cell
+\item Anführungszeichen ({\tt{}"{}}) dürfen nicht als Trennzeichen benutzt
+werden
+\item Die X-Koordinaten sind in der Spalte {\em longdec} enthalten
+\item Die Y-Koordinaten sind in der Spalte {\em latdec} enthalten
+\end{enumerate}
+
+\subsubsection{Das Plugin benutzen}
+
+Um das Plugin zu benutzen, müssen Sie QGIS starten und den Plugin Manager
+aufrufen, um das Plugin \textsl{Getrennter Text} zu aktivieren:
+
+Starten Sie QGIS, öffnen Sie den Plugin Manager über das Menü {\em
+Plugins->Plugin Manager} in der Menüleiste. Der Plugin Manager zeigt
+eine Liste vorhandener Plugins. Sie können Plugins mit der entsprechenden
+Checkbox aktivieren und deaktivieren und dann auf den Knopf \textsl{Ok} klicken, wie in
+Abbildung \ref{fig:plugin_manager} gezeigt.
+
+\begin{figure}[ht]
+   \begin{center}
+   \caption{Dialog des Plugin Managers}
+   \label{fig:plugin_manager}
+   \smallskip
+\includegraphics[clip=true, width=12cm]{plugin_manager}
+   \end{center}  
+\end{figure}
+
+Das ausgewählte Plugin erscheint nun in der Werkzeugleiste:
+\includegraphics[width=0.7cm]{toolbar_icon}
+Klicken Sie auf das Icon, um das Plugin \textsl{Getrennter Text} wie in
+Abbildung \ref{fig:delim_text_plugin_dialog} zu starten.
+
+\begin{figure}[ht]
+   \begin{center}
+   \caption{Getrennter Text Dialog}\label{fig:delim_text_plugin_dialog}\smallskip
+\includegraphics[clip=true, width=12cm]{dialog}            
+   \end{center}  
+\end{figure}
+
+Zuerst wählen Sie eine Textdatei aus, die Sie laden möchten:
+\includegraphics[scale=0.5]{ellipsis}
+Das Plugin versucht nun automatisch mit Hilfe des zuletzt verwendeten
+Trennzeichens eine Struktur (Spalten) in der Datei zu finden. Im Beispiel ist
+es das Trennzeichen \mbox{$|$} (Abbildung \ref{fig:delim_text_file_selected}).
+\begin{figure}[ht]
+   \begin{center}
+   \caption{Ausgewählte Textdatei}\label{fig:delim_text_file_selected}\smallskip
+\includegraphics[clip=true, width=12cm]{file_selected}   
+   \end{center}  
+\end{figure}
+
+Für diese Textdatei ist das Trennzeichen \mbox{$|$} nicht richtig, sie wird
+durch TABs getrennt. Beachten Sie, dass die X- und Y-Felder nicht die gültigen
+Spaltennamen enthalten. Um das richtige Trennzeichen einzustellen, wechseln Sie
+es zu \mbox{$\backslash$} (Dies ist das Zeichen für einen TAB). 
+Nachdem das Trennzeichen angepasst ist, klicken Sie auf {\em Durchsuchen}.
+Nun erscheinen die Spalten in Abbildung \ref{fig:delim_text_file_selected2} korrekt 
+im X- und Y-Feld. Wählen Sie die X- und Y-Felder nun aus und geben Sie einen
+Namen für die neue Ebene ein, wie in Abbildung
+\ref{fig:delim_text_file_selected3}. Um die Textdatei zu laden, klicken Sie auf
+den Knopf {\em Ebene hinzufügen}. Die Textdatei verhält sich nun wie jede in QGIS geladene Ebene (vgl. Abbildung \ref{fig:layer_added}).
+
+\begin{figure}[ht]
+   \begin{center}
+   \caption{In der Textdatei gefundene Spalten}\label{fig:delim_text_file_selected2}\smallskip  
+\includegraphics[clip=true, width=12cm]{file_selected2}
+   \end{center}  
+\end{figure}
+
+\begin{figure}[ht]
+   \begin{center}
+   \caption{Die X- und Y-Spalten auswählen}\label{fig:delim_text_file_selected3}\smallskip
+\includegraphics[clip=true, width=12cm]{file_selected3}
+   \end{center}  
+\end{figure}
+
+\begin{figure}[ht]
+   \begin{center}
+   \caption{In QGIS geladene 'Getrennte Text' Ebene}\label{fig:layer_added}\smallskip
+\includegraphics[clip=true, width=12cm]{layer_added}
+   \end{center}  
+\end{figure}
+
+
+% html: End of file: `index.html'

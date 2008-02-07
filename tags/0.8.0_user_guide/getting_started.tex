@@ -1,0 +1,536 @@
+% vim:autoindent:set textwidth=78:
+\section{Getting Started}\label{label_getstarted}
+
+This chapter gives you a quick overview of running QGIS and examining data
+available on the QGIS web page.
+
+\subsection{Installation}\label{label_installation}
+\index{installation}
+
+Installation of QGIS is documented in Appendix \ref{label_installation}. The
+Installation Guide is distributed with the QGIS source code and is also
+available at \url{http://qgis.org}. Under Windows and Mac OS X, QGIS is
+available as a standard installer package.
+%XXX rewrite next sentence
+Packages for
+many flavors of Linux are also available. Check the 
+QGIS website at \url{http://qgis.org} for the latest information on binary
+packages.
+
+
+\subsection{Sample Data}\label{label_sampledata}
+\index{data!sample} 
+
+If you do not have any GIS data handy, you can obtain an Alaska
+dataset from the QGIS web site at \url{http://qgis.org}. For use with GRASS, a sample GRASS database (Spearfish) can be obtained from the 
+official GRASS GIS-website \url{http://grass.itc.it/download/data.php}.
+
+These data sets will be used as the basis for many of the examples and screenshots 
+provided in this document.
+
+\subsection{Starting QGIS}\label{label_startinqgis}
+
+Assuming that QGIS is installed in the PATH, you can start QGIS by typing:
+\textbf{qgis}  at a command prompt or by double clicking on the QGIS
+application link (or shortcut) on the desktop. Under MS Windows, start QGIS
+using the Start menu shortcut, and under Mac OS X, double click the icon in
+your Applications folder. 
+
+\subsubsection{Command Line Options}\index{command line options}
+\label{label_commandline}
+
+QGIS supports a number of options when started from the command line. To
+get a list of the options, enter \texttt{qgis --help} on the command line.
+The usage statement for QGIS is:
+
+\small
+\begin{verbatim}
+holl@bim:~ > qgis --help
+Quantum GIS - 0.8.0 'TITAN'
+Quantum GIS (QGIS) is a viewer for spatial data sets, including
+raster and vector data.
+Usage: qgis [options] [FILES]
+  options:
+        [--snapshot filename]   emit snapshot of loaded datasets to given file
+        [--lang language]       use language for interface text
+        [--project projectfile] load the given QGIS project
+        [--extent xmin,ymin,xmax,ymax]  set initial map extent
+        [--help]                this text
+
+  FILES:
+    Files specified on the command line can include rasters,
+    vectors, and QGIS project files (.qgs):
+     1. Rasters - Supported formats include GeoTiff, DEM
+        and others supported by GDAL
+     2. Vectors - Supported formats include ESRI Shapefiles
+        and others supported by OGR and PostgreSQL layers using
+        the PostGIS extension
+\end{verbatim}
+\normalsize
+
+\begin{Tip} \caption{\textsc{Example Using command line arguments}}
+\qgistip{You can start QGIS by specifying one or more data files
+on the command line. For example, assuming you are in your data directory,
+you could start QGIS with two shapefiles and a raster file set to
+load on startup using the following command: 
+\ttfamily{qgis ak\_shade.tif alaska.shp majrivers.shp}
+}
+\end{Tip}
+
+\minisec{Command line option \texttt{--snapshot}}
+This option allows you to create a snapshot in PNG format from the current view.
+This comes in handy when you have a lot of projects and want to 
+generate snapshots from your data.
+% FIXME: this is currently broken in SVN Head (SH 22-06-2006)
+
+Currently it generates a PNG-file with 800x600 pixels. A filename can be added after
+\texttt{--snapshot}.
+
+\minisec{Command line option \texttt{--lang}}
+Based on your locale QGIS, selects the correct localization. If you like to 
+change your language, you can provide another language with this option.
+
+\minisec{Command line option \texttt{--project}}
+Starting QGIS with an existing project file is also possible. Just
+add the command line option \texttt{--project} followed by your project name
+and QGIS will open with all layers loaded described in the given file.
+
+\minisec{Command line option \texttt{--extent}}
+To start with a specific map extent use this option. You need to add the bounding
+box of your extent in the following order separated by a comma:
+\begin{verbatim}
+--extent xmin,ymin,xmax,ymax
+\end{verbatim}
+
+
+\subsection{QGIS GUI}\index{main window}
+\label{label_qgismainwindow}
+
+When QGIS starts, you are presented with the GUI as shown below
+(the numbers 1 through 6 in blue ovals refer to the six major areas of the
+interface as discussed below):
+
+\begin{figure}[ht]
+   \begin{center}
+   \caption{Main window with spearfish sample data}\label{fig:startup}
+   \includegraphics[clip=true, width=17cm]{startup08}
+\end{center} 
+\end{figure}
+
+\textbf{Note:} Your window decorations (title bar, etc.) may appear
+different depending on your operating system and window manager.
+
+The QGIS GUI is divided into six areas:
+
+\begin{enumerate}
+\item Menu bar
+\item Tool bar
+\item Map legend
+\item Map view
+\item Map overview
+\item Status bar
+\end{enumerate}
+
+These six components of the QGIS interface are described in more detail in
+the following sections.
+
+\subsubsection{Menu Bar}\label{label_menubar}
+\index{menus}
+
+The menu bar provides access to various QGIS features using a standard 
+hierarchical menu. The top-level menus and a summary of some of the
+functions provided are:
+
+\begin{itemize}
+
+\item \textbf{File}
+\begin{itemize}
+\item \textbf{New Project}          - see Section \ref{sec:projects}
+\item \textbf{Open Project}         - see Section \ref{sec:projects}
+\item \textbf{Open Recent Projects} - see Section \ref{sec:projects}
+\item \textbf{Save Project}         - see Section \ref{sec:projects}
+\item \textbf{Save Project As}      - see Section \ref{sec:projects}
+\item Save as Image
+\item Export to MapServer Map
+\item Print
+\item Exit
+\end{itemize}
+
+\item View
+\begin{itemize}
+\item Zoom Full
+\item Zoom To Selection
+\item Zoom To Layer
+\item Zoom Last
+\item Refresh
+\item Show Bookmarks
+\item New Bookmark
+\end{itemize}
+
+\item Layer
+\begin{itemize}
+\item \textbf{Add a Vector Layer}       - see Section \ref{label_workingvector}
+\item \textbf{Add a Raster Layer}       - see Section \ref{label_raster}
+\item \textbf{Add a PostGIS Layer}      - see Section \ref{label_postgis}
+\item \textbf{Add a WMS Layer}          - see Section \ref{sec:ogc-wms}
+\item Remove Layer
+\item New Vector Layer
+\item In Overview
+\item Add All To Overview
+\item Remove All From Overview
+\item Hide All Layers
+\item Show All Layers
+\end{itemize}
+
+\item \textbf{Settings}
+\begin{itemize}
+\item \textbf{Project Properties}  - see Section \ref{sec:projects}
+\item \textbf{Custom Projection}   - see Section \ref{sec:customprojections}
+\item \textbf{Options}             - see Section \ref{subsec:gui_options}
+\end{itemize}
+
+\item \textbf{Plugins} - (Futher menu items are added by plugins as they are loaded.)
+\begin{itemize}
+\item Plugin Manager
+\end{itemize}
+
+\item Help
+\begin{itemize}
+\item Help Contents
+\item QGIS Homepage
+\item QGIS Sourceforge
+\item About
+\item Check QGIS Version
+
+\end{itemize}
+
+\end{itemize}
+
+%See Appendix \ref{app_menu} for complete descriptions of the menu items.
+
+\subsubsection{Toolbars}\label{label_toolbars}
+\index{toolbars}
+
+The toolbars provide access to most of the same functions as the menus,
+plus additional tools for interacting with the map. Each toolbar item has
+popup help available. Hold your mouse over the item and a short description of
+the tool's purpose will be displayed. 
+%%You can also use the \textit{Whats
+%%This?} tool (the arrow with a question mark next to it) to get more
+%%information about the tools and other components of the QGIS interface. To use
+%%it, click on the \textit{Whats This?} button and then click on the item of
+%%interest to display the information. 
+
+Every menubar can be moved around according to your needs. Additionally every
+menubar can be switched off using your right mouse button context menu.
+
+\begin{Tip}
+\caption{\textsc{Reappearing toolbars}} \index{layout!toolbars}
+\qgistip{If you have accidentally hidden all your toolbars, you can get them back by
+choosing \texttt{Show most toolbars} from the View|Toolbars menu.}
+\end{Tip}
+
+%See Appendix \ref{app_toolbar} for complete
+%descriptions and illustrations of the various toolbars.  
+
+\subsubsection{Map Legend}\label{label_legend}
+\index{legend}
+
+% TODO The new legend features need to be described here briefly.
+% Marco, would you make a start what is new in the legend?!
+The map legend area is used to set the visibility and z-ordering of layers.
+Z-ordering means that layers listed nearer the top of the legend are drawn
+over layers listed lower down in the legend. The checkbox in each legend
+entry can be used to show or hide the layer.\index{layer!visibility}
+
+Layers can be grouped in the legend window by adding a layer group and dragging layers 
+into the group. To do so, go with the mouse to the legend window, right click, choose 'Add group'. 
+A new folder appears. Now drag the layers to the folder symbol. It is then possible to toggle the 
+visibility of all the layers in the group with one click. To bring layers out of a group, go with 
+the mouse to the layer symbol, right click, choose 'make to toplevel item'. To give the folder a 
+new name, choose 'Rename' in the right click menu of the group.
+
+If several vector data sources have the same vector type and the same attributes, their 
+symbolisations may be grouped. This means that if the symbolisation of one data source is 
+changed, the others automatically have the new symbolisation as well. To group symbologies, open 
+the right click menu in the legend window and choose 'Show file groups'. The file groups of the 
+layers appear. It is now possible to drag a file from one file group into another one. If this is done, 
+the symbologies are grouped. Note that QGIS only permits the drag if the two layers are able to share 
+symbology (same vector type and same attribute).  
+
+%% isn't included in Titan anymore, except for an "toggle overview"
+%Each legend entry can show the following mini icons:
+%
+%\includegraphics[width=0.7cm]{pyramid} This is a raster
+%that has pyramids built for it to improve rendering efficiency (see
+%Section \ref{raster_pyramids}).\\
+%\includegraphics[width=0.7cm]{no_pyramid} This is a
+%raster that has no pyramid layers (see Section \ref{raster_pyramids}).\\
+%\includegraphics[width=0.7cm]{inoverview} This layer is
+%shown in the overview map area as well as in the main map window.\\
+%\includegraphics[width=0.7cm]{editable} This is a vector
+%layer that is currently enabled for editing.\\
+
+\subsubsection{Map View}\label{label_mapview}
+\index{map!view}
+
+This is the 'business end' of QGIS - maps are displayed in this area! The
+map displayed in this window will depend on the vector and raster layers you
+have chosen to load (see sections that follow for more information on how to
+load layers). The map view can be panned (shifting the focus of the map display
+to another region) and zoomed in and out. Various other operations can be
+performed on the map as described in the toolbar description above.  The map
+view and the legend are tightly bound to each other - the maps in view reflect
+changes you make in the legend area.  
+
+\begin{Tip}\caption{\textsc{Zooming the Map with the Mouse
+Wheel}}\index{zoom!mouse wheel}
+\qgistip{You can use the mouse wheel to zoom in and out on the map. Place
+the mouse cursor inside the map area and roll it forward (away from you) to
+zoom in and backwards (towards you) to zoom out. The mouse cursor is the 
+center where the zoom occurs. You can customize the behavior of the mouse
+wheel zoom using the \texttt{Map tools} tab under the Settings|Options menu.  }
+\end{Tip}
+
+\subsubsection{Map Overview}\label{label_mapoverview}
+\index{map!overview}
+
+The map overview area provides a full extent view of layers added to it.
+Within the view is a rectangle showing the current map extent. This allows
+you to quickly determine which area of the map you are currently viewing. Note
+that labels are not rendered to the map overview even if the layers in the
+map overview have been set up for labeling. 
+You can add a single layer to the
+overview by right-clicking on it in the legend and choosing \textit{Add
+to overview}. You can also add or remove all layers to the overview using the
+Overview tools on the toolbar.
+
+You can also grab the red rectangle showing your current extent and pan around; the
+map view will update accordingly.
+
+
+\subsubsection{Status Bar}\label{label_statusbar}
+
+The status bar shows you your current position in map coordinates (e.g.
+meters or decimal degrees) as the mouse pointer is moved across the map view.
+The  status bar also shows the view extents of the map view as you pan and
+zoom in and out. A progress bar in the status bar shows progress of rendering
+as each layer is drawn to the map view. In some cases, such as the gathering
+of statistics in raster layers, the progress bar will be used to show the
+status of lengthy operations. On the right side of the status bar is a small
+checkbox which can be used to temporarily prevent layers being rendered to the
+map view (see Section \ref{subsec:redraw_events} below). At the far right of
+the status bar is a projector icon. Clicking on this opens the projection
+properties for the current project.
+
+
+
+\subsection{Rendering}\label{subsec:redraw_events}\index{rendering}
+
+By default, QGIS renders all visible layers whenever the map canvas must be
+refreshed. The events that trigger a refresh of the map canvas include:
+
+\begin{itemize}
+\item Adding a layer
+\item Panning or zooming
+\item Resizing the QGIS window
+\item Changing the visibility of a layer or layers
+\end{itemize}
+
+QGIS allows you to control the rendering process in a number of ways.
+
+\subsubsection{Scale Dependent Rendering}\index{rendering!scale dependent}
+\label{label_scaledepend}
+
+Scale dependent rendering allows you to specify the minimum and maximum
+scales at which a layer will be visible.  To set scale dependency rendering,
+open the properties dialog by double-clicking on the layer in the legend. On
+the \textit{General} tab, set the minimum and maximum scale values and then
+click on the \textit{Use scale dependent rendering} checkbox.
+
+You can determine the scale values by first zooming to the level you want
+to use and noting the scale value in the QGIS status bar.\index{scale}
+
+\subsubsection{Controlling Map Rendering}\label{label_controlmap}
+
+Map rendering can be controlled in the following ways:
+
+\begin{itemize}
+%\item Stopping rendering during drawing of the map canvas
+\item Temporarily suspending rendering
+\item Setting an option to control the visibility of layers when they are
+added
+\end{itemize}
+
+%\subsubsection{Stopping Rendering}\index{rendering!halting}
+%\label{label_stoprender}
+%
+%To stop the map drawing, press the ESC key. This will halt the refresh of
+%the map canvas and leave the map partially drawn. It may take a bit of time
+%between pressing ESC and the time the map drawing is halted.
+%
+%\textbf{NOTE}: It is currently not possible to stop rendering - this was disabled 
+%in qt4 port because of User Interface (UI) problems and crashes.
+%
+\subsubsection{Suspending Rendering}\index{rendering!suspending}
+\label{label_suspendrender}
+
+To suspend rendering, click the \textit{Render} checkbox in the lower right
+corner of the statusbar. When the \textit{Render} box is not checked, QGIS
+does not redraw the canvas in response to any of the events described in
+Section \ref{subsec:redraw_events}. Examples of when you might want to suspend
+rendering include:
+
+\begin{itemize}
+\item Add many layers and symbolize them prior to drawing
+\item Add one or more large layers and set scale dependency before drawing
+\item Add one or more large layers and zoom to a specific view before
+drawing
+\item Any combination of the above
+\end{itemize}
+
+Checking the \textit{Render} box enables rendering and causes and immediate
+refresh of the map canvas.
+
+\subsubsection{Setting Layer Add Option}\label{label_settinglayer}
+\index{rendering!options}\index{layers!initial visibility}
+
+You can set an option to always load new layers without drawing them. This
+means the layer will be added to the map, but its visibility checkbox in the
+legend will be unchecked by default. To set this option, choose
+\textit{Preferences} from the \textit{Settings} menu and click on the
+\textit{Rendering} tab. Check the \textit{New layers added to the map are not
+displayed} checkbox. Any layer added to the map will be off (invisible) by
+default.
+
+\subsubsection{Updating the Map Display During Rendering}
+\label{label_updatemap}\index{rendering!update during drawing}
+
+You can set an option to update the map display as features are drawn. By
+default, QGIS does not display any features for a layer until the entire
+layer has been rendered. To update the display as features are read from the
+datastore, choose \textit{Preferences} from the \textit{Settings} menu and
+click on the \textit{Rendering} tab. Set the feature count to an
+appropriate value to update the display during rendering. Setting a value of 0
+disables update during drawing (this is the default). Setting a value too low
+will result in poor performance as the map canvas is continually updated
+during the reading of the features. A suggested value to start with is 500. 
+
+\textbf{NOTE}: This feature is currently disabled because it does not works
+as expected under Qt 4.2.
+
+\subsection{Measuring}\label{sec:measure}\index{measure}
+
+\subsubsection{Measure length}\index{measure:line length}
+\includegraphics[width=0.7cm]{measureline} QGIS is also able to measure distances between given points. 
+This tool allows you to click points on the map. Each segment-length shows up in the measure-window and additionaly
+the total length is printed. To stop measuring click your right mouse button.
+% FIXME
+% we need to add some words how to measure based on a given ellipsoid.
+
+\subsubsection{Measure areas}\index{measure:areas}
+\includegraphics[width=0.7cm]{measurearea} Also areas can be measured. The window only shows the
+accumulated area-size in the measure window (see figure \ref{fig:measure}).
+
+% measure-tools side by side
+\begin{figure}[h]
+\caption{Measure tools in action} \label{fig:measure}
+\centering
+   \subfigure[Measure lines] {\label{subfig:measure_line}\includegraphics[clip=true, width=0.4\textwidth]{measure_line}}\goodgap
+   \subfigure[Measure areas]{\label{subfig:measure_area}\includegraphics[clip=true, width=0.4\textwidth]{measure_area}}
+\end{figure}
+
+
+\subsection{Projects}\label{sec:projects}\index{projects}
+
+The state of your QGIS session is considered a Project.  QGIS
+works on one project at a time.  Settings are either considered
+as being per-project, or as a default for new projects (see
+Section \ref{subsec:gui_options}).
+
+QGIS can save the state of your workspace into a project file using
+the menu option \textit{File}->\textit{Save Project}.
+
+Loading saved projects is a similar process.
+
+The kinds of information saved in a project file include:
+
+\begin{itemize}
+\item Layers added
+\item Layer properties, including symbolization
+\item Projection for the map view
+\item Last viewed extent
+\end{itemize}
+
+The project file is saved in XML format, so it is possible to edit
+the file outside QGIS if you know what you are doing.  
+
+The file format is new in version 0.8 compared to earlier QGIS versions.
+
+
+%
+%  QGIS options
+%
+\subsection{GUI Options}
+\label{subsec:gui_options}
+\includegraphics[width=0.7cm,clip=true]{options} Some basic options for QGIS
+can be selected using the Options dialog. Select the \textsl{Settings} entry
+from the menu and choose \textsl{Options} (Alt-O). Some of the options you can customize are:
+\begin{itemize}
+\item Appearance
+\item Rendering
+\item Selection and Measuring
+\item Projection
+\item Help Browser
+\end{itemize}
+Modify them according to your needs. Some of the changes may require a restart of QGIS before they will be effective.
+
+On GNU/Linux everything is saved in:
+\begin{verbatim}
+$HOME/.config/QuantumGIS/qgis.conf
+\end{verbatim}
+This is a normal text file consisting of blocks, where QGIS saves its current
+display options, PostGIS and WMS connections, and other settings.
+
+On Windows settings are stored in the registry under:
+\begin{verbatim}
+\\HKEY_CURRENT_USER\Software\QuantumGIS\qgis
+\end{verbatim}
+
+On OS X you can find your settings in:
+\begin{verbatim}
+$HOME/Library/Preferences/org.qgis.qgis.plist
+\end{verbatim}
+
+
+\subsection{Spatial Bookmarks}\label{sec:bookmarks}
+\index{bookmarks}
+\index{spatial bookmarks|\see{bookmarks}}
+
+Spatial Bookmarks allow you to ``bookmark'' a geographic location and return to it later.
+
+\subsubsection{Creating a Bookmark}
+To create a bookmark:
+\begin{enumerate}
+\item Zoom or pan to the area of interest.
+\item Select the menu option \textit{View}->\textit{New Bookmark} or type Ctrl-B.
+\item Enter a descriptive name for the bookmark (up to 255 characters).
+\item Click \textit{OK} to add the bookmark or \textit{Cancel} to exit without adding the bookmark.
+\end{enumerate}
+
+Note that you can have multiple bookmarks with the same name.
+
+
+\subsubsection{Working with Bookmarks}
+To use or manage bookmarks, select the menu option \textit{View}->\textit{Show Bookmarks}.
+The bookmarks dialog allows you to zoom to or delete a bookmark.
+You can not edit the bookmark name or coordinates.
+
+\subsubsection{Zooming to a Bookmark}
+From the Bookmarks dialog, select the desired bookmark by clicking on it, 
+then click the \textit{Zoom To} button.
+You can also zoom to a bookmark by double-clicking on it.
+
+\subsubsection{Deleting a Bookmark}
+To delete a bookmark from the Bookmarks dialog, click on it then click the \textit{Delete} button.
+Confirm your choice by clicking \textit{Yes} or cancel the delete by clicking \textit{No}.
