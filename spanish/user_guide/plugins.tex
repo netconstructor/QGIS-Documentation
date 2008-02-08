@@ -1,83 +1,49 @@
-\section{Using Plugins}\index{plugins}
+\section{Usar complementos}\index{plugins}
 
-\subsection{An Introduction to Using Plugins}\label{label_introplugin}
+\subsection{Una introducción al uso de complementos}\label{label_introplugin}
 
-QGIS has been designed with a plugin architecture. This allows new
-features/functions to be added to the application. Many of the features in
-QGIS are actually implemented as plugins.
+QGIS se ha diseñado con una arquitectura de complementos. Esto permite que se añadan nuevas funciones a la aplicación. Muchas de las funciones actuales de QGIS están en realidad implementadas como complementos.
 
-There are two types of plugins in QGIS: core and user-contributed.
-\index{plugins!types} A core plugin is maintained by the QGIS development team
-and is part of every QGIS distribution. A user-contributed plugin is an
-external plugin that is maintained by the individual author. The QGIS
-SVN website (\url{http://svn.qgis.org}) serves some user contributed 
-plugins.
+Hay dos tipos de complementos en QGIS: integrados o aportados por usuarios. \index{plugins!types} Un complemento integrado es mantenido por el equipo de desarrollo de QGIS y forma parte de cada distribución de QGIS. Un complemento aportado por usuarios es un complemento externo que es mantenido por el autor individual. La web del SVN de QGIS (\url{http://svn.qgis.org}) sirve algunos complementos aportados por usuarios.
 
-\subsubsection{Finding and Installing a Plugin}
-When you install QGIS, all of the core plugins are included (see chapter \ref{sec:core_plugins}). \index{plugins!installing}
+\subsubsection{Encontrar e instalar un complemento}
+Cuando instala QGIS, todos los complementos integrados están incluidos (vea el capítulo \ref{sec:core_plugins}). \index{plugins!installing}
 % Additional user-contributed
 % plugins may be available on the QGIS Community site. To see what
 % user-contributed plugins are available, see the plugins page on the Community
 % site (\url{http://community.qgis.org/plugins}).\index{plugins!user
 % contributed}
 
-Typically user-contributed plugins are distributed in source form and require
-compiling. For instructions on building and installing a user-contributed
-plugin, see the documentation included with the plugin.
+De forma típica, los complementos aportado por usuarios se distribuyen en forma de código fuente y hay que compilarlos. Para instrucciones sobre la compilación e instalación de un complemento aportado por usuarios, vea la documentación incluida con el complemento.
 
-\subsubsection{Managing Plugins}\label{sec:managing_plugins}
-\index{plugins!managing} Managing plugins consists of loading or unloading them from
-QGIS. Loaded plugins are "remembered" when you exit the application and
-restored the next time you run QGIS.
+\subsubsection{Administrar complementos}\label{sec:managing_plugins}
+\index{plugins!managing} La administración de complementos consiste en cargarlos o descargarlos desdes QGIS. Los complementos cargados se «recuerdan» cuando sale de la aplicación y son restaurados la siguiente vez que ejecuta  QGIS.
 
-To manage plugins, open the \textsl{Plugin Manager} from the \textsl{Tools}
-menu. \index{plugins!manager}The Plugin Manager displays all the available
-plugins and their status (loaded or unloaded). Figure \ref{fig:pluginmanager}
-shows the Plugin Manager dialog.
+Para administrar complementos, abra el \textsl{Administrador de complementos} desde el menú \textsl{Complementos}. \index{plugins!manager}El Administrador de complementos muestra todos los complementos disponibles y su estado (cargados o no cargados). La Figura \ref{fig:pluginmanager} muestra el diálogo del Administrador de complementos.
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{Plugin Manager}\label{fig:pluginmanager}\smallskip
+   \caption{Administador de complementos}\label{fig:pluginmanager}\smallskip
    \includegraphics[clip=true, width=14cm]{pluginmanager2}
 \end{center}  
 \end{figure}
 
-Typically all QGIS plugins are installed in the same location. This location
-is shown in the Plugin Directory text field. You can tell QGIS to load plugins
-from another location by specifying a different directory.
+De forma típica todos los complementos de QGIS se instalan en la misma ubicación. Esta localización se muestra en el campo de texto Directorio de complementos. Le puede decir a QGIS que cargue complementos desde otra localización especificando un directorio distinto.
 
-\begin{Tip}\caption{\textsc{Crashing Plugins}}\index{crashes}
-\qgistip{If you find that QGIS crashes on startup, a plugin may be at fault.
-You can stop all plugins from loading by editing your stored settings file (see \ref{subsec:gui_options}
-for location).
-Locate the plugins settings and change all the plugin values to false to prevent them from loading. For
-example, to prevent the Delimited text plugin from loading, the entry in
-\$HOME/.config/QuantumGIS/qgis.conf on Linux 
-should look like this:\ttfamily{Add Delimited Text Layer=false}.\normalfont  Do this for each plugin in the
-[Plugins] section. You can then start QGIS and add the plugins one at a time
-from the Plugin Manger to determine which is causing the problem.
+\begin{Tip}\caption{\textsc{Complementos que se cuelgan}}\index{crashes}
+\qgistip{Si nota que QGIS se cuelga al iniciar, puede que haya un complemento que está dando problemas. Puede detener todos los complementos para que no se carguen editando su archivo de configuración guardado (vea \ref{subsec:gui_options} para su localización). Localice la configuración de los complementos y cambie todos los valores a false para evitar que se carguen. Por ejemplo, para evitar que se cargue el complemento Texto delimitado, la entrada en \$HOME/.config/QuantumGIS/qgis.conf en Linux debería ser como esta::\ttfamily{Add Delimited Text Layer=false}.\normalfont Haga esto con cada  complemento en la sección [Plugins]. Luego puede arrancar QGIS y añadir los complementos de uno en uno desde el Administrador de complementos para determinar cuál está ocasionando los problemas.
 }
 \end{Tip} 
 
-\subsubsection{Data Providers}\index{data providers}
+\subsubsection{Proveedores de datos}\index{data providers}
 
-Data Providers are "special" plugins that provides access to a data store. By
-default, QGIS supports PostGIS layers and disk-based data stores supported by
-the GDAL/OGR library (Appendix \ref{appdx_ogr}). A Data Provider plugin extends the
-ability of QGIS to use other data sources.
+Los proveedores de datos son complementos «especiales» que proporcionan acceso a un almacén de datos. De forma predeterminada, QGIS soporta capas PostGIS y almacenes de datos basados en disco soportados por la biblioteca GDAL/OGR (Apéndice \ref{appdx_ogr}). Un complemento de proveedor de datos amplía la capacidad de QGIS para usar otras fuentes de datos.
 
-Data Provider plugins are registered automatically by QGIS at startup. They
-are not managed by the Plugin Manager but are used behind the scenes when a
-corresponding data type is added as a layer in QGIS.
+Los complementos de proveedores de datos son registrados automáticamente por QGIS al iniciarse. No son gestionados por el Administrador de complementos, pero se usan sin notarlo cuando el tipo de datos correspondiente se añade como capa en QGIS.
 
-\subsubsection{Core Plugins}\label{sec:core_plugins}\index{plugins!core}
+\subsubsection{Complementos integrados}\label{sec:core_plugins}\index{plugins!core}
 
-QGIS currently contains 9 core plugins that can be loaded using the Plugin
-Manager. Table \ref{tab:core_plugins} lists each of the core plugins along
-with a description of their purpose and the toolbar-icon. 
-Note the GRASS plugin is not included below
-because it installs its own toolbar (see section \ref{sec:grass} for a
-discussion of available features in the GRASS plugin).
+Actualmente QGIS contiene 9 complementos integrados que se pueden cargar usando el Administrador de complementos. La tabla \ref{tab:core_plugins} lista cada uno de los complementos integrados junto con una descripción de su propósito y el icono de la barra de herramientas. Note que el complemento de GRASS no está incluido abajo, porque éste instala su propia barra de herramientas (vea la sección \ref{sec:grass} para ver en detalle las funciones disponibles en el complemento de GRASS).
 
 % minipage is needed to appear the footnote under the table
 % SH
