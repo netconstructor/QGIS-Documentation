@@ -50,30 +50,30 @@ Actualmente QGIS contiene 9 complementos integrados que se pueden cargar usando 
 \begin{minipage}{\textwidth}
 \begin{table}[H]
 \centering
-\caption{QGIS Core Plugins}\label{tab:core_plugins}\medskip
+\caption{Complementos integrados de QGIS}\label{tab:core_plugins}\medskip
 \small
  \begin{tabular}{|l|l|p{4in}|}
-\hline \textbf{Icon} & \textbf{Plugin} & \textbf{Description} \\
+\hline \textbf{Icono} & \textbf{Complemento} & \textbf{Descripción} \\
 \hline 
-\includegraphics[width=0.7cm]{copyright} & Copyright Label \index{plugins!copyright}& Display a copyright label on the map canvas\\
+\includegraphics[width=0.7cm]{copyright} & Etiqueta de Copyright \index{plugins!copyright}& Muestra una etiqueta de copyright sobre el lienzo del mapa\\
 \hline 
-\includegraphics[width=0.7cm]{delim_text} & Delimited Text \index{plugins!delimited text}& Load a delimited text file containing x,y coordinates as a point layer \\
+\includegraphics[width=0.7cm]{delim_text} & Texto delimitado \index{plugins!delimited text}& Carga una archivo de texto delimitado que contenga coordenadas X e Y como una capa de puntos \\
 \hline 
-\includegraphics[width=0.7cm]{gps} & GPS Tools \index{plugins!gps}& Load and display GPS data \\
+\includegraphics[width=0.7cm]{gps} & Herramientas de GPS \index{plugins!gps}& Carga y muestra datos de GPS \\
 \hline 
-\includegraphics[width=0.7cm]{gridmaker} & Graticule Creator \index{plugins!graticule}& Create a latitude/longitude grid and save as a shapefile\\
+\includegraphics[width=0.7cm]{gridmaker} & Creador de cuadrículas \index{plugins!graticule}& Crea una cuadrícula latitud/longitud y la guarda como archivo shape\\
 \hline 
-\includegraphics[width=0.7cm]{scalebar} & Scalebar \index{plugins!scalebar}& Add a scalebar to the map canvas\\
+\includegraphics[width=0.7cm]{scalebar} & Barra de escala \index{plugins!scalebar}& Añade una barra de escala a la vista del mapa\\
 \hline 
-\includegraphics[width=0.7cm]{northarrow}& North Arrow \index{plugins!north arrow}& Add a north arrow to the map canvas\\
+\includegraphics[width=0.7cm]{northarrow}& Flecha de Norte \index{plugins!north arrow}& Añada una flecha de Norte a la vista del mapa\\
 \hline 
-\includegraphics[width=0.7cm]{buffer} & PostgreSQL Geoprocessing \index{plugins!geoprocessing}& Buffer a PostGIS layer \\
+\includegraphics[width=0.7cm]{buffer} & Geoprocesamiento PostgreSQL \index{plugins!geoprocessing}& Crea un área de influencia de una capa PostGIS \\
 \hline 
-\includegraphics[width=0.7cm]{spiticon} & SPIT \index{plugins!SPIT}& Shapefile to PostGIS Import Tool - import shapefiles into PostgreSQL\\
+\includegraphics[width=0.7cm]{spiticon} & SPIT \index{plugins!SPIT}& Herramienta de importación de archivos Shape a PostGIS - importa archivos shape a PostgreSQL\\
 \hline
-\includegraphics[width=0.7cm]{georeferencer} & Georeferencer\footnote{The georeferencer-plugin is only available if you have installed the gsl-libraries and headers during compile-time. Please check the installation-chapter \ref{sec:install_gsl} for details.} \index{plugin!Georeferencer} & Georeferencing rasterlayers \\
+\includegraphics[width=0.7cm]{georeferencer} & Georreferenciador\footnote{El complemento Georreferenciador sólo está disponible si tiene instaladas las bibiotecas y cabeceras de gsl durante la compilación. Por favor, revise el capítulo de instalación \ref{sec:install_gsl} para más detalles.} \index{plugin!Georeferencer} & Georreferenciar capas ráster \\
 \hline
-\includegraphics[width=0.7cm]{wfs-icon} & WFS & Load and display WFS layer \\
+\includegraphics[width=0.7cm]{wfs-icon} & WFS & Carga y muestra capas WFS \\
 \hline
 \end{tabular}
 \end{table}
@@ -82,45 +82,33 @@ Actualmente QGIS contiene 9 complementos integrados que se pueden cargar usando 
 \normalsize
 
 
-\begin{Tip}\caption{\textsc{Plugins Settings Saved to Project}}\index{plugins
+\begin{Tip}\caption{\textsc{Configuración de complementos guardada en proyectos}}\index{plugins
 settings}
-\qgistip{When you save a .qgs project, any changes you have made to
-NorthArrow, ScaleBar and Copyright plugins will be saved in the project and
-restored next time you load the project.
+\qgistip{Cuando guarda un proyecto .qgs, cualquier cambio que haya hecho en los complementos flecha de Norte, barra de escala y etiqueta de copyright se guardará en el proyecto y se restaurará la próxima vez que cargue el proyecto.
 }
 \end{Tip}
 
 %
 % External Plugins
 %
-\subsubsection{External Plugins}\label{sec:external_plugins}\index{plugins!external}
+\subsubsection{Complementos externos}\label{sec:external_plugins}\index{plugins!external}
 
-QGIS also comes with some externally developed plugins. They are not shipped with the
-default distribution. However, they can be compiled and used within QGIS.
+QGIS también viene con algunos complementos desarrollados de forma externa. Éstos no están incluidos con la distribución predeterminada. Sin embargo, se pueden compilar y usar en QGIS.
 
-Currently the external plugins are only available directly from SVN. 
-To check out all available external plugins do the following:
+Actualmente los complementos externos sólo están disponibles directamente desde SVN. Para comprobar todos los complementos externos disponibles haga lo siguiente:
 \begin{verbatim}
-svn co https://svn.qgis.org/repos/qgis/trunk/external_plugins external_qgis_plugins
+svn co https://svn.osgeo.org/qgis/trunk/external_plugins external_qgis_plugins
 \end{verbatim}
 
-This will create a folder \texttt{external\_qgis\_plugins} in your current folder.
-Each subdirectory has its own compile and install instructions. Read them carefully
-in order to build the plugin.
+Esto creará la carpeta \texttt{external\_qgis\_plugins} en su carpeta actual. Cada subdirectorio tiene sus propias instrucciones de compilación e instalación. Léalas detenidamente para instalar el complemento.
 
 %
 % Plugin template
 %
-\subsubsection{Plugin templates}\label{sec:plugin_template}\index{plugins!template}
+\subsubsection{Plantillas de complementos}\label{sec:plugin_template}\index{plugins!template}
 
-If you like to develop your own QGIS-plugin the main sources include a nice script
-which guides you through the process of creating your own template-directory-structure
-within the QGIS-source-tree.
-The script lives in \texttt{QGIS/src/plugins/plugin\_builder.pl}.
+Si quiere desarrollar su propio complemento de QGIS las fuentes principales incluyen un buen script que le guía a través del proceso de crear su propia estructura de directorios de plantillas dentro del árbol de las fuentes de QGIS. El script se encuentra en \texttt{QGIS/src/plugins/plugin\_builder.pl}.
 
-The only thing to do is coding your functions into the plugin (and of course contribute
-your plugin the the QGIS-development-team).
+Lo único que hay que hacer es poner el código de sus funciones dentro del complemento (y por supuesto aportar su complemento al equipo de desarrollo de QGIS).
 
-Beside that the QGIS-wiki (\url{http://wiki.qgis.org}) and the QGIS-blog (\url{http://blog.qgis.org})
-provide useful articles about writing your own plugin as well.
-Check the websites for details!
+Además de esto, el wiki de QGIS (\url{http://wiki.qgis.org}) y el blog de QGIS (\url{http://blog.qgis.org}) también proporcionan artículos útiles sobre la escritura de su propio complemento. ¡Visite las páginas web para detalles!
