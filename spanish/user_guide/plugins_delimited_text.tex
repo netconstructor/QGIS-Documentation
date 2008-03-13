@@ -1,27 +1,27 @@
 % vim: set textwidth=78 autoindent:
     
-\subsection{Using the Delimited Text Plugin}\label{label_dltext}    
+\subsection{Usar el complemento de texto delimitado}\label{label_dltext}    
 
-The Delimited Text plugin allows you to load a delimited text file  as a layer
-in QGIS. 
+El complemento de texto delimitado le permite cargar un archivo de texto delimitado 
+como una capa en QGIS.
     
-\subsubsection{Requirements}
+\subsubsection{Requisitos}
 
-To view a delimited text file as layer, the text file must contain:
+Para ver un archivo de texto delimitado como una capa, el archivo de texto debe contener:
 
 \begin{enumerate}      
-\item A delimited header row of field names. This must be the first line in
-the text file     
-\item The header row must contain an X and Y field. These fields can have any
-name.
-\item The x and y coordinates must be specified as a number. The coordinate
-system is not important
+\item Una fila de encabezado delimitado con los nombres de los campos. Debe ser la primera 
+línea del archivo de texto.
+\item La fila de encabezado debe contener un campo X e Y. Estos campos se pueden llamar de 
+cualquier forma.
+\item Las coordenadas X e Y deben estar especificadas como números. El sistema de coordenadas 
+no es importante.
 \end{enumerate}
 
-An example of a valid text file might look like this:
+Un ejemplo de un archivo de texto válido tendría este aspecto:
 
 \begin{verbatim} 
-name|latdec|longdec|cell|
+nombre|latdec|longdec|celda|
 196 mile creek|61.89806|-150.0775|tyonek d-1 ne|
 197 1/2 mile creek|61.89472|-150.09972|tyonek d-1 ne|
 a b mountain|59.52889|-135.28333|skagway c-1 sw|
@@ -34,87 +34,80 @@ aats bay|55.905|-134.24639|craig d-7|
 \end{verbatim}
 
 
-Some items of note about the text file are:
+Algunos elementos a tener en cuenta  sobre los archivos de texto son:
 
 \begin{enumerate}        
-\item  The example text file uses \mbox{$|$} as delimiter. Any character can
-be used to delimit the fields.
-\item The first row is the header row. It contains the fields name, latdec,
-longdec, and cell
-\item No quotes ({\tt{}"{}}) are used to delimit text fields
-\item The x coordinates are contained in the {\em longdec} field
-\item The y coordinates are contained in the {\em latdec} field
+\item  El archivo de texto de ejemplo usa \mbox{$|$} como delimitador. Se puede usar 
+cualquier carácter para delimitar los campos.
+\item La primera fila es la fila de encabezado. Contiene los campos nombre, latdec,
+longdec y celda.
+\item No se usan comillas ({\tt{}"{}}) para delimitar campos de texto.
+\item Las coordenadas X están en el campo {\em longdec}.
+\item Las coordenadas Y están en el campo  {\em latdec}.
 \end{enumerate}
 
-\subsubsection{Using the Plugin}
-To use the plugin you must have QGIS running and use the Plugin Manager to
-load the plugin:
+\subsubsection{Usar el complemento}
+Para usar el complemento debe estar ejecutando QGIS y usar el Administrador de 
+complementos para cargarlo:
 
-Start QGIS, then Open the Plugin Manager by choosing the {\em
-Tools\mbox{$|$}Plugin Manager} menu. The Plugin Manager displays a list of
-available plugins. Plugins that are already loaded have a check mark to the
-left of their name. Click on the checkbox to the left of the {\em Add
-Delimited Text Layer} plugin and click Ok to load it as described in Section
-\ref{sec:managing_plugins}.
+Inicie QGIS y abra el Administrador de complementos seleccionando el menú {\em
+Complementos\mbox{$|$}Administrador de complementos}. El Administrador de complementos 
+muestra una lista de todos los complementos disponibles. Aquellos que se encuentren ya 
+cargados tendrán una marca a la izquierda del nombre. Marque la casilla que hay a la 
+izquierda del complemento {\em Añadir capa de texto delimitado} y pulse Aceptar para 
+cargarlo como se describe en la Sección \ref{sec:managing_plugins}.
 
 
-A new toolbar icon is now present:
+Ahora habrá un nuevo icono en la barra de herramientas:
 \includegraphics[width=0.7cm]{toolbar_icon}
-Click on the icon to open the Delimited Text dialog as shown in Figure
+Pulse el icono para abrir el diálogo de texto delimitado, tal como aparece en la Figura
 \ref{fig:delim_text_plugin_dialog}.
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{Delimited Text
-Dialog}\label{fig:delim_text_plugin_dialog}\smallskip
-\includegraphics[clip=true, width=8cm]{dialog}            
+   \caption{Diálogo de texto delimitado}\label{fig:delim_text_plugin_dialog}\smallskip
+\includegraphics[clip=true, width=10cm]{dialog}
    \end{center}  
 \end{figure}
 
-First select the file to import by clicking on the ellipsis button: 
-\includegraphics[scale=0.5]{ellipsis}
-Select the desired text file from the file dialog
-Once the file is selected, the plugin attempts to parse the file using the
-last used delimiter, in this case \mbox{$|$} (see Figure
-\ref{fig:delim_text_file_selected}).
+Primero seleccione el archivo a importar pulsando en el botón \textit{Explorar...}.
+Seleccione el archivo de texto deseado en el diálogo de archivos. Una vez seleccionado, 
+el complemento intenta analizar el archivo usando el último delimitador empleado, en 
+este caso \mbox{$|$} (vea la Figura \ref{fig:delim_text_file_selected}).
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{File Selected}\label{fig:delim_text_file_selected}\smallskip
-\includegraphics[clip=true, width=8cm]{file_selected}   
+   \caption{Archivo seleccionado}\label{fig:delim_text_file_selected}\smallskip
+\includegraphics[clip=true, width=10cm]{file_selected}   
    \end{center}  
 \end{figure}
   
-In this case the delimiter \mbox{$|$} is not correct for the file. The file is
-actually tab delimited. Note that the X and Y field drop down boxes do not
-contain valid field names.
+En este caso el delimitador \mbox{$|$} no es correcto para el archivo, que en
+realidad está delimitado con tabulador. Vea que los campos desplegables X e Y
+no contienen nombre de campo válidos.
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{Fields Parsed from Text
-File}\label{fig:delim_text_file_selected2}\smallskip  
-\includegraphics[clip=true, width=8cm]{file_selected2}
+   \caption{Campos analizados del archivo de texto}\label{fig:delim_text_file_selected2}\smallskip  
+\includegraphics[clip=true, width=10cm]{file_selected2}
    \end{center}  
 \end{figure}
 
-To properly parse the file, change the delimiter to
-tab using \mbox{$\backslash$}t (this is a regular expression for the tab
-character). After changing the delimiter, click {\em Parse}.
-The drop down boxes now contain the fields properly parsed as shown in Figure
-\ref{fig:delim_text_file_selected2}.
+Para analizar correctamente el archivo, cambie el delimitador a tabulador, 
+usando \mbox{$\backslash$}t (esta es una expresión regular para el carácter 
+tabulador). Después de cambiar el delimitador, pulse {\em Analizar}. Las 
+casillas desplegables ahora contendrá los campos analizados correctamente como 
+se muestra en la Figura \ref{fig:delim_text_file_selected2}.
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{Selecting the X and Y
-Fields}\label{fig:delim_text_file_selected3}\smallskip
-\includegraphics[clip=true, width=8cm]{file_selected3}
+   \caption{Seleccionar los campos X e Y}\label{fig:delim_text_file_selected3}\smallskip
+\includegraphics[clip=true, width=10cm]{file_selected3}
    \end{center}  
 \end{figure}
 
-Choose the X and Y fields from the drop
-down boxes and enter a Layer name as shown in Figure
-\ref{fig:delim_text_file_selected3}. To add the layer to the
-map, click {\em Add Layer}. The delimited text file now behaves as any other
-map layer in QGIS.
+Seleccione los campos X e Y de los cuadros desplegables e introduzca un nombre 
+de capa como se muestra en la Figura \ref{fig:delim_text_file_selected3}. Para 
+añadir la capa al mapa pulse {\em Aceptar}. El archivo de texto delimitado ahora funcionará como cualquier otra capa de mapas en QGIS.
 
 % html: End of file: `index.html'
