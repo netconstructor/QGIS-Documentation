@@ -1,376 +1,345 @@
-\subsection{Using the Python Plugin}
+\subsection{Usar el complemento de Python}
 
-Writing plugins in Python is much simpler than using C++. To create a PyQGIS
-plugin, you need QGIS 0.9, Python, PyQt, and the Qt developer tools 
+Escribir complementos en Python es mucho más sencillo que usar C++. Para crear un complemento de PyQGIS, 
+necesita QGIS 0.9, Python, PyQt y las herramientas de desarrollo de Qt 
 \cite{sherman07}.
 
-When QGIS starts up it scans certain directories looking for both C++ and
-Python plugins. For a file (shared library, DLL, or python script) to be
-recognized as a plugin it has to have a specific signature. For Python scripts
-it's pretty simple. QGIS looks in the following locations under the
-installation directory:
+Cuando QGIS arranca escanea ciertos directorios en busca de complementos tanto de C++ como de Python. 
+Para que un archivo (biblioteca compartida, DLL o script de python) sea reconocido como complemento 
+tiene que tener una firma específica. Para los scripts de Python es bastante sencillo. QGIS busca 
+en las siguientes localizaciones dentro del directorio de instalación:
 
 \begin{itemize}
-\item \textbf{Linux and other Unix}: ./share/qgis/python/plugins
+\item \textbf{Linux y otros Unix}: ./share/qgis/python/plugins
 \item \textbf{Mac OS X}: ./Contents/MacOS/share/qgis/python/plugins
 \item \textbf{Windows}: .\textbackslash share\textbackslash QGIS\textbackslash
 python\textbackslash plugins
 \end{itemize}
 
-Each Python plugin is contained in its own directory. When QGIS starts up it will
-scan each subdirectory in \textsl{share/qgis/python/plugins} and initialize
-any plugins it finds. Once that's done, the plugin will show up in the plugin
-manager.  
+Cada complemento de Python está contenido en su propio directorio. Cuando QGIS arranca busca en cada 
+subdirectorio en \textsl{share/qgis/python/plugins} e inicializa cada complemento que encuentra. 
+Una vez que esto está hecho, el complemento se mostrará en el administrador de complementos.
 
-Let's create a plugin to fill a gap in the QGIS interface. This plugin will
-allow us to create a new PostGIS layer for us to digitize. It will be a
-simple plugin and pretty rough, but it illustrates how to get started
-writing your own PyQGIS plugins.
+Vamos a crear un complemento para rellenar un hueco en la interfaz de QGIS. Esta complemento nos 
+permitirá crear una nueva capa PostGIS para que la digitalicemos. Será un complemento sencillo y 
+bastante burdo, pero ilustrará como iniciarse para escribir sus propios complementos de PyQGIS.
 
-\subsubsection{Setting up the Structure}
-The first thing we need to do is set up the structure for our plugin. In
-this example we'll be developing our plugin on Linux but the method is
-the same, just adapt some of the file system commands as appropriate for
-your platform. QGIS is installed in a directory named
-\textsl{qgis\_09} in our home directory. Let's create the directory for 
-the plugin.
+\subsubsection{Configurar la estructura}
+Lo primero que necesitamos hacer es configurar la estructura de nuestro complemento. En
+este ejemplo desarrollaremos nuestro complemento en Linux, pero el método es el mismo, 
+solo que adaptado a las órdenes del sistema de archivos adecuados a su plataforma. 
+QGIS está instalado en un directorio llamado \textsl{qgis\_09} dentro de su directorio 
+personal. Vamos a crear el directorio para el complemento.
 
 \begin{verbatim}
-mkdir ~/qgis_09/share/qgis/python/plugins/new_layer
+mkdir ~/qgis_09/share/qgis/python/plugins/capa_nueva
 \end{verbatim}
 
-To get started, we need to create the following files in the \textsl{new\_layer} directory
-  (we'll need some additional files in a bit):
+Para empezar, necesitamos crear los siguientes archivos en el directorio \textsl{capa\_nueva}
+  (necesitaremos algunos archivos adicionales dentro de poco):
 
 \begin{verbatim}
 __init__.py 
-resources.py
-resources.qrc
-newlayer.py
+recursos.py
+recursos.qrc
+capanueva.py
 \end{verbatim} 
 
-\subsubsection{Making the Plugin Recognizable}
+\subsubsection{Hacer reconocible el complemento}
 
-Initializing the plugin is done in the \textsl{\_\_init\_\_.py} script. For our 
-\textsl{NewLayer} plugin the script contains:
+La inicialización del complemento se hace en el script \textsl{\_\_init\_\_.py}. Para nuestro 
+complemento \textsl{CapaNueva} el script contiene:
 
 \begin{verbatim}
-1 # load NewLayer class from file newlayer.py
-2 from newlayer import NewLayer
+1 # Cargar la clase CapaNueva desde el archivo capanueva.py
+2 from capanueva import CapaNueva
 3 def name():
-4   return "New PostGIS layer"
+4   return "Nueva capa PostGIS"
 5 def description():
-6   return "Creates a new empty Postgis layer"
+6   return "Crea una capa nueva Postgis vacía"
 7 def version():
 8   return "Version 0.1"
 9 def classFactory(iface):
-10   return NewLayer(iface)
+10   return CapaNueva(iface)
 \end{verbatim} 
 
-The mandatory things a plugin must return are a name, description, and
-version, all of which are implemented in our script above. Each method
-simply returns a string with the appropriate information. The other
-requirement is the \textsl{classFactory} method that must
-return a reference to the plugin itself (line 10), after 
-receiving the \textbf{iface} object as an argument. With this simple code, 
-QGIS will recognize our script as a plugin.
+Las cosas que un complemento debe devolver de forma imperativa son un nombre, descripción y
+versión, todo lo cual está implementado en nuestro script de arriba. Cada método simplemente 
+devuelve una cadena con la información adecuada. El otro requisito es el método \textsl{classFactory} 
+que debe devolver una referencia al propio complemento (línea 10), después de recibir el objeto 
+\textbf{iface} como argumento. Con este sencillo código QGIS  reconocerá nuestro script como 
+un complemento.
 
-\subsubsection{Resources}
+\subsubsection{Recursos}
 
-In order to have a nice icon for our plugin, we need a resources file
-which we'll name \textsl{resources.qrc}. This is just a simple XML 
-file that defines the icon resource:
+Para poder tener un bonito icono para nuestro complemento, necesitamos un archivo de recursos
+al que llamaremos \textsl{recursos.qrc}. Se trata de un sencillo archivo XML que define el 
+recurso del icono:
 
 \begin{verbatim}
  <RCC>
-    <qresource prefix="/plugins/newlayer">
-        <file>icon.png</file>
+    <qresource prefix="/plugins/capanueva">
+        <file>icono.png</file>
     </qresource>
 </RCC> 
 \end{verbatim} 
 
-The resource file uses a prefix to prevent naming clashes with other
-plugins - using the name of the plugin is usually sufficient.
-The \textsl{icon.png} file is is just a PNG image that will be used 
-in the toolbar when the plugin is activated. You can use any image, 
-as long as it's 22x22 pixels (so it fits on the toolbar).
+El archivo de recursos usa un prefijo para evitar conflictos con los nombres de otros complementos. 
+Usar el nombre del complemento normalmente es suficiente. El archivo {icono.png} es simplemente una 
+imagen PNG que se usará en la barra de herramientas cuando se active el complemento. Puede 
+usar cualquier imagen con tal de que tenga 22x22 píxeles (para que se ajuste a la barra de herramientas).
 
-To turn the resource file into something the plugin can use, it must be 
-compiled using the PyQt resource compiler:
+Para convertir el archivo de recursos en algo que el complemento pueda usar, se debe compilar usando el compilador de recursos de PyQt:
 
 \begin{verbatim}
-  pyrcc4 -o resources.py resources.qrc
+  pyrcc4 -o recursos.py recursos.qrc
 \end{verbatim}
 
-The \textsl{-o} switch is used to specify the output file. Now that we 
-have resources, we need a way to collect the information needed for creating 
-a new layer.
+El modificador \textsl{-o} se usa para especificar el archivo de salida. Ahora que tenemos recursos, 
+necesitamos una forma de recoger la información necesaria para crear una capa nueva.
 
-\subsubsection{Creating the GUI}
+\subsubsection{Crear la interfaz gráfica de usuario (GUI)}
 
-Normally we would use the same tool that C++ developers use to create a 
-GUI: Qt Designer. This is a visual design tool that allows you to create 
-dialog and main windows by dragging and dropping widgets and defining 
-their properties.
+Normalmente usaríamos la misma herramienta que usan los desarrolladores de C++ para crear una GUI: Qt Designer. 
+Se trata de una herramienta de diseño visual que le permite crear ventanas de diálogos y principales 
+cogiendo y arrastrando herramientas y definiendo sus propiedades.
 
-To design our NewLayer plugin we could get quite fancy and include widgets 
-for field types and other options. However, since our time is limited, we'll 
-use another means to collect the information we need to create the table. 
-This will illustrate the concepts and then you can venture further using the 
-tutorials on the QGIS blog.
+Para diseñar nuestro complemento CapaNueva podríamos conseguir herramientas bastante entretenidas e integradas 
+para los tipos de campo y otras opciones. Sin embargo, puesto que nuestro tiempo es limitado, usaremos 
+otros medios para recopilar la información que necesitamos para crear la tabla.
+Esto ilustrará los 
+conceptos y luego se podrá profundizar más usando los manuales del blog de QGIS.
 
-To collect the user input, we'll use the \textsl{QInputDialog} class from
-the Qt library.  This prompts the user for a single line of input. While it
-will make our plugin a little crude, it serves to illustrate the concepts.
+Para recopilar la entrada del usuario, usaremos la clase \textsl{QInputDialog} de la biblioteca Qt. 
+Esta pedirá al usuario una línea simple de entrada. Aunque esto hará nuestro complemento un poco 
+crudo, servirá para ilustrar los conceptos.
 
-All we need to write now is the Python code to collect the input and create 
-the table.
+Todo lo que tenemos que escribir ahora es el código de Python para recopilar la entrada y crear la tabla.
 
-\subsubsection{Creating the Plugin}
+\subsubsection{Crear el complemento}
 
-Now that we have the preliminaries out of the way, we can get down to writing
-the code that does the actual work.  Let's start by looking at the things we
-need to import and the initialization of the plugin in \textsl{newlayer.py}.
+Una vez que tenemos los preliminares preparados podemos centrarnos en escribir el código que hará el trabajo real. 
+Empezemos por mirar las cosas que necesitamos importar y la inicialización del complemento en \textsl{capanueva.py}.
  
 \begin{verbatim}
-1 # Import the PyQt and QGIS libraries
+1 # Importar las bibliotecas de PyQt y QGIS
 2 from PyQt4.QtCore import *
 3 from PyQt4.QtGui import *
 4 from qgis.core import *
 5 import psycopg
-6 # Initialize Qt resources from file resources.py
-7 import resources
+6 # Inicializar los recursos de Qt del archivo recursos.py
+7 import recursos
 8
-9 # Our main class for the plugin
-10 class NewLayer:
+9 # Nuestra clase principal para el complemento
+10 class CapaNueva:
 11
 12  def __init__(self, iface):
-13    # Save reference to the QGIS interface
+13    # Guardar la referencia para la interfaz de QGIS
 14    self.iface = iface
 15
 16  def initGui(self):
-17    # Create action that will start plugin configuration
-18    self.action = QAction(QIcon(":/plugins/newlayer/icon.png"),\
-19      "New PosGIS Layer", self.iface.getMainWindow())
+17    # Crear la acción que iniciará la configuración del complemento
+18    self.action = QAction(QIcon(":/plugins/capa_nueva/icono.png"),\
+19      "Nueva capa PostGIS", self.iface.getMainWindow())
 20    QObject.connect(self.action, SIGNAL("activated()"), self.run)
 21
-22    # Add toolbar button and menu item
+22    # Añadir botón a la barra de herramientas y entrada del menú
 23    self.iface.addToolBarIcon(self.action)
-24    self.iface.addPluginMenu("&New PostGIS Layer...", self.action)
+24    self.iface.addPluginMenu("&Nueva capa PostGIS...", self.action)
 25
 26  def unload(self):
-27    # Remove the plugin menu item and icon
-28    self.iface.removePluginMenu("&New PostGIS Layer...",self.action)
+27    # Eliminar la entrada del menú y el icono del complemento
+28    self.iface.removePluginMenu("&Nueva capa PostGIS...",self.action)
 29    self.iface.removeToolBarIcon(self.action)
 \end{verbatim}
 
-In lines 2 through 7 we import the libraries needed for the plugin. 
-This includes the PyQt libraries, the QGIS core library, and the Python 
-PostgreSQL library psycopg. Every Python script that uses the QGIS 
-libraries and PyQt needs to import the QtCore and QtGui libraries, as 
-well as the QGIS core library.
-This gives us access to the PyQt wrappers for our Qt objects (like our
-input dialog) and the QGIS core libraries.  We also need to import the
-\textsl{resources.py} file we created with the icon definition.
+En las líneas 2 a 7 importamos las bibliotecas necesarias para el complemento. Esto incluye las bibliotecas 
+de PyQt, la biblioteca principal de QGIS y la biblioteca de Python 
+PostgreSQL psycopg. 
+Cada script de Python que use las bibliotecas de QGIS y PyQt necesita importar las bibliotecas de QtCore 
+y QtGui, así como la biblioteca principal de QGIS. Esto nos da acceso a los PyQt wrappers para nuestros 
+objetos de Qt (como nuestro diálogo de entrada) y la biblioteca principal de QGIS. 
+También necesitamos importar el archivo \textsl{recursos.py} que creamos con la definición del icono.
 
-In line 10 we declare the class \textbf{NewLayer}. In the \textsl{\_\_init\_\_} 
-method (lines 12 through 14) our class is initialized and passed the 
-\textbf{iface} object from QGIS via the \textsl{classFactory} method
-in line 10 of \_\_init\_\_.py. We store \textbf{iface} as a 
-member variable so we can use it later. 
+En la línea 10 declaramos la clase \textbf{CapaNueva}. En el método \textsl{\_\_init\_\_} 
+(líneas 12 a 14) se inicializa nuestra clase y se pasa el objeto \textbf{iface} de QGIS via el método 
+\textsl{classFactory} en la línea 10 de \_\_init\_\_.py. Guardamos \textbf{iface} como 
+una variable de miembro, de forma que la podamos usar después.
 
-In lines 16 through 24 we initialize the GUI
-elements for the plugin. In Qt, a \textbf{QAction} is used to create a
-user interface action that can be used to create both a menu and toolbar
-item. In our plugin, we use it for both. In line 18 we create the
-action using our icon resource (note the prefix we specified in
-\textsl{resources.qrc}). We also provide some text that will appear when
-it is used in a menu or during a mouseover, and lastly we need to specify
-the ``parent''. In a plugin, the parent is the main window of QGIS. The
-\textbf{iface} object that we stored during initialization allows us to
-get the reference to the main window in line 19.
+En las líneas 16 a 24 inicializamos los elementos de la GUI para el complemento. En Qt se usa una 
+\textbf{QAction} para crear una acción de la interfaz de usuario que se puede usar para crear tanto 
+un elemento de menú como de la barra de herramientas. En nuestro complemento lo usamos para ambas cosas. 
+En la línea 18 creamos la acción usando nuestro recurso de icono (observe el prefijo que hemos especificado 
+en \textsl{recursos.qrc}). También proporcionamos algo de texto que aparecerá cuando se use en un menú o al 
+pasar el ratón por encima y finalmente necesitamos especificar el ``padre''. En un complemento, el padre es 
+la ventana principal de QGIS. El objeto \textbf{iface} que guardamos durante la inicialización nos permite 
+obtener la referencia a la ventana principal en la línea 19.
 
-Once the action is created, we can add it to both the toolbar and the
-\textsl{Plugins} menu (lines 23 and 24).
-That takes care of initializing the GUI for the plugin. The other thing we 
-need to do is clean up after ourself when the plugin is unloaded. The 
-\textsl{unload} method takes care of this by removing
-the menu item and the tool from the toolbar (lines 28 and 29).
+Una vez que la acción está creada, podemos añadirla tanto a la barra de herramientas como al menú 
+de \textsl{Complementos} (líneas 23 y 24). Esto se encarga de inicializar la GUI para el complemento. La otra 
+cosa que necesitamos es hacer limpieza detrás nuestra cuando se descarga el complemento. El método 
+\textsl{unload} se encarga de esto eliminando la entrada del menú y la herramienta de la barra de herramientas (líneas 28 y 29).
 
-This takes care of the initialization stuff and getting our plugin to load
-and unload nicely. Now let's look at the code that does the actual work.
-It's all contained in the \textsl{run} method.
+Esto se encarga del proceso de inicialización y de que nuestro complemento se cargue y descargue correctamente. 
+Miremos ahora al código que hace el verdadero trabajo. Todo se encuentra en el método \textsl{run}.
 
 \begin{verbatim}
 30 def run(self): 
-31   # Get the user input, starting with the table name
-32   table_name = QInputDialog.getText(None, "Table Name?", \
-33     "Name for new PostGIS layer")
+31   # Obtener la entrada del usuario, comenzando por el nombre de la tabla
+32   table_name = QInputDialog.getText(None, "¿Nombre de la tabla?", \
+33     "Nombre para la nueva capa PostGIS")
 34   if table_name[0].length() > 0:
-35     # Get the field names and types
-36     fields = QInputDialog.getText(None, "Field Names", \
-37      "Fields (separate with a comma)")
+35     # Obtener los nombres y tipos de los campos
+36     fields = QInputDialog.getText(None, "Nombres de los campos", \
+37      "Campos (separados por coma)")
 38     parts = fields[0].split(',')
-39     # Create the SQL statement
+39     # Crear la sencencia SQL
 40     sql = "create table " + table_name[0] + " (id int4 primary key, "
 41     for fld in parts:
 42      sql += fld + " varchar(10), "
 43     sql = sql[0:-2]
 44     sql += ")"
-45     # Connect to the database
-46     # First get the DSN
-47     dsn = QInputDialog.getText(None, "Database DSN", \
-48      "Enter the DSN for connecting to the database (dbname=db user=user)")
+45     # Conectar con la base de datos
+46     # Primero obtener la DSN
+47     dsn = QInputDialog.getText(None, "DSN de la base de datos", \
+48      "Introducir la DSN para conectar con la base de datos (dbname=db user=user)")
 49     if dsn[0].length() > 0:
 50      con = psycopg.connect(str(dsn[0]))
 51      curs = con.cursor()
 52      curs.execute(str(sql))
 53      con.commit()
-54      # add the geometry column
+54      # añadir la columna de la geometría
 55      curs.execute("select AddGeometryColumn('" + str(table_name[0]) + \
 56        "', 'the_geom', 4326, 'POLYGON', 2)")
 57      con.commit()
-58      # create the GIST index
+58      # crear el índice GIST
 59      curs.execute("create index sidx_" + str(table_name[0]) + " on " + \
 60        str(table_name[0]) + " USING GIST(the_geom GIST_GEOMETRY_OPS)")
 61        con.commit()
 \end{verbatim}
 
-The first thing we need to do is use the \textbf{QInputDialog} to get the 
-name of the table to create. This is done in line 32 where we prompt for it.
+Lo primero que tenemos que hacer es usar \textbf{QInputDialog} para obtener el nombre de la tabla a crear. 
+Esto se hace en la línea 32, en la que se pide el nombre.
 
 \begin{figure}[ht]
 \begin{center}
-  \caption{Enter new PostGIS table name}\label{fig:gettablename}\smallskip
+  \caption{Introducir nombre de la nueva tabla PostGIS}\label{fig:gettablename}\smallskip
   \includegraphics[scale=0.8]{gettablename}
 \end{center}
 \end{figure}
 
-In line 34 we check to see if the user actually entered anything before 
-proceeding.
+En la línea 34 comprobamos que el usuario realmente ha introducido algo antes de continuar.
 
-Next we need to get the field names. For this example we are keeping it very 
-simple. Every field will be a varchar(10), meaning we can store up to 10 
-characters in it. If we really want to make this plugin useful, we would need 
-to provide a way for the user to specify the type. In line 36 we 
-prompt the user to enter a comma delimited list of field names. 
+A continuación necesitamos obtener los nombres de los campos. Para este ejemplo lo vamos a hacer muy simple. 
+Cada campo será un varchar(10), lo que significa que puede almacenar hasta 10 caracteres. Si realmente queremos 
+hacer útil este complemento, necesitaremos proporcionar una forma de que el usuario especifique el tipo. En 
+la línea 36 pedimos al usuario que introduzca una lista de nombres de campos separados por comas.
 
 \begin{figure}[ht]
 \begin{center}
-  \caption{Enter field names for new PostGIS table}\label{fig:getfieldname}\smallskip
+  \caption{Introducir nombres de campos para la nueva tabla PostGIS}\label{fig:getfieldname}\smallskip
   \includegraphics[scale=0.8]{getfieldname}
 \end{center}
 \end{figure}
 
-We then split this list into its components for use in constructing the SQL 
-statement (line 38). 
+Luego dividimos esta lista en sus componentes para usarla en la construcción de la sentencia (línea 38). 
 
-Line 40 contains the first part of the SQL statement. Note we are 
-creating the table with an integer id field that will be the primary key. We 
-then iterate through the field list, appending the appropriate code to the 
-SQL statement (line 41).
+La línea 40 contiene la primera parte de la sentencia SQL. Observe que estamos creando la tabla con un campo 
+ID entero que será la clave primaria. A continuación iteramos por la lista de campos, añadiendo el código 
+adecuado a la sentencia SQL (línea 41).
 
-Once we have all the fields added to the SQL statement, we chop off the 
-trailing characters we don't want (line 43) and then add 
-the closing parenthesis to complete the statement (line 44).
+Una vez que tenemos todos los campos añadidos a la sentencia SQL, truncamos los caracteres de trailing que no 
+queremos (línea 43) y luego añadimos el paréntesis de cierre para completar la sentencia (línea 44).
 
-Now we are ready to connect to the database and create the table. To access 
-the database, we are using psycopg (\url{http://www.initd.org}). In order 
-to connect we need to specify the data source name (DSN) with the name of 
-the database, the user, and a password if necessary. If we are running both 
-QGIS and PostgreSQL on the same machine we usually don't need to specify a 
-password. In this case, the DSN will look something like this:
+Ahora ya estamos preparados para conectar a la base de datos y crear la tabla. Para acceder a la base de datos 
+usamos psycopg (\url{http://www.initd.org}). Para poder conectar a la base de datos tenemos que especificar 
+el nombre de la fuente de datos (DSN-Data Source Name) con el nombre de la base de datos, usuario y contraseña 
+si es necesario. Si estamos ejecutando tanto QGIS como PostgreSQL en la misma máquina normalmente no es 
+necesario especificar una contraseña. En este caso, el DSN tendrá un aspecto parecido a esto:
 
 \begin{center}
   \textsl{dbname=gis\_data user=gsherman}
 \end{center}
 
-To get the DSN, we prompt the user with a \textbf{QInputDialog} in line 47.
+Para obtener el DSN, preguntamos a usuario con un \textbf{QInputDialog} en la línea 47.
 
 \begin{figure}[ht]
 \begin{center}
-  \caption{Enter DSN for connection to PostGIS database}\label{fig:getdsn}\smallskip
+  \caption{Introducir DSN para la conexión a la base de datos PostGIS}\label{fig:getdsn}\smallskip
   \includegraphics[scale=0.8]{getdsn}
 \end{center}
 \end{figure}
 
-If the user enters a DSN then we can proceed with the connection to the 
-database in line 50. We get a cursor from the connection in 
-line 51 and then execute the SQL statement to create the 
-table and commit the change in lines 52 through 53. 
-This creates the table, but for it to be a valid layer and ready for us to
-use it needs a couple more things. 
+Si el usuario introduce un DSN podemos continuar con la conexión a la base de datos en la línea 50. Obtenemos 
+el cursor desde la conexión en la línea 51 y luego ejecutamos la sentencia SQL para crear la tabla y remitir 
+el cambio en las líneas 52 a 53. Esto crea la tabla, pero para que ésta sea una capa válida y lista para usarla, 
+necesita un par de cosas más. 
 
-First it needs a geometry column. We purposely didn't include one
-when we created the table so we could use the \textsl{AddGeometryColumn} 
-function to create it. This function adds a geometry column to the table 
-and then puts an entry in the \textsl{geometry\_columns} table for us. In 
-line 55 we specify the table name, the name we want for the 
-geometry column, the SRID, feature type, and the dimension of the feature. 
+Primero necesita una columna de geometría. No hemos introducido una a propósito cuando creamos la tabla para 
+poder usar la función \textsl{AddGeometryColumn} para crearla. Esta función añade una columna de geometría 
+y luego pone una entrada en la tabla \textsl{geometry\_columns} por nosotros. En 
+la línea 55 especificamos el 
+nombre de la tabla, el nombre que queremos para la columna de geometría, el SRID, tipo de objeto espacial 
+y sus dimensiones.
 
-The last thing to do is create a spatial index on the table so we get 
-optimum performance when doing spatial searches and displaying the data 
-in QGIS. In line 59 we have cobbled together the SQL to create the 
-index. The actual statement looks like this:
+Lo último que hay que hacer es crear el índice espacial en la tabla, de forma que obtengamos un funcionamiento 
+óptimo cuando hagamos búsquedas espaciales y mostremos los datos en QGIS. En la línea 59 hemos apañado junta la 
+SQL para crear el índice. La sentencia real es la siguiente:
 
 \begin{verbatim}
 create index sidx_park_land on park_land 
    USING GIST(the_geom GIST_GEOMETRY_OPS);
 \end{verbatim}
 
-\subsubsection{Issues and Problems}
+\subsubsection{Fallos y problemas}
 
-Our plugin is now complete. Now lets look at some of the things that are 
-wrong with it or where we could improve it:
+Nuestro complemento ya está completo. Veamos ahora algunas cosas que están mal en él o que podemos mejorar:
 
 \begin{itemize}
-\item We could use an improved GUI, one that lets the user enter all the 
-  needed information on one dialog
-\item The user can't specify field types
-\item There is limited error checking in the dialog
+\item Podríamos usar una GUI mejorada, una que permita al usuario introducir toda la información necesaria en un diálogo.
+\item El usuario no puede especificar tipos de campos.
+\item La comprobación de errores es limitada en el diálogo.
   \begin{itemize}
-    \item If you don't enter any fields, the plugin fails
-    \item There is no error checking on any of the database operations
+    \item Si no se introduce ningún campo el complemento falla.
+    \item No hay comprobación de errores en ninguna de las operaciones de base de datos.
   \end{itemize} 
-\item There is no feedback from the plugin once it completes
+\item No hay retroalimentación desde el complemento una vez que finaliza.
 \end{itemize} 
 
-With all the issues, it still serves as a primordial plugin that illustrates 
-the process and helps get you started with your own plugin development.
+A pesar de todos estos fallos, aún sirve como un complemento primordial que ilustra el proceso y ayuda 
+a iniciarse en el desarrollo de complementos.
 
-\subsubsection{Adding Feedback}
+\subsubsection{Añadir retroalimentación}
 
-Let's fix one of the small problems by adding some feedback at the end of 
-the process. We'll just add a message box to tell the user that everything 
-is done and to check the database to make sure the table was created.
+Vamos a solucionar uno de los pequeños problemas añadiendo algo de retroalimentación al final del 
+proceso. Sólo añadiremos un cuadro de mensaje para indicar al usuario que todo está hecho y para comprobar 
+la base de datos para asegurarnos de que se creó la tabla.
 
-To do this, we just add the following code after line 61:
+Para hacer esto, simplemente añadiremos el siguiente código después de la línea 61:
 
 \begin{verbatim}
-# show the user what happened
-QMessageBox.information(None, "Results", "Table " + str(table_name[0]) + \
-" has been created. Check your database to confirm.")
+# mostrar al usuario lo que ha ocurrido
+QMessageBox.information(None, "Resultados", "La tabla " + str(table_name[0]) + \
+" se ha creado. Compruebe su base de datos para confirmar.")
 \end{verbatim}
 
-When the table is created, the user sees this:
+Cuando la tabla se cree el usuario verá esto:
 
 \begin{figure}[ht]
 \begin{center}
-  \caption{Message Box with Plugin results}\label{fig:plugin_results}\smallskip
+  \caption{Cuadro de mensaje con los resultados del complemento}\label{fig:plugin_results}\smallskip
   \includegraphics[scale=0.8]{plugin_results}
 \end{center}
 \end{figure}
 
-\subsubsection{Summary}
-Writing a QGIS plugin in Python is pretty easy. Some plugins won't require a
-GUI at all. For example, you might write a plugin that returns the map
-coordinates for the point you click on the map. Such a plugin wouldn't
-require any user input and could use a standard Qt \textbf{QMessageBox}
-to display the result. 
+\subsubsection{Resumen}
+Escribir un complemento de QGIS en Python es bastante sencillo. Algunos complementos no requerirán 
+siquiera una GUI. Por ejemplo, podría escribir un complemento que devuelva las coordenadas del mapa para el 
+punto del mapa en el que pulse. Tal complemento no requeriría ninguna entrada por parte del usuario y podría 
+usar un \textbf{QMessageBox} estándar de Qt para mostrar el resultado.
 
-You can also write plugins for QGIS in C++, but that's another story. You can 
-find tutorials on writing QGIS plugins in both C++ and Python on the QGIS 
-blog at:
+También puede escribir complementos para QGIS en C++, paro eso es otra historio. Puede encontrar manuales sobre 
+la escritura de complementos de QGIS tanto en C++ como en Python en el blog de QGIS en:
 
 \begin{center}
   \url{http://blog.qgis.org} 
