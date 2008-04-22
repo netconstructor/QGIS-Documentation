@@ -1,75 +1,72 @@
-\section{Creating Applications}
+\section{Crear aplicaciones}
 
-One of the goals of QGIS is to provide not only an application, but a set of
-libraries that can be used to create new applications. This goal has been
-realized with the refactoring of libraries that took place after the release of
-0.8. With the release of 0.9, development of standalone
-applications using either C++ or Python is possible.
+Uno de los objetivos de QGIS es proporcionar no sólo una aplicación, sino un conjunto de
+bibliotecas que se puedan usar para crear nuevas aplicaciones. Este objetivo se ha realizado
+con la reconstrucción de bibliotecas que tuvo lugar después del lanzamiento de la versión 0.8.
+Con el lanzamiento de la 0.9 es posible el desarrollo de aplicaciones independientes que usen
+bien C++ o Python.
 
-In this chapter we'll take a brief look at the process for creating a standalone
-Python application. The QGIS blog has several examples of creating
-PyQGIS\footnote{An application created using Python and the QGIS bindings}
-applications. We'll use one of them as a starting point to get a look at how to
-create an application.
+En este capítulo echaremos una breve ojeada al proceso de crear aplicaciones independientes en
+Python. El blog de QGIS tiene varios ejemplos de creación de aplicaciones en
+PyQGIS\footnote{An application created using Python and the QGIS bindings}. Usaremos uno de
+ellos como punto de partida para tener una idea de cómo crear una aplicación.
 
-The features we want in the application are:
+Las funciones que queremos en la aplicación son:
 
 \begin{itemize}
-\item Load a vector layer
-\item Pan
-\item Zoom in and out
-\item Zoom to the full extent of the layer
-\item Set custom colors when the layer is loaded
+\item Cargar una capa vectorial.
+\item Panorámica.
+\item Acercar y alejar zum.
+\item Zum a la extesión completa de la capa.
+\item Estalecer colores personalizados al cargar la capa.
 \end{itemize} 
 
-This is a pretty minimal feature set. Let's start by designing the GUI using
-Qt Designer. 
+Se trata de un conjunto mínimo de funciones. Comencemos por diseñar la GUI usando Qt Designer.
 
-\subsection{Designing the GUI}
+\subsection{Diseñar la GUI}
 
-Since we are creating a minimalistic application, we'll take the same
-approach with the GUI. Using Qt Designer, we create a simple MainWindow with
-no menu or toolbars. This gives us a blank slate to work with. To create the
-MainWindow:
+Puesto que estamos creando una aplicación mínima, usaremos la misma aproximación con la GUI. 
+Usando Qt Designer, creamos una MainWindow sencilla sin menús ni barras de herramientas. 
+Esto nos da un slate en blando con el que trabajar. Para crear la MainWindow:
 
 \begin{enumerate}
-\item Create a directory for developing the application and change to it
-\item Run Qt Designer
-\item The "New Form" dialog should appear. If it doesn't, choose
-\textsl{New Form...} from the \textsl{File} menu.
-\item Choose "Main Window" from the templates/forms list
-\item Click \textsl{Create} 
-\item Resize the new window to something manageable
-\item Find the Frame widget in the list (under Containers) and drag it to
-the main window you just created
-\item Click outside the frame to select the main window area 
-\item Click on the \textsl{Lay Out in a Grid} tool. When you do, the frame
-will expand to fill your entire main window
-\item Save the form as \textsl{mainwindow.ui} 
-\item Exit Qt Designer
+\item Crear un directorio para desarrollar la aplicación y cambiar a él.
+\item Ejecutar Qt Designer.
+\item Deba aparecer el diálogo "Formulario nuevo". Si no lo hace, seleccionar 
+\textsl{Formulario nuevo...} del menú \textsl{Archivo}.
+\item Seleccionar "Ventana principal" de la lista de plantillas/formularios.
+\item Pulsar \textsl{Crear}.
+\item Redimensionar la nueva ventana a algo manejable.
+\item Buscar el widget Marco (Frame) en la lista (bajo Contenedores) y arrastrarlo a la ventana principal
+que acabamos de crear.
+\item Pulsar fuera del marco para seleccionar el área de la ventana principal.
+\item Pulsar en la herramienta \textsl{Lay Out in a Grid}. Al hacerlo el marco se expandirá hasta
+ocupar totalmente la ventana principal.
+\item Guardar el formulario como \textsl{mainwindow.ui}.
+\item Salir de Qt Designer.
 \end{enumerate} 
 
-Now compile the form using the PyQt interface compiler:
+Ahora compile el formulario usando el compilador de la interfaz de PyQt:
 
 \begin{verbatim}
    pyuic4 -o mainwindow_ui.py mainwindow.ui
 \end{verbatim}
 
-This creates the Python source for the main window GUI. Next we need to create
-the application code to fill the blank slate with some tools we can use.
+Esto crea la fuente de Python para la ventana principal de la GUI. Lo siguiente que necesitamos es crear
+el código de la aplicación para rellenar la slate en blanco con algunas herramientas que podamos usar.
 
-\subsection{Creating the MainWindow}
+\subsection{Crear la VentanaPrincipal}
 
-Now we are ready to write the \textbf{MainWindow} class that will do the real work.
-Since it takes up quite a few lines, we'll look at it in chunks, starting
-with the import section and environment setup:
+Ahora estamos listos para escribir la clase \textbf{MainWindow} que hará el trabajo real. Puesto que
+Since it takes up quite a few lines, we'll look at it in chunks, comenzaremos con la sección de
+importación y la configuración del entorno:
 
 \begin{verbatim}
 1 # Loosely based on:
-2 #   Original C++ Tutorial 2 by Tim Sutton
-3 #   ported to Python by Martin Dobias
-4 #   with enhancements by Gary Sherman for FOSS4G2007
-5 # Licensed under the terms of GNU GPL 2
+2 #   C++ Tutorial 2 oribignal por Tim Sutton
+3 #   migrado a Python por Martin Dobias
+4 #   con mejoras por Gary Sherman para FOSS4G2007
+5 # Licenciado bajo los términos de la GNU GPL 2
 6
 7 from PyQt4.QtCore import *
 8 from PyQt4.QtGui import *
@@ -77,54 +74,53 @@ with the import section and environment setup:
 10 from qgis.gui import *
 11 import sys
 12 import os
-13 # Import our GUI
+13 # Importar nuestra GUI
 14 from mainwindow_ui import Ui_MainWindow
-15 # Import our resources (icons)
+15 # Importar nuestros recursos (iconos)
 16 import resources
 17 
-18 # Environment variable QGISHOME must be set to the 0.9 install directory
-19 # before running this application
+18 # La variable de entorno QGISHOME se debe establecer al directorio de instalación de la versión 0.9
+19 # antes de ejecutar esta aplicación
 20 qgis_prefix = os.getenv("QGISHOME")
 \end{verbatim}
 
-Some of this should look familiar from our plugin, especially the PyQt4 and
-QGIS imports. Some specific things to note are the import of our GUI in line
-14 and the import of our resources file on line 16.
+Parte de esto debería resultar familiar de nuestro complemento, especialmente las importaciones de PyQt4 y
+QGIS. Algunas cosas específicas que destacar son la importacion de nuestra GUI en la línea 14 y la
+importación de nuestro archivo de recursos en la línea 16.
 
-Our application needs to know where to find the QGIS installation. Because
-of this, we set the QGISHOME environment variable to point to the install
-directory of QGIS 0.9. In line 20 we store this value from
-the environment for later use.
+Nuestra aplicación necesita saber dóndo encontrar la instalación de QGIS. Por eso, establecemos la
+variable de entorno QGISHOME para que apunto al directorio de instalación de QGIS 0.9. En la línea
+20 guardamos este valor del entorno para usarla después.
 
-Next we need to create our \textbf{MainWindow} class which will contain
-all the logic of our application.
+Lo siguiente que necesitamos es crear nuestra clase \textbf{MainWindow} que contendrá toda la lógica de
+nuestra aplicación.
 \begin{verbatim}
 21 class MainWindow(QMainWindow, Ui_MainWindow):
 22 
 23   def __init__(self):
 24     QMainWindow.__init__(self)
 25 
-26     # Required by Qt4 to initialize the UI
+26     # Requerido por Qt4 para inicializar la UI
 27     self.setupUi(self)
 28 
-29     # Set the title for the app
+29     # Establecer el título de la aplicación
 30     self.setWindowTitle("FOSS4G2007 Demo App")
 31 
-32     # Create the map canvas
+32     # Crear el lienzo del mapa
 33     self.canvas = QgsMapCanvas()
-34     # Set the background color to light blue something
+34     # Establecer el color de fondo a azul claro
 35     self.canvas.setCanvasColor(QColor(200,200,255))
 36     self.canvas.enableAntiAliasing(True)
 37     self.canvas.useQImageToRender(False)
 38     self.canvas.show()
 39 
-40     # Lay our widgets out in the main window using a 
+40     # Disponer nuestros widgets en la ventana principal usando una 
 41     # vertical box layout
 42     self.layout = QVBoxLayout(self.frame)
 43     self.layout.addWidget(self.canvas)
 44 
-45     # Create the actions for our tools and connect each to the appropriate
-46     # method
+45     # Crear las acciones para nuestras herramientas y conectar cada una con el método
+46     # adecuado
 47     self.actionAddLayer = QAction(QIcon(":/foss4g2007/mActionAddLayer.png"),
 48     \
 49         "Add Layer", self.frame)
@@ -143,7 +139,7 @@ all the logic of our application.
 62     self.connect(self.actionZoomFull, SIGNAL("activated()"),
 63     self.zoomFull)
 64 
-65     # Create a toolbar
+65     # Crear una barra de herramientas
 66     self.toolbar = self.addToolBar("Map")
 67     # Add the actions to the toolbar
 68     self.toolbar.addAction(self.actionAddLayer)
@@ -152,15 +148,15 @@ all the logic of our application.
 71     self.toolbar.addAction(self.actionPan);
 72     self.toolbar.addAction(self.actionZoomFull);
 73 
-74     # Create the map tools
+74     # Crear las herramientas de mapa
 75     self.toolPan = QgsMapToolPan(self.canvas)
 76     self.toolZoomIn = QgsMapToolZoom(self.canvas, False) # false = in
 77     self.toolZoomOut = QgsMapToolZoom(self.canvas, True) # true = out
 \end{verbatim}
 
-Lines 21 through 27 are the basic declaration and initialization of the 
-\textbf{MainWindow} and the set up of the user interface using the 
-\textsl{setupUi} method. This is required for all applications.
+Las líneas 21 a 27 son la declaración básica y la inicialización de la \textbf{MainWindow}
+y la configuración de la interfaz de usuario usando el método \textsl{setupUi}. Esto hace
+falta para todas las aplicaciones.
 
 Next we set the title for the application so it says something more
 interesting than 'MainWindow' (line 30). Once that is
