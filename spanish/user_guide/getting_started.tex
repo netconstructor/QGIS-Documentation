@@ -1,7 +1,7 @@
 % vim:autoindent:set textwidth=78:
-\section{Comenzando}\label{label_getstarted}
+\section{Comenzar}\label{label_getstarted}
 
-Este capítulo ofrece un vistazo rápido de QGIS funcionando con datos disponibles 
+Este capítulo ofrece un vistazo rápido del funcionamiento de QGIS con datos disponibles 
 en la página web de QGIS.
 
 \subsection{Instalación}\label{label_installation}
@@ -11,15 +11,15 @@ La compilación de QGIS desde su código fuente está documentada en el Apéndic
 La instrucciones de instalación se distribuyen con el código fuente de QGIS y
 también están disponibles en \url{http://qgis.org}. 
 
-Los paquetes estándares de instalación están disponibles para Windows y Mac OS X. 
+Los paquetes estándar de instalación están disponibles para Windows y Mac OS X. 
 Se proporcionan los paquetes binarios para la mayoría de sabores de GNU/Linux. 
-Obtén la última información sobre los paquetes binarios en el sitio web QGIS
+Obtenga la última información sobre los paquetes binarios en el sitio web QGIS
  \url{http://download.qgis.org}.
 
 \subsection{Datos de ejemplo}\label{label_sampledata}
 \index{data!sample} 
 
-Si no tienes datos SIG a mano, puedes obtener un conjunto de datos de Alaska
+Si no tiene datos SIG a mano, puede obtener un conjunto de datos de Alaska
 de la web de QGIS \url{http://qgis.org}. La proyección para los datos de Alaska
 es Albers Equal Area con las unidades en metros:
 
@@ -40,8 +40,8 @@ PROJCS["NAD_1927_Albers",
     UNIT["Meter",1.0]]
 \end{verbatim}
 
-Para utilizarlo con GRASS, una base de datos de ejemplo GRASS (p.ej. Spearfish) 
-se puede obtener de la web-SIG oficial GRASS \url{http://grass.itc.it/download/data.php}. 
+Para utilizarlo con GRASS, se puede obtener una base de datos de GRASS de ejemplo (p.ej. Spearfish) 
+de la web-SIG oficial de GRASS \url{http://grass.osgeo.org/download/data.php}. 
 La proyeccción oficial del conjunto de datos de Spearfish es UTM Zone 13, Northern Hemisphere: 
 
 \begin{verbatim}
@@ -63,19 +63,19 @@ PROJCS["UTM Zone 13, Northern Hemisphere",
 Estos conjuntos de datos se utilizarán como base para muchos ejemplos y 
 capturas de pantalla en este documento.
 
-\subsection{Iniciando QGIS}\label{label_startinqgis}
+\subsection{Iniciar QGIS}\label{label_startinqgis}
 
-Suponiendo que tienes QGIS instalado en el PATH, puedes iniciar QGIS tecleando:
-\textbf{qgis}  en línea de comandos o haciendo doble click sobre el enlace a QGIS 
-(o acceso directo) sobre el escritorio. Bajo MS Windows, inicia QGIS a través 
-del menú Inicio, y bajo Mac OS X, haz doble click en tu carpeta de aplicaciones. 
+Suponiendo que tiene QGIS instalado en el PATH, puede iniciar QGIS tecleando:
+\textbf{qgis} en línea de órdenes o haciendo doble clic sobre el enlace a QGIS 
+(o acceso directo) del escritorio. Bajo MS Windows, inicie QGIS a través 
+del menú Inicio, y bajo Mac OS X, haga doble click en el icono de su carpeta de aplicaciones.
 
-\subsubsection{Opciones de Línea de Comandos}\index{command line options}
+\subsubsection{Opciones de línea de órdenes}\index{command line options}
 \label{label_commandline}
 
 QGIS soporta un buen número de opciones cuando se inicia desde la línea de 
-comandos. Para obtener la lista de opciones, teclea \texttt{qgis ---help} en la
-línea de comandos.
+órdenes. Para obtener la lista de opciones, teclee \texttt{qgis ---help} en la
+línea de órdenes.
 La sentencia de uso para QGIS es:
 
 \small
@@ -103,43 +103,43 @@ Usage: qgis [options] [FILES]
 \end{verbatim}
 \normalsize
 
-\begin{Tip} \caption{\textsc{Ejemplo utilizando argumentos en línea de comandos}}
-\qgistip{Puedes iniciar QGIS especificando uno o más archivos de datos sobre la
-línea de comandos. Por ejemplo, suponiendo que estas en tu directorio de datos, 
-puedes iniciar QGIS con dos archivos shape y un raster preparados para cargarlos 
-con el arranque utilizando el siguiente comando: 
+\begin{Tip} \caption{\textsc{Ejemplo utilizando argumentos en línea de órdenes}}
+\qgistip{Puede iniciar QGIS especificando uno o más archivos de datos sobre la
+línea de órdenes. Por ejemplo, suponiendo que está en su directorio de datos, 
+puede iniciar QGIS con dos archivos shape y un ráster preparados para cargarlos 
+en el arranque utilizando la siguiente orden: 
 \ttfamily{qgis ak\_shade.tif alaska.shp majrivers.shp}
 }
 \end{Tip}
 
-\minisec{Opción de línea de comandos \texttt{---snapshot}}
-Esta opción te permite crear una captura de pantalla en formato PNG de la vista actual.
-Esto puede ser útil cuando tienes muchos proyectos y quieres generar capturas de tus datos.
+\minisec{Opción de línea de órdenes \texttt{---snapshot}}
+Esta opción permite crear una captura de pantalla en formato PNG de la vista actual.
+Esto puede ser útil cuando se tienen muchos proyectos y se quieren generar capturas de tus datos.
 
-Actualmente esto genera un fichero PNG con 800x600 pixeles. Se puede añadir un nombre despues de
+Actualmente esto genera un fichero PNG con 800x600 pixeles. Se puede añadir un nombre después de
 \texttt{---snapshot}.
 
-\minisec{Opción de línea de comandos \texttt{---lang}}
-Basado en tu QGIS local, selecciona la localización correcta. Si quieres cambiar el lenguaje, 
-puedes proporcionar otro lenguaje con esta opción.
+\minisec{Opción de línea de órdenes \texttt{---lang}}
+En base a su configuración local, QGIS selecciona la localización correcta. Si se quiere cambiar el idioma,
+se puede proporcionar otro idioma con esta opción.
 
-\minisec{Opción de línea de comandos \texttt{---project}}
-También es posible iniciar QGIS con un proyecto existente. Simplemente añade 
-la opción \texttt{--project} seguida del nombre de tu proyecto y  QGIS se abrirá 
+\minisec{Opción de línea de órdenes \texttt{---project}}
+También es posible iniciar QGIS con un proyecto existente. Simplemente añada 
+la opción \texttt{--project} seguida del nombre de su proyecto y QGIS se abrirá 
 con todas las capas cargadas definidas en el fichero dado.
 
-\minisec{Opción de línea de comandos \texttt{---extent}}
-Para arrancar con un extensión específica del mapa utiliza esta opción. Necesitas
+\minisec{Opción de línea de órdenes \texttt{---extent}}
+Para arrancar con una extensión específica del mapa utilice esta opción. Es necesario
 añadir los límites en el siguiente orden separados por comas:
 \begin{verbatim}
 --extent xmin,ymin,xmax,ymax
 \end{verbatim}
 
 
-\subsection{GUI QGIS (Interfaz Gráfica de Usuario)}\index{main window}
+\subsection{Interfaz Gráfica de Usuario (GUI) de QGIS}\index{main window}
 \label{label_qgismainwindow}
 
-Cuando QGIS arranca, te encuentras con la GUI como se muestra abajo
+Cuando QGIS arranca, se encuentra con la GUI como se muestra abajo
 (los números del 1 hasta el 6 en ovalos azules señalan las seis áreas principales 
 de la interfaz que se describen abajo):
 
@@ -150,21 +150,21 @@ de la interfaz que se describen abajo):
 \end{center} 
 \end{figure}
 
-\textbf{Nota:} La decoración de tu ventana (barra de título, etc.) puede aparecer 
-distinto dependiendo de tu sistema operativo y administrador de ventanas.
+\textbf{Nota:} La decoración de su ventana (barra de título, etc.) puede aparecer 
+distinta dependiendo del sistema operativo y administrador de ventanas.
 
 La Interfaz Gráfica de Usuario (GUI) de QGIS está dividida en seis áreas:
 
 \begin{tabbing}
-1. Barra de Menús \hspace{3cm}\= 4. Vista de Mapa \\
-2. Barra de Herramientas \hspace{3cm}\> 5. Vista General  \\
-3. Leyenda del Mapa \hspace{3cm}\> 6. Barra de Estado   
+1. Barra de menús \hspace{3cm}\= 4. Vista del mapa \\
+2. Barra de herramientas \hspace{3cm}\> 5. Vista general del mapa \\
+3. Leyenda del mapa \hspace{3cm}\> 6. Barra de estado   
 \end{tabbing}
 
 Estos seis componentes de la interfaz de QGIS están descritos con más detalle
 en las siguientes secciones.
 
-\subsubsection{Barra de Menús}\label{label_menubar}
+\subsubsection{Barra de menús}\label{label_menubar}
 \index{menus}
 
 La barra de menús proporciona acceso a varias características de QGIS utilizando 
