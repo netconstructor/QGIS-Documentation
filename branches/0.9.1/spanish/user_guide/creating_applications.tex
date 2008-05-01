@@ -37,7 +37,7 @@ Esto nos da un slate en blando con el que trabajar. Para crear la MainWindow:
 \item Seleccionar "Ventana principal" de la lista de plantillas/formularios.
 \item Pulsar \textsl{Crear}.
 \item Redimensionar la nueva ventana a algo manejable.
-\item Buscar el widget Marco (Frame) en la lista (bajo Contenedores) y arrastrarlo a la ventana principal
+\item Buscar el control Marco (Frame) en la lista (bajo Contenedores) y arrastrarlo a la ventana principal
 que acabamos de crear.
 \item Pulsar fuera del marco para seleccionar el área de la ventana principal.
 \item Pulsar en la herramienta \textsl{Lay Out in a Grid}. Al hacerlo el marco se expandirá hasta
@@ -114,7 +114,7 @@ nuestra aplicación.
 37     self.canvas.useQImageToRender(False)
 38     self.canvas.show()
 39 
-40     # Disponer nuestros widgets en la ventana principal usando una 
+40     # Disponer nuestros controles en la ventana principal usando una 
 41     # vertical box layout
 42     self.layout = QVBoxLayout(self.frame)
 43     self.layout.addWidget(self.canvas)
@@ -158,103 +158,90 @@ Las líneas 21 a 27 son la declaración básica y la inicialización de la \text
 y la configuración de la interfaz de usuario usando el método \textsl{setupUi}. Esto hace
 falta para todas las aplicaciones.
 
-Next we set the title for the application so it says something more
-interesting than 'MainWindow' (line 30). Once that is
-complete, we are ready to complete the user interface. When we created it in
-Designer, we left it very sparse---just a main window and a frame. You could
-have added a menu and the toolbar using Designer, however we'll do it with
-Python.
+A continuación ponemos el título de la aplicación de forma que diga algo más interesante que 'MainWindow' 
+(línea 30). Una vez que esto está hecho, estamos listos para completar la interfaz de usuario. Cuando la 
+creamos en el Designer, la dejamos muy escasa---sólo una ventana principal y un marcho. Se podría haber añadido 
+un menú y la barra de herramientas usando el Designer, sin embargo lo haremos con Python.
 
-In lines 33 through 38 we set up the map
-canvas, set the background color to a light blue, and enable antialiasing.
-We also tell it not to use a QImage for rendering (trust me on this one) and
-then set the canvas to visible by calling the \textsl{show} method.
+En las líneas 33 a 38 configuramos la vista del mapa, establecemos el color de fondo a azul claro y habilitamos 
+antialiasing. También le decimos que no use un QImage para renderizar (confiar en mi en esto) y hacemos visible 
+el lienzo del mapa llamando al método \textsl{show}.
 
-Next we set the layer to use a vertical box layout within the frame and add the map
-canvas to it in line 43.
+A continuación configuramos la capa para que use una disposición de caja vertical dentro del marco y le 
+añadimos la vista del mapa en la línea 43.
 
-Lines 48 to 63 set up the actions and connections for the tools in our 
-toolbar. For each tool, we create a
-\textbf{QAction} using the icon we defined in our resources file. Then we
-connect up the \textsl{activated} signal from the tool to the method in our
-class that will handle the action. This is similar to how we set things up
-in the plugin example.
+Las líneas 48 a 63 configuran las acciones y conexiones de las herramientas de nuestra barra de herramientas. 
+Para cada herramienta creamos una \textbf{QAction} usando el icono que definimos en nuestro archivo de recursos. 
+Luego conectamos la señal \textsl{activated} de la herramienta al método de nuestra clase que manejará la acción. 
+Esto es similar a cómo configuramos las cosas en el ejemplo de complemento.
 
-Once we have the actions and connections, we need to add them to the
-toolbar. In lines 66 through 72 we create the
-toolbar and add each tool to it.
+Una vez que tenemos las acciones y las conexiones, necesitamos añadirlas a la barra de herramientas. En las 
+líneas 66 a 72 creamos la barra de herramientas y le añadimos cada herramienta.
 
-Lastly we create the three map tools for the application (lines
-75 through 77). We'll use the map tools in a
-moment when we define the methods to make our application functional. Let's
-look at the methods for the map tools.
+Por último creamos las tres herramientas de mapa para la aplicación (líneas 75 a 77). Usaremos las herramientas en 
+un momento cuando definamos los métodos para hacer funcional la aplicación. Veamos los métodos para las herramientas de mapa.
 
 \begin{verbatim}
-78   # Set the map tool to zoom in
+78   # Establecer la herramienta de mapa para acercar zum
 79   def zoomIn(self):
 80     self.canvas.setMapTool(self.toolZoomIn)
 81 
-82   # Set the map tool to zoom out
+82   # Establecer la herramienta de mapa para alejar zum
 83   def zoomOut(self):
 84     self.canvas.setMapTool(self.toolZoomOut)
 85 
-86   # Set the map tool to 
+86   # Establecer la herramienta de mapa para panorámica 
 87   def pan(self):
 88    self.canvas.setMapTool(self.toolPan)
 89 
-90   # Zoom to full extent of layer
+90   # Zum a la extensión de la capa
 91   def zoomFull(self):
 92     self.canvas.zoomFullExtent()
 \end{verbatim}
 
-For each map tool, we need a method that corresponds to the connection we
-made for each action. In lines 79 through 88 we set up a method for each 
-of the three tools that
-interact with the map. When a tool is activated by clicking on it in the
-toolbar, the corresponding method is called that ``tells'' the map canvas it
-is the active tool. The active tool governs what happens when the mouse is
-clicked on the canvas.
+Para cada herramienta de mapa necesitamos un método que corresponda a la conexión que hemos hecho para 
+cada acción. En las líneas 79 a 88 establecemos el método para cada una de las tres herramientas que interaccionan 
+con el mapa. Cuando se activa una herramienta pulsando en ella en la barra de herramientas, se llama al método 
+correspondiente que ``le dice'' a la vista del mapa que esa es la herramienta activa, la cual gobierna lo que 
+pasa cuando se pulsa el ratón sobre la vista del mapa.
 
-The zoom to full extent tool isn't a map tool---it does its job without
-requiring a click on the map. When it is activated, we call the
-\textsl{zoomFullExtent} method of the map canvas (line 92).
-This completes the implementation of all our tools except one---the add
-layer tool. Let's look at it next:
+La herramienta zum a toda la extensión no es una herramienta de mapa---hace su trabajo sin que se requiera una 
+pulsación en el mapa. Cuando se activa llamamos al método \textsl{zoomFullExtent} de la vista del mapa (línea 92). 
+Esto completa la implementación de todas nuestras herramientas menos una---la herramienta añadir capa. Veámosla a continuación:
 
 \begin{verbatim}
-93   # Add an OGR layer to the map
+93   # Añadir una capa OGR al mapa
 94   def addLayer(self):
-95     file = QFileDialog.getOpenFileName(self, "Open Shapefile", ".", "Shapefiles
+95     file = QFileDialog.getOpenFileName(self, "Abrir archivo Shape", ".", "Shapefiles
 96     (*.shp)")
 97     fileInfo = QFileInfo(file)
 98 
-99     # Add the layer
+99     # Añadir la capa
 100     layer = QgsVectorLayer(file, fileInfo.fileName(), "ogr")
 101
 102    if not layer.isValid():
 103      return
 104
-105    # Change the color of the layer to gray
+105    # Cambiar el color de la capa a gris
 106    symbols = layer.renderer().symbols()
 107    symbol = symbols[0]
 108    symbol.setFillColor(QColor.fromRgb(192,192,192))
 109
-110    # Add layer to the registry
+110    # Añadir capa al registro
 111    QgsMapLayerRegistry.instance().addMapLayer(layer);
 112
-113    # Set extent to the extent of our layer
+113    # Establecer extensión a la de nuestra capa
 114    self.canvas.setExtent(layer.extent())
 115
-116    # Set up the map canvas layer set
+116    # Establecer el conjunto de capas de la vista del mapa
 117    cl = QgsMapCanvasLayer(layer)
 118    layers = [cl]
 119    self.canvas.setLayerSet(layers)
 \end{verbatim}
 
-In the \textsl{addLayer} method we use a \textbf{QFileDialog} to get the
-name of the shapefile to load. This is done in line 96.
-Notice that we specify a ``filter'' so the dialog will only show files of
-type \textsl{.shp}.
+En el método \textsl{addLayer} usamos \textbf{QFileDialog} para obtener el nombre del archivo shape a cargar. 
+Esto se hace en la línea 96. Observe que especificamos un ``filtro'' para que el diálogo sólo muestre los archivos 
+de tipo \textsl{.shp}.
 
 Next in line 97 we create a \textbf{QFileInfo} object from the shapefile path. Now the layer is
 ready to be created in line 100. Using the \textbf{QFileInfo} object to get the file name
