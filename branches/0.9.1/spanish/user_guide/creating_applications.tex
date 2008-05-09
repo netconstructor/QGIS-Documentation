@@ -17,7 +17,7 @@ Las funciones que queremos en la aplicación son:
 \item Cargar una capa vectorial.
 \item Panorámica.
 \item Acercar y alejar zum.
-\item Zum a la extesión completa de la capa.
+\item Zum a la extensión completa de la capa.
 \item Estalecer colores personalizados al cargar la capa.
 \end{itemize} 
 
@@ -27,14 +27,14 @@ Se trata de un conjunto mínimo de funciones. Comencemos por diseñar la GUI usa
 
 Puesto que estamos creando una aplicación mínima, usaremos la misma aproximación con la GUI. 
 Usando Qt Designer, creamos una MainWindow sencilla sin menús ni barras de herramientas. 
-Esto nos da un slate en blando con el que trabajar. Para crear la MainWindow:
+Esto nos da una ventana en blanco con la que trabajar. Para crear la MainWindow:
 
 \begin{enumerate}
 \item Crear un directorio para desarrollar la aplicación y cambiar a él.
 \item Ejecutar Qt Designer.
-\item Deba aparecer el diálogo "Formulario nuevo". Si no lo hace, seleccionar 
+\item Debe aparecer el diálogo "Formulario nuevo". Si no lo hace, seleccionar 
 \textsl{Formulario nuevo...} del menú \textsl{Archivo}.
-\item Seleccionar "Ventana principal" de la lista de plantillas/formularios.
+\item Seleccionar "Ventana principal"  de la lista de plantillas/formularios.
 \item Pulsar \textsl{Crear}.
 \item Redimensionar la nueva ventana a algo manejable.
 \item Buscar el control Marco (Frame) en la lista (bajo Contenedores) y arrastrarlo a la ventana principal
@@ -53,17 +53,17 @@ Ahora compile el formulario usando el compilador de la interfaz de PyQt:
 \end{verbatim}
 
 Esto crea la fuente de Python para la ventana principal de la GUI. Lo siguiente que necesitamos es crear
-el código de la aplicación para rellenar la slate en blanco con algunas herramientas que podamos usar.
+el código de la aplicación para rellenar la ventana en blanco con algunas herramientas que podamos usar.
 
-\subsection{Crear la VentanaPrincipal}
+\subsection{Crear la Ventana principal}
 
 Ahora estamos listos para escribir la clase \textbf{MainWindow} que hará el trabajo real. Puesto que
-Since it takes up quite a few lines, we'll look at it in chunks, comenzaremos con la sección de
+estó llevará unas cuantas líneas, lo veremos por partes; comenzaremos con la sección de
 importación y la configuración del entorno:
 
 \begin{verbatim}
-1 # Loosely based on:
-2 #   C++ Tutorial 2 oribignal por Tim Sutton
+1 # Basado libremente en:
+2 #   C++ Tutorial 2 original por Tim Sutton
 3 #   migrado a Python por Martin Dobias
 4 #   con mejoras por Gary Sherman para FOSS4G2007
 5 # Licenciado bajo los términos de la GNU GPL 2
@@ -79,8 +79,8 @@ importación y la configuración del entorno:
 15 # Importar nuestros recursos (iconos)
 16 import resources
 17 
-18 # La variable de entorno QGISHOME se debe establecer al directorio de instalación de la versión 0.9
-19 # antes de ejecutar esta aplicación
+18 # La variable de entorno QGISHOME se debe establecer al directorio de instalación
+19 # de la versión 0.9 antes de ejecutar esta aplicación
 20 qgis_prefix = os.getenv("QGISHOME")
 \end{verbatim}
 
@@ -88,8 +88,8 @@ Parte de esto debería resultar familiar de nuestro complemento, especialmente l
 QGIS. Algunas cosas específicas que destacar son la importacion de nuestra GUI en la línea 14 y la
 importación de nuestro archivo de recursos en la línea 16.
 
-Nuestra aplicación necesita saber dóndo encontrar la instalación de QGIS. Por eso, establecemos la
-variable de entorno QGISHOME para que apunto al directorio de instalación de QGIS 0.9. En la línea
+Nuestra aplicación necesita saber dónde encontrar la instalación de QGIS. Por eso, establecemos la
+variable de entorno QGISHOME para que apunte al directorio de instalación de QGIS 0.9. En la línea
 20 guardamos este valor del entorno para usarla después.
 
 Lo siguiente que necesitamos es crear nuestra clase \textbf{MainWindow} que contendrá toda la lógica de
@@ -104,7 +104,7 @@ nuestra aplicación.
 27     self.setupUi(self)
 28 
 29     # Establecer el título de la aplicación
-30     self.setWindowTitle("FOSS4G2007 Demo App")
+30     self.setWindowTitle("Aplicación de demostración FOSS4G2007")
 31 
 32     # Crear el lienzo del mapa
 33     self.canvas = QgsMapCanvas()
@@ -115,7 +115,7 @@ nuestra aplicación.
 38     self.canvas.show()
 39 
 40     # Disponer nuestros controles en la ventana principal usando una 
-41     # vertical box layout
+41     # disposición de caja vertical
 42     self.layout = QVBoxLayout(self.frame)
 43     self.layout.addWidget(self.canvas)
 44 
@@ -141,7 +141,7 @@ nuestra aplicación.
 64 
 65     # Crear una barra de herramientas
 66     self.toolbar = self.addToolBar("Map")
-67     # Add the actions to the toolbar
+67     # Añadir las acciones a la barra de herramientas
 68     self.toolbar.addAction(self.actionAddLayer)
 69     self.toolbar.addAction(self.actionZoomIn)
 70     self.toolbar.addAction(self.actionZoomOut);
@@ -160,7 +160,7 @@ falta para todas las aplicaciones.
 
 A continuación ponemos el título de la aplicación de forma que diga algo más interesante que 'MainWindow' 
 (línea 30). Una vez que esto está hecho, estamos listos para completar la interfaz de usuario. Cuando la 
-creamos en el Designer, la dejamos muy escasa---sólo una ventana principal y un marcho. Se podría haber añadido 
+creamos en el Designer, la dejamos muy escasa---sólo una ventana principal y un marco. Se podría haber añadido 
 un menú y la barra de herramientas usando el Designer, sin embargo lo haremos con Python.
 
 En las líneas 33 a 38 configuramos la vista del mapa, establecemos el color de fondo a azul claro y habilitamos 
@@ -212,7 +212,7 @@ Esto completa la implementación de todas nuestras herramientas menos una---la h
 \begin{verbatim}
 93   # Añadir una capa OGR al mapa
 94   def addLayer(self):
-95     file = QFileDialog.getOpenFileName(self, "Abrir archivo Shape", ".", "Shapefiles
+95     file = QFileDialog.getOpenFileName(self, "Abrir archivo Shape", ".", "Archivos shape
 96     (*.shp)")
 97     fileInfo = QFileInfo(file)
 98 
@@ -243,50 +243,50 @@ En el método \textsl{addLayer} usamos \textbf{QFileDialog} para obtener el nomb
 Esto se hace en la línea 96. Observe que especificamos un ``filtro'' para que el diálogo sólo muestre los archivos 
 de tipo \textsl{.shp}.
 
-Next in line 97 we create a \textbf{QFileInfo} object from the shapefile path. Now the layer is
-ready to be created in line 100. Using the \textbf{QFileInfo} object to get the file name
-from the path we specify it for the name of the layer when it is created. To make sure that the layer is valid and won't
-cause any problems when loading, we check it in line 102. If it's bad, we bail out and don't add it to
-the map canvas.
+A continuación en la línea 97 creamos un objeto \textbf{QFileInfo} a partir de la ruta del archivo shape. Ahora la 
+capa está lista para crearse en la línea 100. Usando el objeto \textbf{QFileInfo} para obtener el nombre 
+del archivo de la ruta lo especificamos para el nombre de la capa cuando se crea. Para asegurarnos de que la 
+capa es válida y no dará problemas cuando se cargue, la comprobamos en la línea 102. Si no es válida, nos libramos de ella 
+y no la añadimos a la vista del mapa.
 
-Normally layers are added with a random color. Here we want to tweak the colors for the layer to make a more pleasing
-display. Plus we know we are going to add the \textsl{world\_borders} layer to the map and this will make it look nice
-on our blue background. To change the color, we need to get the symbol used for rendering and use it to set a new fill color. This is done in lines
-106 through 108. 
+Normalmente las capas se añaden con un color aleatorio. Aquí queremos ajustar los colores de la capa para una visualización 
+más agradable. Además sabemos que vamos a añadir la capa \textsl{world\_borders} a la vista del mapa y esto hará que 
+se vea bien sobre nuestro fondo azul. Para cambiar el color, necesitamos obtener el símbolo usado para renderizar y 
+usarlo para establecer un color de relleno nuevo. Esto se hace en las líneas 106 a 108. 
 
-All that's left is to actually add the layer to the registry and a few other housekeeping items (lines
-111 through 119). This stuff is standard for adding a layer and the
-end result is the world borders on a light blue background. The only thing you may not want to do is set the extent to
-the layer, if you are going to be adding more than one layer in your application.
+Todo lo que queda es añadir realmente la capa al registro y unos pocos elementos de mantenimiento más (líneas 111 a 119). 
+Este proceso es estándar para añadir una capa y el resultado final son los bordes del mundo sobre un fondo azul 
+claro. La única cosa que puede no querer hacer es establecer la extensión a la capa, si va a añadir más de una capa 
+a su aplicación.
 
-That's the heart of the application and completes the \textbf{MainWindow} class. 
+Este es el corazón de la aplicación y completa la clase \textbf{MainWindow}.
 
-\subsection{Finishing Up}
+\subsection{Finalizar}
 
-The remainder of the code shown below 
-creates the \textbf{QgsApplication} object, sets the path to the QGIS install, sets
-up the \textsl{main} method and then starts the application. The only other thing to note is that we move the
-application window to the upper left of the display. We could get fancy and use the Qt API to center it on the screen.
+El resto del código mostrado abajo crea el objeto \textbf{QgsApplication}, establece la ruta a la instalación de 
+QGIS, configura el método \textsl{main} y a continuación inicia la aplicación. La única cosa a destacar es que 
+movemos la ventana de la aplicación a la esquina superior izquierda del monitor. Podríamos echarle imaginación y usar el API 
+de Qt API para centrarla en la pantalla.
 
 \begin{verbatim}
 120 def main(argv):
-121   # create Qt application
+121   # crear aplicación Qt
 122   app = QApplication(argv)
 123 
-124   # Initialize qgis libraries
+124   # Inicializar las bibliotecas de qgis
 125   QgsApplication.setPrefixPath(qgis_prefix, True)
 126   QgsApplication.initQgis()
 127 
-128   # create main window
+128   # crear la ventana principal
 129   wnd = MainWindow()
-130   # Move the app window to upper left
+130   # Mover la ventana de la aplicación arriba a la izquierda
 131   wnd.move(100,100)
 132   wnd.show()
 133 
-134   # run!
+134   # ¡ejecutar!
 135   retval = app.exec_()
 136   
-137   # exit
+137   # salir
 138   QgsApplication.exitQgis()
 139   sys.exit(retval)
 140 
@@ -295,12 +295,12 @@ application window to the upper left of the display. We could get fancy and use 
 143   main(sys.argv)
 \end{verbatim}
 
-\subsection{Running the Application}
+\subsection{Ejecutar la aplicación}
 
-Now we can run the application and see what happens. Of course if you are like most developers, you've been testing it
-out as you went along. 
+Ahora podemos ejecutar la aplicación y ver qué pasa. Por supuesto si se es como la mayoría de desarrolladores, se 
+habrá ido probando a medida que se avanzaba.
 
-Before we can run the application, we need to set some environment variables. On Linux or OS X:
+Antes de que podamos ejecutar la aplicación, tenemos que establecer algunas variables de entorno. En Linux u OS X:
 
 \begin{verbatim}
 export LD_LIBRARY_PATH=$HOME/qgis_09/lib
@@ -308,49 +308,50 @@ export PYTHONPATH=$HOME/qgis_09/share/qgis/python
 export QGISHOME=$HOME/qgis_09
 \end{verbatim}
 
-For Windows:
+Para Windows:
 \begin{verbatim}
 set PATH=C:\qgis;%PATH%
 set PYTHONPATH=C:\qgis\python
 set QGISHOME=C:\qgis
 \end{verbatim}
 
-In the case of Linux or OS X, we assume that QGIS is installed in your home directory in 
-\textsl{qgis\_09}. For Windows, QGIS is installed in \textsl{C:\textbackslash qgis}.
+En el caso de Linux u OS X, asumimos que QGIS está instalado en su directorio personal en \textsl{qgis\_09}. Para 
+Windows, QGIS esta instalado en \textsl{C:\textbackslash qgis}.
 
-When the application starts up, it looks like this:
+Cuando la aplicación arranca tiene este aspecto:
 
 \begin{figure}[ht]
 \begin{center}
-  \caption{Starting the new demo application}\label{fig:demo_app_startup}\smallskip
+  \caption{Iniciar la nueva aplicación de demostración}\label{fig:demo_app_startup}\smallskip
   \includegraphics[scale=0.8]{getdsn}
 \end{center}
 \end{figure}
 
-To add the \textsl{world\_borders} layer, click on the \textsl{Add Layer} tool and navigate to the data directory.
-Select the shapefile and click \textsl{Open} to add it to the map. Our custom fill color is applied and the result is:
+Para añadir la capa \textsl{world\_borders}, pulse en la herramienta \textsl{Añadir capa} y navegue al 
+directorio de datos. Seleccione el archivo shape y pulse \textsl{Abrir} para añadirla al mapa. Se aplicará nuestro 
+color personalizado y el resultado es:
 
 \begin{figure}[ht]
 \begin{center}
-  \caption{Adding a layer the demo application}\label{fig:demo_app_done}\smallskip
+  \caption{Añadir una capa a la aplicación de demostración}\label{fig:demo_app_done}\smallskip
   \includegraphics[scale=0.8]{getdsn}
 \end{center}
 \end{figure}
 
-Creating a PyQGIS application is really pretty simple. In less than 150 lines of code we have an application that can
-load a shapefile and navigate the map. If you play around with the map, you'll notice that some of the built-in features
-of the canvas also work, including mouse wheel scrolling and panning by holding down the \textsl{Space} bar and
-moving the mouse.
+Crear una aplicación de PyQGIS es realmente muy sencillo. En menos de 150 líneas de código tenemos una aplicación que 
+puede cargar una archivo shape y navegar por el mapa. Si juega un poco con el mapa, notará que algunas de las 
+funciones incrustadas del lienzo también funcionan, incluido el desplazamiento con la rueda del ratón y la 
+panorámica manteniendo pulsada la barra \textsl{Espacio} y moviendo el ratón.
 
-Some sophisticated applications have been created with PyQGIS and more are in the works. This is pretty impressive,
-considering that this development has taken place even before the official release of QGIS 0.9.
+Algunas aplicaciones sofisticadas se han creado usando PyQGIS y más están en camino. Esto es bastante impresionante, 
+considerando que este desarrollo ha tenido lugar incluso antes del lanzamiento oficial de QGIS 0.9.
 
-\begin{Tip}\caption{\textsc{Documentation For PyQGIS}}
-\qgistip{Whether you are writing a plugin or a PyQGIS application, you are going to
-need to refer to both the QGIS API documentation (\url{http://qgis.org}) and
-the PyQt Python Bindings Reference Guide
-(\url{http://www.riverbankcomputing.com/Docs/PyQt4/pyqt4ref.html}). These
-documents provide information about the classes and methods you'll
-use to bring your Python creation to life.
+\begin{Tip}\caption{\textsc{Documentación para PyQGIS}}
+\qgistip{Tanto si está escribiendo un complemento o una aplicación en PyQGIS, va a necesitar consultar tanto la 
+documentación de la API de QGIS (\url{http://qgis.org}) como la Guía de referencia de enlaces Python PyQt 
+(PyQt Python Bindings Reference Guide)
+(\url{http://www.riverbankcomputing.com/Docs/PyQt4/pyqt4ref.html}). 
+Estos documentos proporcionan información sobre las clases y métodos que usará para dar vida a su creación de 
+Python.
 }
 \end{Tip} 
