@@ -251,7 +251,8 @@ usando el menú contextual que aparece al pulsar con el botón derecho sobre la 
 
 \begin{Tip}
 \caption{\textsc{Restaurar barras de herramientas}} \index{layout!toolbars}
-\qgistip{Si ha ocultado accidentalmente todas sus barras de herramientas, puede recuperarlas seleccionando \texttt{Mostrar todas las barras de herramientas} en el menú Ver.}
+\qgistip{Si ha ocultado accidentalmente todas sus barras de herramientas, puede recuperarlas seleccionando \texttt{Mostrar 
+todas las barras de herramientas} en el menú Ver.}
 \end{Tip}
 
 \subsubsection{Leyenda del mapa}\label{label_legend}
@@ -320,13 +321,13 @@ sobre el que se pulsa es una capa ráster o vectorial. Para las capas vectoriale
 
 \end{itemize}
 
-If several vector data sources have the same vector type and the same attributes, their 
-symbolisations may be grouped. This means that if the symbolisation of one data source is 
-changed, the others automatically have the new symbolisation as well. To group symbologies, open 
-the right click menu in the legend window and choose 'Show file groups'. The file groups of the 
-layers appear. It is now possible to drag a file from one file group into another one. If this is done, 
-the symbologies are grouped. Note that QGIS only permits the drag if the two layers are able to share 
-symbology (same vector type and same attributes).  
+Si varias fuentes de datos vectoriales tienen el mismo tipo vectorial y los mismos atributos se puede agrupar 
+su simbolización. Esto significa que si la simbolización de una fuente de datos se cambia las otras tendrán la 
+nueva simbolización de forma automática. Para agrupar las simbologías, abra el menú contextual en la ventana 
+de la leyenda y seleccione «Mostrar grupos de archivos». Aparecerán los grupos de archivos de las capas. Ahora 
+es posible arrastrar un archivo de un grupo de archivos dentro de otro. Si se hace esto las simbologías se 
+agruparán. Tenga en cuenta que QGIS sólo permite arrastrar si las dos capas pueden compartir la simbología 
+(mismo tipo vectorial y atributos).  
 
 %% isn't included in Titan anymore, except for an "toggle overview"
 %Each legend entry can show the following mini icons:
@@ -341,117 +342,103 @@ symbology (same vector type and same attributes).
 %\includegraphics[width=0.7cm]{editable} This is a vector
 %layer that is currently enabled for editing.\\
 
-\subsubsection{Map View}\label{label_mapview}
+\subsubsection{Vista del mapa}\label{label_mapview}
 \index{map!view}
 
-This is the 'business end' of QGIS - maps are displayed in this area! The
-map displayed in this window will depend on the vector and raster layers you
-have chosen to load (see sections that follow for more information on how to
-load layers). The map view can be panned (shifting the focus of the map display
-to another region) and zoomed in and out. Various other operations can be
-performed on the map as described in the toolbar description above.  The map
-view and the legend are tightly bound to each other - the maps in view reflect
-changes you make in the legend area.  
+Este es el «final del negocio» de QGIS - ¡los mapas se muestran en este área! El mapa que se visualice en esta 
+ventana dependerá de las capas vectoriales y ráster que haya seleccionado para cargar (vea las secciones que siguen 
+para más información sobre cómo cargar capas). Las vista del mapa se puede desplazar (moviendo el foco de 
+visualización del mapa a otra región) y se puede acercar y alejar el zum. Se pueden realizar otras operaciones 
+sobre el mapa como se indica en la descripción de las barras de herramientas más arriba. La vista del mapa y la 
+leyenda están íntimamente relacionadas – los mapas de la vista reflejan los cambios que se hacen en el área de la leyenda.
 
-\begin{Tip}\caption{\textsc{Zooming the Map with the Mouse
-Wheel}}\index{zoom!mouse wheel}
-\qgistip{You can use the mouse wheel to zoom in and out on the map. Place
-the mouse cursor inside the map area and roll it forward (away from you) to
-zoom in and backwards (towards you) to zoom out. The mouse cursor is the 
-center where the zoom occurs. You can customize the behavior of the mouse
-wheel zoom using the \texttt{Map tools} tab under the Settings|Options menu.  }
+\begin{Tip}\caption{\textsc{Hacer zum sobre el mapa con la rueda del ratón}}\index{zoom!mouse wheel}
+\qgistip{Se puede usar la rueda del ratón para acercar o alejar el zum sobre el mapa. Sitúe el cursor del ratón 
+dentro del área del mapa mueva la rueda hacia delante para acercar el zum y hacia atrás para alejarlo. El 
+cursor del ratón es el centro sobre el que se hace zum. Puede personalizar el comportamiento de zum con la 
+rueda del ratón usando la pestaña \texttt{Herramientas de mapa} bajo el menú Configuración|Opciones.}
 \end{Tip}
 
-\subsubsection{Map Overview}\label{label_mapoverview}
+\subsubsection{Localizador del mapa}\label{label_mapoverview}
 \index{map!overview}
 
-The map overview area provides a full extent view of layers added to it.
-Within the view is a rectangle showing the current map extent. This allows
-you to quickly determine which area of the map you are currently viewing. Note
-that labels are not rendered to the map overview even if the layers in the
-map overview have been set up for labeling. 
-You can add a single layer to the
-overview by right-clicking on it in the legend and choosing \textit{Add
-to overview}. You can also add or remove all layers to the overview using the
-Overview tools on the toolbar.
+El área del localizador proporciona una vista a toda la extensión de las capas añadidas al mapa. Dentro de la 
+vista hay un rectángulo que muestra la extensión actual del mapa. Esto permite determinar rápidamente que área 
+del mapa se está viendo actualmente. Tenga en cuenta que las etiquetas no se visualizan en el localizador, 
+incluso aunque las capas se hayan configurado para ser etiquetadas. Puede añadir una sola capa al localizador 
+pulsando con el botón derecho sobre ella en la leyenda y seleccionando \textit{Mostrar en el localizador}. 
+También puede añadir o quitar todas las capas del localizador usando las herramientas del localizador en 
+la barra de herramientas.
 
-You can also grab the red rectangle showing your current extent and pan around; the
-map view will update accordingly.
+También puede coger el rectángulo rojo que muestra la extensión actual y desplazarlo alrededor; la vista 
+del mapa se actualizará conforme se desplace.
 
-\subsubsection{Status Bar}\label{label_statusbar}
+\subsubsection{Barra de estado}\label{label_statusbar}
 
-The status bar shows you your current position in map coordinates (e.g.
-meters or decimal degrees) as the mouse pointer is moved across the map view.
-The status bar also shows the view extents of the map view as you pan and
-zoom in and out. A progress bar in the status bar shows progress of rendering
-as each layer is drawn to the map view. In some cases, such as the gathering
-of statistics in raster layers, the progress bar will be used to show the
-status of lengthy operations. On the right side of the status bar is a small
-checkbox which can be used to temporarily prevent layers being rendered to the
-map view (see Section \ref{subsec:redraw_events} below). At the far right of
-the status bar is a projector icon. Clicking on this opens the projection
-properties for the current project.
+La barra de estado muestra su posición actual en las coordenadas del mapa (ej.: metros o grados decimales) a medida 
+que el puntero del ratón se mueve por la vista del mapa. La barra de estado también muestra la extensión de 
+la vista del mapa mientras desplaza el mapa o modifica el nivel del zum. Una barra de progreso en la barra 
+de estado muestra el progreso de la representación de cada capa que se está dibujando en la vista del mapa. En algunos 
+casos, tales como la recopilación de estadísticas en capas ráster, la barra de progreso se usará para mostrar el 
+estado de operaciones prolongadas. En la parte derecha de la barra de estado hay una pequeña casilla de verificación 
+que se puede usar para evitar temporalmente que se representen en la vista del mapa (vea la Sección 
+\ref{subsec:redraw_events} más abajo). En el extremo derecho de la barra de estado hay un icono de un proyector. 
+Pulsando en él se abren las propiedades de la proyección del proyecto actual.
 
-\subsection{Rendering}\label{subsec:redraw_events}\index{rendering}
+\subsection{Representación}\label{subsec:redraw_events}\index{rendering}
 
-By default, QGIS renders all visible layers whenever the map canvas must be
-refreshed. The events that trigger a refresh of the map canvas include:
+Por omisión, QGIS representa todas las capas visibles cada vez que la vista del mapa se debe refrescar. Los eventos 
+que desencadenan un refresco de la vista del mapa incluyen:
 
 \begin{itemize}
-\item Adding a layer
-\item Panning or zooming
-\item Resizing the QGIS window
-\item Changing the visibility of a layer or layers
+\item Añadir una capa.
+\item Panorámica o zum.
+\item Redimensionar la ventana de QGIS.
+\item Cambiar la visibilidad de una o más capas.
 \end{itemize}
 
-QGIS allows you to control the rendering process in a number of ways.
+QGIS permite controlar el proceso de representación de distintas formas.
 
-\subsubsection{Scale Dependent Rendering}\index{rendering!scale dependent}
+\subsubsection{Representación dependiente de la escala}\index{rendering!scale dependent}
 \label{label_scaledepend}
 
-Scale dependent rendering allows you to specify the minimum and maximum
-scales at which a layer will be visible.  To set scale dependency rendering,
-open the properties dialog by double-clicking on the layer in the legend. On
-the \textit{General} tab, set the minimum and maximum scale values and then
-click on the \textit{Use scale dependent rendering} checkbox.
+La representación dependiente de la escala permite especificar las escalas máxima y mínima a las que una capa será 
+visible. Para establecer la representación dependiente de la escala, abra el diálogo de propiedades haciendo 
+doble clic sobre una capa en la leyenda. En la pestaña \textit{General}, marque la casilla  \textit{Utilizar 
+representación dependiente de la escala} y luego establezca la escala mínima y máxima .
 
-You can determine the scale values by first zooming to the level you want
-to use and noting the scale value in the QGIS status bar.\index{scale}
+Puede determinar los valores de escala haciendo zum primero al nivel que quiera usar y anotando el valor de la 
+escala mostrado en la barra de estado de QGIS.\index{scale}
 
-\subsubsection{Controlling Map Rendering}\label{label_controlmap}
+\subsubsection{Controlar la representación del mapa}\label{label_controlmap}
 
-Map rendering can be controlled in the following ways:
+La representación del mapa se puede controlar de las siguientes formas:
 
-\minisec{Suspending Rendering}\index{rendering!suspending}
+\minisec{Suspender la representación}\index{rendering!suspending}
 \label{label_suspendrender}
 
-To suspend rendering, click the \textit{Render} checkbox in the lower right
-corner of the statusbar. When the \textit{Render} box is not checked, QGIS
-does not redraw the canvas in response to any of the events described in
-Section \ref{subsec:redraw_events}. Examples of when you might want to suspend
-rendering include:
+Para suspender la representación, marque la casilla \textit{Representar} en la esquina inferior derecha de la 
+barra de estado. Cuando la casilla \textit{Representar} no está marcada, QGIS no redibuja la vista del mapa en 
+respuesta a ninguno de los eventos descritos en la Sección
+\ref{subsec:redraw_events}. Entre los ejemplos de cuando puede desear suspender la representación se incluyen:
 
 \begin{itemize}
-\item Add many layers and symbolize them prior to drawing
-\item Add one or more large layers and set scale dependency before drawing
-\item Add one or more large layers and zoom to a specific view before
-drawing
-\item Any combination of the above
+\item Añadir muchas capas y simbolizarlas antes de que se dibujen.
+\item Añadir una o más capas grandes y establecer la dependencia de la escala antes de dibujarlas.
+\item Añadir una o más capas grandes y hacer zum a una zona específica antes de dibujarla
+\item Cualquier combinación de las anteriores.
 \end{itemize}
 
-Checking the \textit{Render} box enables rendering and causes and immediate
-refresh of the map canvas.
+Marcar la casilla \textit{Representar} activa la representación y desencadena el refresco inmediato de la vista del mapa.
 
-\minisec{Setting Layer Add Option}\label{label_settinglayer}
+\minisec{Establecer opción al añadir capas}\label{label_settinglayer}
 \index{rendering!options}\index{layers!initial visibility}
 
-You can set an option to always load new layers without drawing them. This
-means the layer will be added to the map, but its visibility checkbox in the
-legend will be unchecked by default. To set this option, choose
-\textit{Options} from the \textit{Settings} menu and click on the
-\textit{Rendering} tab. Check the \textit{New layers added to the map are not
-displayed} checkbox. Any layer added to the map will be off (invisible) by
-default.
+Se puede establecer una opción para que siempre se carguen las capas nuevas sin dibujarlas. Esto
+significa que las capas se añadirán al mapa, pero su casilla de verificación de visualización en la leyenda estaŕa 
+desmarcada por omisión. Para establecer esta opción, seleccione \textit{Opciones} en el menú \textit{Configuración} 
+y pulse en la pestaña \textit{Representación}. Desmarque la casilla \textit{Por omisión, las nuevas casillas añadidas 
+al mapa se deben visualizar}. Cualquier capa que añada al mapa estará desactivada (invisible) por omisión.
 
 %\minisec{Stopping Rendering}\index{rendering!halting}
 %\label{label_stoprender}
