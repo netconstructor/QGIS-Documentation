@@ -1,0 +1,361 @@
+%!PS-Adobe-3.0 EPSF-3.0
+%%Creator: (ImageMagick)
+%%Title: (extractnodes.eps)
+%%CreationDate: (Sat Jan 24 07:56:40 2009)
+%%BoundingBox: 0 0 106 103
+%%HiResBoundingBox: 0 0 106.466 103
+%%DocumentData: Clean7Bit
+%%LanguageLevel: 1
+%%Pages: 1
+%%EndComments
+
+%%BeginDefaults
+%%EndDefaults
+
+%%BeginProlog
+%
+% Display a color image.  The image is displayed in color on
+% Postscript viewers or printers that support color, otherwise
+% it is displayed as grayscale.
+%
+/DirectClassPacket
+{
+  %
+  % Get a DirectClass packet.
+  %
+  % Parameters:
+  %   red.
+  %   green.
+  %   blue.
+  %   length: number of pixels minus one of this color (optional).
+  %
+  currentfile color_packet readhexstring pop pop
+  compression 0 eq
+  {
+    /number_pixels 3 def
+  }
+  {
+    currentfile byte readhexstring pop 0 get
+    /number_pixels exch 1 add 3 mul def
+  } ifelse
+  0 3 number_pixels 1 sub
+  {
+    pixels exch color_packet putinterval
+  } for
+  pixels 0 number_pixels getinterval
+} bind def
+
+/DirectClassImage
+{
+  %
+  % Display a DirectClass image.
+  %
+  systemdict /colorimage known
+  {
+    columns rows 8
+    [
+      columns 0 0
+      rows neg 0 rows
+    ]
+    { DirectClassPacket } false 3 colorimage
+  }
+  {
+    %
+    % No colorimage operator;  convert to grayscale.
+    %
+    columns rows 8
+    [
+      columns 0 0
+      rows neg 0 rows
+    ]
+    { GrayDirectClassPacket } image
+  } ifelse
+} bind def
+
+/GrayDirectClassPacket
+{
+  %
+  % Get a DirectClass packet;  convert to grayscale.
+  %
+  % Parameters:
+  %   red
+  %   green
+  %   blue
+  %   length: number of pixels minus one of this color (optional).
+  %
+  currentfile color_packet readhexstring pop pop
+  color_packet 0 get 0.299 mul
+  color_packet 1 get 0.587 mul add
+  color_packet 2 get 0.114 mul add
+  cvi
+  /gray_packet exch def
+  compression 0 eq
+  {
+    /number_pixels 1 def
+  }
+  {
+    currentfile byte readhexstring pop 0 get
+    /number_pixels exch 1 add def
+  } ifelse
+  0 1 number_pixels 1 sub
+  {
+    pixels exch gray_packet put
+  } for
+  pixels 0 number_pixels getinterval
+} bind def
+
+/GrayPseudoClassPacket
+{
+  %
+  % Get a PseudoClass packet;  convert to grayscale.
+  %
+  % Parameters:
+  %   index: index into the colormap.
+  %   length: number of pixels minus one of this color (optional).
+  %
+  currentfile byte readhexstring pop 0 get
+  /offset exch 3 mul def
+  /color_packet colormap offset 3 getinterval def
+  color_packet 0 get 0.299 mul
+  color_packet 1 get 0.587 mul add
+  color_packet 2 get 0.114 mul add
+  cvi
+  /gray_packet exch def
+  compression 0 eq
+  {
+    /number_pixels 1 def
+  }
+  {
+    currentfile byte readhexstring pop 0 get
+    /number_pixels exch 1 add def
+  } ifelse
+  0 1 number_pixels 1 sub
+  {
+    pixels exch gray_packet put
+  } for
+  pixels 0 number_pixels getinterval
+} bind def
+
+/PseudoClassPacket
+{
+  %
+  % Get a PseudoClass packet.
+  %
+  % Parameters:
+  %   index: index into the colormap.
+  %   length: number of pixels minus one of this color (optional).
+  %
+  currentfile byte readhexstring pop 0 get
+  /offset exch 3 mul def
+  /color_packet colormap offset 3 getinterval def
+  compression 0 eq
+  {
+    /number_pixels 3 def
+  }
+  {
+    currentfile byte readhexstring pop 0 get
+    /number_pixels exch 1 add 3 mul def
+  } ifelse
+  0 3 number_pixels 1 sub
+  {
+    pixels exch color_packet putinterval
+  } for
+  pixels 0 number_pixels getinterval
+} bind def
+
+/PseudoClassImage
+{
+  %
+  % Display a PseudoClass image.
+  %
+  % Parameters:
+  %   class: 0-PseudoClass or 1-Grayscale.
+  %
+  currentfile buffer readline pop
+  token pop /class exch def pop
+  class 0 gt
+  {
+    currentfile buffer readline pop
+    token pop /depth exch def pop
+    /grays columns 8 add depth sub depth mul 8 idiv string def
+    columns rows depth
+    [
+      columns 0 0
+      rows neg 0 rows
+    ]
+    { currentfile grays readhexstring pop } image
+  }
+  {
+    %
+    % Parameters:
+    %   colors: number of colors in the colormap.
+    %   colormap: red, green, blue color packets.
+    %
+    currentfile buffer readline pop
+    token pop /colors exch def pop
+    /colors colors 3 mul def
+    /colormap colors string def
+    currentfile colormap readhexstring pop pop
+    systemdict /colorimage known
+    {
+      columns rows 8
+      [
+        columns 0 0
+        rows neg 0 rows
+      ]
+      { PseudoClassPacket } false 3 colorimage
+    }
+    {
+      %
+      % No colorimage operator;  convert to grayscale.
+      %
+      columns rows 8
+      [
+        columns 0 0
+        rows neg 0 rows
+      ]
+      { GrayPseudoClassPacket } image
+    } ifelse
+  } ifelse
+} bind def
+
+/DisplayImage
+{
+  %
+  % Display a DirectClass or PseudoClass image.
+  %
+  % Parameters:
+  %   x & y translation.
+  %   x & y scale.
+  %   label pointsize.
+  %   image label.
+  %   image columns & rows.
+  %   class: 0-DirectClass or 1-PseudoClass.
+  %   compression: 0-none or 1-RunlengthEncoded.
+  %   hex color packets.
+  %
+  gsave
+  /buffer 512 string def
+  /byte 1 string def
+  /color_packet 3 string def
+  /pixels 768 string def
+
+  currentfile buffer readline pop
+  token pop /x exch def
+  token pop /y exch def pop
+  x y translate
+  currentfile buffer readline pop
+  token pop /x exch def
+  token pop /y exch def pop
+  currentfile buffer readline pop
+  token pop /pointsize exch def pop
+  /Times-Roman findfont pointsize scalefont setfont
+  x y scale
+  currentfile buffer readline pop
+  token pop /columns exch def
+  token pop /rows exch def pop
+  currentfile buffer readline pop
+  token pop /class exch def pop
+  currentfile buffer readline pop
+  token pop /compression exch def pop
+  class 0 gt { PseudoClassImage } { DirectClassImage } ifelse
+  grestore
+} bind def
+%%EndProlog
+%%Page:  1 1
+%%PageBoundingBox: 0 0 106 103
+userdict begin
+DisplayImage
+0 0
+106.466 103.139
+12.000000
+32 31
+0
+0
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff3F0303ffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffff4B02024805055305056203036802025E0101400101000000
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+4501015A05056A06067B06068604046F02023E01010000000B00001800001700000C0000
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffff3204043E03034702024401010F00000C00005F0303740606740707
+7B0606680303250101080101430404680404690202570202ffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff4D0505
+6106067A05057402022700000200003A01016F04047606067008085504041000002A0303
+6007077A0606860303750101ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffff6306066D08087B0707870303540101
+1100001700005B02026D04046006064504040A00006504047107077407078605057D0303
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffff7005057506067007077D06067203034E02020500004C0202630303
+5604043A03033D02027303037A05057107077407076D0505ffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff710303
+7304046D06066907075D05054A0303ffffffffffffffffffffffffffffff570101630101
+6B03036205055A0606530606ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffff4A0101420202480303500505420404
+310202ffffffffffffffffffffffffffffffffffff3F00002B01011E01011F02022C0303
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffff0700000700000A00001B1E0A1D4D16ffffffffffffffffffffffff
+ffffffffffffffffff000000000000000000010000000000ffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff000000
+1901014304045702025E02025F0101ffffffffffffffffffffffffffffffffffff000000
+000000000000000000000000ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffff0000003D0303650505740707690E07
+395112177018ffffffffffffffffffffffffffffff000000000000000000000000000000
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffff030000410101700605383F1139702029A723218F1E16671917661D
+ffffffffffffffffff2103031501011000000F0000160000ffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff311106
+33190837711F399F3752C64A46BE3E2FB7251C851B0D39170000000000001B0101440505
+5205055803035E02025F0101ffffffffffffffffff000000000000000000000000000000
+000000000000000000000000000000ffffff17631E155D1C297D263194306BCF656DD166
+53C44C34B62B24A71D3558124B00000A00000B00004D0404690606750707830404790202
+ffffff000000000000000001000204030E1602090E030C13000000000000000203010405
+00000004090E0000000004010B22091B5A184B9E4A77D47053C44B2DB12423A21D1D861D
+40370D1100000700004B02027306067207077D0606780303ffffff00000000000100060A
+0E49731869A02587CB2D91D63597DC3B9CE041A1E545A1D950ABEC1F4159020609000000
+000000064C0C64B56279D87147BF3F34621B3E45122C56183A330F1A09030600004E0202
+7704047307076E070765050500000000000000010206273E1B88D4218CD72891D92F95DC
+3699DF3C9EE23A95C2277654439DBB56B0EE4A90C1000100000B004F954F7ED77A5CC954
+2C962A40360F750505680D085105040F00000A00005401016F03036D05055F0606510505
+000000000000000000137BC41B88D4228CD72891D92F95DC3699DF3C9EE23D9BD4368E97
+20832836967A3A937D2776453F853D6ECE6A61CB5A36AB321A6D155B02026D0404600606
+4504040A0000ffffff4E01016202026504045605054405050000000001030429421483D1
+1C88D4248DD72891D92F95DC3699DF3C9EE241A1E545A0DC3D9C9E249F2636AA3449BC44
+64CE5C58C75139B334239D201A4A1Cffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffff0000000003050B65A31584D1208AD4268FD82992D92E94DB
+3498DE3B9DE23EA0E347A5E74FABEC4AAAC0288E3D3AA94335A7332E992D1C871C185C1E
+0C2616ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+00000000060B0A619C1986D2258ED72891D92992D92992D93498DE3B9DE23C9EE244A3E6
+4FABEC56B0EE54ABD65AAFDC4593970A2212000000ffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff00000100070C0A629D1885D2
+258DD72991D92992D92992D93498DE3B9DE23C9EE245A4E64FABEC56B0EE5DB4F163B9F4
+5FACE105090C000000000000ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffff0000010000000C72B81684D1248DD72992DA2992D92992D9
+3498DE3B9DE23C9EE248A6E850ABEC56B0EE5DB4F163B9F462B1E705090B000000000000
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+0000000000000D78C21584D1248DD72B92DB2E95DC2992D93498DE3B9DE241A1E449A7E9
+50ABEC56B0EE5DB4F163B9F462B0E6000001000000000000ffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff0000000000000C6AAC1584D1
+238DD72992DA2992D92F94DA3597DB3B9DE042A2E549A7E950ABEC56B0EE5DB4F163B9F4
+61AFE5020304000000000000ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffff00000000010207416A1583D1218BD52790D82891D92F95DC
+3699DF3C9EE242A3E549A7E950ABEC56B0EE5DB4F163B9F45DA7DB091015000000000000
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+000000000000000406147AC11C87D1248DD62891D92F95DC3699DF3C9EE242A3E549A7E9
+50ABEC56B0EE5DB4F162B8F341769B020507000000ffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff000000000000000000020E16
+0B38582085CC2891D92F95DC3699DF3C9EE242A3E549A7E950ABEC56B0EE58ABE5437FA7
+172A39000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffff00000000000000010101070A061B29103C5A1B5781
+21608D276A982D709E306F9B326C9632668B1B3649010203000000000000ffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffff000000000000000000000000000000000000000102000203000203010203
+000102000000000000000000000000ffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+end
+%%PageTrailer
+%%Trailer
+%%EOF
