@@ -1,181 +1,187 @@
 % vim:autoindent:set textwidth=78:
 
-\section{Working with Projections}\label{label_projections}
+\section{Arbeiten mit Projektionen}\label{label_projections}
 \index{Projections!working with}
 
 % when the revision of a section has been finalized, 
 % comment out the following line:
 %\updatedisclaimer
 
-QGIS allows users to define a global and project-wide CRS (Coordinate
-Reference System) for layers without a pre-defined CRS. It also allows the
-user to define custom coordinate reference systems and supports on-the-fly
-(OTF) projection of vector layers. All these features allow the user to
-display layers with different CRS and have them overlay properly.
+QGIS ermöglicht es, globale und projektbezogene KBS (Koordinatenbezugssysteme)
+für Layer ohne vordefinierte KBS zu definieren. Es können benutzerdefinierte
+Koordinatenbezugssysteme erstellt werden und für Vektorlayer with On-The-Fly
+(OTF) Projektion unterstützt, um Layer gemeinsam und lagegenau darzustellen,
+obwohl sie unterschiedliche KBS besitzen. 
 
-\subsection{Overview of Projection Support}\label{label_projoverview}
+\subsection{Überblick zur Projektionsunterstützung}\label{label_projoverview}
 
-QGIS has support for approximately 2,700 known CRS. Definitions for 
-each of these CRS are stored in a SQLite database that is installed with
-QGIS. Normally you do not need to manipulate the database directly. In fact,
-doing so may cause projection support to fail. Custom CRS are stored in a
-user database. See Section \ref{sec:customprojections} for
-information on managing your custom coordinate reference systems.
+QGIS unterstützt etwa 2700 bekannte Koordinatenbezugssysteme (KBS). Diese
+sind in einer SQlite-Datenbank abgelegt, die mit QGIS installiert wird.
+Normalerweise muss diese Datenbank nicht editiert werden, und es kann
+Probleme verursachen, wenn Sie es dennoch versuchen. Selbst definierte KBS
+sind in einer Benutzerdatenbank abgelegt. Informationen zum Anlegen einer
+Benutzerdatenbank finden Sie im Abschnitt \ref{sec:customprojections}.
 
-The CRS available in QGIS are based on those defined by
-EPSG\index{EPSG} and are largely abstracted from the spatial\_references 
-table in PostGIS\index{PostGIS} version 1.x. The EPSG identifiers are
-present in the database and can be used to specify a CRS in QGIS.
+Die Koordinatenbezugssysteme in QGIS basieren auf EPSG Codes\index{EPSG} und
+sind weitestgehend der spatial\_references Tabelle von PostGIS\index{PostGIS}
+Version 1.x entnommen. Wichtig ist, dass die IDs, welche von QGIS benutzt
+werden, nicht den IDs der spatial\_references Tabelle oder den EPSG Codes
+entsprechen. Die EPSG und PostGIS IDs sind in der SQlite-Datenbank abgelegt
+und werden benutzt, um KBS in QGIS zu spezifizieren.
 
-In order to use OTF projection, your data must contain information about its
-coordinate reference system or you have to define a global, layer or
-project-wide CRS. For PostGIS layers QGIS uses the spatial reference
-identifier that was specified when the layer was created. For data supported
-by OGR, QGIS relies on the presence of a format specific means of specifying
-the CRS. In the case of shapefiles, this means a file containing the Well
-Known Text (WKT)\index{WKT} specification of the CRS. The projection file
-has the same base name as the shapefile and a prj extension. For example, a
-shapefile named \filename{alaska.shp} would have a corresponding projection
-file named \filename{alaska.prj}.
+Um OTF Projektion zu verwenden, müssen die Daten Informationen über ihr
+Koordinatenbezugssystem enthalten. Bei PostGIS-Layern benutzt QGIS die spatial
+reference ID, die bei der Erstellung des Layers festgelegt wurde. Bei Daten,
+die von der OGR-Bibliothek unterstützt werden, bezieht sich QGIS auf das
+Vorhandensein eines KBS bei den Daten. Bei Shapes bedeutet dies, dass eine
+Datei mit der Endung .prj vorhanden sein muss, in der das KBS im Well
+Known Text (WKT)\index{WKT} Format angegeben ist. Für ein Shape mit dem Namen
+\filename{lakes.shp} gäbe es also eine entsprechende Projektionsdatei
+\filename{lakes.prj}. 
 
-\subsection{Specifying a Projection}
+\subsection{Eine Projektion festlegen}
 \index{Projections!specifying}
 \label{sec:projection-specifying}
 
-QGIS no longer sets the map CRS to the coordinate reference system of the
-first layer loaded. When you start a QGIS session with layers that do not
-have a CRS, you need to control and define the CRS definition for these
-layers. This can be done globally or project-wide in the \tab{CRS} tab under
-\mainmenuopt{Settings} > \dropmenuopttwo{mActionOptions}{Options} (See
-Figure~\ref{fig:crsdialog}). 
+QGIS setzt das Koordinatenbezugssystem beim Start nicht mehr automatisch auf
+das KBS des zuerst geladenen Layers. Wenn Sie QGIS mit einem Layer starten,
+der keine KBS-Informationen bereitstellt, müssen Sie für diesen Layer ein
+KBS festlegen. Dies kann global oder projektbezogen im Reiter \tab{KBS} im
+Menü \mainmenuopt{Einstellungen} > \dropmenuopttwo{mActionOptions}{Optionen}
+geschehen (Siehe Abbildung~\ref{fig:crsdialog}) 
 
 \begin{itemize}
-\item \checkbox{Prompt for CRS} 
-\item \checkbox{Project wide default CRS will be used}
-\item \checkbox{Global default CRS displayed below will be used}
+\item \checkbox{KBS abfragen} 
+\item \checkbox{Projektweite KBS-Voreinstellung}
+\item \checkbox{Untenstehende globale Voreinstellung wird genutzt}
 \end{itemize}
 
-The global default CRS \texttt{proj=longlat +ellps=WGS84 +datum=WGS84
-+no\_defs} comes predefined in QGIS but can of course be changed, and the new
-definition will be saved for subsequent QGIS sessions.    
+Das globale standard Koordinatenbezugssystem \usertext{proj=longlat
++ellps=WGS84 +datum=WGS84 +no\_defs} ist vordefiniert in QGIS, kann aber
+natürlich geändert werden und wird dann für folgende Sitzungen gespeichert. 
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{CRS tab in the QGIS Options Dialog \nixcaption}\label{fig:crsdialog}\smallskip
+   \caption{KBS Reiter im Dialog Optionen \nixcaption}\label{fig:crsdialog}\smallskip
    \includegraphics[clip=true, width=12cm]{crsdialog}
 \end{center}
 \end{figure}
 
-If you want to define the coordinate reference system for a certain layer
-without CRS information, you can also do that in the \tab{General} tab of the
-raster properties (\ref{label_generaltab}) and vector properties
-(\ref{vectorgeneraltab}) dialog. If your layer already has a CRS defined, it
-will be displayed as shown in Figure~\ref{fig:vector_symbology}.
+Wenn Sie ein Koordinatenbezugssystem für einen bestimmten Layer festlegen
+möchten, können Sie das im Reiter \tab{Allgemein} der Dialoge für 
+Rasterlayereigenschaften (\ref{label_generaltab}) und
+Vektorlayereigenschaften (\ref{vectorgeneraltab}) machen. Falls der geladene
+Layer bereits Informationen zu seinem Koordinatenbezugssystem enthaält,
+werden diese wir in Abbilung~\ref{fig:vector_symbology} angezeigt.
 
-\subsection{Define On The Fly (OTF) Projection}\label{label_projstart}
+\subsection{On-The-Fly (OTF) Projektion}\label{label_projstart}
 
-QGIS does not have OTF projection enabled by default, and this function is
-currently only supported for vector layers. To use OTF projection, you must
-open the \dropmenuopttwo{mActionOptions}{Project Properties} dialog, select a
-CRS and activate the \checkbox{Enable on the fly projection} checkbox.
-There are two ways to open the dialog:
+In QGIS ist die Unterstützung für On-The-Fly (OTF) Projektion nicht als
+Standard aktiviert. Um diese auszuwählen, öffnen Sie den Dialog
+\dropmenuopttwo{mActionOptions}{Projekteinstellungen}, wechseln in den Reiter
+\tab{Benutzerkoordinatenreferenzsystem} und klicken dort das
+Kontrollkästchen \checkbox{On-The-Fly-KBS-Transformation aktivieren} an. 
 
-\begin{enumerate}
-\item Select \dropmenuopttwo{mActionOptions}{Project Properties} from the
-\mainmenuopt{Settings} menu.
-\item Click on the \toolbtntwo{mIconProjectionEnabled}{projector} icon in the
-lower right-hand corner of the statusbar.
-\end{enumerate}
+Um den Dialog \tab{Benutzerkoordinatenreferenzsystem} zu öffnen, können Sie
+auch auf das Icon \toolbtntwo{mIconProjectionEnabled}{KBS-Status} in der
+unteren rechten Ecke der Statusleiste drücken.
 
-If you have already loaded a layer, and want to enable OTF projection, the
-best practice is to open the \tab{Coordinate Reference System} tab of the
-\dialog{Project Properties} dialog and find the CRS of the currently loaded
-layer in the list of CRS, and activate the \checkbox{Enable on the fly
-projection} checkbox. All subsequently loaded vector layers will then be OTF
-projected to the defined CRS.
+Wenn Sie bereits einen Layer geladen haben und nun die Unterstützung für
+On-The-Fly (OTF) Projektion aktivieren wollen ist der beste Weg folgender.
+Öffnen Sie den Reiter \tab{Benutzerkoordinatenreferenzsystem} im Menü
+\dropmenuopttwo{mActionOptions}{Projekteinstellungen}, wählen Sie das
+passende KBS für den Layer aus und aktivieren Sie dann das
+Kontrollkästchen \checkbox{On-The-Fly-KBS-Transformation aktivieren}. Alle
+daraufhin geladenen Vektorlayer werden werden dann On-The-Fly auf das
+ausgewählte KBS projiziert. 
 
-The \tab{Coordinate Reference System} tab of the \dialog{Project Properties}
-dialog contains four important components as numbered in Figure
-\ref{fig:projections} and described below.
+Der Reiter \tab{Benutzerkoordinatenreferenzsystem} enthält vier wichtige
+Optionen (siehe Abbildung~\ref{fig:projections}). Diese werden im Folgenden
+beschrieben.
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{Projection Dialog \nixcaption}\label{fig:projections}\smallskip
+   \caption{Dialog Projekteinstellungen \nixcaption}\label{fig:projections}\smallskip
    \includegraphics[clip=true, width=12cm]{projectionDialog}
 \end{center}  
 \end{figure}
 
 \begin{enumerate}
-\item \textbf{Enable on the fly projection}\index{Projections!enabling} -
-this checkbox is used to enable or disable OTF projection. When off, each
-layer is drawn using the coordinates as read from the data source. When on,
-the coordinates in each layer are projected to the coordinate reference
-system defined for the map canvas.
-\item \textbf{Coordinate Reference System} - this is a list of all CRS
-supported by QGIS, including Geographic, Projected and Custom coordinate
-reference systems. To use a CRS, select it from the list by expanding
-the appropriate node and selecting the CRS. The active CRS is preselected.
-\item \textbf{Proj4 text} - this is the CRS string used by the Proj4
-projection engine. This text is read-only and provided for informational
-purposes.
-\item \textbf{Search} - if you know the EPSG identifier or the name 
-for a Coordinate Reference System, you can use the search feature to find it.
-Enter the identifier and click on \button{Find}.
+\item \textbf{On-The-Fly-KBS-Transformation aktivieren}\index{Projections!enabling} 
+- über diese Checkbox wird die OTF Projektion aktiviert oder deaktiviert.
+  Wenn sie deaktiviert ist, wird jeder Layer entsprechend seines KBS
+  dargestellt. Wenn es aktiviert ist, wird jeder Layer beim Laden in die
+definierte Koordinatenbezugssystem 'on-the-fly' umgewandelt dargestellt.
+\item \textbf{Koordinatensystem} - dies ist eine Liste mit allen
+Koordinatenbezugssystemen, die von QGIS unterstützt werden. Um ein
+KBS zu benutzen, wählt man es aus der Liste aus. Die bis dahin aktive
+Projektion ist vorgegeben als WGS 84.
+\item \textbf{Proj4 Text} - dies ist ein Ausdruck, der von der PROJ-Bibliothek
+genutzt wird. Es dient nur zur Information und kann nicht verändert werden.
+\item \textbf{Suchen} - wenn Sie den EPSG Code oder den Namen für ein KBS
+kennen, können Sie diese benutzen, um ihr Koordinatenbezugssystem zu finden.
+Geben Sie eine ID  der Namen ein und klicken Sie auf \button{Finden}.
 \end{enumerate}
 
 \begin{Tip}
- \caption{\textsc{Project Properties Dialog}}
-\qgistip{
-If you open the \dialog{Project Properties} dialog from the
-\mainmenuopt{Settings} menu, you must click on the \tab{Coordinate Reference
-System} tab to view the CRS settings. Opening the dialog from the
-\toolbtntwo{mIconProjectionEnabled}{projector} icon will automatically bring
-the \tab{Coordinate Reference System} tab to the front.
+\caption{\textsc{Dialog Projekteigenschaften}}
+\qgistip{Wenn Sie den Dialog \dialog{Projekteigenschaften} über die
+Menüleiste öffnen, müssen Sie erst auf den Reiter
+\tab{Benutzerkoordinatenreferenzsystem} drücken. Über das
+\toolbtntwo{mIconProjectionEnabled}{KBS-Status} Icon in der Statusleiste
+unten rechts wird der Reiter \tab{Benutzerkoordinatenreferenzsystem} direkt
+in den Vordergrund gerückt.
 }
 \end{Tip}
 
-\subsection{Custom Coordinate Reference System}\label{sec:customprojections}
+\subsection{Koordinatenbezugssystem selbst definieren}\label{sec:customprojections}
 \index{Projections!custom}
 
-If QGIS does not provide the coordinate reference system you need, you
-can define a custom CRS. To define a CRS, select
-\dropmenuopttwo{mIconNew}{Custom CRS} from the \mainmenuopt{Settings} menu.
-Custom CRS are stored in your QGIS user database. In addition to your custom
-CRS, this database also contains your spatial bookmarks and other custom data. 
+Wenn QGIS nicht das KBS bereithält, welches Sie brauchen, können Sie ein
+eigenes KBS erstellen. Dazu wählen Sie in der Menüleiste
+\mainmenuopt{Einstellungen} >
+\dropmenuopttwo{mIconNew}{Benutzerkoordinatenbezugssystem}. Das eigene KBS
+wird in einer Benutzerdatenbank erstellt. Diese enthält Ihre räumlichen
+Lesezeichen und die selbst erstellten Projektionen.
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{Custom CRS Dialog \nixcaption}\label{fig:customprojections}\smallskip
+   \caption{Definition eines eigenen Koordinatenbezugssystems \nixcaption}\label{fig:customprojections}\smallskip
    \includegraphics[clip=true, width=12cm]{customProjectionDialog}
 \end{center}  
 \end{figure}
 
-Defining a custom CRS in QGIS requires a good understanding of the Proj.4
-projection library. To begin, refer to the Cartographic Projection Procedures
-for the UNIX Environment - A User's Manual by Gerald I. Evenden, U.S.
-Geological Survey Open-File Report 90-284, 1990 (available at \url{ftp://ftp.remotesensing.org/proj/OF90-284.pdf}).
-This manual describes the use of the \usertext{proj.4} and related command line
-utilities. The cartographic parameters used with \usertext{proj.4} are
-described in the user manual, and are the same as those used by QGIS. 
+In QGIS bedarf es einem grundlegenden Verständnis im Umgang mit der
+PROJ4-Bibliothek. Zu Beginn sollten Sie einen Blick in das Benutzerhandbuch
+von PROJ werfen. Cartographic Projection Procedures for the UNIX Environment
+- A User's Manual by Gerald I. Evenden, U.S. Geological Survey Open-File Report
+90-284, 1990 (zu finden unter \url{ftp://ftp.remotesensing.org/proj/OF90-284.pdf}).
+Dieses Handbuch beschreibt die Anwendung von \usertext{proj.4}. Die dort
+beschriebenen kartographischen Parameter sind identisch mit denen, die in QGIS
+verwendet werden.
 
-The \dialog{Custom Coordinate Reference System Definition} dialog requires
-only two parameters to define a user CRS: 
+Der Dialog \dialog{Definition eines Benutzerkoordinatenbezugssystem} braucht
+nur zwei Einträge, um eine eigene Projektion zu definieren:
+
 \begin{enumerate}
-\item a descriptive name and
-\item the cartographic parameters in PROJ.4 format.
+\item Einen Namen
+\item kartographische Parameter 
 \end{enumerate}
-To create a new CRS, click the \toolbtntwo{mIconNew}{New} button and enter a
-descriptive name and the CRS parameters. After that you can save your CRS by
-clicking the button \toolbtntwo{mActionFileSave}{Save}.
 
-Note that the \guilabel{Parameters} must begin with a \usertext{+proj=}-block,
-to represent the new coordinate reference system.
+Um ein neues KBS zu erstellen, klicken Sie auf den Knopf
+\toolbtntwo{mIconNew}{Neu}, geben Sie einen beschreibenden Namen ein
+und die kartographischen Parameter. Abbildung \ref{fig:customprojections}
+zeigt den Dialog mit einer Beispielprojektion. Danach speichern Sie das neue
+KBS mit dem Knopf \toolbtntwo{mActionFileSave}{Speichern} ab. 
 
-You can test your CRS parameters to see if they give sane results by
-clicking on the \button{Calculate} button inside the \guiheading{Test} block 
-and pasting your CRS parameters into
-the \guilabel{Parameters} field. Then enter known WGS 84 latitude and longitude
-values in \guilabel{North} and \guilabel{East} fields respectively. 
-Click on \button{Calculate} and compare the results with the known values in
-your coordinate reference system. 
+Denken Sie daran, dass die kartographischen Parameter mit einem
+\usertext{+proj=}-Block beginnen müssen, um den Beginn eines neuen KBS
+anzuzeigen. 
+
+Sie können das neue KBS testen, um zu sehen, ob bei einer Konvertierung
+von bekannten WGS84 Lat-Lon Koordinaten in ihre Projektion ein sinnvolles
+Ergebnis herauskommt. Dazu kopieren Sie ihre kartographischen Parameter in
+das Fenster \guilabel{Parameter}, geben ein paar bekannte WGS84 Lat-Lon
+Koordinaten an und klicken dann auf den Knopf \button{Berechnen}. Vergleichen
+Sie die Ergebnisse mit den Werten im Kartenfenster.
 
