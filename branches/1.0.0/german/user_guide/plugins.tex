@@ -6,29 +6,35 @@
 % comment out the following line:
 %\updatedisclaimer
 
-QGIS has been designed with a plugin architecture.
-This allows new features/functions to be easily added to the application.
-Many of the features in QGIS are actually implemented as \textbf{core} or \textbf{external} plugins.\index{plugins!types} 
+QGIS wurde mit einer Plugin-Architektur geplant. Dies erlaubt das einfache
+Einfügen weiterer Features/Funktionalitäten in das Programm. Viele der
+Funktionalitäten in QGIS sind bereits als \textbf{Kern-} oder
+\textbf{externe} Plugins implementiert.\index{plugins!types}
 
 \begin{itemize}
-\item \textbf{Core Plugins} are maintained by the QGIS Development Team and are automatically part of every QGIS distribution.
-They are written in one of two languages: C++ or Python.
-More information about core plugins are provided in Section \ref{sec:core_plugins}.
-\item \textbf{External Plugins} are currently all written in Python.
-They are stored in external repositories and maintained by the individual author.
-They can be added to QGIS using the core plugin called \filename{Plugin Installer}.
-More information about external plugins are provided in Section \ref{sec:external_plugins}.
+\item \textbf{Kern-Plugins} werden durch das QGIS Development Team gewartet
+und sind automatisch Teil jeder QGIS Distribution. Sie sind entweder in C++
+oder in Python geschrieben. Weitere Informationen zu Kern-Plugins finden sich
+in Kapitel~\ref{sec:core_plugins}.
+\item \textbf{Externe Plugins} sind derzeit alle in Python geschrieben. Sie
+sind in externen Repositories abegelegt und werden durch die jeweiligen
+Autoren gewartet und betreut. Sie können in QGIS mit Hilfe des Kern-Plugins
+\filename{Plugin Installer} integriert werden. Weitere Informationen zu
+externen Plugins finden sich in Kapitel~\ref{sec:external_plugins}.
 \end{itemize}
 
-\subsection{Managing Plugins}\label{sec:managing_plugins}
+\subsection{Plugins verwalten}\label{sec:managing_plugins}
 \index{plugins!managing} 
 
-Managing plugins in general means loading or unloading them using the \filename{Plugin Manager} plugin.
-External plugins need to be first installed using the \filename{Plugin Installer} plugin.
+Das Verwalten von Plugins bedeutet maßgeblich das Laden und Entladen von
+Erweiterungen mit dem \filename{Plugin Manager}. Externe Plugins müssen
+zuerst mit dem \filename{Plugin Installer} aus dem jeweiligen Repository
+eines Servers integriert werden. 
 
-\subsubsection{Loading a QGIS Core Plugin}\label{sec:load_core_plugin} 
+\subsubsection{Kern-Plugins laden}\label{sec:load_core_plugin} 
 
-Loading a QGIS Core Plugin is provided in the main menu \mainmenuopt{Plugins} > \dropmenuopttwo{mActionShowPluginManager}{Manage Plugins...}.\index{plugins!manager}
+Das Laden eines Kern-Plugins geschieht über das Menü \mainmenuopt{Plugins} >
+\dropmenuopttwo{mActionShowPluginManager}{Plugins verwalten}.\index{plugins!manager}
 
 \begin{figure}[ht]
    \begin{center}
@@ -37,74 +43,153 @@ Loading a QGIS Core Plugin is provided in the main menu \mainmenuopt{Plugins} > 
 \end{center}
 \end{figure}
 
-The Plugin Manager lists all the available plugins and their status (loaded or unloaded).
-All available means all core plugins and all external plugins you added using \filename{Plugin Installer} plugin (see Section \ref{sec:external_plugins}). 
-Figure \ref{fig:pluginmanager} shows the Plugin Manager dialog.
-Loaded plugins are "remembered" when you exit the application and restored the next time you run QGIS.
+Der \filename{Plugin Manager} listet alle vorhandenen Plugins und ihren
+Status (geladen oder nicht geladen). Alle vorhandenen meint in diesem
+Zusammenhang alle Kern-Plugins und alle externen Plugins, die mit Hilfe des
+\filename{Plugin Installer} Plugins integriert wurden (siehe
+Kapitel~\ref{sec:external_plugins}). Abbildung~\ref{fig:pluginmanager} zeigt
+den \dialog{Plugin Manager} Dialog. Geladene Plugins werden sich von QGIS
+'gemerkt' und beim nächsten Starten der Anwendung erneut geladen.
 
-\begin{Tip}\caption{\textsc{Crashing Plugins}}\index{crashes}
-\qgistip{If you find that QGIS crashes on startup, a plugin may be at fault.
-You can stop all plugins from loading by editing your stored settings file (see \ref{subsec:gui_options} for location).
-Locate the plugins settings and change all the plugin values to false to prevent them from loading.
-\nix {For example, to prevent the Delimited text plugin from loading, the entry in \$HOME/.config/QuantumGIS/qgis.conf on Linux should look like this:\usertext{Add Delimited Text Layer=false}.}
-\normalfont 
-Do this for each plugin in the [Plugins] section.
-You can then start QGIS and add the plugins one at a time from the Plugin Manger to determine which is causing the problem.}
-\end{Tip} 
+\begin{Tip}\caption{\textsc{Abstürzende Plugins}}\index{crashes}
+\qgistip{Falls QGIS während des Startens abstürzt, kann der Grund ein
+kaputtes Plugin sein. Um erstmal kein Plugin zu laden, können Sie auch die
+gespeicherten Einstellungen direkt editieren (vgl. Abschnitt
+\ref{subsec:gui_options}). Finden Sie dazu den Block der Plugins und ändern
+Sie alle Werte auf 'false'; dann wird das entsprechende Plugin nicht mehr
+geladen.
+\nix {Um z.B. das Plugin "'Getrennter Text"' nicht automatisch beim Starten
+zu laden, sollte der Eintrag in der Datei
+\filename{\$HOME/.config/QuantumGIS/qgis.conf} folgendermaßen aussehen:
+\usertext{Add Delimited Text Layer=false}.}
+Tun Sie dies nun für alle Plugins, die im Block "'Plugins"' stehen. Danach
+können Sie QGIS starten und vom \dialog{Plugin Manager} Diaolg aus jedes
+einzelne Plugin laden und herausfinden, welches das Probleme machende Plugin
+ist.
+}
+\end{Tip}
 
-\subsubsection{Loading an external QGIS Plugin}\label{sec:load_external_plugin} 
+\subsubsection{Externe Plugins laden}\label{sec:load_external_plugin} 
 
-To be able to integrate external plugins into QGIS you first need to load the \filename{Plugin Installer} plugin as desribed in Section \ref{sec:load_core_plugin}.
-Then you can load external QGIS python plugin in two steps: 
+Um externe Plugins in QGIS integrieren zu können, müssen Sie zuerst das
+Kern-Plugin \filename{Plugin Installer} laden, wie in
+Kapitel~\ref{sec:load_core_plugin} beschrieben. Danach können Sie das externe
+Plugin in zwei Schritten laden: 
 
 \begin{enumerate}
-\item Download an external plugin from a repository using the \filename{Plugin Installer} (Section \ref{sec:python_plugin_installer}).
-The new external plugin will be integrated into the list of available plugins in the \filename{Plugin Manager}.
-\item Load the plugin using the \filename{Plugin Manager}.
+\item Laden Sie mit dem \filename{Plugin Installer} das externe Plugin von
+dem Repository eines Servers (siehe
+Kapitel~\ref{sec:python_plugin_installer}). Das externe Plugin ist nun in
+QGIS integriert.
+\item Laden Sie nun das externe Plugin mit dem \filename{Plugin Manager}.
 \end{enumerate}
 
-\subsubsection{Using the QGIS Python Plugin Installer}\index{plugins!installing}\label{sec:python_plugin_installer}
+\subsubsection{Plugin Installer verwenden}\index{plugins!installing}\label{sec:python_plugin_installer}
 \index{plugins!Python Plugin Installer}\index{plugins!upgrading}
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{Installing external python plugins \nixcaption}
+   \caption{Externe Python Plugins installieren \nixcaption}
 \label{fig:plugininstaller}\smallskip
    \includegraphics[clip=true, width=14cm]{plugininstaller}
 \end{center}
 \end{figure}
 
-In order to download and install an external Python plugin, click the menu \mainmenuopt{Plugins} > \dropmenuopttwo{plugin_installer}{Fetch Python Plugins...}.
-The \filename{Plugin Installer} window will appear (figure \ref{fig:plugininstaller}) with the tab \tab{Plugins}, containing the list of all Python plugins available in remote repositories as well as installed ones. Each plugin can be either:
+Um ein externes Plugin herunterzuladen und zu installieren, klicken Sie auf
+das Menü \mainmenuopt{Plugins} > \dropmenuopttwo{plugin_installer}{Python
+Plugins herunterladen}. Der \dialog{Plugin Installer} Dialog öffnet sich mit
+dem Reiter \tab{Plugins} (siehe Abbildung~\ref{fig:plugininstaller}). Sie
+sehen nun eine Liste aller in den eingebundenen Repositories vorhandenen
+Python Plugins sowie die bereits auf dem Rechner installierten. Jedes Plugin
+kann dabei folgenden Status haben:
 \begin{itemize}
-\item \textbf{not installed} - it means the plugin is available in the repository, but is not installed yet. In order to install, select it from the list and click the \button{Install plugin} button.
-\item \textbf{new} - the same as before but the plugin is seen for the first time.
-\item \textbf{installed} - the plugin is installed. If it's also available in any repository the \button{Reinstall plugin} button is enabled. But if the available version is older than the installed one, the \button{Downgrade plugin} button appears instead.
-\item \textbf{upgradeable} - the plugin is installed, but there is an updated version available. The \button{Upgrade plugin} button is enabled.
-\item \textbf{invalid} - the plugin is installed, but is unworkable. The reason is explained in the plugin description.
+\item \textbf{nicht installiert} - Das Plugin ist auf einem gerade
+eingebundenen Repository vorhanden, aber bisher nicht installiert. Um es zu
+installieren, selektieren Sie es ung klicken dann auf den Knopf
+\button{Plugin installieren}.
+\item \textbf{neu} - Der Status entspricht dem obigen, jedoch erscheint
+dieses Plugin erstmalig.
+\item \textbf{installiert} - Das Plugin ist installiert. Wenn es gleichzeitig
+auf noch in einem eingebundenen Repository vorhanden ist, ist der Knopf
+\button{Plugin erneut installieren} aktiviert. Falls die installierte Version
+des Plugins neuer ist, als die im Repository, erscheint stattdessen der Knopf
+\button{Plugin downgraden}.
+\item \textbf{aktualisierbar} - Das Plugin ist installiert, aber es gibt eine
+aktuellere Version in einem eingebundenen Repository. Der Knopf
+\button{Plugin sktualisieren} erscheint.
+\item \textbf{ungültig} - Das Plugin ist installiert, funktioniert aber
+nicht. Der Grund hierfür ist dann in der Beschreibung des Plugins nachzulesen.
 \end{itemize}
 
-\minisec{Plugins tab}
+\minisec{Plugins Reiter}
 
-To install a plugin, select it from the list and click the \button{Install plugin} button. The plugin is installed in its own directory, e.g. for \nix under \filename{\$HOME/.qgis/python/plugins} and is only visible for the user who has installed it. See a list of other OS specific subdirectory used for plugins in Section~\ref{subsec:pyfoursteps}. If the installation is successful, a confirmation message will appear. Then you need go to the \mainmenuopt{Plugins} > \dropmenuopttwo{mActionShowPluginManager}{Manage Plugins...} and load the installed plugin. 
+Um ein externes Plugin zu installieren, wählen Sie es aus der Liste aus und
+klicken Sie dann auf den Knopf \button{Plugin installieren}. Das Plugin wird
+nun in einem eigenen Verzeichnis installiert. Unter \nix ist das im
+Verzeichnis \filename{\$HOME/.qgis/python/plugins}, und damit nur sichtbar
+für den Benutzer, der es auch installiert hat. Eine Liste spezifischer Ordner
+anderer Betriebssysteme finden Sie in Kapitel~\ref{subsec:pyfoursteps}. Wenn
+die Installation erfolgreich war, wird eine Bestätigung angezeigt. Danach
+können Sie im Menü \mainmenuopt{Plugins} >
+\dropmenuopttwo{mActionShowPluginManager}{Plugins verwalten} das neue externe
+Plugin selektieren und laden.  
 
-If the installation fails, the reason is displayed. The most often troubles are related to connection errors and missing Python modules. In the former case you'll probably need to wait some minutes or hours, in the latter one you need to install the missing modules in your operating system prior to using the plugin. \nix{For Linux, most required modules should be available in a package manager}. \win{For install instructions in Windows visit the module home page}. If you use a proxy, you may need to configure it under the menu \mainmenuopt{Settings} > \dropmenuopttwo{mActionOptions}{Options} on the \tab{Proxy} tab.
+Wenn die Installation fehlschlägt, wird der Grund angezeigt. Die häufigten
+Fehler treten durch eine fehlende Internetverbindung oder fehlende Python
+Module auf dem Rechner auf. Im ersten Fall kann es sein, dass Sie einfach
+ein wenig warten müssen. Im letzteren Fall sollten Sie die fehlenden Python
+Module installieren, und dann nochmals versuchen, das Plugin zu installieren.
+\nix{Für Linux sind die notwendigen Module meist in fertigen
+Installationspaketen über den Paketmanager installierbar}. \win{Für die
+Installation unter MS Windows sollten Sie die Modul Webseiten aufsuchen}.
+Falls Sie Proxy-Einstellungen verwenden, sollten Sie diese unter
+\mainmenuopt{Einstellungen} > \dropmenuopttwo{mActionOptions}{Optionen} im
+reiter \tab{Proxy} eintragen. 
 
-The \button{Uninstall plugin} button is enabled only if the selected plugin is installed and it's not a core plugin. Note that if you have installed an update of a core plugin, you can still uninstall this update with the \button{Uninstall plugin} and revert to the version shipped within Quantum GIS install package. This one cannot be uninstalled.
+Der Knopf \button{Gewähltes Plugin deinstallieren} ist nur aktiv, wenn das
+ausgewählte Plugin installiert und kein Kern-Plugin ist. Falls Sie ein Update
+eines Kern-Plugins installiert haben, können Sie dieses wieder mit dem Knopf
+\button{Gewähltes Plugin deinstallieren} löschen und damit die Version, die
+vorherige Version des QGIS Paketes wieder herstellen. Diese kann dann jedoch
+nicht deinstalliert werden.
 
-\minisec{Repositories tab}
+\minisec{Repositorys Reiter}
 
-The second tab \tab{Repositories} contains a list of plugin repositories available for the Plugin Installer. By default, only the QGIS Official Repository is used. You can add some user-contributed repositories, including the central QGIS Contributed Repository and a few author repositories by clicking the \button{Add 3rd party repositories} button. Those repositories contain a huge number of more or less useful plugins but please note that they aren't maintained by the QGIS Development Team and we can't take any responsibility for them. You can also manage the repository list manually, that is add, remove and edit the entries. Temporary disabling a particular repository is possible clicking the \button{Edit...} button.
+Der zweite Reiter \tab{Repositorys} zeigt eine Liste von Plugin Repositories.
+Als Standard ist nur das QGIS Official Repository vorhanden, aber Sie können
+einige Benutzer Repositories ergänzen, indem Sie auf den Knopf \button{Plugin
+Repositories hinzufügen} drücken. Diese Repositories enthalten eine Vielzahl
+von mehr oder weniger nützlichen Plugins. Bitte beachten Sie, dass diese
+Plugins nicht durch das QGIS Development Team gewartet werden und daher keine
+Verantwortung für die Sicherheit und Zuverlässigkeit übernommen werden kann.
+Desweiteren können Sie die Repository-Liste auch manuell mit den Knöpfen
+\button{Hinzufügen}, \button{Bearbeiten} und \button{Löschen} managen.
 
-The \checkbox{Check for updates on startup} checkbox makes QGIS looking for plugin updates and news. If it's enabled, all repositories listed and enabled on the \tab{Repositories} tab are checked whenever the program is starting. If a new plugin or an update for one of installed plugins is available, a clickable notification appears in the Status Bar. If the checkbox is disabled, looking for updates and news is performed only when Plugin Installer is being launched from the menu.
+Das Kontrollkästchen \checkbox{Beim Start nach Aktualisierungen suchen}
+erlaubt es, nach Updates und neuen externen Plugins zu suchen. Wenn es
+aktiviert ist, durchsucht QGIS dazu alle gelisteten und aktivierten
+Repositories. Wenn ein neues Plugin oder ein Update für ein bereits
+installiertes Plugin gefunden wird, erscheint ein auswählbarer Hinweis in der
+Statusleiste. Wenn das Kontrollkästchen deaktiviert ist, wird nach neuen
+Plugins oder Updates nur gesucht, wenn der Dialog der \dialog{Plugin
+Installer} gestartet wird.    
 
-In case of some internet connection problems a \textit{Looking for new plugins...} indicator in the Status Bar may stay visible during whole QGIS session and cause a program crash when exiting. In this case please disable the checkbox.
+Falls Sie Probleme mit der Internetverbindung haben, kann es sein, dass die
+Meldung \textit{Suche nach neuen Plugins...} während der gesamten QGIS
+Sitzung geöffnet bleibt und dabei einen Programmabsturz verursachen kann.
+Deaktivieren Sie in diesem Fall bitte das Kontrollkästchen \checkbox{Beim
+Start nach Aktualisierungen suchen}.
 
-\subsection{Data Providers}\index{data providers}
+\subsubsection{Datenprovider}\index{data providers}
 
-Data Providers are "special" plugins that provides access to a data store.
-By default, QGIS supports PostGIS layers and disk-based data stores supported by the GDAL/OGR library (Appendix \ref{appdx_ogr}).
-A Data Provider plugin extends the ability of QGIS to use other data sources.
+Datenprovider sind 'spezielle' Plugins, welche die Verbindung zur Datenquelle
+erstellen. Standardmäßig unterstützt QGIS Postgis-Layer und disk-basierte
+Datenquellen, die von der Bibliothek GDAL/OGR unterstützt werden (siehe
+Anhang~\ref{appdx_ogr}). Ein Datenprovider Plugin erweitert QGIS beim Nutzen von
+anderen Datenquellen.
 
-Data Provider plugins are registered automatically by QGIS at startup.
-They are not managed by the Plugin Manager but used behind the scenes when a data type is added as a layer in QGIS.
+Datenprovider Plugins werden automatisch beim Starten im System registriert.
+Sie werden nicht durch den Pluginmanager verwaltet, werden jedoch im
+Hintergrund benutzt, wenn ein entsprechender Datenlayer in QGIS angezeigt
+werden soll.
+
