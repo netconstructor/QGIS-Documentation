@@ -321,16 +321,18 @@ dal menù \mainmenuopt{Plugins}, selezionare la casella di controllo vicina a
 \checkbox{SPIT} e cliccate su \button{OK}. L'icona di SPIT verrà aggiunta alla
 barra degli strumenti plugin\index{PostGIS!SPIT!loading}. 
 
-Per importare uno shapefile, cliccare sull'icona \toolbtntwo{spiticon}{Importa
-shapefile in PostgreSQL} nella barra degli strumenti per aprire la finestra di
-dialogo \dialog{SPIT - Utilità di importazione ESRI Shapefile in PostGIS}.
-Selezionare il database PostGIS al quale si desidera connettersie cliccare su
-\button{Connetti}. Ora è possibile aggiungere uno o più files alla coda
+Per importare uno shapefile, cliccare sull'icona
+\toolbtntwo{spiticon}
+nella barra degli strumenti per aprire la finestra di
+dialogo \dialog{SPIT}.
+Selezionare il database PostGIS al quale si desidera connettersi
+e cliccare su \button{Connetti}.
+Ora è possibile aggiungere uno o più files alla coda
 cliccando su \button{Aggiungi}. Per processare i files selezionati, cliccare
 su \button{OK}. L'avanzamento dell'importazione ed eventuali
 errori/avvertimenti saranno mostrati mentre ciascuno shapefile viene
 elaborato.
-\begin{Tip}\caption{\textsc{Imporare shapefiles contenenti parole riservate a PostgreSQL}}\index{PostGIS!SPIT!reserved words}
+\begin{Tip}\caption{\textsc{Importare shapefiles contenenti parole riservate a PostgreSQL}}\index{PostGIS!SPIT!reserved words}
 \qgistip{Se uno shapefile contenente campi che sono parole riservate per il
 database PostgreSQL viene aggiunto alla coda, comparirà una finestra di dialogo
 che darà informazioni sullo stato di ogni campo. È necessario editare i nomi
@@ -387,9 +389,8 @@ index!GiST} indice GiST
 (indice dell'albero generalizzato di ricerca, Generalized Search Tree) per
 velocizzare le ricerche spaziali di dati.
 
-La sintassi per la creazione di un indice GiST\footnote{le informazioni sull'indice
-GiST sono tratte dalla documentazione PostGIS disponibile su
-\url{http://postgis.refractions.net\filename{ogr2ogr}}} è:
+La sintassi per la creazione di un indice GiST è:
+%\footnote{le informazioni sull'indice GiST sono tratte dalla documentazione PostGIS disponibile su \url{http://postgis.refractions.net\filename{ogr2ogr}}}
 
 \begin{verbatim}
     CREATE INDEX [indexname] ON [tablename] 
@@ -437,7 +438,7 @@ selezionare \dropmenuopt{Proprietà} dal menù contestuale.
 
 \begin{figure}[H]
    \begin{center}
-   \caption{Vector Layer Properties Dialog \nixcaption}\label{fig:vector_symbology}\smallskip
+   \caption{Finestra delle proprietà di un vettoriale \nixcaption}\label{fig:vector_symbology}\smallskip
    \includegraphics[clip=true, width=12cm]{vectorLayerSymbology} 
 \end{center}  
 \end{figure}
@@ -505,11 +506,7 @@ simbologie:
  \item[Colore esterno] - colore del contorno degli elementi
  \item[Dimensione stile esterno] - larghezza della linea di contorno
  \item[Colore di riempimento] - colore di riempimento degli elementi.
- \item[Stile di riempimento] - stile per il riempimento. Oltre ai retini
- forniti è possibile scegliere \selectstring{Stile di riempimento}{? Texture}
- e cliccare su \browsebutton per selezionare un retino personalizzato.
- Attualmente sono
- supportati i formati \filename{*.jpeg, *.xpm, and *.png}.
+ \item[Stile di riempimento] - stile per il riempimento. Oltre ai retini forniti è possibile scegliere \selectstring{Stile di riempimento}{? Texture} e cliccare su \browsebutton per selezionare un retino personalizzato. Attualmente sono supportati i formati \filename{*.jpeg, *.xpm, and *.png}.
 \end{description}
 
 Una volta impostato lo stile del layer esso può essere salvato in un fiel
@@ -624,12 +621,16 @@ del layer. Le voci che iniziano con \tab{Definizione} consentono di settare
 tutti i parametri delle etichette facendo riferimento a campi della tabella
 del livello.
 
-Si noti che la liguetta \tab{Etichette} fornisce una \classname{Anteprima}
+Si noti che la linguetta \tab{Etichette} fornisce una \classname{Anteprima}
 nella quale viene mostrata l'etichetta predefinita.
 
 \subsubsection{Linguetta Azioni}\index{actions}\label{label_actions}
 
-QGIS offre la possibilità di effettuare azioni sulla base degli attributi associati ai singoli elementi dello strato vettoriale. Questo permette di effettuare un elevato numero di azioni, per esempio, lanciare un programma con argomenti costruiti tramite gli attributi delle geometrie o passando i parametri ad uno strumento di web reporting.
+QGIS offre la possibilità di effettuare azioni sulla base degli
+attributi associati ai singoli elementi dello strato vettoriale.
+Questo permette di effettuare un elevato numero di azioni, per esempio,
+lanciare un programma con argomenti costruiti tramite gli attributi
+delle geometrie o passando i parametri ad uno strumento di web reporting.
 
 Definire delle azioni è utile quando si voglia lanciare un'applicazione
 esterna o la visualizzazione di una pagina web sulla base di uno o più valori
@@ -665,7 +666,7 @@ dell'espressione. Se si vuole che i campi sostituiti vengano racchiusi entro
 parentesi quadre, aggiungere una seconda coppia di parentesi quadre in questo
 modo: \usertext{[[\%col10]]}.
 
-La finestra di dialogo \dialogo{Risultati individuati} che compare quando si
+La finestra di dialogo \dialog{Risultati individuati} che compare quando si
 usa lo strumento "Identifica geometrie" ha una voce {\em (Derivato)} che
 contiene informazioni che sono dipendenti dal tipo di layer interrogato. Si
 può accedere ai valori di questa voce similmente a come possibile per i valori
