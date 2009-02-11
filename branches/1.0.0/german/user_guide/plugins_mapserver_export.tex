@@ -6,136 +6,154 @@
 % comment out the following line:
 %\updatedisclaimer
 
-You can use QGIS to ``compose'' your map by adding and arranging layers, 
-symbolizing them, customizing the colors and then create a map file 
-for MapServer. In order to use the MapServer Export plugin, you 
-must have Python >= 2.4 installed on your system and QGIS must have been 
-compiled with support for it. All binary packages include Python Support.
+Mit dem Plugin \toolbtntwo{mapserver_export}{MapServer Export} können Sie
+eine Map-Datei für den UMN MapServer erstellen. Dazu verwenden Sie QGIS, um
+die Layer im Kartenfenster zu arrangieren, zu beschriften und die Farben nach
+ihren Wünschen anzupassen und speichern das Ergebnis als QGIS Projekt ab.
 
-The MapServer Export plugin in QGIS \CURRENT is a Python Plugin, that is 
-automatically loaded into the \filename{Plugin Manager} as a core plugin 
-(see Section~\ref{sec:core_plugins}).
+Um das Plugin verwenden zu können, muss Python >= 2.4 auf ihrem Rechner
+installiert und QGIS mit Python-Support gebaut worden sein. Dies gilt für
+alle fertigen Installationspakete.
 
-\subsubsection{Creating the Project File}
+Das MapServer Export Plugin ist zwar ein externes Python Plugin. Da es aber
+auch direkt im Quellcode von QGIS vorhanden ist, kann es wir ein Kern-Plugin
+verwendet werden (siehe Kapitel~\ref{sec:core_plugins}).
 
-The MapServer Export Plugin operates on a saved QGIS project file and 
-\textbf{not} on the current contents of the map canvas and legend. This 
-has been a source of confusion for a number of people. As described below, 
-before you start using the MapServer Export Plugin, you need to arrange 
-the raster and vector layers you want to use in MapServer and save this 
-status in a QGIS project file
+\subsection{Erstellen einer QGIS Projektdatei}
+
+Das MapServer Export Plugin verwendet eine gespeicherte QGIS Projektdatei und
+nicht die aktuell im Kartenfenster angezeigten Layer. Dies hat bereits
+häufiger zu Verwirrung geführt. Wie im weiteren Verlauf beschrieben, müssen
+Sie die Layer im Kartenfenster layouten und dann als Projekt abspeichern.
 
 \begin{figure}[ht]
 \begin{center}
-  \caption{Arrange raster and vector layers for QGIS project file \nixcaption}
+  \caption{Layer im Kartenfenster layouten und als Projekt speichern \nixcaption}
   \label{fig:mapserver_export_qgs}\smallskip
   \includegraphics[clip=true, width=12cm]{mapserver_export_qgs}
 \end{center}
 \end{figure}
 
-In this example we show the four steps to get us to the point where we are 
-ready to create the MapServer map file. We use raster and vector files from 
-the QGIS sample dataset \ref{label_sampledata}.
+In diesem Beispiel wird in vier Schritten gezeigt, wie wir zu dem Punkt
+kommen, an dem wir die Map-Datei erstellen können. Wir verwenden dazu Raster-
+und Vektorlayer aus dem QGIS Beispieldatensatz \ref{label_sampledata}.
 
 \begin{enumerate}
-\item Add the raster layer \filename{landcover.tif} clicking on the 
-\toolbtntwo{mActionAddRasterLayer}{Add Raster Layer} icon.
-\item Add the vector Shapefiles \filename{lakes.shp, majrivers.shp} and 
-\filename{airports.shp} from the QGIS sample dataset clicking on the 
-\toolbtntwo{mActionAddNonDbLayer}{Add Vector Layer} icon.
-\item Change the colors and symbolize the data as you like (see 
-Figure~\ref{fig:mapserver_export_qgs})
-\item Save a new project named \filename{mapserverproject.qgs} using 
-\mainmenuopt{File} > \dropmenuopttwo{mActionFileSave}{Save Project}.
+\item Laden Sie den Rasterlayer \filename{landcover.img}, indem Sie auf das
+Icon \toolbtntwo{mActionAddRasterLayer}{Add Raster Layer} klicken.
+\item Fügen Sie den Vektorlayer \filename{lakes.gml, majrivers.shp} und 
+\filename{airports} aus dem QGIS Beispieldatensatz hinzu, indem Sie das Icon
+\toolbtntwo{mActionAddNonDbLayer}{Add Vector Layer} verwenden.
+\item Ändern Sie die Farben und Beschriftung nach ihren Wünschen (siehe
+Abbildung~\ref{fig:mapserver_export_qgs})
+\item Speichern Sie das neue Projekt unter dem Namen
+\filename{mapserverproject.qgs} im Menü \mainmenuopt{Datei} >
+\dropmenuopttwo{mActionFileSaveAs}{Projekt speichern als}.
 \end{enumerate} 
 
-\subsubsection{Creating the Map File}
+\subsubsection{Eine Map-Datei erstellen}
 
-The tool \filename{msexport} to export a QGIS project file to a MapServer map 
-file is installed in your QGIS binary directory and can be used independently of QGIS. 
-From QGIS you need to load the MapServer Export Plugin first with the Plugin Manager. 
-Click \mainmenuopt{Plugins} > \dropmenuopt{Manage Plugins...} to open the Plugin Manager, 
-choose MapServer export Plugin and click \button{OK}. Now start the 
-\toolbtntwo{mapserver_export}{MapServer Export} dialog (see 
-Figure~\ref{fig:mapserver_export_dialog}) clicking the icon in the toolbar menu.
+
+Das Programm (\filename{msexport}) befindet sich im QGIS Programmordner und kann
+unabhängig von QGIS verwendet werden. Von QGIS aus müssen Sie das MapServer
+Export Plugin erst mit dem Plugin Manager laden. Klicken Sie dazu auf
+\mainmenuopt{Plugins} > \dropmenuopt{Plugins verwalten}, wählen Sie das
+Plugin aus und klicken dann auf \button{OK}
+
+Nun können Sie auf das Icon \toolbtntwo{mapserver_export}{MapServer Export}
+in der Werkzeugleiste klicken und den Dialog \dialog{Exportieren in
+MapServer} öffnen (siehe Abbildung~\ref{fig:mapserver_export_dialog}). 
 
 \begin{figure}[ht]
 \begin{center}
-  \caption{Export to MapServer Dialog \nixcaption}
+  \caption{Dialog MapServer Export \nixcaption}
   \label{fig:mapserver_export_dialog}\smallskip
   \includegraphics[clip=true, width=10cm]{mapserver_export_dialog}
 \end{center}
 \end{figure}
 
+Hier ist eine Zusammenfassung der Eingabefelder:
+
 \begin{description}
-\item [Map file] \mbox{}\\
-Enter the name for the map file to be created. You can use the button at the 
-right to browse for the directory where you want the map file created. 
-\item [Qgis project file] \mbox{}\\
-Enter the full path to the QGIS project file (.qgs) you want to export. You can 
-use the button at the right to browse for the QGIS project file.
-\item [Map Name] \mbox{}\\
-A name for the map. This name is prefixed to all images generated by the mapserver.
-\item [Map Width] \mbox{}\\
-Width of the output image in pixels.
-\item [Map Height] \mbox{}\\
-Height of the output image in pixels.
-\item [Map Units] \mbox{}\\
-Units of measure used for output
-\item [Image type] \mbox{}\\
-Format for the output image generated by MapServer
-\item [Web Template] \mbox{}\\
-Full path to the MapServer template file to be used with the map file
-\item [Web Header] \mbox{}\\
-Full path to the MapServer header file to be used with the map file
-\item [Web Footer] \mbox{}\\
-Full path to the MapServer footer file to be used with the map file
+\item [Kartendatei] \mbox{}\\
+Tragen Sie hier den Namen der Map-Datei ein, die erstellt werden soll. Sie
+können mit dem 'Speichern unter' Knopf auswählen, wo die Datei gespeichert
+werden soll.
+\item [QGIS Projektdatei] \mbox{}\\
+Geben Sie den kompletten Pfad zur QGIS Projektdatei (.qgs) an, die Sie
+exportieren möchten. Sie können mit dem 'Durchsuchen' Knopf nach der
+Projektdatei suchen.
+\item [Name] \mbox{}\\
+Ein Name für die Karte. Dieser Name wird als Prefix für alle durch den
+MapServer erstellten Karten verwendet.
+\item [Breite] \mbox{}\\
+Breite des Ausgabebildes in Pixeln.
+\item [Höhe] \mbox{}\\
+Höhe des Ausgabebildes in Pixeln.
+\item [Einheiten] \mbox{}\\
+Maßeinheiten für die Ausgabe
+\item [Bildtyp] \mbox{}\\
+Bildformat, das vom MapServer erstellt wird
+\item [Vorlage] \mbox{}\\
+Kompletter Pfad zur MapServer Template-Datei, die mit der Map-Datei benutzt
+wird
+\item [Kopfzeile] \mbox{}\\
+Kompletter Pfad zur MapServer Header-Datei, die mit der Map-Datei benutzt
+wird
+\item [Fusszeile] \mbox{}\\
+Kompletter Pfad zur MapServer Footer-Datei, die mit der Map-Datei benutzt
+wird
 \end{description}
 
-Only the \filename{Map file} and \filename{QGIS project file} inputs are 
-required to create a map file, however you may end up with a non-functional 
-map file, depending on your intended use. Although QGIS is good at creating 
-a map file from your project file, it may require some tweaking to get the 
-results you want. But let's create a map file using the project file 
-\filename{mapserverproject.qgs} we just created 
-(see Figure~\ref{fig:mapserver_export_dialog}):
+Nur die QGIS Projektdatei ist nun notwendig, um eine Map-Datei zu erstellen.
+Es kann aber sein, dass diese nicht auf anhieb funktioniert, abhängig davon,
+was sie sich vorstellen. Auch wenn QGIS durchaus geeignet ist, eine Map-Datei zu
+erstellen, ist es häufig doch notwendig, die Map-Datei manuell
+nachzubearbeiten. man sollte es daher eher als eine Hilfe betrachten, um die
+Map-Datei nicht komplett neu erstellen zu müssen.
+
+Aber lassen Sie uns in einem Beispiel anschauen, wie man aus der gerade
+erstellten Projektdatei eine Map-Datei erstellt (siehe
+Abbildung~\ref{fig:mapserver_export_dialog}).
 
 \begin{enumerate}
-  \item Open the MapServer Export Plugin clicking the 
-  \toolbtntwo{mapserver_export}{MapServer Export} icon.
-  \item Enter the name \filename{qgisproject.map} for your new map file.
-  \item Browse and find the QGIS project file \filename{mapserverproject.qgs} 
-  you just saved.
-  \item Enter a name \filename{MyMap} for the map.
-  \item Enter \filename{600} for the width and \filename{400} for the height.
-  \item Our layers are in meters so we change the units to meters.
-  \item Choose ``png'' for the image type.
-  \item Click \button{OK} to generate the new map file \filename{qgisproject.map}. 
-  QGIS displays the success of your efforts.
+  \item Klicken Sie auf das Icon \toolbtntwo{mapserver_export}{MapServer Export}.
+  \item Geben Sie als Kartendatei \filename{qgisproject.map} für die neue
+Map-Datei an.
+  \item Geben Sie als QGIS Projektdatei die gerade erstellte Datei
+\filename{mapserverproject.qgs} an.
+  \item Geben Sie den Namen \filename{MyMap} für die Karte an.
+  \item Geben Sie als Breite \filename{600} und als Höhe \filename{400} an.
+  \item Die Layer sind in feet, also ändern wir die Einheit in Fuß.
+  \item Wählen Sie ``png'' als Bildtyp.
+  \item Klicken Sie auf \button{OK}, um die neue Map-Datei
+\filename{qgisproject.map} zu erstellen. QGIS zeigt an, dass es erfolgreich
+war.
 \end{enumerate}
 
-You can view the map file in an text editor or visualizer. If you
-take a look, you'll notice that the export tool adds the metadata needed
-to enable our map file for WMS. 
+Sie können sich die Map-Datei in einem Texteditor anschauen. Sie werden
+sehen, dass das Exportmodul alle Metadaten hinzugefügt hat, um die Map-Datei
+für WMS zu aktivieren.
 
-\subsubsection{Testing the Map File}
+\subsubsection{Testen der Map-Datei}
 
-We can now test our work using the \filename{shp2img} tool to create an image
-from the map file. The \filename{shp2img} utility is part of MapServer and FWTools. 
-To create an image from our map:
+Wir können die Map-Datei testen, indem wir ein Bild mit dem Programm
+\filename{shp2img} erzeugen. \filename{shp2img} ist Teil der UMN MapServer
+Installation, aber es ist auch in dem Programm FWTools vorhanden. Um ein
+Testbild zu erstellen sind folgende Schritte notwendig:
 
 \begin{itemize}
-\item Open a terminal window
-\item If you didn't save your map file in your home directory, change to
-  the folder where you saved it
-\item Run \filename{shp2img -m qgisproject.map -o mapserver\_test.png} and 
-  display the image 
+\item Öffnen wir eine Shell, damit wir das Programm shp2img aus der
+Kommandozeile starten können.
+\item Wenn die Map-Datei nicht im aktuellen Verzeichnis gespeichert wurde,
+wechseln Sie bitte in das entsprechende Verzeichnis mit der Map-Datei
+\item starten Sie \filename{shp2img -m qgisproject.map -o mapserver\_test.png}
+\item Schauen Sie sich das erstellte Bild mit einem Bildbetrachter an
 \end{itemize}
- 
-This creates a PNG with all the layers included in the QGIS project file. 
-In addition, the extent of the PNG will be the same as when we saved the 
-project. As you can see in Figure~\ref{fig:mapserver_export_test}, all 
-inforamtion except the airport symbols are included.
+
+Die Ausdehnung des Bildes ist exakt diejenige, die wir in der QGIS-Projektdatei
+abgespeichert haben. Und das erstellte PNG enthält alle Layer, die wir als
+QGIS-Projekt abgespeichert haben, außer den airport Symbolen.
 
 \begin{figure}[ht]
 \begin{center}
@@ -145,10 +163,12 @@ inforamtion except the airport symbols are included.
 \end{center}
 \end{figure}
 
-If you plan to use the map file to serve WMS requests, you probably don't
-have to tweak anything. If you plan to use it with a mapping template or a
-custom interface, you may have a bit of manual work to do. To see how easy
-it is to go from QGIS to serving maps on the web, take a look at
-Christopher Schmidt's 5 minute flash video. He used QGIS version 0.8, but it 
-is still useful.
+Wenn Sie vorhaben, die Map-Datei auch für WMS-Anfragen zu nutzen, dann
+brauchen Sie wahrscheinlich nichts weiter zu machen. Wenn Sie es als
+Kartenvorlage oder individuelle Oberfläche nutzen wollen, ist wahrscheinlich
+noch ein bischen manuelles Optimieren notwendig. Um zu sehen, wie einfach es
+ist, Karten aus QGIS ins Internet zu stellen, schauen Sie sich das 5-minütige
+Flashvideo von Christopher Schmidt's an, auch wenn es schon ein bischen älter
+ist:
 \footnote{\url{http://openlayers.org/presentations/mappingyourdata/}}
+
