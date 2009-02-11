@@ -1,61 +1,71 @@
 % vim: set textwidth=78 autoindent:
 
-\subsection{Interpolation Plugin}
+\subsection{Interpolationsplugin}
 
 % when the revision of a section has been finalized, 
 % comment out the following line:
 %\updatedisclaimer
 
-The Interplation plugin allows to interpolate a TIN or IDW raster layer from a vector 
-point layer loaded in the QGIS canvas. It is very simple to handle and provides 
-functionalities as shown in Figure \ref{fig:interpolation_dialog}.
+Das Plugin \toolbtntwo{interpolation}{Interpolation} erlaubt es, ein TIN
+(Triangulated Irregular Network) oder eine IDW (Inverse Distance Weighted)
+Interpolation aus Vektorpunkten zu berechnen. Die Anwendung ist der sehr
+einfach, wie in Abbildung~\ref{fig:interpolation_dialog} zu sehen.
 
 \begin{itemize}
-\item \textbf{Input vector layer}: Select vector point layer loaded in the QGIS canvas.
-\item \textbf{Interpolation attribute}: Select attribute column used for interpolation or 
-enable \checkbox{Use Z-Coordinate} checkbox.
-\item \textbf{Interpolation Method}: Select interpolation method \selectstring{Triangulated Irregular 
-Network (TIN)}{\ldots} or \selectstring{Inverse Distance Weighted (IDW)}{\ldots}.
-\item \textbf{Number of columns/rows}: define number colums and.rows for the output raster file
-\item \textbf{Output file}: Define a name for the output raster file
+\item \textbf{Eingabevektor}: Wählen einen in QGIS geladenen Vektor
+Punktlayer.
+\item \textbf{Interpolationsattribut}: Wähle die Attributspalte mit den
+Werten für die Berechnung oder aktivieren Sie das Kontrollkästchen
+\checkbox{Z-Koordinate für Interpolation verwenden}.
+\item \textbf{Interpolationsmethode}: Wählen Sie als Interpolationsmethode
+\selectstring{Unregelmäßiges Dreiecksnetz (TIN)}{} oder \selectstring{Inverse
+Distanzgewichtung (IDW)}{}.
+\item \textbf{Spalten- und Zeilenanzahl}: Definieren Sie über die Spalten-
+und Zeilenanzahl die Auflösung der Ausgabekarte.
+\item \textbf{Ausgabedatei}: Legen Sie einen Namen für den Ausgabe
+Rasterlayer fest.
 \end{itemize}
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{Interpolation Plugin \nixcaption}\label{fig:interpolation_dialog}\smallskip
+   \caption{Interpolationsplugin \nixcaption}\label{fig:interpolation_dialog}\smallskip
    \includegraphics[clip=true, width=9cm]{interpolate_dialog}
 \end{center}  
 \end{figure}
 
 \begin{enumerate}
-  \item Start QGIS and load the \filename{elevp.csv} CSV table with elevation points in the QGIS 
-  canvas using the delimited text plugin as described in Section \ref{label_dltext}. 
-  \item Load the Interpolation plugin in the Plugin Manager (see Section 
-  \ref{sec:load_core_plugin}) and click on the \toolbtntwo{interpolation}{Interpolation} 
-  icon which appears in the QGIS toolbar menu. The Interpolation plugin dialog appears as shown in Figure \ref{fig:interpolation_dialog}.
-  \item Select \selectstring{elevp}{\ldots} as input vector and column \filename{ELEV} for 
-  interpolation.
-  \item Select \selectstring{Triangular interpolation}{\ldots} as interpolation method, define 
-  3663 cols and 1964 rows (this is equivalent to a 1000 meter pixel resolution) as raster 
-  output filename \filename{elevation\_tin}.
-  \item Click \button{Ok}.
-  \item Double click \filename{elevation\_tin} in the map legend to open the Raster Layer Properties 
-  dialog and select \selectstring{Pseudocolor}{\ldots} as Color Map in the \tab{Symbology} tab. Or you 
-  can define a new color table as described in Section \ref{label_rasterprop}.
+  \item Starten Sie QGIS und laden Sie die CVS Tabelle \filename{elevp.csv}
+mit Höheninformationen aus dem QGIS Beispieldatensatz mit Hilfe des Plugins
+'Getrennter Text' aus Kapitel~\ref{label_dltext}. 
+  \item Laden Sie das Interpolationsplugin mit dem Plugin Manager (siehe
+Kapitel~\ref{sec:load_core_plugin}) und klicken Sie auf das Icon
+\toolbtntwo{interpolation}{Interpolation} in der Werkzeugleiste, um den
+Dialog zu starten, wie in Abbildung~\ref{fig:interpolation_dialog} zu sehen.
+  \item Wählen Sie den Layer \selectstring{elevp} als Eingabevektorlayer und
+Spalte \filename{ELEV} als Interpolationsattribut.
+  \item Wählen Sie \selectstring{Unregelmäßiges Dreiecksnetz (TIN)} als
+Interpolationsmethode, definieren Sie als Spaltenanzahl 3663 und als
+Zeilenanzahl 1964 (dies entspricht einer 1000 Meter Pixelauflösung). Als
+Ausgabedatei geben Sie \filename{elevation\_tin} an.
+  \item Klicken Sie \button{Ok}.
+  \item Doppelklicken Sie auf die Ergebniskarte \filename{elevation\_tin} in
+der Legende, um den Dialog \dialog{Rasterlayereigenschaften} zu öffnen und
+wählen Sie im Reiter \tab{Darstellung} die Farbabbildung
+\selectstring{Pseudofarben}. Oder Sie definieren eine neue Farbtabelle, wie
+in Kapitel~\ref{label_rasterprop} beschrieben.
 \end{enumerate}
 
-In Figure \ref{fig:interpolation_idw} you see the IDW interpolation result with a 366 cols x 196 rows (10 km) 
-resolution for the \filename{elevp.csv} data visualized using the Pseudocolor color table. The processing 
-takes a couple of minutes, although the data only cover the northern part of Alaska.
+In Abbildung~\ref{fig:interpolation_idw} sehen das Ergebnis einer
+IDW-Interpolation mit einer Pixelauflösung von 10 km und der Farbabbildung
+Pseudofarben. Die Interpolation benötigt einige Zeit, obwohl die Daten nur
+den nördlichen Teil von Alaska abdecken.
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{Interpolation of elevp data using IDW method \nixcaption}\label{fig:interpolation_idw}\smallskip
+   \caption{Interpolation von Höhenpunkten mit der IDW-Methode \nixcaption}\label{fig:interpolation_idw}\smallskip
    \includegraphics[clip=true, width=\textwidth]{interpolate_idw}
 \end{center}  
 \end{figure}
 
 \newpage
-
-
 
