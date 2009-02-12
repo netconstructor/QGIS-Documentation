@@ -53,7 +53,7 @@ correttamente i dati.\index{raster layers!georeferenced}
 	
 \subsection{Caricati dati raster in QGIS}\label{label_loadraster}
 
-I layer raster possono essere caricati sia selezionando nella barra lo
+I layers raster possono essere caricati sia selezionando nella barra lo
 strumento \toolbtntwo{mActionAddRasterLayer}{Aggiungi layer raster} o
 scegliendo la voce di menù
 \mainmenuopt{Layer}>\dropmenuopttwo{mActionAddRasterLayer}{Aggiungi layer
@@ -151,167 +151,183 @@ che hanno un impatto negativo sulla resa a video del raster.
 
 \minisec{Resa in tre bande}
 
-This selection offers you a wide range of options to modify the appereance
-of your rasterlayer. For example you could switch color-bands from the
-standard RGB-order to something else.
+Questa opzione offre un considerevole numero di possibilità di modifica
+dell'aspetto del raster. Ad esempio è possibile cambiare il normale ordine RGB
+delle bande e/o applicare una scala di colori in base ai valori min/max del
+raster.
 
-Also scaling of colors are available.
-
-
-\begin{Tip}\caption{\textsc{Viewing a Single Band of a Multiband Raster}}
-\qgistip{If you want to view a single band (for example Red) of a multiband
-image, you might think you would set the Green and Blue bands to ``Not
-Set''. But this is not the correct way. To display the Red band, 
-set the image type to grayscale, then select Red as the band to use for Gray.
-}
+\begin{Tip}\caption{\textsc{Vedere una singola banda di un raster multibanda}}
+\qgistip{Il modo corretto di visualizzare ad es. la sola banda rossa di
+un'immagine multibanda non è quello di impostare le bande verde e blu a "Non
+impostato" ma di impostare il tipo di immagine come scala di grigi e quindi
+scegliere il rosso come banda da usare per il grigio.}
 \end{Tip} 
 
-\subsubsection{Transparency Tab} \label{rastertab:transparency}
+\subsubsection{Linguetta Trasparenza} \label{rastertab:transparency}
 
-QGIS has the ability to display each raster layer at varying transparency
-levels.\index{raster layers!transparency} Use the transparency slider to indicate to
-what extent the underlying layers (if any) should be visible though the
-current raster layer. 
-This is very useful, if
-you like to overlay more than one rasterlayer, e.g. a shaded relief-map
-overlayed by a classified rastermap. This will make the look of the map
-more three dimensional.
+Questa linguetta consente di impostare in QGIS un diverso grado di trasparenza per ogni livello raster.\index{raster layers!transparency}
+Per settare una \guiheading{Trasparenza globale}, impostare il cursore a scorrimento al livello di trasparenza desiderato
+che consenta di vedere gli eventuali layers sottostanti presenti. 
+L'uso di questa impostazione può essere molto utile nei casi in cui si
+desideri sovrapporre ad es. ad una mappa delle ombreggiature del rilievo (shaded
+relief-map) una mappa raster contenente delle classificazioni, così da dare un
+aspetto tridimensionale a quest'ultima.
 
-Additionally you can enter a rastervalue, which should be treated as
-{\em NODATA}.
+La sezione \guiheading{Nessun valore} consente invece di definire la trasparenza per un certo valore del raster, che sarà quindi letto come un campo privo di dati del tipo {\em NODATA}. Di
+conseguenza in corrispondenza di tutte le celle del raster contenenti quel
+valore non verrà reso a video niente, determinando quindi una trasparenza per
+il valore specificato.
 
-An even more flexible way to customize the transparency can be done in the
-\guiheading{Custom transparency options} section.
-The transparency of every pixel can be set in this tab.
+È possibile definire la trasparenza in maniera ancora più dettagliata e
+personalizzata nelle Sezione \guiheading{Opzioni di trasparenza
+personalizzate}, nella quale è possibile impostare il grado di trasparenza per
+ogni valore del raster.
+Ad esempio se si volesse utilizzare quest'ultima sezione per visualizzare l'acqua del raster di esempio \filename{landcover.tif}
+con una trasparenza del 20\%, bisognerà seguire la seguente procedura:
 
-As an example we want to set the water of our example rasterfile
-\filename{landcover.tif} to a transparency of 20\%. The following steps
-are neccessary:
 \begin{enumerate}
- \item  Load the rasterfile \filename{landcover}
- \item Open the \dialog{properties} dialog by double-clicking on the
- rasterfile-name in the legend or by right-clicking and choosing
- \dropmenuopt{Properties} from the popup meun.
- \item select the \tab{Trasparenza} tab
- \item \label{enum:add} Click the \toolbtntwo{mActionNewAttribute}{Add values manually}
- button. A new row will appear in the pixel-list.
- \item \label{enum:transp} enter the the raster-value (we use 0 here) and adjust the
- transparency to 20\%
- \item press the \button{Apply} button and have a look at the map
+ \item Caricare il raster \filename{landcover}
+ \item Aprire la finestra di dialogo \dialog{Proprietà} facendo doppio click
+ sul nome del file nella legenda o cliccando su di esso con il tasto destro e
+ scegliendo \dropmenuopt{Proprietà} dal menù contestuale
+ \item Selezionare la linguetta \tab{Trasparenza}
+ \item \label{enum:add} Cliccare sul pulsante
+ \toolbtntwo{mActionNewAttribute}{Aggiungi un valore manualmente}. Nella lista
+ pixel apparirà una nuova riga
+ \item \label{enum:transp} Inserire il valore del raster per il quale si
+ desidera modificare la trasparenza (si supponga 0 per questo esempio) e si
+ imposti la trasparenza al 20\%
+ \item Cliccare sul pulsante \button{Applica} e guardare la mappa
 \end{enumerate}
 
-You can repeat the steps \ref{enum:add} and \ref{enum:transp} to adjust
-more values with custom transparency.
+È possibile ripetere i passaggi \ref{enum:add} e \ref{enum:transp} per
+impostare ulteriori valori ai quali si desideri applicare una trasparenza
+personalizzata.
 
-As you can see this is quite easy set custom transparency, but it can be
-quite a lot of work. Therefor you can use the button
-\toolbtntwo{mActionFileSave}{Export to file} to save your
-transparency-list to a file. The button
-\toolbtntwo{mActionAddRasterLayer}{Import from file} loads your
-transparency-settings and applies them to the current rasterlayer.
+Appare quindi semplice impostare la trasparenza personalizzata, ma può
+risultare una procedura laboriosa specie se si hanno molti valori da
+impostare. È quindi possibile salvare la lista delle impostazioni di
+trasparenza cliccando sul pulsante \toolbtntwo{mActionFileSave}{Esporta in
+file} per non ripetere la procedura. Il pulsante
+\toolbtntwo{mActionAddRasterLayer}{Importa da file} infatti carica il file
+salvato e applica le impostazioni al raster selezionato.
 
 \subsubsection{Mappa colore} \label{label_colormaptab}
 % FIXME: Write me
 
-The \tab{Mappa colore} tab is only available, when you have selected a
-single-band-rendering within the tab \tab{Simbologia} (see chapt. \ref{label_sombology}).
+La linguetta \tab{Mappa colore} viene abilitata solo quando si imposta la resa
+a video del raster come "Banda singola grigia" nella linguetta
+\tab{Simbologia} (si veda il capitolo \ref{label_sombology}).
 
-Three ways of color interpolation are available:
+Sono disponibili tre modalità di interpolazione del colore:
 \begin{itemize}
 \item Discrete
-\item Linear 
-\item Exact
+\item Lineare
+\item Esatto
 \end{itemize}
 
-The button \button{Add Entry} adds a color to the individual color-table.
-Double-Clicking on the value-column lets you inserting a specific value.
-Double clicking on the color-column opens the dialog \dialog{Select
-color} where you can select a color to apply on that value.
+Il pulsante \button{Aggiungi oggetto} aggiunge un colore all'elenco.
+Facendo doppio click sul valore comparso nella colonna "Value" (di default
+0.0) è possibile specificare il valore specifico del raster per il quale si
+vuole modificare il colore.
+Facendo doppio click sulla casella colorata nella colonna "Color" appare
+infatti la finestra  \dialog{Select color} nella quale è possibile definire il
+colore da applicare alle celle raster corrispondenti al valore che si sta editando.
+In alternativa è possibile cliccare sul pulsante
+\toolbtntwo{mActionNewAttribute}{Carica mappa colore dalla banda}, con il
+quale viene caricata, se viene trovata o se disponibile, la tabella dalla banda.
 
-Alternativly you can click on the button
-\toolbtntwo{mActionNewAttribute}{Load colormap from Band}
-, which tries to
-load the table from the band (if it has any).
+Il blocco \guiheading{Genera nuova mappa colore} consente di creare nuove
+mappe colore per categoria secondo i parametri impostati. È sufficiente
+impostare il numero di classi (valori) per i quali si intende impostare il
+colore nella sezione \selectnumber{Numero di oggetti}{15} e cliccare poi su
+\button{Classifica}. Attualmente è possibile effettuare una classificazione
+solo in modalità \selectstring{Modo di classificazione}{Equal Interval}\index{raster layer!classify}.
 
-The block \guiheading{Generate new color map} allows you to create newly
-categorized colormaps. You only need to select the \selectnumber{number of
-classes}{15} you need and press the button \button{Classify}. Currently
-only one \selectstring{Classification mode}{Equal Interval} is
-supported\index{raster layer!classify}.
+\subsubsection{Linguetta Generale}\label{label_generaltab}
 
-\subsubsection{General Tab}\label{label_generaltab}
+La linguetta \tab{Generale} visualizza le informazioni di base sui raster selezionati,
+incluso il percorso dal quale il layer è caricato e il nome (modificabile a
+piacere) con il quale esso sarà visualizzato in legenda. Viene inoltre
+mostrata una miniatura dello strato, la legenda dei simboli e la gamma di
+colori (se disponibili). \index{raster layers!properties}
 
-The \tab{Generale} tab displays basic information about the selected raster,
-including the layer source and  display name in the legend (which can be
-modified). This tab also shows a thumbnail of the layer, its legend symbol,
-and the palette.\index{raster layers!properties}
+È qui possibile attivare la funzione che setta la visibilità dello strato
+in base alla scala della mappa, attivando l'apposita casella di controllo ed
+impostando l'intervallo di scale entro il quale si vuole che il layer venga
+reso a video.
 
-Additionally scale-dependent visability can be set in this tab. You need to
-check the checkbox and set an appropriate scale where your data will be
-displayed in the map canvas.
+Viene inoltre fornita l'indicazione del sistema di riferimento spaziale
+impostato per il livello raster in formato stringa PROJ.4. Esso è modificabile
+cliccando sul pulsante \button{Cambia}.
 
-Also the spatial reference system is printed here as a PROJ.4-string. 
-This can be modified by hitting the \button{Change} button.
+\subsubsection{Linguetta Metadata}\label{label_metatab}
 
-\subsubsection{Metadata Tab}\label{label_metatab}
+La linguetta \tab{Metadata} mostra una serie di informazioni sul livello
+raster, come ad es. le statistiche riguardanti ogni banda. Le statistiche sono
+disponibili in questa linguetta solo dopo averle raccolte cliccando sulla
+linguetta \tab{Istogramma} e aver cliccato sul pulsante  \button{Aggiorna} in
+basso a destra (si veda il capitolo \ref{label_histogram}.
 
-The \tab{Metadata} tab displays a wealth of information about the raster layer,
-including statistics about each band in the current raster layer. Statistics
-are gathered on a 'need to know' basis, so it may well be that a given layers
-statistics have not yet been collected.\index{raster layers!metadata}
+Si tratta quindi di una linguetta meramente informativa nella quale non è
+possibile modificare alcun valore.
 
-This tab is mainly for information. You cannot change any values printed
-inside this tab. To update the statistics you need to change to tab
-\tab{Istogramma} and press the button \button{Refresh} on the bottom right,
-see ch. \ref{label_histogram}.
+\subsubsection{Linguetta Piramidi}\label{raster_pyramids}
 
-\subsubsection{Pyramids Tab}\label{raster_pyramids}
-
-Large resolution raster layers can slow navigation in QGIS. By creating lower
-resolution copies of the data (pyramids), performance can be considerably
-improved as QGIS selects the most suitable resolution to use depending on the
-level of zoom.
+I livelli raster ad alta risoluzione possono rallentare notevolmente
+l'esplorazione della mappa in QGIS. Creando copie a minor risoluzione dei dati
+(Piramidi), le prestazioni possono essere incrementate, poiché QGIS seleziona
+la risoluzione più appropriata in relazione al livello di zoom.
 \index{raster layers!pyramids}
 \index{raster layers!resolution pyramids}
 
-You must have write access in the directory where the original data is stored
-to build pyramids. \\
-Several resampling methods can be used to calculate the pyramides:
+Per creare i piramidali è innanzitutto necessario avere i permessi in scrittura
+sulla cartella contenente il dato originale nel quale verranno salvate le
+copie a varia risoluzione. \\
+Sono disponibili i seguenti metodi di ricampionamento:
 \begin{itemize}
-\item Average
-\item Nearest Neighbour
+\item Media
+\item Il più vicino possibile (metodo Nearest Neighbour)
 \end{itemize}
 
-When checking the checkbox \checkbox{Build pyramids internally if
-possible} QGIS tries to build pyramids internally.
+Quando viene attivata la casella di controllo \checkbox{Crea piramidi interne
+se possibile} QGIS cerca di far sì che, se il formato lo supporta, i vari
+livelli di risoluzione siano immagazzinati nella stesso file raster piuttosto
+che in multiple copie separate.
 
-Please note that building pyramids may alter the original data file and once
-created they cannot be removed. If you wish to preserve a 'non-pyramided'
-version of your raster, make a backup copy prior to building pyramids.
+Si evidenzia che la costruzione dei piramidali può alterare il dato originale
+in maniera irreversibile, quindi si raccomanda di fare una copia di backup del
+raster di partenza prima di eseguire l'operazione.
 
-\subsubsection{Histogram Tab}\label{label_histogram}
+\subsubsection{Linguetta Istogramma}\label{label_histogram}
 
-The \tab{Istogramma} tab allows you to view the distribution\index{raster layers!histogram} 
-of the bands or colors in your raster. You must first generate the raster statistics 
-by clicking the \button{Refresh} button. You can choose which bands to display by 
-selecting them in the list box at the bottom left of the tab. Two different
-chart types are allowed: 
+La linguetta \tab{Istogramma} consente di visualizzare la distribuzione
+\index{raster layers!histogram} delle bande di colore nel livello raster.
+Innanzitutto è necessario generare le statistiche del raster cliccando sul
+pulsante \button{Aggiorna}. È possibile selezionare quale banda mostrare nel
+diagramma selezionandola nella lista sulla sinistra della linguetta (è
+possibile effettuare una selezione multipla cliccando su più voci).
+Possono essere visualizzati due tipi di diagrammi: 
 
 \begin{itemize}
-\item Bar chart
-\item Line graph
+\item Diagramma a colonna
+\item Diagramma a linea
 \end{itemize}
 
-You can define the number of chart columns to use and decide wether you want 
-to \checkbox{Allow approximation} or display \checkbox{out of range} values 
-Once you view the histogram, you'll notice that the band statistics have been
-populated on the \tab{metadata} tab.\index{raster layers!metadata)}
+Può essere definito in "Conteggio colonna" il numero di colonne da usare nel grafico
+(rappresentante il numero di intervalli in cui vengono raggruppati i dati)
+e decidere se si desidera abilitare \checkbox{Permetti approssimazione} e/o
+mostrare valori fuori scala abilitando la casella \checkbox{Fuori intervallo
+OK?}. Una volta visualizzato il grafico, verranno popolati i campi sulle
+statistiche per banda nella linguetta \tab{Metadata}.\index{raster layers!metadata)}
 
-\begin{Tip}\caption{\textsc{Gathering Raster Statistics}}
-\qgistip{To gather statistics for a layer, select pseudocolor rendering and
-click the \button{Apply} button. Gathering statistics for a layer can be time
-consuming. Please be patient while QGIS examines your
-data!\index{raster layers!statistics}
+\begin{Tip}\caption{\textsc{Ottenere le statistiche del raster}}
+\qgistip{Per ottenere le statistiche di un livello, impostarne la
+rappresentazione in pseudocolore e cliccare su \button{Applica}. L'operazione
+può richiedere molto tempo in funzione della quantità di dati contenuti nel
+raster, delle impostazioni di analisi settate e delle capacità di calcolo
+della macchina usata, attendere quindi pazientemente
+che QGIS termini l'analisi dei dati!\index{raster layers!statistics}
 }
 \end{Tip}
 
