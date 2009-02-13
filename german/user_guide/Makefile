@@ -15,7 +15,9 @@
 #  make changelog  - creates ChangeLog
 
 # Name of latex main file to compile
-FILE=user_guide
+# Für deutsche Übersetzung nur des Anwenderteils
+FILE=handbuch
+#FILE=user_guide
 # Path to QGIS source plugin folder for 'make updateicon'
 QGISPLUGINSOURCE=/software/qgis_head/src/plugins
 
