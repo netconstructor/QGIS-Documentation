@@ -11,7 +11,7 @@
 # JPG=qgis_icon_new_verylarge.eps\
 
 PNG=rasterPropertiesDialog.eps \
-    rasterContext.eps \
+
 	
 ##### TARGETS #####
 
