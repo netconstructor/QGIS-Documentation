@@ -15,7 +15,7 @@ und MapInfo TAB (Natives Format).\index{TAB files}\index{MapInfo!TAB files}
 Eine Liste von Vektorformaten, die durch die OGR-Bibliothek unterstützt
 werden, finden Sie in Anhang~\ref{appdx_ogr}. 
 
-QGIS unterstützt auch PostGIS-Ebenen\index{PostGIS}\index{PostgreSQL!PostGIS}
+QGIS unterstützt auch PostGIS-Layer\index{PostGIS}\index{PostgreSQL!PostGIS}
 in einer PostgreSQL Datenbank mit Hilfe des PostGIS-Plugins. Unterstützung
 für weitere Datenformate (z.B.: ASCII-Tabellen oder GPS-Daten) sind mittels
 weiterer Plugins realisiert.\index{delimited text}
@@ -51,8 +51,7 @@ Spezifikation unter \url{http://www.esri.com/library/whitepapers/pdfs/shapefile.
 \index{shapefile!specification}.
 
 \subsubsection{Shape Layer laden}\label{sec:load_shapefile}
-{\includegraphics[width=0.7cm]{mActionAddNonDbLayer}} Um ein Shape zu laden,
-starten Sie QGIS und klicken auf das Icon
+Um ein Shape zu laden, starten Sie QGIS und klicken auf das Icon
 \toolbtntwo{mActionAddNonDbLayer}{Vektorlayer hinzufügen} in der
 Werkzeugleiste\index{shapefile!loading} oder mit der Taste \keystroke{V}. Mit
 demselben Tool können Sie auch alle anderen durch OGR unterstützten Formate laden.
@@ -60,7 +59,7 @@ demselben Tool können Sie auch alle anderen durch OGR unterstützten Formate lade
 Beim öffnen des Tools öffnet sich ein Standard-Dialog (Abbildung
 \ref{fig:openshapefile}), mit dessen Hilfe Sie in Ihrem Dateisystem
 navigieren und die entsprechenden zu ladenden Dateien auswählen können. Die
-Auswahlbox \selectstring{Dateien des Typs} ermöglicht es, im Vorfeld ein
+Auswahlbox \selectstring{Dateien des Typs}{} ermöglicht es, im Vorfeld ein
 Format auszuwählen.
 
 \begin{figure}[ht]
@@ -163,8 +162,8 @@ definieren, welche Objekte des Layers angezeigt werden sollen.
 
 \subsubsection{Erstellen einer PostGIS Anbindung}\index{PostgreSQL!connection}\label{sec:postgis_stored}
 
-\includegraphics[width=0.7cm]{mActionAddLayer} Beim ersten Einbinden einer
-PostGIS~-Datenbank muss eine Anbindung erstellt und gespeichert werden.
+Beim ersten Einbinden einer PostGIS~-Datenbank muss eine Anbindung erstellt
+und gespeichert werden.
 Klicken Sie dazu auf den Knopf \toolbtntwo{mActionAddLayer}{PostGIS-Layer
 hinzufügen} in der Werkzeugleiste oder aus dem Menü \mainmenuopt{Layer}. 
 Der \texttt{PostGIS Tabelle(n) hinzufügen}-Dialog erscheint daraufhin. Um
@@ -215,11 +214,10 @@ QGIS-Einstellungen ein Sicherheitsrisiko darstellen.
 
 \minisec{Laden eines Layers aus der PostGIS Datenbank}\index{PostgreSQL!loading layers}
 
-\includegraphics[width=0.7cm]{mActionAddLayer} Nachdem Sie eine oder mehrere
-Verbindungen definiert und gespeichert haben, können Sie einzelne Ebenen aus
-PostGIS laden. Natürlich brauchen Sie dazu Daten in PostgreSQL/PostGIS. Eine
-Beschreibung zum Import von Daten nach PostgreSQL/PostGIS lesen Sie Abschnitt
-\ref{sec:loading_postgis_data}.
+Nachdem Sie eine oder mehrere Verbindungen definiert und gespeichert haben,
+können Sie einzelne Ebenen aus PostGIS laden. Natürlich brauchen Sie dazu
+Daten in PostgreSQL/PostGIS. Eine Beschreibung zum Import von Daten nach
+PostgreSQL/PostGIS lesen Sie Abschnitt \ref{sec:loading_postgis_data}.
 
 Um eine Ebene aus PostGIS zu laden, führen Sie folgende Schritte durch:
 
@@ -304,8 +302,8 @@ Exporttool, um Daten von PostGIS ins Shape-Format zu exportieren:
 
 \minisec{SPIT Plugin}
 
-\includegraphics[width=0.7cm]{spiticon} QGIS bietet ein Plugin mit dem Namen
-SPIT (Shapefile to PostGIS Import Tool)\index{PostGIS!SPIT}. SPIT kann dazu
+QGIS bietet ein Plugin mit dem Namen SPIT (Shapefile to PostGIS Import
+Tool)\index{PostGIS!SPIT}. SPIT kann dazu
 benutzt werden, gleichzeitig mehrere Shapes zu laden und bietet dabei auch
 Support für Schemas. Um das Plugin zu benutzen, öffnen Sie
 \dropmenuopttwo{mActionShowPluginManager}{Plugins verwalten} im Menü
@@ -420,7 +418,7 @@ aus einer PostgreSQL/PostGIS Datenbank geladen wurde, können über den Dialog
 im Reiter \tab{Allgemein} angewendet werden. Ansonsten müssen Sie für
 OGR-unterstützte Formate den \dialog{Query Builder} Dialog über den Knopf
 \button{Erweitert...} im Attributtabellen Fenster starten
-(vgl.Kapitel~\ref{sec:select_by_query}. Um den Dialog für die
+(vgl.Kapitel~\ref{sec:select_by_query}). Um den Dialog für die
 Layereigenschaften zu öffnen, doppelklicken Sie auf den Namen des Layers in
 der Legende oder wählen mit der rechten Maustaste \dialog{Eigenschaften} aus.
 
@@ -871,9 +869,9 @@ deaktivieren (vgl. Abbildung~\ref{fig:snappingoptions}).
 \minisec{Suchradius}
 
 Der Suchradius ist die Distanz, mit der QGIS die nächstgelegenen Stützpunkte
-zum Mauszeiger zu finden. Wenn Sie sich nicht innerhalb des Suchradius
-befinden, wird QGIS keinen Stützpunkt finden, solange Sie nicht wirklich
-direkt auf einen treffen, um diesen z.B. zu verschieben, zu loschen oder
+zum Mauszeiger findet. Wenn der Mauszeiger sich nicht innerhalb des Suchradius
+befindet, wird kein Stützpunkt gefunden, solange Sie nicht wirklich
+direkt auf einen treffen, um diesen z.B. zu verschieben, zu löschen oder
 anderweitig zu editieren. Beide Parameter, Fangtoleranz und Suchradius sind
 in Layereinheiten zu definieren und es kann gut sein, dass Sie für ihre
 Ansprüche ein wenig mit den Werten experimentieren müssen. Dies gilt
@@ -985,8 +983,8 @@ aktiv.\index{editing!icons}
 \minisec{Mit dem Mausrad im Kartenfenster zoomen}
 
 Während des Digitalisierens können Sie mit dem Mausrad in das Kartenfenster
-hinein- und hinauszoomen indem Sie den Mauszeiger auf einen Kartenbereich
-plazieren und das Mausrad nach vorne (weg von Ihnen) zum Hineinzoomen oder
+hinein- und hinauszoomen, indem Sie den Mauszeiger auf einen Kartenbereich
+platzieren und das Mausrad nach vorne (weg von Ihnen) zum Hineinzoomen oder
 nach hinten (näher an Sie heran) zum Hinauszoomen bewegen. Die Position des
 Mauszeigers ist dabei das Zentrum des Zoomvorgangs. Sie können das
 Zoomberhalten des Mausrades in dem Reiter \tab{Kartenwerkzeuge} des Menüs
@@ -1003,8 +1001,9 @@ Süden und die Pfeiltaste nach oben für das Verschieben nach Norden.
 Sie können auch die gedrückte Leer-Taste dazu verwenden, um den Layer im
 Kartenfenster zu verschieben, wenn Sie mit dem Mauszeiger darübergehen. Die
 Leer-Taste übernimmt dabei die Aufgabe der linken Maustaste. Zum Hinein- und
-Herauszoomen können Sie übrigens auch die BildHoch und BildRunter Tasten
-verwenden, so wie Sie es ansonsten mit dem Mausrad tun können.
+Herauszoomen können Sie übrigens auch die \keystroke{BildHoch} und
+\keystroke{BildRunter} Tasten verwenden, so wie Sie es ansonsten mit dem
+Mausrad tun können.
 
 All diese Funktionen ermöglichen es Ihnen, in einem Layer zu zoomen oder
 diesen zu verschieben, ohne das Sie das Digitalisieren unterbrechen müssen.
@@ -1012,9 +1011,9 @@ diesen zu verschieben, ohne das Sie das Digitalisieren unterbrechen müssen.
 Folgende Digitalisier-Tools stehen Ihnen zur Verfügung:
 
 \begin{itemize}
-\item Add Features: \toolbtntwo{mActionCapturePoint}{Punkt digitalisieren},
-  \toolbtntwo{mActionCaptureLine}{Linie digitalisieren} and
-  \toolbtntwo{mActionCapturePolygon}{Polygon digitalisieren}
+\item \toolbtntwo{mActionCapturePoint}{Punkt digitalisieren}
+\item \toolbtntwo{mActionCaptureLine}{Linie digitalisieren} 
+\item \toolbtntwo{mActionCapturePolygon}{Polygon digitalisieren}
 \item \toolbtntwo{mActionAddRing}{Ring hinzufügen}
 \item \toolbtntwo{mActionAddIsland}{Insel hinzufügen}
 \item \toolbtntwo{mActionSplitFeatures}{Objekte trennen}
