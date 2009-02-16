@@ -1,6 +1,6 @@
 % vim: set textwidth=78 autoindent:
 
-\section{Lavorare con dati OGC}
+\section{Lavorare con i dati OGC}
 
 % when the revision of a section has been finalized, 
 % comment out the following line:
@@ -9,7 +9,7 @@
 QGIS supporta sorgenti di dati WMS e WFS. Il supporto WMS è nativo, quello per
 WFS è fornito tramite plugin.
 
-\subsection{What is OGC Data}\index{OGC!introduction}
+\subsection{Cosa sono i dati OGC}\index{OGC!introduction}
 
 L'Open Geospatial Consortium (OGC), è un’organizzazione internazionale che raggruppa più
 di 300 organizzazioni commerciali, governative, nonprofit e di ricerca.
@@ -199,7 +199,7 @@ attiva, se disponibile.
 }
 \end{Tip}
 
-\minisec{Coordinate Reference System}
+\minisec{Sistema di proiezione delle coordinate (Coordinate Reference System)}
 \index{WMS!CRS}\index{WMS!coordinate reference system}
 \index{OGC!CRS}\index{OGC!coordinate reference system}
 \index{Projections!WMS}
@@ -207,147 +207,161 @@ attiva, se disponibile.
 \index{CRS}\index{coordinate reference system}
 \index{SRS}\index{Projections!SRS}
 
-A Coordinate Reference System (CRS) is the OGC terminology for a QGIS Projection.
+Un sistema di proiezione delle coordinate (Coordinate Reference System, CRS) è
+il termine OGC per una priezione in QGIS.
 
-Each WMS Layer can be presented in multiple CRSs, depending
-on the capability of the WMS server.  You may notice that the \textsl{x} changes in
-the \textsl{Coordinate Reference System (x available)} header as you
-select and deselect layers from the \tab{Layers} section.
+Ogni layer WMS può essere restituito in molteplici CRS, in funzione delle
+capacità del server. Si noti che il numero di sistemi di riferimento tra cui
+scegleire viene indicato nella dicitura \textsl{Coordinate Sistema di
+Riferimento (x disponibili)} quando si seleziona/deseleziona un livello nella
+sezione \tab{Layer}.
 
-To choose a CRS, select \button{Change...} and a screen similar to
-Figure \ref{fig:projections} in Section \ref{label_projstart} will appear.
-The main difference with the WMS version of the screen is that only
-those CRSs supported by the WMS Server will be shown.
+Per scegliere uno dei CRS disponibili, cliccare su \button{Cambia...} per fare
+apparire una finestra simile a quella della Figura \ref{fig:projections} alla
+Sezione \ref{label_projstart}.
+La differenza principale rispetto alla versione WMS mostrata nello schermo è
+che saranno mostrati solo i CRS supportati dal server al quale ci si sta
+effettivamente connettendo.
 
 
-\begin{Tip}[ht]\caption{\textsc{WMS Projections}}
-\qgistip{For best results, make the WMS layer the first layer
-you add in the project.  This allows the project
-projection to inherit the CRS you used to render the WMS layer.
-On-the-fly projection (see Section \ref{sec:projection-specifying})
-can then be used to fit any subsequent
-vector layers to the project projection.
-In this version of QGIS, if you add a WMS layer later, and give it a different
-CRS to the current project projection, unpredictable
-results can occur.
+\begin{Tip}[ht]\caption{\textsc{Le proiezioni WMS}}
+\qgistip{Per ottenere i migliori risultati, aggiungere per primo al progetto
+il layer WMS, in modo che il sistema di riferimento dell'intero progetto sia
+lo stesso attribuito al layer WMS.
+Si potrà quindi usare la proiezione al volo (si veda la Sezione \ref{sec:projection-specifying})
+per adattare qualunque altro livello vettoriale successivamente aggiunto.
+In questa versione di qgis, aggiungere strati WMS successivamente ad altri
+con un CRS diverso rispetto a quello del progetto, può causare errori.
 }
 \end{Tip}
 
 
-\subsubsection{Using the Identify Tool}\label{sec:ogc-wms-identify}
+\subsubsection{Uso dello strumento di identificazione}\label{sec:ogc-wms-identify}
 \index{WMS!identify}
 \index{identify!WMS}
 \index{WMS!GetFeatureInfo}
 
-Once you have added a WMS server, 
-and if any layer from a WMS server is queryable, you can then use
-the \toolbtntwo{mActionIdentify}{Identify} tool to select a pixel on the map canvas.
-A query is made to the WMS server for each selection made.
+Una volta aggiunto un server WMS, e se uno dei layer disponibili è
+interrogabile, è possibile usare lo strumento
+\toolbtntwo{mActionIdentify}{Informazioni geometrie} per selezionare un pixel
+sulla mappa, determinando una interrogazione verso il server WMS per ogni
+selezione.
 
-The results of the query are returned in plain text.
-The formatting of this text is dependent on the particular
-WMS server used.
+I risultati dell'interrogazione vengono restituiti come testo semplice la cui
+formattazione dipenderà dalle impostazioni del server WMS.
 
 % FIXME: GetFeatureInfo-Requests are done here?
 
-\subsubsection{Viewing Properties}\label{sec:ogc-wms-properties}\index{WMS!properties}
+\subsubsection{Visualizzazione delle proprietà del server}\label{sec:ogc-wms-properties}\index{WMS!properties}
 \index{rasters!properties}
 
-Once you have added a WMS server, you can view its properties
-by right-clicking on it in the legend, and selecting
-\button{Properties}.
+Una volta aggiunto un server WMS, è possibile visualizzarne le le proprietà
+cliccando con il tasto destro sul suo nome nella legenda e selezionando
+\button{Proprietà}.
 
 
-\minisec{Metadata Tab}\label{sec:ogc-wms-properties-metadata}
+\minisec{Linguetta Metadata}\label{sec:ogc-wms-properties-metadata}
 \index{rasters!metadata}
 \index{WMS!metadata}
 \index{WMS!capabilites}
 
-The \tab{Metadata} tab displays a wealth of information about the WMS server,
-generally collected from the Capabilities statement returned from
-that server.
+La linguetta \tab{Metadata} mostra parecchie informazioni sul server WNS,
+generally raccolte dalla affermazione "Capabilities" ritornata dal server alla
+apposita richiesta.
 
-Many definitions can be gleaned by reading the WMS
-standards \cite{OGCWMS010101web}, \cite{OGCWMS010300web}, but
-here are a few handy definitions:
+Molte definizioni possono essere dedotte leggendo gli standards WMS \cite{OGCWMS010101web}, \cite{OGCWMS010300web}, alcune definizioni utili sono le seguenti:
 
 \begin{itemize}
-\item \textbf{Server Properties}
+\item \textbf{Proprietà server}
 
 \begin{itemize}
-\item \textbf{WMS Version}      - The WMS version supported by the server.
+\item \textbf{Versione WMS}      - La versione WMS supportata dal server.
 
-\item \textbf{Image Formats}    - The list of MIME-types the server can respond with when
-                                  drawing the map.  QGIS supports whatever formats
-                                  the underlying Qt libraries were built with, which
-                                  is typically at least \texttt{image/png} 
-                                  and \texttt{image/jpeg}.
+\item \textbf{Formati immagine}  - Elenco dei tipi MIME che il server può
+                                   fornire  per disegnare la mappa. QGIS
+				   supporta qualunque formato sia supportato
+				   dalle librerie Qt contro le quali è
+				   compilato, che sono solitamente almeno \texttt{image/png}
+				   e \texttt{image/jpeg}.
 
-\item \textbf{Identity Formats} - The list of MIME-types the server can respond with when
-                                  you use the Identify tool.  Currently QGIS supports
-                                  the \texttt{text-plain} type.
+\item \textbf{Interroga formati} - L'elenco dei tipi MIME con i quali il server
+                                   può fornire risposta quando si usa lo strumento
+				   "Identifica geometrie". Attualmente QGIS supporta
+				   il tipo \texttt{text-plain}.
 
 \end{itemize}
 
-\item \textbf{Layer Properties}
+\item \textbf{Proprietà layer}
 
 \begin{itemize}
-\item \textbf{Selected}         - Whether or not this layer was selected when its                                                                        server was added to this project.
+\item \textbf{Selezionato}         - Indica se il layer era selezionato quando
+                                     il server è stato aggiunto al progetto.
 
-\item \textbf{Visible}          - Whether or not this layer is selected as visible
-                                  in the legend.  (Not yet used in this version of QGIS.)
+\item \textbf{Visibilità}          - Indica se il layer sia stato impostato
+                                     come visibile in legenda.  (funzione non ancora utilizzata
+				     in questa versione di QGIS.)
 
-\item \textbf{Can Identify}     - Whether or not this layer will return any results
-                                  when the Identify tool is used on it.
+\item \textbf{Può interrogare}     - Indica se il layer fornisca o meno
+                                     informazioni se si usa lo strumento "Identifica geometrie".
 
-\item \textbf{Can be Transparent} - Whether or not this layer can be rendered with transparency.
-                                    This version of 
-                                    QGIS will always use transparency if this is \textsl{Yes}
-                                    and the image encoding supports transparency
+\item \textbf{Può essere trasparente} - Indica se il layer può essere o meno
+                                        reso trasparente a video. Questa
+					versione di QGIS farà sempre uso della
+					trasparenza se questa voce visualizza
+					\textsl{Sì} e se il formato immagine
+					la supporta.
 % BM: doesn't seem to work?
 %                                    (see Section
 %                                    \ref{ogc-wms-transparency}
 %                                    ).
-                                    .
 
-\item \textbf{Can Zoom In}      - Whether or not this layer can be zoomed in by the server.  This version
-                                  of QGIS assumes all WMS layers have this set to \textsl{Yes}.
-                                  Deficient layers may be rendered strangely.
+\item \textbf{Può ingrandire}      - Indica se questo strato possa o meno
+                                     essere ingrandito dal server.
+				     Questa versione di QGIS suppone che tutti i
+                                     livelli WMS abbiano questa opzione settata su \textsl{Sì}.
+                                     Layers carenti in questa impostazione
+				     possono essere resi a video in modo
+				     anomalo.
 
-\item \textbf{Cascade Count}    - WMS servers can act as a proxy to other WMS servers to get
-                                  the raster data for a layer.  This entry shows how
-                                  many times the request for this layer is forwarded to peer
-                                  WMS servers for a result.
+\item \textbf{Conteggio a cascata}    - I server WMS possono fungere da proxy
+                                        per altri server WMS dai quali ottengono
+					i dati raster per un certo layer. La
+                                        voce mostra quindi quante richieste per questo
+					layer vengono inoltrate ai nodi
+                                        per ottenere un risultato.
 
-\item \textbf{Fixed Width}, \textbf{Fixed Height}
-                                - Whether or not this layer has fixed source pixel dimensions.
-                                  This version
-                                  of QGIS assumes all WMS layers have this set to nothing.
-                                  Deficient layers may be rendered strangely.
+\item \textbf{Larghezza fissa}, \textbf{Altezza fissa}
+                                - Indica se lo strato abbia o meno una
+				dimensione del pixel fissata alla sorgente.
+                                  Questa versione di QGIS assume che tutti i
+				  layer WMS abbiano vuota questa voce. Layers
+				  con impostazioni diverse possono essere resi
+				  a video in modo anomalo.
 
-\item \textbf{WGS 84 Bounding Box} - The bounding box of the layer, in WGS 84 coordinates.
-                                     Some WMS servers do not set this correctly (e.g. UTM
-                                     coordinates are used instead).  If this is the case,
-                                     then the initial view of this layer may be rendered
-                                     with a very ``zoomed-out'' appearance by QGIS.
-                                     The WMS webmaster should be informed of this error,
-                                     which they may know as the WMS XML elements
-                                     \texttt{LatLonBoundingBox},
-                                     \texttt{EX\_GeographicBoundingBox} or
-                                     the CRS:84 \texttt{BoundingBox}.
+\item \textbf{Perimentro WGS 84} - Estensione dello strato in coordinate WGS84. Alcuni server
+                                   WMS non settano questo parametro correttamente (ad
+				   es. usano coordinate UTM invece di WGS84).
+				   In questo caso sembrerà che la vista
+				   iniziale dello strato
+                                   sia ad uno zoom molto ridotto. Bisognerebbe
+				   informare di questi errori il webmaster del
+				   server WMS, il quale li dovrebbe
+				   identificare come elementi
+				   WMS XML \texttt{LatLonBoundingBox},
+				   \texttt{EX\_GeographicBoundingBox} o CRS:84 \texttt{BoundingBox}.
 
-\item \textbf{Available in CRS} - The projections that this layer can be rendered in by
-                                  the WMS server.  These are listed in the WMS-native format.
+\item \textbf{Disponibile in CRS} - Sistemi di proiezione nel quale il layer
+                                    può essere rappresentato dal server WMS,
+				    elencati nel formato nativo WMS.
 
-\item \textbf{Available in style} - The image styles that this layer can be rendered in by
-                                    the WMS server.
+\item \textbf{Disponibile in stile} - Stili visuali applicabili al layer dal server WMS.
 
 \end{itemize}
 
 \end{itemize}
 
 
-\subsubsection{WMS Client Limitations}\label{sec:ogc-wms-limits}\index{WMS!client!limits}
+\subsubsection{Limitazioni del client WMS}\label{sec:ogc-wms-limits}\index{WMS!client!limits}
 
 Not all possible WMS Client functionality had been included in this version of QGIS.
 Some of the more notable exceptions follow:
