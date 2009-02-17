@@ -1,181 +1,190 @@
 % vim:autoindent:set textwidth=78:
 
-\section{Working with Projections}\label{label_projections}
+\section{Lavorare con le proiezioni}\label{label_projections}
 \index{Projections!working with}
 
 % when the revision of a section has been finalized, 
 % comment out the following line:
 %\updatedisclaimer
 
-QGIS allows users to define a global and project-wide CRS (Coordinate
-Reference System) for layers without a pre-defined CRS. It also allows the
-user to define custom coordinate reference systems and supports on-the-fly
-(OTF) projection of vector layers. All these features allow the user to
-display layers with different CRS and have them overlay properly.
+QGIS consente all'utente di definire un CRS (Coordinate
+Reference System) globale o per ogni singolo progetto per i layers privi di un
+CRS predefinito. Consente inoltre di definire sistemi di coordinate
+personalizzati e supporta la riproiezione al volo (on-the-fly, OTF) dei layers
+vettoriali. Tutte queste caratteristiche permettono all'utente di visualizzare
+contemporaneamente layers con diversi CRS correttamente sovrapposti.
 
-\subsection{Overview of Projection Support}\label{label_projoverview}
+\subsection{Panoramica del supporto alle proiezioni}\label{label_projoverview}
 
-QGIS has support for approximately 2,700 known CRS. Definitions for 
-each of these CRS are stored in a SQLite database that is installed with
-QGIS. Normally you do not need to manipulate the database directly. In fact,
-doing so may cause projection support to fail. Custom CRS are stored in a
-user database. See Section \ref{sec:customprojections} for
-information on managing your custom coordinate reference systems.
+QGIS supporta all'incirca 2,700 CRS noti. Le definizioni di ognuno di questi
+CRS sono immagazzinate in un database SQLite che viene installato con QGIS.
+Normalmente non è necessario manipolare il database direttamente, in effetti
+tale operazione può causare il malfunzionamento del supporto alla proiezione.
+I CRS personalizzati sono salvati in un database utente.
+Si veda la Sezione \ref{sec:customprojections} per informazioni
+sulla gestione dei CRS personalizzati.
 
-The CRS available in QGIS are based on those defined by
-EPSG\index{EPSG} and are largely abstracted from the spatial\_references 
-table in PostGIS\index{PostGIS} version 1.x. The EPSG identifiers are
-present in the database and can be used to specify a CRS in QGIS.
+I CRS disponibili in QGIS sono basati su quelli definiti da EPSG\index{EPSG}
+e sono largamente ispirati alle tabelle spatial\_references
+di PostGIS\index{PostGIS} versione 1.x. Gli identificatori EPSG sono presenti
+nel database e possono essere usati per richiamare e definire i CRS in QGIS.
 
-In order to use OTF projection, your data must contain information about its
-coordinate reference system or you have to define a global, layer or
-project-wide CRS. For PostGIS layers QGIS uses the spatial reference
-identifier that was specified when the layer was created. For data supported
-by OGR, QGIS relies on the presence of a format specific means of specifying
-the CRS. In the case of shapefiles, this means a file containing the Well
-Known Text (WKT)\index{WKT} specification of the CRS. The projection file
-has the same base name as the shapefile and a prj extension. For example, a
-shapefile named \filename{alaska.shp} would have a corresponding projection
-file named \filename{alaska.prj}.
+Per usare la proiezione al volo (OTF), i dati devono contenere informazioni
+sul proprio sistema di coordinate oppure bisogna definire un CRS per il layer,
+per il progetto oppure globale.
+Per livelli PostGIS QGIS usa l'identificatore dello spatial reference
+specificato quando il layer è stato creato. Per i dati supportati da OGR,
+QGIS fa affidamento sulla presenza di un file con formato caratteristico che
+definisce il CRS. Per gli shapefiles, questo significa avere l'indicazione del
+CRS in formato Well Known Text (WKT)\index{WKT}. Il file della proiezione
+ha lo stesso nome dello shapefile ma ha estensione prj. Per esempio uno
+shapefile chiamato \filename{alaska.shp} avrà un corrispondente file di
+proiezione chiamato \filename{alaska.prj}.
 
-\subsection{Specifying a Projection}
+\subsection{Specificare una proiezione}
 \index{Projections!specifying}
 \label{sec:projection-specifying}
 
-QGIS no longer sets the map CRS to the coordinate reference system of the
-first layer loaded. When you start a QGIS session with layers that do not
-have a CRS, you need to control and define the CRS definition for these
-layers. This can be done globally or project-wide in the \tab{CRS} tab under
-\mainmenuopt{Settings} > \dropmenuopttwo{mActionOptions}{Options} (See
-Figure~\ref{fig:crsdialog}). 
+QGIS non imposta più il CRS della mappa al sistema di coordinate per primo
+layer caricato. Quando si avvia una sessione QGIS con livelli privi di CRS,
+è necessario controllare e definire il CRS di questi layers. Questo può
+essere fatto globalmente o per ogni progetto nella linguetta \tab{CRS} sotto
+la voce di menù \mainmenuopt{Impostazioni} >
+\dropmenuopttwo{mActionOptions}{Opzioni} (Si veda la Figura~\ref{fig:crsdialog}). 
 
 \begin{itemize}
-\item \checkbox{Prompt for CRS} 
-\item \checkbox{Project wide default CRS will be used}
-\item \checkbox{Global default CRS displayed below will be used}
+\item \checkbox{Richiesta per CRS} 
+\item \checkbox{CRS predefinito utilizzato dal progetto}
+\item \checkbox{Verrà utilizzato il seguente CRS globale predefinito
+visualizzato qui sotto}
 \end{itemize}
 
-The global default CRS \texttt{proj=longlat +ellps=WGS84 +datum=WGS84
-+no\_defs} comes predefined in QGIS but can of course be changed, and the new
-definition will be saved for subsequent QGIS sessions.    
+In QGIS il CRS globale predefinito è \texttt{proj=longlat +ellps=WGS84 +datum=WGS84
++no\_defs} ma può essere cambiato, la nuova impostazione verrà salvata per le
+successive sessioni.    
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{CRS tab in the QGIS Options Dialog \nixcaption}\label{fig:crsdialog}\smallskip
+   \caption{Linguetta CRS nella finestra opzioni di QGIS \nixcaption}\label{fig:crsdialog}\smallskip
    \includegraphics[clip=true, width=12cm]{crsdialog}
 \end{center}
 \end{figure}
 
-If you want to define the coordinate reference system for a certain layer
-without CRS information, you can also do that in the \tab{General} tab of the
-raster properties (\ref{label_generaltab}) and vector properties
-(\ref{vectorgeneraltab}) dialog. If your layer already has a CRS defined, it
-will be displayed as shown in Figure~\ref{fig:vector_symbology}.
+Per definire il CRS di un layer privo di tale informazione, si può anche agire
+nella linguetta \tab{Generale} della finestra delle proprietà raster (\ref{label_generaltab})
+e delle proprietà vettore (\ref{vectorgeneraltab}). Se il CRS è già stato
+definito, verrà mostrato come nella figura~\ref{fig:vector_symbology}.
 
-\subsection{Define On The Fly (OTF) Projection}\label{label_projstart}
+\subsection{Definire la proiezione al volo (OTF)}\label{label_projstart}
 
-QGIS does not have OTF projection enabled by default, and this function is
-currently only supported for vector layers. To use OTF projection, you must
-open the \dropmenuopttwo{mActionOptions}{Project Properties} dialog, select a
-CRS and activate the \checkbox{Enable on the fly projection} checkbox.
-There are two ways to open the dialog:
+In QGIS la proiezione al volo (OTF) non è abilitata di default, tale funzione
+è attualmente supportata solo per layers vettoriali. Per usare la proiezione OTF,
+bisogna aprire la finestra di dialogo
+\dropmenuopttwo{mActionOptions}{Proprietà progetto}, selezionare un CRS
+e attivare la casella di controllo \checkbox{Abilita la 'modifica al volo'
+della trasformazione CRS}.
+Ci sono due modi per aprire questa finestra:
 
 \begin{enumerate}
-\item Select \dropmenuopttwo{mActionOptions}{Project Properties} from the
-\mainmenuopt{Settings} menu.
-\item Click on the \toolbtntwo{mIconProjectionEnabled}{projector} icon in the
-lower right-hand corner of the statusbar.
+\item Selezionare \dropmenuopttwo{mActionOptions}{Proprietà progetto} dal menù
+\mainmenuopt{Impostazioni}.
+\item Cliccare sull'icona \toolbtntwo{mIconProjectionEnabled}{Stato CRS}
+nell'angolo destro della barra di stato.
 \end{enumerate}
 
-If you have already loaded a layer, and want to enable OTF projection, the
-best practice is to open the \tab{Coordinate Reference System} tab of the
-\dialog{Project Properties} dialog and find the CRS of the currently loaded
-layer in the list of CRS, and activate the \checkbox{Enable on the fly
-projection} checkbox. All subsequently loaded vector layers will then be OTF
-projected to the defined CRS.
+Se è già stato caricato un livello, e si vuole abilitare la proiezione OTF, è
+buona norma aprire la linguetta \tab{Sistema di coordinate di riferimento
+spaziale (CRS)} della finestra di dialogo \dialog{Proprietà progetto} e
+individuare nell'elenco il CRS attualmente impostato, quindi attivare
+la casella di controllo \checkbox{Abilita la 'modifica al volo'
+della trasformazione CRS}. Ogni layer caricato successivamente sarà quindi
+riproiettato al volo nel CRS definito.
 
-The \tab{Coordinate Reference System} tab of the \dialog{Project Properties}
-dialog contains four important components as numbered in Figure
-\ref{fig:projections} and described below.
+La liguetta \tab{Sistema di coordinate di riferimento
+spaziale (CRS)} della finestra \dialog{Proprietà progetto}
+contiene quattro importanti componenti come individuate nella Figura \ref{fig:projections}
+e di seguito descritte.
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{Projection Dialog \nixcaption}\label{fig:projections}\smallskip
+   \caption{Finestra di dialogo per l'impostazione della proiezione \nixcaption}\label{fig:projections}\smallskip
    \includegraphics[clip=true, width=12cm]{projectionDialog}
 \end{center}  
 \end{figure}
 
 \begin{enumerate}
-\item \textbf{Enable on the fly projection}\index{Projections!enabling} -
-this checkbox is used to enable or disable OTF projection. When off, each
-layer is drawn using the coordinates as read from the data source. When on,
-the coordinates in each layer are projected to the coordinate reference
-system defined for the map canvas.
-\item \textbf{Coordinate Reference System} - this is a list of all CRS
-supported by QGIS, including Geographic, Projected and Custom coordinate
-reference systems. To use a CRS, select it from the list by expanding
-the appropriate node and selecting the CRS. The active CRS is preselected.
-\item \textbf{Proj4 text} - this is the CRS string used by the Proj4
-projection engine. This text is read-only and provided for informational
-purposes.
-\item \textbf{Search} - if you know the EPSG identifier or the name 
-for a Coordinate Reference System, you can use the search feature to find it.
-Enter the identifier and click on \button{Find}.
+\item \textbf{Abilita la 'modifica al volo' della trasformazione CRS}\index{Projections!enabling} -
+questa casella di controllo è usata per abilitare o disabilitare la proiezione
+OTF. Quando è deselezionata, ogni layer è tracciato usando le coordinate lette
+dal dato sorgente. Se abilitata, le coordinate di ogni layer sono riproiettate
+verso il sistema di coordinate definito per la mappa.
+\item \textbf{Coordinate del Sistema di Riferimento} - è la lista di tutti i CRS
+supportati da QGIS, inclusi i sitemi di coordinate geografiche, piane e
+quelli personalizzati. Per usare un CRS, selezionarlo dalla lista espandendo
+la voce appropriata. Il CRS attivo è preselezionato.
+\item \textbf{Stringa Proj4} - è la stringa CRS usata dal motore per le
+proiezioni the Proj4. È un testo in sola lettura a solo scopo informativo.
+\item \textbf{Trova} - se si conosce l'identificatore EPSG o il nome del CRS
+che si vuole impostare, può essere usata questa area di ricerca per trovarlo
+nell'elenco inserendo l'identificatore e cliccando su \button{Trova}.
 \end{enumerate}
 
 \begin{Tip}
- \caption{\textsc{Project Properties Dialog}}
+ \caption{\textsc{Finestra delle proprietà della proiezione}}
 \qgistip{
-If you open the \dialog{Project Properties} dialog from the
-\mainmenuopt{Settings} menu, you must click on the \tab{Coordinate Reference
-System} tab to view the CRS settings. Opening the dialog from the
-\toolbtntwo{mIconProjectionEnabled}{projector} icon will automatically bring
-the \tab{Coordinate Reference System} tab to the front.
+Se si apre la finestra \dialog{Proprietà progetto} dal menù
+\mainmenuopt{Impostazioni}, bisogna cliccare sulla linguetta \tab{Sistema di coordinate di riferimento
+spaziale (CRS)} per vedere le impostazioni del CRS. Aprendo la finestra
+dall'icona \toolbtntwo{mIconProjectionEnabled}{Stato CRS} verrà portata invece
+immediatamente in primo piano la linguetta \tab{Sistema di coordinate di riferimento
+spaziale (CRS)}.
 }
 \end{Tip}
 
-\subsection{Custom Coordinate Reference System}\label{sec:customprojections}
+\subsection{Proiezione definita dall'utente}\label{sec:customprojections}
 \index{Projections!custom}
 
-If QGIS does not provide the coordinate reference system you need, you
-can define a custom CRS. To define a CRS, select
-\dropmenuopttwo{mIconNew}{Custom CRS} from the \mainmenuopt{Settings} menu.
-Custom CRS are stored in your QGIS user database. In addition to your custom
-CRS, this database also contains your spatial bookmarks and other custom data. 
+Se in QGIS non si trova la proiezione di cui si necessita, è possibile
+definire un CRS personalizzato. Per fare ciò, selezionare
+\dropmenuopttwo{mIconNew}{CRS personalizzato} dal menù
+\mainmenuopt{Impostazioni}. I CRS personalizzati sono salvati nel database
+utente di QGIS. Oltre ai CRS personalizzati, questo database contiene anche i
+segnalibri geospaziali e altri dati personalizzati. 
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{Custom CRS Dialog \nixcaption}\label{fig:customprojections}\smallskip
+   \caption{Finestra del CRS personalizzato \nixcaption}\label{fig:customprojections}\smallskip
    \includegraphics[clip=true, width=12cm]{customProjectionDialog}
 \end{center}  
 \end{figure}
 
-Defining a custom CRS in QGIS requires a good understanding of the Proj.4
-projection library. To begin, refer to the Cartographic Projection Procedures
-for the UNIX Environment - A User's Manual by Gerald I. Evenden, U.S.
-Geological Survey Open-File Report 90-284, 1990 (available at \url{ftp://ftp.remotesensing.org/proj/OF90-284.pdf}).
-This manual describes the use of the \usertext{proj.4} and related command line
-utilities. The cartographic parameters used with \usertext{proj.4} are
-described in the user manual, and are the same as those used by QGIS. 
+La definizione di un CRS personalizzato in QGIS richiede una buona
+comprensione delle librerie Proj.4. Per iniziare, fare riferimento al
+documento Cartographic Projection Procedures for the UNIX Environment - A User's Manual
+by Gerald I. Evenden, U.S. Geological Survey Open-File Report 90-284, 1990
+(disponibile all'indirizzo \url{ftp://ftp.remotesensing.org/proj/OF90-284.pdf}).
+Questo manuale descrive l'uso di \usertext{proj.4} e delle relative utilità da
+riga di comando. I parametri cartografici usati da \usertext{proj.4} sono
+descritti nel manuale utente e sono identici a quelli usati da . 
 
-The \dialog{Custom Coordinate Reference System Definition} dialog requires
-only two parameters to define a user CRS: 
+La finestra \dialog{Definizione Sistema Riferimento Spaziale Personalizzato}
+richiede solo due parametri per definire un CRS personalizzato: 
 \begin{enumerate}
-\item a descriptive name and
-\item the cartographic parameters in PROJ.4 format.
+\item un nome descrittivo e
+\item i parametri cartografici in formato PROJ.4.
 \end{enumerate}
-To create a new CRS, click the \toolbtntwo{mIconNew}{New} button and enter a
-descriptive name and the CRS parameters. After that you can save your CRS by
-clicking the button \toolbtntwo{mActionFileSave}{Save}.
+Per creare un nuovo CRS, cliccare il pulsante \toolbtntwo{mIconNew}{Nuovo} e
+inserire il nome descrittivo e i parametri CRS. Successivamente salvare il CRS
+cliccando sul pulsante \toolbtntwo{mActionFileSave}{Salva}.
 
-Note that the \guilabel{Parameters} must begin with a \usertext{+proj=}-block,
-to represent the new coordinate reference system.
+Si noti che la voce \guilabel{Parametri} deve iniziare con un blocco \usertext{+proj=},
+per rappresentare il nuovo CRS.
 
-You can test your CRS parameters to see if they give sane results by
-clicking on the \button{Calculate} button inside the \guiheading{Test} block 
-and pasting your CRS parameters into
-the \guilabel{Parameters} field. Then enter known WGS 84 latitude and longitude
-values in \guilabel{North} and \guilabel{East} fields respectively. 
-Click on \button{Calculate} and compare the results with the known values in
-your coordinate reference system. 
+È possibile testare i parametri CRS per vedere se danno risultati validi
+cliccando sul pulsante \button{Calcola} nella sezione \guiheading{Prova} dopo
+aver incollato i parametri CRS personalizzati nel campo \guilabel{Parameters}.
+Inserire valori di latitudine e longitudine WGS 84 nei campi \guilabel{Nord} e
+\guilabel{Est} rispettivamente. 
+Cliccare su \button{Calcola} e confrontare i risultati con i valori noti nel
+sistema CRS personalizzato. 
 
