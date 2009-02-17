@@ -363,91 +363,99 @@ Molte definizioni possono essere dedotte leggendo gli standards WMS \cite{OGCWMS
 
 \subsubsection{Limitazioni del client WMS}\label{sec:ogc-wms-limits}\index{WMS!client!limits}
 
-Not all possible WMS Client functionality had been included in this version of QGIS.
-Some of the more notable exceptions follow:
+Non tutte le possibili funzionalità WMS sono state incluse in questa versione di QGIS. Le eccezioni
+più rilevanti sono:
 
-\minisec{Editing WMS Layer Settings}
+\minisec{Midificare le impostazioni del layer WMS}
 \index{WMS!layer settings!editing}
 
-Once you've completed the \toolbtntwo{mActionAddWmsLayer}{Add WMS layer}
-procedure, there is no ability to change the settings.
+Una volta completata la procedura mostrata dalla finestra
+\toolbtntwo{mActionAddWmsLayer}{Aggiungi layer WMS}, non è più possibile
+modificarne i parametri.
 
-A workaround is to delete the layer completely and start again.
+Una possibile soluzione è quella di eliminare il livello completamente e
+ricaricarlo reimpostando i parametri.
 
-\minisec{WMS Servers Requiring Authentication}
+\minisec{Servers WMS che richiedono un'autenticazione}
 \index{WMS!remote server!authentication}
 
-Only public WMS servers are accessible.
-There is no ability to apply a user name and password combination
-as an authentication to the WMS server.
+Sono accessibili solo server pubblici. Non è infatti possibile impostare user
+name e password per l'autentificazione al server WMS.
 
-\begin{Tip}[ht]\caption{\textsc{Accessing secured OGC-layers}}
-\qgistip{If you need to access secured layers, you could use InteProxy as
-a transparent proxy, which does supports several authentification methods.
-More information can be found at the InteProxy-manual found on the website
-\url{http://inteproxy.wald.intevation.org}.
+\begin{Tip}[ht]\caption{\textsc{Accesso a livelli OGC con password}}
+\qgistip{Se fosse necessario accedere a livelli protetti con password, è
+possibile usare InteProxy come proxy trasparente, che supporta molti metodi
+di autenticazione. Ulteriori informazioni sono fornite dal manuale di
+InteProxy al sito web \url{http://inteproxy.wald.intevation.org}.
 \index{WMS!secured layers!}\index{OGC!Authentication}
 }
 \end{Tip}
 
 
-\subsection{WFS Client}
+\subsection{Client WFS}
 
-In QGIS, a WFS layer behaves pretty much like any other vector layer. You 
-can identify and select features and view the attribute table. An exception 
-is that editing is not supported at this time. To start the WFS plugin you 
-need to open \mainmenuopt{Plugins} > \dropmenuopttwo{mActionShowPluginManager}{Plugin Manager...}, 
-activate the \checkbox{WFS plugin} checkbox and click \button{OK}. 
+In QGIS, un layer WFS si comporta come un qualsiasi altro livello vettoriale.
+È possibile identificare e selezionare elementi e visualizzare la tabella
+attributi. L'unica eccezione è che al momento non è supportata la modifica del
+livello. Per avviare il plugin the WFS bisogna andare alla voce di menù
+\mainmenuopt{Plugins} > \dropmenuopttwo{mActionShowPluginManager}{Gestione
+Plugins...}, attivare la casella di controllo \checkbox{plugin WFS} e cliccare su \button{OK}. 
 
-A new \toolbtntwo{mIconAddWfsLayer}{Add WFS Layer} icon appears next 
-to the WMS icon. Click on it to open the dialog. In General adding a WFS 
-layer is very similar to the procedure used with WMS. The difference is 
-there are no default servers defined, so we have to add our own.
+Apparirà nella barra una nuova icona per lo strumento
+\toolbtntwo{mIconAddWfsLayer}{Aggiungi layer WFS} vicino all'icona WMS.
+Cliccando su di essa si aprirà la finestra di dialogo. La procedura per l'aggiunta di un layer
+WFS si svolge in maniera molto simile a quella vista per i WMS. La differenza
+sta nel fatto che non vi sono server predefiniti, di conseguenza è necessario
+aggiungere manualmente quelli noti.
 
-\subsubsection{Loading a WFS Layer}
+\subsubsection{Caricare un layer WFS}
 
-As an example we use the DM Solutions WFS server and display a layer. The URL is:
+Come esempio è possibile caricare il server WFS DM Solutions e mostrare un
+layer. L'indirizzo da inserire è:
 \begin{verbatim}
 http://www2.dmsolutions.ca/cgi-bin/mswfs_gmap?VERSION=1.0.0&SERVICE=
 wfs&REQUEST=GetCapabilities
 \end{verbatim}
 
 \begin{enumerate}
-  \item Make sure the WFS plugin is loaded; if not, open the Plugin Manager and load it
-  \item Click on the 
-  \toolbtntwo{mIconAddWfsLayer}{Add WFS Layer} 
-  tool on the plugins toolbar
-  \item Click on \button{New} 
-  \item Enter \inputtext{Name}{DM Solutions} as the name
-  \item Enter the URL (see previous page)
-  \item Click \button{OK} 
-  \item Choose \selectstring{Server Connections}{DM Solutions} from the drop-down box
-  \item Click \button{Connect} 
-  \item Wait for the list of layers to be populated
-  \item Click on the \clicklistitem{Canadian Land} layer
-  \item Click \button{Add} to add the layer to the map
-  \item Wait patiently for the features to appear
+  \item Assicurarsi che il plugin WFS sia caricato; in caso contrario aprire
+  il Gestore plugins e caricarlo
+  \item Cliccare sullo strumento \toolbtntwo{mIconAddWfsLayer}{Aggiungi layer
+  WFS} nella barra strumenti plugins
+  \item Cliccare su \button{Nuovo} 
+  \item Inserire \inputtext{Nome}{DM Solutions} come nome
+  \item Inserire l'indirizzo precedentemente indicato
+  \item Cliccare su \button{OK} 
+  \item Selezionare \selectstring{Connessioni server}{DM Solutions} dal menù a
+  tendina
+  \item Cliccare su \button{Connetti} 
+  \item Attendere la ricezione dell'elenco layers
+  \item Cliccare sul livello \clicklistitem{Canadian Land}
+  \item Cliccare su \button{OK} per aggiungere il livello alla mappa
+  \item Attendere pazientemente che gli elementi del livello appaiano nella
+  vista mappa dopo essere scaricati dal server
 \end{enumerate}
 
 \begin{figure}[ht]
   \begin{center}
-  	\caption{Adding a WFS layer \nixcaption}\label{fig:wfs_dmsolutions}
+  	\caption{Aggiunta di un layer WFS \nixcaption}\label{fig:wfs_dmsolutions}
 	\includegraphics[clip=true,width=0.6\textwidth]{connection_wfs}
   \end{center}
 \end{figure}
 
-You'll notice the download progress is visualized in the left bottom of the QGIS main window. 
-Once the layer is loaded, you can identify and select a province or two and view the 
-attribute table.
+Si noti che l'avanzamento della ricezione dei dati viene visualizzato nella
+parte inferiore sinistra della finestra principale di QGIS. 
+Quando il layer è caricato, è possibile identificare e selezionare alcuni
+elementi e visualizzare la tabella attributi.
 
-Remember this plugin works best with UMN MapServer WFS servers. It still
-could be, that you might experience random behavior 
-and crashes. You can look forward to improvements in a future version of the plugin.
+Tenere a mente che il plugin funziona al meglio con servers WFS basati su UMN
+MapServer. Sono ancora possibili comportamenti anomale e crash dello stesso,
+ma ci saranno miglioramenti in future versioni.
 
-\begin{Tip}[ht]\caption{\textsc{Finding WMS and WFS Servers}}
-\qgistip{You can find additional WMS and WFS servers by using Google or your
-favorite search engine. There are a number of lists with public URLs, some 
-of them maintained and some not.
+\begin{Tip}[ht]\caption{\textsc{Trovare servers WMS e WFS}}
+\qgistip{È possibile trovare ulteriori server WMS e WFS usando Google o altro
+motore di ricerca preferito. Ci sono anche diversi elenchi di URL pubblici,
+alcuni dei quali aggiornati e altri non più mantenuti.
 \index{WFS!remote server!}
 }
 \end{Tip} 
