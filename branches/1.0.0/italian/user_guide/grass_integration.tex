@@ -504,135 +504,144 @@ es. contorni aperti/chiusi).
 
 \begin{figure}[h]
  \begin{center}
- \caption{GRASS Digitizing Symbolog Tab \nixcaption}\label{fig:grass_digitizing_symbology}
+ \caption{Linguetta Simbologia negli strumenti per la digitalizzazione in GRASS \nixcaption}\label{fig:grass_digitizing_symbology}
  \includegraphics[clip=true,width=8cm]{grass_digitizing_symbology}
  \end{center}
 \end{figure}
 
-\minisec{Table Tab} \index{GRASS!table editing}
+\minisec{Liguetta Tabella} \index{GRASS!table editing}
 
-The \tab{Table} tab provides information about the database table for
-a given 'layer'. Here you can add new columns to an existing attribute table,
-or create a new database table for a new GRASS vector layer (see Section 
+La linguetta \tab{Tabella} fornisce informazioni sulla struttura della tabella
+nel database per un determinato 'layer'. Qui si possono aggiungere nuove
+colonne ad una tabella attributi esistente o creare un nuovo schema tabella
+per un nuovo layer vettoriale GRASS o per un nuovo 'layer' (si veda la Sezione 
 \ref{sec:creating_new_grass_vectors}).
 
 \begin{figure}[h]
  \begin{center}
- \caption{GRASS Digitizing Table Tab \nixcaption}\label{fig:grass_digitizing_table}
+ \caption{Linguetta Tabella negli strumenti per la digitalizzazione in GRASS \nixcaption}\label{fig:grass_digitizing_table}
  \includegraphics[clip=true,width=10cm]{grass_digitizing_table}
  \end{center}
 \end{figure}
 
-\begin{Tip}\caption{\textsc{GRASS Edit Permissions}}\index{GRASS!edit
+\begin{Tip}\caption{\textsc{Permessi di modifica in GRASS}}\index{GRASS!edit
 permissions}
-\qgistip{You must be the owner of the GRASS \filename{MAPSET} you want to 
-edit. It is impossible to edit data layers in a \filename{MAPSET} that is not 
-yours, even if you have write permissions.
+\qgistip{È necessario essere il proprietario del \filename{MAPSET} GRASS che
+si vuole editare. Non è possibile modificare dati in un {MAPSET} del quale non
+si è proprietari, anche se si possiedono si di esso permessi in scrittura.
 }
 \end{Tip} 
 
-\subsection{The GRASS region tool}\label{sec:grass_region}\index{GRASS!region}
+\subsection{Lo strumento Region di GRASS}\label{sec:grass_region}\index{GRASS!region}
 
-The region definition (setting a spatial working window) in GRASS is important 
-for working with raster layers. Vector analysis is per default not limited
-to any defined region definitions. All newly-created rasters will have the
-spatial extension and resolution of the currently defined GRASS region,
-regardless of their original extension and resolution. The current GRASS
-region is stored in the \filename{\$LOCATION/\$MAPSET/WIND} file, and it 
-defines north, south, east and west bounds, number of columns and rows, 
-horizontal and vertical spatial resolution.
+L'impostazione di una regione (ovvero di una porzione di spazio geografico
+nella quale operare) è molto importante in GRASS quando si lavora con dati
+raster. L'analisi vettoriale infatti di default non è limitata
+dall'impostazione della regione ma viene fatta su tutta l'estensione del
+layer. Tutti i raster di nuova creazione avranno l'estensione e risoluzione
+spaziale della regione GRASS definita, indipendentemente dalla loro estensione
+e risoluzione originale. L'impostazione corrente della regione GRASS è salvata
+nel file \filename{\$LOCATION/\$MAPSET/WIND} che ne definisce i limiti nord, sud
+est e ovest, il numero di righe e colonne e la risoluzione spaziale in senso
+orizzontale e verticale.
 
-It is possible to switch on/off the visualization of the GRASS region in the
-QGIS canvas using the \toolbtntwo{grass_region}{Visualizza GRASS regione attuale}
-button. \index{GRASS!region!display}.
+È possibile abilitare/disabilitare la visualizzazione della region di GRASS
+nella vista mappa in QGIS usando il pulsante \toolbtntwo{grass_region}{Visualizza GRASS regione attuale}. \index{GRASS!region!display}.
 
-With the \toolbtntwo{grass_region_edit}{Modifica region GRASS attuale} icon you 
-can open a dialog to change the current region and the symbology of the GRASS 
-region rectangle in the QGIS canvas. Type in the new region bounds and 
-resolution and click \button{OK}. It also allows to select a new region 
-interactively with your mouse on the QGIS canvas. Therefore click with the 
-left mouse button in the QGIS canvas, open a rectangle, close it using the 
-left mouse button again and click \button{OK}.\index{GRASS!region!editing}
-The GRASS module \filename{g.region} provide a lot more parameters to define 
-an appropriate region extend and resolution for your raster analysis. You can 
-use these parameters with the GRASS Toolbox, described in Section 
-\ref{subsec:grass_toolbox}.
+Con lo strumento \toolbtntwo{grass_region_edit}{Modifica region GRASS attuale}
+è possibile aprire una finestra di dialogo per cambiare le impostazioni
+attuali della regione e la simbologia con la quale il rettangolo che la
+rappresenta viene visualizzato nella vista mappa di QGIS. Inserire i nuovi
+limiti della regione e la risoluzione e cliccare su \button{OK}. Lo strumento
+consente anche di selezionare l'estensione della regione interattivamente con
+il mouse nella vista mappa di QGIS. Cliccando quindi con il tasto sinistro del
+mouse nella vista mappa si imposta il primo angolo del rettangolo che definirà
+la regione e cliccando in un altro punto lo si chiuderà. Cliccare quindi su
+\button{OK} per confermare.\index{GRASS!region!editing}
+Il modulo GRASS \filename{g.region} mette a disposizione molti più parametri
+per definire l'estensione della regione e la risoluzione con la quale si vuole
+condurre l'analisi raster. Si possono usare questi parametri usando lo
+strumento appropriato nella barra GRASS, descritta nella Sezione \ref{subsec:grass_toolbox}.
 
-\subsection{The GRASS toolbox}\label{subsec:grass_toolbox}\index{GRASS!toolbox}
+\subsection{La barra strumenti GRASS}\label{subsec:grass_toolbox}\index{GRASS!toolbox}
 
-The \toolbtntwo{grass_tools}{Open GRASS Tools} box provides GRASS module 
-functionalities to work with data inside a selected GRASS \filename{LOCATION} 
-and \filename{MAPSET}. To use the GRASS toolbox you need to open a 
-\filename{LOCATION} and \filename{MAPSET} where you have write-permission 
-(usually granted, if you created the \filename{MAPSET}). This is necessary, 
-because new raster or vector layers created during analysis need to be written 
-to the currently selected \filename{LOCATION} and \filename{MAPSET}.
+Lo strumento \toolbtntwo{grass_tools}{Apri strumenti GRASS} fornisce accesso
+alle funzionalità dei moduli GRASS con i quali lavorare nella
+\filename{LOCATION} e nel \filename{MAPSET} impostati. Per usare gli strumenti
+di GRASS è necessario aprire una \filename{LOCATION} e un \filename{MAPSET}
+sui quali si abbiano permessi di scrittura (in genere concessi se si è
+l'utente che ha creato il \filename{MAPSET}). Ciò è necessario in quanto i
+nuovi layer raster o vettoriali creati durante l'analisi devono poter essere
+scritti nella \filename{LOCATION} e nel \filename{MAPSET} selezionato.
 
-\subsubsection{Working with GRASS modules}\index{GRASS!toolbox}
+\subsubsection{Lavorare con i moduli GRASS}\index{GRASS!toolbox}
 
 \begin{figure}[h]
 \centering
-\caption{GRASS Toolbox and searchable Modules List \nixcaption}\label{fig:grass_modules}
-   \subfigure[Modules Tree] {\label{subfig:grass_module_tree}\includegraphics[clip=true, width=0.4\textwidth]{grass_toolbox_moduletree}}\goodgap
-   \subfigure[Searchable Modules List] {\label{subfig:grass_module_list}\includegraphics[clip=true, width=0.4\textwidth]{grass_toolbox_modulelist}}
+\caption{Strumenti di GRASS e Lista Moduli con possibilità di ricerca \nixcaption}\label{fig:grass_modules}
+   \subfigure[Albero moduli] {\label{subfig:grass_module_tree}\includegraphics[clip=true, width=0.4\textwidth]{grass_toolbox_moduletree}}\goodgap
+   \subfigure[Lista moduli con casella di ricerca] {\label{subfig:grass_module_list}\includegraphics[clip=true, width=0.4\textwidth]{grass_toolbox_modulelist}}
 \end{figure}
 
-The GRASS Shell inside the GRASS Toolbox provides access to almost all (more 
-than 300) GRASS modules in command line modus. To offer a more user
-friendly working environment, about 200 of the available GRASS modules and 
-functionalities are also provided by graphical dialogs. These dialogs are 
-grouped in thematic blocks, but are searchable as well. You find a complete 
-list of GRASS modules available in QGIS version \CURRENT
-in appendix \ref{appdx_grass_toolbox_modules}. It is also possible to 
-customize the GRASS Toolbox content. It is described in Section 
+La shell di GRASS negli strumenti fornisce accesso a praticamente tutti gli
+oltre 300 moduli GRASS in modalità riga di comando. Per offrire un ambiente di
+lavoro maggiormente user-friendly, circa 200 di questi moduli e delle relative
+funzionalità sono presentate in finestre di dialogo. Questi moduli sono
+raggruppate in blocchi tematici ma possono anche essere cercati. Una lista
+completa dei moduli GRASS disponibili nella versione di QGIS \CURRENT
+è fornita in Appendice \ref{appdx_grass_toolbox_modules}. È anche possibile
+personalizzare il contenuto degli strumenti GRASS come descritto alla Sezione 
 \ref{sec:toolbox-customizing}.
 
-As shown in Figure \ref{fig:grass_modules}, you can look for the appropriate 
-GRASS module using the thematically grouped \tab{Albero moduli} or the 
-searchable \tab{Modules List} tab. 
+Come mostrato in Figura \ref{fig:grass_modules}, è possibile cercare il modulo
+GRASS desiderato cercandolo per aree tematiche nella linguetta \tab{Albero
+moduli} o nella linguetta con casella di ricerca \tab{Lista moduli}. 
 
-Clicking on a grapical module icon a new tab will be added to the toolbox 
-dialog providing three new sub-tabs \tab{Options}, \tab{Output} and 
-\tab{Manual}. In Figure \ref{fig:grass_module_dialog} you see an example 
-for the GRASS module \filename{v.buffer}.
+Cliccando sull'icona di un modulo grafico verrà aggiunta una nuova linguetta
+alla finestra degli strumenti. In questa linguetta si avranno tre ulteriori
+sottolinguette denominate \tab{Opzioni}, \tab{Output} e \tab{Manuale}. Un
+esempio è mostrato in Figura \ref{fig:grass_module_dialog} per il modulo
+\filename{v.buffer}.
 
 \begin{figure}[h]
 \centering
-\caption{GRASS Toolbox Module Dialogs \nixcaption}\label{fig:grass_module_dialog}
-   \subfigure[Module Options] {\label{subfig:grass_module_option}\includegraphics[clip=true, width=0.3\textwidth]{grass_module_option}}\goodgap
-   \subfigure[Modules Output] {\label{subfig:grass_module_output}\includegraphics[clip=true, width=0.3\textwidth]{grass_module_output}}\goodgap
-   \subfigure[Module Manual] {\label{subfig:grass_module_manual}\includegraphics[clip=true, width=0.3\textwidth]{grass_module_manual}}
+\caption{Finestre degli strumenti GRASS \nixcaption}\label{fig:grass_module_dialog}
+   \subfigure[Linguetta Opzioni] {\label{subfig:grass_module_option}\includegraphics[clip=true, width=0.3\textwidth]{grass_module_option}}\goodgap
+   \subfigure[Linguetta Output] {\label{subfig:grass_module_output}\includegraphics[clip=true, width=0.3\textwidth]{grass_module_output}}\goodgap
+   \subfigure[Linguetta Manuale] {\label{subfig:grass_module_manual}\includegraphics[clip=true, width=0.3\textwidth]{grass_module_manual}}
 \end{figure}
 
-\minisec{Options}
+\minisec{Opzioni}
 
-The \tab{Options} tab provides a simplified module dialog where you can 
-usually select a raster or vector layer visualized in the QGIS canvas and 
-enter further module specific parameters to run the module. The provided 
-module parameters are often not complete to keep the dialog clear. If you want 
-to use further module parameters and flags, you need to start the GRASS Shell 
-and run the module in the command line.
+La linguetta \tab{Opzioni} fornisce una finestra semplificata nel quale di
+solito è possibile selezionare un layer raster o vettoriale ed inserire
+ulteriori opzioni specifiche per l'esecuzione del modulo. Per mantenere la
+leggibilità della finestra non sempre sono presenti tutte le opzioni, se si
+volessero usare ulteriori parametri per il modulo è necessario avviare la
+shell di GRASS e eseguire il modulo dalla riga di comando.
 
 \minisec{Output}
 
-The \tab{Output} tab provides information about the output status of the 
-module. When you click the \button{Run} button, the module switches to the 
-\tab{Output} tab and you see information about the analysis process. If all 
-works well, you will finally see a \usertext{Successfully finished} message.
+La linguetta \tab{Output} fornisce informazioni sull'avanzamento delle
+operazioni eseguite dal modulo. Quando si clicca sul pulsante \button{Esegui},
+viene portata in primo piano la linguetta \tab{Output} nella quale vengono
+visualizzate le informazioni sul processo in corso. Se l'operazione va a buon
+fine, si vedrà il messaggio \usertext{Operazione conclusa con successo}.
 
-\minisec{Manual}
+\minisec{Manuale}
 
-The \tab{Manual} tab shows the HTML help page of the GRASS module. You can 
-use it to check further module parameters and flags or to get a deeper 
-knowledge about the purpose of the module. At the end of each module 
-manual page you see further links to the \filename{Main Help index}, the 
-\filename{Thematic index} and the \filename{Full index}. These links provide 
-the same information as if you use the module \filename{g.manual} 
+La linguetta \tab{Manual} mostra la pagina di aiuto in formato HTML del modulo
+GRASS scelto. Qui può essere controllata la disponibilità di ulteriori
+parametri o ottenere una conoscenza più approfondita sulle operazioni che il
+modulo può eseguire. Ala fine di ogni pagina di manuale vi sono ulteriori
+collegamenti al \filename{Main Help index}, al \filename{Thematic index} o al
+\filename{Full index}. Questi links forniscono le stesse informazioni che si
+avrebbero usando il modulo \filename{g.manual}.
 
-\begin{Tip}\caption{\textsc{Display results immediately}}\index{GRASS!display results}
-\qgistip{If you want to display your calculation results immediately in your 
-map canvas, you can use the 'View Output' button at the bottom of the 
-module tab.
+\begin{Tip}\caption{\textsc{Mostrare i risultati immediatamente}}\index{GRASS!display results}
+\qgistip{Se si desidera visualizzare il risultato dell'analisi immediatamente
+nella vista mappa, è possibile cliccare sul pulsante 'Visualizza Output' nella
+porzione inferiore della linguetta.
 }
 \end{Tip} 
 
