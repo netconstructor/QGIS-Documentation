@@ -284,33 +284,36 @@ medesimo \ref{label_sampledata}.
 \end{enumerate}
 
 
-\subsection{Il modello di dato vettoriale in GRASS}\label{label_vectmodel}\index{GRASS!vector data
-model}
+\subsection{Il modello di dato vettoriale in GRASS}\label{label_vectmodel}\index{GRASS!vector data model}
 
 Prima di digitalizzare dati in GRASS è importante capirne la struttura del
-dato vettoriale.\index{GRASS!digitizing} In general, GRASS uses a topological
-vector model.\index{GRASS!topology} This means that areas are not represented
-as closed polygons, but by one or more boundaries. A boundary between two
-adjacent areas is digitized only once, and it is shared by both areas.
-Boundaries must be connected without gaps. An area is identified (labeled) 
-by the centroid of the area.
+dato vettoriale.\index{GRASS!digitizing} In generale, GRASS usa un modello di
+dato vettoriale topologico.\index{GRASS!topology} Questo significa che le aree
+non sono rappresentate con poligoni chiusi singoli, ma da uno o più limiti
+(boundaries). Un  limite (boundary) tra due aree adiacenti è digitalizzato una
+sola volta, e condiviso da entrambe le aree. Perché un'area sia
+topologicamente corretta, i limiti devono essere collegati senza soluzione di
+continuità. Un'area è identificata (etichettata, labeled) dal centroide
+dell'area stessa.
 
-Besides boundaries and centroids, a vector map can also contain
-points and lines. All these geometry elements can be mixed
-in one vector and will be represented in different so called 'layers' inside
-one GRASS vector map. So in GRASS a layer is not a vector or raster map but a
-level inside a vector layer. This is important to distinguish carefully.
-\footnote{Although it
-is possible to mix geometry elements, it is unusual and even in GRASS only
-used in special cases such as vector network analysis. Normally you should
-prefere to store different geometry elements in different layers.}
+Oltre a limiti e centroidi, una mappa vettoriale può contenere anche punti e
+linee. Tutti questi elementi possono essere mischiati in un singolo layer
+vettoriale e saranno rappresentati in cosiddetti 'layers' differenti in una
+singola mappa vettoriale di GRASS. Quindi in GRASS con  layer non si intende
+una mappa raster o vettoriale ma un livello all'interno di un dato vettoriale.
+Questa è una distinzione molto importante da tenere presente.
+\footnote{Sebbene sia possibile mescolare elementi geometrici di diverso tipo
+(punti, linee, limiti e centroidi), ciò è abbastanza insolito e perfino in
+GRASS viene usato solo in casi speciali come ad es. quando si esegue l'analisi
+di una rete vettoriale. DI solito è preferibile che elementi geometrici
+diversi vengano digitalizzati su "file" distinti.}
 
-It is possible to store more 'layers' in one vector dataset. For example,
-fields, forests and lakes can be stored in one vector. Adjacent
-forest and lake can share the same boundary, but they have separate attribute
-tables. It is also possible to attach attributes to boundaries. For example,
-the boundary between lake and forest is a road, so it can have a different 
-attribute table.
+È possibile salvare più 'layers' in un set di dati vettoriale. Per esempio
+campi, foreste e laghi possono essere salvati in un vettoriale. Foreste e
+laghi adiacenti possono condividere lo stesso limite, ma avranno tabelle degli
+attributi distinte. È anche possibile assegnare attributi ai limiti. Ad
+esempio se il limite un lago ed una foresta è una strada, può avere una
+diversa tabella degli attributi.
  
 The 'layer' of the feature is defined by 'layer' inside GRASS. 'Layer' is the 
 number which defines if there are more than one layer inside the dataset, e.g. 
