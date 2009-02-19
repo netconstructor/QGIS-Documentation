@@ -645,51 +645,57 @@ porzione inferiore della linguetta.
 }
 \end{Tip} 
 
-\subsubsection{Working with the GRASS LOCATION browser} \index{GRASS!toolbox!Browser}
+\subsubsection{Lavorare con il browser delle LOCATION GRASS} \index{GRASS!toolbox!Browser}
 
-Another useful feature inside the GRASS Toolbox is the GRASS 
-\filename{LOCATION} browser. In Figure~\ref{fig:grass_mapset_browser} you 
-can see the current working \filename{LOCATION} with its \filename{MAPSETs}.
+Un'altra utile funzione tra quelle presenti negli strumenti GRASS è il browser
+delle \filename{LOCATION}. In Figura~\ref{fig:grass_mapset_browser} è
+possibile vedere un esempio che mostra la \filename{LOCATION} impostata 
+e i relativi \filename{MAPSETs}.
 
-In the left browser windows you can browse through all \filename{MAPSETs} 
-inside the current \filename{LOCATION}. The right browser window shows some 
-meta information for selected raster or vector layers, e.g. resolution, 
-bounding box, data source, connected attribute table for vector data and a 
-command history.
+Nella parte sinistra della finestra del browser si può navigare attraverso
+tutti i \filename{MAPSETs} contenuti nella \filename{LOCATION} impostata. La
+porzione di destra mostra invece alcuni metadati del raster o del vettoriale
+selezionato, come la risoluzione, l'estensione spaziale, la fonte del dato, il
+percorso alla tabella attributi associata per i dati vettoriali e lo storico
+comandi che ha generato quel dato.
 
 \begin{figure}[h]
  \begin{center}
- \caption{GRASS LOCATION browser \nixcaption}\label{fig:grass_mapset_browser}
+ \caption{Browser delle LOCATION GRASS \nixcaption}\label{fig:grass_mapset_browser}
  \includegraphics[clip=true,width=10cm]{grass_mapset_browser}
  \end{center}
 \end{figure}
 
-The toolbar inside the \tab{Browser} tab offers following tools to manage 
-the selected \filename{LOCATION}:
+La barra strumenti nella linguetta \tab{Browser} tab offre i seguenti
+strumenti per la gestione della \filename{LOCATION} selezionata:
 
 \begin{itemize}
-\item \toolboxtwo{grass_add_map}{Add selected map to canvas}
-\item \toolboxtwo{grass_copy_map}{Copy selected map}
-\item \toolboxtwo{grass_rename_map}{Rename selected map}
-\item \toolboxtwo{grass_delete_map}{Delete selected map}
-\item \toolboxtwo{grass_set_region}{Set current region to selected map}
-\item \toolboxtwo{grass_refresh}{Refresh browser window}
+\item \toolboxtwo{grass_add_map}{Aggiungi la mappa selezionata all'area di
+lavoro}
+\item \toolboxtwo{grass_copy_map}{Copia la mappa selezionata}
+\item \toolboxtwo{grass_rename_map}{Rinomina la mappa selezionata}
+\item \toolboxtwo{grass_delete_map}{Elimina la mappa selezionata}
+\item \toolboxtwo{grass_set_region}{Imposta la regione corrente con la mappa
+selezionata}
+\item \toolboxtwo{grass_refresh}{Aggiorna}
 \end{itemize}
 
-The \toolboxtwo{grass_rename_map}{Rename selected map} and 
-\toolboxtwo{grass_delete_map}{Delete selected map} only work with maps inside 
-your currently selected \filename{MAPSET}. All other tools also work with 
-raster and vector layers in another \filename{MAPSET}.
+Gli strumenti \toolboxtwo{grass_rename_map}{Rinomina la mappa selezionata} e
+\toolboxtwo{grass_delete_map}{Elimina la mappa selezionata} funzionano solo su
+mappe contenute nel \filename{MAPSET} attivo. Tutti gli altri strumenti
+funzionano anche con livelli raster e vettoriali di altri \filename{MAPSET}.
 
-\subsubsection{Customizing the GRASS Toolbox} \index{GRASS!toolbox!customize}
+\subsubsection{Personalizzazione degli strumenti GRASS} \index{GRASS!toolbox!customize}
 \label{sec:toolbox-customizing}
 
-Nearly all GRASS modules can be added to the GRASS toolbox. A XML 
-interface is provided to parse the pretty simple XML files which configures 
-the modules appearance and parameters inside the toolbox.
+Praticamente tutti i moduli GRASS possono essere aggiunti agli strumenti
+GRASS. Per incorporare i file XML di configurazione dei moduli è fornita
+un'interfaccia XML nella quale definire l'aspetto del modulo e i parametri
+da visualizzare nello strumento.
 
-A sample XML file for generating the module \usertext{v.buffer} (v.buffer.qgm) 
-looks like this:
+Un esempio di file XML che genera il module \usertext{v.buffer} (v.buffer.qgm)
+ha il seguente aspetto:
+
 \begin{verbatim}
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE qgisgrassmodule SYSTEM "http://mrcc.com/qgisgrassmodule.dtd">
@@ -701,8 +707,9 @@ looks like this:
 </qgisgrassmodule>
 \end{verbatim}
 
-The parser reads this definition and creates a new tab inside the toolbox 
-when you select the module. A more detailed description for adding new 
-modules, changing the modules group, etc. can be found on the QGIS wiki at \\
+Il parser legge questa definizione e crea una nuova linguetta negli strumenti
+quando si seleziona il modulo. Informazioni più dettagliate su come aggiungere
+moduli, cambiare i gruppi di moduli ecc. sono reperibile sul Wiki di QGIS
+all'indirizzo \\
 \url{http://wiki.qgis.org/qgiswiki/Adding\_New\_Tools\_to\_the\_GRASS\_Toolbox}.
 
