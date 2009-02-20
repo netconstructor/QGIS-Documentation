@@ -1,112 +1,121 @@
 % vim:autoindent:set textwidth=78:
 
-\section{Print Composer}\label{label_printcomposer}
+\section{Compositore di stampe}\label{label_printcomposer}
 
 % when the revision of a section has been finalized, 
 % comment out the following line:
 % \updatedisclaimer
 
-The print composer provides growing layout and printing
-capabilities. It allows you to add elements such as the QGIS map canvas, 
-legend, scalebar, images, and text labels. You can size, group 
-and position each element and adjust the properties to create your layout. 
-The result can be printed (also to Postscript and PDF), exported to image 
-formats or to SVG.\footnote{Export to SVG supported, but it is not working 
-properly with some recent QT4 versions. You should try and check individual 
-on your system} See a list of tools in table~\ref{tab:printcomposer_tools}:
+Il compositore di stampe fornisce funzionalità per la creazione di layout di
+stampa che saranno continuamente migliorate. Consente di aggiungere elementi
+al layout come la vista mappa, la legenda, la barra di scala, immagini esterne
+e campi testuali. È possibile cambiare le dimensioni, raggruppare e spostare
+ogni elemento e regolarne le proprietà per creare il layout desiderato. 
+Il risultato può essere stampato (anche come Postscript e PDF), esportato come
+immagine o come disegno vettoriale in formato SVG.\footnote{L'esportazione in
+SVG è supportata, ma non funziona correttamente con alcune recenti versioni di
+QT4. È necessario fare delle prove e dei controlli individuali sul proprio
+sistema} Si veda l'elenco degli strumenti nella tabella~\ref{tab:printcomposer_tools}:
 
 \begin{table}[h]\index{Print composer!tools}
 \centering
-\caption{Print Composer Tools}\label{tab:printcomposer_tools}\medskip
+\caption{Strumenti del compositore di stampe}\label{tab:printcomposer_tools}\medskip
  \begin{tabular}{|l|p{6.9cm}|l|p{6.9cm}|}
- \hline \textbf{Icon} & \textbf{Purpose} & \textbf{Icon} &
- \textbf{Purpose} \\
+ \hline \textbf{Icona} & \textbf{Scopo} & \textbf{Icona} &
+ \textbf{Scopo} \\
 
  \hline \includegraphics[width=0.7cm]{mActionExportMapServer}
- & Export to an image format & 
- \includegraphics[width=0.7cm]{mActionSaveAsSVG} & Export print composition 
- to SVG \\
- \hline \includegraphics[width=0.7cm]{mActionFilePrint} & Print or 
- export as PDF or Postscript &
- \includegraphics[width=0.7cm]{mActionZoomFullExtent} & Zoom to
- full extend \\
- \hline \includegraphics[width=0.7cm]{mActionZoomIn} & Zoom in &
- \includegraphics[width=0.7cm]{mActionZoomOut} & Zoom out \\
- \hline \includegraphics[width=0.7cm]{mActionDraw} & Refresh 
- view &
- \includegraphics[width=0.7cm]{mActionAddRasterLayer} & Add 
- new map from QGIS map canvas \\
- \hline \includegraphics[width=0.7cm]{mActionSaveMapAsImage} & Add Image to 
- print composition &
- \includegraphics[width=0.7cm]{mActionLabel} & Add label to print composition \\
- \hline \includegraphics[width=0.7cm]{mActionAddLegend} & Add new legend to 
- print composition & 
- \includegraphics[width=0.7cm]{mActionScaleBar} & Add new scalebar to print
- composition\\
- \hline \includegraphics[width=0.7cm]{mActionSelectPan} & Select/Move item in 
- print composition &
- \includegraphics[width=0.7cm]{mActionMoveItemContent} & Move content within
- an item \\
- \hline \includegraphics[width=0.7cm]{mActionGroupItems} & Group items of 
- print composition & 
- \includegraphics[width=0.7cm]{mActionUngroupItems} & Ungroup items of print 
- composition \\
- \hline \includegraphics[width=0.7cm]{mActionRaiseItems} & Raise selected
- items in print composition &
- \includegraphics[width=0.7cm]{mActionLowerItems} & Lower selected items 
- in print composition \\
- \hline \includegraphics[width=0.7cm]{mActionMoveItemsToTop} & Move selected
- items to top & 
- \includegraphics[width=0.7cm]{mActionMoveItemsToBottom} & Move selected
- items to bottom \\
+ & Esporta come immagine & 
+ \includegraphics[width=0.7cm]{mActionSaveAsSVG} & Esporta come SVG \\
+ \hline \includegraphics[width=0.7cm]{mActionFilePrint} & Stampa o esporta
+ come PDF o Postscript &
+ \includegraphics[width=0.7cm]{mActionZoomFullExtent} & Zoomma all'estensione
+ massima \\
+ \hline \includegraphics[width=0.7cm]{mActionZoomIn} & Ingrandisci &
+ \includegraphics[width=0.7cm]{mActionZoomOut} & Rimpicciolisci \\
+ \hline \includegraphics[width=0.7cm]{mActionDraw} & Aggiorna la vista &
+ \includegraphics[width=0.7cm]{mActionAddRasterLayer} & Aggiungi una nuova
+ vista mappa da QGIS \\
+ \hline \includegraphics[width=0.7cm]{mActionSaveMapAsImage} & Aggiungi
+ immagine al layout di stampa &
+ \includegraphics[width=0.7cm]{mActionLabel} & Aggiungi caselle di testo al
+ layout di stampa \\
+ \hline \includegraphics[width=0.7cm]{mActionAddLegend} & Aggiungi una nuova
+ legenda al layout di stampa & 
+ \includegraphics[width=0.7cm]{mActionScaleBar} & Aggiungi una barra di scala
+ al layout di stampa\\
+ \hline \includegraphics[width=0.7cm]{mActionSelectPan} & Seleziona/sposta
+ oggetti del layout di stampa &
+ \includegraphics[width=0.7cm]{mActionMoveItemContent} & Sposta centro della
+ vista mappa \\
+ \hline \includegraphics[width=0.7cm]{mActionGroupItems} & Raggruppa oggetti
+ del layout & 
+ \includegraphics[width=0.7cm]{mActionUngroupItems} & Separa oggetti del
+ layout \\
+ \hline \includegraphics[width=0.7cm]{mActionRaiseItems} & Alza di livello
+ l'oggetto selezionato nel layout &
+ \includegraphics[width=0.7cm]{mActionLowerItems} & Abbassa di livello
+ l'oggetto selezionato nel layout \\
+ \hline \includegraphics[width=0.7cm]{mActionMoveItemsToTop} & Porta l'oggetto
+ selezionato in primo piano & 
+ \includegraphics[width=0.7cm]{mActionMoveItemsToBottom} & Porta l'oggetto
+ selezionato sullo sfondo \\
 \hline
 \end{tabular}
 \end{table}
 
-To access the print composer, click on the \toolbtntwo{mActionFilePrint}{Print}
-button in the toolbar or choose \mainmenuopt{File} > \dropmenuopttwo{mActionFilePrint}{Print Composer}.
+Per accedere al compositore di stampe, cliccare sul pulsante
+\toolbtntwo{mActionFilePrint}{Print} nella barra strumenti o scegliere la voce
+di menù \mainmenuopt{File} > \dropmenuopttwo{mActionFilePrint}{Compositore
+stampe}.
 
-\subsection{Using Print Composer}\label{label_useprintcomposer} 
+\subsection{Uso del compositore di stampe}\label{label_useprintcomposer} 
 
-Before you start to work with the print composer, you need to load some 
-raster and vector layers in the QGIS map canvas and adapt their properties 
-to suite your own convinience. After everything is rendered and symbolized to 
-your liking you click the \toolbtntwo{mActionFilePrint}{Print Composer} icon.
+Prima di iniziare a lavorare con il compositore di stampe, è necessario
+caricare alcuni livelli raster e vettoriali nella vista mappa di QGIS e
+regolarne le proprietà secondo le proprie esigenze. Una volta effettuate
+tutte le impostazioni e applicata la simbologia cliccare sul pulsante
+\toolbtntwo{mActionFilePrint}{Compositore stampe}.
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{Print Composer \nixcaption}\label{fig:print_composer_blank}\smallskip
+   \caption{Compositore di stampe \nixcaption}\label{fig:print_composer_blank}\smallskip
    \includegraphics[clip=true, width=\textwidth]{print_composer_blank}
 \end{center}  
 \end{figure}
 
-Opening the print composer provides you with a blank canvas to which you can 
-add the current QGIS map canvas, legend, scalebar, images and text. Figure
-\ref{fig:print_composer_blank} shows the initial view of the print composer 
-before any elements are added. The print composer provides two tabs:
+Aprendo il compositore di stampe viene visualizzato un foglio bianco al quale
+aggiungere vista mappa, legenda, barra di scala, immagini e testo. La Figura
+\ref{fig:print_composer_blank} mostra la vista iniziale del compositore di
+stampe prima dell'aggiunta di un qualunque elemento. Nel compositore di stampe
+co sono due linguette:
 
 \begin{itemize}
-\item The \tab{General} tab allows you to set paper size, orientation, and the 
-print quality for the output file in dpi.
-\item The \tab{Item} tab displays the properties for the selected map element. 
-Click the \toolbtntwo{mActionSelectPan}{Select/Move item} 
-icon to select an element (e.g. legend, scalebar or label) on the canvas. 
-Then click the Item tab and customize the settings for the selected 
-element.
+\item La linguetta \tab{Generale} consente di impostare la dimensione del
+foglio, l'orientamento e la qualità di stampa del file in uscita in dpi.
+\item La linguetta \tab{Oggetto} mostra le proprietà dell'elemento selezionato
+nel layout di stampa. 
+Cliccare sull'icona \toolbtntwo{mActionSelectPan}{Seleziona/Sposta oggetto} 
+per selezionare un elemento (ad es. legenda, barra di scala o etichetta
+testuale) nel layout. Cliccare dunque sulla linguetta \tab{Oggetto} e
+personalizzare le impostazioni dell'elemento selezionato.
 \end{itemize}
 
-You can add multiple elements to the composer. It is also possible to have 
-more than one map view or legend or scalebar in the print composer canvas. 
-Each element has its own properties and in the case of the map, its own 
-extent.
+Possono essere aggiunti diversi elementi al compositore ed è anche
+possibile avere più di una vista mappa o legenda o barra di scala nel layout
+di stampa. Ogni elemento ha le sue proprietà e, nel caso delle viste mappa, la
+propria estensione.
 
-\subsubsection{Adding a current QGIS map canvas to the Print Composer}
+\subsubsection{Aggiungere una vista mappa al layout nel compositore di
+stampe}
 
-To add the QGIS map canvas, click on the \toolbtntwo{mActionAddRasterLayer}{Add new map 
-from QGIS map canvas} button in the print composer toolbar and drag a 
-rectangle on the composer canvas with the left mouse button to add the map. 
-You will see an empty box with a \textit{"Map will be printed here"} message.
-To display the current map, choose \selectstring{Preview}{Cache} in the map \tab{Item} tab.
+Per aggiungere una vista mappa, cliccare sul pulsante
+\toolbtntwo{mActionAddRasterLayer}{Aggiungi nuova mappa} nella barra strumenti
+del compositore di stampe e trascinare il mouse per definire un rettangolo
+nell'area occupata dal foglio tenendo premuto il tasto sinistro per aggiungere
+la vista mappa. Verrà visualizzato un riquadro vuoto con la scritta
+\textit{"La mappa verrà stampata qui"}. Per visualizzare effettivamente la mappa,
+selezionare \selectstring{Anteprima}{Cache} nella linguetta \tab{Oggetto}.
 
 \begin{figure}[ht]
 \centering
