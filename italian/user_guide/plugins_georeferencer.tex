@@ -1,20 +1,16 @@
 % vim: set textwidth=78 autoindent:
 
-\subsection{Georeferencer Plugin}
+\subsection{Plugin Georeferenziatore}
 
 % when the revision of a section has been finalized, 
 % comment out the following line:
 %\updatedisclaimer
 
-The \toolbtntwo{georeferencer}{Georeferencer} allows to generate world files for rasters.
-Therefore you select points on the raster, add their coordinates, and the plugin will compute the world file parameters.
-The more coordinates you provide the better the result will be.
+Il \toolbtntwo{georeferencer}{Georeferenziatore} permette di generare file di georeferenziazione per raster. Occorre selezionare punti sul raster, aggiungere le loro coordinate ed il plugin calcola i parametri per il file di georeferenziazione. più sono le coordinate che si forniscono, migliore sarà il risultato.
 
-As an example we will generate a world file for a topo sheet of South Dakota from SDGS.
-It can later be visualized together with in the data of the GRASS spearfish60 location.
-You can download the topo sheet here: \url{http://grass.osgeo.org/sampledata/spearfish\_toposheet.tar.gz}
+Come esempio genereremo un file di georeferenziazione per una carta topografica del Sud Dakota da SDGS. Essa potrà essere visualizzata insieme agli altri dati della Location Spearfish60 di GRASS. E' possibile scaricare la carta topografica qui: \url{http://grass.osgeo.org/sampledata/spearfish\_toposheet.tar.gz}
 
-As a first step we download the file and untar it.
+Come primo passo scaricare il file e decomprimerlo.
 
 \begin{verbatim}
 wget http://grass.osgeo.org/sampledata/spearfish_toposheet.tar.gz
@@ -22,65 +18,57 @@ tar xvzf spearfish_toposheet.tar.gz
 cd spearfish_toposheet
 \end{verbatim}
 
-The next step is to start QGIS, load the georeferencer plugin and select the file \filename{spearfish\_topo24.tif}.
+Il passo successivo è avviare QGIS, caricare il plugin di georeferenziazione e selezionare il file \filename{spearfish\_topo24.tif}.
 
 \begin{figure}[ht]
 \begin{center}
-\caption{Select an image to georeference \nixcaption}\label{fig:select_image}\smallskip
+\caption{Selezionare un'immagine da georeferenziare \nixcaption}\label{fig:select_image}\smallskip
   \includegraphics[clip=true, width=12cm]{select_image}
 \end{center}
 \end{figure}
 
-Now click on the button \button{Arrange plugin window} to open the image in
-the georeferencer and to arrange it with the reference map in the qgis map
-canvas on your desktop (see Figure \ref{fig:georefplugin}).
+Ora cliccare il pulsante \button{Organizza le finestre di plugin} per aprire l'immagine nel georeferenziatore e organizzarla nella mappa di riferimento nella mappa qgis sulla propria scrivania (Vedere Figura \ref{fig:georefplugin}).
 
 \begin{figure}[ht]
 \begin{center}
-  \caption{Arrange plugin window with the qgis map canvas \nixcaption}\label{fig:georefplugin}\smallskip
+  \caption{Organizzare le finestre di plugin con la mappa qgis \nixcaption}\label{fig:georefplugin}\smallskip
   \includegraphics[clip=true,width=\textwidth]{georefplugin}
 \end{center}
 \end{figure}
 
-With the button \button{Add Point} you can start to add points on the raster image and enter their coordinates, and the plugin will compute the world file parameters (see Figure \ref{fig:choose_points}).
-The more coordinates you provide the better the result will be.
-For the procedure you have two options:
+Con il pulsante \button{Aggiungi punto} è possibile cominciare ad aggiungere punti sull'immagine raster ed inserire le loro coordinate, ed il plugin calcolerà i parametri del file di georeferenziazione (Vedere Figura \ref{fig:choose_points}).
+Più sono le coordinate che si forniscono, migliore sarà il risultato. Per procedere ci sono due opzioni:
 
 \begin{enumerate}
-\item You click on a point in the raster map and enter the X and Y coordinates manually
-\item You click on a point in the raster map and choose the button \button{from map canvas} to add the X and Y coordinates with the help of a georeferenced map already loaded in QGIS.
+\item Si può cliccare sul raster inserendo manualmente le coordinate X e Y del punto inserito
+\item Si può cliccare sul raster e premere il pulsante \button{da mappa} per aggiungere le coordinate X e Y con l'aiuto di una mappa già georeferenziata già caricata in QGIS.
 \end{enumerate}
 
 \begin{figure}[ht]
 \begin{center}
-  \caption{Add points to the raster image \nixcaption}\label{fig:choose_points}\smallskip
+  \caption{Aggiungere punti all'immagine raster \nixcaption}\label{fig:choose_points}\smallskip
   \includegraphics[clip=true,width=0.9\textwidth]{choose_points}
 \end{center}
 \end{figure}
 
-For this example we use the second option and enter the coordinates for the selected points with the help of the \filename{roads} map provided with the  \filename{spearfish60} location from: \url{http://grass.osgeo.org/sampledata/spearfish\_grass60data-0.3.tar.gz}
+Per questo esempio useremo la seconda opzione e inseriremo le coordinate per i punti selezionati con l'aiuto della mappa \filename{roads} contenuta nella location \filename{spearfish60} da: \url{http://grass.osgeo.org/sampledata/spearfish\_grass60data-0.3.tar.gz}
 
-If you don't know how to integrate the \filename{spearfish60} location with
-the GRASS plugin, information are provided in Section \ref{sec:grass}. As you
-can see in Figure \ref{fig:choose_points}, the georeferencer provides buttons to zoom, pan, add and delete points in the image.
+Se non si sa come integrare la location \filename{spearfish60} con il plugin GRASS, vedere le informazioni nella Sezione \ref{sec:grass}. Come si può vedere in Figura \ref{fig:choose_points}, il georeferenziatore fornisce tasti di zoom, pan, aggiunta e rimozione di punti dall'immagine.
 
-After you added enough points to the image you need to select the transformation type for the georeferencing process and save the resulting world file together with the Tiff.
-In our example we choose 
-\selectstring{Transform type}{linear transformation} 
-although a 
-\selectstring{Transform type}{Helmert transformation}
-might be sufficient as well.
+Dopo aver aggiunti abbastanza punti all'immagine, occorre selezionare il tipo di trasformazione per il processo di georeferenziazione e salvare il risultante file di georeferenziazione insieme con il file Tiff.
+Nel nostro esempio scegliamo una
+\selectstring{Transform type}{trasformazione lineare} 
+anche se una
+\selectstring{Transform type}{trasformazione di Helmert}
+sarebbe sufficiente.
 
 
-\begin{Tip}\caption{\textsc{Choosing the transformation type}}
-\qgistip{The linear (affine) transformation is a 1st order transformation and is used for scaling, translation and rotation of geometrically correct images.
-With the Helmert transformation you simply add coordinate information to the image like geocooding.
-If your image is contorted you will need to use software that provides 2nd or 3rd order polynomial transformation, e.g. GRASS GIS.}
+\begin{Tip}\caption{\textsc{Scegliere il tipo di trasformazione}}
+\qgistip{La trasformazione lineare (affine) è una trasformazione di primo ordine e si usa per scalare, traslare e ruotare immagini geometricamente corrette.
+Con la trasformazione di Helmert semplicemente si aggiunge l'informazione delle coordinate all'immagine come in un geocoding. Se l'immagine è contorta, è necessario usare software che fornisca trasformazioni polinomiali di secondo o terzo ordine, ad esempio GRASS GIS.}
 \end{Tip} 
 
-The points we added to the map will be stored in a \filename{spearfish\_topo24.tif.points} file together with the raster image.
-This allows us to reopen the georeferencer plugin and to add new points or delete existing ones to optimize the result.
-The \filename{spearfish\_topo24.tif.points} file of this example shows the points:
+I punti aggiunti alla mappa saranno salvati nel file \filename{spearfish\_topo24.tif.points} Insieme all'immagine raster. Questo permette di riaprire il plugin Georeferenziatore e aggiungere o rimuovere punti per ottimizzare il risultato. Il file \filename{spearfish\_topo24.tif.points} di quest'esempio mostra i punti:
 
 \begin{verbatim}
 mapX    		mapY    		pixelX  pixelY
@@ -91,13 +79,11 @@ mapX    		mapY    		pixelX  pixelY
 602649.526155399973504  4919088.353569299913943 602618  4.91907e+06
 \end{verbatim} 
 
-We used 5 coordinate points to georeference the raster image.
-To get correct results it is important to disperse the points regulary in the image.
-Finally we check the result and load the new georeferenced map \filename{spearfish\_topo24.tif} and overlay it with the map \filename{roads} of the \filename{spearfish60} location.
+Usiamo le 5 coordinate dei punti per georeferenziare l'immagine raster. Per ottenere un risultato corretto, è importante posizionare i punti con regolarità nell'immagine. Infine, si può controllare il risultato, caricare la nuova mappa georeferenziata \filename{spearfish\_topo24.tif} e sovrapporla alla mappa \filename{roads} della location \filename{spearfish60}.
 
 \begin{figure}[ht]
 \begin{center}
-  \caption{Georeferenced map with overlayed roads from spearfish60 location
+  \caption{Mappa georeferenziata con la mappa roads della location spearfish60 sovrapposta
   \nixcaption}\label{fig:result_map}\smallskip
   \includegraphics[clip=true,width=\textwidth]{result_map}
 \end{center}
