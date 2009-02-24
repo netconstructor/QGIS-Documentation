@@ -1,139 +1,173 @@
-% vim: set textwidth=78 autoindent:
+%\section{Introduction To GIS}\label{label_intro} 
+\section{Introduction au SIG}\label{label_intro} 
+% when the revision of a section has been finalized,  % comment out the following line: 
+%\updatedisclaimer 
 
-\section{Introduction To GIS}\label{label_intro}
+%A Geographical Information System (GIS)\cite{mitchel05}\footnote{This chapter is by Tyler 
+%Mitchell (\url{http://www.oreillynet.com/pub/wlg/7053}) and 
+%used under the Creative Commons License. Tyler is the author of 
+%\textit{Web Mapping Illustrated}, published by O'Reilly, 2005.}
+%is a collection of software that allows you to create, visualize, query and %analyze geospatial data. Geospatial data refers to information about the 
+%geographic location of an entity. This often involves the use of a 
+%geographic coordinate, like a latitude or longitude value. Spatial data is 
+%another commonly used term, as are: geographic data, GIS data, map data, 
+%location data, coordinate data and spatial geometry data.
 
-% when the revision of a section has been finalized, 
-% comment out the following line:
-%\updatedisclaimer
+Un Système d'Information Géographique (SIG)\cite{mitchel05}\footnote{Ce chapitre est de Tyler Mitchell (\url{http://www.oreillynet.com/pub/wlg/7053}) et est utilisé sous une licence Creative Commons. Tyler est l'auteur de \textit{Web Mapping Illustrated}, publié par O'Reilly, 2005.} est une collection de logiciels qui vous permettent de créer, visualiser, rechercher des données géospatiales. Ces données se réfèrent à des informations concernant l'emplacement géographique d'une entité. Ceci implique souvent l'utilisation de coordonnées géographiques, tel qu'une  valeur de latitude ou de longitude. Les termes équivalents à la donnée spatiale sont : donnée géographique, donnée SIG, donnée cartographique, donnée de localisation, donnée de géométrie spatiale...
 
-A Geographical Information System (GIS)\cite{mitchel05}\footnote{This chapter is by Tyler
-Mitchell (\url{http://www.oreillynet.com/pub/wlg/7053}) and
-used under the Creative Commons License. Tyler is the author of 
-\textit{Web Mapping Illustrated}, published by O'Reilly, 2005.}
-is a collection of software that allows you to create, visualize, query and
-analyze geospatial data. Geospatial data refers to information about the
-geographic location of an entity. This often involves the use of a
-geographic coordinate, like a latitude or longitude value. Spatial data is
-another commonly used term, as are: geographic data, GIS data, map data,
-location data, coordinate data and spatial geometry data.
+%Applications using geospatial data perform a variety of functions. Map 
+%production is the most easily understood function of geospatial 
+%applications. Mapping programs take geospatial data and render it in a form 
+%that is viewable, usually on a computer screen or printed page.
+%Applications can present static maps (a simple image) or dynamic maps that 
+%are customised by the person viewing the map through a desktop program or a 
+%web page.
 
-Applications using geospatial data perform a variety of functions. Map
-production is the most easily understood function of geospatial
-applications. Mapping programs take geospatial data and render it in a form
-that is viewable, usually on a computer screen or printed page.
-Applications can present static maps (a simple image) or dynamic maps that
-are customised by the person viewing the map through a desktop program or a
-web page.
+Les applications utilisant des données géospatiales réalisent une grande variété de fonctions. La création de carte est celle-là plus admise, les logiciels cartographiques prennent les données géospatiales et les sortent sous une forme visuelle, sur un écran d'ordinateur ou sur une page imprimée.
+Ces applications peuvent présenter des cartes statiques (une seule image) ou des cartes dynamiques qui peuvent être personnalisées par la personne regardant la carte via un logiciel bureautique ou une page internet.
 
-Many people mistakenly assume that geospatial applications just produce
-maps, but geospatial data analysis is another primary function of
-geospatial applications. Some typical types of analysis include computing:
+Beaucoup de gens présument à tort que les applications géospatiales se limitent à la production de cartes, l'analyse des données est une autre importante fonction de ces logiciels. Quelques exemples d'analyses incluent le calcul : 
 
-\begin{enumerate}
-\item distances between geographic locations
-\item the amount of area (e.g., square meters) within a certain geographic
-region
-\item what geographic features overlap other features
-\item the amount of overlap between features
-\item the number of locations within a certain distance of another
-\item and so on...
+%\item distances between geographic locations 
+%\item the amount of area (e.g., square meters) within a certain geographic %region %\item what geographic features overlap other features 
+%\item the amount of overlap between features 
+%\item the number of locations within a certain distance of another 
+%\item and so on...
+%\end{enumerate} 
+
+\begin{enumerate} 
+\item de la distance entre deux points géographiques  
+\item de l'aire (p. ex., mètres carrés) d'une zone géographique 
+\item pour déterminer quelles entités se superposent sur d'autres entités 
+\item le montant de superposition entre entités 
+\item le nombre de points se situant à une certaine distance d'un autre 
+\item et beaucoup d'autres...
+\end{enumerate} 
+
+%These may seem simplistic, but can be applied in all sorts of ways across %many disciplines. The results of analysis may be shown on a map, but are %often tabulated into a report to support management decisions.
+%
+%The recent phenomena of location-based services promises to introduce all 
+%sorts of other features, but many will be based on a combination of maps 
+%and analysis. For example, you have a cell phone that tracks your 
+%geographic location. If you have the right software, your phone can tell 
+%you what kind of restaurants are within walking distance. While this is a 
+%novel application of geospatial technology, it is essentially doing 
+%geospatial data analysis and listing the results for you.
+
+Cela semble peut-être simpliste, mais ils peuvent être appliqués à de nombreuses disciplines. Le résultat de ces analyses peut être affiché sur une carte ou sous une forme tabulaire dans des rapports pour appuyer des décisions.
+
+Le phénomène récent de services basés sur la localisation va introduire toutes sortes de nouvelles fonctionnalités, mais beaucoup seront issus de la conjugaison de cartes et d'analyses. Par exemple, si vous avez un téléphone portable qui affiche votre position. Si vous avez le bon type de logiciel, votre téléphone pourra vous signaler les restaurants se trouvant à une courte distance de marche. Bien que ce soit une nouvelle application des technologies géospatiales, il s'agit pour l'essentiel d'analyser des données géospatiales et de vous livrer les résultats.
+
+	
+%
+%Well, it's not. There are many new hardware devices that are enabling 
+%mobile geospatial services. Many open source geospatial applications are 
+%also available, but the existence of geospatially focused hardware and 
+%software is nothing new. Global positioning system (GPS) receivers are 
+%becoming commonplace, but have been used in various industries for more 
+%than a decade. Likewise, desktop mapping and analysis tools have also been 
+%a major commercial market, primarily focused on industries such as natural 
+%resource management.
+%
+%What is new is how the latest hardware and software is being applied and 
+%who is applying it. Traditional users of mapping and analysis tools were 
+%highly trained GIS Analysts or digital mapping technicians trained to use 
+%CAD-like tools. Now, the processing capabilities of home PCs and open 
+%source software (OSS) packages have enabled an army of hobbyists, professionals, 
+%web developers, etc. to interact with geospatial data. The learning curve 
+%has come down. The costs have come down. The amount of geospatial 
+%technology saturation has increased.
+%
+%How is geospatial data stored? In a nutshell, there are two types of 
+%geospatial data in widespread use today. This is in addition to 
+%traditional tabular data that is also widely used by geospatial %applications.
+
+\subsection{Pour tout cela est-il si récent ?}\label{label_whynew}
+Et bien ça ne l'est pas. Il y a beaucoup d'appareils qui autorisent l'utilisation mobile de services géospatiaux. Beaucoup d'applications open source sont aussi disponibles, mais l'existence de matériels et logiciels dédiés à la géospatialisation n'est pas quelque chose de nouveau. Les récepteurs GPS (Global Positioning System) sont devenus courants et sont utilisés dans certaines industries depuis plus d'une décennie. De la même manière, la cartographie bureautique et les outils d'analyse représentent un important secteur commercial, principalement consacré à des industries comme la gestion de ressources naturelles.
+
+Ce qui est nouveau est la façon dont les appareils et applications sont utilisés et par qui. Les utilisateurs traditionnels étaient des géomaticiens hautement qualifiés ou des techniciens habitués à travailler avec des outils de CAO. Aujourd'hui les capacités de calculs des ordinateurs domestiques et des logiciels open source ont permis à une foule de passionnés, de professionnels, de développeurs internet, etc. d'interagir avec des données géospatiales. La courbe d'apprentissage a diminué tandis que la diffusion des technologies spatiales a augmenté.
+
+Comment sont stockées ces informations ? Pour faire simple, il existe deux sortes de données géospatiales dont l'utilisation est très répandue de nos jours. À quoi s'ajoutent les données tabulaires qui continuent à être utilisées couramment par les applications géospatiales.
+
+%\subsubsection{Raster Data}\label{label_rasterdata} 
+%
+%One type of geospatial data is called raster data or simply "a raster". The 
+%most easily recognised form of raster data is digital satellite imagery or 
+%air photos. Elevation shading or digital elevation models are also 
+%typically represented as raster data. Any type of map feature can be 
+%represented as raster data, but there are limitations.
+%
+%A raster is a regular grid made up of cells, or in the case of imagery, 
+%pixels. They have a fixed number of rows and columns. Each cell has a 
+%numeric value and has a certain geographic size (e.g. 30x30 meters in 
+%size).
+%
+%Multiple overlapping rasters are used to represent images using more than
+ %one colour value (i.e. one raster for each set of red, green and blue 
+%values is combined to create a colour image). Satellite imagery also 
+%represents data in multiple "bands". Each band is essentially a separate, 
+%spatially overlapping raster, where each band holds values of certain 
+%wavelengths of light. As you can imagine, a large raster takes up more file 
+%space. A raster with smaller cells can provide more detail, but takes up 
+%more file space. The trick is finding the right balance between cell size 
+%for storage purposes and cell size for analytical or mapping purposes.
+
+\subsubsection{Les Données Raster}\label{label_rasterdata}
+
+L'un des types de données géospatiales est qualifié de donnée raster/matricielle, ou plus communément un "raster". Les formes les plus facilement reconnaissables de donnée raster sont les images satellites numériques ou les photos aériennes. Les ombrages de pentes ou les modèles numériques de terrain sont également représentés en raster. Tout type de données cartographiques peut être représenté comme une donnée raster, mais il y a des limitations.
+
+Un raster est une grille régulière qui se compose de cellules ou, dans le cas de l'imagerie, de pixels. Il y a un nombre déterminé de lignes et de colonnes. Chaque cellule a une valeur numérique et une certaine taille géographique (30 x 30 mètres de surface).
+
+De multiples rasters sont superposés pour afficher des images qui utilisent plus d'une valeur de couleur (c.-à-d. un raster pour chaque bande de valeurs de rouge, vert et bleue sont combinés pour créer une image couleur). L'imagerie satellite représente les données avec plusieurs bandes. Chacune de ces bandes est un raster distinct qui se superpose spatialement aux autres rasters, une bande détient les valeurs comprises d'une largeur de spectre de la lumière. Comme vous pouvez l'imaginer, un gros raster prend plus d'espace-disque. Un raster avec de plus petites cellules fournira plus de détails, mais prendra plus de place. l'astuce est de trouver le juste équilibre entre la taille de cellule pour le stockage et la taille de cellule pour l'analyse ou la cartographie.
+
+%\subsubsection{Vector Data}\label{label_vectordata} 
+%
+%Vector data is also used in geospatial applications. If you stayed awake 
+%during trigonometry and coordinate geometry classes, you will already be 
+%familiar with some of the qualities of vector data. In its simplest sense, 
+%vectors are a way of describing a location by using a set of coordinates.
+%Each coordinate refers to a geographic location using a system of x and y 
+%values.
+%
+%This can be thought of in reference to a Cartesian plane - you know, the 
+%diagrams from school that showed an x and y-axis. You might have used them 
+%to chart declining retirement savings or increasing compound mortgage 
+%interest, but the concepts are essential to geospatial data analysis and 
+%mapping.
+%
+%There are various ways of representing these geographic coordinates 
+%depending on your purpose. This is a whole area of study for another day - 
+%map projections.
+%
+%Vector data takes on three forms, each progressively more complex and %building on the former.
+
+\subsubsection{Les données vectorielles}\label{label_vectordata}
+
+Les données vectorielles sont également utilisées dans les applications géospatiales. Si vous êtes resté éveillé durant vos cours de trigonométrie et de géométrie, vous serez déjà familier avec quelques-unes des particularités des données vectorielles. Les vecteurs sont une façon de décrire un emplacement en utilisant une série de coordonnées, chaque coordonnée se référant à une localisation géographique utilisant un système de valeurs en x et en y.
+
+On peut faire la comparaison avec un plan Carthésien - vous savez, le diagramme de l'école qui présentait des axes x et y. Vous en avez sans doute eu recours pour des graphiques montrant la chute de votre épargne-retraite ou l'augmentation de votre taxe d'habitation, le concept est ici similaire et essentiel pour l'analyse et la représentation géospatiale.
+
+Il y a différentes manières de représenter ces coordonnées qui dépendent de votre objectif, c'est un tout autre chapitre à étudier : celui des projections cartographiques.
+Les données vectorielles prennent trois formes, chacune progressivement plus complexe et s'appuyant sur la précédente.  
+
+%\begin{enumerate} 
+%\item Points - A single coordinate (x y) represents a discrete geographic 
+%location
+%\item Lines - Multiple coordinates (x1 y1, x2 y2, x3 y4, ... xn yn) strung 
+%together in a certain order, like drawing a line from Point (x1 y1) to 
+%Point (x2 y2) and so on. These parts between each point are considered line 
+%segments. They have a length and the line can be said to have a direction 
+%based on the order of the points. Technically, a line is a single pair of 
+%coordinates connected together, whereas a line string is multiple lines 
+%connected together.  
+%\item Polygons - When lines are strung together by more 
+%than two points, with the last point being at the same location as the 
+%first, we call this a polygon. A triangle, circle, rectangle, etc. are all 
+%polygons. The key feature of polygons is that there is a fixed area within them.  
+%\end{enumerate} 
+
+\begin{enumerate} 
+\item le Point - une simple coordonnée (x y) qui représente un emplacement géographique ponctuel 
+\item les Lignes - plusieurs coordonnées (x1 y1, x2 y2, x3 y4, ... xn yn) reliés ensemble selon un ordre précis, tel que pour dessiner une ligne du point (x1 y1) au point (x2 y2). Les parties qui se situent entre les points sont considérées comme des segments de ligne. Ils ont une longueur et la ligne peut avoir une direction suivant l'ordre des points. Techniquement, une ligne est une simple paire de points reliés ensemble tandis qu'une ficelle de ligne se compose multiples lignes qui sont connectées.
+\item les Polygones - quand les lignes sont reliées par plus de deux points, avec le dernier point situé au même endroit que le premier, nous appelons le résultat un polygone. Un triangle, un cercle, un rectangle, etc. sont tous des polygones. Le point clé des polygones est qu'ils ont une surface interne fixe.
 \end{enumerate}
-
-These may seem simplistic, but can be applied in all sorts of ways across
-many disciplines. The results of analysis may be shown on a map, but are
-often tabulated into a report to support management decisions.
-
-The recent phenomena of location-based services promises to introduce all
-sorts of other features, but many will be based on a combination of maps
-and analysis. For example, you have a cell phone that tracks your
-geographic location. If you have the right software, your phone can tell
-you what kind of restaurants are within walking distance. While this is a
-novel application of geospatial technology, it is essentially doing
-geospatial data analysis and listing the results for you.
-
-\subsection{Why is all this so new?}\label{label_whynew}
-
-Well, it's not. There are many new hardware devices that are enabling
-mobile geospatial services. Many open source geospatial applications are
-also available, but the existence of geospatially focused hardware and
-software is nothing new. Global positioning system (GPS) receivers are
-becoming commonplace, but have been used in various industries for more
-than a decade. Likewise, desktop mapping and analysis tools have also been
-a major commercial market, primarily focused on industries such as natural
-resource management.
-
-What is new is how the latest hardware and software is being applied and
-who is applying it. Traditional users of mapping and analysis tools were
-highly trained GIS Analysts or digital mapping technicians trained to use
-CAD-like tools. Now, the processing capabilities of home PCs and open
-source software (OSS) packages have enabled an army of hobbyists, professionals,
-web developers, etc. to interact with geospatial data. The learning curve
-has come down. The costs have come down. The amount of geospatial
-technology saturation has increased.
-
-How is geospatial data stored? In a nutshell, there are two types of
-geospatial data in widespread use today. This is in addition to
-traditional tabular data that is also widely used by geospatial
-applications.
-
-\subsubsection{Raster Data}\label{label_rasterdata}
-
-One type of geospatial data is called raster data or simply "a raster". The
-most easily recognised form of raster data is digital satellite imagery or
-air photos. Elevation shading or digital elevation models are also
-typically represented as raster data. Any type of map feature can be
-represented as raster data, but there are limitations.
-
-A raster is a regular grid made up of cells, or in the case of imagery,
-pixels. They have a fixed number of rows and columns. Each cell has a
-numeric value and has a certain geographic size (e.g. 30x30 meters in
-size).
-
-Multiple overlapping rasters are used to represent images using more than
-one colour value (i.e. one raster for each set of red, green and blue
-values is combined to create a colour image). Satellite imagery also
-represents data in multiple "bands". Each band is essentially a separate,
-spatially overlapping raster, where each band holds values of certain
-wavelengths of light. As you can imagine, a large raster takes up more file
-space. A raster with smaller cells can provide more detail, but takes up
-more file space. The trick is finding the right balance between cell size
-for storage purposes and cell size for analytical or mapping purposes.
-
-\subsubsection{Vector Data}\label{label_vectordata}
-
-Vector data is also used in geospatial applications. If you stayed awake
-during trigonometry and coordinate geometry classes, you will already be
-familiar with some of the qualities of vector data. In its simplest sense,
-vectors are a way of describing a location by using a set of coordinates.
-Each coordinate refers to a geographic location using a system of x and y
-values.
-
-This can be thought of in reference to a Cartesian plane - you know, the
-diagrams from school that showed an x and y-axis. You might have used them
-to chart declining retirement savings or increasing compound mortgage
-interest, but the concepts are essential to geospatial data analysis and
-mapping.
-
-There are various ways of representing these geographic coordinates
-depending on your purpose. This is a whole area of study for another day -
-map projections.
-
-Vector data takes on three forms, each progressively more complex and
-building on the former.  
-
-\begin{enumerate}
-\item Points - A single coordinate (x y) represents a discrete geographic
-location
-\item Lines - Multiple coordinates (x1 y1, x2 y2, x3 y4, ... xn yn) strung
-together in a certain order, like drawing a line from Point (x1 y1) to
-Point (x2 y2) and so on. These parts between each point are considered line
-segments. They have a length and the line can be said to have a direction
-based on the order of the points. Technically, a line is a single pair of
-coordinates connected together, whereas a line string is multiple lines
-connected together.  
-\item Polygons - When lines are strung together by more
-than two points, with the last point being at the same location as the
-first, we call this a polygon. A triangle, circle, rectangle, etc. are all
-polygons. The key feature of polygons is that there is a fixed area within them.  
-\end{enumerate}
-
