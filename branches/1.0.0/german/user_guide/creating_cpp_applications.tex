@@ -1,24 +1,24 @@
-\section{Creating C++ Applications}
+\section{C++ Anwendungen erstellen}
 
-Not everyone wants a full blown GIS desktop application. Sometimes you want
-to just have a widget inside your application that displays a map while the
-main goal of the application lies elsewhere. Perhaps a database frontend with
-a map display? This Section provides two simple code examples by Tim Sutton. 
-They are available in the qgis subversion repository together with more
-interesting tutorials. Check out the whole repository from: 
+Nicht jeder wünscht sich eine "'aufgeblähte"' Desktop-GIS-Anwendung. 
+Zuweilen ist auch eine Vorrichtung in der Anwendung gewünscht, welche einfach nur
+die Karte darstellt, während das eigentliche Ziel, 
+die eigentliche Anwendung ganz woanders liegt. Wie wäre es z.B. mit einer
+Datenbank-Anwendung mit Kartendarstellung? Dieses 
+Kapitel erläutert zwei Code-Beispiele von Tim Sutton welche im QGIS Subversion
+Repository liegen (neben vielen anderen interessanten Beispielen). 
+Das gesamte Repository können Sie hier auschecken:
 \filename{https://svn.osgeo.org/qgis/trunk/code\_examples/}
 
-\subsection{Creating a simple mapping widget}\label{subsec:simple_widget}
+\subsection{Eine einfache Kartendarstellung erstellen}\label{subsec:simple_widget}
 
-With this first tutorial we take a little walk through creating a simple mapping
-widget. It won't do anything much - just load a shape file and display it in
-a random colour. 
-But it should give you an idea of the potential for using QGIS as an embedded
-mapping component. Before we carry on, many thanks to Francis Bolduc who wrote
-the beginnings of this demo. He kindly agreed to make his work generally
-available.
-
-We start with typical adding the neccessary includes for our app:
+Mit dieser ersten Anleitung werden wir eine einfache Kartendarstellung erstellen.
+Die Anwendung wird begrenzt sein, es wird lediglich ein einfaches Shapefile geladen 
+und in einer Zufallsfarbe visualisiert.
+Das Beispiel wird aber einen Eindruck vermitteln wie QGIS als integrierte Kartenkomponente
+funktioniert. An dieser Stelle zunächst einmal vielen Dank an Francis Bolduc, 
+welcher den Anfang dieses Tutoriums erstellt hat.
+Zunächst einmal beginnen wir mit den typischen Includings für unsere Anwendung:
 
 \begin{verbatim}
 //
@@ -38,64 +38,54 @@ We start with typical adding the neccessary includes for our app:
 #include <QWidget>
 \end{verbatim}
 
-We use QgsApplication instead of Qt's QApplication, and get some added
-benifits of various static methods that can be used to locate library paths
-and so on.
+Wir gebrauchen an dieser Stelle "'QgsApplication"' anstelle von "'Qt's
+QApplication"' und erhalten dadurch zusätzlichen Nutzen durch verschiedene
+Methoden welche z.B. unterschiedliche Pfade von Bibliotheken lokalisieren.
 
-The provider registry is a singleton that keeps track of vector data provider
-plugins. It does all the work for you of loading the plugins and so on. The
-single symbol renderer is the most basic symbology class. It renders points,
-lines or polygons in a single colour which is chosen at random by default
-(though you can set it yourself). Every vector layer must have a symbology
-associated with it.
+Die "'providerregistry"' sorgt dafür, dass Plugins für Vektor-Daten hinzugefügt 
+werden. Die Basis-Symbol-Klasse wird durch den "'singlesymbolrenderer"'
+dargestellt. Hierdurch werden Punkte, Linien und Polygone in einer Zufallsfarbe präsentiert.
+Jeder Vektor-Layer muss letztlich über eine bestimmte Symbologie verfügen.
+"'Maplayerregistry"' ist zuständig für die verwendeten Layer.
+Diese Vektor-Layer-Klasse erbt von "'maplayer"' und sorgt für verschiedene erweiterte
+Vektor-Daten-Funktionalitäten.
+Last but not least sorgt "apcanvas" für das eigentliche Zeichnen der Karte.
 
-The map layer registry keeps track of all the layers you are using. The
-vector layer class inherits from maplayer and extends it to include
-specialist functionality for vector data.
-
-Finally the mapcanvas is really the nub of the matter. Its the drawable
-widget that our map will be drawn onto.
-
-Now we can move on to initialising our application....
+Weiter geht es mit der Initialisierung der Anwendung \dots
 
 \begin{verbatim}
 int main(int argc, char ** argv)
 {
-  // Start the Application
+  // Start der Anwendung
   QgsApplication app(argc, argv, true);
 
   QString myPluginsDir        = "/home/timlinux/apps/lib/qgis";
   QString myLayerPath         = "/home/timlinux/gisdata/brazil/BR_Cidades/";
   QString myLayerBaseName     = "Brasil_Cap";
   QString myProviderName      = "ogr";
-
 \end{verbatim}
 
-So now we have a qgsapplication and we have defined some variables. Since I
-tested this on the Ubuntu 8.10, I just specified the location of the vector
-provider plugins as being inside the my development install directory. It
-would probaby make more sense in general to keep the QGIS libs in one of the
-standard library search paths on your system (e.g. /usr/lib) but this way
-will do for now.
+Wir haben nun also eine Quantum GIS Anwendung mit einigen Variablen.
+In diesem Falle liegen die Plugin in einem Entwicklungs-Installations-Verzeichnis.
+Natürlich können diese auch in einem Standard-Bibliotheken-Verzeichnis liegen wie 
+z.B.: /usr/lib.
 
-The next two variables defined here just point to the shapefile I am going to
-be using (and you should substitute your own data here).
+Die nächsten beiden Variablen gehören zu dem hier verwendeten Shapefile (Sie sollten hier 
+entsprechende Einträge ändern).
+Der ProviderName ist wichtig - 
+hier wird angegeben welche Bibliothek verwendet wird um die Datei zu laden.
 
-The provider name is important - it tells qgis which data provider to use to
-load the file. Typically you will use 'ogr' or 'postgres'.
-
-Now we can go on to actually create our layer object.
+Anschließend geht es nun darum ein erstes Layer-Objekt zu schaffen:
 
 \begin{verbatim}
-  // Instantiate Provider Registry
   QgsProviderRegistry::instance(myPluginsDir);
 \end{verbatim}
 
-First we get the provider registry initialised. Its a singleton class so we
-use the static instance call and pass it the provider lib search path. As it
-initialises it will scan this path for provider libs.
-
-Now we go on to create a layer...
+Zunächst geht es darum die "'ProviderRegistry"' zu initialisieren.
+Wir nutzen hierfür den statischen Instance-Aufruf und übergeben diesen an den
+Suchpfad von "'myPluginsDir"'.
+Während der Initialisierung wird das entsprechende Verzeichnis nach den
+provider-Bibliotheken untersucht.
 
 \begin{verbatim}
   QgsVectorLayer * mypLayer =
@@ -114,114 +104,112 @@ QgsSingleSymbolRenderer(mypLayer->geometryType());
     qDebug("Layer is NOT valid");
   }
 
-  // Add the Vector Layer to the Layer Registry
+  // Hinzufügen des Layers zur "LayerRegistry"
   QgsMapLayerRegistry::instance()->addMapLayer(mypLayer, TRUE);
-  // Add the Layer to the Layer Set
+  // Hinzufügen des Layers zum Layer Set
   myLayerSet.append(QgsMapCanvasLayer(mypLayer, TRUE));
-
 \end{verbatim}
 
-The code is fairly self explanatory here. We create a layer using the
-variables
-we defined earlier. Then we assign the layer a renderer. When we create a
-renderer, we need to specify the geometry type, which do do by asking the
-vector layer for its geometry type. Next we add the layer to a layerset
-(which
-is used by the QgsMapCanvas to keep track of which layers to render and in
-what
-order) and to the maplayer registry. Finally we make sure the layer will be
-visible.
+Dieser Code erklärt sich fast von selber. Wir kreieren einen Layer indem wir die zuvor 
+definierten Variablen nutzen. Dann weisen wir den Layer einem Renderer zu.
+Bei der Erstellung des Renderes müssen wir den Geometrie-Typus angeben, was dadurch geschieht,
+dass der Typus des Vektor-Layers abgefragt wird.
+Anschließend wird der Layer einem Layerset (das Layerset wird von
+"'QgsMapCanvas"' genutzt um herauszufinden, welche Layer gerendert werden
+sollen bzw. in welcher Reihenfolge) sowie der "'maplayerregistry"'
+hinzugefügt. Schlußendlich wird der Layer sichtbar gemacht.
 
-Now we create a map canvas on to which we can draw the layer.
+Nachfolgend wird der Layer gezeichnet:
 
 \begin{verbatim}
-  // Create the Map Canvas
+  // Generierung der Kartenoberfläche
   QgsMapCanvas * mypMapCanvas = new QgsMapCanvas(0, 0);
   mypMapCanvas->setExtent(mypLayer->extent());
   mypMapCanvas->enableAntiAliasing(true);
   mypMapCanvas->setCanvasColor(QColor(255, 255, 255));
   mypMapCanvas->freeze(false);
-  // Set the Map Canvas Layer Set
+  // Generierung des Layer-Sets
   mypMapCanvas->setLayerSet(myLayerSet);
   mypMapCanvas->setVisible(true);
   mypMapCanvas->refresh();
 
 \end{verbatim}
 
-Once again there is nothing particularly tricky here. We create the canvas
-and then we set its extents to those of our layer. Next we tweak the canvas a bit
-to draw antialiased vectors. Next we set the background colour, unfreeze the
-canvas, make it visible and then refresh it.
+Auch dieser Code ist nicht besonders kompliziert.
+Wir schaffen die Oberfläche und setzen diese auf die räumliche Ausdehnung der Layer.
+Zudem setzen wir fest, dass die Vektordaten "'antialiased"' (also mit geringem
+"'Treppcheneffekt"') gezeichnet werden. Als nächstes wird die Hintergrundfarbe
+angegeben, die Sichtbarkeit gesetzt und das ganze "'refreshed"'.
 
 \begin{verbatim}
-  // Start the Application Event Loop
+  // Start der Anwendungsschleife
   return app.exec();
 }
 
 \end{verbatim}
 
-In the last step we simply start the Qt event loop and we are all done. You
-can check out, compile and run this example using cmake like this:
+Im letzten Schritt wird einfach die Qt-Schleife gestartet und das wars.
+Das Beispiel kann ausgecheckt, kompiliert und mittels cmake behandelt werden wie folgt:
 
 \begin{verbatim}
 svn co
 https://svn.osgeo.org/qgis/trunk/code_examples/1_hello_world_qgis_style
 cd 1_hello_world_qgis_style
 mkdir build
-#optionally specify where your QGIS is installed (should work on all
-platforms)
-#if your QGIS is installed to /usr or /usr/local you can leave this next step
-out
+# Optional kann festgelegt werden wo Ihr QGIS installiert ist.
+# Wenn Ihr QGIS in /usr oder /usr/local installiert ist können Sie den 
+# nachfolgenden Schritt auslassen.
 export LIB_DIR=/home/timlinux/apps
 cmake ..
 make
 ./timtut1
 \end{verbatim}
 
-When we compile and run it here is what the running app looks like:
+Wenn das ganze kompiliert und gelaufen ist sieht es aus wie folgt:
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{Simple C++ Application \osxcaption}\label{fig:cpp1_application}\smallskip
+   \caption{Einfache C++ Applikation \osxcaption}\label{fig:cpp1_application}\smallskip
    \includegraphics[clip=true]{cpp1_application}
 \end{center}
 \end{figure}
 
-\subsection{Working with QgsMapCanvas}
+\subsection{Arbeiten mit QgsMapCanvas}
 
-In Section~\ref{subsec:simple_widget} we showed you the usage of the
-QgsMapCanvas api to create a simple application that loads a shapefile and
-displays the points in it. But what good is a map that you can't interact
-with? 
+Im Bereich~\ref{subsec:simple_widget} wurde die Nutzung der "'QgsMapCanvas
+api"' verdeutlicht um eine ganz einfache Anwendung zu erstellen, welche ein Shapefile
+lädt und dessen Punkte darstellt. Aber wofür soll eine Karte nützlich sein,
+wenn man damit nicht interagieren kann?
 
-In this second tutorial I will extend the last tutorial by making it a
-QMainWindow application with a menu, toolbar and canvas area. We show you how
-to use QgsMapTool - the base class for all tools that need to interact with
-the map canvas.
-The purpose is to provide a demonstrator project, so I wont promise to write the most
-elegant or robust C++ code. The project will provide 4 toolbar icons for
+Das nachfolgende 2.Tutorium soll nun die Erstellung einer Anwendung mit Menü, Toolbar und Kartenoberfläche
+verdeutlichen. Es wird gezeigt wie das "'QgsMapTool"' genutzt werden kann
+- die Basisklasse für alle Werkzeuge, welche mit "'MapCanvas"' interagieren.
+
+Sinn und Zweck ist es ein kleines Demonstrationsprojekt zu erstellen, daher
+mag es sein, dass der C++-Code nicht immer der eleganteste ist.
+
+Das Projekt wird vier Toolbar-icons beinhalten um
 
 \begin{itemize}
- \item loading a map layer (layer name is hard coded in the application
- \item zooming in
- \item zooming out
- \item panning
+ \item einen Layer zu laden
+ \item ein Hineinzoomen zu gestatten
+ \item ein Herauszoomen zu gestatten
+ \item Panning zu gewährleisten
 \end{itemize}
 
-In the working directory for the tutorial code you will find a number of files
-including c++ sources, icons and a simple data file under data. There is also
-the .ui file for the main window.
+Im Arbeitsverzeichnis des Tutorium-Codes finden Sie eine Anzahl von Dateien 
+(C++-Code, Bilder, Datenfile). Zudem befindet sich dort das .ui-File für das Hauptfenster.
 
-\textbf{Note:} You will need to edit the .pro file in the above svn directory to
-match your system.
+\textbf{Bemerkung:} Sie werden das .pro-File editieren müssen (im svn directory)
+um es an Ihr System anzupassen.
 
-Since much of the code is the same as the previous tutorial, I will focus on
-the MapTool specifics - the rest of the implementation details can be
-investigated by checking out the project form SVN. A QgsMapTool is a class that
-interacts with the MapCanvas using the mouse pointer. QGIS has a number of
-QgsMapTools implemented, and you can subclass QgsMapTool to create your own. In
-mainwindow.cpp you will see I include the headers for the QgsMapTools near the
-start of the file:
+Da sehr viel Code dem vorhergegangenen Tutorium gleicht soll der Fokus hier nun
+auf die MapTool-Besonderheiten gerichtet werden.
+"'QgsMapTool"' ist eine Klasse welche mit MapCanvas zusammenarbeitet. QGIS
+hat zahlreiche QgsMapTools implementiert. Es ist möglich eine Unterklasse
+von QgsMapTools anzulegen um ein eigenes Tool zu kreieren.
+In "'mainwindow.cpp"' wird verdeutlicht, dass Header für die "'QgsMapTools"'
+am Anfang des Files eigebunden werden.
 
 \begin{verbatim}
      //
@@ -230,8 +218,8 @@ start of the file:
      #include "qgsmaptoolpan.h"
      #include "qgsmaptoolzoom.h"
      //
-     // These are the other headers for available map tools 
-     // (not used in this example)
+     // Es existieren weitere header für verschiedene Tools
+     // (hier nicht genutzt)
      //
      //#include "qgsmaptoolcapture.h"
      //#include "qgsmaptoolidentify.h"
@@ -240,23 +228,23 @@ start of the file:
      //#include "qgsmeasure.h"
 \end{verbatim}
 
-As you can see, I am only using two types of MapTool subclasses for this
-tutorial, but there are more available in the QGIS library. Hooking up our
-MapTools to the canvas is very easy using the normal Qt4 signal/slot mechanism:
+Wie zu sehen ist werden zwei Typen von MapTool-Unterklassen fur diese Anwendung genutzt.
+Weitere sind verfügbar in der QGIS-Bibliothek.
+Die Tools können auf die Oberfläche gebracht werden durch Nutzung des
+"'Qt4 signal/slot"'-Mechanismus:
 
 \begin{verbatim}
-     //create the action behaviours
+     //Aktionsweisen werden generiert
      connect(mActionPan, SIGNAL(triggered()), this, SLOT(panMode()));
      connect(mActionZoomIn, SIGNAL(triggered()), this, SLOT(zoomInMode()));
      connect(mActionZoomOut, SIGNAL(triggered()), this, SLOT(zoomOutMode()));
      connect(mActionAddLayer, SIGNAL(triggered()), this, SLOT(addLayer()));
 \end{verbatim}
 
-Next we make a small toolbar to hold our toolbuttons. Note that the mpAction*
-actions were created in designer.
+Als nächstes wird eine einfache Toolbar für die Buttons generiert.
 
 \begin{verbatim}
-     //create a little toolbar
+     //Toolbar wird erstellt
      mpMapToolBar = addToolBar(tr("File"));
      mpMapToolBar->addAction(mpActionAddLayer);
      mpMapToolBar->addAction(mpActionZoomIn);
@@ -264,11 +252,10 @@ actions were created in designer.
      mpMapToolBar->addAction(mpActionPan);
 \end{verbatim}
 
-Thats really pretty straightforward Qt stuff too. Now we create our three map
-tools:
+Anschließend werden unsere 3 Maptools generiert.
 
 \begin{verbatim}
-     //create the maptools
+     //Generierung der Maptools
      mpPanTool = new QgsMapToolPan(mpMapCanvas);
      mpPanTool->setAction(mpActionPan);
      mpZoomInTool = new QgsMapToolZoom(mpMapCanvas, FALSE); // false = in
@@ -277,10 +264,11 @@ tools:
      mpZoomOutTool->setAction(mpActionZoomOut);
 \end{verbatim}
 
-Again nothing here is very complicated - we are creating tool instances, each
-of which is associated with the same mapcanvas, and a different QAction. When
-the user selects one of the toolbar icons, the active MapTool for the canvas is
-set. For example when the pan icon is clicked, we do this:
+Letztlich auch nicht besonders kompliziert. Es werden Instanzen der Tools geschaffen,
+jede davon ist mit dem selben "'MapCanvas"' und einer unterschiedlichen
+"'QAction"' verbunden. Wenn der User ein Toolbar-Icon wählt wird das
+entsprechende Maptool gewählt. Zum Beispiel wenn das Panning-icon geklickt
+ist geschieht das folgende: 
 
 \begin{verbatim}
     void MainWindow::panMode()
@@ -291,30 +279,32 @@ set. For example when the pan icon is clicked, we do this:
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{QMainWindow application with a menu, toolbar and canvas area
-\osxcaption}\label{fig:cpp2_application}\smallskip
+   \caption{QMainWindow Applikation mit Menü, Werkzeugleiste und
+Kartenfenster \osxcaption}\label{fig:cpp2_application}\smallskip
    \includegraphics[clip=true, width=\textwidth]{cpp2_application}
 \end{center}
 \end{figure}
 
-\minisec{Conclusion}
+\minisec{Ergebnis}
 
-As you can see extending our previous example into something more functional
-using MapTools is really easy and only requires a few lines of code for each
-MapTool you want to provide.
+Wie man sehen kann ist der Ausbau des vorherigen Beispiels durch einige Funktionen
+unter Nutzung der MapTools relativ einfach und benötigt nur wenige Zeilen
+für jedes MapTool.
 
-You can check out and build this tutorial using SVN and CMake using the following steps:
+Das Tutorium kann ausgecheckt und kompiliert werden unter Nutzung von SVN und CMake:
 
 \begin{verbatim}
 svn co https://svn.osgeo.org/qgis/trunk/code_examples/2_basic_main_window
 cd 2_basic_main_window
 mkdir build
-#optionally specify where your QGIS is installed (should work on all platforms)
-#if your QGIS is installed to /usr or /usr/local you can leave this next step out
+# Optional kann festgelegt werden wo Ihr QGIS installiert ist.
+# Wenn Ihr QGIS in /usr oder /usr/local installiert ist können Sie den 
+# nachfolgenden Schritt auslassen.
 export LIB_DIR=/home/timlinux/apps
 cmake ..
 make
 ./timtut2
 \end{verbatim}
+
 
 
