@@ -1,7 +1,7 @@
 % vim:autoindent:set textwidth=78:
 
 \section{Arbeiten mit Vektordaten}\label{label_workingvector}
-\index{vector layers|(}
+\index{Vektorlayer|(}
 
 % when the revision of a section has been finalized,
 % comment out the following line:
@@ -9,16 +9,17 @@
 
 QGIS unterstützt eine Vielzahl unterschiedlicher Vektorformate, inklusive
 allen Formaten, die durch die OGR-Bibliothek unterstützt werden, wie etwa
-das ESRI Shape,\index{shapefiles}\index{ESRI!shapefiles}\index{SHP files}
-MapInfo MIF (Austauschformat)\index{MIF files}\index{MapInfo!MIF files}
-und MapInfo TAB (Natives Format).\index{TAB files}\index{MapInfo!TAB files}
+das ESRI Shape,\index{Shapedaten}\index{ESRI!Shapedaten}\index{SHP Dateien}
+MapInfo MIF (Austauschformat)\index{MIF Dateien}\index{MapInfo!MIF Dateien}
+und MapInfo TAB (Natives Format).\index{TAB Dateien}\index{MapInfo!TAB
+Dateien}. 
 Eine Liste von Vektorformaten, die durch die OGR-Bibliothek unterstützt
 werden, finden Sie in Anhang~\ref{appdx_ogr}. 
 
 QGIS unterstützt auch PostGIS-Layer\index{PostGIS}\index{PostgreSQL!PostGIS}
 in einer PostgreSQL Datenbank mit Hilfe des PostGIS-Plugins. Unterstützung
 für weitere Datenformate (z.B.: ASCII-Tabellen oder GPS-Daten) sind mittels
-weiterer Plugins realisiert.\index{delimited text}
+weiterer Plugins realisiert.\index{Getrennter Text}
 
 In diesem Abschnitt wird beispielhaft beschrieben, wie man mit ESRI Shapes
 und PostGIS-Ebenen arbeitet. Viele Funktionen in QGIS sind unabhängig vom
@@ -29,14 +30,14 @@ Das Arbeiten mit GRASS GIS Vektorlayern bildet an manchen Stellen eine Ausnahme
 und wird daher in Kapitel \ref{sec:grass} explizit beschrieben.
 
 \subsection{ESRI Shapes}
-\index{vector layers!ESRI shapefiles}
-\index{shapefiles}
-\index{ESRI!shapefiles}
-\index{SHP files}
+\index{Vektorlayer!ESRI Shapedateien}
+\index{Shapedateien}
+\index{ESRI!Shapedateien}
+\index{SHP Dateien}
 
 ESRI Shape ist das Standard Vektorformat in QGIS und wird duch die OGR Simple
 Feature Library \url{http://www.gdal.org/ogr}\index{OGR} bereitgestellt.
-Ein Shape besteht aus mindestens drei Dateien:\index{shapefile!format}
+Ein Shape besteht aus mindestens drei Dateien:\index{Shapedateien!Format}
 
 \begin{itemize}
 \item .shp Datei (enthält die Geometrien)
@@ -48,12 +49,12 @@ Idealerweise existiert noch eine weitere Datei mit .prj Endung. Diese enthält
 die Projektionsinformationen des Shapes. Es können noch weitere Dateien zu
 einem Shape gehören. Weitere Details finden sich in der technischen
 Spezifikation unter \url{http://www.esri.com/library/whitepapers/pdfs/shapefile.pdf}
-\index{shapefile!specification}.
+\index{Shapedateien!Spezifikation}.
 
 \subsubsection{Shape Layer laden}\label{sec:load_shapefile}
 Um ein Shape zu laden, starten Sie QGIS und klicken auf das Icon
 \toolbtntwo{mActionAddNonDbLayer}{Vektorlayer hinzufügen} in der
-Werkzeugleiste\index{shapefile!loading} oder mit der Taste \keystroke{V}. Mit
+Werkzeugleiste\index{Shapedateien!Öffnen} oder mit der Taste \keystroke{V}. Mit
 demselben Tool können Sie auch alle anderen durch OGR unterstützten Formate laden.
 
 Beim öffnen des Tools öffnet sich ein Standard-Dialog (Abbildung
@@ -98,9 +99,9 @@ für weitere Informationen zum Editieren der Eigenschaften von Vektorlayern.
 \subsubsection{Darstellungsgeschwindigkeit optimieren}
 
 Um die Darstellungsgeschwindigkeit zu optimieren, kann ein räumlicher Index
-erstellt werden. Ein\index{spatial index!shapefiles} räumlicher Index erhöht
-die Geschwindigkeit beim Zoomen und Verschieben. Räumliche Indizes haben in
-QGIS die Endung \filename{.qix}.
+erstellt werden. Ein\index{Räumlicher Index!Shapedateien} räumlicher Index
+erhöht die Geschwindigkeit beim Zoomen und Verschieben. Räumliche Indizes
+haben in QGIS die Endung \filename{.qix}.
 
 Benutzen Sie folgende Schritte zum Erstellen eines räumlichen Index:
 
@@ -114,7 +115,7 @@ im Bereich \button{Räumlichen Index erstellen}
 \end{itemize}
 
 \subsubsection{MapInfo Layer laden}
-\index{vector layers!MapInfo}
+\index{Vektorlayer!MapInfo}
 
 Um eine MapInfo Datei zu laden, klicken Sie auf das Icon \texttt{Vektorlayer
 hinzufügen} in der Werkzeugleiste oder drücken Sie die Taste \keystroke{V},
@@ -122,7 +123,7 @@ geben Sie ein \selectstring{Dateien des Typs}{MapInfo (*.mif *.tab *.MIF *.TAB)}
 und wählen die gewünschte Datei aus.
 
 \subsubsection{ArcInfo Coverage laden}
-\index{vector layers!ArcInfo Coverage}
+\index{Vektorlayer!ArcInfo Coverage}
 
 Um ein ArcInfo Coverage zu laden, klicken Sie auf das Icon \texttt{Vektorlayer
 hinzufügen} in der Werkzeugleiste oder drücken Sie die Taste \keystroke{V},
@@ -137,8 +138,8 @@ eine der aufgelisteten Datei aus (falls vorhanden).
 \end{itemize}
 
 \subsection{PostGIS Layer laden}
-\index{vector layers!PostGIS|see{PostGIS}}
-\index{PostGIS!layers}
+\index{Vektorlayer!PostGIS}
+\index{PostGIS!Layer}
 \label{label_postgis} 
 
 PostGIS-Ebenen sind in einer PostgreSQL Datenbank gespeichert. Der Vorteil
@@ -148,11 +149,11 @@ funktionieren besser als bei Ebenen, die durch die OGR-Bibliothek geladen
 wurden.
 
 Um PostGIS benutzen zu können, brauchen Sie folgende
-Schritte:\index{PostgreSQL!loading layers}
+Schritte:\index{PostgreSQL!Layer laden}
 
 \begin{itemize}
 \item Verknüpfen Sie QGIS mit einer PostgreSQL Datenbank (falls dies noch
-nicht geschehen ist)\index{PostgreSQL!connection}
+nicht geschehen ist)\index{PostgreSQL!Verbindung}
 \item Stellen Sie eine Verbindung zur Datenbank her
 \item Wählen Sie einen PostGIS Layer aus
 \item Optional nutzen Sie eine SQL \usertext{WHERE}-Abfrage, um zu
@@ -160,9 +161,9 @@ definieren, welche Objekte des Layers angezeigt werden sollen.
 \item Laden Sie den Layer
 \end{itemize}
 
-\subsubsection{Erstellen einer PostGIS Anbindung}\index{PostgreSQL!connection}\label{sec:postgis_stored}
+\subsubsection{Erstellen einer PostGIS Anbindung}\index{PostgreSQL!Verbindung}\label{sec:postgis_stored}
 
-Beim ersten Einbinden einer PostGIS~-Datenbank muss eine Anbindung erstellt
+Beim ersten Einbinden einer PostGIS-Datenbank muss eine Anbindung erstellt
 und gespeichert werden.
 Klicken Sie dazu auf den Knopf \toolbtntwo{mActionAddLayer}{PostGIS-Layer
 hinzufügen} in der Werkzeugleiste oder aus dem Menü \mainmenuopt{Layer}. 
@@ -172,20 +173,20 @@ Dialog \dialog{Neue PostGIS-Verbindung erzeugen} öffnet sich, und Sie können
 die notwendigen Parameter aus Tabelle \ref{tab:postgis_connection_parms}
 eingeben und speichern.
 
-\begin{table}[h]\index{PostgreSQL!connection parameters}
+\begin{table}[h]\index{PostgreSQL!Verbindungsparameter}
 \centering
 \caption{PostGIS Verbindungsparameter}\label{tab:postgis_connection_parms}\medskip
  \begin{tabular}{|l|p{5in}|}
 \hline Name & Ein Name für die Verbindung. Kann derselbe wie für die
 Datanbank sein \\
-\hline Host \index{PostgreSQL!host} & Name des Datenbank-Hosts. Dies muss ein
+\hline Host \index{PostgreSQL!Host} & Name des Datenbank-Hosts. Dies muss ein
 auflösbarer Name für den HOST sein, genau wie beim Benutzen von telnet oder ping \\
-\hline Datenbank \index{PostgreSQL!database} & Name der Datenbank  \\
-\hline Port \index{PostgreSQL!port}& Port Nummer der Datenbank auf dem
+\hline Datenbank \index{PostgreSQL!Datenbank} & Name der Datenbank  \\
+\hline Port \index{PostgreSQL!Port}& Port Nummer der Datenbank auf dem
 Server. Standard ist 5432.\\
-\hline Benutzername \index{PostgreSQL!username}& Benutzername, um sich bei
+\hline Benutzername \index{PostgreSQL!Benutzername}& Benutzername, um sich bei
 der Datenbank anzumelden \\
-\hline Passwort \index{PostgreSQL!password}& Passwort, um sich als Benutzer
+\hline Passwort \index{PostgreSQL!Passwort}& Passwort, um sich als Benutzer
 mit der Datenbank zu verbinden\\
 \hline
 \end{tabular}
@@ -201,10 +202,10 @@ Optional können noch die folgenden Kontrollkästchen aktiviert werden:
 
 Wenn alle Parameter eingetragen sind, kann die Verbindung getestet werden,
 indem Sie auf den Knopf \button{Teste Verbindung}
-drücken\index{PostgreSQL!connection!testing}. 
+drücken\index{PostgreSQL!Verbindung!Testen}. 
 
 \begin{Tip}\caption{\textsc{QGIS Benutzereinstellungen und Sicherheit}}
-\index{settings}\index{security} \qgistip{Ihre Einstellungen für QGIS werden
+\index{Einstellungen}\index{Sicherheit} \qgistip{Ihre Einstellungen für QGIS werden
 abhängig von Ihrem Betriebssystem gespeichert. Unter \nix ist dies in Ihrem
 Homeverzeichnis unter .qt/qgisrc. Unter \win ist es in der Registry. Abhängig
 von Ihrer Arbeitsumgebung kann das Speichern von Passworten in den
@@ -212,7 +213,8 @@ QGIS-Einstellungen ein Sicherheitsrisiko darstellen.
 }
 \end{Tip}
 
-\minisec{Laden eines Layers aus der PostGIS Datenbank}\index{PostgreSQL!loading layers}
+\minisec{Laden eines Layers aus der PostGIS Datenbank}\index{PostgreSQL!Layer
+laden}
 
 Nachdem Sie eine oder mehrere Verbindungen definiert und gespeichert haben,
 können Sie einzelne Ebenen aus PostGIS laden. Natürlich brauchen Sie dazu
@@ -246,7 +248,7 @@ Informationen über die Erstellung von Views zu erhalten.}
 \end{Tip}
 
 \subsubsection{Einige Details zu PostGIS-Layern}\label{sec:postgis_details}
-\index{PostgreSQL!layer details}
+\index{PostgreSQL!Layerdetails}
 
 Dieser Abschnitt enthält einige Details, wie QGIS auf PostgreSQL zugreift.
 Meistens soll QGIS eine Liste mit ein paar Datenbanktabellen bereitstellen,
@@ -274,7 +276,7 @@ damit er eine entsprechende Spalte vom Typ int4 enthält, entweder mit einem
 Primärschlüssel oder eindeutiger Zuordnung und bevorzugt natürlich mit Index.
 
 \subsubsection{Layer nach PostgreSQL/PostGIS importieren}\label{sec:loading_postgis_data}
-\index{PostGIS!SPIT!importing data}
+\index{PostGIS!SPIT!Daten importieren}
 
 \minisec{shp2pgsql}
 Layer können auf unterschiedliche Art nach PostGIS importiert werden.
@@ -294,7 +296,7 @@ Informationen zu räumlichen Referenzsystemen finden Sie in Abschnitt
 \ref{label_projections}.
 
 \begin{Tip}
-\caption{\textsc{PostGIS-Layer exportieren}\index{PostGIS!Exporting}}
+\caption{\textsc{PostGIS-Layer exportieren}\index{PostGIS!Exportieren}}
 \qgistip{Entsprechend dem Importtool \usertext{shp2pgsql} gibt es auch ein
 Exporttool, um Daten von PostGIS ins Shape-Format zu exportieren:
 \usertext{pgsql2shp}. Dieses Tool ist in der PostGIS-Installation enthalten.}
@@ -309,7 +311,7 @@ Support für Schemas. Um das Plugin zu benutzen, öffnen Sie
 \dropmenuopttwo{mActionShowPluginManager}{Plugins verwalten} im Menü
 \mainmenuopt{Plugins}, wählen das \checkbox{SPIT} aus und drücken auf
 \button{OK}. Das SPIT-Icon wird nun in der Plugin-Werkzeugleiste
-angezeigt\index{PostGIS!SPIT!loading}.
+angezeigt\index{PostGIS!SPIT!laden}.
 
 Klicken Sie nun auf das \toolbtntwo{spiticon}{SPIT}-Icon in der
 Werkzeugleiste, um den Dialog \dialog{Shapefile nach PostGIS Import Tool} zu
@@ -320,11 +322,11 @@ Shapes zu der Liste hinzu und klicken dann für den Import auf den Knopf
 werden für jedes Shape angezeigt.
 
 \begin{Tip}\caption{\textsc{Shapes mit für PostgreSQL reservierten
-Ausdrücken importieren}}\index{PostGIS!SPIT!reserved words}
+Ausdrücken importieren}}\index{PostGIS!SPIT!reservierte Ausdrücke}
 \qgistip{Wenn Sie ein Shape in der Liste zu importierender Daten haben,
 welches Felder mit für PostgreSQL reservierten Ausdrücken enthält, erscheint
 ein Popup mit dem jeweiligen Status der Felder. Sie können die Namen der Felder
-\index{PostGIS!SPIT!editing field names} dann vor dem Import editieren und
+\index{PostGIS!SPIT!Spaltennamen editieren} dann vor dem Import editieren und
 anpassen. Der Versuch die Datei ohne Änderung zu importieren, wird sehr
 wahrscheinlich fehlschlagen.}
 \end{Tip}
@@ -369,8 +371,8 @@ im folgenden Kapitel~\ref{label_improve} näher beschrieben.
 
 Der Datentransfer von einer PostgreSQL/PostGIS Datenbank kann langsam sein,
 besonders über ein Netzwerk. Die Geschwindigkeit kann optimiert werden, indem
-für alle Ebenen in PostgreSQL ein räumlicher Index\index{PostGIS!spatial
-index} erstellt wird. PostGIS unterstützt das Erstellen eines GiST
+für alle Ebenen in PostgreSQL ein räumlicher Index\index{PostGIS!Räumlicher
+Index} erstellt wird. PostGIS unterstützt das Erstellen eines GiST
 (Generalized Search Tree) Index, um den Zugriff auf die Ebenen zu beschleunigen.
 
 Die Syntax zur Erstellung eines GiST\footnote{Die GiST Index Informationen wurden
@@ -387,7 +389,8 @@ zeitaufwendig ist. Nachdem der Index erstellt ist, sollte ein
 \usertext{VACUUM ANALYZE} durchgeführt werden (vgl. PostGIS Dokumentation
 \cite{PostGISweb}).
 
-The following is an example of creating a GiST index:
+Im Folgenden sehen Sie ein Beispiel, um einen GiST-Index zu erstellen:
+
 \begin{verbatim}
 gsherman@madison:~/current$ psql gis_data
 Welcome to psql 8.3.0, the PostgreSQL interactive terminal.
@@ -408,7 +411,7 @@ gsherman@madison:~/current$
 \end{verbatim}
 
 \subsection{Vektorlayereigenschaften}\label{sec:vectorprops}
-\index{vector layers!properties dialog}
+\index{Vektorlayer!Layereigenschaften}
 
 Der Dialog \dialog{Layereigenschaften} stellt Einstellungsmöglicheiten und
 Informationen zu einem Vektorlayer, seiner Darstellung, Metadaten,
@@ -432,7 +435,7 @@ der Legende oder wählen mit der rechten Maustaste \dialog{Eigenschaften} aus.
 
 \subsubsection{Allgemein}\label{vectorgeneraltab}
 
-The Reiter \tab{Allgemein} im Dialog \dialog{Layereigenschaften} ermöglicht
+Der Reiter \tab{Allgemein} im Dialog \dialog{Layereigenschaften} ermöglicht
 es, den Anzeigenamen in der Legende zu verändern, einen räumlichen Index für
 PostGIS- sowie OGR-Layer zu erstellen, das Koordinatenbezugssystem des Layers
 zu definieren und einen Minimum- und Maximumwert für Ma"sstabsabhängiges
@@ -446,27 +449,27 @@ entsprechenden Layers öffnen und dann auf den Knopf \button{Erweitert...}
 drücken.
 
 \subsubsection{Darstellung}\label{sec:symbology}
-\index{vector layers!symbology}
+\index{Vektorlayer!Darstellung}
 
 QGIS bietet eine Vielzahl von Funktionen, um die Darstellung von
 Vektorobjekten zu kontrollieren. Derzeit sind folgende Legendentypen vorhanden:
 
 \begin{description}
 \item[Einfaches Symbol] - eine definierte Darstellung wird allen Objekten des
-Layers zugewiesen.\index{vector layers!renderers!single symbol}
+Layers zugewiesen.\index{Vektorlayer!Darstellung!Einfaches Symbol}
 \item[Abgestuftes Symbol] - Objekten eines Layers wird in Abhängigkeit von
 einer Attributspalte und einer definierten Anzahl von Klassen eine
-Darstellung zugewiesen.\index{vector layers!renderers!graduated symbol}
+Darstellung zugewiesen.\index{Vektorlayer!Darstellung!Abgestuftes Symbol}
 \item[Fortlaufende Farbe] - Objekten eines Layers wird anhand von definierten,
-numerischen Werten eine fortlaufende Farbe zugewiesen.\index{vector
-layers!renderers!continuous color}
+numerischen Werten eine fortlaufende Farbe
+zugewiesen.\index{Vektorlayer!Darstellung!Fortlaufende Farbe}
 \item[Eindeutiger Wert] - eine definierte Darstellung wird jeder Objektklasse
-eines Layers anhand einer definierten Attributspalte zugewiesen.\index{vector
-layers!renderers!unique value}
+eines Layers anhand einer definierten Attributspalte
+zugewiesen.\index{Vektorlayer!Darstellung!Eindeutiger Wert}
 \end{description}
 
-\minisec{Stiloption} \label{sec:style_options} \index{vector
-layers!styles}
+\minisec{Stiloption} \label{sec:style_options}
+\index{Vektorlayer!Stiloptionen}
 
 Innerhalb des Reiters \tab{Darstellung} können auch Stiloptionen für
 Vektorlayer definiert werden. Abhängig vom ausgewählten Legendentyp können
@@ -474,17 +477,17 @@ Vektorobjekte auch klassifiziert dargestellt werden. Die folgenden
 Stiloptionen stehen zur Verfügung: 
 
 \begin{description}
- \item[Umrandunsstil] - Definition verschiedener Linienarten und auch keine
+ \item[Umrandungsstil] - Definition verschiedener Linienarten und auch keine
 Linie für Linien und Flächenumrandungen.
  \item[Umrandungsfarbe] - Definition der Farbe für Linien und Umrandunglinien
 von Objekten
  \item[Umrandungsbreite] - Definition der Linienbreite für Linien und
 Umrandunglinien von Objekten
  \item[Füllfarbe] - Definition der Füllfarbe von Polygonen.
- \item[Fullstil] - Definition des Füllstils von Polygonen. Neben Ausgefüllt
+ \item[Füllstil] - Definition des Füllstils von Polygonen. Neben Ausgefüllt
 und Nicht gefüllt stehen zahlreiche Schraffurstile und die Möglichkeit eine
 eigene Textur in Form eines Bildes zu laden. Wählen Sie dazu
-\selectstring{Füllstil}{? texture}, drücken Sie auf den Knopf \browsebutton
+\selectstring{Füllstil}{? Texture}, drücken Sie auf den Knopf \browsebutton
 und wählen Sie eine Bilddatei. Aktuell wird als Datenformat \filename{*.jpeg,
 *.xpm, und *.png} unterstützt.
 \end{description}
@@ -500,8 +503,8 @@ speichern}. Wenn Sie die Darstellung des Layers verändern, aber lieber wieder
 zur abgespeicherten Standard-Stildefinition zurückkehren möchten, drücken Sie
 den Knopf \button{Standardstil wiederherstellen}.
 
-\minisec{Transparenz}\label{sec:vect_transparency} \index{vector
-layers!transparency}
+\minisec{Transparenz}\label{sec:vect_transparency}
+\index{Vektorlayer!Transparenz}
 
 Innerhalb des Reiters \tab{Darstellung} kann auch die Transparenz für den
 Layer festgelegt werden. Dazu verschieben Sie den Regler
@@ -588,7 +591,7 @@ notwendigen Parameter anhand von Inhalten aus Attributspalten definieren.
 Beachten Sie, dass es im unteren Bereich auch ein kleines
 \classname{Vorschau}-Feld gibt, in dem alle Änderungen angezeigt werden.
 
-\subsubsection{Aktionen auf Basis von Attributen}\index{actions}\label{label_actions}
+\subsubsection{Aktionen auf Basis von Attributen}\index{Aktionen}\label{label_actions}
 
 QGIS bietet die Möglichkeit, Aktionen auf Basis von Attributen einer Ebene
 durchzuführen. Dies kann für eine Vielzahl von Aktionen genutzt werden, z.B.
@@ -599,7 +602,7 @@ Aktionen auf Basis von Attributen sind sinnvoll, wenn sie mit externen
 Applikationen auf Ergebnisse einer oder mehrerer Attributabfragen von
 Vektorlayern zugreifen möchten. Ein Beispiel finden Sie im nächsten Abschnitt.
 
-\minisec{Aktionen definieren}\index{actions!defining}
+\minisec{Aktionen definieren}\index{Aktionen!Definition}
 
 Attribut-Aktionen werden im Dialog \dialog{Layereigenschaften} im Reiter
 \texttt{Aktionen} definiert. Sie brauchen einen Namen für die Aktion und das
@@ -633,7 +636,7 @@ werden mit dem Eintrag \usertext{\%(abgeleitet).X} and
 Dialog \dialog{Abfrageergebnisse} angesprochen werden, nicht über
 die \dialog{Attributtable}. 
 
-Zur besseren Erläuterung zwei Beispiele:\index{actions!examples}
+Zur besseren Erläuterung zwei Beispiele:\index{Aktionen!Beispiele}
 
 \begin{verbatim}
     konqueror http://www.google.com/search?q=\%nam
@@ -653,7 +656,7 @@ Das zweite Beispiel nutzt den Ausdruck \%\%, welcher unabhängig ist von einem
 speziellen Feld. Beim Ausführen des Befehls wird der Ausdruck \%\% durch den
 Wert des jeweils selektierten Feldes ersetzt.
 
-\minisec{Aktionen anwenden}\index{actions!using}\label{label_usingactions}
+\minisec{Aktionen anwenden}\index{Aktionen!anwenden}\label{label_usingactions}
 
 Aktionen können entweder über den Dialog \dialog{Abfrageergebnisse} oder die
 geöffnete \dialog{Attributtabelle} gestartet werden. Beide Dialoge sind per
@@ -756,19 +759,19 @@ vorhanden, nach der man im Internet suchen könnte.
 
 Sie können auch mehrere Aktionen für einen Layer definieren. Sie alle werden
 dann bei der Abfrage von Objekten im Dialog \dialog{Abfrageergebnisse}
-angezeigt und können ausgewählt und benutzt werden. Sie können auf eine
+angezeigt und können ausgewählt und benutzt werden. Sie können auch eine
 Aktion starten, in dem Sie in der Attributtabelle in eine Zeile gehen und mit
 der rechten Maustaste eine Aktion für genau diesen einen Eintrag ausführen.
 
 Sie sehen, man kann sich eine Vielzahl interessanter Aktionen ausdenken. Wenn
-Sie z.B. einen Punktlayer mit einzelne Punkten haben, an denen Photos geschossen
-wurden, dann könnten Sie eine Aktion erstellen, über die sie dann das
-entsprechende Photo anzeigen lassen können, wenn Sie auf den Punkt in der
-Karte klicken. Man könnte auch zu bestimmten Attributen webbasierte
+Sie z.B. einen Punktlayer mit einzelnen Punkten haben, an denen Photos
+geschossen wurden, dann können Sie eine Aktion erstellen, über die Sie dann
+das entsprechende Photo anzeigen lassen können, wenn Sie auf den Punkt in der
+Karte klicken. Man kann auch zu bestimmten Attributen webbasierte
 Information ablegen (z.B. in einer HTML-Datei) und diese dann
 über eine Aktion anzeigen lassen, etwa so wie in dem Google Beispiel.
 
-\subsubsection{Attribute}\index{attributes}\label{label_attributes}
+\subsubsection{Attribute}\index{Attribute}\label{label_attributes}
 
 Innerhalb des Reiters \tab{Attribute} kann die Eingabe von Attributwerten für
 den Layer beinflusst werden. Aktuell können nur PostGIS-Layer editiert
@@ -814,25 +817,25 @@ Reiters \tab{Attribute} definiert und durch Semikolon getrennt (e.g.
 eine Datei anzugeben.
 \end{itemize}
 
-\subsection{Editierfunktionen}\index{editing}
+\subsection{Editierfunktionen}\index{Editierfunktionen}
 
 QGIS bietet einfache Editierfunktionen für Vektordaten. Bevor Sie
 weiterlesen sollten Sie sich bewusst sein, dass derzeit nicht alle
 Funktionen ausgereift sind. Bevor Sie also anfangen, Vektorlayer zu
 editieren, sollten Sie die Daten sichern.
 
-\textbf{Bemerkung} - die Vorgehensweise zum Editieren GRASS Vektorlayern ist
-anders und wird in Kapitel~\ref{grass_digitising} beschrieben.
+\textbf{Bemerkung}: Die Vorgehensweise zum Editieren von GRASS Vektorlayern
+ist anders und wird in Kapitel~\ref{grass_digitising} beschrieben.
 
 \subsubsection{Einstellen der Fangtoleranz und des Suchradius}
 
 Bevor wir damit beginnen können, Vektorgeometrien zu editieren, ist es sehr
-wichtig die Fangtoleranz und den Suchradius für Stützpunkte (Vertice)
+wichtig die Fangtoleranz und den Suchradius für Stützpunkte (Vertices)
 festzulegen, um optimale Ergebnisse zu erzielen. 
 
 \minisec{Fangtoleranz}
 
-Die Fangtoleranz ist der Abstand des QGIS benutzt, um beim digitalisieren den
+Die Fangtoleranz ist der Abstand, den QGIS verwendet, um beim digitalisieren den
 nächstgelegenen Stützpunkt bzw. das nächstgelegene Liniensegment zu suchen
 und sich damit zu verbinden. Wenn Sie sich nicht innerhalb der definierten
 Fangtoleranz befinden, wird der Stützpunkt dort gesetzt, wo sich der
@@ -911,8 +914,8 @@ Flächen exakt aneinander liegen. Der Vorteil ist, dass nicht alle Stützpunkte
 einer gemeinsamen Grenzlinie digitalisiert werden müssen.
 
 \subsubsection{Einen vorhandenen Layer editieren}
-\index{vector layers!editing}
-\index{editing!an existing layer}
+\index{Vektorlayer!Editierfunktionen}
+\index{Editierfunktionen!existierender Layer}
 \label{sec:edit_existing_layer}
 
 Standardmäßig lädt QGIS Vektorlayer im 'read-only' Modus, um ungewolltes
@@ -972,12 +975,12 @@ können wählen zwischen einem Kreuz und einem halbtransparenten Kreis. Zum
 Vor jedem Editieren eines Vektorlayers muss dieser in der Legende ausgewählt
 werden und die Option 
 \dropmenuopttwo{mActionToggleEditing}{Bearbeitungsstatus umschalten} in der
-Werkzeugleiste aktiviert sein. Alternative können Sie dazu auch mit der
+Werkzeugleiste aktiviert sein. Alternativ können Sie dazu auch mit der
 rechten Maustaste auf den Namen des Layers in der Legende klicken und die
 Option im Kontextmenü auswählen. Sobald der Layer im Bearbeitungsstatus ist,
 erscheinen die Stützpunkte als das von Ihnen gewählte Stützpunktsymbol und
 zusätzlich werden die Digitalisier-Tools in der Werkzeugleiste
-aktiv.\index{editing!icons}
+aktiv.\index{Editierfunktionen!Icons}
 
 
 \minisec{Mit dem Mausrad im Kartenfenster zoomen}
@@ -992,7 +995,7 @@ Zoomberhalten des Mausrades in dem Reiter \tab{Kartenwerkzeuge} des Menüs
 
 \minisec{Den Layer mit den Pfeiltasten im Kartenfenster verschieben}
 
-Das Verschieben des Layers im Kartenfensters während des Digitalisierens ist
+Das Verschieben des Layers im Kartenfenster während des Digitalisierens ist
 mit den Pfeiltasten möglich. Plazieren Sie den Mauszeiger in das
 Kartenfenster und drücken Sie rechte Pfeiltaste, um den Layer nach Osten zu
 verschieben, die linke Pfeiltaste für Westen, die Pfeiltaste nach unten für
@@ -1017,7 +1020,7 @@ Folgende Digitalisier-Tools stehen Ihnen zur Verfügung:
 \item \toolbtntwo{mActionAddRing}{Ring hinzufügen}
 \item \toolbtntwo{mActionAddIsland}{Insel hinzufügen}
 \item \toolbtntwo{mActionSplitFeatures}{Objekte trennen}
-\item \toolbtntwo{mActionMoveFeature}{Objekte verschiebens}
+\item \toolbtntwo{mActionMoveFeature}{Objekte verschieben}
 \item \toolbtntwo{mActionMoveVertex}{Stützpunkt verschieben}
 \item \toolbtntwo{mActionAddVertex}{Stützpunkt hinzufügen}
 \item \toolbtntwo{mActionDeleteVertex}{Stützpunkt löschen}
@@ -1028,7 +1031,7 @@ Folgende Digitalisier-Tools stehen Ihnen zur Verfügung:
 \end{itemize}
 
 \minisec{Objekte hinzufügen}
-\index{vector layers!adding!feature}
+\index{Vektorlayer!hinzufügen!Objekt}
 
 Bevor Sie mit dem Editieren von Objekten beginnen, benutzen Sie die Tools
 \toolbtntwo{mActionPan}{Karte verschieben} und 
@@ -1061,7 +1064,7 @@ Alaska gezeigt.
 \end{figure}
 
 \begin{Tip}[h]\caption{\textsc{Datentyp der Attribute}}
-\qgistip{QGIS kontrolliert beim editieren von Shapes, ob die eingetragenen
+\qgistip{QGIS kontrolliert beim Editieren von Shapes, ob die eingetragenen
 Werte dem Datentyp der Attributspalte entspricht (z.B.: Zahl oder Text).
 Ansonsten ist es nicht möglich, im Dialog \dialog{Attributwert eingeben}
 eine Zahl in eine Textspalte einzutragen, oder umgekehrt. Falls es dennoch
@@ -1071,20 +1074,20 @@ notwendig sein sollte, können Sie es nachträglich im Fenster der
 \end{Tip}
 
 \minisec{Objekt verschieben}
-\index{vector layers!move!feature}
+\index{Vektorlayer!verschieben!Objekt}
 
 Mit dem Werkzeug \toolbtntwo{mActionMoveFeature}{Objekte verschieben} können Sie
 komplette Objekte verschieben.
 
 \minisec{Objekte trennen}
-\index{vector layers!split!feature}
+\index{Vektorlayer!trennen!Objekt}
 
 Polygone können mit dem Werkzeug \toolbtntwo{mActionSplitFeatures}{Objekte
 trennen} 'durchschnitten' werden. Die neu enstehenden Objekte sind dann
 jeweils mit den Attributdaten verknüpft. 
 
 \minisec{Stützpunkte eines Objektes editieren}
-\index{vector layers!editing!vertex}
+\index{Vektorlayer!Editierfunktionen!Stützpunkt}
 
 Für PostgreSQL/PostGIS- und Shape-Layer können die Stützpunkte von Objekten
 editiert werden. Stützpunkte können direkt editiert werden, ohne vorher
@@ -1094,7 +1097,7 @@ Objekte dieselben Knotenpunkte. Folgende Regeln kommen daher zum Einsatz:
 \begin{itemize}
 \item \textbf{Linien}    - Die zum Mauszeiger nächste Linie wird als 
 			  Zielobjekt
-                          benutzt. Beim verschieben oder löschen eines
+                          benutzt. Beim Verschieben oder Löschen eines
                           Stützpunktes wird der zum Mauszeiger nächste
 			  Stützpunkt auf einer Linie editiert.
 
@@ -1102,7 +1105,7 @@ Objekte dieselben Knotenpunkte. Folgende Regeln kommen daher zum Einsatz:
                           befindet, ist dies das Zielobjekt, ansonsten wird
 			  das
                           zum Mauszeiger nächstliegende Objekt benutzt. Beim
-                          verschieben oder löschen eines Stützpunktes
+                          Verschieben oder Löschen eines Stützpunktes
                           wird der zum Mauszeiger nächste Stützpunkt auf dem
 			  Polygon editiert.
 \end{itemize}
@@ -1113,7 +1116,7 @@ Sie sollten den Suchradius beim Digitalisieren über die Menüleiste unter
 Lage, ein Objekt auszuwählen.
 
 \minisec{Stützpunkte hinzufügen}
-\index{vector layers!adding!vertex}
+\index{Vektorlayer!hinzufügen!Stützpunkt}
 
 Sie können einen Stützpunkt zu einem Objekt hinzufügen, indem Sie das Icon
 \toolbtntwo{mActionAddVertex}{Stützpunkt hinzufügen} aus der Werkzeugleiste
@@ -1126,13 +1129,13 @@ Linie über ihr Ende hinaus verlängern möchten, müssen Sie erst den letzten
 Stützpunkt verschieben und können dann weitere Stützpunkte ergänzen.
 
 \minisec{Stützpunkte verschieben}
-\index{vector layers!moving!vertex}
+\index{Vektorlayer!verschieben!Stützpunkt}
 
 Sie können Stützpunkte mit dem Icon \toolbtntwo{mActionMoveVertex}{Stützpunkt
 verschieben} aus der Werkzeugleiste verschieben.
 
 \minisec{Stützpunkte löschen}
-\index{vector layers!deleting!vertex}
+\index{Vektorlayer!löschen!Stützpunkt}
 
 Sie können einen Stützpunkt aus einem Objekt löschen, indem Sie das Icon
 \toolbtntwo{mActionDeleteVertex}{Stützpunkt löschen} aus der Werkzeugleiste
@@ -1141,7 +1144,7 @@ Punktobjekt zu löschen. Löschen Sie in dem Fall das Objekt. Ebenso ist eine
 Linie, die aus einem Stützpunkt besteht oder ein Polygon, das aus zwei
 Stützpunkten besteht sinnlos und führt zu fehlerhaften Ergebnissen.
 
-\textbf{Warnung:} Ein Stützpunkt ist zum löschen ausgewählt, sobald Sie mit
+\textbf{Warnung:} Ein Stützpunkt ist zum Löschen ausgewählt, sobald Sie mit
 bei entsprechend gewählten Suchradius der Maus in die Nähe des Stützpunktes
 klicken. Um dies rückgänggig zu machen, müssen Sie den Editiermodus verlassen
 und bei der Nachfrage, ob die Veränderungen gespeichert werden sollen
@@ -1149,7 +1152,7 @@ und bei der Nachfrage, ob die Veränderungen gespeichert werden sollen
 dahin vorgenommenen Änderungen verworfen.
 
 \minisec{Ring hinzufügen}
-\index{vector layers!add!ring}
+\index{Vektorlayer!hinzufügen!Ring}
 
 Sie können Ring-Polygone mit dem Werkzeug \toolbtntwo{mActionAddRing}{Ring
 hinzufügen} erstellen. Das bedeutet, dass Sie innerhalb eines bestehenden
@@ -1158,20 +1161,20 @@ Polygons weitere Polygone digitalisieren können. Diese erscheinen dann als
 Ring-Polygon übrig bleibt.
 
 \minisec{Insel hinzufügen}
-\index{vector layers!add!island}
+\index{Vektorlayer!hinzufügen!Insel}
 
 Mit dem Tool \toolbtntwo{mActionAddIsland}{Insel hinzufügen} können Sie ein
 neues Polygons digitalisieren und einem zuvor selektierten Multipolygon
-zuweisen. Das neue Inselpolygon muss ausserhalb des selektierten Multipolygon
-digitalisiert werden.
+zuweisen. Das neue Inselpolygon muss ausserhalb des selektierten
+Multipolygons digitalisiert werden.
 
 \minisec{Objekte ausschneiden, kopieren und einfügen}
-\index{vector layers!cut!feature}
-\index{vector layers!copy!feature}
-\index{vector layers!paste!feature}
-\index{editing!cutting features}
-\index{editing!copying features}
-\index{editing!pasting features}
+\index{Vektorlayer!Objekte ausschneiden}
+\index{Vektorlayer!Objekte kopieren}
+\index{Vektorlayer!Objekte einfügen}
+\index{Editierfunktionen!Objekte ausschneiden}
+\index{Editierfunktionen!Objekte kopieren}
+\index{Editierfunktionen!Objekte einfügen}
 
 Ausgewählte Objekte können ausgeschnitten, kopiert und an andere Ebenen im
 aktuellen QGIS-Projekt übergeben (eingefügt) werden, wenn sich der Ziellayer
@@ -1196,7 +1199,7 @@ Wir nutzen diese Idee und machen daraus ein kleines Anwendungsbeispiel:
 \begin{enumerate}
 \item Laden Sie den Layer, von dem Sie einige Objekte kopieren wollen
 (Quelle)
-\item Laden oder erstellen einen Layer, in den die kopierten Objekte
+\item Laden oder erstellen Sie einen Layer, in den die kopierten Objekte
 eingefügt werden sollen (Ziel)
 \item Schalten Sie für beide Layer den Bearbeitungsstatus ein
 \item Stellen Sie die Quelle aktiv, indem Sie es in der Legende anklicken
@@ -1228,7 +1231,7 @@ zwischen Projektionen.
 \end{Tip}
 
 \minisec{Ausgewählte Objekte löschen}
-\index{vector layers!deleting!feature}
+\index{Vektorlayer!löschen!Objekte}
 
 Wenn Sie ein ganzes Polygon löschen möchten, selektieren Sie es erst mit dem
 \toolbtntwo{mActionSelect}{Wähle Objekt aus} Werkzeug. Sie können dabei auch
@@ -1258,7 +1261,7 @@ wurden mit GDAL Version 1.3.2 oder höher erstellt.
 \end{Tip}
 
 \minisec{Fangtoleranz einstellen}
-\index{editing!snap}
+\index{Editierfunktionen!Fangtoleranz}
 
 QGIS ermöglicht es, digitalisierte Stützpunkte an andere Stützpunkte
 desselben Layers anzubinden. Dazu müssen Sie die Fangtoleranz im Menü
@@ -1267,7 +1270,7 @@ desselben Layers anzubinden. Dazu müssen Sie die Fangtoleranz im Menü
 als Layereinheit interpretiert wird.
 
 \minisec{Editierte Layer speichern}
-\index{editing!saving changes}
+\index{Editierfunktionen!Änderungen speichern}
 
 Wenn sich ein Vektorlayer im Editiermodus befindet, werden alle Änderungen im
 Speicher von QGIS abgelegt. Sie werden also nicht direkt auf den Datenträger
@@ -1279,8 +1282,8 @@ Wenn die Änderungen nicht gespeichert werden können (z.B.: weil die
 Festplatte voll ist) bleiben diese 'im-memory' Status erhalten. Sie können somit
 Veränderungen vornehmen und das Speichern erneut versuchen.
 
-\subsubsection{Neue Vektorlayer erstellen}\label{sec:create
-shape}\index{editing!creating a new layer}
+\subsubsection{Neuen Vektorlayer erstellen}\label{sec:create
+shape}\index{Editierfunktionen!Neuen Vektorlayer erstellen}
 
 Um einen neuen Vektorlayer zu erstellen, wählen Sie in der Menüleiste
 \toolbtntwo{mActionNewVectorLayer}{Neuer Vektorlayer} aus dem Menü
@@ -1336,22 +1339,22 @@ Der Query Builder\index{Query Builder} listet die vorhandenen Attributspalten
 eines Vektorlayers in der linken oberen Box (Felder). Sie können einen
 Ausschnitt der vorhanden Attributwerte im rechten oberen Feld (Werte)
 anzeigen, indem Sie eine Attributspalte auswählen und auf den Knopf
-\button{Stichprobe}\index{Query Builder!generating sample list} klicken.
+\button{Stichprobe}\index{Query Builder!Beispielliste erstellen} klicken.
 Dadurch werden die ersten 25 unterschiedlichen Werte der Attributspalte
 angezeigt. Um eine vollständige Liste zu bekommen, klicken Sie auf den Knopf
-\button{Alle}\index{Query Builder!getting all values}. Um eine Attributspalte
+\button{Alle}\index{Query Builder!Gesamtliste erstellen}. Um eine Attributspalte
 in das untere Fenster (SQL where clause) zu kopieren, doppelklicken sie auf
-den Namen in der Box (Felder)\index{Query Builder!adding fields}. Um eine
+den Namen in der Box (Felder)\index{Query Builder!Spalten hinzufügen}. Um eine
 Abfrage zu erstellen, können Sie die verschiedenen Operatoren benutzen.
 
 Um eine Abfrage zu testen, klicken Sie auf den Knopf
-\button{Test}\index{Query Builder!testing queries}. Dies erzeugt ein Fenster,
+\button{Test}\index{Query Builder!Abfrage testen}. Dies erzeugt ein Fenster,
 in dem die Anzahl der für diese Abfrage zutreffenden Objekte angezeigt wird.
 Nach erfolgreichem Testen klicken Sie auf den Knopf \button{Ok}. Das
 SQL-Kommando wird in der SQL-Spalte der Layerliste angezeigt werden.
 
 \begin{Tip}\caption{\textsc{Ändern der Layer-Definition}}\index{Query
-Builder!changing layer definitions}
+Builder!Layer-Definition ändern}
 \qgistip{Sie können die Definition der Ebene ändern nachdem sie geladen ist,
 indem sie die SQL-Abfrage anders starten. Dazu öffnen Sie den Dialog
 \dialog{Layereigenschaften} durch Doppelklicken auf den Layernamen in der
@@ -1360,26 +1363,23 @@ Builder}. Weitere Informationen können Sie im Kapitel \ref{sec:vectorprops}
 finden.}
 \end{Tip}
 
-\subsection{Selektion durch Abfrage}\label{sec:select_by_query}
-\index{PostgreSQL!query builder}
-\index{PostGIS!query builder}
-\index{query builder!PostgreSQL}
-\index{query builder!PostGIS}
+\minisec{Aufruf des Query Builder für PostGIS-Layer}\index{Query
+Builder!starten}
 
-QGIS ermöglicht es, Objekte über den Query Builder abzufragen, ähnlich wie in
-Abschnitt~\ref{sec:query_builder} vorgestellt. Im oberen Beispiel haben wir
-den Query Builder dazu verwendet, um die Abfrage eines PostGIS-Layers als
-'virtuellen Layer' anzuzeigen. Dabei werden alle abgefragten Objekte, welche
-die Abfragekriterien erfüllen, farblich hervorgehoben, Dies funktioniert
-grundsätzlich auch mit allen anderen, durch QGIS unterstützen Vektorformaten. 
+Der Query Builder funktioniert grundsätzlich mit allen von QGIS unterstützen
+Vektorformaten. Im oberen Beispiel haben Sie den Query Builder dazu
+verwendet, um eine Abfrage eines PostGIS-Layers durchzuführen. Dazu haben Sie
+den \dialog{Layereigenschaften} Dialog des geladenen PostGIS-Layers geöffnet
+und im Reiter \tab{Allgemein} auf den Knopf \button{Query Builder} geklickt. 
 
-Um eine geladene OGR- oder GRASS-Ebene abzufragen, öffnen Sie jedoch nichg
-auf den \dialog{Layereigenschaften} Dialog, sondern klicken auf den Knopf
-\toolbtntwo{mActionOpenTable}{Attributtabelle öffnen} in der
-Werkzeugleiste und dann Dialogfenster auf den Knopf \button{Erweitert}.
-Dadurch wird auch der Query Builder gestartet und ermöglicht Abfragen wie in
-Abschnitt \ref{sec:query_builder} beschrieben.
+\minisec{Aufruf des Query Builder für OGR- und GRASS-Layer}
 
-\index{vector layers|)}
+Dieses Vorgehen funktioniert momentan aber nur für PostGIS-Layer. Um den
+Query Builder zu öffnen, und einen geladene OGR- oder GRASS-Layer abzufragen,
+öffnen müssen Sie auf das Icon \toolbtntwo{mActionOpenTable}{Attributtabelle
+öffnen} in der Werkzeugleiste klicken und dann im Dialogfenster auf den Knopf
+\button{Erweitert} drücken. Dadurch wird ebenfalls der Query Builder
+gestartet und ermöglicht Abfragen wie im obigen Abschnitt
+\ref{sec:query_builder} für PostGIS beschrieben.
 
 

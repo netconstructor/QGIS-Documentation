@@ -1,7 +1,7 @@
 % vim: set textwidth=78 autoindent:
 
 \section{Arbeiten mit Rasterdaten}\label{label_raster}
-\index{raster layers|(}
+\index{Rasterlayer|(}
 
 % when the revision of a section has been finalized, 
 % comment out the following line:
@@ -10,7 +10,7 @@
 Dieses Kapitel beschreibt, wie Rasterlayer visualisiert und ihre
 Eigenschaften (Darstellung, Farben, Kanäle) festgelegt werden können. QGIS
 unterstützt eine Vielzahl von Rasterformaten. Bisher getestete Formate sind:
-\index{raster layers!data formats}
+\index{Rasterlayer!Datenformate}
 
 \begin{itemize}
 \item Arc/Info Binary Grid
@@ -26,13 +26,13 @@ unterstützt eine Vielzahl von Rasterformaten. Bisher getestete Formate sind:
 Da die Rasterimplementation in QGIS auf der GDAL-Bibliothek basiert, ist es
 wahrscheinlich, dass auch andere durch GDAL unterstützte Rasterformate
 unterstützt werden. Vergleichen Sie dazu \ref{appdx_gdal} für weitere
-Details.\index{raster layers!GDAL implementation} oder
+Details.\index{Rasterlayer!GDAL Implementation} oder
 \url{http://www.gdal.org/formats_list.html}. Wenn Sie Rasterlayer aus einer
 GRASS Location laden möchten, lesen Sie bitte in
 Kapitel~\ref{sec:load_grassdata} weiter.
 
 \subsection{Was ist ein Rasterlayer?}\label{label_whatsraster}
-\index{raster layers!definition}
+\index{Rasterlayer!Definition}
 
 Rasterlayer in QGIS sind Gitter aus diskreten Zellen oder Pixeln, die Objekte
 über, auf oder unter der Erdoberfläche beschreiben. Jede Zelle eines Rasters
@@ -47,10 +47,10 @@ In Geographischen Informationssystemen (GIS) ist ein Raster eine
 georeferenzierte Datei mit Informationen, die räumlich korrekt mit anderen
 Vektorlayern oder Rasterdaten überlagert werden kann. QGIS liest dazu die 
 Projektionsinformationen innerhalb des Rasterlayers (e.g. GeoTiff) oder aus
-einem passenden Worldfile.\index{raster layers!georeferenced}
+einem passenden Worldfile.\index{Rasterlayer!Georeferenziert}
 
 QGIS kann Rasterlayer also korrekt visualisieren aber bisher nur
-eingeschränkt analysieren.\index{raster layers!georeferenced}
+eingeschränkt analysieren.
 
 \subsection{Rasterlayer in QGIS laden}\label{label_loadraster}
 
@@ -61,14 +61,14 @@ Menüleiste unter
 geladen werden. Mehrere Raster können gleichzeitig geladen werden, indem die
 \keystroke{Control}- oder \keystroke{Shift}-Taste während der Auswahl der
 Layer im Dialog \dialog{Öffnen einer GDAL Rasterquelle} gedrückt
-gehalten wird.\index{raster layers!loading}
+gehalten wird.\index{Rasterlayer!Offnen}
 
 \subsection{Rasterlayereigenschaften}\label{label_rasterprop}
 
 Um die Darstellung des Rasterlayers anzusehen oder anzupassen, klicken Sie
 mit der rechten Maustaste auf den Layernamen in der Legende. Dadurch
-erscheint ein Menü und bietet eine Vielzahl von Optionen:\index{raster
-layers!context menu}
+erscheint ein Menü und bietet eine Vielzahl von
+Optionen:\index{Rasterlayer!Layereigenschaften}
 
 \minisec{Rechte-Maustaste Menü für Rasterlayer}
 
@@ -86,7 +86,7 @@ layers!context menu}
 \end{itemize}
 
 Wählen Sie \dropmenuopt{Eigenschaften} aus dem Menü, um die
-Rasterlayereigenschaften\index{raster layers!properties} anzuzeigen oder 
+Rasterlayereigenschaften\index{Rasterlayer!Eigenschaften} anzuzeigen oder 
 doppelklicken Sie einfach auf den Namen des Rasterlayers in der Legende. 
 Abbildung \ref{fig:raster_properties} zeigt das Dialogfenster
 \dialog{Rastereigenschaften} mit verschiedenen Reitern:
@@ -111,7 +111,8 @@ Abbildung \ref{fig:raster_properties} zeigt das Dialogfenster
 
 \subsubsection{Darstellung}\label{label_sombology}
 
-QGIS unterstützt zwei unterschiedliche Arten der Darstellung von Rasterlayern:\index{raster layers!supported channels}
+QGIS unterstützt zwei unterschiedliche Arten der Darstellung von
+Rasterlayern:\index{Rasterlayer!unterstützte Kanäle}
 
 \begin{itemize}
 \item Einfaches Grauband - Ein Kanal (Band) des Rasterlayers wird in
@@ -144,8 +145,8 @@ Kapitel~\ref{label_colormaptab}.
 
 QGIS kann so eingestellt werden, dass nur Rasterzellen gezeigt werden, die
 Werte innerhalb eines definierten Minimum und Maximum oder einer
-Standarbweichung zum Mittelwert des Layers enthalten. \index{raster
-layers!standard deviation} Dies ist nützlich, wenn man Layer anzeigen lassen
+Standarbweichung zum Mittelwert des Layers enthalten.
+\index{Rasterlayer!Standardabweichung} Dies ist nützlich, wenn man Layer anzeigen lassen
 möchte, bei denen einzelne Zellen extrem abweichende Werte haben, was einen
 negativen Einfluss auf die Darstellung in QGIS hat. Diese Extrema des Kanals
 können Sie manuell eingeben, oder statistisch schätzen oder genau bestimmen.
@@ -170,7 +171,7 @@ und wählen dann Rot als Kanal, den Sie als Graustufenbild anzeigen möchten.}
 \subsubsection{Transparenz} \label{rastertab:transparency}
 
 In QGIS können Rasterlayer in unterschiedlicher Transparenz dargestellt
-werden.\index{raster layers!transparency}. Wählen Sie den Schieberegler
+werden.\index{Rasterlayer!Transparenz}. Wählen Sie den Schieberegler
 \slider{Globale Transparenz}{}{20mm} und stellen Sie ein, in welchem
 Ausmaß
 darunterliegende Layer im Kartenfenster sichtbar sein sollen. Dies ist z.B.
@@ -185,7 +186,7 @@ Als Beispiel wollen wir die Wasserflächen aus dem Rasterlayer
 Schritte sind dazu notwendig:
 
 \begin{enumerate}
- \item  Loaden Sie den Rasterlayer \filename{landcover.img} aus dem Alaska
+ \item  Laden Sie den Rasterlayer \filename{landcover.img} aus dem Alaska
 Beispieldatensatz
  \item Öffnen Sie den Dialog \dialog{Rasterlayereigenschaften} indem Sie auf
 den Namen \filename{landcover} in der Legende doppelklicken, oder im
@@ -233,14 +234,14 @@ definierten Klassen erstellen. Wählen Sie dazu eine
 \selectnumber{Eintragsanzahl}{14} und drücken Sie auf den Knopf
 \button{Klassifizieren}. In dieser QGIS Version steht nur der
 \selectstring{Klassifikationsmodus}{Gleiches Interval} zur
-Verfügung.\index{raster layer!classify}.
+Verfügung.\index{Rasterlayer!Klassifizierung}.
 
 \subsubsection{Allgemein}\label{label_generaltab}
 
 Im Reiter \tab{Allgemein} werden allgemeine Informationen zum ausgewählten
 Rasterlayer angezeigt, wie der Name und Quellpfad des Rasters (kann geändert
 werden). Außerdem wird ein Thumbnail der Karte gezeigt, die Legende sowie die
-Farbpalette.\index{raster layers!properties}
+Farbpalette.\index{Rasterlayer!Layereigenschaften}
 
 Zusätzlich kann eine skalenabhängige Sichtbarkeit eingestellt werden. Dazu
 muss das Kontrollkästchen \checkbox{Maßstababhängige Sichtbarkeit} aktiviert
@@ -255,7 +256,7 @@ Der Reiter \tab{Metadaten} zeigt eine Anzahl von Informationen über den
 Rasterlayer, inklusive Statistiken über jeden Kanal (Band) innerhalb des
 Layers. Statistiken werden nach dem Prinzip 'was brauche ich' erstellt. Es
 kann also gut sein, dass für einen Rasterlayer keine Statistik zur Verfügung
-steht oder gesammelt wurde.\index{raster layers!metadata}
+steht oder gesammelt wurde.\index{Rasterlayer!Metadaten}
 
 Wie Sie sehen, kann man in diesem Reiter bisher keine Informationen ändern.
 Um die Statistik des Rasterlayers zu aktualisieren, wechseln Sie in den
@@ -268,8 +269,7 @@ Hochaufgelöste Rasterlayer können das Navigieren in QGIS verlangsamen. Indem
 Sie geringer aufgelöste Kopien (Pyramiden) erstellen, kann die Darstellung
 optimiert werden. QGIS wählt dann ensprechend des Zoom-Levels die passende
 Auflösung.
-\index{raster layers!pyramids}
-\index{raster layers!resolution pyramids} 
+\index{Rasterlayer!Pyramiden erstellen}
 Sie brauchen dazu Schreibrecht in dem Ordner, in dem sich sie Originaldaten
 befinden und können dann zwischen verschiedenen Resampling-Methoden wählen:
 
@@ -290,7 +290,7 @@ vorher eine Kopie.
 
 Der Reiter \tab{Histogramm} ermöglicht es, ein Histogramm der Werteverteilung
 eines Rasterlayers zu erstellen, und damit die Pixelverteilung
-darzustellen.\index{raster layers!histogram} Es gibt zwei Arten der
+darzustellen.\index{Rasterlayer!Histogramm} Es gibt zwei Arten der
 Visualisierung: 
 
 \begin{itemize}
@@ -301,15 +301,15 @@ Visualisierung:
 Klicken Sie dazu erst auf den Knopf \button{Erneuern} und wählen Sie dann die
 Kanäle (falls mehrere vorhanden sind) aus, die angezeigt werden sollen.
 Die Berechneten Werte werden dann auch in dem Reiter \tab{Metadaten}
-ergänzt.\index{raster layers!metadata}\index{raster layers|)} Zusätzlich
-können Sie noch die Anzahl der Diagrammspalten festlegen und
+ergänzt.\index{Rasterlayer|)} Zusätzlich können Sie noch die Anzahl der
+Diagrammspalten festlegen und
 auswählen, ob \checkbox{Bereichsüberschreitung erlaubt} ist, oder ob Sie
 \checkbox{Approximation erlauben}.
 
 \begin{Tip}\caption{\textsc{Statistikwerte für Rasterlayer sammeln}}
 \qgistip{Um statistische Informationen klicken Sie auf \texttt{Erneuern}.
 Dieser Vorgang kann zeitaufwendig sein. Bitte seien Sie geduldig, während
-QGIS Daten sammelt!\index{raster layers!statistics}
+QGIS Daten sammelt!\index{Rasterlayer!Statistik}
 }
 \end{Tip}
 

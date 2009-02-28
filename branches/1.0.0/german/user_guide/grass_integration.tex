@@ -1,6 +1,6 @@
 % vim: set textwidth=78 autoindent:
 
-\section{GRASS GIS Integration}\label{sec:grass}\index{GRASS}
+\section{GRASS GIS Integration}\label{sec:grass}\index{GRASS GIS}
 
 % when the revision of a section has been finalized, 
 % comment out the following line:
@@ -30,7 +30,7 @@ wenn Sie es wie in Kapitel~\ref{sec:starting_grass} beschrieben laden:
 \end{itemize}
 
 \subsection{GRASS Plugin starten}\label{sec:starting_grass}
-\index{GRASS!starting QGIS}
+\index{GRASS GIS!QGIS starten}
 
 Um GRASS-Funktionen in QGIS zu benutzen oder GRASS Raster- und Vektorlayer zu
 visualisieren, muss das GRASS-Plugin im Plugin-Manager geladen werden.
@@ -47,8 +47,8 @@ diese neue Location importieren (siehe Kapitel~\ref{sec:import_loc_data}) und
 über die GRASS-Werkzeugkiste mit den mehr als 300 GRASS Modulen analysieren
 (siehe Kapitel~\ref{subsec:grass_toolbox}).
 
-\subsection{GRASS Layer visualisieren}\label{sec:load_grassdata}\index{GRASS!loading
-data}
+\subsection{GRASS Layer visualisieren}\label{sec:load_grassdata}\index{GRASS
+GIS!Layer laden}
 
 Wenn das GRASS-Plugin geladen ist, können Sie GRASS Vektor- und Rasterlayer
 mit den entsprechenden Knöpfen in der Werkzeugleiste laden. Als Beispiel
@@ -67,7 +67,7 @@ mit 3 Vektor- und einem Rasterlayer mit Höheninformationen.
   verwalten} und wählen \dropmenuopt{GRASS} aus. Die GRASS-Werkzeuge
   erscheinen nun in der Werkzeugleiste.
   \item Klicken Sie nun auf das Icon \toolbtntwo{grass_open_mapset}{Mapset
-  öffnen}, um den \dialog{Wählen Sie ein GRASS Mapset} zu starten.
+  öffnen}, um eine Session in einer GRASS Location zu starten.
   \item Als \filename{Gisdbase} suchen und wählen Sie bitte den Pfad zum
   Ordner \filename{grassdata}.
   \item Sie sollten nun als Location \filename{alaska} und als Mapset
@@ -83,7 +83,7 @@ mit 3 Vektor- und einem Rasterlayer mit Höheninformationen.
   über dem Rasterlayer dargestellt. Sie können nun die Layereigenschaften
   einstellen, wie in Kapitel~\ref{sec:vectorprops} beschrieben. Z.B.: die
   Transparenz verändern oder andere Farben auswählen.
-  \item Laden Sie auch noch die weitere Vektorlayer \filename{rivers} und
+  \item Laden Sie auch noch die weiteren Vektorlayer \filename{rivers} und
   \filename{airports} hinzu und passen Sie deren Layereigenschaften an.
 \end{enumerate}
 
@@ -193,7 +193,7 @@ sichern. Diese wird zusätzlich zu der von Ihneg gewählten Mapset erstellt (Netel
   \item Prüfen Sie alles, damit alles wie gewünscht ist
   \item Klicken Sie auf \button{Abschliessen}
   \item Die neue Location \filename{alaska} mit den beiden Mapsets
-\filename{PERMANENT} und \filename{demo} sind Location sind nun erstellt
+\filename{PERMANENT} und \filename{demo} sind nun erstellt
 worden. Ihre aktuelle Arbeitsumgebung ist die von Ihnen definierte Mapset
 \filename{demo}.
   \item Beachten Sie, dass einige Werkzeuge des GRASS Plugins grau hinterlegt
@@ -203,9 +203,9 @@ waren und nun auch zur Verfügung stehen.
 Auch wenn es recht kompliziert aussieht, ist dies doch ein sehr einfacher
 Weg, eine neue GRASS Location zu erstellen. Unsere Location \filename{alaska}
 ist nun bereit für den Import von Daten (siehe
-Kapitel~\ref{sec:import_loc_data}). Sie können aber die bereits in der
-vorhandenen Daten der \filename{alaska} Location des QGIS Beispieldatensatzes
-verwenden und zu Kapitel~\ref{label_vectmodel} weitergehen.
+Kapitel~\ref{sec:import_loc_data}). Sie können an dieser Stelle aber auch die
+vorhandene \filename{alaska} Location des QGIS Beispieldatensatzes verwenden
+und direkt zu Kapitel~\ref{label_vectmodel} weitergehen.
 
 \subsubsection{Eine neue GRASS Mapset erstellen}\label{sec:add_mapset}
 
@@ -225,6 +225,7 @@ bereits geschehen ist.
 in der GRASS Werkzeugleiste, um den \dialog{MAPSET} Dialog zu starten.
   \item Wählen Sie als GRASS Datenbank (GISDBASE) den Ordner
 \filename{grassdata}, in der sich auch die Location \filename{alaska}
+befindet.
   \item Klicken Sie auf \button{Weiter}. 
   \item In diesem Dialog können Sie ein neues \filename{MAPSET} innerhalb
 der bereits vorhandenen \filename{LOCATION} alaska, oder eine ganz neue
@@ -293,12 +294,12 @@ angezeigt.
 \end{enumerate}
 
 
-\subsection{GRASS Vektormodell}\label{label_vectmodel}\index{GRASS!vector data
-model}
+\subsection{GRASS Vektormodell}\label{label_vectmodel}\index{GRASS
+GIS!Vektormodell}
 
 Für das Arbeiten mit GRASS-Vektordaten ist es wichtig, das Datenmodell von
-GRASS-Vektoren zu kennen\index{GRASS!digitizing}. GRASS nutzt ein
-topologisches Datenmodell.\index{GRASS!topology}
+GRASS-Vektoren zu kennen\index{GRASS GIS!Digitalisieren}. GRASS nutzt ein
+topologisches Datenmodell.\index{GRASS GIS!Topology}
 Das bedeutet, dass Flächen nicht als geschlossene Polygone vorhanden sind,
 sondern als ein oder mehrere Umrandungen (Boundaries). Eine Umrandung
 (Boundary) zwischen zwei aneinander grenzenden Flächen ist nur einmal
@@ -334,10 +335,11 @@ als Layername unterstützt, in kommenden GRASS-Versionen werden auch Namen
 möglich sein.
 
 Attribute können in externen Datenbanktabellen abgelegt werden,
-beispielsweise DBase, PostgreSQL, MySQL, SQLITE3, etc.\index{GRASS!attribute storage}
+beispielsweise DBase, PostgreSQL, MySQL, SQLITE3, etc.\index{GRASS
+GIS!Attributdaten speichern}
 
 Die Attribute in den Tabellen werden über ein sog. 'Kategoriefeld' an die
-Geometrien des Datensatzes gehängt.\index{GRASS!attribute linkage}
+Geometrien des Datensatzes gehängt.\index{GRASS GIS!Attributdaten verlinken}
 Die 'Kategorie' (oder key, ID, etc) ist eine Ganzzahl, über die eine
 Verknüpfung zwischen den Geometrien und den Spalten  in der Datenbanktabelle
 hergestellt wird.
@@ -347,12 +349,14 @@ hergestellt wird.
 Der beste Weg, etwas über das GRASS Vektordatenmodell zu erfahren, ist das
 Studieren eines der vielen verfügbaren GRASS-Tutorien, wo dieses Thema
 vertieft behandelt wird.
-Unter \url{http://grass.osgeo.org/gdp/manuals.php} sind eine Fälle von weiteren
-Informationsquellen in unterschiedlichen Sprachen vorhanden.
+Unter \url{http://grass.osgeo.org/gdp/manuals.php} sind eine Vielzahl
+weiterer Informationsquellen in unterschiedlichen Sprachen vorhanden.
 }
 \end{Tip}
 
-\subsection{Einen neuen GRASS Vektorlayer erstellen}\label{sec:creating_new_grass_vectors}\index{GRASS!Creating new vectors|see{editing!creating a new layer}}
+\subsection{Einen neuen GRASS Vektorlayer
+erstellen}\label{sec:creating_new_grass_vectors}\index{GRASS GIS!Vektorlayer
+erstellen}
 
 Einen neuen GRASS Vektorlayer können Sie erstellen, indem Sie auf das Icon
 \toolbtntwo{grass_new_vector_layer}{Neuen GRASS-Vektorlayer anlegen} in der
@@ -378,14 +382,14 @@ Digitalisieren beginnen (siehe Abbildung~\ref{fig:grass_digitizing_table}).
 }
 \end{Tip} 
 
-\subsection{Digitalisier- und Editierwerkzeuge}\index{GRASS!digitizing
-tools}
+\subsection{Digitalisier- und Editierwerkzeuge}\index{GRASS
+GIS!Digitalisierwerkzeuge}\index{GRASS GIS!Editierwerkzeuge}
 \label{grass_digitising}
 
 Die Digitalisierwerkzeuge für GRASS-Vektorlayer werden über den Knopf
 \toolbtntwo{grass_edit}{GRASS-Vektorlayer bearbeiten} in der
-GRASS-Werkzeugleiste gestartet. Dazu müssen den zu bearbeitenden Layer in der
-Legende auswählen, bevor Sie auf den Editier-Knopf drücken. Abbildung
+GRASS-Werkzeugleiste gestartet. Dazu müssen Sie den zu bearbeitenden Layer in
+der Legende auswählen, bevor Sie auf den Editier-Knopf drücken. Abbildung
 \ref{fig:grass_digitizing_category} zeigt den Dialog für die GRASS
 Digitalisierung. Die einzelnen Werkzeuge werden im folgenden Kapitel
 beschrieben.
@@ -415,7 +419,7 @@ Verfügung stehenden Funktionalitäten.
 \end{center}  
 \end{figure}
 
-\begin{table}[h]\index{GRASS!digitizing tools}
+\begin{table}[h]\index{GRASS GIS!Digitalisierwerkzeuge}
 \centering
 \caption{GRASS Digitalisierwerkzeuge}\label{tab:grass_tools}\medskip
  \begin{tabular}{|l|l|p{5in}|}
@@ -455,7 +459,7 @@ die Bearbeitung (und aktualisiert die Topolgie anschließend).\\
 \end{tabular}
 \end{table}
 
-\minisec{Kategorie Reiter}\index{GRASS!category settings}
+\minisec{Kategorie Reiter}\index{GRASS GIS!Digitalisierwerkzeuge!Kategorie}
 
 In dem Reiter \tab{Kategorie} können Sie einstellen, in welcher Weise
 Kategoriewerte neuen Objekten oder neue Kategoriewerte vorhandenen Objekten
@@ -493,10 +497,9 @@ erstellen und diese mit dem neuen 'Layer' verbinden.
 }
 \end{Tip}
 
-\minisec{Einstellungen Reiter}\label{label_settingtab}\index{GRASS!snapping
-tolerance}
+\minisec{Einstellungen Reiter}\label{label_settingtab}\index{GRASS GIS!Digitalisierwerkzeug!Einstellungen}\index{GRASS GIS!Digitalisierwerkzeug!Fangtoleranz}
 
-Der Reiter \tab{Einstellungen} erlaubt das Setzen der Snappingtoleranz in
+Der Reiter \tab{Einstellungen} erlaubt das Setzen der Fangtoleranz in
 Bildschirmpixeln. Dies ist der Schwellenwert in Pixeln, innerhalb dessen neu
 digitalisierte Knotenpunkte an vorhandene Knoten gesnappt werden. Dies hilft,
 Lücken oder Überlagerungen zwischen Objekten zu vermeiden. Der Standardwert
@@ -509,7 +512,7 @@ ist auf 10 Pixel eingestellt.
  \end{center}
 \end{figure}
 
-\minisec{Darstellung Reiter}\index{GRASS!symbology settings}
+\minisec{Darstellung Reiter}\index{GRASS GIS!Digitalisierwerkzeug!Darstellung}
 
 Der \tab{Darstellung} Reiter erlaubt die Farbeinstellungen für die verschiedenen
 Geometrietypen und ihren Topologiestatus (z.B. offene/geschlossene Fläche).
@@ -521,7 +524,7 @@ Geometrietypen und ihren Topologiestatus (z.B. offene/geschlossene Fläche).
  \end{center}
 \end{figure}
 
-\minisec{Tabellenreiter} \index{GRASS!table editing}
+\minisec{Tabellenreiter} \index{GRASS GIS!Digitalisierwerkzeug!Attributtabelle}
 
 Der Reiter \tab{Tabelle} gibt Informationen über die Attributtabelle des
 aktuellen Layers. In diesem Reiter können Sie eine Attributtabelle
@@ -536,8 +539,8 @@ Kapitel~\ref{sec:creating_new_grass_vectors}).
  \end{center}
 \end{figure}
 
-\begin{Tip}\caption{\textsc{GRASS Schreibberechtigung}}\index{GRASS!edit
-permissions} 
+\begin{Tip}\caption{\textsc{GRASS Schreibberechtigung}}\index{GRASS
+GIS!Schreibberechtigung} 
 \qgistip{Um einen Datensatz zu editieren, müssen Sie der Besitzer des
 aktuellen GRASS-Mapsets sein. Es ist nicht möglich, Karten aus einem Mapset
 zu
@@ -546,7 +549,8 @@ Schreibrechte haben.
 }
 \end{Tip}
 
-\subsection{Einstellung der GRASS Region}\label{sec:grass_region}\index{GRASS!region}
+\subsection{Einstellung der GRASS Region}\label{sec:grass_region}\index{GRASS
+GIS!Region}
 
 Die aktuelle Region (Projektausdehnung und Pixelauflösung) ist in GRASS sehr
 wichtig für alle Rastermodule. Alle neu erzeugten Rasterdaten haben nämlich
@@ -559,7 +563,7 @@ Pixelauflösung.
 
 Es ist auch möglich, die Region mit dem Knopf
 \toolbtntwo{grass_region}{Aktuelle GRASS-Region darstellen} aus- bzw.
-einzusschalten.\index{GRASS!region!display}
+einzusschalten.\index{GRASS GIS!Region!Darstellung}
 
 Um die aktuelle GRASS-Region zu ändern, benutzen Sie den Knopf
 \toolbtntwo{grass_region_edit}{Aktuelle GRASS-Region editieren}.
@@ -567,13 +571,15 @@ Dort haben Sie die Möglichkeit, die Region zu verändern sowie das Aussehen der
 Regionsdarstellung. Wenn der Dialog sichtbar ist, können Sie die Region neben
 der einfachen Koordinateneingabe auch interaktiv mit der Maus im Kartenbild
 verändern. Die Koordinaten werden dann automatisch angepasst, sobald Sie den
-Dialog mit dem Knopf \button{OK} schließen.\index{GRASS!region!editing}
+Dialog mit dem Knopf \button{OK} schließen.\index{GRASS
+GIS!Region!Einstellung}
 Das GRASS Modul \filename{g.region} bietet viele weitere Optionen zur
-einstellung der passenden Ausdehnung und Auflösung der Region für die
+Einstellung der passenden Ausdehnung und Auflösung der Region für die
 Rasteranalyse. Das Modul \filename{g.region} können Sie über die GRASS
 Werkzeugkiste nutzen, wie in Kapitel~\ref{subsec:grass_toolbox} beschrieben.
 
-\subsection{GRASS-Werkzeugkiste}\label{subsec:grass_toolbox}\index{GRASS!toolbox}
+\subsection{GRASS-Werkzeugkiste}\label{subsec:grass_toolbox}\index{GRASS
+GIS!Werkzeugkiste}
 
 Die \toolbtntwo{grass_tools}{GRASS-Werkzeugkiste} ermöglicht es, GRASS Module
 auf Daten innerhalb einer ausgewählten GRASS \filename{Location} und
@@ -584,7 +590,7 @@ Schreibrechte besitzen. Dies ist normalerweise garantiert, wenn Sie die
 Ergebniskarten der Raster- und Vektoranalysen in der ausgewählten
 \filename{Mapset} gespeichert werden können. 
 
-\subsubsection{Arbeiten mit GRASS Modulen}\index{GRASS!toolbox}
+\subsubsection{Arbeiten mit GRASS Modulen}\index{GRASS GIS!Module}
 
 \begin{figure}[h]
 \centering
@@ -629,7 +635,7 @@ Sie das Modul ebenfalls aufrufen können.
 
 \minisec{Ergebnis}
 
-Der Reiter \tab{Ergebnis} stellt die Ausgabe des Moduls während des Laufens dar.
+Der Reiter \tab{Ergebnis} stellt die Ausgabe des Moduls zur Laufzeit dar.
 Nachdem Sie den Knopf \button{Los} gedrückt haben, wird auf diesen Reiter
 gewechselt und Sie sehen die Statusausgaben des Moduls. Wenn alles
 funktioniert hat, sehen Sie den Ausgabetext \usertext{Erfolgreich beendet}.
@@ -637,7 +643,7 @@ funktioniert hat, sehen Sie den Ausgabetext \usertext{Erfolgreich beendet}.
 \minisec{Handbuch}
 
 Der Reiter \tab{Handbuch} enthält die Hilfeseite zu jedem GRASS-Modul. Falls Sie
-weitergehende Informationen zum gewählten Modul benötigten, schauen Sie in
+weitergehende Informationen zum gewählten Modul benötigen, schauen Sie in
 diese Hilfeseite. Dabei werden Sie feststellen, dass viele Module mehr
 Parameter haben, als im Reiter \tab{Optionen} zu sehen sind. Das ist gewollt.
 Um die GUI möglichst einfach zu halten, sind nur die nötigsten Optionen in
@@ -649,14 +655,15 @@ index}, dem \filename{Thematic index} und dem \filename{Full index}. Diese
 enthalten alle Informationen, die Sie ansonsten über das Modul
 \filename{g.manual} finden.
 
-\begin{Tip}\caption{\textsc{Ergebnisse direkt anzeigen}}\index{GRASS!display results}
+\begin{Tip}\caption{\textsc{Ergebnisse direkt anzeigen}}\index{GRASS
+GIS!Ergebnisse direkt anzeigen}
 \qgistip{Wollen Sie Ihre Ergenisse direkt in der Kartenansicht ansehen,
 nutzen Sie den Knopf \button{Ergebnis visualisieren} im unteren Bereich des
 jeweiligen Modulreiters.
 }
 \end{Tip}
 
-\subsubsection{GRASS Datei-Browser} \index{GRASS!toolbox!Browser}
+\subsubsection{GRASS Datei-Browser} \index{GRASS GIS!Werkzeugkiste!Browser}
 
 Eine weitere interessante Funktion ist der GRASS Datei-Browser. In der linken
 Hälfte des Datei-Browsers können Sie sich alle in der aktuellen Location
@@ -689,7 +696,7 @@ Die Knöpfe \toolboxtwo{grass_rename_map}{Gewählte Karte umbenennen} und
 \toolboxtwo{grass_delete_map}{Gewählte Karte löschen} stehen nur für die
 aktuelle \filename{Mapset} zur Verfügung. Die anderen Werkzeuge funktinionieren auch in den anderen Mapsets.
 
-\subsubsection{Anpassen der Module} \index{GRASS!toolbox!customize}
+\subsubsection{Anpassen der Module} \index{GRASS GIS!Werkzeugkiste!Anpassen}
 \label{sec:toolbox-customizing}
 
 Nahezu alle GRASS-Module können in die GRASS-Werkzeugkiste integriert
