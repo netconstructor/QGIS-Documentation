@@ -79,68 +79,60 @@ entpacken Sie es unter C:$\backslash$msys
 Wenn Sie die MSYS selbst erstellen wollen, finden Sie Informationen dazu
 auch in diesem Dokument.
 
-If you wish to prepare your msys environment yourself rather than using 
-our pre-made one, detailed instructions are provided elsewhere in this
-document.
-
 \subsection{Qt4.3}
-Download qt4.3 opensource precompiled edition exe and install (including the
-download and install of mingw) from here:
+Laden Sie die Qt4.3 Opensource Precompiled Edition exe herunter und
+installieren Sie (inklusive Download und Installation von Mingw) von hier:
 
 \htmladdnormallink{http://www.trolltech.com/developer/downloads/qt/windows}{http://www.trolltech.com/developer/downloads/qt/windows}
 
-When the installer will ask for MinGW, you don't need to download and install
-it, just point the installer to c:$\backslash$msys$\backslash$mingw
+Wenn der Installer nach MinGW fragt, müssen Sie es nicht herunterladen und
+installieren, verweisen Sie den Installer einfach auf c:$\backslash$msys$\backslash$mingw
 
-When Qt installation is complete:
+Wenn die Qt Installation komplett ist:
 
-Edit C:$\backslash$Qt$\backslash$4.3.0$\backslash$bin$\backslash$qtvars.bat and add the following lines:
+Editieren Sie
+C:$\backslash$Qt$\backslash$4.3.0$\backslash$bin$\backslash$qtvars.bat und
+fügen folgende Zeilen hinzu:
 
 \begin{verbatim}
 set PATH=%PATH%;C:\msys\local\bin;c:\msys\local\lib 
 set PATH=%PATH%;"C:\Program Files\Subversion\bin" 
 \end{verbatim}
 
-I suggest you also add C:$\backslash$Qt$\backslash$4.3.0$\backslash$bin$\backslash$ to your Environment Variables Path in
-the windows system preferences.
+Ich schlage vor, Sie fügen auch
+C:$\backslash$Qt$\backslash$4.3.0$\backslash$bin$\backslash$ zu ihren
+Umgebungsvariablen hinzu in den Windows Preferences.
 
-If you plan to do some debugging, you'll need to compile debug version of Qt:
+Wenn Sie debuggen möchten, müssen Sie die Debugversion von Qt kompilieren:
 C:$\backslash$Qt$\backslash$4.3.0$\backslash$bin$\backslash$qtvars.bat compile\_debug
 
-\textbf{Note:} there is a problem when compiling debug version of Qt 4.3, the script ends with
-this message  "mingw32-make: *** No rule to make target 'debug'.  Stop. To 
-compile the debug version you have to go out of src directory and execute the
-following command:
+\textbf{Bemerkung:} Es gibt einb Problem beim Kompilieren der Debugversion
+von Qt 4.3, das Skript endet mit folgender Aussage: "mingw32-make: *** No
+rule to make target 'debug'.  Stop. Um die Debugversion zu kompilieren müssen
+Sie aus den src Ordner gehen und folgendes Kommando ausführen.
 
 \begin{verbatim}
 c:\Qt\4.3.0 make 
 \end{verbatim}
 
-\subsection{Flex and Bison}
-\textbf{Note:} I think this section can be removed as it should be installed int the msys image already.
+\subsection{Python: (optional)}
 
-Get Flex
+Lesen Sie dieses Kapitel, wenn Sie Python bindings in QGIS verwenden wollen.
+Um die bindings zu kompilieren, müssen zuvor SIP und PyQT4 kompiliert werden. 
 
-\url{http://sourceforge.net/project/showfiles.php?group\_id=23617&package\_id=16424} (the zip bin) and extract it into c:$\backslash$msys$\backslash$mingw$\backslash$bin
-
-\subsection{Python stuff: (optional)}
-Follow this section in case you would like to use Python bindings for QGIS.  To
-be able to compile bindings, you need to compile SIP and PyQt4 from sources as
-their installer doesn't include some development files which are necessary.
-
-\subsubsection{Download and install Python - use Windows installer}
-(It doesn't matter to what folder you'll install it)
+\subsubsection{Python herunterladen und installieren - mit MS Windows Installer}
+(Es ist egal in welchen Ordner man es installiert)
 
 \htmladdnormallink{http://python.org/download/}{http://python.org/download/}
 
-\subsubsection{Download SIP and PyQt4 sources}
+\subsubsection{SIP und PyQt4 Quellen herunterladen}
 \url{http://www.riverbankcomputing.com/software/sip/download} \\
 \url{http://www.riverbankcomputing.com/software/pyqt/download}
 
-Extract each of the above zip files in a temporary directory. Make sure
-to get versions that match your current Qt installed version.
+Entpacken Sie jedes ZIP-File in einem temporären Ordner. Stellen Sie sicher,
+dass die Version zur installierten Qt Version passen.
 
-\subsubsection{Compile SIP}
+\subsubsection{SIP kompilieren}
 \begin{verbatim}
 c:\Qt\4.3.0\bin\qtvars.bat 
 python configure.py -p win32-g++ 
@@ -148,7 +140,7 @@ make
 make install 
 \end{verbatim}
 
-\subsubsection{Compile PyQt}
+\subsubsection{PyQt kompilieren}
 \begin{verbatim}
 c:\Qt\4.3.0\bin\qtvars.bat 
 python configure.py 
@@ -156,23 +148,25 @@ make
 make install 
 \end{verbatim}
 
-\subsubsection{Final python notes}
+\subsubsection{Abschließende Bemerkungen zu Python}
 
-\textbf{Note:} You can delete the directories with unpacked SIP and PyQt4 sources after a
-successfull install, they're not needed anymore.
+\textbf{Bemerkung:} Sie können die temporären Ordner nach erfolgreicher
+Kompilierung löschen.
 
 \subsection{Subversion:}
-In order to check out QGIS sources from the repository, you need Subversion
-client. This installer should work fine:
+
+Um QGIS Quellen von einem Repository auszuchecken brauchen Sie den Subversion
+Klienten. Dieser Installer sollte funktionieren:
 
 \htmladdnormallink{http://subversion.tigris.org/files/documents/15/36797/svn-1.4.3-setup.exe}{http://subversion.tigris.org/files/documents/15/36797/svn-1.4.3-setup.exe}
 
 \subsection{CMake:}
-CMake is build system used by Quantum GIS. Download it from here:
+CMake ist das Buildsystem für Quantum GIS. Laden Sie es hier herunter:
 
 \htmladdnormallink{http://www.cmake.org/files/v2.4/cmake-2.4.6-win32-x86.exe}{http://www.cmake.org/files/v2.4/cmake-2.4.6-win32-x86.exe}
 
 \subsection{QGIS:}
+
 Start a cmd.exe window ( Start -$>$ Run -$>$ cmd.exe ) Create development 
 directory and move into it
 
@@ -207,7 +201,7 @@ For ease of use add c:$\backslash$Qt$\backslash$4.3.0$\backslash$bin$\backslash$
 properties so you can just type qtvars.bat when you open the cmd console.
 Create build directory and set it as current directory:
 
-\begin{verbatim}
+Q\begin{verbatim}
 cd c:\dev\cpp\qgis 
 md build 
 cd build 
@@ -342,7 +336,7 @@ Retrieve the Gnu Scientific Library from
 
 \begin{verbatim}
 curl -O ftp://ftp.gnu.org/gnu/gsl/gsl-1.8.tar.gz 
-\end{verbatim}
+t\end{verbatim}
 
 Then extract it and build it to a prefix of /usr/local:
 
