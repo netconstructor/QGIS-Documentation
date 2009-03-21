@@ -1,65 +1,70 @@
 % vim: set textwidth=78 autoindent:
 
-\section{Writing a QGIS Plugin in C++}\label{cpp_plugin}
+\section{Ein QGIS Plugin in C++ schreiben}\label{cpp_plugin}
 
 % when the revision of a section has been finalized, 
 % comment out the following line:
 % \updatedisclaimer
 
-In this section we provide a beginner's tutorial for writing a simple QGIS
-C++ plugin. It is based on a workshop held by Dr. Marco Hugentobler. 
+In diesem Kapitel wird ein Anfängertutorial vorgestellt, um ein einfaches
+QGIS Plugin in C++ zu schreiben. Es basiert auf einem Beispiel von Dr. Marco
+Hugentobler.
 
-QGIS C++ plugins are dynamically linked libraries (.so or .dll). They are
-linked to QGIS at runtime when requested in the plugin manager and extend the
-functionality of QGIS. They have access to the QGIS GUI and can be devided
-into core and external plugins.
+QGIS C++ Plugins sind dynamisch eingebundene Bibliotheken (.so oder .dll).
+Sie werden in QGIS zur Laufzeit eingebunden, wenn sie durch den Plugin
+Manager aktiviert werden und erweitern die QGIS Funktionalitäten. Die Plugins
+haben Zugriff auf die QGIS GUI und können in Kern- und externe Plugins
+unterteilt werden.
 
-Technically the QGIS plugin manager looks in the lib/qgis directory for all
-.so files and loads them when it is started. When it is closed they are
-unloaded again, except the ones with a checked box. For newly loaded plugins,
-the \method{classFactory} method creates an instance of the plugin class and
-the \method{initGui} method of the plugin is called to show the GUI elements
-in the plugin menu and toolbar. The \method{unload()} function of the plugin
-is used to remove the allocated GUI elements and the plugin class itself is
-removed using the class destructor. To list the plugins, each plugin must
-have a few external 'C' functions for description and of course the
-\method{classFactory} method.
+Technisch gesehen, schaut der QGIS Plugin Manager unter GNU/Linux im Order
+\filename{lib/qgis} nach allen .so Dateien und lädt diese, wenn der Plugin
+Manager gestartet wird. Wenn dieser beendet wird, werden auch die .so Dateien
+wieder entladen, ausser denen, die mit dem Kontrollkästchen aktiviert wurden.
+Bei neu geladenen Plugins erstellt die \method{classFactory} Methode eine
+Instanz der Plugin Klasse und die \method{initGui} Methode wird gestartet, um
+die GUI Elemente in der Menü- und Werkzeugleiste anzuzeigen. Die
+\method{unload()} Funktion des Plugins wird verwendet, um die GUI Elemente
+wieder zu löschen. Die Plugin Klasse wird mit Hilfe des 'class destructors'
+gelöscht. Um eine Liste der Plugins zu erstellen, muss jedes Plugin ein paar
+externe 'C' Funktionen für die Beschreibung und natürlich auch die
+\method{classFactory} Methode enthalten.
 
-\subsection{Why C++ and what about licensing}
+\subsection{Warum C++ und wie sieht es mit der Lizensierung aus}
 
-QGIS itself is written in C++, so it also makes sense to write plugins in C++
-as well. It is an object-oriented programming (OOP) language that is viewed
-by many developers as a prefered language for creating large-scale
-applications.
+QGIS ist in C++ geschrieben, daher macht es Sinn auch die Plugins in C++ zu
+schreiben. Es ist eine objektorientierte Sprache (OOP), die von vielen
+Entwicklern für die Programmierung umfangreicher Anwendungen bevorzugt wird. 
 
-QGIS C++ plugins use functionalities of libqgis*.so libraries. As they are
-licensed under GNU GPL, QGIS C++ plugins must be licenced under the GPL, too.
-This means you may use your plugins for any purpose and you are not forced to
-publish them. If you do publish them however, they must be published under
-the conditions of the GPL license. 
+QGIS C++ Plugins verwenden die Funktionalitäten der libqgis*.so Bibliotheken.
+Da diese unter der GNU GPL lizensiert sind, müssen QGIS C++ Plugins auch
+unter der GPL lizensiert werden. Das bedeutet, dass das Plugin für jeglichen
+Zweck verwendet werden kann und nicht publiziert werden muss. Wenn das Plugin
+jedoch veröffentlicht wird, dann muss es unter den Bedingungen der GPL Lizens
+stattfinden. 
 
-\subsection{Programming a QGIS C++ Plugin in four steps}
+\subsection{Ein QGIS C++ Plugin in vier Schritten programmieren}
 
-The example plugin is a point converter plugin and intentionally kept simple. 
-The plugin searches the active vector layer in QGIS, converts all vertices of
-the layer features to point features keeping the attributes and finally
-writes the point features into a delimited text file. The new layer can then
-be loaded into QGIS using the delimited text plugin (see Section
-\ref{label_dltext}).
+Das Beispielplugin dieser Übung konvertiert Punktdaten und ist einfach
+gehalten. Das Plugin sucht nach einem geladenen Vektorlayer in QGIS,
+konvertiert alle vorhandenen Stützpunkte der Vektorobjekte in Punkte
+inklusive der dazugehörigen Attribute und schreibt diese als ACSII-Tabelle in
+eine Datei. Der neue Layer kann dann in QGIS mit dem 'getrennter Text' Plugin
+geladen werden (siehe \ref{label_dltext}).
 
-\minisec{Step 1: Make the plugin manager recognise the plugin}
+\minisec{Schritt 1: Erkennen des neuen Plugins im Plugin Manager}
 
-As a first step we create the \filename{QgsPointConverter.h} and
-\filename{QgsPointConverter.cpp} files. Then we add virtual methods inherited
-from QgisPlugin (but leave them empty for now), create necessary external 'C'
-methods and a .pro file, which is a Qt mechanism to easily create Makefiles.
-Then we compile the sources, move the compiled library into the plugin folder
-and load it in the QGIS plugin manager.
+Zu Beginn werden die beiden Dateien \filename{QgsPointConverter.h} und
+\filename{QgsPointConverter.cpp} erstellt. Dann werden ein paar
+virtuelle Methoden, vererbt von QgisPlugin, ergänzt (erstmal aber offen
+gelassen), notwendige externe 'C' Methoden und eine .pro Datei, die ein Qt
+Mechanismus darstellen, um auf einfache Art Makefiles zu erstellen. Dann
+kompileren wir die Quellen, verschieben die kompilierte Bibliothek in den
+Pluginordner und laden es mit dem Plugin Manager.  
 
-\textbf{a) Create new pointconverter.pro file and add}:
+\textbf{a) Erstellen Sie die Datei pointconverter.pro und fügen hinzu}:
 
 \begin{verbatim}
-#base directory of the qgis installation
+#Basisordner der QGIS Installation
 QGIS_DIR = /home/marco/src/qgis
 
 TEMPLATE = lib
@@ -74,7 +79,7 @@ DEST = pointconverterplugin.so
 DEFINES += GUI_EXPORT= CORE_EXPORT=
 \end{verbatim}
 
-\textbf{b) Create new qgspointconverterplugin.h file and add}:
+\textbf{b) Erstellen Sie die Datei qgspointconverterplugin.h und fügen hinzu}:
 
 \begin{verbatim}
 #ifndef QGSPOINTCONVERTERPLUGIN_H
@@ -82,8 +87,9 @@ DEFINES += GUI_EXPORT= CORE_EXPORT=
 
 #include "qgisplugin.h"
 
-/**A plugin that converts vector layers to delimited text point files.
- The vertices of polygon/line type layers are converted to point features*/
+/**Ein Plugin, um Vertices eines Layers in eine ASCII-Tabelle zu schreiben.
+Die Vertices einer Vektorlinie oder -fläche werden in eine ASCII-Tabelle
+konvertiert.*/
 class QgsPointConverterPlugin: public QgisPlugin
 {
   public:
@@ -98,7 +104,8 @@ class QgsPointConverterPlugin: public QgisPlugin
 #endif
 \end{verbatim}
 
-\textbf{c) Create new qgspointconverterplugin.cpp file and add}:
+\textbf{c) Erstellen Sie die Datei qgspointconverterplugin.cpp und fügen
+hinzu}:
 
 \begin{verbatim}
 #include "qgspointconverterplugin.h"
@@ -158,14 +165,15 @@ QGISEXTERN void unload(QgisPlugin* theQgsPointConverterPluginPointer)
 }
 \end{verbatim}
 
-\minisec{Step 2: Create an icon, a button and a menu for the plugin}
+\minisec{Schritt 2: Ein Icon, Button und Menüeintrag für das Plugin erstellen}
 
-This step includes adding a pointer to the QgisInterface object in the plugin
-class. Then we create a QAction and a callback function (slot), add it to the
-QGIS GUI using QgisIface::addToolBarIcon() and QgisIface::addPluginToMenu()
-and finally remove the QAction in the \method{unload()} method.
+An dieser Stelle fügen Sie einen Pointer zum QgisInterface Objekt in der
+Plugin Klasse hinzu. Danach erstellen Sie eine QAction und eine 'callback'
+Funktion (slot), fügen es der QGIS GUI mit Hilfe von
+QgisIface::addToolBarIcon() anQgisInterfaced QgisIface::addPluginToMenu()
+hinzu und löschen QAction schließlich in der \method{unload()} Methode.
 
-\textbf{d) Open qgspointconverterplugin.h again and extend existing content to}:
+\textbf{d) Öffnen Sie qgspointconverterplugin.h wieder und ergänzen}:
 
 \begin{verbatim}
 #ifndef QGSPOINTCONVERTERPLUGIN_H
@@ -176,8 +184,9 @@ and finally remove the QAction in the \method{unload()} method.
 
 class QAction;
 
-/**A plugin that converts vector layers to delimited text point files.
- The vertices of polygon/line type layers are converted to point features*/
+/**Ein Plugin, um Vertices eines Layers in eine ASCII-Tabelle zu schreiben.
+Die Vertices einer Vektorlinie oder -fläche werden in eine ASCII-Tabelle
+konvertiert.*/
 class QgsPointConverterPlugin: public QObject, public QgisPlugin
 {
   Q_OBJECT
@@ -199,7 +208,7 @@ class QgsPointConverterPlugin: public QObject, public QgisPlugin
 #endif
 \end{verbatim}
 
-\textbf{e) Open qgspointconverterplugin.cpp again and extend existing content to}:
+\textbf{e) Öffnen Sie qgspointconverterplugin.cpp wieder und ergänzen}:
 
 \begin{verbatim}
 #include "qgspointconverterplugin.h"
@@ -277,15 +286,16 @@ QGISEXTERN void unload(QgisPlugin* theQgsPointConverterPluginPointer)
 \end{verbatim}
 
 
-\minisec{Step 3: Read point features from the active layer and write to text file}
+\minisec{Schritt 3: Lese Punkte des aktiven Layers und schreibe sie in eine
+ASCII-Tabelle}
 
-To read the point features from the active layer we need to query the current
-layer and the location for the new text file. Then we iterate through all
-features of the current layer, convert the geometries (vertices) to points,
-open a new file and use QTextStream to write the x- and y-coordinates
-into it.
+Um die Vertices aus dem aktiven Layer zu lesen, muss der aktive Layer und der
+Ort für die zu erstellende ASCII-Tabelle abgefragt werden. Dann werden nach
+und nach alle Objekte des Vektorlayers durchsucht, die Vertices in Punkte
+umgewandelt, eine neue Datei geöffnet und mit Hilfe von QTextStream die X-
+und Y-Koordinaten hineingeschrieben. 
 
-\textbf{f) Open qgspointconverterplugin.h again and extend existing content to}
+\textbf{f) Öffnen Sie qgspointconverterplugin.h wieder und ergänzen}
 
 \begin{verbatim}
 class QgsGeometry;
@@ -307,7 +317,7 @@ void convertMultiPolygon(QgsGeometry* geom, const QString& attributeString, \
 		  QTextStream& stream) const;
 \end{verbatim}
 
-\textbf{g) Open qgspointconverterplugin.cpp again and extend existing content to}:
+\textbf{g) Öffnen Sie qgspointconverterplugin.cpp wieder und ergänzen}:
 
 \begin{verbatim}
 #include "qgsgeometry.h"
@@ -508,16 +518,16 @@ attributeString, QTextStream& stream) const
 }
 \end{verbatim}
 
-\minisec{Step 4: Copy the feature attributes to the text file}
+\minisec{Step 4: Kopieren der Objektattribute in die ASCII-Tabelle}
 
-At the end we extract the attributes from the active layer using
-QgsVectorDataProvider::fieldNameMap(). For each feature we extract the field
-values using QgsFeature::attributeMap() and add the contents comma separated
-behind the x- and y-coordinates for each new point feature. For this step
-there is no need for any furter change in \filename{qgspointconverterplugin.h} 
+Zum Schluss extrahieren Sie die Attribute aus dem aktiven Layer mit
+QgsVectorDataProvider::fieldNameMap(). Für jedes Objekt werden die Werte
+mit QgsFeature::attributeMap() extrahiert und der Inhalt Komma-separiert
+hinter die X- und Y-Koordinaten geschrieben. Für diesen Schritt ist es nicht
+notwendig, weitere Veränderungen in \filename{qgspointconverterplugin.h}
+vorzunehmen.
 
-\textbf{h) Open qgspointconverterplugin.cpp again and extend existing content
-to}:
+\textbf{h) Öffnen Sie qgspointconverterplugin.cpp wieder und ergänzen}:
 
 \begin{verbatim} 
 #include "qgspointconverterplugin.h"
@@ -816,19 +826,20 @@ QGISEXTERN void unload(QgisPlugin* theQgsPointConverterPluginPointer)
 
 \end{verbatim}
 
-\subsection{Further information}
+\subsection{Weiterführende Informationen}
 
-As you can see, you need information from different sources to write QGIS C++
-plugins. Plugin writers need to know C++, the QGIS plugin interface as
-well as Qt4 classes and tools. At the beginning it is best to learn from
-examples and copy the mechanism of existing plugins. 
+Wie zu sehen, brauchen Sie verschiedene Informationen aus unterschiedlichen
+Quellen, um ein QGIS Plugin zu schreiben. Programmierer müssen C++ kennen,
+die QGIS Programmierschnittstelle sowie die QT4 Klassen und Werkzeuge. Zu
+Beginn ist es am einfachsten, von vorhandenen Beispielen zu lernen und
+existierende Mechanismen von bereits existierenden Plugins zu kopieren. 
 
-There is a a collection of online documentation that may be usefull for
-QGIS C++ programers:
+Es gibt eine Vielzahl von Online Dokumentationen, die nützlich für QGIS C++
+Programmierer sind:
 
 \begin{itemize}
 \item QGIS Plugin Debugging: \url{http://wiki.qgis.org/qgiswiki/DebuggingPlugins}
-\item QGIS API Documentation: \url{http://svn.qgis.org/api_doc/html/}
-\item Qt documentation: \url{http://doc.trolltech.com/4.3/index.html}
+\item QGIS API Dokumentation: \url{http://svn.qgis.org/api_doc/html/}
+\item Qt Dokumentation: \url{http://doc.trolltech.com/4.3/index.html}
 \end{itemize}
 

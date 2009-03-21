@@ -1,80 +1,83 @@
 % vim: set textwidth=78 autoindent:
 
-\section{Installation Guide}\label{label_install}
+\section{Installation aus dem Quellcode}\label{label_install}
 
 % when the revision of a section has been finalized,
 % comment out the following line:
 % \updatedisclaimer
 
-The following chapters provide build and installation information for QGIS
-Version \CURRENT. This document corresponds almost to a \LaTeX~ conversion of
-the INSTALL.t2t file coming with the QGIS sources from December, 16th 2008.
+Die folgenden Kapitel stellen Informationen zur Verfügung, wie man die QGIS
+Version \CURRENT aus dem Quellcode bauen und installieren kann. Dieses
+Dokument entspricht in etwa der \LaTeX~ Konvertierung der Datei INSTALL.t2t
+des QGIS Quellcodes vom 16. Dezember 2008.
 
-A current version is also available at the wiki, see:
+Eine aktuelle Version ist im QGIS WIki verfügbar unter:
 \htmladdnormallink{http://wiki.qgis.org/qgiswiki/BuildingFromSource}{http://wiki.qgis.org/qgiswiki/BuildingFromSource}
 
-\subsection{General Build Notes}
-At version 0.8.1 QGIS no longer uses the autotools for building. QGIS, like a
-number of major projects (eg. KDE 4.0), now uses cmake (\htmladdnormallink{http://www.cmake.org}{http://www.cmake.org})
-for building from source. The configure script in this directory simply checks
-for the existence of cmake and provides some clues to build QGIS.
+\subsection{Allgemeine Bemerkungen}
 
-For complete information, see the wiki at:
+Seit der Version 0.8.1 verwendet QGIS cmake zum Kompilieren des Quellcodes
+(\htmladdnormallink{http://www.cmake.org}{http://www.cmake.org}). Das
+'configure' Skript sucht nach cmake und bietet Möglichkeiten, um QGIS zu
+bauen.
+
+Komplette Informationen befinden sich im Wiki unter:
    \htmladdnormallink{http://wiki.qgis.org/qgiswiki/Building\_with\_CMake}{http://wiki.qgis.org/qgiswiki/Building\_with\_CMake}
 
-\subsection{An overview of the dependencies required for building}
+\subsection{Ein Überblick der notwendigen Dependencies}
 
-\textbf{Required build deps}:
+\textbf{Benötigte Kompilier-Dependencies}:
 
 \begin{itemize}
 \item CMake $>$= 2.4.3
 \item Flex, Bison
 \end{itemize}
 
-\textbf{Required runtime deps}:
+\textbf{Benötigte Laufzeit-Dependencies}:
 
 \begin{itemize}
 \item Qt $>$= 4.3.0
-\item Proj $>$= ? (known to work with 4.4.x)
-\item GEOS $>$= 2.2 (3.0 is supported, maybe 2.1.x works too)
-\item Sqlite3 $>$= ? (probably 3.0.0)
+\item Proj $>$= 4.4.x
+\item GEOS $>$= 2.2 (3.0 wird unterstützt, vielleicht geht auch 2.1.x)
+\item Sqlite3 $>$= ? (wahrscheinlich 3.0.0)
 \item GDAL/OGR $>$= 1.4.x
 \end{itemize}
 
-\textbf{Optional dependencies}:
+\textbf{Optionale Dependencies}:
 
 \begin{itemize}
-\item for GRASS plugin - GRASS $>$= 6.0.0
-\item for georeferencer - GSL $>$= ? (works with 1.8)
-\item for postgis support and SPIT plugin - PostgreSQL $>$= 8.0.x
-\item for gps plugin - expat $>$= ? (1.95 is OK)
-\item for mapserver export and PyQGIS - Python $>$= 2.3 (2.5+ preferred)
-\item for PyQGIS - SIP $>$= 4.5, PyQt $>$= must match Qt version
+\item für das GRASS Plugin - GRASS $>$= 6.0.0
+\item für den georeferencer - GSL $>$= ? (1.8)
+\item für PostGIS Support und das SPIT Plugin - PostgreSQL $>$= 8.0.x
+\item für GPS Plugin - expat $>$= ? (1.95 ist OK)
+\item für Mapserver Export und PyQGIS - Python $>$= 2.3 (2.5+ bevorzugt)
+\item für PyQGIS - SIP $>$= 4.5, PyQt $>$= muss zur Qt Version passen
 \end{itemize}
 
-\textbf{Recommended runtime deps}:
+\textbf{Empfohlene Laufzeit-Dependencies}:
 
 \begin{itemize}
-\item for gps plugin - gpsbabel
+\item für GPS Plugin - gpsbabel
 \end{itemize}
 
-\section{Building under windows using msys}\label{sec:install_windows}
-\textbf{Note:} For a detailed account of building all the dependencies yourself you 
-can visit Marco Pasetti's website here:
+\section{Kompilieren unter MS Windows mit MSYS}\label{sec:install_windows}
+\textbf{Note:} Für mehr Informationen besuchen Sie Marco Pasetti's Webseite:
 
 \htmladdnormallink{http://www.webalice.it/marco.pasetti/qgis+grass/BuildFromSource.html}{http://www.webalice.it/marco.pasetti/qgis+grass/BuildFromSource.html}
 
-Read on to use the simplified approach with pre-built libraries...
+Lesen Sie weiter für die vereinfachte Variante mit bereits kompilierten
+Bibliotheken...
 
 \subsection{MSYS:}
-MSYS provides a unix style build environment under windows. We have created a
-zip archive that contains just about all dependencies.
-
-Get this: 
+MSYS bietet eine UNIX-ähnliche Kompilierumgebung unter Windows. Wir haben ein
+ZIP-File mit allen Dependencies erstellt:
 
 \htmladdnormallink{http://download.osgeo.org/qgis/win32/msys.zip}{http://download.osgeo.org/qgis/win32/msys.zip}
 
-and unpack to c:$\backslash$msys
+entpacken Sie es unter C:$\backslash$msys
+
+Wenn Sie die MSYS selbst erstellen wollen, finden Sie Informationen dazu
+auch in diesem Dokument.
 
 If you wish to prepare your msys environment yourself rather than using 
 our pre-made one, detailed instructions are provided elsewhere in this
@@ -105,7 +108,7 @@ If you plan to do some debugging, you'll need to compile debug version of Qt:
 C:$\backslash$Qt$\backslash$4.3.0$\backslash$bin$\backslash$qtvars.bat compile\_debug
 
 \textbf{Note:} there is a problem when compiling debug version of Qt 4.3, the script ends with
-this message  "mingw32-make: *** No rule to make target `debug'.  Stop.". To 
+this message  "mingw32-make: *** No rule to make target 'debug'.  Stop. To 
 compile the debug version you have to go out of src directory and execute the
 following command:
 
@@ -640,7 +643,7 @@ The packages qgis depends on to build are available in the "universe" component
 of Ubuntu. This is not activated by default, so you need to activate it:
 
 1. Edit your /etc/apt/sources.list file.  
-2. Uncomment the all the lines starting with "deb"
+2. Uncomment the all the lines starting with 'deb'
 
 Also you will need to be running (K)Ubuntu 'edgy' or higher in order for 
 all dependencies to be met.
