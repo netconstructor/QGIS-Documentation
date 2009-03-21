@@ -16,8 +16,8 @@
 
 # Name of latex main file to compile
 # Für deutsche Übersetzung nur des Anwenderteils
-FILE=handbuch
-#FILE=user_guide
+#FILE=handbuch
+FILE=user_guide
 # Path to QGIS source plugin folder for 'make updateicon'
 QGISPLUGINSOURCE=/software/qgis_head/src/plugins
 
