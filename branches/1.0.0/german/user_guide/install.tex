@@ -167,107 +167,117 @@ CMake ist das Buildsystem für Quantum GIS. Laden Sie es hier herunter:
 
 \subsection{QGIS:}
 
-Start a cmd.exe window ( Start -$>$ Run -$>$ cmd.exe ) Create development 
-directory and move into it
+Öffnen Sie ein cmd.exe Fenster ( Start -$>$ Run -$>$ cmd.exe ). Erstellen Sie
+einen development Ordner und wechseln Sie dort hinein.
 
 \begin{verbatim}
 md c:\dev\cpp 
 cd c:\dev\cpp 
 \end{verbatim}
 
-Check out sources from SVN For svn head:
+Checken Sie die Quellen von svn head aus:
 
 \begin{verbatim}
 svn co https://svn.osgeo.org/qgis/trunk/qgis 
 \end{verbatim}
-For svn 0.8 branch
 
+Für den svn 0.8 Branch
 \begin{verbatim}
  svn co https://svn.osgeo.org/qgis/branches/Release-0_8_0 qgis0.8
 \end{verbatim}
 
 \subsection{Compiling:}
-As a background read the generic building with CMake notes at the end of 
-this document.
+Nebenher können Sie die Information zum kompilieren mit CMake mit am Ende des
+Dokuments lesen.
 
-Start a cmd.exe window ( Start -$>$ Run -$>$ cmd.exe ) if you don't have one
-already.  Add paths to compiler and our MSYS environment:
+Öffnen Sie ein cmd.exe Fenster ( Start -$>$ Run -$>$ cmd.exe) und fügen Sie
+die Pfade zum Kompiler und zur MSYS-Umgebung hinzu. 
 
 \begin{verbatim}
 c:\Qt\4.3.0\bin\qtvars.bat 
 \end{verbatim}
 
-For ease of use add c:$\backslash$Qt$\backslash$4.3.0$\backslash$bin$\backslash$ to your system path in system
-properties so you can just type qtvars.bat when you open the cmd console.
-Create build directory and set it as current directory:
+Zur Vereinfachung fügen Sie
+c:$\backslash$Qt$\backslash$4.3.0$\backslash$bin$\backslash$ zum Systempfad
+in den Systemeinstellungen hinzu, damit Sie einfach qtvars.bat tippen können,
+wenn Sie die cdm Konsole öffnen. Erstellen Sie den Buildordner und setzen Sie
+es als aktuellen Ordner:
 
-Q\begin{verbatim}
+\begin{verbatim}
 cd c:\dev\cpp\qgis 
 md build 
 cd build 
 \end{verbatim}
 
-\subsection{Configuration}
+\subsection{Konfiguration}
 \begin{verbatim}
 cmakesetup ..  
 \end{verbatim}
 
-\textbf{Note:} You must include the '..' above.
+\textbf{Bemerkung:} Sie müssen oben '..' ergänzen.
 
-Click 'Configure' button.  When asked, you should choose 'MinGW Makefiles' as generator.
+Klicken Sie den 'Configure' Button. Wenn gefragt wird, wählen Sie 'MinGW
+Makefiles' als Generator.
 
-There's a problem with MinGW Makefiles on Win2K. If you're compiling on this platform, use 'MSYS Makefiles' generator instead.
+Es gibt ein Problem mit MinGW Dateien unter Win2k. Verwenden Sie in diesem
+Fall 'MSYS Makefiles'.
 
-All dependencies should be picked up automatically, if you have set up the Paths correctly. The only thing you need to change is the installation destination (CMAKE\_INSTALL\_PREFIX) and/or set 'Debug'.
+Alle Dependencies sollten automatisch eingebunden werden, wenn die Pfade
+richtig gesetzt sind. Sie müssen nur den Installationsordner angeben
+(CMAKE\_INSTALL\_PREFIX) und/oder 'Debug' setzen.
 
-For compatibility with NSIS packaging cripts I recommend to leave the
-install prefix to its default c:$\backslash$program files$\backslash$
+Für Kompatibilität mit NSIS packaging Skripten sollten Sie den Install Prefix
+so belassen, wie er ist c:$\backslash$program files$\backslash$
 
-When configuration is done, click 'OK' to exit the setup utility.
+Nach der Konfiguration klicken Sie auf 'Ok' und verlassen den Setup Dialog.
 
-\subsection{Compilation and installation}
+\subsection{Kompilieren und Installieren}
 \begin{verbatim}
  make make install 
 \end{verbatim}
 
-\subsection{Run qgis.exe from the directory where it's installed (CMAKE\_INSTALL\_PREFIX)}
-Make sure to copy all .dll:s needed to the same directory as the qgis.exe
-binary is installed to, if not already done so, otherwise QGIS will complain
-about missing libraries when started.
+\subsection{Starten von qgis.exe aus dem Installationsordner (CMAKE\_INSTALL\_PREFIX)}
 
-The best way to do this is to download both the QGIS current release installer
-package from \htmladdnormallink{http://qgis.org/uploadfiles/testbuilds/}{http://qgis.org/uploadfiles/testbuilds/} and install it. Now copy
-the installation dir from C:$\backslash$Program Files$\backslash$Quantum GIS into c:$\backslash$Program
-Files$\backslash$qgis-0.8.1 (or whatever the current version is. The name should strictly
-match the version no.) After making this copy you can uninstall the release
-version of QGIS from your c:$\backslash$Program Files directory using the provided
-uninstaller. Double check that the Quantum GIS dir is completely gone under
-program files afterwards.
+Kopieren Sie alle .dlls in denselben Ordner, in den auch das qgis.exe
+installiert wurde, falls dies noch nicht der Fall ist. Ansonsten wird sich
+QGIS beim Start beschweren, dass Bibliotheken fehlen.
 
-Another possibility is to run qgis.exe when your path contains
-c:$\backslash$msys$\backslash$local$\backslash$bin and c:$\backslash$msys$\backslash$local$\backslash$lib directories, so the DLLs will be
-used from that place.
+Am besten laden Sie dazu den QGIS current release installer von
+\htmladdnormallink{http://qgis.org/uploadfiles/testbuilds/}{http://qgis.org/uploadfiles/testbuilds/}
+herunter und installieren diesen. Nun kopieren Sie den Installationsordner
+von C:$\backslash$Program Files$\backslash$Quantum GIS nach c:$\backslash$Program
+Files$\backslash$qgis-1.0.0 (oder wie die aktuelle Version heisst. Der Name
+sollte genau der QGIS Version entsprechen.) Danach können Sie die Release
+Version mit dem Uninstaller aus dem Ordner c:$\backslash$Program Files
+löschen. Prüfen Sie, ob alles gelöscht wurde.
 
-\subsection{Create the installation package: (optional)}
-Downlad and install NSIS from (\htmladdnormallink{http://nsis.sourceforge.net/Main\_Page}{http://nsis.sourceforge.net/Main\_Page})
+Eine andere Möglichkeit besteht darin, qgis.exe zu starten, wenn der Pfad
+c:$\backslash$msys$\backslash$local$\backslash$bin und c:$\backslash$men
+sys$\backslash$local$\backslash$lib enthält, so dass die DLLs aus den Pfaden
+verwendet werden.
 
-Now using windows explorer, enter the win\_build directory in your QGIS source
-tree. Read the READMEfile there and follow the instructions. Next right click
-on qgis.nsi and choose the option 'Compile NSIS Script'. 
+\subsection{Ein Installationspaket erstellen (optional)}
 
+Installieren Sie NSIS von (\htmladdnormallink{http://nsis.sourceforge.net/Main\_Page}{http://nsis.sourceforge.net/Main\_Page})
 
-\section{Building on Mac OSX using frameworks and cmake (QGIS $>$ 0.8)}\label{sec:install_macosx}
-In this approach I will try to avoid as much as possible building dependencies
-from source and rather use frameworks wherever possible.
+Erstellen Sie nun den win\_build Ordner im QGIS Quellordner. Lesen Sie den
+README File darin und folgen Sie den Instruktionen. Danach klicken Sie mit
+der rechten Maustaste auf qgis.nsi und wählen Sie die Option 'Compile NSIS Script'. 
 
-Included are a few notes for building on Mac OS X 10.5 (\underline{Leopard}).
+\section{Kompilieren unter Mac OSX mit frameworks und cmake}\label{sec:install_macosx}
 
-\subsection{Install XCODE}
-I recommend to get the latest xcode dmg from the Apple XDC Web site. Install
-XCODE after the \~{}941mb download is complete.
+Hier sollen Build-Dependencies weitestgehend vermieden werden und stattdessen
+frameworks verwendet werden, soweit möglich.
 
-\textbf{Note:} It may be that you need to create some symlinks after installing 
-the XCODE SDK (in particular if you are using XCODE 2.5 on tiger):
+Ein paar Bemerkungen zum kompilieren unter Mac OS X 10.5 (\underline{Leopard}).
+
+\subsection{XCODE installieren}
+
+Installieren Sie das aktuelle xcode dmg von der Apple XDC Webseite.
+
+\textbf{Bemerkung:} Es kann sein, dass sie ein paar Symlinks nach der
+Installation des XCODE SDK erstellen müssen (besonders mit XCODE 2.5 unter
+Tiger):
 
 \begin{verbatim}
 cd /Developer/SDKs/MacOSX10.4u.sdk/usr/
@@ -275,35 +285,22 @@ sudo mv local/ local_
 sudo ln -s /usr/local/ local
 \end{verbatim}
 
-\subsection{Install Qt4 from .dmg}
-You need a minimum of Qt4.3.0. I suggest getting the latest (at time of writing).
+\subsection{Qt4 vom .dmg installieren}
+
+Sie benötigen mindestens Qt4.3.0 und am besten die aktuelle Version.
 
 \begin{verbatim}
 ftp://ftp.trolltech.com/qt/source/qt-mac-opensource-4.3.2.dmg
 \end{verbatim}
 
-If you want debug libs, Qt also provide a dmg with these:
+Debug-Bibliotheken finden Sie unter:
 
 \begin{verbatim}
 ftp://ftp.trolltech.com/qt/source/qt-mac-opensource-4.3.2-debug-libs.dmg
 \end{verbatim}
 
-I am going to proceed using only release libs at this stage as the download for
-the debug dmg is substantially bigger. If you plan to do any debugging though
-you probably want to get the debug libs dmg. Once downloaded open the dmg and run the installer. 
-
-\textbf{Note:} you need admin access to install.
-
-After installing you need to make two small changes:
-
-First edit \texttt{/Library/Frameworks/QtCore.framework/Headers/qconfig.h} and
-change 
-
-\textbf{Note:} this doesnt seem to be needed since version 4.2.3
-
-\texttt{QT\_EDITION\_Unknown} to \texttt{QT\_EDITION\_OPENSOURCE}
-
-Second change the default mkspec symlink so that it points to macx-g++:
+An dieser Stelle wird nicht auf die Debug-Bibliotheken eingegangen.
+Nach der Installation müssen Sie eine kleine Veränderungen vornehmen:
 
 \begin{verbatim}
 cd /usr/local/Qt4.3/mkspecs/ 
