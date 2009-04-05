@@ -1,7 +1,7 @@
 % vim: set textwidth=78 autoindent:
 
 % \section{Writing a QGIS Plugin in Python}
-\section{Écrire une extension en Python pour QGIS}
+\section{\'Ecrire une extension en Python pour QGIS}
 
 % when the revision of a section has been finalized,
 % comment out the following line:
@@ -11,25 +11,23 @@
 % plugins. It is based on the workshop "Extending the Functionality of QGIS
 % with Python Plugins" held at FOSS4G 2008 by Dr. Marco Hugentobler, Dr. Horst
 % D\"uster and Tim Sutton.
-
-Dans cette section vous trouverez un cours pour débutant pour écrire des
-extensions Python Pour QGIS. Il est basé sur le workshop "Étendre les
-fonctionnalités de QGIS avec des extensions en Python" réalisé lors du FOSS4G 2008
+Dans cette section vous trouverez un cours pour d\'ebutant pour \'ecrire des
+extensions Python Pour QGIS. Il est bas\'e sur le workshop "\'Etendre les
+fonctionnalit\'es de QGIS avec des extensions en Python" r\'ealis\'e lors du FOSS4G 2008
 par  Dr. Marco Hugentobler, Dr. Horst D\"uster et Tim Sutton.
 
 % Apart from writing a QGIS Python plugin, it is also possible to use PyQGIS
 % from a python command line console which is mainly interesting for debugging
 % or to write standalone applications in Python with their own user interfaces
 % using the functionality of the QGIS core library.
-
-En plus d'écrire des extensions en python pour QGIS, il est également possible
+En plus d'\'ecrire des extensions en python pour QGIS, il est \'egalement possible
 d'utiliser PyQGIS dans une console de ligne de commande python qui est
-principalement utilisée pour déboguer ou pour écrire des applications
-indépendantes en Python avec leurs propres interfaces en utilisant la
-bibliothèque principale de QGIS.
+principalement utilis\'ee pour d\'eboguer ou pour \'ecrire des applications
+ind\'ependantes en Python avec leurs propres interfaces en utilisant la
+biblioth\`eque principale de QGIS.
 
 % \subsection{Why Python and what about licensing}
-\subsection{Pourquoi Python et à propos de la licence}
+\subsection{Pourquoi Python et \`a propos de la licence}
 
 % Python is a scripting language which was designed with the goal of being easy
 % to program. It has a mechanism that automatically releases memory that is no
@@ -37,11 +35,10 @@ bibliothèque principale de QGIS.
 % that are written in C++ or Java offer the possibility to write extensions in
 % Python, e.g. OpenOffice or Gimp. Therefore it is a good investment of time to
 % learn the Python language.
-
-Python est un langage de script qui a été conçu afin d'être facile à écrire. Il
-a un mécanisme qui nettoie automatiquement la mémoire qui n'est plus utilisée
-(collecteur de déchet). Un avantage supplémentaire est que plusieurs programmes
-écrits en C++ ou Java offrent la possibilité d'écrire des extensions en Python,
+Python est un langage de script qui a \'et\'e con\c{c}u afin d'\^etre facile \`a \'ecrire. Il
+a un m\'ecanisme qui nettoie automatiquement la m\'emoire qui n'est plus utilis\'ee
+(collecteur de d\'echet). Un avantage suppl\'ementaire est que plusieurs programmes
+\'ecrits en C++ ou Java offrent la possibilit\'e d'\'ecrire des extensions en Python,
 comme OpenOffice.org ou GIMP. C'est donc un bon investissement d'apprendre le
 langage Python.
 
@@ -50,23 +47,21 @@ langage Python.
 % the GPL, too. This means you may use your plugins for any purpose and you are
 % not forced to publish them. If you do publish them however, they must be
 % published under the conditions of the GPL license. 
-
-Les extensions PyGQIS utilisent les fonctionnalités de libqgis\_core.so et
-libqgis\_gui.so. Comme les deux sont publiés sous licence GPL, les extensions
-Python pour QGIS doivent être publiés sous licence GPL également. Cela signifie
-que vous pouvez utiliser votre extension dans n'importe quel but et vous n'êtes pas
-obligé de les publier. Toutefois, si vous voulez les publier, ils doivent l'être
+Les extensions PyGQIS utilisent les fonctionnalit\'es de libqgis\_core.so et
+libqgis\_gui.so. Comme les deux sont publi\'es sous licence GPL, les extensions
+Python pour QGIS doivent \^etre publi\'es sous licence GPL \'egalement. Cela signifie
+que vous pouvez utiliser votre extension dans n'importe quel but et vous n'\^etes pas
+oblig\'e de les publier. Toutefois, si vous voulez les publier, ils doivent l'\^etre
 dans les conditions de la licence GPL.
 
 % \subsection{What needs to be installed to get started}
-\subsection{ce que vous avez besoin d'installer pour démarrer}
+\subsection{ce que vous avez besoin d'installer pour d\'emarrer}
 
 % On the lab computers, everything for the workshop is already installed. If
 % you program Python plugins at home, you will need the following libraries and
 % programs:
-
-Sur les ordinateurs du labs, tout ce qui est nécessaire est déjà installé. Si
-vous programmez chez vous, vous aurez besoin des bibliothèques et programmes
+Sur les ordinateurs du labs, tout ce qui est n\'ecessaire est d\'ej\`a install\'e. Si
+vous programmez chez vous, vous aurez besoin des biblioth\`eques et programmes
 suivants :
 
 \begin{itemize}
@@ -75,29 +70,27 @@ suivants :
 \item Qt ;
 \item PyQT ;
 % \item PyQt development tools
-\item Outils de développement PyQt.
+\item Outils de d\'eveloppement PyQt.
 \end{itemize}
 
 % If you use Linux, there are binary packages for all major distributions. For
 % Windows, the PyQt installer already contains Qt, PyQt and the PyQt
 % development tools.
-
-Si vous utilisez un système Linux ou équivalent, il existe des binaires pour
+Si vous utilisez un syst\`eme Linux ou \'equivalent, il existe des binaires pour
 toutes les distributions majeures. Pour les utilisateurs de Windows,
-l'installateur PyQT contient déjà Qt, PyQT et les outils de développement de
+l'installateur PyQT contient d\'ej\`a Qt, PyQT et les outils de d\'eveloppement de
 PyQT.
 
 % \subsection{Programming a simple PyQGIS Plugin in four
 steps}\label{subsec:pyfoursteps}
 \subsection{Programmer une extension PyQGIS en quatre
-étapes}\label{subsec:pyfoursteps}
+\'etapes}\label{subsec:pyfoursteps}
 
 % The example plugin is intentionally kept simple. It adds a button to the menu
 % bar of QGIS. If the button is clicked, a file dialog appears where the user
 % may load a shape file.
-
-Notre exemple d'extension restera intentionnellement simple. Il ajoute un bouton à
-la barre de menu de QGIS. Si le bouton est cliqué, une boîte de dialogue
+Notre exemple d'extension restera intentionnellement simple. Il ajoute un bouton \`a
+la barre de menu de QGIS. Si le bouton est cliqu\'e, une bo\^ite de dialogue
 apparait dans laquelle un utilisateur peut charger un fichier shape.
 
 % For each python plugin, a dedicated folder that contains the plugin files
@@ -105,21 +98,19 @@ apparait dans laquelle un utilisateur peut charger un fichier shape.
 % two locations: \$QGIS\_DIR/share/qgis/python/plugins and
 % \$HOME/.qgis/python/plugins. Note that plugins installed in the latter
 % location are only visible for one user.
-
-Pour chaque extension Python, un répertoire dédié qui contient les fichiers du
-extensions est nécessaire. Par défaut, QGIS cherche des extensions dans
+Pour chaque extension Python, un r\'epertoire d\'edi\'e qui contient les fichiers du
+extensions est n\'ecessaire. Par d\'efaut, QGIS cherche des extensions dans
 \$QGIS\_DIR/share/qgis/python/plugins et \$HOME/.qgis/python/plugins.
-Remarquez que les extensions installés dans ce dernier  sont seulement visible
+Remarquez que les extensions install\'es dans ce dernier  sont seulement visible
 par l'utilisateur.
 
 % \minisec{Step 1: Make the plugin manager recognise the plugin}
-\minisec{Étape 1 : reconnaissance d'une extension par le gestionnaire d'extension}
+\minisec{\'Etape 1 : reconnaissance d'une extension par le gestionnaire d'extension}
 
 % Each Python plugin is contained in its own directory. When QGIS starts up it
 % will scan each OS specific subdirectory and initialize any plugins it finds.
-
-Chaque extension Python est contenu dans son propre répertoire. Lors de démarrage
-de QGIS celui-ci parcourra chaque sous-répertoire spécifique au système et
+Chaque extension Python est contenu dans son propre r\'epertoire. Lors de d\'emarrage
+de QGIS celui-ci parcourra chaque sous-r\'epertoire sp\'ecifique au syst\`eme et
 initialisera toutes les extensions qu'il trouvera.
 
 \begin{itemize}
@@ -138,22 +129,22 @@ C:\textbackslash Documents and Settings\textbackslash\$USERNAME\textbackslash .q
 
 % Once that's done, the plugin will show up in the
 % \dropmenuopttwo{mActionShowPluginManager}{Plugin Manager...}
-Une fois réalisé, le plugin s'affichera dans
+Une fois r\'ealis\'e, le plugin s'affichera dans
 \dropmenuopttwo{mActionShowPluginManager}{gestionnaire de plugin...}
 
 % \begin{Tip}\caption{\textsc{Two QGIS Python Plugin folders}}
-\begin{Tip}\caption{\textsc{Deux répertoires de plugins Python}}
+\begin{Tip}\caption{\textsc{Deux r\'epertoires de plugins Python}}
 % \qgistip{There are two directories containing the python plugins.
 % \$QGIS\_DIR/share/qgis/python/plugins
 % is designed mainly for the core plugins while \$HOME/.qgis/python/plugins for
 % easy installation of the external plugins. Plugins in the home location are
 % only visible for one user but also mask the core plugins with the same name,
 % what can be used to provide main plugin updates
-\qgistip{Il y a deux répertoires contenant les extensions en python.
-\$QGIS\_DIR/share/qgis/python/plugins a été conçu principalement pour les
+\qgistip{Il y a deux r\'epertoires contenant les extensions en python.
+\$QGIS\_DIR/share/qgis/python/plugins a \'et\'e con\c{c}u principalement pour les
 extensions principales tandis que \$HOME/.qgis/python/plugins pour les extensions
 seulement visibles par l'utilisateur, mais aussi masque les extensions principales de
-même nom, ce qui peut être pratique pour les mettre à jour.
+m\^eme nom, ce qui peut \^etre pratique pour les mettre \`a jour.
 }
 \end{Tip}
 
@@ -166,31 +157,28 @@ même nom, ce qui peut être pratique pour les mettre à jour.
 % create an instance of the plugin. The argument of type QGisInterface is used
 % by the plugin to access functions of the QGIS instance. We are going to work
 % with this object in step 2.
-
-Pour fournir les informations nécessaires pour QGIS, le plugin nécessite
-d'implémenter les méthodes \method{name()}, \method{description()} et
-\method{version()} qui renvoient les chaînes descriptives.
+Pour fournir les informations n\'ecessaires pour QGIS, le plugin n\'ecessite
+d'impl\'ementer les m\'ethodes \method{name()}, \method{description()} et
+\method{version()} qui renvoient les cha\^ines descriptives.
 \method{qgisMinimumVersion()} doit renvoyer une forme simple, par exemple
-``1.0``. Une extension nécessite également une méthode
-\method{classFactory(QgisInterface)} qui est appelée par le gestionnaire d'extension
- pour créer une instance de l'extension. L'argument de type QGisInterface est
-utilisé par l'extension pour accéder aux fonctions de l'instance QGIS. Nous allons
-travailler avec cet objet à l'étape 2.
+``1.0``. Une extension n\'ecessite \'egalement une m\'ethode
+\method{classFactory(QgisInterface)} qui est appel\'ee par le gestionnaire d'extension
+ pour cr\'eer une instance de l'extension. L'argument de type QGisInterface est
+utilis\'e par l'extension pour acc\'eder aux fonctions de l'instance QGIS. Nous allons
+travailler avec cet objet \`a l'\'etape 2.
 
 % Note that, in contrast to other programing languages, indention is very
 % important. The Python interpreter throws an error if it is not correct.
-
 Notez que, contrairement aux autres langages de programmation, l'indentation est
-très importante. L'interpréteur Python renvoie une erreur si elle n'est pas
+tr\`es importante. L'interpr\'eteur Python renvoie une erreur si elle n'est pas
 correcte.
 
 % For our plugin we create the plugin folder 'foss4g\_plugin' in
 % \filename{\$HOME/.qgis/python/plugins}. Then we add two new textfiles into
 % this folder, \filename{foss4gplugin.py} and \filename{\_\_init\_\_.py}.
-
-Pour nos plugins nous  créons un répertoire de plugin 'foss4g\_plugin' dans
+Pour nos plugins nous  cr\'eons un r\'epertoire de plugin 'foss4g\_plugin' dans
 \filename{\$HOME/.qgis/python/plugins}. Puis nous ajoutons deux nouveaux
-fichiers textes dans ce répertoire \filename{foss4gplugin.py} et
+fichiers textes dans ce r\'epertoire \filename{foss4gplugin.py} et
 \filename{\_\_init\_\_.py}.
 
 % The file \filename{foss4gplugin.py} contains the plugin class:
@@ -198,17 +186,17 @@ Le fichier \filename{foss4gplugin.py} contient la classe de l'extension :
 
 \begin{verbatim}
 # -*- coding: utf-8 -*-
-# Import des bibliothèques PyQt et QGIS
+# Import des biblioth\`eques PyQt et QGIS
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from qgis.core import *
-# Initialisation des ressources Qt à partir du fichier resources.py
+# Initialisation des ressources Qt \`a partir du fichier resources.py
 import resources
 
 class FOSS4GPlugin:
 
 def __init__(self, iface):
-# Sauve la référence à l'interface QGIS
+# Sauve la r\'ef\'erence \`a l'interface QGIS
   self.iface = iface
 
 def initGui(self):
@@ -223,9 +211,9 @@ def unload(self):
 % and \method{authorName()} and \method{classFactory}. As
 % we are creating a new instance of the plugin class, we need to import the
 % code of this class:
-Le fichier \filename{\_\_init\_\_.py} contient les méthodes \method{name()},
+Le fichier \filename{\_\_init\_\_.py} contient les m\'ethodes \method{name()},
 \method{description()}, \method{version()}, \method{qgisMinimumVersion()}
-et \method{authorName()} évoqués plus haut. Comme nous somme en train de créer
+et \method{authorName()} \'evoqu\'es plus haut. Comme nous somme en train de cr\'eer
 une nouvelle instance de la classe plugin (extension)s, nous devons importer le code de cette
 classe :
 
@@ -249,24 +237,23 @@ def classFactory(iface):
 % At this point the plugin already the neccessary infrastructure to appear in
 % the QGIS \dropmenuopttwo{mActionShowPluginManager}{Plugin Manager...} to be
 % loaded or unloaded.
-Maintenant l'extension possède l'infrastructure nécessaire pour apparaître dans le
-\dropmenuopttwo{mActionShowPluginManager}{gestionnaire d'extension} QGIS et être
-chargé/déchargé.
+Maintenant l'extension poss\`ede l'infrastructure n\'ecessaire pour appara\^itre dans le
+\dropmenuopttwo{mActionShowPluginManager}{gestionnaire d'extension} QGIS et \^etre
+charg\'e/d\'echarg\'e.
 
 % \minisec{Step 2: Create an Icon for the plugin}
-\minisec{Étape 2 : Créer un icône pour le plugin}
+\minisec{\'Etape 2 : Cr\'eer un ic\^one pour le plugin}
 
 % To make the icon graphic available for our program, we need a so-called
 % resource file. In the resource file, the graphic is contained in hexadecimal
 % notation. Fortunately, we don't need to care about its representation because
 % we use the pyrcc compiler, a tool that reads the file
 % \filename{resources.qrc} and creates a resource file. 
-
-Pour que votre icône graphique soit disponible dans votre programme, nous avons
+Pour que votre ic\^one graphique soit disponible dans votre programme, nous avons
 besoin d'un fichier ressource. Dans ce fichier ressource, le graphique est
-contenu sous forme hexadécimale. Heureusement, nous n'avons pas à nous occuper de
-sa représentation parce que nous utilisons le compilateur pyrcc, un outil qui
-lit le fichier \filename{resources.qrc} et créé un fichier ressource.
+contenu sous forme hexad\'ecimale. Heureusement, nous n'avons pas \`a nous occuper de
+sa repr\'esentation parce que nous utilisons le compilateur pyrcc, un outil qui
+lit le fichier \filename{resources.qrc} et cr\'e\'e un fichier ressource.
 
 % The file \filename{foss4g.png} and the \filename{resources.qrc} we use in
 % this little workshop can be downloaded from
@@ -274,49 +261,47 @@ lit le fichier \filename{resources.qrc} et créé un fichier ressource.
 % directory of the example plugin
 % \filename{\$HOME/.qgis/python/plugins/foss4g\_plugin} and enter there: pyrcc4
 % -o resources.py resources.qrc.
-
 Le fichier \filename{foss4g.png} et le ficher \filename{resources.qrc} peuvent
-être téléchargé à partir de \url{http://karlinapp.ethz.ch/python\_foss4g}.
-Déplacez ces fichiers dans le répertoire de l'extension exemple
+\^etre t\'el\'echarg\'e \`a partir de \url{http://karlinapp.ethz.ch/python\_foss4g}.
+D\'eplacez ces fichiers dans le r\'epertoire de l'extension exemple
 \filename{\$HOME/.qgis/python/plugins/foss4g\_plugin} et entrez : pyrcc4 -o
 ressources.py ressources.qrc.
 
 % \minisec{Step 3: Add a button and a menu}
-\minisec{Étape 3 : ajouter un bouton au menu}
+\minisec{\'Etape 3 : ajouter un bouton au menu}
 
 % In this section, we implement the content of the methods \method{initGui()}
 % and \method{unload()}. We need an instance of the class \classname{QAction}
 % that executes the \method{run()} method of the plugin. With the action object,
 % we are then able to generate the menu entry and the button:
-
-Dans cette partie, nous allons implémenter le contenu des méthodes
+Dans cette partie, nous allons impl\'ementer le contenu des m\'ethodes
 \method{initGui()} et \method{unload()}. Nous avons besoins d'une instance de la
-classe \classname{QAction} qui exécute la méthode \method{run()} de l'v. Avec
-l'objet action, nous somme alors capable de générer l'entrée du menu et le
+classe \classname{QAction} qui ex\'ecute la m\'ethode \method{run()} de l'extension. Avec
+l'objet action, nous somme alors capable de g\'en\'erer l'entr\'ee du menu et le
 bouton :
 
 \begin{verbatim}
 import resources
 
   def initGui(self):
-    # Créer une action qui démmarera la configuration du plugin
+    # Cr\'eer une action qui d\'emmarera la configuration du plugin
     self.action = QAction(QIcon(":/plugins/foss4g_plugin/foss4g.png"), "FOSS4G
 plugin",self.iface.getMainWindow())
-    # Connecter l'action à la méthode run
+    # Connecter l'action \`a la m\'ethode run
     QObject.connect(self.action, SIGNAL("activated()"), self.run)
 
-    # Ajoutez le bouton de la barre d'outil et l'entrée du menu
+    # Ajoutez le bouton de la barre d'outil et l'entr\'ee du menu
     self.iface.addToolBarIcon(self.action)
     self.iface.addPluginMenu("FOSS-GIS plugin...", self.action)
 
     def unload(self):
-    # Supprime les entrées des menu et de l'icône
+    # Supprime les entr\'ees des menu et de l'ic\^one
     self.iface.removePluginMenu("FOSSGIS Plugin...", self.action)
     self.iface.removeToolBarIcon(self.action)
 \end{verbatim}
 
 % \minisec{Step 4: Load a layer from a shape file}
-\minisec{Étape 4 : charger une couche à partir d'un shapefile}
+\minisec{\'Etape 4 : charger une couche \`a partir d'un shapefile}
 
 % In this step we implement the real functionality of the plugin in the
 % \method{run()} method. The Qt4 method \method{QFileDialog::getOpenFileName}
@@ -327,17 +312,16 @@ plugin",self.iface.getMainWindow())
 % the layer that will be shown in the legend and the data provider name. For
 % shapefiles, this is 'ogr' because QGIS internally uses the OGR library to
 % access shapefiles:
-
-Dans cette étape nous allons implémenter les fonctionnalités réelles de l'extension
-dans la méthode method{run()} La méthode Qt4
-\method{QFileDialog::getOpenFileName} ouvre une boîte de dialogue et renvoie le
-chemin du fichier choisit. Si l'utilisateur annule la boîte de dialogue, le
-chemin est un objet null, que nous allons tester. Puis nous appelons la méthode
-\method{addVectorLayer} de l'objet interface qui charge la couche. La méthode
-possède seulement trois arguments : le chemin du fichier, le nom de la couche
-qui sera affichée dans la légende et le nom du fournisseur de données. Pour les
-Shapefiles, c'est 'ogr' car QGIS utilise en interne la bibliothèque OGR pour
-accéder aux shapefiles :
+Dans cette \'etape nous allons impl\'ementer les fonctionnalit\'es r\'eelles de l'extension
+dans la m\'ethode method{run()} La m\'ethode Qt4
+\method{QFileDialog::getOpenFileName} ouvre une bo\^ite de dialogue et renvoie le
+chemin du fichier choisit. Si l'utilisateur annule la bo\^ite de dialogue, le
+chemin est un objet null, que nous allons tester. Puis nous appelons la m\'ethode
+\method{addVectorLayer} de l'objet interface qui charge la couche. La m\'ethode
+poss\`ede seulement trois arguments : le chemin du fichier, le nom de la couche
+qui sera affich\'ee dans la l\'egende et le nom du fournisseur de donn\'ees. Pour les
+Shapefiles, c'est 'ogr' car QGIS utilise en interne la biblioth\`eque OGR pour
+acc\'eder aux shapefiles :
 
 \begin{verbatim}
     def run(self):
@@ -351,38 +335,38 @@ accéder aux shapefiles :
 
 
 % \subsection{Committing the plugin to repository}
-\subsection{Comiter l'extension dans un dépôt}
+\subsection{Comiter l'extension dans un d\'ep\^ot}
 
 % If you have written a plugin you consider to be useful and you want to share
 % with other users you're welcome to upload it to the QGIS User-Contributed
 % Repository.
-Si vous avez écrit une extension vous pouvez trouver utile et vouloir le partager
-avec d'autres utilisateurs, vous êtes invité à le télécharger sur le dépôt de
+Si vous avez \'ecrit une extension vous pouvez trouver utile et vouloir le partager
+avec d'autres utilisateurs, vous \^etes invit\'e \`a le t\'el\'echarger sur le d\'ep\^ot de
 contribution des utilisateurs de QGIS.
 \begin{itemize}
 % \item Prepare a plugin directory containing only necessary files (ensure that
 % there is no compiled .pyc files, Subversion .svn directories etc).
-\item Préparer un répertoire d'extensions contenant les fichiers nécessaires
-(assurez-vous qu'il n'y ait pas de fichiers .pyc compilés, de répertoires .svn
+\item Pr\'eparer un r\'epertoire d'extensions contenant les fichiers n\'ecessaires
+(assurez-vous qu'il n'y ait pas de fichiers .pyc compil\'es, de r\'epertoires .svn
 de subversion, etc.)
 % \item Make a zip archive of it, including the directory. Be sure the zip file
 % name is exactly the same as the directory inside (except the .zip extension of
 % course). In other case the Plugin Installer won't be able to relate the
 % available plugin with its locally installed instance.
-\item Faîtes une archive zip, incluant le répertoire. Assurez-vous que le nom du
-fichier zip est exactement le même que le répertoire à l'intérieur (sauf bien
+\item Fa\^ites une archive zip, incluant le r\'epertoire. Assurez-vous que le nom du
+fichier zip est exactement le m\^eme que le r\'epertoire \`a l'int\'erieur (sauf bien
 sur avec l'extension .zip). Sinon l'installateur d'extension ne sera pas capable
-de relier l'extension disponible avec celui installé localement.
+de relier l'extension disponible avec celui install\'e localement.
 % \item Upload it to the repository: \url{http://pyqgis.org/admin/contributed}
 % (you will need to register at first time). Please pay attention when filling
 % the form. Especially the Version Number field is often filled wrongly what
 % confuses the Plugin Installer and causes false notifications of available
 % updates.
-\item Téléchargez le dans le dépôt : \url{http://pyqgis.org/admin/contributed}
-(vous devez vous enregistrer la première fois). S'il vous plait, ayez une
-attention particulière lors du remplissage du formulaire. Spécialement le champ
-du numéro de version qui est souvent remplie incorrectement ce qui pose
-problème à l'installateur d'extension et cause de fausse notification de mise à
+\item T\'el\'echargez le dans le d\'ep\^ot : \url{http://pyqgis.org/admin/contributed}
+(vous devez vous enregistrer la premi\`ere fois). S'il vous plait, ayez une
+attention particuli\`ere lors du remplissage du formulaire. Sp\'ecialement le champ
+du num\'ero de version qui est souvent remplie incorrectement ce qui pose
+probl\`eme \`a l'installateur d'extension et cause de fausse notification de mise \`a
 jour disponible.
 \end{itemize}
 
@@ -395,19 +379,17 @@ jour disponible.
 % examples and copy the mechanism of existing plugins. Using the QGIS plugin
 % installer, which itself is a Python plugin, it is possible to download a lot
 % of existing Python plugins and to study their behaviour.
-
-Comme vous pouvez voir, vous avez besoin d'informations de différentes sources
-pour écrire des extensions PyQGIS. Les développeurs de plugins doivent connaître
+Comme vous pouvez voir, vous avez besoin d'informations de diff\'erentes sources
+pour \'ecrire des extensions PyQGIS. Les d\'eveloppeurs de plugins doivent conna\^itre
 Python et l'interface d'extension de QGIS ainsi que les classes et outils de Qt4.
-Au début il est important d'apprendre à partir des exemples et de copier les
-mécanismes d'extensions existants. En utilisant l'installateur d'extensionns de QGIS,
-qui est lui même une extension Python, il est possible de télécharger plusieurs
-extensions et de les étudier.
+Au d\'ebut il est important d'apprendre \`a partir des exemples et de copier les
+m\'ecanismes d'extensions existants. En utilisant l'installateur d'extensionns de QGIS,
+qui est lui m\^eme une extension Python, il est possible de t\'el\'echarger plusieurs
+extensions et de les \'etudier.
 
 % There is a a collection of online documentation that may be usefull for
 % PyQGIS programers:
-
-Il y a de nombreuses documentations qui peuvent être utile pour les programmeurs de
+Il y a de nombreuses documentations qui peuvent \^etre utile pour les programmeurs de
 PyQGIS :
 
 \begin{itemize}
@@ -424,7 +406,6 @@ programmation d'extension PyQGIS :
 
 % You can also write plugins for QGIS in C++. See Section \ref{cpp_plugin} for
 % more information about that.
-
-Vous pouvez également écrire des extensions pour QGIS en C++. Lisez la section
-\ref{cpp_plugin} pour plus d'information là dessus.
+Vous pouvez \'egalement \'ecrire des extensions pour QGIS en C++. Lisez la section
+\ref{cpp_plugin} pour plus d'information l\`a dessus.
 
