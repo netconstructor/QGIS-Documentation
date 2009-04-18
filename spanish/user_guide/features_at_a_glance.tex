@@ -1,39 +1,40 @@
 % vim:autoindent:set textwidth=78:
 
-\section{Features at a Glance}\label{feature_glance}
+\section{Características de un vistazo}\label{feature_glance}
 
 % when the revision of a section has been finalized, 
 % comment out the following line:
 %\updatedisclaimer
 
-After a first and simple sample session in Section \ref{label_getstarted} we now 
-want to give you a more detailed overview of the features of QGIS. 
-Most features presented in the following chapters will be explained and described in 
-own sections later in the manual.
+Después de una primera y sencilla sesión en la Sección \ref{label_getstarted}, ahora
+queremos mostrarle una ojeada más detallada de las características de QGIS. 
+La mayoría de las características presentadas en los siguientes capítulos se explicarán
+y describirán en sus propias secciones más adelante en el manual.
 
-\subsection{Starting and Stopping QGIS}\label{label_startinqgis}
+\subsection{Iniciar y detener QGIS}\label{label_startinqgis}
 
-In Section \ref{samplesession} you already learned how to start QGIS. We will 
-repeat this here and you will see that QGIS also provides further command line options. 
+En la Secciónn \ref{samplesession} ya aprendió como iniciar QGIS. Repetiremos
+esto aquí y verá que QGIS también proporciona más opciones de línea de órdenes. 
 
 \begin{itemize}
-\item \nix{assuming that QGIS is installed in the PATH, you can start QGIS 
-by typing: \usertext{qgis}  at a command prompt or by double clicking on the QGIS
-application link (or shortcut) on the desktop.} 
-\item \win{start QGIS using the Start menu or desktop shortcut, 
-or double click on a QGIS project file.}
-\item \osx{double click the icon in your Applications folder.}
+\item \nix{suponiendo que tiene QGIS instalado en el PATH, puede iniciar QGIS
+tecleando: \usertext{qgis} en la línea de órdenes o haciendo doble clic sobre el enlace a QGIS 
+(o acceso directo) del escritorio.}
+\item \win{inicie QGIS usando el menú Inicio o un acceso directo del escritorio, 
+o haga doble clic en un archivo de proyecto de QGIS.}
+\item \osx{doble clic en el icono de la carpeta Aplicaciones.}
 \end{itemize} 
 
-To stop QGIS, click the menu options \{\nix{}\win{File} \osx{QGIS}\} > Quit,
-or use the shortcut \keystroke{Ctrl+Q}.
+Para detener QGIS, pulse las opciones de menú \{\nix{}\win{Archivo} \osx{QGIS}\} > Salir,
+o use el atajo de teclado \keystroke{Ctrl+Q}.
 
-\subsubsection{Command Line Options}\index{command line options}
+\subsubsection{Opciones de línea de órdenes}\index{command line options}
 \label{label_commandline}
 
-\nix QGIS supports a number of options when started from the command line. To
-get a list of the options, enter \usertext{qgis ---help} on the command line.
-The usage statement for QGIS is:
+\nix QGIS admite un buen número de opciones cuando se inicia desde la línea de 
+órdenes. Para obtener la lista de opciones, teclee \usertext{qgis ---help} en la
+línea de órdenes.
+La sentencia de uso para QGIS es:
 
 \small
 \begin{verbatim}
@@ -60,88 +61,88 @@ Usage: qgis [options] [FILES]
 \end{verbatim}
 \normalsize
 
-\begin{Tip} \caption{\textsc{Example Using command line arguments}}
-\qgistip{You can start QGIS by specifying one or more data files
-on the command line. For example, assuming you are in the 
-qgis\_sample\_data directory, you could start QGIS with a vector layer 
-and a raster file set to load on startup using the following command: 
+\begin{Tip} \caption{\textsc{Ejemplo utilizando argumentos en línea de órdenes}}
+\qgistip{Puede iniciar QGIS especificando uno o más archivos de datos sobre la
+línea de órdenes. Por ejemplo, suponiendo que está en el directorio 
+qgis\_sample\_data, podría iniciar QGIS con una capa vectorial 
+y un archivo ráster preparados para cargarlos 
+en el arranque utilizando la siguiente orden: 
 \usertext{qgis ./raster/landcover.img ./gml/lakes.gml}
 }
 \end{Tip}
 
-\minisec{Command line option \usertext{---snapshot}}
-This option allows you to create a snapshot in PNG format from the current view.
-This comes in handy when you have a lot of projects and want to 
-generate snapshots from your data.
+\minisec{Opción de línea de órdenes \usertext{---snapshot}}
+Esta opción permite crear una captura de pantalla en formato PNG de la vista actual.
+Esto puede ser útil cuando se tienen muchos proyectos y se quieren generar capturas de los datos.
 
-Currently it generates a PNG-file with 800x600 pixels. A filename can be added after
+Actualmente esto genera un fichero PNG con 800x600 píxeles. Se puede añadir un nombre después de
 \usertext{---snapshot}.
 
-\minisec{Command line option \usertext{---lang}}
-Based on your locale QGIS, selects the correct localization. If you would like 
-to change your language, you can specify a language code. For example: 
+\minisec{Opción de línea de órdenes \usertext{---lang}}
+En base a su configuración local, QGIS selecciona la localización correcta. Si se quiere 
+cambiar el idioma, se puede especificar el código del idioma. Por ejemplo:
 \usertext{---lang=it}
-starts QGIS in italian localization. A list of currently supported
-languages with language code is provided at
-\url{http://wiki.qgis.org/qgiswiki/TranslatorsCorner} 
+arranca QGIS con la localización en italiano. En \url{http://wiki.qgis.org/qgiswiki/TranslatorsCorner}
+se proporciona una lista de los idiomas admitidos actualmente con su código.
 
-\minisec{Command line option \usertext{---project}}
-Starting QGIS with an existing project file is also possible. Just
-add the command line option \usertext{--project} followed by your project name
-and QGIS will open with all layers loaded described in the given file.
+\minisec{Opción de línea de órdenes \usertext{---project}}
+También es posible iniciar QGIS con un proyecto existente. Simplemente añada 
+la opción \usertext{---project} seguida del nombre de su proyecto y QGIS se abrirá 
+con todas las capas cargadas definidas en el fichero dado.
 
-\minisec{Command line option \usertext{---extent}}
-To start with a specific map extent use this option. You need to add the bounding
-box of your extent in the following order separated by a comma:
+\minisec{Opción de línea de órdenes \usertext{---extent}}
+Para arrancar con una extensión específica del mapa utilice esta opción. Es necesario
+añadir los límites en el siguiente orden separados por comas:
 \begin{verbatim}
 --extent xmin,ymin,xmax,ymax
 \end{verbatim}
 
 
-\subsection{QGIS GUI}\index{main window}
+\subsection{Interfaz Gráfica de Usuario (GUI) de QGIS}\index{main window}
 \label{label_qgismainwindow}
 
-When QGIS starts, you are presented with the GUI as shown below
-(the numbers 1 through 6 in yellow ovals refer to the six major areas of the
-interface as discussed below):
+Cuando QGIS arranca, se encuentra con la GUI como se muestra abajo
+(los números del 1 hasta el 6 en ovalos amarillos señalan las seis áreas principales 
+de la interfaz que se describen abajo):
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{QGIS GUI with Alaska sample data \wincaption}
+   \caption{Interfaz de QGIS con datos de ejemplo de Alaska \wincaption}
 	 \label{fig:startup}
    \includegraphics[clip=true, width=17cm]{startup1_0_0}
 \end{center} 
 \end{figure}
 
-\textbf{Note:} Your window decorations (title bar, etc.) may appear
-different depending on your operating system and window manager.
+\textbf{Nota:} La decoración de su ventana (barra de título, etc.) puede aparecer 
+distinta dependiendo del sistema operativo y administrador de ventanas.
 
-The QGIS GUI is divided into six areas:
+La Interfaz Gráfica de Usuario (GUI) de QGIS está dividida en seis áreas:
 
 \begin{tabbing}
-1. Menu Bar \hspace{3cm}\= 4. Map View \\
-2. Tool Bar \hspace{3cm}\> 5. Map Overview  \\
-3. Map Legend \hspace{3cm}\> 6. Status Bar   
+1. Barra de menús \hspace{3cm}\= 4. Vista del mapa \\
+2. Barra de herramientas \hspace{3cm}\> 5. Vista general del mapa \\
+3. Leyenda del mapa \hspace{3cm}\> 6. Barra de estado   
 \end{tabbing}
 
-These six components of the QGIS interface are described in more detail in
-the following sections.
+Estos seis componentes de la interfaz de QGIS son descritos con más detalle
+en las siguientes secciones.
 
-\subsubsection{Menu Bar}\label{label_menubar}
+\subsubsection{Barra de menús}\label{label_menubar}
 \index{menus}
 
-The menu bar provides access to various QGIS features using a standard 
-hierarchical menu. The top-level menus and a summary of some of the
-menu options are listed below, together with the icons of the corresponding 
-tools as they appear on the toolbar, as well as keyboard shortcuts.
-Although most menu options have a corresponding tool and vice-versa,
-the menus are not organized quite like the toolbars. 
-The toolbar containing the tool is listed after each menu option as a checkbox
-entry. For more information about tools and toolbars, see Section \ref{label_toolbars}.
+La barra de menús proporciona acceso a varias características de QGIS utilizando 
+menús jerárquicos estándar. A continuación se lista el nivel superior de los menús
+y un resumen de algunas opciones de menú, junto con los iconos de las herramientas
+correspondientes tal como aparecne en la barra de herramientas, así como atajos de
+teclado. Aunque la mayoría de opciones de menú tiene una herramientas y viceversa,
+los menús no están organizados igual que las barras de herramientas. La barra de
+herramientas que contiene cada herramienta se indica después de cada opción de menú
+como una casilla de verificación. Para más información sobre herramientas y barras
+de herramientas, vea la Sección \ref{label_toolbars}.
 
 \begin{tabbing}
 \hspace{5.5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
-\hspace{1cm} Menu Option \> Shortcut \> Reference \> Toolbar\\
+\hspace{1cm} Opción de menú \> Atajo \> Referencia \> Barra de herramientas\\
 \end{tabbing}
 
 \begin{itemize}
