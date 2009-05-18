@@ -1,101 +1,162 @@
 % vim: set textwidth=78 autoindent:
 
-\subsection{Georeferencer Plugin}
+\subsection{Georeferenzier Plugin}\index{Plugins!Georeferenzierer}
 
 % when the revision of a section has been finalized, 
 % comment out the following line:
 %\updatedisclaimer
 
-The Georeferencer Plugin is a tool for generating world files for rasters.
-It allows you to reference rasters to geographic or projected coordinate systems by creating a 
-world file, or by transforming the raster to a new coordinate system. The basic approach to georeferencing a raster is to locate points on the raster for which you can accurately determine their coordinates. The source of the coordinates can be:
+Das Plugin \toolbtntwo{georeferencer}{Georeferenzierer} erlaubt die
+Erstellung von Worldfiles für Rasterkarten. Es ermöglicht damit das
+georeferenzieren von Rasterdaten in geographische und projizierte
+Koordinatensysteme durch das Erstellen eines World files oder die
+Transformation des Rasters in ein neues Koordinatensystem. Der Ansatz besteht
+darin, Bezugspunkte auf der Rasterkarte zu finden, denen eindeutige
+Koordinaten zugewiesen werden können. Die Quelle der Bezugspunkten kann dabei
+sein:
 
 \begin{enumerate}
-\item The raster itself, sometimes coordinates are literally `written' on the raster. 
-In this case you can enter the coordinates manually.
-\item Other georeferenced data, this can be either vector or raster data that contain the same objects/features that you have on the raster that you want to georeference. In this case you can enter the coordinates by clicking on the reference dataset loaded in QGIS map canvas.
+\item Der Rasterlayer selbst, für den Fall das Koordinaten auf den
+Kartenrändern oder in der Karte selbst vermerkt sind. In diesem Fall können
+Sie die Koordinaten der Bezugspunkte manuell eintragen.
+\item Ein anderer georeferenzierter Raster- oder Vektorlayer, der die
+gleichen Objekte zeigt, wie auf des zu referenzierenden Rasterlayers. In
+diesem Fall können Sie die Koordinaten der Bezugspunkte festlegen, indem Sie
+den bereits georeferenzierten Layer in QGIS laden und dann mit der Maus
+Bezugspunkte auf beiden Layern anklicken.
 \end{enumerate}
 
-The usual procedure for georeferencing an image involves selecting multiple points on the raster, 
-specifying their coordinates, and choosing a relevant transformation type. Based on the input parameters and data, the plugin will compute the world file parameters. The more coordinates you provide, the better the result will be.
+Das normale Vorgehen beim georeferenzieren eines Rasterlayers beinhaltet das
+Auswählen von mindestens vier Bezugspunkten auf dem Rasterlayer, das Zuweisen
+von Koordinaten und die Auswahl des passenden Transformationstyps. Basierend
+auf den Eingabeparametern und den Daten, wird dann ein Worldfile erstellt.
+Dabei gilt allgemein: Je mehr, räumlich gleichmäßig verteilte Bezugspunkte
+gesetzt wurden, umso besser wird das Resultat ausfallen. 
 
-The first step is to start QGIS and load the Georeferencer Plugin (see Section 
-\ref{sec:load_core_plugin}) and click on the \toolbtntwo{georeferencer}{Georeferencer} 
-icon which appears in the QGIS toolbar menu. The Georeferencer Plugin dialog appears as 
-shown in Figure \ref{fig:georefplugin}.
-  
-For this example, we are using a topo sheet of South Dakota from SDGS. It can later be visualized 
-together with the data from the GRASS spearfish60 location. You can download the topo sheet here: 
+Als ersten Schritt starten Sie QGIS, laden das Georeferenzier Plugin
+(siehe Kapitel~\ref{sec:load_core_plugin}) und klicken dann auf das Icon
+\toolbtntwo{georeferencer}{Georeferenzierer} in der Werkzeugleiste. Daraufhin
+erscheint der Dialog, wie in Abbildung~\ref{fig:georefplugin} zu sehen.
+
+In diesem Beispiel soll ein Worldfile für eine topografische Karte aus der
+Gegend Süd-Dakotas erstellt werden, welche zu dem GRASS Spearfish-Datensatz
+passt. Diese Karte kann später zusammen mit den erstellten Daten in
+der GRASS spearfish60 Location dargestellt werden. Die topopgrafische Karte
+steht unter folgender Adresse zum Download bereit.
 \url{http://grass.osgeo.org/sampledata/spearfish\_toposheet.tar.gz}
 
 \begin{figure}[ht]
 \begin{center}
-  \caption{Georeferencer Plugin Dialog \nixcaption}\label{fig:georefplugin}\smallskip
-  \includegraphics[clip=true, width=12cm]{georefplugin}
+  \caption{Das Georeferenzier Plugin \nixcaption}\label{fig:georefplugin}\smallskip
+  \includegraphics[clip=true,width=0.9\textwidth]{georefplugin}
 \end{center}
 \end{figure}
 
-\minisec{Entering ground control points (GCPs)}\label{georeferencer_entering}
+Nach dem Laden der topopgrafischen Karte, wird diese im Fenster des
+Georeferenzierer geöffnet, wie in Abbildung~\ref{fig:georefplugin} zu sehen.
+
+\minisec{Eingabe von Bezugspunkten (Ground Control Points (GCP))}\label{georeferencer_entering}
+
+Mit dem Knopf \toolbtntwo{mActionCapturePoint}{Addiere Punkt} können Sie nun
+damit beginnen dem Rasterbild Bezugspunkte und die dazugehörigen Koordinaten
+hinzuzufügen (siehe Abbildung~\ref{fig:choose_points}). Aus diesen
+Punktkoordinaten errechnet das
+Plugin später die entsprechenden Worldfile Parameter. Je mehr Bezugspunkte
+Sie erstellen, desto genauer wird in der Regel das Ergebnis. Für die Angabe
+der nötigen Punktkoordinaten stehen Ihnen zwei unterschiedliche
+Vorgehensweisen zur Verfügung.
 
 \begin{enumerate}
-\item To start georeferencing an unreferenced raster, we must load it using the \browsebutton browse button. The raster will show up in the main working area of the dialog. Once the raster is loaded, we can start to enter reference points.
-
-\item Using the \toolbtntwo{mActionCapturePoint}{Add Point} button, add points to the main working area and enter their coordinates (See Figure \ref{fig:choose_points}). For this procedure you have two options:
-
-\begin{enumerate}
-\item Click on a point in the raster map and enter the X and Y coordinates manually
-\item Click on a point in the raster map and choose the button \toolbtntwo{pencil}{from map canvas} to add the X and Y coordinates with the help of a georeferenced map already loaded in QGIS.
-\end{enumerate}
-\item Continue entering points. You should have at least 4 points, and the more coordinates you can provide, the better the result will be. There are additional tools on the plugin dialog to zoom and pan the working area in order to locate a relevant set of GCP points.
+\item Sie klicken auf einen Punkt in der Rasterkarte und geben die X- und
+Y-Koordinaten ein.
+\item Sie klicken auf einen Punkt in der Rasterkarte und wählen den Knopf
+\button{aus Karte}, um die X- und Y-Koordinaten mit Hilfe einer
+georeferenzierten, in QGIS geladenen Karte hinzuzufügen.
 \end{enumerate}
 
 \begin{figure}[ht]
 \begin{center}
-  \caption{Add points to the raster image \nixcaption}\label{fig:choose_points}\smallskip
-  \includegraphics[clip=true,width=9cm]{choose_points}
+  \caption{Bezugspunkte zu einem Rasterbild hinzufügen \nixcaption}\label{fig:choose_points}\smallskip
+  \includegraphics[clip=true,width=0.6\textwidth]{choose_points}
 \end{center}
 \end{figure}
 
-The points that are added to the map will be stored in a separate text file ([filename].points) which is stored together with the raster image. This allows us to reopen the Georeferencer plugin at a later date and add new points or delete existing ones to optimize the result. The points file contains values of the form: mapX, mapY, pixelX, pixelY. You can also \button{Load GCPs} and \button{Save GCPs} to different directories if you like.
+In unserem Beispiel nutzen wir die zweite Option und geben die Koordinaten
+der ausgewählten Punkte mit Hilfe des Vektorlayers \filename{roads} aus der
+\usertext{spearfish60} Location ein. Diese Daten stehen unter folgender
+Adresse zum Download bereit: \\
+\url{http://grass.osgeo.org/sampledata/spearfish\_grass60data-0.3.tar.gz}
 
-\minisec{Choosing the transformation}\label{georeferencer_transformation}
+Für den Fall, dass Sie nicht wissen, wie Sie die spearfish60 Location in QGIS
+integrieren und mit Hilfe des GRASS Plugins verwenden können, finden Sie im
+Abschnitt~\ref{sec:grass} weitere Informationen. 
 
-After you have added your GCPs to the raster image, you need to select the transformation type for the georeferencing process. Depending on how many ground control point you have captured, you may want to use different transformation algorithms. Choice of transformation algorithm is also dependent on the type and quality of input data and the amount of geometric distortion that you are willing to introduce to final result.
+Wie Sie in Abbildung~\ref{fig:choose_points} sehen können, stellt Ihnen der
+Georeferenzierdialog auch Icons zum Vergrößern/Verkleinern, zum Verschieben,
+sowie zum Hinzufügen und Löschen von Bezugspunkten zur Verfügung. 
 
-Currently, several algorithms are available:
+Die gesetzten Bezugspunkte werden zusammen mit dem Rasterbild als Textdatei
+mit der Endung \filename{.points} gespeichert. Dies erlaubt uns, bei Bedarf
+das Georeferenzier Plugin wieder zu öffnen und neue Punkte
+hinzuzufügen oder bestehende Punkte zu löschen, um dadurch das Ergebnis zu
+verbessern. 
 
-\begin{enumerate}
-\item Linear
-\item Helmert
-\item Polynomial 1
-\item Polynomial 2
-\item Polynomial 3
-\item Thin plate spline (TPS)
-\end{enumerate}
+\minisec{Auswahl des Transformationstyps}\label{georeferencer_transformation}
+
+Nachdem Sie dem Bild eine ausreichende Anzahl an Punkten gesetzt haben,
+gilt es nun, für die Georeferenzierung die gewünschte
+Koordinaten-Transformationsmethode auszuwählen und die daraus errechneten
+Worldfile Daten zusammen mit dem Tiff zu speichern. In der aktuellen QGIS
+Version stehen folgende Algorithmen zur Auswahl:
 
 \begin{itemize}
-\item The Linear algorithm is used to create a world-file, and is different from the other algorithms, as it does not actually transform the raster. This algorithm likely won't be sufficient if you are dealing with scanned material.
-\item The Helmert transformation performs simple scaling and rotation transformations. 
-\item The Polynomial algorithms are among the most widely used algorithms for georeferencing, and each one differs by the degree of distortion introduced to match source and destination ground control points. The most widely used polynomial algorithm is the second order polynomial transformation, which allows some curvature. First order polynomial transformation (affine) preserves colliniarity and allows scaling, translation and rotation only.
-\item The Thin plate spline (TPS) algorithm is a more modern georeferencing method, which is able to introduce local deformations in the data. This algorithm is useful when very low quality originals are being georeferenced.
+\item \textbf{Linear}: Der lineare (affine) Algorithmus wird verwendet um
+einen Worldfile zu
+erstellen. Er unterscheidet sich von den anderen Algorithmen, da tatsächlich
+keine Transformation stattfindet. Für verzerrte Daten, z.B. gescannte Karten
+werden die Ergebnisse wahrscheinlich nicht ausreichen.
+\item \textbf{Helmert}: Die Helmert Transformation führt eine einfache
+Skalierung und Rotation der Daten durch.
+\item \textbf{Polynomial 1, 2 und 3}: Die Polynomial Algorithmen stellen die
+am häufigsten verwendeten
+Algorithmen zur Georeferenzierung dar. Sie unterscheiden sich anhand des
+Entzerrungsgrades, der verwendet wird, damit die Bezugspunkte der zu
+georeferenzierenden Karte mit den Bezugspunkten der Zielkarte genau
+zueinander passen. Am häufigsten wird der Polynomial 2 Algorithmus verwendet,
+der auch entzerrt. Die Polynomial 1 (Affine) Transformation bewahrt
+Kollinearität und erlaubt die Skalierung, Übersetzung und Rotation des Layers.  
+\item \textbf{Thin Plate-Spline (TPS)}: Der Thin Plate-Spline (TPS)
+Algorithmus stellt eine moderne Methode zur
+Georeferenzierung dar und ermöglicht eine lokale Deformation der Daten. Die
+Anwendung ist besonders dann sinnvoll, wenn die Ausgangsdaten eine schlechte
+Qualität haben.
 \end{itemize}
 
-\minisec{Running the transformation}\label{georeferencer_running}
+\minisec{Durchführung der Transformation}\label{georeferencer_running}
 
 \begin{enumerate}
-\item When the GCPs have been collected, and the transformation has been chosen, press either \button{Create} to create a new raster or \button{Create and load layer} to automatically add the new raster to the layer list.
-\item A warning message will appear that will inform you that a new raster (in GeoTIFF format) will be created.
-\item After hitting OK, you will also be asked to choose a resampling method. There are three methods available:
-
+\item Nachdem die Bezugspunkte (GCPs) gesetzt sind und die Methoder der
+Transformation ausgewählt wurde, klicken Sie auf den Knopf
+\button{Erstellen}, um das neue Raster zu erstellen, oder auf
+\button{Erstellen und Layer laden}, um den neuen Rasterlayer automatisch nach
+der Transformation in das QGIS Kartenfenster zu laden.
+\item Eine Meldung zeigt dabei an, dass ein neuer Rasterlayer (im GeoTiff
+Format) erstellt wird.
+\item Nachdem Sie auf den Knopf \button{OK} klicken, werden Sie noch nach der
+Resampling Methode gefragt. Hier stehen drei Methoden zur Auswahl:
 \begin{enumerate}
-\item Nearest neighbour
+\item Nächster Nachbar
 \item Linear
-\item Cubic
+\item Kubisch
 \end{enumerate}
 \end{enumerate}
 
-\begin{Tip}\caption{\textsc{Choosing the resampling method}}
-\qgistip{The type of resampling you choose will likely depending on your input data and the ultimate objective of the exercise. If you don't want to change statistics of the image, you might want to choose Nearest neighbour, whereas a Cubic resampling will likely provide a more smoothed result.}
+\begin{Tip}\caption{\textsc{Wahl der Resampling Methode bei der
+Geoferenzierung}}
+\qgistip{Die ausgewählte Resambling Methode hängt von den Daten und der
+späteren Anwendung der Daten ab. Wenn die Statistik des Layers erhalten
+bleiben soll, wird wahrscheinlich 'Nächster Nachbar' gewählt, wo hingegen
+'Kubisch' im Normalfall ein visuell besseres Ergebnis liefern wird. 
+}
 \end{Tip}
-
 
