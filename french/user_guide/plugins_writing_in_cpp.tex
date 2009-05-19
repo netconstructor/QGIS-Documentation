@@ -663,8 +663,8 @@ void QgsPointConverterPlugin::convertToPoint()
       QFile f(fileName);
       if(!f.open(QIODevice::WriteOnly))
       {
- QMessageBox::information(0, "error", "Could not open file", QMessageBox::Ok);
- return;
+	QMessageBox::information(0, "error", "Could not open file", QMessageBox::Ok);
+	return;
       }
       QTextStream theTextStream(&f);
       theTextStream.setRealNumberNotation(QTextStream::FixedNotation);
@@ -724,37 +724,37 @@ void QgsPointConverterPlugin::convertToPoint()
             case QGis::WKBPoint:
             case QGis::WKBPoint25D:
                 convertPoint(currentGeometry, featureAttributesString, \
-  theTextStream);
+		theTextStream);
                 break;
 
             case QGis::WKBMultiPoint:
             case QGis::WKBMultiPoint25D:
                 convertMultiPoint(currentGeometry, featureAttributesString, \
-  theTextStream);
+		theTextStream);
                 break;
 
             case QGis::WKBLineString:
             case QGis::WKBLineString25D:
                 convertLineString(currentGeometry, featureAttributesString, \
-  theTextStream);
+		theTextStream);
                 break;
 
             case QGis::WKBMultiLineString:
             case QGis::WKBMultiLineString25D:
                 convertMultiLineString(currentGeometry, featureAttributesString \
-  theTextStream);
+		theTextStream);
                 break;
 
             case QGis::WKBPolygon:
             case QGis::WKBPolygon25D:
                 convertPolygon(currentGeometry, featureAttributesString, \
-  theTextStream);
+		theTextStream);
                 break;
 
             case QGis::WKBMultiPolygon:
             case QGis::WKBMultiPolygon25D:
                 convertMultiPolygon(currentGeometry, featureAttributesString, \
-  theTextStream);
+		theTextStream);
                 break;
         }
       }
