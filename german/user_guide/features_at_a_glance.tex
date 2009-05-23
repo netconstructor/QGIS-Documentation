@@ -127,9 +127,6 @@ Die QGIS Benutzeroberfläche ist in sechs Bereiche unterteilt:
 3. Legende \hspace{3cm}\> 6. Statusleiste   
 \end{tabbing}
 
-Diese sechs Komponenten des QGIS Interfaces werden im folgenden Abschnitt
-detailliert beschrieben.
-
 \subsubsection{Menüleiste}\label{label_menubar}
 \index{Menüleiste}
 
@@ -249,10 +246,10 @@ Und weitere Digitalisier-Tools
 \dropmenuopttwo{mActionZoomToSelected}{Zur Auswahl zoomen}
 	\> \keystroke{Ctrl+J}
 	\> \> \dropmenucheck{Kartennavigation} \\
-\dropmenuopttwo{mActionZoomLast}{Zur vorherigen Zoomeinstellung}
+\dropmenuopttwo{mActionZoomLast}{Zoom zurück}
 	\>
 	\> \> \dropmenucheck{Kartennavigation} \\
-\dropmenuopttwo{mActionZoomNext}{Zur nächsten Zoomeinstellung}
+\dropmenuopttwo{mActionZoomNext}{Zoom vor}
 	\>
 	\> \> \dropmenucheck{Kartennavigation} \\
 \dropmenuopt{Auf tatsächliche Größe zoomen}
@@ -293,6 +290,10 @@ Und weitere Digitalisier-Tools
 	\> \keystroke{D}
 	\> Kapitel \ref{label_postgis}
 	\> \dropmenucheck{Datei} \\
+\dropmenuopttwo{mActionAddSpatiaLiteLayer}{SpatiaLite Layer hinzufügen}
+        \>
+        \> Kapitel \ref{label_spatialite}
+        \> \dropmenucheck{Datei} \\
 \dropmenuopttwo{mActionAddWmsLayer}{WMS-Layer hinzufügen}          
 	\> \keystroke{W}
 	\> Kapitel \ref{sec:ogc-wms}
@@ -410,7 +411,7 @@ rechten Mausknopf drücken.
 \caption{\textsc{Werkzeugleiste zurückholen}} \index{Layout!Werkzeugleiste}
 \qgistip{Wenn sie aus Versehen alle Untermenüs der Werkzeugleiste
 ausgeblendet haben, können Sie diese über das Menü 
-\mainmenuopt{Einstellungen} > \dropmenuopt{Werkzeugkasten} wieder
+\mainmenuopt{Einstellungen} > \dropmenuopt{Werkzeugkästen} wieder
 zurückholen.}
 \end{Tip}
 
@@ -767,7 +768,7 @@ oder JPG-Format speichern können. Zusätzlich wird ein Worldfile mit der
 Endung PNGW oder JPGW im selben Ordner erstellt, so dass das Bild
 georeferenziert ist.
 \item Die Menüoption \dropmenuopttwo{mActionFilePrint}{Druckzusammenstellung}
-öffnet das Map Composer Plugin, in dem Sie das aktuelle Kartenfenster
+öffnet den Print Composer Dialog, in dem Sie das aktuelle Kartenfenster
 layouten und drucken können (Siehe Kapitel~\ref{label_printcomposer}).
 \end{itemize}
 
@@ -785,15 +786,12 @@ eingestellt werden:
 werden sollen}
 \item \checkbox{Warnung ausgeben, wenn QGIS-Projekt einer früheren Version
 geöffnet wird}
-\item \checkbox{Ändere Auswahl- und Hintergrundfarbe}
+\item Ändere Auswahl- und Hintergrundfarbe
 \item Ändere das Icon-Thema (Wähle zwischen default, classic, gis und nkids)
 \item \checkbox{Layernamen in der Legende grossschreiben}
 \item \checkbox{Klassifikationsattributnamen in der Legende anzeigen}
 \item \checkbox{Splashscreen beim Start nicht anzeigen}
 \item \checkbox{Attributtabelle gedockt öffnen}
-\item Verhalten der Attributtabelle ändern (Wähle zwischen: Alle Objekte
-anzeigen, Nur selektierte Objekte anzeigen und Objekte im aktuellen
-Kartenausschnitt anzeigen)
 \end{itemize}
 
 \minisec{Darstellung}
@@ -806,8 +804,6 @@ werden soll.
 \item \checkbox{Linien auf Kosten der Zeichengeschwindigkeit weniger gezackt
 zeichnen}
 \item \checkbox{Problem mit falsch gefüllten Polygonen beheben}
-\item \checkbox{Karte kontinuierlich neuzeichnen, wenn Teiler zwischen
-Legende und Karte verschoben wird} 
 \end{itemize}
 
 \minisec{Kartenwerkzeuge}
@@ -822,6 +818,13 @@ Mausposition zoomen, Nichts)
 \item Definiere Zoomfaktor für das Mausrad
 \end{itemize}
 
+\minisec{Überlagern}
+
+\begin{itemize}
+\item Einstellung des Plazierungsalgorithmus für Labelanzeige (Wähle zwischen
+Zentrum (Standard), Kette, Popmusik-Tabu-Kette, Popmusik-Tabu und Popmusik-Kette)
+\end{itemize}
+
 \minisec{Digitalsierung}
 
 \begin{itemize}
@@ -830,8 +833,10 @@ Mausposition zoomen, Nichts)
 Stützpunkt und Segment)
 \item Definiere voreingestellte Fangtoleranz in Layereinheiten
 \item Definiere Suchradius für Knickpunktbearbeitung in Layereinheiten
-\item Definiere Markierstil von Knickpunkten (Kreuz oder halbtransparenter
-Kreis)
+\item Definiere Markierstil von Knickpunkten (Wähle zwischen Kreuz,
+halbtransparenter Kreis und Keine)
+\item \checkbox{Eingabe der Attributwerte bei der Einstellung neuer Objekte
+unterdrücken}
 \end{itemize}
 
 \minisec{KBS (Koordinatenbezugssystem)}
