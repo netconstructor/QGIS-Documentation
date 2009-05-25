@@ -12,7 +12,7 @@ allen Formaten, die durch die OGR-Bibliothek unterstützt werden, wie etwa
 das ESRI Shape,\index{Shapedaten}\index{ESRI!Shapedaten}\index{SHP Dateien}
 MapInfo MIF (Austauschformat)\index{MIF Dateien}\index{MapInfo!MIF Dateien}
 und MapInfo TAB (Natives Format).\index{TAB Dateien}\index{MapInfo!TAB
-Dateien}. 
+Dateien} 
 Eine Liste von Vektorformaten, die durch die OGR-Bibliothek unterstützt
 werden, finden Sie in Anhang~\ref{appdx_ogr}. 
 
@@ -36,7 +36,7 @@ und wird daher in Kapitel \ref{sec:grass} explizit beschrieben.
 \index{ESRI!Shapedateien}
 \index{SHP Dateien}
 
-ESRI Shape ist das Standard Vektorformat in QGIS und wird duch die OGR Simple
+ESRI Shape ist das Standard Vektorformat in QGIS und wird durch die OGR Simple
 Feature Library \url{http://www.gdal.org/ogr}\index{OGR} bereitgestellt.
 Ein Shape besteht aus mindestens drei Dateien:\index{Shapedateien!Format}
 
@@ -46,10 +46,11 @@ Ein Shape besteht aus mindestens drei Dateien:\index{Shapedateien!Format}
 \item .shx Datei (enthält den räumlichen Index)
 \end{itemize}
 
-Darüberhinaus kann eine weitere Datei mit .prj Endung existieren. Diese enthält
+Darüberhinaus kann eine Datei mit .prj Endung existieren. Diese enthält
 die Projektionsinformationen des Shapes. Es können noch weitere Dateien zu
-einem Shape gehören. Weitere Details finden sich in der technischen
-Spezifikation unter \url{http://www.esri.com/library/whitepapers/pdfs/shapefile.pdf}
+einem Shape gehören. Details dazu finden sich in der technischen
+Spezifikation unter \\
+\url{http://www.esri.com/library/whitepapers/pdfs/shapefile.pdf}
 \index{Shapedateien!Spezifikation}.
 
 \subsubsection{Shape Layer laden}\label{sec:load_shapefile}
@@ -159,13 +160,15 @@ können:
 \end{itemize}
 
 Klicken Sie auf \button{Ok}. Es öffnet sich jetzt ein weiterer Dialog mit
-einer Liste der vorhandenen Unterlayern, die sich in dem ausgewählten Ordner
+einer Liste der vorhandenen Unterlayer, die sich in dem ausgewählten Ordner
 befinden. Wählen Sie die gewünschten Layer aus und klicken Sie wieder auf
 \button{Ok}, um diese in QGIS anzuzeigen.
 
 Auf die gleiche Art und Weise können auch andere Verzeichnis-basierte
 Vektorlayer geladen werden, wie etwa das U.K. National Transfer Format, das
-raw TIGER Format des U.S. Census Bureau oder auch GRASS Vektorlayer.
+raw TIGER Format des U.S. Census Bureau oder auch GRASS Vektorlayer. Letztere
+werden normalerweise aber über das GRASS Plugin geladen (siehe
+Kapitel~\ref{sec:grass}).
 
 \subsection{PostGIS Layer laden}
 \index{Vektorlayer!PostGIS}
@@ -199,12 +202,14 @@ Klicken Sie dazu auf das Icon \toolbtntwo{mActionAddLayer}{PostGIS-Layer
 hinzufügen} in der Werkzeugleiste oder aus dem Menü \mainmenuopt{Layer}. 
 Der \texttt{PostGIS Tabelle(n) hinzufügen}-Dialog erscheint daraufhin. Um
 eine neue Anbindung zu erstellen, klicken Sie auf den Knopf \button{Neu}.
-Sie können dazu auch auf das Icon toolbtntwo{mActionAddNonDbLayer}{Vektorlayer
+Sie können dazu auch auf das Icon \toolbtntwo{mActionAddNonDbLayer}{Vektorlayer
 hinzufügen} klicken, und aus den möglichen Quelltypen
 \radiobuttonon{Datenbank} auswählen und dann auf den Knopf \button{Neu}
 drücken. Der Dialog \dialog{Neue PostGIS-Verbindung erzeugen} öffnet sich,
 und Sie können die notwendigen Parameter aus Tabelle
 \ref{tab:postgis_connection_parms} eingeben und speichern.
+
+\newpage
 
 \begin{table}[h]\index{PostgreSQL!Verbindungsparameter}
 \centering
@@ -279,7 +284,7 @@ geöffnet ist, klicken Sie auf den Knopf
 auswählen, indem Sie die \keystroke{Shift}-Taste beim Auswählen gedrückt
 halten. Weitere Informationen, z.B. zum Umgang mit dem PostgreSQL
 Query-Builder finden Sie in Abschnitt~\ref{sec:query_builder}.
-\item Klicken Sie auf den \button{Hinzufügen}-Knopf, um den Layer zu laden.
+\item Klicken Sie auf den Knopf \button{Hinzufügen}, um den Layer zu laden.
 \end{itemize}
 
 \begin{Tip}\caption{\textsc{PostGIS-Layer}}
@@ -484,6 +489,14 @@ um eine Datei mit der Endung \filename{.sqlite}.
 \subsection{Vektorlayereigenschaften}\label{sec:vectorprops}
 \index{Vektorlayer!Layereigenschaften}
 
+\begin{figure}[H]
+   \begin{center}
+   \caption{Dialog zur Einstellung von Vektorlayereigenschaften
+\nixcaption}\label{fig:vector_symbology}\smallskip
+   \includegraphics[clip=true, width=16cm]{vectorLayerSymbology}
+\end{center}
+\end{figure}
+
 Der Dialog \dialog{Layereigenschaften} stellt Einstellungsmöglicheiten und
 Informationen zu einem Vektorlayer, seiner Darstellung, Metadaten,
 Beschriftungsoptionen, Aktionen und Attributen bereit. Wenn ein Vektorlayer
@@ -493,17 +506,9 @@ im Reiter \tab{Allgemein} angewendet werden, indem Sie auf den Knopf
 \button{Abfrageerstellung} klicken. Ansonsten müssen Sie für
 OGR-unterstützte Formate den \dialog{Query Builder} Dialog über den Knopf
 \button{Erweiterte Suche} im Attributtabellen Fenster starten
-(vgl. Kapitel~\ref{sec:select_by_query}). Um den Dialog für die
+(vgl. Kapitel~\ref{sec:query_builder}). Um den Dialog für die
 Layereigenschaften zu öffnen, doppelklicken Sie auf den Namen des Layers in
 der Legende oder wählen mit der rechten Maustaste \dialog{Eigenschaften} aus.
-
-\begin{figure}[H]
-   \begin{center}
-   \caption{Dialog zur Einstellung von Vektorlayereigenschaften
-\nixcaption}\label{fig:vector_symbology}\smallskip
-   \includegraphics[clip=true, width=16cm]{vectorLayerSymbology}
-\end{center}
-\end{figure}
 
 \subsubsection{Allgemein}\label{vectorgeneraltab}
 
@@ -567,7 +572,7 @@ und wählen Sie eine Bilddatei. Aktuell wird als Datenformat \filename{*.jpeg,
 Nachdem Sie die Darstellung für den Layer festgelegt haben, können Sie die
 Definition als Datei mit der Endung \filename{*.qml} speichern. Dazu drücken
 Sie auf den Knopf \button{Stil speichern \ldots} und entsprechend zum Laden
-einer Stildefinition auf den Knopf {Stil laden \ldots}.
+einer Stildefinition auf den Knopf \button{Stil laden \ldots}.
 
 Wenn Sie möchten, dass immer eine bestimmte Stildefinition verwendet wird, wenn
 Sie einen Layer laden, klicken Sie auf den Knopf \button{Als Standard
@@ -621,7 +626,7 @@ Zeichen, wie ein Backslash \textbackslash gefolgt von dem Zeichen n).
 Nun werden Beschriftungen angezeigt, aber sie sind wahrscheinlich noch zu
 gro"s und schlecht plaziert bezogen auf die Objekte des Layers
 \filename{lakes}. Klicken Sie auf den Knopf \button{Schrift}, ändern Sie
-Schriftart, -stil und -größe. Kl und drücken auf \button{OK}. Ändern Sie
+Schriftart, -stil und -größe und drücken dann auf \button{OK}. Ändern Sie
 entsprechend auf die \button{Farbe} der Beschriftung.
 
 Um die Position der Beschriftungen zu ändern führen Sie folgende Schritte
@@ -920,14 +925,14 @@ Teil des QGIS Beispieldatensatzes (siehe Kapitel~\ref{label_sampledata}).
 
 \begin{enumerate}
 \item Als erstes klicken Sie auf das Icon
-\toolbtntwo{mActionAddOgrLayer}{Vektorlayer hinzufügen}, browsen Sie zum QGIS
-Beispieldatensatz und laden Sie die beiden Vektorlayer \filename{alaska.shp}
+\toolbtntwo{mActionAddOgrLayer}{Vektorlayer hinzufügen}, dann browsen Sie zum QGIS
+Beispieldatensatz und laden die beiden Vektorlayer \filename{alaska.shp}
 und \filename{climate.shp}.
 \item Doppelklicken Sie auf den \filename{climate} Layer in der
 Kartenlegende, um den Dialog \dialog{Layereigenschaften} zu starten.
 \item Klicken Sie auf den Reiter \tab{Diagram Overlay} und wählen Sie
 \button{Balkendiagramm} als Diagrammtyp.
-\item Im Diagram wollen wir die Werte von drei Attributspalten 
+\item Im Diagramm wollen wir die Werte von drei Attributspalten 
 \filename{T\_F\_JAN, T\_F\_JAN} und \filename{T\_F\_MEAN} anzeigen. Als
 erstes selektieren wir \filename{T\_F\_JAN} als Attribute und klicken auf
 \button{Attribute hinzufügen}, dann \filename{T\_F\_JUL} und schließlich
@@ -1468,7 +1473,7 @@ auswählen. Die dritte und einfachste Variante besteht darin, direkt auf das Icon
 \toolbtntwo{mActionOpenTable}{Attributtabelle öffnen} in der Werkzeugleiste
 zu klicken. 
 
-In der Attributtabelle werden sämtliche Attribute alle Objekte des
+In der Attributtabelle werden sämtliche Attribute aller Objekte des
 ausgewählten Vektorlayers angezeigt (siehe Abbildung~\ref{fig:attributetable}).
 
 \begin{figure}[ht]
@@ -1487,7 +1492,7 @@ nach} Feld verwendet werden. Wählen Sie zusätzlich zu dem Attributwert noch
 eine Spalte aus, in welche die Suche erfolgen soll. Danach klicken Sie auf
 \button{Suchen}. Für komplexere Abfragen gibt es den Erweiterte Suche
 \button{...} Knopf. Damit wird der Query Builder gestartet, der in Kapitel
-\ref{sec:select_by_query} genauer beschrieben wird.
+\ref{sec:query_builder} genauer beschrieben wird.
 
 Nach einer Selektion  können Sie sich auch nur die selektierten Werte
 anzeigen lassen, indem Sie auf das Kontrollkästchen \checkbox{Nur gewählte
@@ -1495,7 +1500,7 @@ Datensätze zeigen} aktivieren. Über die Icons in der unteren linken Ecke der
 Attributtabelle kann von links nach rechts die Auswahl gelöscht werden, die
 ausgewählten Objekte nach oben verschoben werden oder die Auswahl invertiert
 oder in eine Zwischenablage kopiert werden. Das Kopieren geht auch mit der
-Tastenkombination keystroke{Strg-C}. Weiterhin können Sie zu den selektierten
+Tastenkombination \keystroke{Strg-C}. Weiterhin können Sie zu den selektierten
 Werten im Kartenfenster zoomen oder den Bearbeitungsmodus umschalten, um
 einzelne Werte in der Attributtabelle zu editieren.  
 
