@@ -252,15 +252,11 @@ QGISEXTERN void unload(QgisPlugin* theQgsPointConverterPluginPointer)
 \end{verbatim}
 
 
-\minisec{Step 3: Read point features from the active layer and write to text file}
+\minisec{Passo 3: Leggere le caratteristiche del punto dal layer attivo e scriverle in file di testo}
 
-To read the point features from the active layer we need to query the current
-layer and the location for the new text file. Then we iterate through all
-features of the current layer, convert the geometries (vertices) to points,
-open a new file and use QTextStream to write the x- and y-coordinates
-into it.
+Per leggere le caratteristiche del punto dal layer attivo è necessario specificare il layer corrente e la posizione del nuovo file di testo. Quindi si ripete per tutte le caratteristiche dell layer corrente, si convertono le geometrie (vertici) a punti, si apre un nuovo file e si usa QTextStream per scrivere le coordinate  X e Y.
 
-\textbf{f) Open qgspointconverterplugin.h again and extend existing content to}
+\textbf{f) Aprire qgspointconverterplugin.h di nuovo e estendere i contenuti esistenti a}
 
 \begin{verbatim}
 class QgsGeometry;
@@ -282,7 +278,7 @@ void convertMultiPolygon(QgsGeometry* geom, const QString& attributeString, \
 		  QTextStream& stream) const;
 \end{verbatim}
 
-\textbf{g) Open qgspointconverterplugin.cpp again and extend existing content to}:
+\textbf{g) Aprire qgspointconverterplugin.cpp di nuovo e estendere i contenuti esistenti a}:
 
 \begin{verbatim}
 #include "qgsgeometry.h"
@@ -483,16 +479,11 @@ attributeString, QTextStream& stream) const
 }
 \end{verbatim}
 
-\minisec{Step 4: Copy the feature attributes to the text file}
+\minisec{Passo 4: Copiare gli attributi delle caratteristiche in un file di testo}
 
-At the end we extract the attributes from the active layer using
-QgsVectorDataProvider::fieldNameMap(). For each feature we extract the field
-values using QgsFeature::attributeMap() and add the contents comma separated
-behind the x- and y-coordinates for each new point feature. For this step
-there is no need for any furter change in \filename{qgspointconverterplugin.h} 
+Alla fine si estraggono gli attributi dal layer attivo usando QgsVectorDataProvider::fieldNameMap(). Per ogni caratteristica si estraggono i valori di campo usando QgsFeature::attributeMap() e si aggiungono i contenuti separati da virgole di seguito alle coordinate X e Y per ogni nuovo punto. Per questo step non c'è bisogno di alcun altro cambiamento in \filename{qgspointconverterplugin.h} 
 
-\textbf{h) Open qgspointconverterplugin.cpp again and extend existing content
-to}:
+\textbf{h) Aprire qgspointconverterplugin.cpp Anuovo e estendere i contenuti esistenti a}:
 
 \begin{verbatim} 
 #include "qgspointconverterplugin.h"
@@ -791,19 +782,16 @@ QGISEXTERN void unload(QgisPlugin* theQgsPointConverterPluginPointer)
 
 \end{verbatim}
 
-\subsection{Further information}
+\subsection{Ulteriori informazioni}
 
-As you can see, you need information from different sources to write QGIS C++
-plugins. Plugin writers need to know C++, the QGIS plugin interface as
-well as Qt4 classes and tools. At the beginning it is best to learn from
-examples and copy the mechanism of existing plugins. 
+Come si vede, c'è necessità di informazioni da diverse fonti per scrivere QGIS plugin in C++. Gli sviluppatori di plugin devono conoscere C++, l'interfaccia plugin di QGIS, nonchè le classi e gli strumenti Qt4. All'inizio è meglio imparare dagli esempi e copiare i meccanismi dei plugin esistenti. 
 
-There is a a collection of online documentation that may be usefull for
-QGIS C++ programers:
+Online è disponibile una documentazione che può risultare utile per i programmatori
+QGIS C++:
 
 \begin{itemize}
-\item QGIS Plugin Debugging: \url{http://wiki.qgis.org/qgiswiki/DebuggingPlugins}
-\item QGIS API Documentation: \url{http://svn.qgis.org/api_doc/html/}
-\item Qt documentation: \url{http://doc.trolltech.com/4.3/index.html}
+\item Debugging dei plugin QGIS: \url{http://wiki.qgis.org/qgiswiki/DebuggingPlugins}
+\item Documentazione QGIS API: \url{http://svn.qgis.org/api_doc/html/}
+\item DocumentationQt: \url{http://doc.trolltech.com/4.3/index.html}
 \end{itemize}
 
