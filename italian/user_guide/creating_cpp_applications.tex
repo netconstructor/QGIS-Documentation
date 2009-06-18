@@ -1,24 +1,14 @@
-\section{Creating C++ Applications}
+ \section{Creare applicazioni C++}
 
-Not everyone wants a full blown GIS desktop application. Sometimes you want
-to just have a widget inside your application that displays a map while the
-main goal of the application lies elsewhere. Perhaps a database frontend with
-a map display? This Section provides two simple code examples by Tim Sutton. 
-They are available in the qgis subversion repository together with more
-interesting tutorials. Check out the whole repository from: 
+Non tutti vogliono un'applicazione GIS completa. Talvolta si vuole solamente avereun widget nella propria applicazione che mostri una mappa mentre lo scopo principale dell'applicazione è un altro. Forse un database frontend con un mappa? Questa Sezione fornisce due semplici esempi di scritti da Tim Sutton.
+Sono disponibili nell'archivio qgis subversion insieme con altre interessanti guide. L'intero archivio può essere esplorato: 
 \filename{https://svn.osgeo.org/qgis/trunk/code\_examples/}
 
-\subsection{Creating a simple mapping widget}\label{subsec:simple_widget}
+\subsection{Creare un semplice widget mappa}\label{subsec:simple_widget}
 
-With this first tutorial we take a little walk through creating a simple mapping
-widget. It won't do anything much - just load a shape file and display it in
-a random colour. 
-But it should give you an idea of the potential for using QGIS as an embedded
-mapping component. Before we carry on, many thanks to Francis Bolduc who wrote
-the beginnings of this demo. He kindly agreed to make his work generally
-available.
+Con questa guida si esplora come creare un semplice widget di mappazione. Esso on farà molto - solo caricare uno shape file e mostrarlo in colori casuali. Ma dovrebbe dare un'idea del potenziale per usare QGIS come un componente di mappazione incorporato. Prima di procedere, molti ringraziamenti a Francis Bolduc che ha scritto l'inizio di questo demo. Egli ha gentilmente acconsentito a rendere il suo lavoro pubblicamente disponibile.
 
-We start with typical adding the neccessary includes for our app:
+Si comincia con la tipica aggiunta del necessario "includes" per la nostra applicazione:
 
 \begin{verbatim}
 //
@@ -38,25 +28,15 @@ We start with typical adding the neccessary includes for our app:
 #include <QWidget>
 \end{verbatim}
 
-We use QgsApplication instead of Qt's QApplication, and get some added
-benifits of various static methods that can be used to locate library paths
-and so on.
+Si usa QgsApplication invece di Qt's QApplication, e si ottengono alcuni benmifici aggiuntivi di vari metodi statici che possono essere usati per localizzare i percorsi della libreria e così via.
 
-The provider registry is a singleton that keeps track of vector data provider
-plugins. It does all the work for you of loading the plugins and so on. The
-single symbol renderer is the most basic symbology class. It renders points,
-lines or polygons in a single colour which is chosen at random by default
-(though you can set it yourself). Every vector layer must have a symbology
-associated with it.
+Il registro del provider è un singleton che tiene traccia dei plugin del provider di dati vettoriali. Fa tutto il lavoro di caricare i plugin e così via. Il generatore di singolo simbolo è la più basilare classe di simbologia. Genera punti linee o poligoni in un singolo colore che viene scelto predefinitamente in modo casuale (anche se lo si può impostare in modo personalizzato). Ogni layer vettoriale deve avere una simbologia da esso associata.
 
-The map layer registry keeps track of all the layers you are using. The
-vector layer class inherits from maplayer and extends it to include
-specialist functionality for vector data.
+Il registro del layer di mapp tiene traccia di tutti i layer in uso. La classe del layer vettoriale eredita da maplayer e lo estende ad includere funzionalità specialistiche per dati vettoriali.
 
-Finally the mapcanvas is really the nub of the matter. Its the drawable
-widget that our map will be drawn onto.
+Infine il mapcanvas è realmente il nocciolo della questione. E' un widget disegnabile su cui sarà disegnata la mappa.
 
-Now we can move on to initialising our application....
+Ora si può andare oltre alla inizializzazione della nostra applicazione....
 
 \begin{verbatim}
 int main(int argc, char ** argv)
@@ -71,31 +51,22 @@ int main(int argc, char ** argv)
 
 \end{verbatim}
 
-So now we have a qgsapplication and we have defined some variables. Since I
-tested this on the Ubuntu 8.10, I just specified the location of the vector
-provider plugins as being inside the my development install directory. It
-would probaby make more sense in general to keep the QGIS libs in one of the
-standard library search paths on your system (e.g. /usr/lib) but this way
-will do for now.
+Così ora abbiamo un'applilcazione qgs e abbiamo definito alcue varibili. Dato che ho testato su Ubuntu 8.10, specifico qui le posizione dei plugin del provider vettoriale come nella mia directory di istallazione sviluppo. Probabilmente avrebbe più senso in generale tenere le lilbrerie QGIS libs in uno dei percorsi di ricerca delle library standard del vostro sistemas (ad es. /usr/lib) ma per ora andrà bene anche così.
 
-The next two variables defined here just point to the shapefile I am going to
-be using (and you should substitute your own data here).
+Le prossime due variabili definite qui indicano solo il file shape che si userà (e qui dovreste sostituire i vostri dati).
 
-The provider name is important - it tells qgis which data provider to use to
-load the file. Typically you will use 'ogr' or 'postgres'.
+Il nome del provider è importante - dice a QGIS che provider di dati usare per caricare il file. Tipicamente si userà 'ogr' o 'postgres'.
 
-Now we can go on to actually create our layer object.
+Ora possiamo creare il ayer oggetto.
 
 \begin{verbatim}
   // Instantiate Provider Registry
   QgsProviderRegistry::instance(myPluginsDir);
 \end{verbatim}
 
-First we get the provider registry initialised. Its a singleton class so we
-use the static instance call and pass it the provider lib search path. As it
-initialises it will scan this path for provider libs.
+Prima si inizializza il registro del provider. E' una classe singleton quindi si usa un'istanza di chiamata statica e si passa il percorso di ricerca della library del provider. Appena inizializzato scansionerà questo percorso alla ricerca di lbrerie del provider.
 
-Now we go on to create a layer...
+Ora si crea un layer...
 
 \begin{verbatim}
   QgsVectorLayer * mypLayer =
@@ -121,18 +92,8 @@ QgsSingleSymbolRenderer(mypLayer->geometryType());
 
 \end{verbatim}
 
-The code is fairly self explanatory here. We create a layer using the
-variables
-we defined earlier. Then we assign the layer a renderer. When we create a
-renderer, we need to specify the geometry type, which do do by asking the
-vector layer for its geometry type. Next we add the layer to a layerset
-(which
-is used by the QgsMapCanvas to keep track of which layers to render and in
-what
-order) and to the maplayer registry. Finally we make sure the layer will be
-visible.
-
-Now we create a map canvas on to which we can draw the layer.
+Il codice è adeguatamente auto esplicativo qui. Si crea un layer usando le variabili definite prima. Poi si assegna al layer un generatore di immagini. Quando si crea un generatore di immagini, dobbiamo specificare il tipo di geometria, cosa che si fa chiedendo allo stato vettoriale il suo tipo di geometria. Poi si aggiunge il layer ad un set di layer (che è usato da QgsMapCanvas per tenere traccia di quali layer generare graficamente e in che ordineo) e al registro di maplayer. Infine ci si assicura che il layer sarà visibile.
+Ora si crea un map canvas sul quale disegnare il layer.
 
 \begin{verbatim}
   // Create the Map Canvas
