@@ -109,10 +109,7 @@ Ora si crea un map canvas sul quale disegnare il layer.
 
 \end{verbatim}
 
-Once again there is nothing particularly tricky here. We create the canvas
-and then we set its extents to those of our layer. Next we tweak the canvas a bit
-to draw antialiased vectors. Next we set the background colour, unfreeze the
-canvas, make it visible and then refresh it.
+Di nuovo, non c'è niente di particolarmente complesso in questo. Si crea il canvas e si imposta la sua estensione a quella del layer. Poi si aggiusta un po' il canvas per disegnare vettori a distorsione minima. Infine si imposta il colore di sfondo, si sblocca il canvas, si rende visibile e quindi si aggiorna.
 
 \begin{verbatim}
   // Start the Application Event Loop
@@ -121,8 +118,7 @@ canvas, make it visible and then refresh it.
 
 \end{verbatim}
 
-In the last step we simply start the Qt event loop and we are all done. You
-can check out, compile and run this example using cmake like this:
+Nell'ultimo passaggio semplicemente si avvia il loop di eventi Qt ed è fatta. Si può controllare, compilare e lanciare usando cmake come questo:
 
 \begin{verbatim}
 svn co
@@ -139,50 +135,34 @@ make
 ./timtut1
 \end{verbatim}
 
-When we compile and run it here is what the running app looks like:
+Quando lo si compila e lo si lancia ecco come appare l'applicazione funzionante:
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{Simple C++ Application \osxcaption}\label{fig:cpp1_application}\smallskip
+   \caption{Semplice applicazione C++ \osxcaption}\label{fig:cpp1_application}\smallskip
    \includegraphics[clip=true]{cpp1_application}
 \end{center}
 \end{figure}
 
-\subsection{Working with QgsMapCanvas}
+\subsection{Lavorare con QgsMapCanvas}
 
-In Section~\ref{subsec:simple_widget} we showed you the usage of the
-QgsMapCanvas api to create a simple application that loads a shapefile and
-displays the points in it. But what good is a map that you can't interact
-with? 
+nella Sezione~\ref{subsec:simple_widget} è stato illustrato l'uso del QgsMapCanvas api per creare una semplice applicazione che carica un file shape e mostra i punti in esso contenuti. Ma a cosa serve una mappa con la quale non si può interagire?
 
-In this second tutorial I will extend the last tutorial by making it a
-QMainWindow application with a menu, toolbar and canvas area. We show you how
-to use QgsMapTool - the base class for all tools that need to interact with
-the map canvas.
-The purpose is to provide a demonstrator project, so I wont promise to write the most
-elegant or robust C++ code. The project will provide 4 toolbar icons for
+In questa seconda guida la guida precedente viene estesa rendendola un'applicazione QMainWindow con un menu, una barra degli strumenti e un'area canvas. Si illustra come usare QgsMapTool - la classe base per tutti gli strumenti che devono interagire con il canvas della mappa.
+Lo scopo è fornire un progetto dimostrativo, così non prometto di scrivere il più elegante o il più robusto dei codici C++. Il progetto fornirà 4 icon per barre degli strumenti per
 
 \begin{itemize}
- \item loading a map layer (layer name is hard coded in the application
- \item zooming in
- \item zooming out
- \item panning
+ \item caricare un layer mappa (il nome del layer è incorporato nell'applicazione)
+ \item ingrandire
+ \item ridurre
+ \item panoramica
 \end{itemize}
 
-In the working directory for the tutorial code you will find a number of files
-including c++ sources, icons and a simple data file under data. There is also
-the .ui file for the main window.
+Nella directory di lavoro per il codice guida si trovano un certo numero di file incluse sorgenti c++, icone e un semplice file di dati sotto il nome dati. C'è anche il file .ui per la finestra principale.
 
-\textbf{Note:} You will need to edit the .pro file in the above svn directory to
-match your system.
+\textbf{Nota:} Sarà necessario editare il file .pro nella directory svn soprastante per abbinarlo al proprio sistema.
 
-Since much of the code is the same as the previous tutorial, I will focus on
-the MapTool specifics - the rest of the implementation details can be
-investigated by checking out the project form SVN. A QgsMapTool is a class that
-interacts with the MapCanvas using the mouse pointer. QGIS has a number of
-QgsMapTools implemented, and you can subclass QgsMapTool to create your own. In
-mainwindow.cpp you will see I include the headers for the QgsMapTools near the
-start of the file:
+dato che il codice è lo stesso della precedente guida, ci focalizzeremo sulle specifiche MapTool - il resto dei dettagli di implementazione può essere investigato esplorando il progetto da SVN. Un QgsMapTool è una clasee che interagisce con il MapCanvas usando il puntatore del mouser. QGIS ha un gran numero di QgsMapTools implementati, e si possono fare delle sottoclassi in QgsMapTool per crearsi il proprion. In mainwindow.cpp si può vedere che ho incluso dei capipaginay per il QgsMapTools vicino all'inzionde file:
 
 \begin{verbatim}
      //
@@ -201,9 +181,7 @@ start of the file:
      //#include "qgsmeasure.h"
 \end{verbatim}
 
-As you can see, I am only using two types of MapTool subclasses for this
-tutorial, but there are more available in the QGIS library. Hooking up our
-MapTools to the canvas is very easy using the normal Qt4 signal/slot mechanism:
+Come si vede, uso soltanto due tipi di sottoclassi MapTool per questa guida, ma ce ne sono altre disponibili nella libreria QGIS. Collegare MapTools al canvas è molto semplice usando il normale meccanismo Qt4 segnale/slot:
 
 \begin{verbatim}
      //create the action behaviours
@@ -213,8 +191,7 @@ MapTools to the canvas is very easy using the normal Qt4 signal/slot mechanism:
      connect(mActionAddLayer, SIGNAL(triggered()), this, SLOT(addLayer()));
 \end{verbatim}
 
-Next we make a small toolbar to hold our toolbuttons. Note that the mpAction*
-actions were created in designer.
+Quindi si crea una piccola barra degli strumenti per contenere i pulsanti degli strumenti. Da notare che le azioni mpAction* sono state create in designer.
 
 \begin{verbatim}
      //create a little toolbar
@@ -225,8 +202,7 @@ actions were created in designer.
      mpMapToolBar->addAction(mpActionPan);
 \end{verbatim}
 
-Thats really pretty straightforward Qt stuff too. Now we create our three map
-tools:
+Anche la parte Qt è decisamente diretta. Ora si creano tre strumenti della mappa:
 
 \begin{verbatim}
      //create the maptools
@@ -238,10 +214,7 @@ tools:
      mpZoomOutTool->setAction(mpActionZoomOut);
 \end{verbatim}
 
-Again nothing here is very complicated - we are creating tool instances, each
-of which is associated with the same mapcanvas, and a different QAction. When
-the user selects one of the toolbar icons, the active MapTool for the canvas is
-set. For example when the pan icon is clicked, we do this:
+Di nuovo, niente qui è molto complicato - si creano le istanze degli strumenti, ognuno dei quali è associato con lo stesso mapcanvas, ed una diversa QAction. Quando l'utente seleziona una delle icone della barra degli strumenti, il MapTool attivo per il canvas viene impostato. Per esempio, quando l'icona panoramica viene premuta, si fa questo:
 
 \begin{verbatim}
     void MainWindow::panMode()
@@ -252,19 +225,17 @@ set. For example when the pan icon is clicked, we do this:
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{QMainWindow application with a menu, toolbar and canvas area
+   \caption{Applicazione QMainWindow con un menu, una barra degli strumenti e un'area canvas
 \osxcaption}\label{fig:cpp2_application}\smallskip
    \includegraphics[clip=true, width=\textwidth]{cpp2_application}
 \end{center}
 \end{figure}
 
-\minisec{Conclusion}
+\minisec{Conclusioni}
 
-As you can see extending our previous example into something more functional
-using MapTools is really easy and only requires a few lines of code for each
-MapTool you want to provide.
+Come si vede, ampliare il precedente esempio a qualcosa di più funzionale usando MapTools è veramente molto facile e richiede solo poche righe di codice per ogni MapTool che si voglia fornire.
 
-You can check out and build this tutorial using SVN and CMake using the following steps:
+Si può controllare e costruire questa guiida usando SVN e CMake usando i seguenti passaggi:
 
 \begin{verbatim}
 svn co https://svn.osgeo.org/qgis/trunk/code_examples/2_basic_main_window
