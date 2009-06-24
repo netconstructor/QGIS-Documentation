@@ -1,78 +1,60 @@
 % vim: set textwidth=78 autoindent:
 
-\section{Creating PyQGIS Applications}
+\section{Creare applicazioni PyQGIS}
 
 % when the revision of a section has been finalized, 
 % comment out the following line:
 % \updatedisclaimer
 
-One of the goals of QGIS is to provide not only an application, but a set of
-libraries that can be used to create new applications. This goal has been
-realized with the refactoring of libraries that took place after the release
-of 0.8. Since the release of 0.9, development of standalone applications using
-either C++ or Python is possible. We recommend you use QGIS 1.0.0 or greater
-as the basis for your pythong applications because since this version we now
-provide a stable consistent API.
+Uno degli obiettivi di QGIS è fornire non soltanto un'applicazione ma anche un set di librerie che possano essere usate per creare nuove applicazioni. Questo obiettivo è stato realizzato mediante la ristrutturazione delle libreria che ha avuto luogo dopo il rilascio della versione 0.8. Dal rilascio dell aversione 0.9, è possibile lo sviluppo di applicazioni indipendenti usando C++ o Python. Si raccomanda di usare QGIS 1.0.0 o superiore come base per le proprie applicazioni python poichè da questa versione si fornisce un API stabile e coerente.
 
-In this chapter we'll take a brief look at the process for creating a
-standalone Python application. The QGIS blog has several examples of creating
-PyQGIS\footnote{An application created using Python and the QGIS bindings}
-applications. We'll use one of them as a starting point to get a look at how
-to create an application.
+In questo capitolo si darà un'occhiata al processo di creazione di un'applicazione Python indipendente. Il blog di QGIS ha vari esempi su come creare applicazioni PyQGIS\footnote{Un'applicazione creata usando Python ed i legami QGIS}. Useremo una di esse come punto di partenza per un'occhiata a come creare un'applicazione.
 
-The features we want in the application are:
+Le funzioni che vogliamo nell'applicazione sono:
 
 \begin{itemize}
-\item Load a vector layer
-\item Pan
-\item Zoom in and out
-\item Zoom to the full extent of the layer
-\item Set custom colors when the layer is loaded
+\item Caricare un layer vettoriale
+\item Panoramica
+\item Ingrandimento e riduzione
+\item Ingrandiamento alla completa estensione del layer
+\item Impostazione di colori personlaizzati al caricamento del layer
 \end{itemize} 
 
-This is a pretty minimal feature set. Let's start by designing the GUI using
-Qt Designer. 
+Questo è un set di funzioni piuttosto minimo. Cominciamo progettando il GUI usando Qt Designer.
 
-\subsection{Designing the GUI}
+\subsection{Progettare il GUI}
 
-Since we are creating a minimalistic application, we'll take the same
-approach with the GUI. Using Qt Designer, we create a simple MainWindow with
-no menu or toolbars. This gives us a blank slate to work with. To create the
-MainWindow:
+Dato che stiamo creando un'applicazione minimale, useremo lo stesso approccio per il GUI. Usando Qt Designer, si crea una semplice finestra principale (MainWindow) priva di menu e barre degli strumenti. Questo ci da una lavagna bianca per lavorare. Per creare la finestra principale:
 
 \begin{enumerate}
-\item Create a directory for developing the application and change to it
-\item Run Qt Designer
-\item The \qtdialog{New Form} dialog should appear. If it doesn't, choose
-\qtdropmenuopt{New Form...} from the \qtmainmenuopt{File} menu.
-\item Choose \qtdropmenuopt{Main Window} from 
-the \qtdropmenuopt{templates/forms} list
-\item Click \qtdropmenuopt{Create} 
-\item Resize the new window to something manageable
-\item Find the \qtdropmenuopt{Frame} widget in the list 
-(under \qtdropmenuopt{Containers}) and drag it to
-the main window you just created
-\item Click outside the frame to select the main window area 
-\item Click on the \qtdropmenuopt{Lay Out in a Grid} tool. When you do, the frame
-will expand to fill your entire main window
-\item Save the form as \usertext{mainwindow.ui} 
+\item Creare una directory per sviluppare l'applicazione andare in essa
+\item Lanciare Qt Designer
+\item Dovrebbe apparire la finestra di dialogo \qtdialog{New form}. Se non appare, scegliere
+\qtdropmenuopt{New form...} dal menu \qtmainmenuopt{File}.
+\item Scegliere \qtdropmenuopt{Main Window} dalla lista 
+the \qtdropmenuopt{templates/forms} 
+\item Premere \qtdropmenuopt{Create} 
+\item Ridimensionare la nuova finestra ad una dimensione maneggevole
+\item Trovare nella lista il widget \qtdropmenuopt{Frame} 
+(sotto \qtdropmenuopt{Containers}) e trascinarlo nella finestra principale appena creata
+\item Premere all'esterno della cornice per selezionare l'area della finestra principale 
+\item Premere lo strumento \qtdropmenuopt{Lay Out in a Grid}. Quando si fa questo, ila cornice si allarga a riempire l'intera finestra principale
+\item Salvare il modulo come \usertext{mainwindow.ui} 
 \item \qtdropmenuopt{Exit} Qt Designer
 \end{enumerate} 
 
-Now compile the form using the PyQt interface compiler:
+Ora compilare il modulo usando l'interfaccia compilatore PyQt:
 
 \begin{verbatim}
    pyuic4 -o mainwindow_ui.py mainwindow.ui
 \end{verbatim}
 
-This creates the Python source for the main window GUI. Next we need to create
-the application code to fill the blank slate with some tools we can use.
+Questo crea la sorgente Python per la finestra principale GUI. Poi si deve creare il codice dell'applicazione per riempire la lavagna bianca con alcuni strumenti che si possono usare.
 
-\subsection{Creating the MainWindow}
+\subsection{Creare la Finestra Principale}
 
-Now we are ready to write the \classname{MainWindow} class that will do the real work.
-Since it takes up quite a few lines, we'll look at it in chunks, starting
-with the import section and environment setup:
+Adesso siamo pronti a scrivere la classe \classname{MainWindow} che farà il vero lavoro.
+Dato che ci vogliono parecchie linee, ci daremo un'occhiata a pezzi, cominciando con la sezione importazione e il settaggio dell'ambiente:
 
 \begin{verbatim}
 1 # Loosely based on:
@@ -95,17 +77,13 @@ with the import section and environment setup:
 18 qgis_prefix = os.getenv("QGISHOME")
 \end{verbatim}
 
-Some of this should look familiar from our plugin, especially the PyQt4 and
-QGIS imports. Some specific things to note are the import of our GUI in line
-14 and the import of our CORE library on line 9.
+Un po' di questo dovrebbe apparire familiare dal nostro plugin, specialmente le importazioni PyQt4 e
+QGIS. Alcune cose specifiche da notare sono le importazioni del nostro GUI alla linea
+14 e l'importazione nella libreria CORE alla linea 9.
 
-Our application needs to know where to find the QGIS installation. Because
-of this, we set the \usertext{QGISHOME} environment variable to point to the 
-install directory of QGIS 1.x In line 20 we store this value from
-the environment for later use.
+La nostra applicazione necessita di sapere dove trovare l'istallazione di QGIS. Per questo, impostiamo l'ambiente variabile \usertext{QGISHOME} in modo che indichi la directory di istallazione di QGIS 1.x Alla linea 20 memorizziamo questo valore dall'mbiente per un uso successivo.
 
-Next we need to create our \classname{MainWindow} class which will contain
-all the logic of our application.
+Poi è necessario creare la nostra classe \classname{MainWindow} che conterrà tutta la logica della nostra applicazione.
 \begin{verbatim}
 21 class MainWindow(QMainWindow, Ui_MainWindow):
 22 
@@ -166,38 +144,23 @@ all the logic of our application.
 77     self.toolZoomOut = QgsMapToolZoom(self.canvas, True) # true = out
 \end{verbatim}
 
-Lines 21 through 27 are the basic declaration and initialization of the 
-\classname{MainWindow} and the set up of the user interface using the 
-\method{setupUi} method. This is required for all applications.
+Le linee da 21 a 27 costituiscono la dichiarazione di base e l'inizializzazione della 
+\classname{MainWindow} e le impostazioni dell'interfaccia utente usando il metodo 
+\method{setupUi}. Questo è richiesto per tutte le applicazioni.
 
-Next we set the title for the application so it says something more
-interesting than \usertext{MainWindow} (line 30). Once that is
-complete, we are ready to complete the user interface. When we created it in
-Designer, we left it very sparse---just a main window and a frame. You could
-have added a menu and the toolbar using Designer, however we'll do it with
-Python.
+Quindi si imposta il titolo per l'applicazione così dice qualcosa di più interessante che \usertext{MainWindow} (linea 30). Una volta che questo è fatto, siamo pronti a completare l'interfaccia utente. Quando la si è creata in Designer, l'abbiamo lasciata abbozzata---solo una finestra principale e una cornice. Si può aver aggiunto un menu ed una barra degli strumenti usando Designer, comunque lo faremo con Python.
 
-In lines 33 through 38 we set up the map canvas, set the background color to a
-light blue, and enable antialiasing.  We also tell it not to use a
-\classname{QImage} for rendering (trust me on this one) and then set the
-canvas to visible by calling the \method{show} method.
+Nelle linee 33 fino a 38 si impostano il canvas della mappa, il colore di sfondo a celeste e si abilita la distorsione minima. Si specifica anche di non usare una \classname{QImage} per la rappresentazione grafica (fidatevi a questo riguardo) e poi si imposta il canvas a visibile chiamando il metodo \method{show}.
 
-Next we set the layer to use a vertical box layout within the frame and add
-the map canvas to it in line 43.
+Quindi si imposta il layer affinchè usi uno schema a riquadro verticale all'interno della cornice e si aggiunge ad esso il canvas della mappa alla linea 43.
 
-Lines 48 to 63 set up the actions and connections for the tools in our
-toolbar. For each tool, we create a \classname{QAction} using the icon we
-defined in the QGIS classic theme.  Then we connect up the
-\usertext{activated} signal from the tool to the method in our class that will
-handle the action. This is similar to how we set things up in the plugin
-example.
+Le linee da 48 a 63 impostano le azioni e le connessioni per gli strumentinella nostra barra degli strumenti. Per ogni strumento, si crea una \classname{QAction} usando l'icona che abbiamo definito nel tema classico di QGIS. Poi colleghiamo il segnale \usertext{activated} dallo strumento al metodo nella nostra classe che gestirà l'azione. Questo è simile a come impostare le cose nell'esempio plugin.
 
-Once we have the actions and connections, we need to add them to the toolbar.
-In lines 66 through 72 we create the toolbar and add each tool to it.
+Una volta che si hanno l'azione e la connessione, si deve aggiungerle alla barra degli strumenti.
+Nelle linee da 66 a 72 si crea la barra degli strumenti e si aggiunge ad esse ogni strumento.
 
-Lastly we create the three map tools for the application (lines 75 through
-77). We'll use the map tools in a moment when we define the methods to make
-our application functional. Let's look at the methods for the map tools.
+Infine si creano tre strumenti mappa per l'applicazione (linee da 75 a
+77). Si useranno gli strumenti mappa in un momento dopo aver definito i metodi per rendere l'applicazione funzionale. Vediamo i metodi per gli strumenti mappa.
 
 \begin{verbatim}
 78   # Set the map tool to zoom in
