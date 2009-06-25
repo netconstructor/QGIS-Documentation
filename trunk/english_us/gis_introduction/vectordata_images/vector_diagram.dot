@@ -1,0 +1,72 @@
+//To generate the graph use:
+//cat vector_diagram.dot | dot -T png -o vector_diagram.png ; display vector_diagram.png
+
+
+digraph G {
+  //
+  // General Diagram Setup (global props)
+  //
+  concentrate=true;
+  ratio=fill;
+  size="12,12";
+  node [shape=box fontsize=12 fontname="Arial"];
+  //edge  [arrowtail=inv, arrowhead=none];
+  VectorFeature[color=black, fontcolor=white, style=filled, weight=8];
+  PointFeature[color=cyan, fontcolor=black, style=filled, weight=10];
+  LineFeature[color=cyan, fontcolor=black, style=filled, weight=10];
+  PolygonFeature[color=cyan, fontcolor=black, style=filled, weight=10];
+  // If the name begins with cluster, the nodes and edges within the subgraphs
+  // are drawn together (within a bounding rectangle). 
+  // Only specify the nodes in the cluster, not the relationships for better results
+  //subgraph clusterVertex {
+    PointX [label="X\n(e.g. Longitude)\n"];
+    PointY [label="Y\n(e.g. Latitude)\n"];
+    PointZ [label="Z\n(height\nabove sea level)"];
+  //}
+
+  PointFeature [label="Point\nFeature"];
+  LineFeature [label="Line\nFeature"];
+  PolygonFeature [label="Polygon\nFeature"];
+  
+  
+  LineX [label="X\n(e.g. Longitude)\n"];
+  LineY [label="Y\n(e.g. Latitude)\n"];
+  LineZ [label="Z\n(height\nabove sea level)"];
+  
+  PolygonX [label="X\n(e.g. Longitude)\n"];
+  PolygonY [label="Y\n(e.g. Latitude)\n"];
+  PolygonZ [label="Z\n(height\nabove sea level)"];
+
+  PointVertex [label="Has only one\nVertex"];
+  LineVertex [label="Has at least two\nVertices"];
+  PolygonVertex [label="Has at least four\nVertices"];
+
+  PointAttributes [label="Attributes describe the\nfeature e.g. 'Lamp post'"];
+  LineAttributes [label="Attributes describe the\nfeature e.g. 'Secondary Road'"];
+  PolygonAttributes [label="Attributes describe\nthe feature e.g. 'Municipal Dam'"];
+
+  PointVertex -> PointX;
+  PointVertex -> PointY;
+  PointVertex -> PointZ;
+  
+  LineVertex -> LineX ;
+  LineVertex -> LineY ;
+  LineVertex -> LineZ ;
+  
+  PolygonVertex -> PolygonX;
+  PolygonVertex -> PolygonY;
+  PolygonVertex -> PolygonZ;
+  
+  VectorFeature -> PointFeature ;
+  VectorFeature -> LineFeature ;
+  VectorFeature -> PolygonFeature ;
+
+  PointFeature -> PointAttributes ;
+  LineFeature -> LineAttributes ;
+  PolygonFeature -> PolygonAttributes ;
+
+  PointFeature -> PointVertex ;
+  LineFeature -> LineVertex ;
+  PolygonFeature -> PolygonVertex ;
+
+}

@@ -1,0 +1,19 @@
+//To generate the graph use:
+//cat raster_diagram.dot | dot -T png -o raster_diagram.png ; display raster_diagram.png
+
+
+digraph G {
+  concentrate=true;
+  ratio=fill;
+  size="4,4";
+  node [shape=box fontsize=12 fontname="Arial"];
+  //edge  [arrowtail=inv, arrowhead=none];
+  Raster[color=black, fontcolor=white, style=filled, weight=18];
+  SpatialResolution [label="Spatial Resolution"];
+  SpectralResolution [label="Spectral Resolution"] ;
+  BandCount [label="Band Count"];
+  Raster -> SpatialResolution ;
+  Raster -> SpectralResolution  ;
+  Raster -> BandCount ;
+
+}
