@@ -180,19 +180,12 @@ Infine si creano tre strumenti mappa per l'applicazione (linee da 75 a
 92     self.canvas.zoomFullExtent()
 \end{verbatim}
 
-For each map tool, we need a method that corresponds to the connection we made
-for each action. In lines 79 through 88 we set up a method for each of the
-  three tools that interact with the map. When a tool is activated by clicking
-  on it in the toolbar, the corresponding method is called that ``tells'' the
-  map canvas it is the active tool. The active tool governs what happens when
-  the mouse is clicked on the canvas.
+Per ogni strumento della mappa, è necessario un metodo che corrisponde alla connessione fatta per ogni azione. Nelle linee da 79 a 88 impostiamo un metodo per ognuno dei tre strumenti che interagiscono con la mappa. Quando uno strumento è attivato premendo il suo pulsante nella barra degli strumenti, è attivato il metodo corrispondente che 'dice' al canvas della mappa che quello è lo strumento attivo. Lo strumento attivo governa cosa avviene quando il maouse è premuto nel canvas.
 
-The \usertext{zoom to full extent} tool isn't a map tool---it does its job
-without requiring a click on the map. When it is activated, we call the
-\method{zoomFullExtent} method of the map canvas (line 92).  This completes
-the implementation of all our tools except one---the \usertext{Add Layer}
-tool. %FIXME 
-Let's look at it next:
+Lo strumento \usertext{zoom to full extent} non è uno strumento mappa---svolge il suo lavoro senza richiedere un  click sulla mappa. Quando è attivato, viene chiamato il metodo del canvas della mappa
+\method{zoomFullExtent} (line 92).  Questo completa l'implementazione di tutti i nostri strumenti eccetto uno---lo strumento \usertext{Add Layer}. %FIXME 
+Analizziamolo:
+
 
 \begin{verbatim}
 93   # Add an OGR layer to the map
@@ -224,40 +217,19 @@ Let's look at it next:
 119    self.canvas.setLayerSet(layers)
 \end{verbatim}
 
-In the \method{addLayer} method we use a \classname{QFileDialog} to get the
-name of the shapefile to load. This is done in line 96.
-Notice that we specify a ``filter'' so the dialog will only show files of
-type \filename{.shp}.
+Nel metodo \method{addLayer} si usa \classname{QFileDialog} per trovare il nome del file da caricare. Questo è fatto alla linea 96. Va notato che si specifica un 'filtro' così la finestra di dialogo mostrerà solamente file di tipo \filename{.shp}.
 
-Next in line 97 we create a \classname{QFileInfo} object from the shapefile
-path.  Now the layer is ready to be created in line 100. Using the
-\classname{QFileInfo} object to get the file name from the path we specify it 
-for the name of the layer when it is created.  To make sure that the layer is 
-valid and won't cause any problems when loading, we check it in line 102. If
-it's bad, we bail out and don't add it to the map canvas.
+Di seguito nella 97 si crea un oggetto \classname{QFileInfo} dal percorso del file shape.  Ora il layer è pronto per essere creato nella linea 100. Usando l'oggetto \classname{QFileInfo} per arrivare al file dal percorso abbiamo specificato il nome del layer quando esso viene creato.  Per essere sicuri che il layer sia valido e non causi alcun problem quando ccaricato, controlliamolo nella linea 102. Se non va bene, lo abbandoniamo e non lo aggiungiamo al canvas della mappa.
 
-Normally layers are added with a random color. Here we want to tweak the
-colors for the layer to make a more pleasing display. Plus we know we are
-going to add the \filename{world\_borders} layer to the map and this will make
-it look nice on our blue background. To change the color, we need to get the
-symbol used for rendering and use it to set a new fill color. This is done in
-lines 106 through 108. 
+Normalmente i layer sono aggiunti con un colore random. Ora si vogliono modificare i colori del layer per rendere la vista più piacevole. Inoltre sappiamo che si deve aggiungere il layer \filename{world\_borders} alla mappa e questo lo renderà più bello sul nostro sfondo blu. Per cambiare il colore, è necessario prendere il simbolo usato per la rappresentazione grfica e usarlo per impostare un nuovo colore di riempimento. Questo è fatto dalla linea 106 alla 108. 
 
-All that's left is to actually add the layer to the registry and a few other
-housekeeping items (lines 111 through 119). This stuff is standard for adding
-a layer and the end result is the world borders on a light blue background.
-The only thing you may not want to do is set the extent to the layer, if you
-are going to be adding more than one layer in your application.
+Tutto ciò che rimane ora è aggiungere il layer al registro e alcune allltre voci di manutentzione (linee da 111 a 119). Questa roba è standard nell'aggiungere un layer ed il risultato finale sono i bordi del mondo su uno sfondo celeste. La sola cosa che si potrebbe non voler impostare è l'estensione del layer, se si deve aggiunge più di un layer nell'applicazione.
 
-That's the heart of the application and completes the \classname{MainWindow} class. 
+Questo è il cuore dell'applicazione e completa la classe \classname{MainWindow}. 
 
-\subsection{Finishing Up}
+\subsection{Conclusione}
 
-The remainder of the code shown below creates the \object{QgsApplication}
-object, sets the path to the QGIS install, sets up the \method{main} method
-and then starts the application. The only other thing to note is that we move
-the application window to the upper left of the display. We could get fancy
-and use the Qt API to center it on the screen.
+Il resto del codice scritto sotto crea l'oggetto \object{QgsApplication}, imposta il percorso all'istallazione di QGIS, imposta il metodo \method{main} e infine avvia l'applicazione. L'unica altra cosa da notare è che noi muoviamo la finestra dell'applicazione all'angolo superiore sinistro dello schermi. Potremmo anche essere fantasiosi e usare il Qt API per centrarla sullo schermo.
 
 \begin{verbatim}
 120 def main(argv):
@@ -286,12 +258,11 @@ and use the Qt API to center it on the screen.
 143   main(sys.argv)
 \end{verbatim}
 
-\subsection{Running the Application}
+\subsection{Lanciare l'applicazione}
 
-Now we can run the application and see what happens. Of course if you are like 
-most developers, you've been testing it out as you went along. 
+Ora si può lanciare l'applicazione e vedere cosa succede. Naturalmente se si è come molti sviluppatori, la si è testata man mano che la si scriveva. 
 
-Before we can run the application, we need to set some environment variables. 
+Prima di lanciare l'applicazione, si devono impostare alcune variabli dell'ambiente. 
 
 \nix{}\osx{}
 \begin{verbatim}
@@ -307,15 +278,14 @@ set PYTHONPATH=C:\qgis\python
 set QGISHOME=C:\qgis
 \end{verbatim}
 
-We assume
+Si assume che
 \begin{itemize}
-\item\nix{}\osx{}QGIS is installed in 
-your home directory in 
+\item\nix{}\osx{}QGIS sia istalla to nella home directory in 
 \filename{qgis}. 
-\item\win{}QGIS is installed in \filename{C:\textbackslash qgis}.
+\item\win{}QGIS sia istallato in \filename{C:\textbackslash qgis}.
 \end{itemize}
 
-When the application starts up, it looks like this:
+Quando l'applicazione si avvia, appare così:
 
 %\begin{figure}[ht]
 %\begin{center}
@@ -324,10 +294,10 @@ When the application starts up, it looks like this:
 %\end{center}
 %\end{figure}
 
-To add the \filename{world\_borders} layer, click on the 
-\usertext{Add Layer} tool and navigate to the data directory.
-Select the shapefile and click \button{Open} to add it to the map. 
-Our custom fill color is applied and the result is:
+Per aggiunger il layer \filename{world\_borders}, premere lo strumento 
+\usertext{Add Layer} e navigare alla directory dei dati.
+Selezionare il file shape e premere \button{Open} per aggiungerlo alla mappa. 
+Il nostro color di riempimento personalizzato è aggiunto e il risultato è:
 
 %\begin{figure}[ht]
 %\begin{center}
@@ -336,22 +306,12 @@ Our custom fill color is applied and the result is:
 %\end{center}
 %\end{figure}
 
-Creating a PyQGIS application is really pretty simple.  In less than 150 lines
-of code we have an application that can load a shapefile and navigate the map.
-If you play around with the map, you'll notice that some of the built-in
-features of the canvas also work, including mouse wheel scrolling and panning
-by holding down the \keystroke{Space} bar and moving the mouse.
+Creare un'applicazione PyQGIS è veramente molto facile.  In meno di 150 linee di codice avete un'applicazione che può caricare un file shapes e navigare la mappa. Se giocate un po' con la mappa, noterete che funzionano anche alcune delle caratteristiche integrate del canvas, incluso lo scroolling del mouse e lo spostamento premendo e tenendo premuta la barra  \keystroke{Space} e contemporaneamente muovendo il mouse.
 
-Some sophisticated applications have been created with PyQGIS and more are in 
-the works. This is pretty impressive, considering that this development has 
-taken place even before the official release of QGIS 1.0.
+Alcune applicazioni sofisticate sono state create con PyQGIS e molte sono in lavorazione. Questo è impressionante, se si considera che questo sviluppo è avvenuto anche prima del rilascio ufficiale di QGIS 1.0.
 
-\begin{Tip}\caption{\textsc{Documentation For PyQGIS}}
-\qgistip{Whether you are writing a plugin or a PyQGIS application, you are
-going to need to refer to both the QGIS API documentation
-(\url{http://doc.qgis.org}) and the PyQt Python Bindings Reference Guide
-(\url{http://www.riverbankcomputing.com/Docs/PyQt4/pyqt4ref.html}). These
-documents provide information about the classes and methods you'll use to
-bring your Python creation to life.
+\begin{Tip}\caption{\textsc{Documentazione per PyQGIS}}
+\qgistip{Se state scrivendo un plugin o un'applicazione PyQGIS, avrete bisogno di far riferimento alle documentazioni QGIS API (\url{http://doc.qgis.org}) e alla Guida di riferimento di PyQt Python
+(\url{http://www.riverbankcomputing.com/Docs/PyQt4/pyqt4ref.html}). Questi documenti forniscono informazioni sulle classi e sui metodi che saranno usati per portare la vostra creazione in Python alla vita.
 }
 \end{Tip} 
