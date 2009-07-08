@@ -1,143 +1,126 @@
 % vim: set textwidth=78 autoindent:
 
-\section{Installation Guide}\label{label_install}
+\section{Guida all'Istallazione}\label{label_install}
 
 % when the revision of a section has been finalized,
 % comment out the following line:
 % \updatedisclaimer
 
-The following chapters provide build and installation information for QGIS
-Version \CURRENT. This document corresponds almost to a \LaTeX~ conversion of
-the INSTALL.t2t file coming with the QGIS sources from December, 16th 2008.
+I capitoli seguenti forniscono informazioni di compilazione ed istallazione per QGIS
+Versione \CURRENT. Questo documetno corrisponde più o meno ad una conversione \LaTeX~ del file INSTALL.t2t che si scarica dai sorgenti QGIS dal 16 dicembre 2008.
 
-A current version is also available at the wiki, see:
+Una versione attuale è anche disponibile sul wiki, vedere:
 \htmladdnormallink{http://wiki.qgis.org/qgiswiki/BuildingFromSource}{http://wiki.qgis.org/qgiswiki/BuildingFromSource}
 
-\subsection{General Build Notes}
-At version 0.8.1 QGIS no longer uses the autotools for building. QGIS, like a
-number of major projects (eg. KDE 4.0), now uses cmake (\htmladdnormallink{http://www.cmake.org}{http://www.cmake.org})
-for building from source. The configure script in this directory simply checks
-for the existence of cmake and provides some clues to build QGIS.
+\subsection{Note generali di compilazione}
+Dalla versione 0.8.1 QGIS non usa più gli strumenti automatici per compilarsi. QGIS, come un gran numero di progetti importanti (eg. KDE 4.0), usa ora cmake (\htmladdnormallink{http://www.cmake.org}{http://www.cmake.org}) per compilarsi dai sorgenti. Lo script di configurazione in questa directory semplicemente controlla che cmake esista e fornisce alcune indicazioni per compilare QGIS.
 
-For complete information, see the wiki at:
+Per informazioni più complete, vedere wiki:
    \htmladdnormallink{http://wiki.qgis.org/qgiswiki/Building\_with\_CMake}{http://wiki.qgis.org/qgiswiki/Building\_with\_CMake}
 
-\subsection{An overview of the dependencies required for building}
+\subsection{Panoramica delle dipendenze richieste per la compilazione}
 
-\textbf{Required build deps}:
+\textbf{Dipendenze richieste per la compilazione}:
 
 \begin{itemize}
 \item CMake $>$= 2.4.3
 \item Flex, Bison
 \end{itemize}
 
-\textbf{Required runtime deps}:
+\textbf{Dipendenze richieste per runtime}:
 
 \begin{itemize}
 \item Qt $>$= 4.3.0
-\item Proj $>$= ? (known to work with 4.4.x)
-\item GEOS $>$= 2.2 (3.0 is supported, maybe 2.1.x works too)
-\item Sqlite3 $>$= ? (probably 3.0.0)
+\item Proj $>$= ? (noto funzionare con 4.4.x)
+\item GEOS $>$= 2.2 (3.0 è supportato, forse funziona anche 2.1.x)
+\item Sqlite3 $>$= ? (probabilmente 3.0.0)
 \item GDAL/OGR $>$= 1.4.x
 \end{itemize}
 
-\textbf{Optional dependencies}:
+\textbf{Dipendenze opzionali}:
 
 \begin{itemize}
-\item for GRASS plugin - GRASS $>$= 6.0.0
-\item for georeferencer - GSL $>$= ? (works with 1.8)
-\item for postgis support and SPIT plugin - PostgreSQL $>$= 8.0.x
-\item for gps plugin - expat $>$= ? (1.95 is OK)
-\item for mapserver export and PyQGIS - Python $>$= 2.3 (2.5+ preferred)
-\item for PyQGIS - SIP $>$= 4.5, PyQt $>$= must match Qt version
+\item per plugin GRASS - GRASS $>$= 6.0.0
+\item per georeferenziatore - GSL $>$= ? (works with 1.8)
+\item per supporto postgis e plugin SPIT - PostgreSQL $>$= 8.0.x
+\item per plugin gps - expat $>$= ? (1.95 is OK)
+\item per esportazione mapserver e PyQGIS - Python $>$= 2.3 (2.5+ preferita)
+\item per PyQGIS - SIP $>$= 4.5, PyQt $>$= deve accordarsi con la versione Qt
 \end{itemize}
 
-\textbf{Recommended runtime deps}:
+\textbf{Dipendenze raccomandate per runtime}:
 
 \begin{itemize}
-\item for gps plugin - gpsbabel
+\item per plugin gps - gpsbabel
 \end{itemize}
 
-\section{Building under windows using msys}\label{sec:install_windows}
-\textbf{Note:} For a detailed account of building all the dependencies yourself you 
-can visit Marco Pasetti's website here:
+\section{Compilazione in ambiente windows usando msys}\label{sec:install_windows}
+\textbf{Nota:} Per una descrizione accurata della compilazione di tutte le dipendenze da soli, visitare il sito web di Marco Pasetti's website:
 
 \htmladdnormallink{http://www.webalice.it/marco.pasetti/qgis+grass/BuildFromSource.html}{http://www.webalice.it/marco.pasetti/qgis+grass/BuildFromSource.html}
 
-Read on to use the simplified approach with pre-built libraries...
+Leggere la parte sull'uso dell'approcio semplificato con librerie pre-costruite...
 
 \subsection{MSYS:}
-MSYS provides a unix style build environment under windows. We have created a
-zip archive that contains just about all dependencies.
+MSYS fornisce un ambiente di compilazione stile unix in windows. Abbiamo creato un archivio zip che contiene quasi tutte le dipendenze.
 
-Get this: 
+Scaricare questo: 
 
 \htmladdnormallink{http://download.osgeo.org/qgis/win32/msys.zip}{http://download.osgeo.org/qgis/win32/msys.zip}
 
-and unpack to c:$\backslash$msys
+e estrarlo in c:$\backslash$msys
 
-If you wish to prepare your msys environment yourself rather than using 
-our pre-made one, detailed instructions are provided elsewhere in this
-document.
+Se si vuole preparare l'ambiente msys da soli piuttosto che usarne uno già fatto, istruzioni dettagliate possono essere trovate altrove in questo documento.
 
 \subsection{Qt4.3}
-Download qt4.3 opensource precompiled edition exe and install (including the
-download and install of mingw) from here:
+Scaricare qt4.3 opensource edizione precompilata e istallare (incluso lo scaricamento e l'istallazione di mingw) da qui:
 
 \htmladdnormallink{http://www.trolltech.com/developer/downloads/qt/windows}{http://www.trolltech.com/developer/downloads/qt/windows}
 
-When the installer will ask for MinGW, you don't need to download and install
-it, just point the installer to c:$\backslash$msys$\backslash$mingw
+Quando l'istallatore chiede di MinGW, non è necessaro scricarlo e istallarlo, solo indirizzare l'istallatore a c:$\backslash$msys$\backslash$mingw
 
-When Qt installation is complete:
+Quando l'istallazione di Qt è completa:
 
-Edit C:$\backslash$Qt$\backslash$4.3.0$\backslash$bin$\backslash$qtvars.bat and add the following lines:
+Aprire C:$\backslash$Qt$\backslash$4.3.0$\backslash$bin$\backslash$qtvars.bat e aggiunger le seguenti linee:
 
 \begin{verbatim}
 set PATH=%PATH%;C:\msys\local\bin;c:\msys\local\lib 
 set PATH=%PATH%;"C:\Program Files\Subversion\bin" 
 \end{verbatim}
 
-I suggest you also add C:$\backslash$Qt$\backslash$4.3.0$\backslash$bin$\backslash$ to your Environment Variables Path in
-the windows system preferences.
+Suggerisco anche di aggiungere C:$\backslash$Qt$\backslash$4.3.0$\backslash$bin$\backslash$ al proprio percorso delle variabili dell'ambiente nella finastra delle preferenze di sistema.
 
-If you plan to do some debugging, you'll need to compile debug version of Qt:
+Se si pianifica di fare debugging, sarà necessario compliare una versione debug di Qt:
 C:$\backslash$Qt$\backslash$4.3.0$\backslash$bin$\backslash$qtvars.bat compile\_debug
 
-\textbf{Note:} there is a problem when compiling debug version of Qt 4.3, the script ends with
-this message  "mingw32-make: *** No rule to make target `debug'.  Stop.". To 
-compile the debug version you have to go out of src directory and execute the
-following command:
+\textbf{Nota:} C'è un problema nella compilazione della versione debug di Qt 4.3, lo script finisce con questo messaggio  "mingw32-make: *** No rule to make target `debug'.  Stop.". Per compilare la versione debug bisogna uscire dalla directory src ed eseguire il seguente comando:
 
 \begin{verbatim}
 c:\Qt\4.3.0 make 
 \end{verbatim}
 
 \subsection{Flex and Bison}
-\textbf{Note:} I think this section can be removed as it should be installed int the msys image already.
+\textbf{Nota:} Penso che questa sezione possa essere rimossa dato che dovrebbe essere già istallata nell'immagine msys.
 
-Get Flex
+Scaricare Flex
 
-\url{http://sourceforge.net/project/showfiles.php?group\_id=23617&package\_id=16424} (the zip bin) and extract it into c:$\backslash$msys$\backslash$mingw$\backslash$bin
+\url{http://sourceforge.net/project/showfiles.php?group\_id=23617&package\_id=16424} (zip bin) e estrarlo in c:$\backslash$msys$\backslash$mingw$\backslash$bin
 
-\subsection{Python stuff: (optional)}
-Follow this section in case you would like to use Python bindings for QGIS.  To
-be able to compile bindings, you need to compile SIP and PyQt4 from sources as
-their installer doesn't include some development files which are necessary.
+\subsection{Materiale Python: (opzionale)}
+Seguire questa sezione nel caso in cui si voglia usare bindings Python per QGIS.  Per riuscire a compilare i bindings, bisogna compilare SIP e PyQt4 dai sorgenti dato che il loro istallatore non include alcuni file di sviluppo che sono necessari.
 
-\subsubsection{Download and install Python - use Windows installer}
-(It doesn't matter to what folder you'll install it)
+\subsubsection{Scaricare e istallare Python - uso dell'istallatore di Windows}
+(Non importa in quale cartella lo si istalli)
 
 \htmladdnormallink{http://python.org/download/}{http://python.org/download/}
 
-\subsubsection{Download SIP and PyQt4 sources}
+\subsubsection{Scaricare i sorgenti SIP and PyQt4}
 \url{http://www.riverbankcomputing.com/software/sip/download} \\
 \url{http://www.riverbankcomputing.com/software/pyqt/download}
 
-Extract each of the above zip files in a temporary directory. Make sure
-to get versions that match your current Qt installed version.
+Estrarre ognuno dei file zip qui sopra in una directory temporanea. Assicurarsi di prendere versioni che si adattino alla propria versione Qt istallata.
 
-\subsubsection{Compile SIP}
+\subsubsection{Compilare SIP}
 \begin{verbatim}
 c:\Qt\4.3.0\bin\qtvars.bat 
 python configure.py -p win32-g++ 
@@ -145,7 +128,7 @@ make
 make install 
 \end{verbatim}
 
-\subsubsection{Compile PyQt}
+\subsubsection{Compilare PyQt}
 \begin{verbatim}
 c:\Qt\4.3.0\bin\qtvars.bat 
 python configure.py 
@@ -153,56 +136,52 @@ make
 make install 
 \end{verbatim}
 
-\subsubsection{Final python notes}
+\subsubsection{Note finali python}
 
-\textbf{Note:} You can delete the directories with unpacked SIP and PyQt4 sources after a
-successfull install, they're not needed anymore.
+\textbf{Nota:} Si possono eliminare le directory in cui si sono estratti i sorgenti SIP and PyQt4 dopo un'istallazione andata a buon fine, non sono più necessarie.
 
-\subsection{Subversion:}
-In order to check out QGIS sources from the repository, you need Subversion
-client. This installer should work fine:
+\subsection{Subversioni:}
+Per ottenere i sorgenti QGIS dall'archivio, è necessaria la Subversione
+client. Questo istallotaore dovrebbe funzionare bene:
 
 \htmladdnormallink{http://subversion.tigris.org/files/documents/15/36797/svn-1.4.3-setup.exe}{http://subversion.tigris.org/files/documents/15/36797/svn-1.4.3-setup.exe}
 
 \subsection{CMake:}
-CMake is build system used by Quantum GIS. Download it from here:
+CMake è il sistema di compilazione usato da Quantum GIS. Si scarica qui:
 
 \htmladdnormallink{http://www.cmake.org/files/v2.4/cmake-2.4.6-win32-x86.exe}{http://www.cmake.org/files/v2.4/cmake-2.4.6-win32-x86.exe}
 
 \subsection{QGIS:}
-Start a cmd.exe window ( Start -$>$ Run -$>$ cmd.exe ) Create development 
-directory and move into it
+Eseguire una finestrat cmd.exe ( Inizio -$>$ Esegui -$>$ cmd.exe ) Creare la directory di sviluppo e spostarla in essa
 
 \begin{verbatim}
 md c:\dev\cpp 
 cd c:\dev\cpp 
 \end{verbatim}
 
-Check out sources from SVN For svn head:
+Ottenere i sogenti per SVN 
+Per svn head:
 
 \begin{verbatim}
 svn co https://svn.osgeo.org/qgis/trunk/qgis 
 \end{verbatim}
-For svn 0.8 branch
+Per svn 0.8 branch
 
 \begin{verbatim}
  svn co https://svn.osgeo.org/qgis/branches/Release-0_8_0 qgis0.8
 \end{verbatim}
 
-\subsection{Compiling:}
-As a background read the generic building with CMake notes at the end of 
-this document.
+\subsection{Compilare:}
+Come inizio leggere le note generiche di compilazione con CMake alla fine di questo documento.
 
-Start a cmd.exe window ( Start -$>$ Run -$>$ cmd.exe ) if you don't have one
-already.  Add paths to compiler and our MSYS environment:
+Eseguire una finestra cmd.exe ( Inizio -$>$ Esegui -$>$ cmd.exe ) se non se ne ha già una. Scrivere il percorso per il il compilatore e il nostro ambiente MSYS:
 
 \begin{verbatim}
 c:\Qt\4.3.0\bin\qtvars.bat 
 \end{verbatim}
 
-For ease of use add c:$\backslash$Qt$\backslash$4.3.0$\backslash$bin$\backslash$ to your system path in system
-properties so you can just type qtvars.bat when you open the cmd console.
-Create build directory and set it as current directory:
+Per facilità d'uso aggiungere c:$\backslash$Qt$\backslash$4.3.0$\backslash$bin$\backslash$ alle proprie proprietà di sistema così si può soltanto scrivere qtvars.bat quando si apre la console cmd.
+Creare la directory di compilazione e impostarla come directory attuale:
 
 \begin{verbatim}
 cd c:\dev\cpp\qgis 
@@ -210,48 +189,38 @@ md build
 cd build 
 \end{verbatim}
 
-\subsection{Configuration}
+\subsection{Configurazione}
 \begin{verbatim}
 cmakesetup ..  
 \end{verbatim}
 
-\textbf{Note:} You must include the '..' above.
+\textbf{Nota:} Si deve includere il '..' qui sopra.
 
-Click 'Configure' button.  When asked, you should choose 'MinGW Makefiles' as generator.
+Premere il pulsante 'Configura' button. Quando richiesto, si deve scegliere 'MinGW Makefiles' come generatore.
 
-There's a problem with MinGW Makefiles on Win2K. If you're compiling on this platform, use 'MSYS Makefiles' generator instead.
+C'è un problema con MinGW Makefiles in ambiente Win2K. Se si compila da questa piattaforma, usare invece il generatore 'MSYS Makefiles'.
 
-All dependencies should be picked up automatically, if you have set up the Paths correctly. The only thing you need to change is the installation destination (CMAKE\_INSTALL\_PREFIX) and/or set 'Debug'.
+Tutte le dipendenze dovrebbero essere colte automaticamente, se si è impostato correttamente il percorso. La sola cosa da cambiare è la destinazionedell'istallazione (CMAKE\_INSTALL\_PREFIX) e/o impostare 'Debug'.
 
-For compatibility with NSIS packaging cripts I recommend to leave the
-install prefix to its default c:$\backslash$program files$\backslash$
+Per la compatibilità con il pacchetto di script NSIS si raccomanda di lasciare il prefisso di istallazione al suo default c:$\backslash$program files$\backslash$
 
-When configuration is done, click 'OK' to exit the setup utility.
+Quando la configurazione è completata, premere 'OK' per uscire dall'utility di impostazione.
 
-\subsection{Compilation and installation}
+\subsection{Compilazione and istallazione}
 \begin{verbatim}
  make make install 
 \end{verbatim}
 
-\subsection{Run qgis.exe from the directory where it's installed (CMAKE\_INSTALL\_PREFIX)}
-Make sure to copy all .dll:s needed to the same directory as the qgis.exe
-binary is installed to, if not already done so, otherwise QGIS will complain
-about missing libraries when started.
+\subsection{Eseguire qgis.exe dalla directory dove è istallato (CMAKE\_INSTALL\_PREFIX)}
+Assicurarsi di copiare tutti i .dll necessari nella stessa directory dove si trova il binario qgis.exe, se non lo si è già fattto, altrimenti all'avvio QGIS si lamenterà della mancanza di librerie.
 
-The best way to do this is to download both the QGIS current release installer
-package from \htmladdnormallink{http://qgis.org/uploadfiles/testbuilds/}{http://qgis.org/uploadfiles/testbuilds/} and install it. Now copy
-the installation dir from C:$\backslash$Program Files$\backslash$Quantum GIS into c:$\backslash$Program
-Files$\backslash$qgis-0.8.1 (or whatever the current version is. The name should strictly
-match the version no.) After making this copy you can uninstall the release
-version of QGIS from your c:$\backslash$Program Files directory using the provided
-uninstaller. Double check that the Quantum GIS dir is completely gone under
-program files afterwards.
+Il modo migliore per far questo è scaricare il pacchetto di istallazione della versione attuale di QGIS da \htmladdnormallink{http://qgis.org/uploadfiles/testbuilds/}{http://qgis.org/uploadfiles/testbuilds/} e istallarlo. Ora si copia la directory di istallazione da C:$\backslash$Program Files$\backslash$Quantum GIS a c:$\backslash$Program
+Files$\backslash$qgis-0.8.1 (o qualsiasi sia la versione attuale. Il nome dovrebbe coincidere con il numero della versione.) Dopo aver fatto questa copia, si può disistallare la versione rilasciata diQGIS dalla directory c:$\backslash$Program Files usando il disistallatore fornito. Controllare poi bene che la directory Quantum GIS dir sia completamente scomparsa da programmi.
 
-Another possibility is to run qgis.exe when your path contains
-c:$\backslash$msys$\backslash$local$\backslash$bin and c:$\backslash$msys$\backslash$local$\backslash$lib directories, so the DLLs will be
-used from that place.
+Un'altra possibilità è eseguire qgis.exe quando il percorso contiene le directory
+c:$\backslash$msys$\backslash$local$\backslash$bin e c:$\backslash$msys$\backslash$local$\backslash$lib, così i DLLs verranno usati da quella posizione.
 
-\subsection{Create the installation package: (optional)}
+\subsection{Creare il pacchetto d'istallazione: (opzionale)}
 Downlad and install NSIS from (\htmladdnormallink{http://nsis.sourceforge.net/Main\_Page}{http://nsis.sourceforge.net/Main\_Page})
 
 Now using windows explorer, enter the win\_build directory in your QGIS source
