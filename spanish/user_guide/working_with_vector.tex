@@ -1,6 +1,6 @@
 % vim:autoindent:set textwidth=78:
 
-\section{Working with Vector Data}\label{label_workingvector}
+\section{Trabajando con datos vectoriales}\label{label_workingvector}
 \index{vector layers|(}
 
 % when the revision of a section has been finalized,
@@ -8,25 +8,19 @@
 %\updatedisclaimer
 
 
-QGIS supports vector data in a number of formats, including those
-supported by the OGR library data provider plugin, such as ESRI shapefiles,
+QGIS suporta datos vectoriales en un n\'umero de formatos, incluyendo los formatos soportados por el proveedor de datos de la librer\'{\i}a OGR, tales como ESRI shapefiles,
 \index{shapefiles}\index{ESRI!shapefiles}\index{SHP files}
-MapInfo MIF (interchange format)\index{MIF files}\index{MapInfo!MIF files}
-and MapInfo TAB (native format).\index{TAB files}\index{MapInfo!TAB files}
-You find a list of OGR supported vector formats in Appendix~\ref{appdx_ogr}.
+MapInfo MIF (formato de intercambio)\index{MIF files}\index{MapInfo!MIF files}
+y MapInfo TAB (formato nativo).\index{TAB files}\index{MapInfo!TAB files}
+Puede encontrar una lista de los formatos vectoriales soportados por OGR en el Ap\'endice~\ref{appdx_ogr}.
 
-QGIS also supports PostGIS\index{PostGIS}\index{PostgreSQL!PostGIS} layers 
-in a PostgreSQL database using the PostgreSQL data provider plugin.
-Support for additional data types (eg. delimited text) is provided by 
-additional data provider plugins.\index{delimited text}
+QGIS tambien soporta capas de PostGIS\index{PostGIS}\index{PostgreSQL!PostGIS} en una base de datos PostgreSQL usando el proveedor de datos PostgreSQL. El soporte para tipos de datos adicionales (ej. texto delimitado) se provee a trav\'es de proveedores de datos adicionales.\index{delimited text}
 
-This section describes how to work with several common formats:
-ESRI shapefiles, PostGIS layers, and SpatialLite layers. Many of the
-features available in QGIS work the same, regardless of the vector data source.
-This is by design and includes the identify, select, labeling and attributes
-functions.
+Esta secci\'on describe como trabajar con diferentes formatos comunes:
+ESRI shapefiles, capas de PostGIS, y capas de SpatialLite. Muchas de las caracter\'{\i}sticas disponibles en QGIS trabajan de la misma forma, independientemente de la fuente de datos vectoriales.
+Esto es por dise\~no e incluyen las funciones de identificar, seleccionar, etiquetar y de atributos.
 
-Working with GRASS vector data is described in Section \ref{sec:grass}.
+El c\'omo trabajar con vectores de GRASS se describe en la Secci\'on \ref{sec:grass}.
 
 \subsection{ESRI Shapefiles}
 \index{vector layers!ESRI shapefiles}
@@ -34,377 +28,289 @@ Working with GRASS vector data is described in Section \ref{sec:grass}.
 \index{ESRI!shapefiles}
 \index{SHP files}
 
-The standard vector file format used in QGIS is the ESRI Shapefile. Support 
-is provided by the OGR Simple Feature Library (\url{http://www.gdal.org/ogr/})
-\index{OGR}. A shapefile actually consists of several files. The following three are required:
+El formato de archivo vectorial estandar usado en QGIS es el ESRI Shapefile. El soporte se provee a trav\'es de la librer\'{\i}a OGR Simple Feature (\url{http://www.gdal.org/ogr/})
+\index{OGR}. Un shapefile actualmente consiste de m\'ultiples archivos. Los siguientes tres son requeridos:
 \index{shapefile!format}
 
 \begin{itemize}
-\item \filename{.shp} file containing the feature geometries.
-\item \filename{.dbf} file containing the attributes in dBase format.
-\item \filename{.shx} index file.
+\item \filename{.shp} archivo que contiene las geometr\'{\i}as de las caracter\'{\i}sticas.
+\item \filename{.dbf} archivo que contiene los atributos en formato dBase.
+\item \filename{.shx} archivo de \'{\i}ndices.
 \end{itemize}
 
-Shapefiles also can include a file with a \filename{.prj} suffix, which contains
-the projection information. While it is very useful to have a projection file, it is not mandatory. A shapefile dataset can contain additional files. For further details see the ESRI technical specification at \url{http://www.esri.com/library/whitepapers/pdfs/shapefile.pdf}.
+Los shapefiles tambien pueden incluir un archivo con un sufijo \filename{.prj}, que contiene la informaci\'on de proyecci\'on. Mientras es muy \'util tener un archivo de proyecci\'on, no es obligatorio. Un conjunto de datos shapefile puede contener archivos adicionales. Para mayores detalles vea la especificaci\'on t\'ecnica de ESRI en  \url{http://www.esri.com/library/whitepapers/pdfs/shapefile.pdf}
 \index{shapefile!specification}.
 
-\subsubsection{Loading a Shapefile}\label{sec:load_shapefile}
+\subsubsection{Cargando un Shapefile}\label{sec:load_shapefile}
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{Add Vector Layer Dialog \nixcaption}\label{fig:addvectorlayer}\smallskip
+   \caption{Di\'alogo Abrir Capa Vectorial \nixcaption}\label{fig:addvectorlayer}\smallskip
    \includegraphics[clip=true, width=12cm]{addvectorlayerdialog}
 \end{center} 
 \end{figure}
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{Open an OGR Supported Vector Layer Dialog \nixcaption}\label{fig:openshapefile}\smallskip
+   \caption{Di\'alogo Abrir una Capa Vectorial de OGR \nixcaption}\label{fig:openshapefile}\smallskip
    \includegraphics[clip=true, width=14cm]{shapefileopendialog}
 \end{center} 
 \end{figure}
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{QGIS with Shapefile of Alaska loaded \nixcaption}\label{fig:loadedshapefile}\smallskip
+   \caption{QGIS con un shapefile de Alaska cargado \nixcaption}\label{fig:loadedshapefile}\smallskip
    \includegraphics[clip=true, width=16cm]{shapefileloaded}
 \end{center} 
 \end{figure}
 
-\includegraphics[width=0.7cm]{mActionAddNonDbLayer} To load a shapefile, start
-QGIS and click on the \toolbtntwo{mActionAddNonDbLayer}{Add a vector layer}
-toolbar button\index{shapefile!loading} or simply type \keystroke{V}. 
-This will bring up a new window (see Figure\ref{fig:addvectorlayer}).  
+\includegraphics[width=0.7cm]{mActionAddNonDbLayer} Para cargar un shapefile, inicie
+QGIS y haga clic en el bot\'on \toolbtntwo{mActionAddNonDbLayer} de la barra de herramientas{A\~nadir una capa vectorial}
+\index{shapefile!loading} o simplemente presione la tecla \keystroke{V}. Esto abrir\'a una nueva ventana (vea la Figura \ref{fig:addvectorlayer}).  
 
-From the available options check \radiobuttonon{File}. Click on \button{Browse}. 
-That will bring up a standard open file dialog (see Figure
-\ref{fig:openshapefile}) which allows you to navigate the file system and load
-a shapefile or other supported data source. 
-The selection box \selectstring{Files of type}{\ldots} allows you to preselect some OGR supported file formats.
+De los botones de selecci\'on disponibles verifique \radiobuttonon{Archivo}. Clic en \button{Explorar}. Eso traer\'a un di\'alogo de abrir archivo estandar (vea la Figura \ref{fig:openshapefile}) que permite navegar el sistema de archivos y cargar un  shapefile o cualquier otra fuente de datos soportada. 
+La caja de selecci\'on \selectstring{Ficheros de tipo}{\ldots} permite preseleccionar algunos formatos de archivos OGR soportados.
 
-You can also select the Encoding type for the shapefile if desired.
+Puede seleccionar tambien el tipo de codificaci\'on deseado para el shapefile.
 
-Selecting a shapefile from the list and clicking \button{Open} loads it into QGIS. Figure
-\ref{fig:loadedshapefile} shows QGIS after loading the \filename{alaska.shp} file.
+Seleccionando un shapefile de la lista y haciendo clic en \button{Abrir} lo carga dentro de QGIS. La Figura
+\ref{fig:loadedshapefile} muestra QGIS despues de cargar el archivo \filename{alaska.shp}.
 
 
-\begin{Tip}\caption{\textsc{Layer Colors}}
-\qgistip{When you add a layer to the map, it is assigned a random color. When
-adding more than one layer at a time, different colors are assigned to each layer. }
+\begin{Tip}\caption{\textsc{Colores de la capa}}
+\qgistip{Cuando agrega una capa al mapa, se le asigna un color de manera aleatoria. Cuando se
+agrega mas de una capa al mismo tiempo, se le asigna diferentes colores a cada capa. }
 \end{Tip}
 
-Once loaded, you can zoom around the shapefile using the map navigation tools.
-To change the symbology of a layer, open the \dialog{Layer Properties} dialog by double
-clicking on the layer name or by right-clicking on the name in the legend and
-choosing \dropmenuopt{Properties} from the popup menu. See
-Section \ref{sec:symbology} for more information on setting symbology of
-vector layers.
+Una vez cargado, puede hacer acercamientos o alejamientos al shapefile usando las herramientas de navegaci\'on del mapa.
+Para cambiar la simbolog\'ia de la capa, abra el di\'alogo \dialog{Propiedades de la capa} haciendo doble clic en el nombre de la capa o haciendo clic derecho en el nombre de la capa en la leyenda y eligiendo \dropmenuopt{Propiedades} del men\'u emergente. Vea la  Secci\'on \ref{sec:symbology} para mas informaci\'on sobre como configurar la simbolog\'{\i}a para capas vectoriales.
   
-\subsubsection{Improving Performance}
+\subsubsection{Mejorando el rendimiento}
 
-To improve the performance of drawing a shapefile, you can create a spatial
-index. A \index{spatial index!shapefiles} spatial index will improve the 
-speed of both zooming and panning. Spatial indexes used by QGIS have a 
-\filename{.qix} extension.
+Para mejorar el rendimiento del dibujado de un shapefile, puede crear un \'{\i}ndice espacial. Un \'{\i}ndice espacial \index{spatial index!shapefiles} mejorar\'a la velocidad en las operaciones de acercar, alejar y desplazar. Los \'{\i}ndices espaciales usados por QGIS tienen una extensi\'on \filename{.qix}.
 
-Use these steps to create the index:
+Use estos pasos para crear el \'{\i}ndice:
 
 \begin{itemize}
-\item Load a shapefile.
-\item Open the \dialog{Layer Properties} dialog by double-clicking on the
-shapefile name in the legend or by right-clicking and choosing
-\dropmenuopt{Properties} from the popup menu.
-\item In the tab \tab{General} click the \button{Create Spatial Index} button.
+\item Cargue un shapefile.
+\item Abra el di\'alogo \dialog{Propiedades de la capa} haciendo doble clic en el nombre del shapefile en la leyenda o haciendo clic derecho en el nombre de la capa en la leyenda y eligiendo \dropmenuopt{Propiedades} del men\'u emergente.
+\item En la pesta\~na general \tab{General} haga clic en el bot\'on \button{Crear \'Indice Espacial}.
 \end{itemize}
 
-\subsubsection{Loading a MapInfo Layer}
+\subsubsection{Cargando una capa de MapInfo}
 \index{vector layers!MapInfo}
 
-To load a MapInfo layer, click on the 
-\toolbtntwo{mActionAddNonDbLayer}{Add a vector layer}
-toolbar bar button or type \keystroke{V}, change the file type filter to
-\selectstring{Files of Type}{[OGR] MapInfo (*.mif
-*.tab *.MIF *.TAB)} and select the layer you want to load.
+Para cargar una capa de MapInfo, haga clic en el bot\'on  \toolbtntwo{mActionAddNonDbLayer}{A\~nadir capa vectorial}
+de la barra de herramientas o presione la tecla \keystroke{V}, cambie el filtro de tipo de archivo a
+\selectstring{Ficheros de tipo}{[OGR] MapInfo (*.mif
+*.tab *.MIF *.TAB)} y seleccione la capa que desea cargar.
 
-\subsubsection{Loading an ArcInfo Binary Coverage}
+\subsubsection{Cargando un ArcInfo Binary Coverage}
 \index{vector layers!ArcInfo Binary Coverage}
 
-To load an ArcInfo binary coverage click on the 
-\toolbtntwo{mActionAddNonDbLayer}{Add a vector layer}
-toolbar button or type \keystroke{V} to open the 
-\dialog{Add Vector Layer} dialog.  Select \radiobuttonon{Directory}. Change to \selectstring {Type}{Arc/Ingo Binary Coverage}. 
-Navigate to the directory that contains the coverage files and select it.
+Para cargar un ArcInfo binary coverage haga clic en el bot\'on  
+\toolbtntwo{mActionAddNonDbLayer}{A\~nadir capa vectorial} de la barra de herramientas
+o presione la tecla \keystroke{V} para abrir el di\'alogo 
+\dialog{A\~nadir capa vectorial}.  Seleccione \radiobuttonon{Directorio}. Cambie a \selectstring {Tipo}{Arc/Ingo Binary Coverage}. 
+Navegue al directorio que contiene los archivos de coberturas y selecci\'onelo.
 
-Similarly, you can load directory based  vector files in the UK National Transfer Format as well as the 
-raw TIGER Format of the US Census Bureau.
+Similarmente, puede cargar vectores basados en directorio como el formato UK National Transfer as\'{\i} como el 
+formato raw TIGER del US Census Bureau.
 
-\subsection{PostGIS Layers}
+\subsection{Capas PostGIS}
 \index{vector layers!PostGIS|see{PostGIS}}
 \index{PostGIS!layers}
 \label{label_postgis} 
 
-PostGIS layers are stored in a PostgreSQL database. The advantages of PostGIS
-are the spatial indexing, filtering and query capabilities it provides. Using PostGIS,
-vector functions such as select and identify work more accurately than with
-OGR layers in QGIS.
+Las capas de PostGIS son almacenadas en una base de datos PostgreSQL. Las ventajas de PostGIS
+son indexamiento espacial, filtrado y las capacidades de consulta que provee. Usando POstgis, funciones
+vectoriales tales como seleccionar e identificar funcionan mucho mas eficazmente que con
+capas OGR en QGIS.
 
-To use PostGIS layers you must:\index{PostgreSQL!loading layers}
-
+Para usar capas de PostGIS debe de:\index{PostgreSQL!loading layers}
 \begin{itemize}
-\item Create a stored connection in QGIS to the PostgreSQL database (if one is
-not already defined).\index{PostgreSQL!connection}
-\item Connect to the database.
-\item Select the layer to add to the map.
-\item Optionally provide a SQL \usertext{where}
-clause to define which features
-to load from the layer.
-\item Load the layer.
+\item Crear una conexi\'on almacenada en QGIS a la base de datos PostgreSQL (si no ha sido
+previamente definida).\index{PostgreSQL!connection}
+\item Conectarse a la base de datos.
+\item Seleccionar la capa a agregar al mapa.
+\item Opcionalmente proveer una clausula SQL \usertext{where}
+para definir que caracter\'{\i}sticas cargar desde la capa.
+\item Cargar la capa.
 \end{itemize}
 
-\subsubsection{Creating a stored
-Connection}\index{PostgreSQL!connection}\label{sec:postgis_stored}
+\subsubsection{Creando una conexi\'on almacenada}\index{PostgreSQL!connection}\label{sec:postgis_stored}
 
-\includegraphics[width=0.7cm]{mActionAddLayer} The first time
-you use a PostGIS data source, you must create a connection to the PostgreSQL
-database that contains the data. Begin by clicking on the
-\toolbtntwo{mActionAddLayer}{Add a PostGIS Layer} toolbar button, selecting the
-\dropmenuopttwo{mActionAddLayer}{Add a PostGIS Layer...} option from the \mainmenuopt{Layer} menu or typing
-\keystroke{D}. You can also open the open the 
-\dialog{Add Vector Layer} dialog and select \radiobuttonon{Database}.
-The \dialog{Add PostGIS Table(s)} dialog will
-be displayed. To access the connection manager\index{PostgreSQL!connection
-manager}, click on the \button{New} button to display the \dialog{Create a New
-PostGIS Connection} dialog. The parameters required for a connection are shown
-in table \ref{tab:postgis_connection_parms}.
+\includegraphics[width=0.7cm]{mActionAddLayer} La primera vez que utilize un conjunto de datos PostGIS, debe crear una conexi\'on a la base de datos PostgreSQL que contiene los datos. Comienze haciendo clic en el bot\'on \toolbtntwo{mActionAddLayer}{A\~nadir capa de PostGIS} de la barra de herramientas, seleccionando la opci\'on 
+\dropmenuopttwo{mActionAddLayer}{A\~nadir capa de PostGIS...} del men\'u \mainmenuopt{Capa} o presionando la tecla \keystroke{D}. Tambien puede abrir el di\'alogo \dialog{A\~nadir capa vectorial} y seleccionar \radiobuttonon{Base de datos}.
+Se abrir\'a el di\'alogo \dialog{A\~nadir tabla(s) PostGIS}. Para accesar al manejador de conexiones \index{PostgreSQL!connectionmanager}, haga clic en el bot\'on \button{Nueva} para mostrar el di\'alogo  \dialog{Crear una nueva conexi\'on a PostGIS}. Los par\'ametros requeridos para una conexi\'on se muestran en la tabla \ref{tab:postgis_connection_parms}.
 
 \begin{table}[ht]\index{PostgreSQL!connection parameters}
 \centering
-\caption{PostGIS Connection
-Parameters}\label{tab:postgis_connection_parms}\medskip
+\caption{Par\'ametros de conexi\'on a PostGIS}\label{tab:postgis_connection_parms}\medskip
  \begin{tabular}{|l|p{5in}|}
-\hline Name & A name for this connection. Can be the same as \textsl{Database}.
+\hline Nombre & Un nombre para esta conexi\'on. Puede ser la misma que \textsl{Base de datos}.
 \\
-\hline Host \index{PostgreSQL!host}
-& Name of the database host. This must be a resolvable host name the same as
-would be used to open a telnet connection or ping the host. If the database is 
-on the same computer as QGIS, simply enter 'localhost' here. \\
-\hline Database \index{PostgreSQL!database} & Name of the database.  \\
-\hline Port \index{PostgreSQL!port}& Port number the PostgreSQL database
-server listens on. The default port is 5432.\\
-\hline Username \index{PostgreSQL!username}& User name used to login to the
-database. \\
-\hline Password \index{PostgreSQL!password}& Password used with
-\textsl{Username} to connect to the database.\\
-\hline SSL mode \index{PostgreSQL!sslmode}& How the SSL connection will be negotiated with the server. These are the options: 
+\hline Servidor \index{PostgreSQL!host}
+& Nombre del servidor de bases de datos. Este debe ser un nombre de servidor que pueda ser resuelto como puediera
+ser usado para abrir una conexi\'on telnet o hacer un ping al servidor. Si la base de datos est\'a 
+en la misma computadora que QGIS, simplemente introdusca 'localhost' aqu\'{\i}. \\
+\hline Base de datos \index{PostgreSQL!database} & Nombre de la base de datos.  \\
+\hline Puerto \index{PostgreSQL!port}& N\'umero del puerto en el que el servidor 
+de base de datos PostgreSQL escucha. El puerto por defecto es el 5432.\\
+\hline Nombre de Usuario \index{PostgreSQL!username}& El nombre de usuario es usado para iniciar sesi\'on
+a la base de datos. \\
+\hline Contrase\~na \index{PostgreSQL!password}& Contrase\~na usada para
+\textsl{Nombre de usuario} conectarse a la base de datos.\\
+\hline Modo SSL \index{PostgreSQL!sslmode}& Como ser\'a negociada la conexi\'on SSL con el servidor. Estas son las opciones: 
 \begin {itemize}
-\item disable: only try an unencrypted SSL connection;
-\item allow: try a non-SSL connection, if that fails, try an SSL connection;
-\item prefer (the default): try an SSL connection, if that fails, try a non-SSL connection;
-\item require: only try an SSL connection.
+\item desactivar: solo tratar una conexi\'on SSL no encriptada;
+\item permitir: tratar una conexi\'on sin SSL, si falla, intentar una conexi\'on SSL;
+\item preferir (predeterminada): intentar una conexi\'on SSL, si falla, intentar una conexi\'on no-SSL;
+\item requerir: solo intentar una conexi\'on SSL.
 \end {itemize}
-Note that massive speedups in PostGIS layer rendering can be achieved by disabling SSL in the connection editor. \\
+Note se puede alcanzar aumentos masivos en la velocidad de presentado de capas PostGIS desactivando SSL en el editor de conexiones. \\
 \hline
 \end{tabular}
 \end{table}
 
-Optional you can activate follwing checkboxes:
+Opcionalmente puede activar las siguientes casillas:
 
 \begin{itemize}
-\item \checkbox{Save Password}
-\item \checkbox{Only look in the geometry\_columns table}
-\item \checkbox{Only look in the 'public' schema}
+\item \checkbox{Guardar contrase\~na}
+\item \checkbox{Solo buscar en la tabla geometry\_columns}
+\item \checkbox{Solo buscar en el esquema 'public'}
 \end{itemize}
 
-Once all parameters and options are set, you can test the connection by
-clicking on the \button{Test Connect} button\index{PostgreSQL!connection!testing}.
+Una vez que todos los par\'ametros y opciones son establecidos, puede probar la conexi\'on haciendo clic 
+en el bot\'on \button{Probar Conexi\'on} \index{PostgreSQL!connection!testing}.
 
-\begin{Tip}\caption{\textsc{QGIS User Settings and
-Security}}\index{settings}\index{security}
-\qgistip{Your customized settings for QGIS are stored based on the operating
-system. \nix, the settings are stored in your home directory in
-\filename{.qt/qgisrc}. \win, the settings are stored in the registry. Depending on
-your computing environment, storing passwords in your QGIS settings may be a
-security risk.
+\begin{Tip}\caption{\textsc{Configuraciones de Usuario y Seguridad de QGIS}}\index{settings}\index{security}
+\qgistip{Sus configuraciones personalizadas para QGIS son almacenadas en el sistema
+operativo. En \nix, las configuraciones son almacenadas en su directorio home en
+\filename{.qt/qgisrc}. En \win, las configuraciones son almacenadas en el registro. Dependiendo de su
+ambiente de computo, almacenar contrase\~nas en sus configuraciones de QGIS puede ser
+un riesgo de seguridad.
 }
 \end{Tip}
 
-\subsubsection{Loading a PostGIS Layer}\index{PostgreSQL!loading layers}
+\subsubsection{Cargando una capa PostGIS}\index{PostgreSQL!loading layers}
 
-\includegraphics[width=0.7cm]{mActionAddLayer} Once you have one or more
-connections defined, you can load layers from the PostgreSQL database. Of
-course this requires having data in PostgreSQL. See Section
-\ref{sec:loading_postgis_data} for a discussion on importing data into the
-database. 
+\includegraphics[width=0.7cm]{mActionAddLayer} Una vez que tiene una o mas
+conexiones definidas, puede cargar capas desde la base de datos PostgreSQL. Claro
+que esto requiere tener datos en PostgreSQL. Vea la secci\'on
+\ref{sec:loading_postgis_data} para una discusi\'on sobre importar datos dentro de la
+base de datos. 
 
-To load a layer from PostGIS, perform the following steps:
+Para cargar una capa de PostGIS, realize los siguientes pasos:
 
 \begin{itemize}
-\item If the \dialog{Add PostGIS Table(s)} dialog is not already open, click on the
-\toolbtntwo{mActionAddLayer}{Add a PostGIS Layer} toolbar button.
-\item Choose the connection from the drop-down list and click \button{Connect}.
-\item Find the layer you wish to add in the list of available layers.
-\item Select it by clicking on it. You can select multiple layers by holding
-down the \keystroke{shift} key while clicking. See Section \ref{sec:query_builder} for
-information on using the PostgreSQL Query Builder to further define the layer.
-\item Click on the \button{Add} button to add the layer to the map.
+\item Si el di\'alogo \dialog{A\~nadir tabla(s) PostGIS} no esta abierto aun, haga clic en el bot\'on
+\toolbtntwo{mActionAddLayer}{A\~nadir Capa PostGIS}de la barra de herramientas.
+\item Elija la conexi\'on de la lista desplegable y haga clic en \button{Connectar}.
+\item Encuentre la capa que desea agregar en la lista de capas disponibles.
+\item Seleccionela haciendo clic en ella. Puede seleccionar m\'ultiples capas presionando
+la tecla \keystroke{shift} mientras hace clic. Vea la secci\'on \ref{sec:query_builder} para
+informaci\'on sobre usar el Constructor de Consultas de PostgreSQL para definir con mas precisi\'on la capa.
+\item Clic en el bot\'on \button{A\~nadir} para agregar una capa al mapa.
 \end{itemize}
 
-\begin{Tip}\caption{\textsc{PostGIS Layers}}
-\qgistip{Normally a PostGIS layer is defined by an entry in the
-geometry\_columns table. From version \OLD % should be 0.9.0 
-on, QGIS can load layers that do not have
-an entry in the geometry\_columns table. This includes both tables and views.
-Defining a spatial view provides a powerful means to visualize your data. Refer
-to your PostgreSQL manual for information on creating views.}
+\begin{Tip}\caption{\textsc{Capas PostGIS}}
+\qgistip{Normalmente una capa PostGIS es definida por una entrada en la tabla
+geometry\_columns. Desde la versi\'on \OLD % should be 0.9.0 
+hacia arriba, QGIS puede cargar capas que no tienen una entrada
+en la tabla geometry\_columns. Esto incluye tablas y vistas.
+La definici\'on de una vista espacial provee poderosos medios para visualizar sus datos. Rem\'{\i}tase
+a su manual de PostgreSQL para informaci\'on sobre creaci\'on de vistas.}
 \end{Tip}
 
-\subsubsection{Some details about PostgreSQL
-layers}\label{sec:postgis_details}
+\subsubsection{Algunos detalles acerca de capas PostgreSQL}\label{sec:postgis_details}
 \index{PostgreSQL!layer details}
 
-This section contains some details on how QGIS accesses PostgreSQL
-layers. Most of the time QGIS should simply provide you with a list of
-database tables that can be loaded, and load them on request. However,
-if you have trouble loading a PostgreSQL table into QGIS, the information
-below may help you understand any QGIS messages and give you direction on
-changing the PostgreSQL table or view definition to allow QGIS to load it.
+Esta secci\'on contiene algunos detalles de como QGIS accesa capas PostgreSQL. La mayor\'{\i}a de las veces QGIS deber\'{\i}a simplemente proveerle una lista de tablas de la base de datos que puede ser cargadas, y cargarlas cuando sea necesario. Sin embargo, si tiene problemas cargando una tabla PostgreSQL en QGIS, la siguiente informaci\'on puede ayudarle a entender cualquier mensaje de QGIS y guiarlo para cambiar la definici\'on de tabla o vista de PostgreSQL para que QGIS pueda cargarla.
 
-QGIS requires that PostgreSQL layers contain a column that can be
-used as a unique key for the layer. For tables this usually means
-that the table needs a primary key, or a column with a unique
-constraint on it. In QGIS, this column needs to be of
-type int4 (an integer of size 4 bytes). Alternatively the ctid column can be used as primary key. 
-If a table lacks these items,
-the oid column will be used instead. Performance will be improved if the
-column is indexed (note that primary keys are automatically indexed in
-PostgreSQL). 
+QGIS requiere que las copas de PostgreSQL contengan una columna que pueda ser usada como llave \'unica para la capa. Para tablas esto usualmente significa que la tabla necesita una llave primaria, o una columna con una restricci\'on de \'unica en ella. En QGIS, esta columna necesita ser del tipo int4 (un entero de tama\~no de 4 bytes). Alternativamente una columna ctid puede ser usada como llave primaria. Si la tabla carece de estos elementos, la columna oid ser\'a usada. El rendimiento se mejorar\'a si la columna es indexada (note que las llaves primarias son indexadas autom\'aticamente en PostgreSQL). 
 
-If the PostgreSQL layer is a view, the same requirement exists, but
-views don't have primary keys or columns with unique constraints on
-them. In this case QGIS will try to find a column in the view that is
-derived from a suitable table column. It does this by parsing the view
-definition SQL. However there are several aspects of SQL that QGIS ignores
-- these include the use of table aliases and columns that are generated by
-SQL functions.
+Si la capa PostgreSQL es una vista, existe el mismo requerimiento, pero las vistas no tienen llave primaria o columnas restricciones de valores \'unicos. En este caso QGIS tratar\'a de encontrar una columna en la vista que sea derivada de una columna adecuada. La determinaci\'on de la columna se hace analizando la definici\'on SQL de la vista. Sin embargo hay varios aspectos de SQL que QGIS ignora - estos incluyen el uso de alias en tablas y columnas que son generados por funciones SQL.
 
-If a suitable column cannot be found, QGIS will not load the layer. If this
-occurs, the solution is to alter the view so that it does include a suitable
-column (a type of int4 and either a primary key or with a unique constraint,
-preferably indexed).
+Si no es posible encontrar una columna adecuada, QGIS no cargar\'a la capa. Si esto ocurre, la soluci\'on es alterar la vista de manera que incluya una columna adecuada (de un tipo int4 y que bien sea una llave primaria o que tenga una restricci\'on de valores \'unicos en la columna, preferentement indexada). 
 
-When dealing with views, QGIS parses the view definition and
+Cuando QGIS trabaja con vistas, analiza la definici\'on de la vista y 
 
-\subsubsection{Importing Data into PostgreSQL}\label{sec:loading_postgis_data}
-\index{PostGIS!SPIT!importing data}
-
-\minisec{shp2pgsql}
-Data can be imported into PostgreSQL using a number of methods. PostGIS
-includes a utility called \filename{shp2pgsql} that can be used to import shapefiles into
-a PostGIS enabled database. For example, to import a shapefile named
-\filename{lakes.shp}
-into a PostgreSQL database named \usertext{gis\_data}, use the following command:
+\subsubsection{Importando datos a PostgreSQL}\label{sec:loading_postgis_data} \index{PostGIS!SPIT!importing data} \minisec{shp2pgsql}
+Los datos pueden ser importados a PostgreSQL usando un n\'umero de m\'etodos. PostGIS
+incluye una utiler\'{\i} llamada \filename{shp2pgsql} que puede ser usada para importar shapefiles a una base de datos PostgreSQL con PostGIS activado. Por ejemplo para importar un shapefile llamado \filename{lakes.shp} a una base de datos PostgreSQL llamada \usertext{gis\_data}, use el siguiente comando:
 
 \begin{verbatim} 
   shp2pgsql -s 2964 lakes.shp lakes_new | psql gis_data
 \end{verbatim}
 
-This creates a new layer named \usertext{lakes\_new} in the
-\usertext{gis\_data} database. The
-new layer will have a spatial reference identifier (SRID) of 2964. See Section 
-\ref{label_projections} for more information on spatial reference systems and
-projections.
+Esto crea una capa llamada \usertext{lakes\_new} en la base de datos \usertext{gis\_data}. La nueva capa tendr\'a un identificador del sitema espacial de referencia (SRID) de 2964. Vea la secci\'on \ref{label_projections} para mas informaci\'on de sistemas de referencia espaciales y proyecciones.
+
 \begin{Tip}
 \caption{\textsc{Exporting datasets from PostGIS}\index{PostGIS!Exporting}}
-\qgistip{Like the import-tool \filename{shp2pgsql} there is also a tool to export
-PostGIS-datasets as shapefiles: \filename{pgsql2shp}. This is shipped within your
-PostGIS distribution.} 
+\qgistip{Al igual que la herramienta de importaci\'on \filename{shp2pgsql} hay tambien una herramienta para exportar
+conjuntos de datos PostGIS a shapefiles: \filename{pgsql2shp}. Esta se encuentra en 
+su distribuci\'on PostGIS.} 
 \end{Tip}
 
 \minisec{SPIT Plugin}
-\includegraphics[width=0.7cm]{spiticon} QGIS comes with a
-plugin named 
+\includegraphics[width=0.7cm]{spiticon} QGIS viene con un complemento llamado 
 SPIT (Shapefile to PostGIS Import Tool)\index{PostGIS!SPIT}.
-SPIT can be used to load multiple shapefiles at one time and includes support
-for schemas. To use SPIT, open the Plugin Manager from the \mainmenuopt{Plugins}
-menu, check the box next to the \checkbox{SPIT plugin} and click \button{OK}. The SPIT
-icon will be added to the plugin toolbar\index{PostGIS!SPIT!loading}. 
+SPIT puede ser usado para cargar m\'ultiples shapefiles al mismo tiempo e inluye soporte para esquemas. Para usar SPIT, habra el Manejador de Complementos del men\'u \mainmenuopt{Plugins}, verifique la caja siguiente al \checkbox{SPIT plugin} y haga clic en el bot\'on \button{OK}. El \'{\i}cono de SPIT ser\'a agregado a la barra de herramientas de complementos \index{PostGIS!SPIT!loading}. 
 
-To import a shapefile, click on the \toolbtntwo{spiticon}{SPIT} tool in the 
-toolbar to open the 
-\dialog{SPIT - Shapefile to PostGIS Import Tool} dialog. Select the PostGIS database 
-you want to connect to and click on \button{Connect}. Now you can add one or more 
-files to the queue by clicking on the \button{Add} button. To process the files, 
-click on the \button{OK} button. The progress of the import as well as any 
-errors/warnings will be displayed as each shapefile is processed.
+Para importar un shapefile, haga clic en \'{\i}cono de la barra de herramientas \toolbtntwo{spiticon}{SPIT} para abrir el di\'alogo \dialog{SPIT - Shapefile to PostGIS Import Tool}. Seleccione la base de datos PostGIS a la que desea conectarse y haga clic en el bot\'on \button{Connect}. Ahora puede agregar uno o mas archivos a la cola haciendo clic en el bot\'on   \button{Add}. Para procesar los archivos, haga clic en el bot\'on  
+\button{OK}. El progreso de la importaci\'on as\'{i} como cualquier error\\advertencia ser\'a mostrado conforme cada shapefile sea procesado.
 
 \begin{Tip}\caption{\textsc{Importing Shapefiles Containing
 PostgreSQL Reserved Words}}\index{PostGIS!SPIT!reserved words}
-\qgistip{If a shapefile is added to the queue containing fields that are
-reserved words in the PostgreSQL database a dialog will popup showing the
-status
-of each field. You can edit the field names\index{PostGIS!SPIT!editing field names}
-prior to import and change any that are reserved words (or change any other
-field names as desired). Attempting to
-import a shapefile with reserved words as field names will likely fail.}
+\qgistip{ Si es agregado un shapefile que contenga campos que sean palabras reservadas en el PostgreSQL se abrir\'a un di\'alogo mostrando el estado de cada campo. Los nombres de los campos pueden ser editados\index{PostGIS!SPIT!editing field names} antes de importarr y cambiar cualquier palabra reservada ( o cualquier otro nombre de campos que se desee). Intentar importar un shapefile con palabras reservadas como nombres de campos fallar\'a.}
 \end{Tip} 
 
 \minisec{ogr2ogr}
-Beside \filename{shp2pgsql} and \filename{SPIT} there is another tool for feeding
-geodata in PostGIS: \filename{ogr2ogr}. This is part of your GDAL installation.
-To import a shapefile into PostGIS, do the following:
+Ademas de \filename{shp2pgsql} y \filename{SPIT} hay otra herramienta para alimentar datos espaciales al PostGIS: \filename{ogr2ogr}. Esta herramienta es parte de la instalaci\'on de GDAL.
+Para importar un shapefile a PostGIS, haga lo siguiente:
 \begin{verbatim}
   ogr2ogr -f "PostgreSQL" PG:"dbname=postgis host=myhost.de user=postgres \
   password=topsecret" alaska.shp
 \end{verbatim}
 
-This will import the shapefile \filename{alaska.shp} into the PostGIS-database
+Esto importar\'a un shapefile  llamado \filename{alaska.shp} dentro de la base de datos PostGIS
 \usertext{postgis}
-using the user \usertext{postgres} with the password \usertext{topsecret} on host
+usando el usuario \usertext{postgres} con ls contrase\~na \usertext{topsecret} en el servidor
 \server{myhost.de}.
 
-Note that OGR must be built with PostgreSQL to support PostGIS.
-You can see this by typing
+Note que OGR debe ser compilado con PostgreSQL para soportar PostGIS.
+Esto se puede ver escribiendo
 \begin{verbatim}
 ogrinfo --formats | grep -i post
 \end{verbatim}
 
-If you like to use PostgreSQL's \filename{COPY}-command instead of the default
-\filename{INSERT INTO} method you can export the following
-environment-variable (at least available on \nix and \osx):
+Si desea utilizar comandos de PostgreSQL \filename{COPY}- en lugar del default
+\filename{INSERT INTO} puede exportar la siguiente variable de ambiente( al menos disponible en \nix y \osx):
 \begin{verbatim}
   export PG_USE_COPY=YES
 \end{verbatim}
 
-\filename{ogr2ogr} does not create spatial indexes like \filename{shp2pgsl}
-does. You need to create them manually using the normal SQL-command
-\filename{CREATE INDEX} afterwards as an extra step (as described in the next
-section \ref{label_improve}).
+\filename{ogr2ogr} no crea \'{\i}ndices espaciales por defecto como lo hace \filename{shp2pgsl}. Necesita crearlos manualmente usando el comando SQL \filename{CREATE INDEX} despues como una paso extra (como se describe en la siguiente secci\'on \ref{label_improve}).
 
-\subsubsection{Improving Performance} \label{label_improve}
+\subsubsection{Mejorando el rendimiento} \label{label_improve}
 
-Retrieving features from a PostgreSQL database can be time consuming,
-especially over a network. You can improve the drawing performance of
-PostgreSQL layers by ensuring that a \index{PostGIS!spatial index} spatial
-index
-exists on each layer in the database. PostGIS supports creation of a
-\index{PostGIS!spatial index!GiST} GiST
-(Generalized Search Tree) index to speed up spatial searches of the data.
+Recuperar caracter\'{\i}sticas de una base de datos PostgreSQL puede ser tardado, especialmente si se trabaja en red. Se puede mejorar el rendimiento del dibujado de capas PostgreSQL asegurando que exista un \'{\i}ndice espacial \index{PostGIS!spatial index} en cada capa de la base de datos. PostGIS suporta la creaci\'on de \'{\i}ndices GiST (Generalized Search Tree) \index{PostGIS!spatial index!GiST} para agilizar consultas espaciales de los datos.
 
-The syntax for creating a GiST\footnote{GiST index information is taken from the PostGIS
-documentation available at \url{http://postgis.refractions.net}}
-index is:
+La sintaxis para crear un \'{\i}ndice GiST\footnote{La informaci\'on de \'{\i}ndices GiST es tomada de la documentaci\'on de PostGIS
+disponible en \url{http://postgis.refractions.net}}
+es:
 
 \begin{verbatim}
     CREATE INDEX [indexname] ON [tablename] 
       USING GIST ( [geometryfield] GIST_GEOMETRY_OPS );
 \end{verbatim}
 
-Note that for large tables, creating the index can take a long time. Once the
-index is created, you should perform a \usertext{VACUUM ANALYZE}. See the
-PostGIS documentation \cite{PostGISweb} for more information.
+Note que para tablas grandes, la creaci\'on de un \'{\i}ndice puede tomar mucho tiempo. Una vez
+el \'{\i}ndice es creado, debe realizarse un \usertext{VACUUM ANALYZE}. Vea la documentaci\'on de
+PostGIS \cite{PostGISweb} para mas informaci\'on.
 
-The following is an example of creating a GiST index:
+El siguiente es un ejemplo de la creaci\'on de un \'{\i}ndice GiST:
 \begin{verbatim}
 gsherman@madison:~/current$ psql gis_data
 Welcome to psql 8.3.0, the PostgreSQL interactive terminal.
@@ -424,85 +330,83 @@ gis_data=# \q
 gsherman@madison:~/current$
 \end{verbatim}
 
-\subsection{SpatiaLite Layers} 
+\subsection{Capas SpatiaLite} 
 \index{SpatiaLite layers!properties dialog}
 \index{vector layers!SpatlaLIte|see{SpatiaLite}}
 \index{SpatiaLite!layers}
 \label{label_spatialite} 
 
 \includegraphics[width=0.7cm]{mActionAddSpatiaLiteLayer}
-The first time you load data from a Spatialite database, begin by clicking on the 
-\toolbtntwo{mActionAddSpatiaLiteLayer}{Add SpatiaLite Layer} toolbar button or by selecting the 
+Para cargar datos desde una base de datos Spatialite, comienze haciendo clic en el bot\'on de la barra 
+de herramientas \toolbtntwo{mActionAddSpatiaLiteLayer}{Add SpatiaLite Layer} o seleccionando la opci\'on  
 \dropmenuopttwo{mActionAddSpatiaLiteLayer}{Add SpatiaLite Layer...} 
-option from the \mainmenuopt{Layer} menu or by typing \keystroke{L}. 
-This will bring up a window, which will allow you to either connect to a Spatialite database already known to QGIS, which 
-you can choose from the dropdown menu or to define a new connection to a new database. To define a new connection, 
-click on \button{New} and use the file browser to point to your SpatiaLite database, 
-which is a file with a \filename{.sqlite } extension.
+\mainmenuopt{Layer} del men\'u o tecleando \keystroke{L}. 
+Esto mostrar\'a una ventana, la cual permitir\'a que se conecte a una base de datos Spatialite conocida por QGIS, la cual 
+puede ser seleccionada del men\'u desplegable o definir una nueva conecci\'on a una base de datos. Para definir una nueva conecci\'on, haga clic en \button{New} y use el bavegador de archivos para apuntar hacia su base de datos SpatiaLite, 
+el cual es un archivo con una extensi\'on \filename{.sqlite }.
 
-\subsection{The Vector Properties Dialog}\label{sec:vectorprops}
+\subsection{El di\'alogo de propiedades de vectores}\label{sec:vectorprops}
 \index{vector layers!properties dialog}
 
-The \dialog{Layer Properties} dialog for a vector layer 
-provides information about the layer, symbology
-settings and labeling options. If your vector layer has been loaded from a
-PostgreSQL / PostGIS datastore, you can also alter the underlying SQL for the
-layer - either by hand editing the SQL on the \tab{General} tab or by
-invoking the \dialog{Query Builder} dialog on the \tab{General} tab. 
-To access the
-\dialog{Layer Properties} dialog, double-click on a layer in the legend or right-click on the
-layer and select \dropmenuopt{Properties} from the popup menu.
+El di\'alogo \dialog{Layer Properties} para una capa vectorial 
+provee informaci\'on acerca de la capa, configuraciones
+de simbolog\'{\i} y opciones de etiquetado. Si la capa vectorial ha sido cargada desde
+un almacen de datos PostgreSQL / PostGIS, tambien puede alterar el SQL subyacente para la
+capa - bien manualmente editando el SQL en la pesta\~na \tab{General} o invocando
+el di\'alogo \dialog{Query Builder} en la pesta\~na \tab{General}. 
+Para accesar al di\'alogo
+\dialog{Layer Properties}, haga doble clic en un capa en la leyenda o clic derecho sobre
+la capa y seleccionela del men\'u emergente \dropmenuopt{Properties}.
 
 \begin{figure}[H]
    \begin{center}
-   \caption{Vector Layer Properties Dialog \nixcaption}\label{fig:vector_symbology}\smallskip
+   \caption{Di\'alogo de Propiedades de Capas Vectoriales \nixcaption}\label{fig:vector_symbology}\smallskip
    \includegraphics[clip=true, width=12cm]{vectorLayerSymbology} 
 \end{center}  
 \end{figure}
 
-\subsubsection{General Tab}\label{vectorgeneraltab}
-The \tab{General} tab is essentially like that of the raster dialog. It allows you
-to change the display name, set scale dependent rendering options, create a spatial 
-index of the vector file (only for OGR supported formats and PostGIS) and view or
-change the projection of the specific vetor layer.
+\subsubsection{Pesta\~na general}\label{vectorgeneraltab}
+La pesta\~na \tab{General} es esencialmente muy parecida a la del di\'alogo raster. Permite
+cambiar el nombre a mostrar, establecer las opciones de dibujado dependientes de la escala, crear un \'{\i}ndice espacial 
+de el archivo vectorial (solo para formatos OGR y PostGIS) y ver o cambiar
+la proyecci\'on espec\'{\i}fica para la capa vectorial.
 
-The \button{Query Builder} button allows you to create a subset of the features 
-in the layer - but this button currently only is available when you open the 
-attribute table and select the \button{...} button next to Advanced search.
+El bot\'on \button{Query Builder} permite crear un subconjunto de caracter\'{\i}sticas 
+en la capa - pero este bot\'on actualmente solo est\'a disponible cuando se abre la tabla  
+de atributos y se selecciona el bot\'on \button{...} siguiente a b\'usqueda avanzada.
 
-\subsubsection{Symbology Tab}\label{sec:symbology}
+\subsubsection{Pesta\~na simbolog\'{\i} Tab}\label{sec:symbology}
 \index{vector layers!symbology}
 
-QGIS supports a number of symbology renderers to control how
-vector features are displayed. Currently the following renderers
-are available:
+QGIS soporta un n\'umero de renderers simbolog\'{\i}as para controlar como
+los caracter\'{\i}sticas vectoriales son mostradas. Actualmente los siguientes renderers
+est\'an disponibles:
 
 \begin{description} 
-    \item[Single symbol] - a single style is applied to every
-    object in the layer.\index{vector layers!renderers!single symbol}
-    \item[Graduated symbol] - objects within the layer are
-    displayed with different symbols classified by the values of a
-    particular field.\index{vector layers!renderers!graduated symbol}
-    \item[Continuous color] - objects within the layer are
-    displayed with a spread of colours classified by the numerical
-    values within a specified field.\index{vector layers!renderers!continuous
+    \item[S\'{\i}mbolo simple] - un solo estilo es aplicado a
+    cada objeto en la capa.\index{vector layers!renderers!single symbol}
+    \item[S\'{\i}mbolo graduado] - los objetos dentro de la capa son
+    mostrados con diferentes s\'{\i}mbolos clasificados por los valores de un
+    campo particular. \index{vector layers!renderers!graduated symbol}
+    \item[Color cont\'{\i}nuo] - los objetos dentro de la capa son
+    mostrados con una propagaci\'on de colores clasificado por los valores
+    n\'umericos de un campo espec\'{\i}fico.\index{vector layers!renderers!continuous
 color}
-    \item[Unique value] - objects are classified by the unique
-    values within a specified field with each value having a
-    different symbol.\index{vector layers!renderers!unique value}
+    \item[Valor \'unico] - los objetos son clasificados por los valores \'unicos
+    dentro de un campo especificado teniendo cada valor un diferente s\'{\i}mbolo.
+    \index{vector layers!renderers!unique value}
 \end{description}
 
-To change the symbology for a layer, simply double click on its legend 
-entry and the vector \dialog{Layer Properties} dialog will be 
-shown.\index{symbology!changing}
+Para cambiar la simbolog\'{\i}a de una capa, simplemente has doble clic en su entrada
+en la leyenda y el di\'alogo de propiedades del vector \dialog{Layer Properties} se mostrar\'a.\index{symbology!changing}
 
 \begin{figure}[h]
 \centering
 \caption{Symbolizing-options \nixcaption}
-   \subfigure[Single symbol] {\label{subfig:single_symbol}\includegraphics[clip=true, width=0.4\textwidth]{vectorClassifySingle}}\goodgap
-   \subfigure[Graduated symbol] {\label{subfig:graduated_symbol}\includegraphics[clip=true, width=0.4\textwidth]{vectorClassifyGraduated}}\\
-   \subfigure[Continous color] {\label{subfig:cont_color}\includegraphics[clip=true, width=0.4\textwidth]{vectorClassifyContinous}}\goodgap
-   \subfigure[Unique value] {\label{subfig:unique_val}\includegraphics[clip=true, width=0.4\textwidth]{vectorClassifyUnique}}
+   \subfigure[S\'{\i}mbolo simple] {\label{subfig:single_symbol}\includegraphics[clip=true, width=0.4\textwidth]{vectorClassifySingle}}\goodgap
+   \subfigure[S\'{\i}mbolo graduado] {\label{subfig:graduated_symbol}\includegraphics[clip=true, width=0.4\textwidth]{vectorClassifyGraduated}}\\
+   \subfigure[Color cont\'{\i}nuo] {\label{subfig:cont_color}\includegraphics[clip=true, width=0.4\textwidth]{vectorClassifyContinous}}\goodgap
+   \subfigure[Valor \'unico] {\label{subfig:unique_val}\includegraphics[clip=true, width=0.4\textwidth]{vectorClassifyUnique}}
 \end{figure}
 
 % FIXME: outdated
@@ -510,221 +414,220 @@ shown.\index{symbology!changing}
 % your computer as fill pattern for vector layers.
 
 \minisec{Style Options} \label{sec:style_options} \index{vector layers!styles}
-Within this dialog you can style your vector layer. Depending on the selected
-rendering option you have the possibility to also classify your mapfeatures.
+Dentro de este di\'alogo se puede definir el estilo de la capa vectorial. Dependiendo de la opci\'on
+seleccionada de dibujado tambien es posible clasificar caracter\'{\i}sticas del mapa.
 
-At least the following styling options apply for nearly all renderers:
+Al menos las siguientes opciones de estilo pueden aplicarse para casi todos los renderers:
 \begin{description}
- \item[Outline style] - pen-style for your outline of your feature. you can
- also set this to 'no pen'.
- \item[Outline color] - color of the ouline of your feature
- \item[Outline width] - width of your features
- \item[Fill color] - fill-color of your features.
- \item[Fill style] - Style for filling. Beside the given brushes you can
- select \selectstring{Fill style}{? texture} and click the \browsebutton
- button for selecting your own fill-style. Currently the fileformats
- \filename{*.jpeg, *.xpm, and *.png} are supported.
+ \item[Estilo de borde] - estilo de lapiz para el borde de las caracter\'{\i}sticas. Tambien puede ser
+ establecido a 'sin lapiz'.
+ \item[Color de borde] - color del borde de las caracter\'{\i}sticas.
+ \item[Ancho de borde] - ancho del borde de las caracter\'{\i}sticas.
+ \item[Color de relleno] - color de relleno de las caracter\'{\i}sticas.
+ \item[Estilo de relleno] - estilo para el relleno. Aparte de las brochas definidas puede
+ seleccionar \selectstring{Fill style}{? texture} y hacer clic en el bot\'on \browsebutton
+ para seleccionar su propio estilo de relleno. Actualmente los formatos soportados son
+ \filename{*.jpeg, *.xpm, and *.png}.
 \end{description}
 
-Once you have styled your layer you also could save your layer-style to a
-separate file (with \filename{*.qml}-ending).
-To do this, use the button \button{Save Style \ldots}. No need to say that
-\button{Load Style \ldots} loads your saved layer-style-file.
+Una vez que ha estilizado su capa tambien puede almacenar su estilo de capa a
+un archivo separado (con extensi\'on \filename{*.qml}).
+Para hacer esto, use el bot\'on \button{Save Style \ldots}. No hay necesidad de decir que
+\button{Load Style \ldots} carga el archivo de estilo previamente almacenado.
 
-If you wish to always use a particular style whenever the layer is loaded, 
-use the \button{Save As Default} button to make your style the default. Also, 
-if you make changes to the style that you are not happy with, use the \button{Restore 
-Default Styel} button to revert to your default style.
+Si se desea siempre usar un estilo particular siempre que la capa es cargada, 
+use el bot\'on \button{Save As Default} para hacer su estilo el estilo por defecto. Tambien, 
+si hace cambios al estilo y no esta contento con los cambios, use el bot\'on \button{Restore 
+Default Styel} para revertir a su estilo por defecto.
 
-\minisec{Vector transparency} \label{sec:vect_transparency} \index{vector layers!transparency}
-QGIS \CURRENT allows to set a transparency for every vector layer. This can be done with
-the slider \slider{Transparency}{0}{20mm} inside the \tab{symbology} tab (see fig. \ref{fig:vector_symbology}).
-This is very useful for overlaying several vector layers.
+\minisec{Transparencia de vectores} \label{sec:vect_transparency} \index{vector layers!transparency}
+QGIS \CURRENT soporta el establecer transparencia para cada capa vectorial. Esto puede ser hecho con
+la barra de desplazamiento \slider{Transparency}{0}{20mm} dentro de la pesta\~na \tab{symbology} (vea la fig. \ref{fig:vector_symbology}).
+Esto es muy \'util para sobreponer varias capas vectoriales.
 
-\subsubsection{Metadata Tab}
+\subsubsection{Pesta\~na metadatos}
 
-The \tab{Metadata} tab contains information about the layer, including specifics
-about the type and location, number of features, feature type, and the editing
-capabilities. The \guiheading{Layer Spatial Reference System} section, providing 
-projection information, and the \guiheading{Attribute field info} section,
-listing fields and their data types, are displayed 
-on this tab. This is a quick way to get information about the layer.
+La pesta\~na \tab{Metadata} contiene informaci\'on acerca de la capa, incluyendo peculiaridades
+acerca del tipo y localizaci\'on, n\'umero de caracter\'{\i}sticas, tipo de caracter\'{\i}stica, y las capacidades de edici\'on.
+La Secci\'on \guiheading{Layer Spatial Reference System}, provee 
+informaci\'on de proyecci\'on, y la secci\'on \guiheading{Attribute field info},
+lista los campos y sus tipos de datos. Esta es una forma r\'apida de obtener informaci\'on acerca de la capa.
 
-\subsubsection{Labels Tab}
+\subsubsection{Pesta\~na etiquetas}
 
-The \tab{Labels} tab allows you to enable labeling features and control a number of
-options related to fonts, placement, style, alignment and buffering.
+La pesta\~na \tab{Labels} permite activar el etiquetado de caracter\'{\i}sticas y controlar un n\'umero de opciones
+relacionadas con las fuentes, colocaci\'on, estilo, alineaci\'on y buffering.
 
-We will illustrate this by labelling the lakes shapefile of the
+Vamos a ilustrar esto etiquetando el shapefile lakes de el 
 \filename{qgis\_example\_dataset}:
 
 \begin{enumerate}
-\item Load the Shapefile \filename{alaska.shp} and GML file \filename{lakes.gml} in QGIS.
-\item Zoom in a bit to your favorite area with some lake.
-\item Make the \filename{lakes} layer active.
-\item Open the \dialog{Layer Properties} dialog.
-\item Click on the \tab{Labels} tab.
-\item Check the \checkbox{Display labels} checkbox to enable labeling.
-\item Choose the field to label with. 
-  We'll use \selectstring{Field containing label}{NAMES}.
-\item Enter a default for lakes that have no name. The default label will be
-  used each time QGIS encounters a lake with no value in the \guilabel{NAMES} field.
-\item If have labels extending over several lines, check \checkbox{Multiline labels?}. 
-QGIS will check for a true line return in your label field and insert the line breaks accordingly.
-A true line return is a \textbf{single} character \textbackslash n, 
-(not two separate characters, like a backlash \textbackslash ~followed by the character n).
-\item Click \button{Apply}.
+\item Cargar el shapefile \filename{alaska.shp} y el archivo GML \filename{lakes.gml} en QGIS.
+\item Acerquese un poco a su area favorita con alg\'un lago.
+\item Haga la capa \filename{lakes} la capa activa.
+\item Abra el di\'alogo \dialog{Layer Properties}.
+\item Clic en la pesta\~na \tab{Labels}.
+\item Verifique la caja de selecci\'on \checkbox{Display labels} para activar el etiquetado.
+\item Elija el campo a usar en el etiquetado. 
+  Usaremos \selectstring{Field containing label}{NAMES}.
+\item Escriba un valor por defecto para lagos que no tengan nombre. La etiqueta por defecto ser\'a
+  usada cada vez que QGIS encuentre un lago sin valor en el campo \guilabel{NAMES}.
+\item Si tiene etiquetas que se extienden sobre varia l\'{\i}neas, verifique \checkbox{Multiline labels?}. 
+QGIS verificar\'a una verdadera l\'{\i}nea sea regresada en su campo etiqueta e inserta retornos de l\'{\i}nea como corresponda.
+Una verdadera l\'{\i}nea regresada es un caracter \textbf{single} \textbackslash n, 
+(no dos caracteres separados, como una diagonal invertida \textbackslash ~seguida del caracter n).
+\item clic en el bot\'on \button{Apply}.
 \end{enumerate} 
 
-Now we have labels. How do they look? They are probably too big and poorly
-placed in relation to the marker symbol for the lakes.
+Ahora tenemos etiquetas. Como se ven? Probablemente muy grander y pobremente colocadas en relaci\'on al s\'{\i}mbolo
+marcador para los lagos.
 
-Select the \tab{Font} entry and use the \button{Font} and \button{Color}
-buttons to set the font and color. You can also change the angle and the
-placement of the text-label.
+Seleccione la entrada \tab{Font} y use los botones  \button{Font} y \button{Color}
+para establecer la fuente y el color. Tambien puede cambiar el \'angulo y la posici\'on de la etiqueta de texto.
 
-To change the position of the text relative to the feature:
+
+Para cambiar la posici\'on del texto relativo a la caracter\'{\i}stica:
 
 \begin{enumerate} 
-\item Click on the \tab{Font} entry.
-\item Change the placement by selecting one of the radio buttons
-in the \classname{Placement} group. To fix our labels, choose the
-\radiobuttonon{Right} radio button.
-\item the \classname{Font size units} allows you to select between
-\radiobuttonon{Points} or \radiobuttonon{Map units}.
-\item Click \button{Apply} to see your changes without closing the dialog.
+\item Hacen clic en la entrada \tab{Font}.
+\item Cambiar el posicionamiento seleccionando uno de los botones de selecci\'on
+en el grupo \classname{Placement}. Para fijar las etiquetas, elija el bot\'on de selecci\'on
+\radiobuttonon{Right}.
+\item el \classname{Font size units} permite seleccionar entre
+\radiobuttonon{Points} o \radiobuttonon{Map units}.
+\item Haga clic \button{Apply} para ver los cambios sin cerrar el di\'alogo.
 \end{enumerate} 
 
-Things are looking better, but the labels are still too close to the marker. To
-fix this we can use the options on the \tab{Position} entry. Here we can add
-offsets for the X and Y directions. Adding an X offset of 5 will move our
-labels off the marker and make them more readable. Of course if your marker
-symbol or font is larger, more of an offset will be required.
+Las cosas se ven mejor, pero las etiquetas est\'an aun muy cerca del marcador. Para
+arreglar esto podemos usar las opciones en la entrada \tab{Position}. Aqu\'{\i} podemos agregar 
+desplazamientos en las direcciones X y Y. Agregando un desplazamiento de 5 mover\'a las etiquetas
+fuera del marcador y las har\'a mas legibles. Claro esto si el s\'{i}mbolo marcador
+o la fuente es muy grande, ser\'a necesario un desplazamiento mayor.
 
-The last adjustment we'll make is to \tab{buffer} the labels. This just means
-putting a backdrop around them to make them stand out better. To buffer the
-lakes labels:
+El \'ultimo ajuste que haremos es \tab{buffer} las etiqueta. Esto significa
+poner un fondo alrededor de ellas para que se vean mejor. Para hacer un buffer a las
+etiquetas de lagos:
 
 \begin{enumerate}
-\item Click the \tab{Buffer} tab.
-\item Click the \checkbox{Buffer Labels?} checkbox to enable buffering.
-\item Choose a size for the buffer using the spin box.
-\item Choose a color by clicking on \button{Color} and choosing your
-  favorite from the color selector. You can also set some transparency for the
-  buffer if you prefer.
-\item Click \button{Apply} to see if you like the changes.
+\item Clic en la pesta\~na \tab{Buffer}.
+\item Clic en la casilla de verificaci\'on  \checkbox{Buffer Labels?} para activar el buffering.
+\item Elija el tama\~no del buffer usando el spin box.
+\item Elija un color haciendo clic en \button{Color} y eligiendo el color favorito
+  con el selector de colores. Puede establecer alguna transparencia para el buffer
+  si lo prefiere.
+\item Clic \button{Apply} para ver si los cambios le agradan.
 \end{enumerate} 
 
-If you aren't happy with the results, tweak the settings and then test again
-by clicking \button{Apply}.
+Si no est\'as feliz con los resultados, afine las configuraciones y pruebe nuevamente
+haciendo clic en \button{Apply}.
 
-A buffer of 1 points seems to give a good result.
-Notice you can also specify the buffer size in map units if that works out
-better for you.
+Un buffer de un 1 punto parece dar un buen resultado.
+Note que puede tambien especificar un tama\~no de buffer en unidades de mapa si eso trabaja mejor
+para usted.
 
-The remaining entries inside the \tab{Label} tab allow you control the appearance of the
-labels using attributes stored in the layer. The entries beginning with \tab{Data defined} allow you to
-set all the parameters for the labels using fields in the layer.
+Las entradas restantes en la pestan\~a \tab{Label} permiten controlar la apariencia de las
+etiquetas usando atributos almacenados en la capa. Las entradas que comienzan con \tab{Data defined} permiten establecer
+todos los par\'ametros para las etiquetas usando campos de la capa.
 
-Not that the \tab{Label} tab provides a \classname{preview-box} where your
-selected label is shown.
+Note que la pesta\~na \tab{Label} que provee \classname{preview-box} donde 
+se muestra la etiqueta seleccionada.
 
-\subsubsection{Actions Tab}\index{actions}\label{label_actions}
+\subsubsection{Pesta\~na acciones}\index{actions}\label{label_actions}
 
-QGIS provides the ability to perform an action based on the attributes of a
-feature. This can be used to perform any number of actions, for example,
-running a program with arguments built from the attributes of a feature or
-passing parameters to a web reporting tool.
+QGIS provee la habilidad de realizar una acci\'on basada en los atributos de una
+caracter\'{\i}stica. Puede ser usado para realizar cualquier numero de acciones, por ejemplo,
+correr un programa con argumentos creados a partir de los atributos de una caractar\'{\i}stica o
+pasando argumentos a una herramienta de reporte web.
 
-Actions are useful when you frequently want to run an external application or
-view a web page based on one or more values in your vector layer. An example
-is performing a search based on an attribute value. This concept is used in 
-the following discussion.
+Las acciones son muy \'utiles cuando se desea correr una aplicaci\'on externa o ver
+una p\'agina web basada en uno o mas valores en su capa vectorial. Un ejemplo
+is realizar una b\'usqueda basada en un valor de atributo. Este concepto es usado en la  
+siguiente discuci\'on.
 
 \minisec{Defining Actions}\index{actions!defining}
 
-Attribute actions are defined from the vector \dialog{Layer Properties} dialog. To
-define an action, open the vector \dialog{Layer Properties} dialog and click on the
-\tab{Actions} tab. Provide a descriptive name for the action. The action
-itself must contain the name of the application that will be executed when the
-action is invoked. You can add one or more attribute field values as arguments
-to the application. When the action is invoked any set of characters that
-start with a \% followed by the name of a field will be replaced by the value of
-that field. The special characters \%\% \index{\%\%}will be replaced by the value
-of the field that was selected from the identify results or attribute table (see
-Using Actions below).  Double quote marks can be used to group text into a
-single argument to the program, script or command. Double quotes will be
-ignored if preceded by a backslash.
+Las acciones de atributos son definidas desde el di\'alogo de vectores \dialog{Layer Properties}. Para definir una
+acci\'on, abra el di\'alogo de vectores \dialog{Layer Properties} y haga clic en la
+pesta\~na \tab{Actions}. Provea un nombre descriptivo para la acci\'on. La acci\'on por si misma
+debe contener el nombre de la aplicaci\'on que ser\'a ejecutada cuando la acci\'on es invocada.
+Puede agregar uno o mas valores de atributos como argumentos
+a la aplicaci\'on. Cuando la acci\'on es invocada cualquier conjunto de caracteres que empiezan
+con un \% seguido del nombre de un campo ser\'an reemplazados por el valor de ese campo.
+Los caracteres especiales \%\% \index{\%\%}ser\'an reemplazados por el valor
+de el campo que fue seleccionado desde identificar resultados o tabla de atributos (vea
+Usando Acciones abajo).  Pueden ser usadas comillas dobles para agrupar texto dentro
+de un solo argumento para el programa, script o comando. Las comillas dobles ser\'an ignoradas
+si est\'an precedidas por una diagonal invertida.
 
-If you have field names that are substrings of other field names (e.g., \usertext{col1}
-and \usertext{col10}) you should
-indicate so, by surrounding the field name (and the \% character) with square
-brackets (e.g., \usertext{[\%col10]}). This will prevent the \usertext{\%col10} field
-name being mistaken for the \usertext{\%col1} field name with a \usertext{0}
-on the end. The brackets will be removed by QGIS when it substitutes in the
-value of the field. If you want the substituted field to be surrounded by square
-brackets, use a second set like this: \usertext{[[\%col10]]}.
+Si tiene nombres de campos que son subcadenas de otros nombres de campos (e.g., \usertext{col1}
+y \usertext{col10}) deber\'{\i}a de indicarlos
+, rodeando el nombre de campo (y el \% character) con 
+corchetes (ej., \usertext{[\%col10]}). Esto prevendr\'a que el nombre de campo \usertext{\%col10}
+sea confundido con el nombre de campo \usertext{\%col1} con un \usertext{0}
+al final. Los par\'entesis ser\'an removidos por QGIS cuando substituya el valor en el campo
+. Si quiere que el campo substituido sea rodeado de corchetes,
+use un segundo conjunto como este: \usertext{[[\%col10]]}.
 
-The \dialog{Identify Results} dialog box includes a {\em (Derived)} item that
-contains information relevant to the layer type. The
-values in this item can be accessed in a similar way to the other fields
-by using preceeding the derived field name by \usertext{(Derived).}. For
-example, a point layer has an \usertext{X} and \usertext{Y} field and the
-value of these can be used in the action with \usertext{\%(Derived).X} and
-\usertext{\%(Derived).Y}. The derived attributes are only available from the
-\dialog{Identify Results} dialog box, not the \dialog{Attribute Table} dialog box.
+El di\'alogo \dialog{Identify Results} incluye un {\em (Derived)} elemento que
+contiene informaci\'on relevante al tipo de capa. Los valores
+en este elemento pueden ser accesados en una forma similar a los otros campos
+precediendo el nombre de campo derivado  con \usertext{(Derived).}. Por
+ejemplo, una capa de puntos tiene un campo \usertext{X} y \usertext{Y} y el
+valor de estos puede ser usado en la acci\'on con \usertext{\%(Derived).X} y
+\usertext{\%(Derived).Y}. Los atributos derivados est\'an solo disponibles desde el di\'alogo
+\dialog{Identify Results}, no en el di\'alogo \dialog{Attribute Table}.
 
-Two example actions are shown below:\index{actions!examples}
+Dos ejemplos de acciones se muestrab abajo:\index{actions!examples}
 
 \begin{itemize}
   \item \usertext{konqueror http://www.google.com/search?q=\%nam}
   \item \usertext{konqueror http://www.google.com/search?q=\%\%}
 \end{itemize}
 
-In the first example, the web browser konqueror is invoked and passed a URL to
-open. The URL performs a Google search on the value of the \usertext{nam} field
-from our vector layer. Note that the application or script called by the
-action must be in the path or you must provided the full path. To be sure, we could
-rewrite the first example as: \usertext{/opt/kde3/bin/konqueror
-http://www.google.com/search?q=\%nam}. This will ensure that the konqueror
-application will be executed when the action is invoked.
+En el primer ejemplo, el navegador konqueror es invocado y pasado a la URL al 
+abrirse. La URL realiza una b\'usqueda en Google con el valor del campo \usertext{nam}
+de nuestra capa vectorial. Note que la aplicaci\'on o script llamado por la acci\'on
+debe ser definida en la ruta o debe proveer la  ruta completa. Para asegurar, podemos
+reescribir el primer ejemplo como: \usertext{/opt/kde3/bin/konqueror
+http://www.google.com/search?q=\%nam}. Esto asegurar\'a que la aplicaci\'on konqueror
+ser\'a ejecutada cuando la acci\'on es invocada.
 
-The second example uses the \%\% notation which does not rely on a particular
-field for its value. When the action is invoked, the \%\% will be replaced by
-the value of the selected field in the identify results or attribute table.
+El segundo ejemplo usa la notaci\'on \%\% que no recae en un campo en particular
+para su valor. Cuando la acci\'on es invocada, el \%\% ser\'a reemplazado por
+el valor del campo seleccionado en identificar resultados o tabla de atributos.
 
-\minisec{Using Actions}\index{actions!using}\label{label_usingactions}
-Actions can be invoked from either the \dialog{Identify Results} dialog or an
- \dialog{Attribute Table} dialog. 
-(Recall that these dialogs can be opened by clicking
+\minisec{Usando Acciones}\index{actions!using}\label{label_usingactions}
+Las acciones pueden ser invocadas bien desde el di\'alogo \dialog{Identify Results} o el 
+ di\'alogo \dialog{Attribute Table}. 
+(Recuerde que estos di\'alogos pueden ser abiertos haciendo clic en
 \toolbtntwo{mActionOpenTable}{Identify Features}
-or
+o
 \toolbtntwo{mActionOpenTable}{Open Table}.)
-To invoke an action, 
-right click on the
-record and choose the action from the popup menu. Actions are listed in the popup
-menu by the name you assigned when defining the actions. Click on the action you
-wish to invoke.
+Para invocar una acci\'on, 
+haga clic derecho en el registro
+y elija la acci\'on desde el men\'u emergente. Las acciones se listan en el men\'u
+emergente por el nombre que le asign\'o cuando defin\'{\i}a las acciones. Clic en la acci\'on
+que desea invocar.
 
-If you are invoking an action that uses the \%\% notation, right-click on the
-field value in the \dialog{Identify Results} dialog or the
-\dialog{Attribute Table} dialog that you wish to pass to the application or script.
+Si est\'a invocando una acci\'on que usa la notaci\'on \%\%, haga clic derecho en el
+valor del campo en el di\'alogo \dialog{Identify Results} o el
+\dialog{Attribute Table} di\'alogo que desea pasar a la aplicaci\'on o script.
 
-Here is another example that pulls data out of a vector layer and inserts them
-into a file using bash and the \usertext{echo} command (so it will only work
-\nix or perhaps \osx). The layer in question has fields for a species name
-\usertext{taxon\_name}, latitude \usertext{lat} and longitude
-\usertext{long}. I would like to be able to
-make a spatial selection of a localities and export these field values to a
-text file for the selected record (shown in yellow in the QGIS map area). Here is
-the action to achieve this:
+Aqui est\'a un ejemplo que jala datos de una capa vectorial y los inserta
+dentro de un archivo usando bash y el comando \usertext{echo} (de esta manera solo trabajar\'a
+\nix o quiza \osx). La capa en cuestion tiene campos para nombres de especies
+\usertext{taxon\_name}, latitud \usertext{lat} y longitud
+\usertext{long}. Desear\'{\i} poder hacer
+una selecci\'on espacial de las localidades y exportar estos valores de campos a
+un archivo de texto para el registro seleccionado (se muestra en amarillo en el \'area de mapa de QGIS). Aqu\'{\i} est\'a
+una acci\'on para lograr esto:
 
 \begin{verbatim}
   bash -c "echo \"%taxon_name %lat %long\" >> /tmp/species_localities.txt"
 \end{verbatim} 
 
-After selecting a few localities and running the action on each one, opening
-the output file will show something like this:
+Despues de seleccionar algunas localidades y correr una acci\'on en cada una, al abrir
+el archivo de salida mostrar\'a algo como esto:
 
 \begin{verbatim}
   Acacia mearnsii -34.0800000000 150.0800000000
@@ -733,509 +636,508 @@ the output file will show something like this:
   Acacia mearnsii -32.2700000000 150.4100000000
 \end{verbatim} 
 
-As an exercise we create an action that does a Google search on the 
-\filename{lakes} layer. First we need to determine the URL needed to perform a search on a
-keyword. This is easily done by just going to Google and doing a simple
-search, then grabbing the URL from the address bar in your browser. From this
-little effort we see that the format is: \url{http://google.com/search?q=qgis},
-where \usertext{qgis} is the search term. Armed with this information, we can
-proceed:
+Como un ejercicio crearemos una acci\'on que realiza una b\'usqueda en Google sobre la capa 
+\filename{lakes}. Primero necesitamos determinar la URL necesaria para realizar una b\'usqueda en una
+palabra clave. Esto se realiza f\'acilmente yendo al Google y haciendo una b\'usqueda
+simple, entonces agarrando la URL desde la barra de direcciones en tu navegador. Con este
+peque\~no esfuerzo vemos que el formato es: \url{http://google.com/search?q=qgis},
+donde \usertext{qgis} es el t\'ermino de b\'usqueda. Armado con esta informaci\'on, podemos
+proceder:
 
 \begin{enumerate}
-\item Make sure the \filename{lakes} layer is loaded.
-\item Open the \dialog{Layer Properties} dialog by double-clicking on the layer in the
-  legend or right-click and choose \dropmenuopt{Properties} from the popup menu.
-\item Click on the \tab{Actions} tab.
-\item Enter a name for the action, for example \usertext{Google Search}.
-\item For the action, we need to provide the name of the external program to
-  run. In this case, we can use Firefox. If the program is not in
-  your path, you need to provide the full path.
-\item Following the name of the external application, add the URL used for
-  doing a Google search, up to but not included the search term:
+\item Asegurese que la capa \filename{lakes} est\'a cargada.
+\item Abra el di\'alogo \dialog{Layer Properties} haciendo doble clic en la capa en la
+  leyenda o haga clic derecho y elija \dropmenuopt{Properties} del men\'u emergente.
+\item Clic en la pesta\~na \tab{Actions}.
+\item Escriba un nombre para la acci\'on, por ejemplo \usertext{Google Search}.
+\item Para la acci\'on, necesitamos proveer el nombre de un programa externo a
+  ejecutar. En este caso, podemos utilizar Firefox. Si el programa no esta en
+  su ruta, necesita proveer la ruta completa.
+\item Siguiendo el nombre de la aplicaci\'on externa, agregue la URL usada para
+  hacer la b\'usqueda en Google, sin incluir el t\'ermino de b\'usqueda:
   \url{http://google.com/search?q=}
-\item The text in the \guilabel{Action} field should now look like this:\\
+\item El texto en el campo \guilabel{Action} debe ahora verse como:\\
   \usertext{firefox \url{http://google.com/search?q=}}
-\item Click on the drop-down box containing the field names for the
-  \usertext{lakes} layer. It's located just to the left of the
-  \button{Insert Field} button.
-\item From the drop-down box, select \selectstring{}{NAMES} and click \button{Insert Field}.
-\item Your action text now looks like this:\\ \usertext{firefox
+\item Clic en la caja desplegable que contiene los nombres de los campos para la
+  capa \usertext{lakes}. Est\'a localizada justo a la izquierda del
+  bot\'on \button{Insert Field}.
+\item De la caja desplegable, seleccione \selectstring{}{NAMES} y haga clic en \button{Insert Field}.
+\item El texto de su acci\'on ahora se ve como:\\ \usertext{firefox
   \url{http://google.com/search?q=\%NAMES}}
-\item Fo finalize the action click the \button{Insert action} button.
+\item Para finalizar la acci\'on haga clic en el bot\'on \button{Insert action}.
 \end{enumerate}
  
-This completes the action and it is ready to use. The final text of the action
-should look like this:
+Esto completa la acci\'on y est\'a lista para ser usada. El texto final de la acci\'on
+debe verse como:
 
 \begin{center}
 \usertext{firefox \url{http://google.com/search?q=\%NAMES}}
 \end{center}
 
-We can now use the action. Close the \dialog{Layer Properties} dialog and zoom in to an area
-of interest. Make sure the \filename{lakes} layer is active and identify a
-lake. In the result box you'll now see that our action is visible:
+Ahora podemos usar la acci\'on. Cierre el di\'alogo \dialog{Layer Properties} y haga un acercamiento al \'area
+de inter\'es. Asegurese que la capa \filename{lakes} esta activa e identifique un
+lago. En la caja de resultados ahora ver\'a que nuestra acci\'on est\'a visible:
 
 \begin{figure}[H]
    \begin{center}
-   \caption{Select feature and choose action \nixcaption}\label{fig:identify_action}\smallskip
+   \caption{Seleccione la caracter\'{\i}stica y elija acci\'on \nixcaption}\label{fig:identify_action}\smallskip
    \includegraphics[clip=true, width=8cm]{action_identifyaction} 
 \end{center}  
 \end{figure}
 
-When we click on the action, it brings up Firefox and navigates to the URL
-\url{http://www.google.com/search?q=Tustumena}. It is also possible to add further 
-attribute fields to the action. Therefore you can add a ``+'' to the end of the action 
-text, select another field and click on \button{Insert Field}. In this example there 
-is just no other field available that would make sense to search for.
+Cuando hacemos clic en la acci\'on, se abre el Firefox y navega a la URL
+\url{http://www.google.com/search?q=Tustumena}. Tambien es posible agregar mas 
+campos de atributos a la acci\'on. Por lo tanto puede agregar un ``+'' al final del texto de la acci\'on, 
+seleccione otro campo y haga clic en el bot\'on \button{Insert Field}. En este ejemplo no
+hay otro campo disponible que tenga sentido que sea b\'uscado.
 
-You can define multiple actions for a layer and each will show up in the
-\dialog{Identify Results} dialog. You can also invoke actions from the attribute table
-by selecting a row and right-clicking, then choosing the action from the popup
-menu.
+Puede definir m\'ultiples acciones para una capa y cada una se mostrar\'s en el
+di\'alogo \dialog{Identify Results}. Puede tambien invocar acciones desde la tabla de atributos
+seleccionando una l\'{\i}nea y haciendo clic, entonces eligiendo la acci\'on desde el men\'u
+emergente.
 
-You can think of all kinds of uses for actions. For example, if you have a point layer
-containing locations of images or photos along with a file name, you could
-create an action to launch a viewer to display the image. You could also use
-actions to launch web-based reports for an attribute field or combination of
-fields, specifying them in the same way we did in our Google search example.
+Puede pensar en todos los tipos de usos para las acciones. Por ejemplo, si tiene una capa de puntos
+que contenga lugares de im\'agenes o fotos junto con un nombre de archivo, puede
+crear una acci\'on para lanzar el visualizador para mostrar la imagen. Tambien puede usar
+acciones para lanzar reportes web para un campo de atributos o combinaci\'on de
+campos, especificandolos en la misma forma que hicimos con el ejemplo de b\'usqueda en Google.
 
-\subsubsection{Attributes Tab}\index{attributes}\label{label_attributes}
-Within the \tab{Attributes} tab the attributes of the selected dataset can be
-manipulated. The buttons \button{New Column} and \button{Delete Column} can be
-used, when the dataset is in editing mode. At the moment only columns from 
-PostGIS layers can be edited, because this feature is not yet supported by 
-the OGR library. 
+\subsubsection{Pesta\~na atributos}\index{attributes}\label{label_attributes}
+Dentro de la pesta\~na \tab{Attributes} el conjunto de datos seleccionado puede ser manipulado.
+Los botones \button{New Column} y \button{Delete Column} pueden ser usados,
+cuando el conjunto de datos est\'a en modo de edici\'on. Al momento solo columnas
+de capas Postgis pueden ser editados, debido a que esta funcionalidad no es soportada aun 
+por la librer\'{\i}a the OGR. 
 
-The \button{Toggle editing mode} button toggles this mode.
+El bot\'on \button{Toggle editing mode} activa o desactiva este modo.
 
 \minisec{edit widget}
 
-Within the \tab{Attributes} tab you also find an \texttt{edit widget} and a 
-\texttt{value} column. These two columns can be used to define values or a range 
-of values that are allowed to be added to the specific attribute table columns. 
-They are used to produce different edit widgets in the attribute dialog. These 
-widgets are:
+Dentro de la pesta\~na \tab{Attributes} tambien encontrara un \texttt{edit widget} y una columna 
+\texttt{value}. Estas dos columnas pueden ser usadas para definir valores o un rango 
+de valores que son permitidos agregarse a las columnas de atributos de la tabla especifica. 
+Son usadas para producir diferentes widgets de edici\'on en el di\'alogo de atributos. Estos 
+widgets son:
 
 \begin{itemize}
-\item line edit: an edit field which allows to enter simple text (or restrict to 
-numbers for numeric attributes).
-\item unique value: a list of unique attribute values of all pre-existing features
-is produced and presented in a combo box for selection.
-\item  unique value (editable): a combination of `line edit' and `unique value'.
-The edit field completes entered values to the unique value, but also allows
-to enter new values.
-\item value map: a combobox to select from a set of values specified in the
-\texttt{value} column the \tab{Attributes} tab.  The possible values are 
-delimited by a semicolon (e.g. \verb|high;medium;low|).  It is also possible
-to prepend a label to each value, which is delimited with an equal sign (e.g.
-\verb|high=1;medium=2;low=3|). The label is shown in the combobox instead of
-the value.
-\item classification: if a unique value renderer is selected for the layer, the
-values used for the classes are presented for selection in a combobox.
-\item range (editable): A edit field that allows to restrict numeric values to a
-given range.  That range is specified by entering minium and maximum value
-delimited by a semicolon (e.g. \verb|0;360|) in the \texttt{value} column of
-the \tab{Attributes} tab.
-\item range (slider): A slider widget is presented that allows selection of a value
-in a given range and precision.  The range is specifed by minimum, maximum
-value and a step width (e.g. \verb|0;360;10|) in the \texttt{value} column of
-the \tab{Attributes} tab.
-\item file name: the line edit widget is accompanied by a push button. When pressed
-it allows to select a filename using the standard file dialog.
+\item l\'{\i}nea de edici\'on: un campo de edici\'on que permite capturar texto simple (o restringir a 
+n\'umero para atributos n\'umericos).
+\item valor \'unico: una lista de atributos \'unicos de las caracter\'{\i}sticas existentes
+es generada y presentada en una caja de selecci\'on para su selecci\'on.
+\item  valor  \'unico (editable): una combinaci\'on de `l\'{\i}nea de edici\'on' y `valor \'unico'.
+El campo de edici\'on completa los valores ingresados a un valor \'unico, pero tambien permite
+escribir valores nuevos.
+\item mapa de valores: una caja de selecci\'on para seleccionar desde un conjunto de valores especificados en la
+columna \texttt{value} de la pesta\~na \tab{Attributes}.  Los posibles valores son 
+delimitados por un punto y coma (ej. \verb|high;medium;low|). Tambien es posible
+anteponer una etiqueta a cada valor, la cual es delimitada por signo de igual (ej.
+\verb|high=1;medium=2;low=3|). La etiqueta se muestra en la caja de selecci\'on en lugar
+del valor.
+\item clasificaci\'on: si un renderer de valor \'unico es seleccionado para la capa, los valores
+usados para las clases son presentados para selecci\'on en una caja de selecci\'on.
+\item rango (editable): Un campo de edici\'on que permite restringir valores n\'umericos a un
+rango dado.  El rango se especifica capturando un valor m\'{\i}nimo y un valor m\'aximo
+delimitado por un punto y coma(ej. \verb|0;360|) en la columna \texttt{value} de
+la pesta\~na \tab{Attributes}.
+\item rango (slider): Se presenta un widget slider que permite la selecci\'on de un valor
+en un rango y precisi\'on dado.  El rango es especificado por valores m\'{\i}nimo, m\'aximo
+y un ancho de salto (ej. \verb|0;360;10|) en la columna \texttt{value} de
+la pesta\~na \tab{Attributes}.
+\item nombre de archivo: un widget de l\'{\i}nea de edici\'on acompa\~nado de un pulsador. Cuando est\'a
+presionado permite seleccionar un nombre de archivo usando el di\'alogo de archivo estandar.
 \end{itemize}
 
-\subsubsection{Diagram Tab}\label{sec:diagram}
+\subsubsection{Pesta\~na diagrama}\label{sec:diagram}
 \index{vector layers!diagram}
 
-The \tab{Diagram} tab allows you to add a grahic overlay to a vector layer.
-To activate this feature, open the Plugin Manager and select the Diagram Overlay' 
-plugin. After this, there is a new tab in the vector \dialog{Layer
-Properties} dialog where the settings for diagrams may be entered (see
-figure~\ref{fig:diagramtab}).
+La pesta\~na \tab{Diagram} te permite agregar un sobreposici\'on de gr\'aficos a una capa vectorial.
+Para activar esta caracter\'{\i}stica, habra al Manejador de Complementos y selecciones el complemento  
+de Sobreposici\'on de di\'agramas. Despues de esto, hay una nueva pesta\~na en el di\'alogo de vectores \dialog{Layer
+Properties} donde las configuraciones para los diagramas pueden ser capturadas (vea 
+la figura~\ref{fig:diagramtab}).
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{Vector properties dialog with diagram tab \nixcaption}\label{fig:diagramtab}\smallskip
+   \caption{El di\'alogo de propiedades de vector con la pesta\~na diagramas \nixcaption}\label{fig:diagramtab}\smallskip
    \includegraphics[clip=true, width=13cm]{diagram_tab}
 \end{center}
 \end{figure}
 
-The current implementation of diagrams provides support for pie- and barcharts
-and for linear scaling of the diagram size according to a classification
-attribute. We will demonstrate an example and overlay the alaska boundary
-layer a barchart diagramm showing some temperature data from a climate vector
-layer. Both vector layers are part of the QGIS sample dataset (see
-Section~\ref{label_sampledata}.
+La implementaci\'on actual de di\'agramas provee soporte para barras, pastel
+y para escalado lineal del tama\~no del diagrama de acuerdo a un atributo de
+clasificaci\'on. Mostraremos un ejemplo la sobreposici\'on de un gr\'afico de barras
+sobre la capa de l\'{\i}mites de Alaska.
+Ambas capas vectoriales son parte del conjunto de datos de ejemplo de QGIS (vea
+la Secci\'on~\ref{label_sampledata}.
 
 \begin{enumerate}
-\item First click on the \toolbtntwo{mActionAddOgrLayer}{Load Vector} icon,
-browse to the QGIS sample dataset folder and load the two vector shape layers
-\filename{alaska.shp} and \filename{climate.shp}.
-\item Double click the \filename{climate} layer in the map legend to open the
-\dialog{Layer Properties} dialog.
-\item Click on the \tab{Diagram Overlay} and select \button{Bar chart} as
-Diagram type.
-\item In the diagram we want to display the values of the three columns
-\filename{T\_F\_JAN, T\_F\_JAN} and \filename{T\_F\_MEAN}. First select
-\filename{T\_F\_JAN} as Attributes and click \button{Add attribute}, then
-\filename{T\_F\_JUL} and finally \filename{T\_F\_MEAN}.  
-\item For linear scaling of the diagram size we define \filename{T\_F\_JUL}
-as classification attribute.
-\item Now click on \button{find maximum value}, choose a size value and unit
-and click \button{Apply} to display the diagram in the QGIS main window.
-\item You can now adapt the chart size, or change the attribute colors double
-clicking on the color values in the attribute field.
-Figure~\ref{fig:climatediagram} gives an impression.
-\item Finally click \button{Ok}. 
+\item Primero haga clic en el \'{\i}cono \toolbtntwo{mActionAddOgrLayer}{Load Vector},
+navegue hasta el directorio con el conjunto de datos de ejemplo de QGIS y cargue las dos capas de vectores
+\filename{alaska.shp} y \filename{climate.shp}.
+\item Haga doble clic en la capa \filename{climate} en la leyenda del mapa y abra el di\'alogo
+\dialog{Layer Properties}.
+\item Haga clic en \tab{Diagram Overlay} y seleccione \button{Bar chart} como
+tipo de diagrama.
+\item En el diagrama necesitamos mostrar los valores de las tres columnas
+\filename{T\_F\_JAN, T\_F\_JAN} y \filename{T\_F\_MEAN}. Primero seleccione
+\filename{T\_F\_JAN} como atributos y haga clic \button{Add attribute}, entonces
+\filename{T\_F\_JUL} y finalemente \filename{T\_F\_MEAN}.  
+\item Para escalado lineal del tama\~no del diagrama definimos \filename{T\_F\_JUL}
+como atributo de clasificaci\'on.
+\item Ahora clic en \button{find maximum value}, elija el tama\~no y unidad y clic
+\button{Apply} para mostrar el diagrama en la ventana principal de QGIS.
+\item Ahora puede adaptar el tama\~no del gr\'afico, o cambiar los atributos de colores haciendo
+doble clic en los valores de colores en el campo atributo.
+Figure~\ref{fig:climatediagram} da una impresi\'on.
+\item Finalmente haga clic \button{Ok}. 
 \end{enumerate}
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{Diagram from temperature data overlayed on a map \nixcaption}\label{fig:climatediagram}\smallskip
+   \caption{Diagrama de datos de temperatura sobrepuesto en un mapa \nixcaption}\label{fig:climatediagram}\smallskip
    \includegraphics[clip=true, width=13cm]{climate_diagram}
 \end{center}
 \end{figure}
 
-\subsection{Editing}\index{editing}
+\subsection{Edici\'on}\index{editing}
 
-QGIS supports basic capabilities for editing vector geometries.  Before reading any
-further you should note that at this stage editing support is still preliminary.
-Before performing any edits, always make a backup of the dataset you are about
-to edit. 
+QGIS suporta capacidades b\'asicas para la edici\'on de geometrias.  Antes de leer mas
+deber\'{\i}a notar que en esta etapa el soporte para edici\'on es preliminar.
+Antes de realizar cualquier edici\'on, realize siempre una copia de respaldo del conjunto de datos
+a editar. 
 
-\textbf{Note} - the procedure for editing GRASS layers is different - see
-Section \ref{grass_digitising} for details.
+\textbf{Note} - el procedimiento para editar capas de GRASS es diferente - vea la
+Secci\'on \ref{grass_digitising} para detalles.
 
-\subsubsection{Setting the Snapping Tolerance and Search Radius}
+\subsubsection{Estableciendo la tolerancia del snapping y radio de b\'usqueda}
 
-Before we can edit vertices, it is very important to set the snapping
-tolerance and search radius to a value that allows us an optimal editing of
-the vector layer geometries. 
+Antes de poder editar v\'ertices, es muy importante establecer la tolerancia
+de snapping y radio de b\'usqueda a valores que permitan una \'optima edici\'on de
+las geometr\'{\i}as de capas vectoriales. 
 
-\minisec{Snapping tolerance}
+\minisec{Tolerancia de Snapping}
 
-Snapping tolerance is the distance QGIS uses to \usertext{search} for the
-closest vertex and/or segment you are trying to
-connect when you set a new vertex or move an existing vertex. If you aren't
+Tolerancia de Snapping es la distancia que QGIS usa para \usertext{search} el v\'ertice
+mas cercano y/o segemento al cual tratas de conectar
+cuando estableces un nuevo v\'ertice o mueve un v\'ertice existente. If you aren't
 within the snap tolerance, QGIS will leave the vertex where you release the
 mouse button, instead of snapping it to an existing vertex and/or segment. 
 
 \begin{enumerate}
-\item A general, project wide snapping tolerance can be defined choosing
+\item Una tolerancia de snapping general puede ser definida eligiendo
 \mainmenuopt{Settings} > \dropmenuopttwo{mActionOptions}{Options}. 
-(On Mac: go to  \mainmenuopt{QGIS} > Preferences, on Linux: \mainmenuopt{Edit} > \dropmenuopttwo{mActionOptions}{Options}.)
-In the \tab{Digitizing} tab you can select between to vertex, to segment or
-to vertex and segment as default snap mode. You can also define a default
-snapping tolerance and a search radius for vertex edits. The tolerance an be set either in map units or in pixels. 
-In our digitizing project (working with the
-Alaska dataset), the units are in feet. Your results may vary, but something
-on the order of 300ft should be fine at a scale of 1:10 000 should be a
-reasonable setting.
-\item A layer based snapping tolerance can be defined by choosing
+(En Mac: vaya a  \mainmenuopt{QGIS} > Preferencias, en Linux: \mainmenuopt{Edit} > \dropmenuopttwo{mActionOptions}{Options}.)
+En la pesta\~na de \tab{Digitizing} puede elegir entre v\'ertice a segmento o v\'ertice a
+segmento y v\'ertice como mode de snap por defencto. Tambien puede definir una tolerancia de
+snapping por defecto y un radio de b\'usqeuda para edici\'on de v\'ertices. La tolerancia puede ser establecida bien
+en unidades de mapa o en pixeles.
+En nuestro proyecto de digitalizaci\'on (trabajando con el conjunto de datos de Alaska),
+las unidades estas en pies. Sus resultados pueden variar, pero algo en el
+orden de 300 pies deber\'{\i}a estar bien a una escala de 1:10 000 y es una configuraci\'on razonable.
+\item Una tolerancia de snapping basada en la capa puede ser definida eligiendo
 \mainmenuopt{Settings} (or \mainmenuopt{File}) > \dropmenuopttwo{mActionOptions}{Project
-Properties\dots}. In the \tab{General} tab, section \classname{Digitize} you
-can click on \button{Snapping options\dots} to enable and adjust snapping
-mode and tolerance on a layer basis (see Figure~\ref{fig:snappingoptions}).
+Properties\dots}. En la pesta\~na \tab{General}, secci\'on \classname{Digitize} puede hacer clic
+en \button{Snapping options\dots} para activar y ajustar el modo de snapping
+y tolerancia en una capa (see Figure~\ref{fig:snappingoptions}).
 \end{enumerate}
 
 \begin{figure}[H]
    \begin{center}
-   \caption{Edit snapping options on a layer basis \nixcaption}\label{fig:snappingoptions}\smallskip
+   \caption{Editar opciones de snapping para una capa \nixcaption}\label{fig:snappingoptions}\smallskip
    \includegraphics[clip=true, width=14cm]{editProjectSnapping} 
 \end{center}  
 \end{figure}
 
-\minisec{Search radius}
+\minisec{Radio de b\'usqueda}
 
-Search radius is the distance QGIS uses to \usertext{search} for the closest
-vertex you are trying to move when you click on the
-map. If you aren't within the search radius, QGIS won't find and select
-any vertex for editing and it will pop up an annoying warning to that effect.
-Snap tolerance and search radius are set in map units or pixels, so you may find you
-need to experiment to get them set right. If you specify too big of a
-tolerance, QGIS may snap to the wrong vertex, especially if you are dealing
-with a large number of vertices in close proximity. Set search radius too
-small and it won't find anything to move.
+El radio de b\'usqueda es la distancia que QGIS usa para \usertext{search} el v\'ertice
+mas cercano que se est\'a tratando de mover cuando se hace clic en el
+mapa. Si no est\'a dentro del radio de b\'usqueda, QGIS no encontrar\'a y seleccionar\'a
+ning\'un v\'ertice para edici\'on y mostrar\'a un molesto mensaje a tal efecto.
+La tolerancia de snap tolerance y el radio de b\'usqueda pueden ser establecidos en unidades de mapa o pixeles, de esta manera puede
+necesitar experimentar para establecerlos correctamente. Si especifica una tolerancia muy grande
+QGIS puede snap al v\'ertice incorrecto, especialmente si est\'a tratando
+con un gran n\'umero de v\'ertices muy proximos. Establecer un radio de b\'usqueda muy
+peque\~no no encontrar\'a nada a mover.
 
-The search radius for vertex edits in layer units can be defined in the
-\tab{Digitizing} tab under \mainmenuopt{Settings} >
-\dropmenuopttwo{mActionOptions}{Options}. The same place where you define the
-general, project wide snapping tolerance.
+El radio de b\'usqueda para ediciones de vertices en unidades de capa puede ser definido en la
+pesta\~na \tab{Digitizing} bajo \mainmenuopt{Settings} >
+\dropmenuopttwo{mActionOptions}{Options}. El mismo lugar donde defini\'o la
+tolerancia de snapping general para el proyecto.
 
-\subsubsection{Topological editing}
+\subsubsection{Edici\'on topol\'ogica}
 
-Besides layer based snapping options the \tab{General} tab in menu 
+Ademas de las opciones basadas en capa la pesta\~na \tab{General} en el men\'u 
 \mainmenuopt{Settings} -> \dropmenuopttwo{mActionOptions}{Project Properties\dots} 
-also provides some topological functionalities. 
-In the Digitizing option group you can \checkbox{Enable topological editing} and/or activate 
-\checkbox{Avoid intersections of new polygons}.
+tambien provee algunas funcionalidades topol\'ogicas. 
+En el grupo de opciones Digitalizaci\'on puede \checkbox{Activar edici\'on topol\'ogica} y/o activar 
+\checkbox{Evitar intersecciones de nuevos pol\'{i}gonos}.
 
-\minisec{Enable topological editing}
+\minisec{Activar edici\'on topol\'ogica}
 
-The option \checkbox{Enable topological editing} is for editing and maintaining 
-common boundaries in polygon mosaics. QGIS "detects" a shared boundary in 
-a polygon mosaic and you only have to move the vertex once and QGIS will take 
-care about updating the other boundary.
+La opci\'on \checkbox{Activar edici\'on topol\'ogica} es para editar y mantener 
+l\'{\i}mites comunes en mosaicos de pol\'{\i}gonos. QGIS "detecta" un l\'{\i}mite compartido en 
+un mosaico de pol\'{\i}gonos y solo tiene que mover el v\'ertice una sola vez y QGIS se encargar\'a 
+de actualizar el otro l\'{\i}mite.
 
-\minisec{Avoid intersections of new polygons}
+\minisec{Evitar intersecciones de nuevos pol\'{\i}gonos}
 
-The second topological option called \checkbox{Avoid intersections of new polygons} 
-avoids overlaps in polygon mosaics. It is for quicker digitizing of adjacent polygons. 
-If you already have one polygon, it is possible with this option to digitise the second 
-one such that both intersect and qgis then cuts the second polygon to the common boundary. 
-The advantage is that users don't have to digitize all vertices of the common boundary.
+La segunda opci\'on topol\'ogica llamada \checkbox{Evitar intersecci\'on de nuevos pol\'{\i}gonos} 
+evita traslapes en mosaicos de pol\'{\i}gonos. Es para digitalizaci\'on r\'apida de pol\'{\i}gonos adyacentes. 
+Si ya tiene un pol\'{\i}gono, es posible con esta opci\'on digitalizar la segunda 
+de tal forma que las dos se intersecten y Qgis entonces corta el segundo pol\'{i}gono en el l\'{i}mite com\'un. 
+La ventaja es que los usuarios no tienen que digitalizar todos los v\'ertices del l\'{i}mite com\'un.
 
-\subsubsection{Editing an Existing Layer}
+\subsubsection{Edici\'on de una capa existente}
 \index{vector layers!editing}
 \index{editing!an existing layer}
 \label{sec:edit_existing_layer}
 
-By default, QGIS loads layers read-only: This is a safeguard
-to avoid accidentally editing a layer if there is a slip of the mouse.
-However, you can choose to edit any layer as long as the data provider supports it,
-and the underlying data source is writable (i.e. its files are not read-only).
+Por defecto, QGIS carga capas como solo lectura: Esto es una medida de seguridad
+para evitar editar accidentalmente una capa si hay un dezlis del mouse.
+Sin embargo, puede elegir editar una capa siempre y cuando el proveedor de datos lo soporte,
+y el conjunto de datos sea escribible (ej. sus archivos no son de solo escritura).
 
-Layer editing is most versatile when used on PostgreSQL/PostGIS data sources. 
+La edici\'on de capas es mas versatil cuando es usada en conjuntos de datos PostgreSQL/PostGIS. 
 
-\begin{Tip}[ht]\caption{\textsc{Data Integrity}}
-\qgistip{It is always a good idea to back up your data source before you start 
-editing. While the authors of QGIS have made every effort to preserve the 
-integrity of your data, we offer no warranty in this regard.
+\begin{Tip}[ht]\caption{\textsc{Integridad de datos}}
+\qgistip{Siempre es una buena idea respaldar su conjunto de datos antes de iniciar 
+la edici\'on. Mientras los autores de QGIS han realizado cada esfuerzo para preservar 
+la integridad de sus datos, no se ofrece garant\'{\i}a en este aspecto.
 }
 \end{Tip}
 
-\begin{Tip}[ht]\caption{\textsc{Manipulating Attribute data}}
-\qgistip{Currently only PostGIS layers are supported for adding or dropping attribute
-columns within this dialog. In future versions of QGIS, other datasources 
-will be supported, because this feature was recently implemented in GDAL/OGR > 1.6.0
+\begin{Tip}[ht]\caption{\textsc{Manipulando datos de atributos}}
+\qgistip{Actualmente solo capas de PostGIS son soportadas para agregar y eliminar columnas de atributos
+dentro de este di\'alogo. En versiones futuras de QGIS, otros conjuntos de datos ser\'an soportados, 
+porque esta funcionalidad fue recientemente implementada en GDAL/OGR > 1.6.0
 }
 \end{Tip}
 
 
 
-\begin{Tip}[ht]\caption{\textsc{Save Regularly}}
-\qgistip{Remember to toggle \toolbtntwo{mActionToggleEditing}{Toggle editing} off regularly.  
-This allows you to save your recent changes,
-and also confirms that your data source can accept all
-your changes.
+\begin{Tip}[ht]\caption{\textsc{Guarde regularmente}}
+\qgistip{Recuerde desactivar \toolbtntwo{mActionToggleEditing}{Toggle editing} regularmente.  
+Esto le permite guardar los cambios recientes,
+y tambien confirmar que los conjuntos de datos pueden aceptar todos los cambios.
 }
 \end{Tip}
 
-\begin{Tip}[ht]\caption{\textsc{Concurrent Edits}}
-\qgistip{This version of QGIS does not track if somebody else is editing a feature at the same time
-as you.  The last person to save their edits wins.
+\begin{Tip}[ht]\caption{\textsc{Ediciones concurrentes}}
+\qgistip{Esta versi\'on de QGIS no rastrea si alguien mas est\'a editando una caracter\'{i}stica al mismo tiempo
+que usted.  La \'ultima persona en guardar su edici\'on gana.
 }
 \end{Tip}
 
-\begin{Tip}[ht]\caption{\textsc{Zoom in Before Editing}}
-\qgistip{Before editing a layer, you should
-zoom in to your area of interest. This 
-avoids waiting while all the vertex markers are rendered across the entire layer.
+\begin{Tip}[ht]\caption{\textsc{Haga un acercamiento antes de empezar a editar}}
+\qgistip{Antes de editar una capa, deber\'{\i}a hacer un acercamiento
+a su \'area de inter\'es. Esto evita esperar mientras los marcadores de v\'ertices 
+son dibujados en la capa completa.
 }
 \end{Tip}
 
-\begin{Tip}[ht]\caption{\textsc{Vertex Markers}}
+\begin{Tip}[ht]\caption{\textsc{Marcadores de v\'ertices}}
 \qgistip{
-The current version of QGIS supports two kinds of vertex-markers -
-a semi-transparent circle or a cross. To change the marker style, choose
-\dropmenuopttwo{mActionOptions}{Options} from the
-\mainmenuopt{Settings} menu and click on the \tab{Digitizing} tab and select
-the appropriate entry.
+La versi\'on actual de QGIS soporta dos tipos de marcadores de v\'ertices 
+un c\'irculo semi-transparente o una cruz. Para cambiar el estilo de marcador, elija
+\dropmenuopttwo{mActionOptions}{Options} del men\'u
+\mainmenuopt{Settings} y haga clic en la pesta\~na \tab{Digitizing} y selecciones
+la entrada apropiada.
 }
 \end{Tip}
 
-All editing sessions start by choosing the \dropmenuopttwo{mActionToggleEditing}{Toggle editing} option.
-This can be found in the context menu after right clicking on the legend
-entry for that layer.\index{Allow Editing}
-Alternately, you can use the \index{Toggle Editing}
-\toolbtntwo{mActionToggleEditing}{Toggle editing} button from the toolbar to start 
-or stop the editing mode.\index{editing!icons} Once the layer is in edit mode, 
-markers will appear at the vertices, and additional tool buttons on the editing 
-toolbar will become available.
+Todas las sesiones de edici\'on comienzan eligiendo la opci\'on \dropmenuopttwo{mActionToggleEditing}{Toggle editing}.
+Esta puede ser encontrada en el men\'u contextual haciendo clic derecho en la entrada para esa capa en la leyenda.
+\index{Allow Editing}
+Alternativamente, puede usar el bot\'on \index{Toggle Editing}
+\toolbtntwo{mActionToggleEditing}{Toggle editing} de la barra de herramientas para empezar o parar 
+el modo de edici\'on.\index{editing!icons} Una vez que la capa est\'a en modo de edic\'on, 
+los marcadores aparecer\'an en los v\'ertices, y botones adicionales en la barra de herramientas 
+estar\'an disponibles.
 
-\minisec{Zooming and panning with the mouse wheel}
+\minisec{Haciendo zoom y pan con la rueda del rat\'on}
 
-While digitizing you can press the mouse wheel to pan inside of the main
-window and you can roll the mouse wheel to zoom in and out on the map. For
-zooming place the mouse cursor inside the map area and roll it forward (away from you) 
-to zoom in and backwards (towards you) to zoom out. The mouse cursor position will 
-be the center of the zoomed area of interest. You can customize the behavior 
-of the mouse wheel zoom using the \tab{Map tools} tab under the
-\mainmenuopt{Settings} >\dropmenuopt{Options} menu.  
+Mientras esta digitalizando puede presionar la rueda del rat\'on para hacer un pan dentro de la ventana
+principal y puede girar la rueda para acercarse o alejarse en el mapa. Para alejarse
+posicione el cursor del rat\'on dentro del \'area del mapa y gire hacia atras (hacia usted) 
+para acercarse gire la rueda del rat\'on hacia afuera (alejandose de usted). La posici\'on del cursor del mouse ser\'a el centro 
+del zoom al \'area de inter\'es. Puede personalizar el comportamiento 
+de la rueda del mouse usando la pesta\~na \tab{Map tools} bajo el men\'u
+\mainmenuopt{Settings} >\dropmenuopt{Options}.  
 
-\minisec{Panning with the arrow keys}
+\minisec{Desplazamiento con las teclas de flechas}
 
-Panning the Map during digitizing is possible with the arrow keys. Place
-the mouse cursor inside the map area and click on the right arrow key to
-pan east, left arrow key to pan west, up arrow key to pan north and down arrow 
-key to pan south.
+Es posible desplazar el mapa  durante la digitalizaci\'on con las teclas de flecha. Posicione
+el cursor del mouse dentro del \'area de mapa presione la flecha derecha para hacer un
+desplazamiento al este, tecla de flecha izquierda para desplazarse al oeste, tecla de flecha hacia arriba para desplazarse al norte y flecha hacia abajo 
+para desplazarse al sur.
 
-You can also use the spacebar to temporarily cause mouse movements to pan 
-then map. The PgUp and PgDown keys on your keyboard will cause the map 
-display to zoom in or out without interrupting your digitising session.
+Tambien puede usar la barra espaciadora para temporalmente causar movimientos del mouse para hacer desplazamientos 
+al mapa. Las teclas PgUp y PgDown en su teclado causar\'an que la vista se acerque 
+o aleje sin interrumpir su sesi\'on de digitalizaci\'on.
 
 You can perform the following editing functions:
 
 \begin{itemize}
-\item Add Features: \toolbtntwo{mActionCapturePoint}{Capture Point},
-  \toolbtntwo{mActionCaptureLine}{Capture Line} and
-  \toolbtntwo{mActionCapturePolygon}{Capture Polygon}
-\item \toolbtntwo{mActionAddRing}{Add Ring}
-\item \toolbtntwo{mActionAddIsland}{Add Island}
-\item \toolbtntwo{mActionSplitFeatures}{Split Features}
-\item \toolbtntwo{mActionMoveFeature}{Move Features}
-\item \toolbtntwo{mActionMoveVertex}{Move Vertex}
-\item \toolbtntwo{mActionAddVertex}{Add Vertex}
-\item \toolbtntwo{mActionDeleteVertex}{Delete Vertex}
-\item \toolbtntwo{mActionDeleteSelected}{Delete Selected}
-\item \toolbtntwo{mActionEditCut}{Cut Features}
-\item \toolbtntwo{mActionEditCopy}{Copy Features}
-\item \toolbtntwo{mActionEditPaste}{Paste Features}
+\item Add Features: \toolbtntwo{mActionCapturePoint}{Capturar Punto},
+  \toolbtntwo{mActionCaptureLine}{Capturar L\'{\i}nea} y
+  \toolbtntwo{mActionCapturePolygon}{Capturar Pol\'{\i}gono}
+\item \toolbtntwo{mActionAddRing}{Agregar Anillo}
+\item \toolbtntwo{mActionAddIsland}{Agregar Isla}
+\item \toolbtntwo{mActionSplitFeatures}{Partir Caracter\'{\i}sticas}
+\item \toolbtntwo{mActionMoveFeature}{Mover Caracter\'{\i}sticas}
+\item \toolbtntwo{mActionMoveVertex}{Mover V\'ertice}
+\item \toolbtntwo{mActionAddVertex}{Agregar V\'ertice}
+\item \toolbtntwo{mActionDeleteVertex}{Eliminar V\'ertice}
+\item \toolbtntwo{mActionDeleteSelected}{Eliminar Seleccionado}
+\item \toolbtntwo{mActionEditCut}{Cortar Caracter\'{\i}sticas}
+\item \toolbtntwo{mActionEditCopy}{Copiar Caracter\'{\i}sticas}
+\item \toolbtntwo{mActionEditPaste}{Pegar Caracter\'{\i}sticas}
 \end{itemize}
 
-\minisec{Adding Features}
+\minisec{Agregando Caracter\'{\i}sticas}
 \index{vector layers!adding!feature}
 
-Before you start adding features, use the \toolbtntwo{mActionPan}{pan}
-and \toolbtntwo{mActionZoomIn}{zoom-in}/\toolbtntwo{mActionZoomOut}{zoom-out} 
-tools to first navigate to the area of interest.
+Antes de iniciar agregando caracter\'{\i}sticas, use las herramientas \toolbtntwo{mActionPan}{pan}
+y \toolbtntwo{mActionZoomIn}{zoom-in}/\toolbtntwo{mActionZoomOut}{zoom-out} 
+para navegar al \'area de inter\'es.
 
-Then you can use the \toolbtntwo{mActionCapturePoint}{Capture point},
-\toolbtntwo{mActionCaptureLine}{Capture line} or
-\toolbtntwo{mActionCapturePolygon}{Capture polygon} icons on the toolbar to put the QGIS cursor
-into digitizing mode.
+Entonces puede usar los \'{\i}conos \toolbtntwo{mActionCapturePoint}{Capturar punto},
+\toolbtntwo{mActionCaptureLine}{Capture l\'{\i}nea} o
+\toolbtntwo{mActionCapturePolygon}{Capturar pol\'{\i}gono} en la barra de herramientas para poner el cursor de QGIS
+en modo de digitalizaci\'on.
 
-For each feature, you first digitize the geometry, then enter its attributes.
+Para cada caracter\'{\i}sticas, primero digitaliza la geometr\'{\i}a, despues captura sus atributos.
 
-To digitize the geometry, left-click on the map area to create the
-first point of your new feature.
+Para digitalizar la geometr\'{\i}a, haga clic izquierdo en el \'area del mapa para crear el primer
+punto de su nueva caracter\'{\i}stica.
 
-For lines and polygons, keep on left-clicking for each additional
-point you wish to capture.  When you have finished adding points,
-right-click anywhere on the map area to confirm you have finished entering
-the geometry of that feature.
+Para l\'{\i}neas y pol\'{\i}gonos, siga haciendo clic izquierdo para cada punto adicional
+que desee capturar. Cuando haya finalizado de agregar puntos,
+haga clic derecho en cualquier parte del \'area de mapa para confirmar que ha terminados de meter
+la geometr\'{i}a de esa caracter\'{\i}stica.
 
-The attribute window will appear, allowing you to enter the information for the new feature.
-Figure \ref{fig:vector_digitising} shows setting attributes for a fictitious
-new river in Alaska.
+La ventana de atributos aparecer\'a, permitiendole meter la informaci\'on de la nueva caracter\'{\i}stica.
+Figure \ref{fig:vector_digitising} muestra como establecer atributos para un nuevo rio ficticio
+en Alaska.
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{Enter Attribute Values Dialog after digitizing a new vector
-   feature \nixcaption}\label{fig:vector_digitising}\smallskip
+   \caption{Di\'alogo de Captura de Atributos despues de digitalizar una nueva caracter\'{\i}stica vectorial
+   \nixcaption}\label{fig:vector_digitising}\smallskip
    \includegraphics[clip=true, width=8cm]{editDigitizing}
 \end{center}  
 \end{figure}
 
-\begin{Tip}[ht]\caption{\textsc{Attribute Value Types}}
+\begin{Tip}[ht]\caption{\textsc{Tipos de Valores de Atributos}}
 \qgistip{
-At least for shapefile editing the attribue types are validated during the
-entry. Because of this, it is not possible to enter a number into the text-column in
-the dialog \dialog{Enter Attribute Values} or vica versa. If you need to do so,
-you should edit the attributes in a second step within the \dialog{Attribute
-table} dialog.
+Al menos para edici\'on de shapefiles los tipos de atributos son validados durante la
+captura. Por esto, no es posible capturar un n\'umero dentro de una columna de texto en el di\'alogo
+\dialog{Capturar Valores de Atributos} o viceversa. Si necesita hacerlo as\'{\i},
+deber\'{\i}a editar los atributos en un segundo paso dentro del di\'alogo \dialog{Attribute
+table}.
 }
 \end{Tip}
 
-\minisec{Move Feature}
+\minisec{Mover Caracter\'{\i}stica}
 \index{vector layers!move!feature}
 
-You can move features using the \toolbtntwo{mActionMoveFeature}{Move Feature} icon
-on the toolbar.
+Puede mover caracter\'{\i}sticas usando el \'{\i}cono \toolbtntwo{mActionMoveFeature}{Move Feature} 
+de la barra de herramientas.
 
-\minisec{Split Feature}
+\minisec{Partir Caracter\'{\i}stica}
 \index{vector layers!split!feature}
 
-You can split features using the \toolbtntwo{mActionSplitFeatures}{Split Features} icon
-on the toolbar.
+Puede partir caracter\'{\i}sticas usando el \'{\i}cono \toolbtntwo{mActionSplitFeatures}{Split Features}
+de la barra de herramientas.
 
-\minisec{Editing Vertices of a Feature}
+\minisec{Editando V\'ertices de una Caracter\'{\i}stica}
 \index{vector layers!editing!vertex}
 
-For both PostgreSQL/PostGIS and shapefile-based layers, the vertices of features can be edited. 
+Para ambos tipos de capas PostgreSQL/PostGIS y  shapefile, los v\'ertices de las caracter\'{\i}sticas pueden ser editados. 
 
-Vertices can be directly edited, that is, you don't
-have to choose which feature to edit before you can change
-its geometry.
-In some cases, several features may share the same vertex
-and so the following rules apply when the mouse is pressed
-down near map features:
+Los v\'ertices pueden ser directamente editados, esto es, no tiene
+que elegir cual nueva caracter\'{\i}stica editar antes de que pueda cambiar
+su geometr\'{\i}a.
+En algunos casos, m\'ultiples caracter\'{\i}sticas pueden compartir el mismo v\'ertice
+y de esta manera los siguientes reglas aplican cuando el mouse es presionado
+cerca de caracter\'{\i}sticas del mapa:
 
 \begin{itemize}
-\item \textbf{Lines}    - The nearest line to the mouse position
-                          is used as the target feature.
-                          Then (for moving and deleting a vertex)
-                          the nearest vertex
-                          on that line is the editing target.
+\item \textbf{L\'{\i}neas}    - La l{\'i}nea mas cercana a la posici\'on del rat\'on
+                          es usada como caracter\'{\i}stica objetivo.
+                          Entonces (para mover y eliminar un v\'ertice)
+                          el v\'ertice mas cercano
+                          en esa l\'{\i}nea es el objetivo de edici\'on.
 
-\item \textbf{Polygons} - If the mouse is inside a polygon, then it is
-                          the target feature; otherwise the nearest polygon
-                          is used.
-                          Then (for moving and deleting a vertex)
-                          the nearest vertex
-                          on that polygon is the editing target.
+\item \textbf{Pol\'{\i}gonos} - Si el rat\'on est\'a dentro del pol\'{\i}gono, entonces este
+                          es la caracter\'{\i}stica objetivo; de lo contrario el pol\'{\i}gono mas cercano
+                          es usado.
+                          Entonces (para mover y eliminar un v\'ertice)
+                          el v\'ertice mas cercano
+                          en ese pol\'{\i}gono es el objetivo de edici\'on.                          
 \end{itemize}
 
-You will need to set the property
-\mainmenuopt{Settings}>\dropmenuopttwo{mActionOptions}{Options}>\tab{Digitizing}>\selectnumber{Search Radius}{10}
-to a number greater than zero.  Otherwise QGIS will not be able to tell which feature is being edited.
+Necesitar\'a establecer la propiedad
+\mainmenuopt{Settings}>\dropmenuopttwo{mActionOptions}{Options}>\tab{Digitalizando}>\selectnumber{Radio de b\'usqueda}{10}
+a un n\'umero mayor que cero.  De lo contrario QGIS no podr\'a decir que caracter\'{\i}stica esta siendo editeda.
 
 
-\minisec{Adding Vertices of a Feature}
+\minisec{Agregando V\'ertices de una Caracter\'{\i}stica}
 \index{vector layers!adding!vertex}
 
-You can add new vertices to a feature by using the
-\toolbtntwo{mActionAddVertex}{Add Vertex} icon
-on the toolbar.
+Puede agregar nuevos v\'ertices a una caracter\'{\i}stica usando el \'{\i}cono
+\toolbtntwo{mActionAddVertex}{Add Vertex} 
+de la barra de herramientas.
 
-Note, it doesn't make sense to add more vertices to a Point feature!
+Note que, no tiene sentido agregar mas v\'ertices a una caracter\'{\i}stica de punto!
 
-In this version of QGIS, vertices can only be added to an \textit{existing} line
-segment of a line feature.  If you want to extend a line beyond its end,
-you will need to move the terminating vertex first, then add a new vertex where
-the terminus used to be.
+En esta versi\'on de QGIS, los v\'ertices solo pueden ser agregados a un \textit{existing} segmento
+de una caracter\'{\i}stica de l\'{\i}nea.  Si quieres extender una l\'{\i}nea mas all\'a de su final,
+necesitaras primero mover el v\'ertice final, entonces agrega un nuevo v\'ertice donde
+el terminal solia estar.
 
-\minisec{Moving Vertices of a Feature}
+\minisec{Moviendo V\'ertices de una Caracter\'{\i}stica}
 \index{vector layers!moving!vertex}
 
-You can move vertices using the \toolbtntwo{mActionMoveVertex}{Move Vertex} icon
-on the toolbar.
+Puede mover v\'ertices usando el \'{\i}cono \toolbtntwo{mActionMoveVertex}{Mover V\'ertice}
+de la barra de herramientas.
 
-\minisec{Deleting Vertices of a Feature}
+\minisec{Eliminando V\'ertices de una Caracter\'{\i}stica}
 \index{vector layers!deleting!vertex}
 
-You can delete vertices by using the \toolbtntwo{mActionDeleteVertex}{Delete Vertex} icon
-on the toolbar.
+Puede eliminar v\'ertices usando el \'{\i}cono \toolbtntwo{mActionDeleteVertex}{Delete Vertex}
+de la barra de herramientas.
 
-Note, it doesn't make sense to delete the vertex of a Point feature!
-Delete the whole feature instead.
+Note que, no tiene sentido eliminar el v\'ertice de una caracter\'{\i}stica de Punto!
+En lugar de eso elimine la caracter\'{\i}stica completa.
 
-Similarly, a one-vertex line or a two-vertex polygon is also
-fairly useless and will lead to unpredictable results elsewhere
-in QGIS, so don't do that.
+Similarment, una l\'{\i}nea de un solo v\'ertice o pol\'{\i}gono de dos v\'ertices tambien es
+bastante inutil y llevar\'a a resultados impredecibles en alg\'un otro lugar
+QGIS, as\'{\i} que no lo haga.
 
-\textbf{Warning:} A vertex is identified for deletion as
-soon as you click the mouse near an eligible
-feature.  To undo, you will need to toggle
-Editing off and then discard your changes.
-(Of course this will mean that other unsaved changes will be lost, too.)
+\textbf{advertencia:} Un v\'ertice es identificado para eliminaci\'on tan pronto 
+como haces clic con el rat\'on cerca de una caracter\'{\i}stica elegible.
+Para deshacer, necesitaras desactivar
+la edici\'on y despues descartar sus cambios.
+(Claro esto significar\'a que otros cambios sin guardar ser\'an perdidos, tambien.)
 
-\minisec{Add Ring}
+\minisec{Agregar Anillo}
 \index{vector layers!add!ring}
 
-You can create ring polygons using the \toolbtntwo{mActionAddRing}{Add Ring}
-icon in the toolbar. This means inside an existing area it is
-possible to digitize further polygons, that will occur as a 'whole', so only 
-the area in between the boundaries of the outer and inner polygons remain as 
-a ring polygon. 
+Puede crear pol\'{\i}gonos anillo usando el \'{\i}cono \toolbtntwo{mActionAddRing}{Add Ring}
+de la barra de herramientas. Esto significa que dentro de un \'area existente es posible digitalizar
+otros pol\'{\i}gonos, esto ocurrir\'a como un 'todo', de esta manera solo 
+el \'area entre los l\'{\i}mites del pol\'{\i}gono mas externo y el mas interno permanecen 
+como un pol\'{\i}gono de anillo. 
 
-\minisec{Add Island}
+\minisec{Agregar Isla}
 \index{vector layers!add!island}
 
-You can \toolbtntwo{mActionAddIsland}{add island} polygons to a selected multipolygon. 
-The new island polygon has to be digitized outside the selected multipolygon. 
+Puede \toolbtntwo{mActionAddIsland}{agregar isla} a seleccionados multipol\'{\i}gonos. 
+El nuevo pol\'{\i}gono isla tiene que ser digitalizado fuera del multipol\'{\i}gono seleccionado. 
 
-\minisec{Cutting, Copying and Pasting Features}
+\minisec{Cortando, Copiando y Pegando Caracter\'{\i}sticas}
 \index{vector layers!cut!feature}
 \index{vector layers!copy!feature}
 \index{vector layers!paste!feature}
@@ -1243,173 +1145,166 @@ The new island polygon has to be digitized outside the selected multipolygon.
 \index{editing!copying features}
 \index{editing!pasting features}
 
-Selected features can be cut, copied and pasted between layers in the
-same QGIS project, as long as destination layers are set to 
-\toolbtntwo{mActionToggleEditing}{Toggle editing} beforehand.
+Las caracter\'{\i}sticas seleccionadas pueden ser cortadas, copiadas y pegadas entre capas en el mismo proyecto
+de QGIS, siempre y cuado de antemano las capas de destino han sido establecidas a 
+\toolbtntwo{mActionToggleEditing}{Activar edici\'on}.
 
-Features can also be pasted to external applications as text:  That is,
-the features are represented in CSV format with the geometry data appearing 
-in the OGC Well-Known Text (WKT) format.
+Las caracter\'{\i}stica pueden tambien ser pegadas a aplicaciones externas como texto:  Esto es,
+las caracter\'{\i}sticas son presentadas en formato CSV con los datos de geometr\'{\i}a 
+en el formtado Well-Known Text (WKT) de la OGC.
 
 
-However in this version of QGIS, text features from outside QGIS cannot 
-be pasted to a layer within QGIS. When would the copy and paste function 
-come in handy? Well, it turns out that you can edit more than one layer 
-at a time and copy/paste features between layers. Why would we want to do 
-this?  Say we need to do some work on a new layer but only need one or 
-two lakes, not the 5,000 on our \filename{big\_lakes} layer. We can create 
-a new layer and use copy/paste to plop the needed lakes into it. 
+Sin embargo en esta version de QGIS, texto de caracter\'{\i}sticas de fuera de QGIS no pueden 
+ser pegadas a una capa dentro de QGIS. ?`Cuando seria \'util la funci\'on de copiar y pegar? 
+Bien, resulta que puede editar mas de una capa 
+al tiempo que copia y pega caracter\'{\i}sticas entre capas. ?`Por qu\'e querriamos hacer
+eso?  dicho que tenemos que hacer una trabajo sobre una nueva capa pero solo necesita uno o
+dos lagos, no los 5,000 en nuestra capa \filename{big\_lakes}. Podemos crear una nueva capa
+y usar copiar/pegar para soltar los lagos necesarios en ella. 
 
-As an example we are copying some lakes to a new layer:
+Como un ejemplo estamos copiando algunos lagos a una nueva capa:
 
 \begin{enumerate}
-\item Load the layer you want to copy from (source layer)
-\item Load or create the layer you want to copy to (target layer) 
-\item Start editing for target layer
-\item Make the source layer active by clicking on it in the legend 
-\item Use the \toolbtntwo{mActionSelect}{Select} tool to select the feature(s) on the source layer
-\item Click on the \toolbtntwo{mActionEditCopy}{Copy Features} tool
-\item Make the destination layer active by clicking on it in the legend 
-\item Click on the \toolbtntwo{mActionEditPaste}{Paste Features} tool 
-\item Stop editing and save the changes
+\item Cargue la capa de la que desea copiar (capa fuente)
+\item Cargue o cree la capa a la que desea copiar (capa destino) 
+\item Inicie la edici\'on para la capa destino
+\item Haga la capa fuente activa haciendo clic en ella en la leyenda 
+\item Use la herramienta \toolbtntwo{mActionSelect}{Seleccionar} para seleccionar la caracter\'{\i}sticas(s) en la capa fuente
+\item Haga clic en la herramienta \toolbtntwo{mActionEditCopy}{Copy Features}
+\item Haga la capa destibo activa haciendo clic en ella en la leyenda 
+\item Haga clic en la herramienta \toolbtntwo{mActionEditPaste}{Paste Features}
+\item Pare la edici\'on y guarde los cambios
 \end{enumerate}
 
-What happens if the source and target layers have
-different schemas (field names and types are not the same)? QGIS populates
-what matches and ignores the rest. If you don't care about the attributes
-being copied to the target layer, it doesn't matter how you design the
-fields and data types. If you want to make sure everything - feature and its
-attributes - gets copied, make sure the schemas match.
+?`Qu\'e pasa si las capas fuentes y destino tienen
+diferentes esquemas (no son iguales los nombres de campos y tipos)? QGIS llena
+lo que coincide e ignora el resto. Si no le interesa los atributos
+siendo copiados a la capa destino, no importa como dise\~ne los
+campos y los tipos de datos. Si desea asegurarse que todo - caracter\'{\i}sticas y sus
+atributos - son copiados, aseg\'urese que los esquemas coincidan.
 
-\begin{Tip}[ht]\caption{\textsc{Congruency of Pasted Features}}
-\qgistip{If your source and destination layers use the
-same projection, then the pasted features will have
-geometry identical to the source layer.
-However if the destination layer is a different projection
-then QGIS cannot guarantee the geometry is identical.
-This is simply because there are small rounding-off errors
-involved when converting between projections.
+\begin{Tip}[ht]\caption{\textsc{Congruencia de Caracter\'{\i}sticas Pegadas}}
+\qgistip{Si sus capas de fuente y destino usan la 
+misma proyecc\'on, entonces las caracter\'{\i}sticas pegadas tendr\'an
+una geometr\'{\i}a id\'entica a la capa fuente.
+Sin embargo si la capa destino tiene una proyecci\'on diferente
+entonces QGIS no puede garantizar que la geometr\'{\i}a es identica.
+Esto es simplemente porque hay peque\~nos errores de redondeo
+envolucrados durante la conversi\'on entre proyecciones.
 }
 \end{Tip}
 
-\minisec{Deleting Selected Features}
+\minisec{Eliminado Caracter\'{\i}sticas Seleccionadas}
 \index{vector layers!deleting!feature}
 
-If we want to delete an entire polygon, we can do that by first selecting 
-the polygon using the regular \toolbtntwo{mActionSelect}{Select Features} tool. You can select 
-multiple features for deletion. Once you have the selection set, use the 
-\toolbtntwo{mActionDeleteSelected}{Delete Selected} tool to delete the features. There is no undo function, 
-but remember your layer isn't really changed until you stop editing and choose 
-to save your changes. So if you make a mistake, you can always cancel the save.
+Si deseamos eliminar un pol\'{\i}gono completo, podemos hacerlo primero seleccionando 
+el pol\'{\i}gono usando la herramienta regurla \toolbtntwo{mActionSelect}{Select Features}. Puede seleccionar 
+m\'ultiples caracter\'{\i}sticas para su eliminaci\'on. Una vez que ha establecido la selecci\'on, use la 
+herramienta \toolbtntwo{mActionDeleteSelected}{Eliminar Seleccionado} para eliminar las caracter\'{\i}sticas. No hay funci\'on deshacer, 
+pero recuerde que su capa no ha cambiado realmente hasta que pare la edici\'on y elija 
+guardar los cambios. De esta manera si comete alg\'un error, siempre puede cancelar el guardado.
 
-The \toolbtntwo{mActionEditCut}{Cut Features} tool on the digitizing toolbar can
-also be used to delete features. This effectively deletes the feature but
-also places it on a ``spatial clipboard". So we cut the feature to delete. 
-We could then use the \toolbtntwo{mActionEditPaste}{paste tool} to put it back, giving us a one-level undo 
+La herramienta \toolbtntwo{mActionEditCut}{Cortar Caracter\'{\i}sticas} en la barra de herramientas de digitalizaci\'on puede
+tambien ser usada para eliminar caracter\'{\i}sticas. Esto efectivamente elimina la caracter\'{\i}sticas pero
+tambien la coloca en un lugar especial llamado ``portapapeles espacial". De esta manera cortamos la caracter\'{\i}stica a eliminar. 
+Podemos entonces usar la \toolbtntwo{mActionEditPaste}{herramienta pegar} para regresarla, d\'andonos un deshacer de un nivel 
 capability. Cut, copy, and paste work on the currently selected features, 
-meaning we can operate on more than one at a time.
+significando que podemos operar en mas de una al mismo tiempo.
 
-\begin{Tip}[ht]\caption{\textsc{Feature Deletion Support}}
-\qgistip{When editing ESRI shapefiles, the deletion
-of features only works if QGIS is linked to a GDAL version 1.3.2 or greater. 
-The OS X and Windows versions of QGIS available from the download site are built 
-using GDAL 1.3.2 or higher.
+\begin{Tip}[ht]\caption{\textsc{Soporte para la Eliminaci\'on de Caracter\'{\i}sticas}}
+\qgistip{Cuando se edita ESRI shapefiles, el borrado
+de caracter\'{\i}sticas solo trabaja si QGIS est\'a compilado con una versi\'on de GDAL version 1.3.2 o mayor. 
+Las versiones de OS X y Windows QGIS disponibles en el sitio de descarga estan compilados 
+usando GDAL 1.3.2 o mayor.
 }
 \end{Tip}
 
-\minisec{Snap Mode}
+\minisec{Modo Snap}
 \index{editing!snap}
-QGIS allows digitized vertices to be snapped to other vertices of the same layer. To 
-set the snapping tolerance, go to
+QGIS permite que los v\'ertices digitalizados sean snapped a otros v\'ertices de la misma capa. Para 
+establecer la tolerancia de snapping, vaya a
 \mainmenuopt{Settings}>\dropmenuopttwo{mActionOptions}{Options}->\tab{Digitizing}.
-(On Mac: go to  \mainmenuopt{QGIS} > Preferences, on Linux: \mainmenuopt{Edit} > \dropmenuopttwo{mActionOptions}{Options}.)
-Note that the snapping tolerance is in map units or pixels.
+(En Mac: vaya a  \mainmenuopt{QGIS} > Preferencias, En Linux: \mainmenuopt{Edit} > \dropmenuopttwo{mActionOptions}{Options}.)
+Note que la tolerancia de snapping est\'a en unidades de mapa o pixeles.
 
-\minisec{Saving Edited Layers}
+\minisec{Guardadno Capas Editadas}
 \index{editing!saving changes}
 
-When a layer is in editing mode, any changes remain in the memory of QGIS.
-Therefore they are not committed/saved immediately to the data source or disk.
-When you turn editing mode off (or quit QGIS for that matter), 
-you are then asked if you want to save your
-changes or discard them.
+Cuando una capa est\'a en modo de edici\'on, cualquier cambio permanece pendiente en la memoria de QGIS.
+Por lo tanto no se guardan o se les aplica un commit inmediatamente al conjunto de datos o disco.
+Cuando desactiva la edici\'on (o sale de QGIS para el caso), 
+se le pregunta si desea guardar sus cambios o
+descartarlos.
 
-If the changes cannot be saved (e.g. disk full, or the attributes have
-values that are out of range), the QGIS in-memory state is preserved.  This
-allows you to adjust your edits and try again.
+Si los cambios no pueden ser guardados (ej. disco lleno, o los atributos tienen
+valores fuera de rango), el estado de memoria de QGIS es preservado.  Esto
+permites que ajuste su edici\'on y lo intente de nuevo.
 
-\subsubsection{Creating a New Layer}\label{sec:create shape}\index{editing!creating a new layer}
+\subsubsection{Creando una nueva capa}\label{sec:create shape}\index{editing!creating a new layer}
 
-To create a new layer for editing, choose \toolbtntwo{mActionNewVectorLayer}{New Vector Layer} from the
-\mainmenuopt{Layer} menu. 
-The \dialog{New Vector Layer} dialog will be displayed as
-shown in Figure \ref{fig:newvectorlayer}. Choose the type of layer (point,
-line or polygon).
+Para crear una nueva capa para edici\'on, elija \toolbtntwo{mActionNewVectorLayer}{New Vector Layer} del
+\mainmenuopt{Layer} men\'u. 
+Se mostrar\'a un dia\'alogo \dialog{New Vector Layer} como el de la
+Figura \ref{fig:newvectorlayer}. Elija el tipo de capa (point,
+line o polygon).
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{Creating a New Vector Dialog \nixcaption}\label{fig:newvectorlayer}\smallskip
+   \caption{Di\'alogo creando una nueva capa \nixcaption}\label{fig:newvectorlayer}\smallskip
    \includegraphics[clip=true, width=10cm]{editNewVector}
 \end{center} 
 \end{figure}
 
-Note that QGIS does not yet support creation of 2.5D
-features (i.e. features with X,Y,Z coordinates) or measure features. At this
-time, only shapefiles can be created. In a future version of QGIS, creation of
-any OGR or PostgreSQL layer type will be supported. 
+Note que QGIS no soporta aun la creaci\'on de
+caracter\'{\i}sticas 2.5D (ej. caracter\'{\i}sticas con coordenadas X,Y,Z) o caracter\'{\i}sticas de medidas.
+A la fecha solo pueden ser creados shapefiles. En una futura versi\'on de QGIS, la creaci\'on de cualquier tipo
+de capa OGR o PostgreSQL ser\'a soportado. 
 
-Creation of GRASS-layers is supported within the GRASS-plugin. Please refer to section
-\ref{sec:creating_new_grass_vectors} for more information on creating GRASS vector 
-layers.
+La creaci\'on de capas GRASS es soportada dentro del complemento de GRASS. Vea la secci\'on 
+\ref{sec:creating_new_grass_vectors} para mas informaci\'on de creaci\'on de capas GRASS.
 
-To complete the creation of the new layer, add the desired attributes by
-clicking on the \button{Add} button and specifying a name and type for the
-attribute. Only \selectstring{Type}{real}, \selectstring{Type}{integer}, and \selectstring{Type}{string} attributes are supported. Once you
-are happy with the attributes, click \button{OK} and provide a name for the shapefile.
-QGIS will automatically add a \filename{.shp} extension to the name you specify.  Once
-the layer has been created, it will be added to the map and you can edit it in
-the same way as described in Section \ref{sec:edit_existing_layer} above. 
+Para completar la creaci\'on de una nueva capa, agregue los atributos deseados haciendo
+clic en el bot\'on  \button{Add} y especificando un campo y el tipo para al atributo.
+Solo los tipos de atributos \selectstring{Type}{real}, \selectstring{Type}{integer}, y \selectstring{Type}{string} son soportados. Una vez que esta contento con sus atributos,
+haga clic en \button{OK} y provea un nombre para el shapefile.
+QGIS autom\'aticamente agregar\'a una extensi\'on \filename{.shp} al nombre que especific\'o. Una vez
+que la capa ha sido creada, ser\'a agregada al mapa y puede ser editada en la misma forma
+que se describe en la Secci\'on anterior \ref{sec:edit_existing_layer}. 
 
-\subsubsection{Working with the Attribute Table}\label{sec:attribute table}\index{editing!working with the attribute table}
+\subsubsection{Trabajando con la tabla de atributos}\label{sec:attribute table}\index{editing!working with the attribute table}
 
-To open the attribute table for a vector layer, make the layer active by clicking on it in the Map legend area. 
-Then use \mainmenuopt{Layer} Layer from the main menu and and choose \dropmenuopttwo{mActionOpenTable}{Open Attribute Table} 
-from the menu. It is also possible to rightlick on the layer and choose \dropmenuopttwo{mActionOpenTable}{Open Attribute Table} 
-from the dropdown menu. This will open a new window which displays the attributes for every feature in the layer 
+Para abrir la tabla de atributos para una capa vectorial, haga la capa activa haciendo clic en ella en el \'area de leyenda del mapa. 
+Entonces use el men\'u  capa\mainmenuopt{Layer} del men\'u principal y elija \dropmenuopttwo{mActionOpenTable}{Open Attribute Table} 
+desde el men\'u. Tambien es posible hacer clic derechi en la capa y elegir \dropmenuopttwo{mActionOpenTable}{Open Attribute Table} 
+desde el men\'u desplegable. Esto abrir\'a una nueva ventana que mostrar\'a los atributos para cada caracter\'{\i}stica en la capa 
 (figure \ref{fig:attributetable}).
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{Attribute Table for Alaska layer \nixcaption}\label{fig:attributetable}\smallskip
+   \caption{Tabla de atributos para la tabla de Alaska \nixcaption}\label{fig:attributetable}\smallskip
    \includegraphics[clip=true, width=12cm]{vectorAttributeTable}
 \end{center} 
 \end{figure}
 
-Each column can be sorted by clicking on its header. A small arrow indicates the sort 
-order (downward pointing means descending values from the top row down, upward pointing means 
-ascending values from the top rown down). 
-For a simple selection by attributes on only one column the \button{Look for} field 
-can be used. Select the field (column) from which the search should be performed from 
-the dropdown menu and hit the \button{Search} button. For more complex searches use the
-Advanced search \button{...}, which will lauch the Search Query Builder described in 
-Section \ref{sec:select_by_query}. 
+Cada columna puede ser ordenada haciendo clic en su encabezado. Una peque\~na flecha indica el orden 
+(apuntando hacia abajo significa valores descendentes de la primara columna hacia abajo, apuntando hacia arriba significa valores ascendentes desde la primera columna hacia abajo). 
+Para una selecci\'on simple de atributos en una columna el bot\'on \button{Look for} 
+puede ser usado. Seleccione el campo (columna) en la cual la b\'usqueda ser\'a realizada 
+el men\'u desplegable y presione el bot\'on \button{Search}. Para b\'usquedas mas complejas use
+el bot\'on B\'usquedas Avanzadas \button{...}, el cual lanzar\'a el Constructor de Consultas de B\'usqueda descrito en 
+la Secci\'on \ref{sec:select_by_query}. 
 
-To show selected records only, use the checkbox \checkbox{Show selected records only}.
-Using the buttons at the bottom left of the window, selected fields can be removed, 
-moved to the top of the table, or the selection can be inverted. Selected features can 
-also be copied to the clipboard, which can also be done with \keystroke{Ctrl-C}. You can also zoom 
-into the selected features on the map. Toggle editing allows to edit single values of attributes. 
+Para solo mostrar los registros, use la caja de selecci\'on \checkbox{Show selected records only}.
+Usando los botones en la parte izquierda inferior de la ventana, seleccione los campos que ser\'an removidos, 
+movidos a la parte superior de la tabla, o la selecci\'on que ser\'a invertida. Las caracter\'{\i}sticas seleccionadas pueden ser movidas, copiadas al portapapeles, tambien puede ser hecho con \keystroke{Ctrl-C}. Puede hacer zoom 
+a las caracter\'{\i}sticas seleccionadas en el mapa. Activando la edici\'on permite editar valores de atributos. 
 
-\subsection{Query Builder}\label{sec:query_builder}
+\subsection{Constructor de consultas}\label{sec:query_builder}
 \index{Query Builder}
 
-The Query Builder allows you to define a subset of a table and display
-it as a layer in QGIS. It can currently only be used with PostGIS layers. 
-For example, if you have a \filename{towns} layer with a
-\usertext{population} field you could select only larger towns by entering
-\usertext{population > 100000} in the SQL box of the query builder. Figure
-\ref{fig:query_builder} shows an example of the query builder populated with
-data from a PostGIS layer with attributes stored in PostgreSQL. 
+El Constructor de Consultas permite definir un conjunto de una tabla y mostrarlo como una capa en QGIS. Actualmente solo puede ser usado con capas PostGIS. 
+Por ejemplo, si se tiene una capa \filename{towns} con un campo \usertext{population} se puede seleccionar solo ciudades grandes escribiendo \usertext{population > 100000} en la caja SQL del constructor de consultas. Figura
+\ref{fig:query_builder} muestra un ejemplo del constructor de consultas llenado con datos de una capa PostGIS con atributos almacenada en PostgreSQL. 
 
 \begin{figure}[ht]
   \begin{center}
@@ -1418,20 +1313,12 @@ data from a PostGIS layer with attributes stored in PostgreSQL.
   \end{center}  
 \end{figure}
 
-The query builder\index{Query Builder} lists the layer's database
-fields in the list box on the left. You can get a sample of the data
-contained in the highlighted field by clicking on the \button{Sample} button\index{Query
-Builder!generating sample list}. This retrieves the first 25 distinct values
-for the field from the database. To get a list of all possible values for a
-field, click on the \button{All} button\index{Query Builder!getting all
-values}. To add a selected field or value to the query, double-click on
-it\index{Query Builder!adding fields}. You can use the various buttons to
-construct the query or you can just type it into the SQL box.
+El constructor de consultas \index{Query Builder} muestra los campos de la capa de la base de datos en una lista en la izquierda. Puede obtener un ejemplo de los datos contenidos en el campo resaltado haciendo clic en el bot\'on \button{Sample} \index{Query
+Builder!generating sample list}. Esto recupera los primeros 25 valores distintos para el campo desde la base de datos. Para obtener una lista de todos los posibles valores para un campo, haga clic en el bot\'onf \button{All} \index{Query Builder!getting all
+values}. Para agregar un campo seleccionado o valor a la consulta, haga doble clic en el\index{Query Builder!adding fields}. Puede usar varios botones para construir la consulta o puede escribirla dentro de la caja SQL.
 
-To test a query, click on the \button{Test} button\index{Query Builder!testing
-queries}. This will return a count of the number of records that will be
-included in the layer. When satisfied with the query, click \button{OK}. The
-SQL for the where clause will be shown in the SQL column of the layer list.
+Para probar una consulta, haga clic en el bot\'on \button{Test} \index{Query Builder!testing
+queries}. Esto regresar\'a un conteo del n\'umero de registros que pueden ser incluidos en la capa. Cuando est\'e satisfecho con la consulta, haga click en el bot\'on \button{OK}. El SQL para la clausula where ser\'a mostrada en la columna SQL de la lista de capas.
 
 \begin{Tip}\caption{\textsc{Changing the Layer Definition}}\index{Query
 Builder!changing layer definitions}
@@ -1442,24 +1329,15 @@ vector \dialog{Layer Properties} dialog by double-clicking on the layer in the l
 \ref{sec:vectorprops} for more information.}
 \end{Tip}
 
-\subsection{Select by query}\label{sec:select_by_query}
+\subsection{Selecci\'on por consulta}\label{sec:select_by_query}
 \index{PostgreSQL!query builder}
 \index{PostGIS!query builder}
 \index{query builder!PostgreSQL}
 \index{query builder!PostGIS}
 
-With QGIS it is possible also to select features using a similar query builder 
-interface to that used in \ref{sec:query_builder}. In the above section 
-the purpose of the query builder is to only show features meeting the 
-filter criteria as a 'virtual layer' / subset. The purpose of the select by 
-query function is to highlight all features that meet a particular criteria. 
-Select by query can be used with all vector data providers.
+Con QGIS es tambien posible seleccionar caracter\'isticas usando una interface similar al constructor de consultas utilizado en \ref{sec:query_builder}. En la secci\'on superior el proposito el prop\'osito del constructor de consultas es solo mostrar las caracter\'{\i}sticas cumpliendo el filtro de ser un subconjunto de una 'capa virtual'. El prop\'osito de la funci\'on de consulta seleccionar por es la de resaltar todas las caracter\'{\i}sticas que cumplan con un criterio particular. Seleccionar por consulta puede ser usado con todos los complementos proveedores de datos.
 
-To do a `select by query' on a loaded layer, click on the 
-button \toolbtntwo{mActionOpenTable}{Open Table} to open the attribute table of the layer. Then 
-click the \button{Advanced...} button at the bottom. This starts the Query Builder 
-that allows to define a subset of a table and display it as described in Section 
-\ref{sec:query_builder}.
+Para hacer una 'selecci\'on por consulta' en una capa cargada, haga clic en el bot\'on \toolbtntwo{mActionOpenTable}{Open Table} para abrir la tabla de atributos de la capa. Entonces clic en el bot\'on \button{Advanced...} en la parte inferior. Esto inicia el Constructor de Consultas que permite definir un subconjunto de una tabla y mostrarlo como se describe en la Secci\'on \ref{sec:query_builder}.
 
 
 \index{vector layers|)}
