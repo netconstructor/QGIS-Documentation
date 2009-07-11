@@ -18,12 +18,14 @@ PNG=attribute_diagram.eps\
     graduated_contours.eps\
     HousesByBalcony.eps\
     HousesByRoofColour.eps\
+    HousesByBalconyRoof.eps\
     Houses.eps\
     HousesSearch.eps\
     RenderAsColour.eps\
     RenderAsComparison.eps\
     RenderAsGrey.eps\
     single_symbol_dialog_lines.eps\
+    single_symbol_dialog_point.eps\
     unique_value_dialog.eps\
     unique_value_roads.eps\
  
