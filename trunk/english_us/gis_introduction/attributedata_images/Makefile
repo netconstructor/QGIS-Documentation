@@ -28,7 +28,20 @@ PNG=attribute_diagram.eps\
     single_symbol_dialog_point.eps\
     unique_value_dialog.eps\
     unique_value_roads.eps\
- 
+    blueline.eps\
+    blackline.eps\
+    apricotline.eps\
+    apricotdots.eps\
+    colorange1.eps\
+    colorange2.eps\
+    colorange3.eps\
+    colorange4.eps\
+    colorange5.eps\
+    colbrown1.eps\
+    colbrown2.eps\
+    colbrown3.eps\
+    colbrown4.eps\
+
 #JPG=
 
 ##### TARGETS #####
