@@ -221,25 +221,20 @@ Un'altra possibilità è eseguire qgis.exe quando il percorso contiene le direct
 c:$\backslash$msys$\backslash$local$\backslash$bin e c:$\backslash$msys$\backslash$local$\backslash$lib, così i DLLs verranno usati da quella posizione.
 
 \subsection{Creare il pacchetto d'istallazione: (opzionale)}
-Downlad and install NSIS from (\htmladdnormallink{http://nsis.sourceforge.net/Main\_Page}{http://nsis.sourceforge.net/Main\_Page})
+Scaricare e istallare NSIS da (\htmladdnormallink{http://nsis.sourceforge.net/Main\_Page}{http://nsis.sourceforge.net/Main\_Page})
 
-Now using windows explorer, enter the win\_build directory in your QGIS source
-tree. Read the READMEfile there and follow the instructions. Next right click
-on qgis.nsi and choose the option 'Compile NSIS Script'. 
+Ora usando windows explorer, entrare nella directory the win\_build nel tuo albero sorgente QGIS. Leggere il file README che si trova lì e seguire le istruzioni. Poi fare click con il tasto destro del mouse su qgis.nsi e scegliere l'opzione 'Compile NSIS Script'.
 
 
-\section{Building on Mac OSX using frameworks and cmake (QGIS $>$ 0.8)}\label{sec:install_macosx}
-In this approach I will try to avoid as much as possible building dependencies
-from source and rather use frameworks wherever possible.
+\section{Compilare su Mac OSX usando frameworks e cmake (QGIS $>$ 0.8)}\label{sec:install_macosx}
+In questo approccio cercherò di evitare per quanto possibile di costruire dipendenze dal sorgente e piuttosto usare frameworks quando possibile.
 
-Included are a few notes for building on Mac OS X 10.5 (\underline{Leopard}).
+Sono incluse alcune note per compilare su Mac OS X 10.5 (\underline{Leopard}).
 
-\subsection{Install XCODE}
-I recommend to get the latest xcode dmg from the Apple XDC Web site. Install
-XCODE after the \~{}941mb download is complete.
+\subsection{Installare XCODE}
+Raccomando di scaricare la più recente immagine xcode dmg dal sito web Apple XDC. Installare XCODE dopo che il download \~{}941mb è completo.
 
-\textbf{Note:} It may be that you need to create some symlinks after installing 
-the XCODE SDK (in particular if you are using XCODE 2.5 on tiger):
+\textbf{Nota:} Può essere necessario creare certi symlinks dopo l'istallazione di XCODE SDK (in particolare se si sta usando XCODE 2.5 su tiger):
 
 \begin{verbatim}
 cd /Developer/SDKs/MacOSX10.4u.sdk/usr/
@@ -247,35 +242,32 @@ sudo mv local/ local_
 sudo ln -s /usr/local/ local
 \end{verbatim}
 
-\subsection{Install Qt4 from .dmg}
-You need a minimum of Qt4.3.0. I suggest getting the latest (at time of writing).
+\subsection{Installare Qt4 from .dmg}
+E' necessario almeno Qt4.3.0. Suggerisco di scaricare l'ultima versione (almeno al momento della scrittura di questo manuale).
 
 \begin{verbatim}
 ftp://ftp.trolltech.com/qt/source/qt-mac-opensource-4.3.2.dmg
 \end{verbatim}
 
-If you want debug libs, Qt also provide a dmg with these:
+Se si vogliono librerie di debug, Qt fornisce anche un'immagine dmg che le contiene:
 
 \begin{verbatim}
 ftp://ftp.trolltech.com/qt/source/qt-mac-opensource-4.3.2-debug-libs.dmg
 \end{verbatim}
 
-I am going to proceed using only release libs at this stage as the download for
-the debug dmg is substantially bigger. If you plan to do any debugging though
-you probably want to get the debug libs dmg. Once downloaded open the dmg and run the installer. 
+Sto usando soltanto librari di rilascio a questo stadio dato che scaricare l'immagine debug dmg è sostanzialmente più lungo. Se però si pianifica di fare debugging, probabilmente è meglio prendere l'immagine dmg con le librerie di debug. Una volta che si sia scaricata, aprire l'immagine dmg e lanciare l'istallatore.
 
-\textbf{Note:} you need admin access to install.
+\textbf{Nota:} è necessario accesso di amministartore per istallare.
 
-After installing you need to make two small changes:
+Dopo l'istallazione si devono fare due piccoli cambiamenti:
 
-First edit \texttt{/Library/Frameworks/QtCore.framework/Headers/qconfig.h} and
-change 
+Primo, aprire \texttt{/Library/Frameworks/QtCore.framework/Headers/qconfig.h} e cambiare
 
-\textbf{Note:} this doesnt seem to be needed since version 4.2.3
+\textbf{Nota:} questo non sembra essere necessario dalla versione 4.2.3
 
-\texttt{QT\_EDITION\_Unknown} to \texttt{QT\_EDITION\_OPENSOURCE}
+\texttt{QT\_EDITION\_Unknown} a \texttt{QT\_EDITION\_OPENSOURCE}
 
-Second change the default mkspec symlink so that it points to macx-g++:
+Secondo, cambiare il mkspec symlink di default che manda a macx-g++:
 
 \begin{verbatim}
 cd /usr/local/Qt4.3/mkspecs/ 
@@ -283,34 +275,31 @@ sudo rm default
 sudo ln -sf macx-g++ default
 \end{verbatim}
 
-\subsection{Install development frameworks for QGIS dependencies}
-Download William Kyngesburye's excellent all in one framework that includes
-proj, gdal, sqlite3 etc
+\subsection{Installare i frameworks di sviluppo per le dipendenze QGIS}
+Scaricare l'eccellente framework tutto in uno che include proj, gdal, sqlite3 etc di William Kyngesburye
 
 \begin{verbatim}
 http://www.kyngchaos.com/wiki/software:frameworks
 \end{verbatim}
 
-Once downloaded, open and install the frameworks.
+Una volta scaricato, aprire e istallare i frameworks.
 
-William provides an additional installer package for Postgresql/PostGIS. Its
-available here:
+William fornisce un pacchetto d'istallazione addizionale per Postgresql/PostGIS disponibile qui:
 
 \begin{verbatim}
 http://www.kyngchaos.com/wiki/software:postgres 
 \end{verbatim}
 
-There are some additional dependencies that at the time of writing are not
-provided as frameworks so we will need to build these from source.
+Ci sono alcuna dipendenze addizionali che al momento di scrivere non sono fornite come frameworks così abbiamo bisogno di compilarle dal sorgente.
 
-\subsubsection{Additional Dependencies : GSL}
-Retrieve the Gnu Scientific Library from
+\subsubsection{Dipendenze addizionali: GSL}
+Scaricare la Library Scientific Gnu da
 
 \begin{verbatim}
 curl -O ftp://ftp.gnu.org/gnu/gsl/gsl-1.8.tar.gz 
 \end{verbatim}
 
-Then extract it and build it to a prefix of /usr/local:
+Quindi estrarla e compilarla ad un prefisso di /usr/local:
 
 \begin{verbatim}
 tar xvfz gsl-1.8.tar.gz 
@@ -321,8 +310,8 @@ sudo make install
 cd ..  
 \end{verbatim}
 
-\subsubsection{Additional Dependencies : Expat}
-Get the expat sources:
+\subsubsection{Dipendenze addizionali: Expat}
+Scaricare i sorgenti expat:
 
 \begin{verbatim}
 http://sourceforge.net/project/showfiles.php?group_id=10127 
@@ -337,20 +326,20 @@ sudo make install
 cd ..  
 \end{verbatim}
 
-\subsubsection{Additional Dependencies : SIP}
-Make sure you have the latest Python fom 
+\subsubsection{Dipendenze addizionali: SIP}
+Assicurarsi di avere l'ultima versione di Python da 
 
 \begin{verbatim}
 http://www.python.org/download/mac/
 \end{verbatim}
 
-\underline{Leopard note:} Leopard includes a usable Python 2.5.  Though you can install Python from python.org if preferred.
+\underline{Nota riguardo a Leopard:} Leopard include una versione Python 2.5 utilizzabile.  Comunque si può istallare  Python da python.org se si preferisce.
 
-Retrieve the python bindings toolkit SIP from
+Scaricare il toolkit SIP per i binding python da
 
 \url{http://www.riverbankcomputing.com/software/sip/download}
 
-Then extract and build it (this installs by default into the Python framework):
+Quindi estrarlo e compilarlo (questo si istalla automaticamente nel framework Python):
 
 \begin{verbatim}
 tar xvfz sip-<version number>.tar.gz 
@@ -361,31 +350,29 @@ sudo make install
 cd ..  
 \end{verbatim}
 
-\underline{Leopard notes}
+\underline{Note riguardo a Leopard:}
 
-If building on Leopard, using Leopard's bundled Python, SIP wants to install in the system path -- this is not a good idea.  Use this configure command instead of the basic configure above:
+Se si compila in Leopard, usando il Pyton incluso in Leopard, SIP vuole istallare nel percorso di sistema -- questa non è una buona idea. Usare questo comando di configurazione al posto delle configgurazione base di sopra:
 
 \begin{verbatim}
 python configure.py -d /Library/Python/2.5/site-packages -b \
 /usr/local/bin -e /usr/local/include -v /usr/local/share/sip
 \end{verbatim}
 
-\subsubsection{Additional Dependencies : PyQt}
-If you encounter problems compiling PyQt using the instructions 
-below you can also try adding python from your frameworks dir
-explicitly to your path e.g.
+\subsubsection{Dipendenze addizionali: PyQt}
+Se si incontrano problemi compilando PyQt seguendo le istruzioni qui sotto, sai può provare anche aggiungendo python dalla propria directory di frameworks esplicitamente al proprio percorso, ad es.
 
 \begin{verbatim}
 export PATH=/Library/Frameworks/Python.framework/Versions/Current/bin:$PATH$
 \end{verbatim}
 
-Retrieve the python bindings toolkit for Qt from
+Scaricare il il toolkit per Qt per i binding python da
 
 \begin{verbatim}
 http://www.riverbankcomputing.com/software/pyqt/download
 \end{verbatim}
 
-Then extract and build it (this installs by default into the Python framework):
+Quindi estrarlo e compilarlo (si istalla automaticamente nel framework Python):
 
 \begin{verbatim}
 tar xvfz PyQt-mac<version number here>
@@ -398,27 +385,26 @@ sudo make install
 cd ..  
 \end{verbatim}
 
-\underline{Leopard notes}
+\underline{Note riduardo a Leopard}
 
-If building on Leopard, using Leopard's bundled Python, PyQt wants to install in the system path -- this is not a good idea.  Use this configure command instead of the basic configure above:
+Se si compila in Leopard, usando il Python incluso in Leopard, PyQt vuole istallarsi nel percorso di sistema -- questa non è una buona idea.  Usare questo comando di configurazione invece della configurazioone base sopra:
 
 \begin{verbatim}
 python configure.py -d /Library/Python/2.5/site-packages -b /usr/local/bin
 \end{verbatim}
 
-There may be a problem with undefined symbols in QtOpenGL on Leopard.  Edit QtOpenGL/makefile and add -undefined dynamic\_lookup to LFLAGS.
+Può esserci un problema con simboli indefiniti in QtOpenGL sotto Leopard.  Aprire QtOpenGL/makefile e aggiungere -undefined dynamic\_lookup a LFLAGS.
 
-\subsubsection{Additional Dependencies : Bison}
-\underline{Leopard note:} Leopard includes Bison 2.3, so this step can be skipped on Leopard.
+\subsubsection{Dipendenze addizionali: Bison}
+\underline{Nota riguardo a Leopard:} Leopard include Bison 2.3, quindi questo passaggio può essere saltato in Leopard.
 
-The version of bison available by default on Mac OSX is too old so you need to
-get a more recent one on your system. Download if from:
+La versione di bison disponibile di default in Mac OSX è troppo vecchia quindi è necessario procurarsi una versione priù recente per il proprio sistema:
 
 \begin{verbatim}
 curl -O http://ftp.gnu.org/gnu/bison/bison-2.3.tar.gz 
 \end{verbatim}
 
-Now build and install it to a prefix of /usr/local :
+Ora compilarla e istallarla in un prefisso di /usr/local :
 
 \begin{verbatim}
 tar xvfz bison-2.3.tar.gz 
@@ -429,67 +415,63 @@ sudo make install
 cd ..  
 \end{verbatim}
 
-\subsection{Install CMAKE for OSX}
-Get the latest release from here:
+\subsection{Installare CMAKE per OSX}
+Procurarsi l'ultima versione rilasciata:
 
 \begin{verbatim}
 http://www.cmake.org/HTML/Download.html 
 \end{verbatim}
 
-At the time of writing the file I grabbed was:
+Al tempo della scrittura di questo manuale ho preso:
 
 \begin{verbatim}
 curl -O http://www.cmake.org/files/v2.4/cmake-2.4.6-Darwin-universal.dmg
 \end{verbatim}
 
-Once downloaded open the dmg and run the installer
+Una volta scaricata, aprire l'immagine dmg ed eseguire l'istallatore
 
-\subsection{Install subversion for OSX}
-\underline{Leopard note:} Leopard includes SVN, so this step can be skipped on Leopard.
+\subsection{Installare subversioni per OSX}
+\underline{Nota riguardo a Leopard:} Leopard include SVN, così questo passaggio può essere saltato in Leopard.
 
-The \url{http://sourceforge.net/projects/macsvn/} project has a downloadable
-build of svn. If you are a GUI inclined person you may want to grab their gui
-client too. Get the command line client here:
+Il progetto \url{http://sourceforge.net/projects/macsvn/} ha una versione compilata di svn scaricabile. Volendo si può anche reperire il loro client GUI. Reperire la linea di comando del client qui:
 
 \begin{verbatim}
 curl -O http://ufpr.dl.sourceforge.net/sourceforge/macsvn/Subversion_1.4.2.zip 
 \end{verbatim}
 
-Once downloaded open the zip file and run the installer.
+Una volta scaricato, aprire il file zip ed eseguire l'istallatore.
 
-You also need to install BerkleyDB available from the same
-\url{http://sourceforge.net/projects/macsvn/}. At the time of writing the file was here:
+Può essere necessario istallare anche BerkleyDB, disponibile allo stesso indirizzo
+\url{http://sourceforge.net/projects/macsvn/}. Al momento della scrittura di questo manualeera qui:
 
 \begin{verbatim}
 curl -O http://ufpr.dl.sourceforge.net/sourceforge/macsvn/Berkeley_DB_4.5.20.zip 
 \end{verbatim}
 
-Once again unzip this and run the installer therein. Lastly we need to ensure that the svn commandline executeable is in the path. Add the following line to the end of /etc/bashrc using 
-sudo:
+Ancora una volta aprire il file zip eed eseguire l'istallatore. Infine dobbiamo assicurarci che la linea di comando svn eseguibile sia nel percorso. aggiungere la seguente linea alla fine di /etc/bashrc usando sudo:
 
 \begin{verbatim}
 sudo vim /etc/bashrc 
 \end{verbatim}
 
-And add this line to the bottom before saving and quiting:
+E aggiungere questa line in fondo prima di salvare e chiudere:
 
 \begin{verbatim}
 export PATH=/usr/local/bin:$PATH:/usr/local/pgsql/bin 
 \end{verbatim}
 
-/usr/local/bin needs to be first in the path so that the newer bison (that will be built from source further down) is found before the bison (which is very old) that is installed by MacOSX.
+/usr/local/bin deve essere primo nel percorso cosicchè il più recente bison (che sarà compilato dal sorgente più avanti) venga trovato prima del bison istallato da MacOSX, che è molto vecchio.
 
-Now close and reopen your shell to get the updated vars.
+Ora chiudere e riaprire la propria shell per avere le versioni aggiornate.
 
-\subsection{Check out QGIS from SVN}
-Now we are going to check out the sources for QGIS. First we will create a
-directory for working in:
+\subsection{Check out QGIS da SVN}
+Ora facciamo il check out del sorgente per for QGIS. Prima si crea una directory per lavorarci:
 
 \begin{verbatim}
 mkdir -p ~/dev/cpp cd ~/dev/cpp 
 \end{verbatim}
 
-Now we check out the sources:
+Ora si fa il check out del sorgente:
 
 Trunk:
 
@@ -497,20 +479,19 @@ Trunk:
 svn co https://svn.osgeo.org/qgis/trunk/qgis qgis 
 \end{verbatim}
 
-For svn 0.8 branch
+Per la branch svn 0.8 
 
 \begin{verbatim}
 svn co https://svn.osgeo.org/qgis/branches/Release-0_8_0 qgis0.8
 \end{verbatim}
 
-For svn 0.9 branch
+Per la branch svn 0.9 
 
 \begin{verbatim}
 svn co https://svn.qgis.org/qgis/branches/Release-0_9_0 qgis0.9
 \end{verbatim}
 
-The first time you check out QGIS sources you will probably get a message like
-this:
+la prima volta che si fa check out del sorgente QGIS sourcessi avrà priobabilmente un messaggio di questo tipo:
 
 \begin{verbatim}
  Error validating server certificate for 'https://svn.qgis.org:443':
@@ -523,14 +504,10 @@ this:
    (R)eject, accept (t)emporarily or accept (p)ermanently?  
 \end{verbatim}
 
-I suggest you press 'p' to accept the key permanently.
+Suggerisco di premere 'p' per accettare la chiave in modo permanente.
 
-\subsection{Configure the build}
-CMake supports out of source build so we will create a 'build' dir for the
-build process. By convention I build my software into a dir called 'apps' in
-my home directory. If you have the correct permissions you may want to build
-straight into your /Applications folder. The instructions below assume you are
-building into a pre-existing \$\{HOME\}/apps directory ...
+\subsection{Configurare la versione compilata}
+CMake supporta la compilazione fuori dal sorgente così possiamo creare una directory 'di compilazione' per il processo di compilazione. Per convenzione io compilo il mio software in una directory chiamata 'apps' nella mia directory home. Se si hanno i corretti permessi si può voler compilare direttamente nella cartella /Applications. Le istruzioni sotto assumono che si stia compilando in una preesistente directory \$\{HOME\}/apps ...
 
 \begin{verbatim}
 cd qgis
@@ -539,18 +516,15 @@ cd build
 cmake -D CMAKE_INSTALL_PREFIX=$HOME/apps/ -D CMAKE_BUILD_TYPE=Release ..
 \end{verbatim}
 
-\underline{Leopard note:} To find the custom install of SIP on Leopard, add ""-
-D SIP\_BINARY\_PATH=/usr/local/bin/sip"" to the cmake command above,
-before the .. at the end, ie:
+\underline{Nota riguardo a Leopard:} Per trovare un'istallazione personalizzata di SIP in Leopard, aggiungere ""-
+D SIP\_BINARY\_PATH=/usr/local/bin/sip"" al comando cmake sopra, prima di .. alla fine, per esempio:
 
 \begin{verbatim}
 cmake -D CMAKE_INSTALL_PREFIX=$HOME/apps/ -D CMAKE_BUILD_TYPE=Release -
 D SIP_BINARY_PATH=/usr/local/bin/sip ..
 \end{verbatim}
 
-To use the application build of GRASS on OSX, you can optionally use the
-following cmake invocation (minimum GRASS 6.3 required, substitute the GRASS
-version as required):
+Per usare la versione compilata di GRASS su OSX, si può altrimenti eseguire cmake nella maniera seguente (richiesto almeno GRASS 6.3, sostituire la versione GRASS come richiesto):
 
 \begin{verbatim}
 cmake -D CMAKE_INSTALL_PREFIX=${HOME}/apps/ \
@@ -561,9 +535,8 @@ cmake -D CMAKE_INSTALL_PREFIX=${HOME}/apps/ \
       ..
 \end{verbatim}
 
-Or, to use a Unix-style build of GRASS, use the following cmake invocation
-(minimum GRASS version as stated in the Qgis requirements, substitute the GRASS
-path and version as required):
+Oppure, per usare una versione di Grass Unix-style, si può eseguire cmake nella maniera seguente
+(richiesta almeno una versione di GRASS come nei requisiti Qgis, sostituire il percorso GRASS e la versione come richiesto):
 
 \begin{verbatim}
 cmake -D CMAKE_INSTALL_PREFIX=${HOME}/apps/ \
@@ -573,54 +546,44 @@ cmake -D CMAKE_INSTALL_PREFIX=${HOME}/apps/ \
   ..
 \end{verbatim}
 
-\subsection{Building}
-Now we can start the build process:
+\subsection{Compilazione}
+Ora cominciamo il processo di compilazione:
 
 \begin{verbatim}
 make 
 \end{verbatim}
 
-If all built without errors you can then install it:
+se tutto compila senza errori si può passare all'istallazione:
 
 \begin{verbatim}
 make install 
 \end{verbatim}
 
-\section{Building on GNU/Linux}\label{sec:install_linux}
-\subsection{Building QGIS with Qt4.x}
-\textbf{Requires:} Ubuntu Hardy / Debian derived distro
+\section{Compilare sotto GNU/Linux}\label{sec:install_linux}
+\subsection{Compilare QGIS con Qt4.x}
+\textbf{Requisiti:} Ubuntu Hardy / distro derivati Debian 
 
-These notes are current for Ubuntu 7.10 - other versions and Debian derived 
-distros may require slight variations in package names.
+Queste note sono attuali per Ubuntu 7.10 - altre versioni e distro derivati Debian potrebbero richiedere piccole variazioni nei nomi dei pacchetti.
 
-These notes are for if you want to build QGIS from source. One of the major
-aims here is to show how this can be done using binary packages for \textbf{*all*}
-dependencies - building only the core QGIS stuff from source. I prefer this
-approach because it means we can leave the business of managing system packages
-to apt and only concern ourselves with coding QGIS! 
+Queste note sono per chi vuole compilare QGIS dal sorgente. Uno dei principali scopi qui è mostrare come questo si possa fare usando pacchetti binari per dipendenze \textbf{*all*} - compilando solo la parte core di QGIS dal sorgente. Preferisco questo approccio perchè significa che si può lasciare l'affare di gestire i pacchetti di sistema ad apt e preoccuparsi soltanto del codice QGIS! 
 
-This document assumes you have made a fresh install and have a 'clean' system.
-These instructions should work fine if this is a system that has already been
-in use for a while, you may need to just skip those steps which are irrelevant
-to you.
+Questo documento assume che si abbia un'istallazione recente e un sistema 'pulito'. Queste istruzioni dovrebbero funzionare se questo è un sistema che è già stato in uso per un po', si potrebbe aver bisogno solo di saltare queipassaggi che sono irrilevanti per noi.
 
-\subsection{Prepare apt}
-The packages qgis depends on to build are available in the "universe" component
-of Ubuntu. This is not activated by default, so you need to activate it:
+\subsection{Preparare apt}
+Il pacchetto qgis dipende dalla versione disponibile nel componente "universe" di Ubuntu. Questo non è attivo di default, quindi bisogna ttivarlo:
 
-1. Edit your /etc/apt/sources.list file.  
-2. Uncomment the all the lines starting with "deb"
+1. Aprire il proprio file /etc/apt/sources.list
+2. Decommentare tutte le linee che cominciano con "deb"
 
-Also you will need to be running (K)Ubuntu 'edgy' or higher in order for 
-all dependencies to be met.
+Sarà anche necessario eseguire (K)Ubuntu 'edgy' o superiore per incontrare tutte le dipendenze.
 
-Now update your local sources database:
+Ora aggiornare il  database dei propri sorgente locali:
 
 \begin{verbatim}
 sudo apt-get update 
 \end{verbatim}
 
-\subsection{Install Qt4}
+\subsection{Installare Qt4}
 \begin{verbatim}
 sudo apt-get install libqt4-core libqt4-debug  \
 libqt4-dev libqt4-gui libqt4-qt3support libqt4-sql lsb-qt4 qt4-designer \
