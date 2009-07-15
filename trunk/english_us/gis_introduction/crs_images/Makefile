@@ -18,11 +18,11 @@ PNG=cartesian-system.eps\
     projection-family.eps\
     robinson-projection.eps\
     unlogo.eps\
-    utmzones.eps\
     za_utmzones_coordinates.eps\
     za_utmzones.eps\
 
-#JPG=
+JPG=utmzones.eps\
+
  
 ##### TARGETS #####
 
