@@ -590,12 +590,7 @@ libqt4-dev libqt4-gui libqt4-qt3support libqt4-sql lsb-qt4 qt4-designer \
 qt4-dev-tools qt4-doc qt4-qtconfig uim-qt gcc libapt-pkg-perl resolvconf
 \end{verbatim}
 
-\textbf{A Special Note:} If you are following this set of instructions on
-a system where you already have Qt3 development tools installed, there will
-be a conflict between Qt3 tools and Qt4 tools. For example, qmake will
-point to the Qt3 version not the Qt4. Ubuntu Qt4 and Qt3 packages are
-designed to live alongside each other. This means that for example if you
-have them both installed you will have three qmake exe's:
+\textbf{Nota speciale:} Se si sta seguendo questo set di istruzioni su un sistema che già ha gli strumenti di sviluppo Qt3 istallati, ci sarà un conflitto tra strumenti Qt3 e Qt4. Per esempio, qmake punterà alla versione Qt3 e non alla Qt4. In Ubuntu i pacchetti Qt4 e Qt3 sono fatti in modo da poter convivere. Questo significa per esempio che se si hanno istallati entyrambi si dovranno fare tre eseguibili:
 
 \begin{verbatim}
 /usr/bin/qmake -> /etc/alternatives/qmake 
@@ -603,13 +598,9 @@ have them both installed you will have three qmake exe's:
 /usr/bin/qmake-qt4 
 \end{verbatim}
 
-The same applies to all other Qt binaries. You will notice above that the
-canonical 'qmake' is managed by apt alternatives, so before we start to
-build QGIS, we need to make Qt4 the default. To return Qt3 to default later
-you can use this same process.
+Lo stesso vale per tutti gli altri Qt binari. Avrete notato sopra che il canonico 'qmake' è gestito dalle alternative apt, quindi prima di cominciare a compilare QGIS, è necessario rendere Qt4 il predefinito. Per far poi tornare Qt3 a predefinito si può usare lo stesso procedimento.
 
-You can use apt alternatives to correct this so that the Qt4 version of
-applications is used in all cases:
+si possono usare le alternative apt per correggere questo, così la versione Qt4 dell'applicazione verrà usata in tutti i casi:
 
 \begin{verbatim}
 sudo update-alternatives --config qmake
@@ -623,10 +614,9 @@ sudo update-alternatives --config lrelease
 sudo update-alternatives --config linguist 
 \end{verbatim}
 
-Use the simple command line dialog that appears after running each of the
-above commands to select the Qt4 version of the relevant applications.
+Usare la semplice finestra della linea di comando che appare dopo aver eseguito ognuno dei comandi sopra per selezionare la versione Qt4 dell'applicazione in questione.
 
-\subsection{Install additional software dependencies required by QGIS}
+\subsection{Installare dipendenze software additionali richieste da QGIS}
 \begin{verbatim}
 sudo apt-get install gdal-bin libgdal1-dev libgeos-dev proj \
 libgdal-doc libhdf4g-dev libhdf4g-run python-dev \
@@ -635,32 +625,29 @@ libsqlite3-dev sqlite3 ccache make libpq-dev flex bison cmake txt2tags \
 python-qt4 python-qt4-dev python-sip4 sip4 python-sip4-dev
 \end{verbatim}
 
-\textbf{Note:} Debian users should use libgdal-dev above rather
+\textbf{Nota:} Per gli utenti Debian dovrebbero usare libgdal-dev sopra piuttosto
 
-\textbf{Note:} For python language bindings SIP $>$= 4.5 and PyQt4 $>$= 4.1 is required! Some stable GNU/Linux
-distributions (e.g. Debian or SuSE) only provide SIP $<$ 4.5 and PyQt4 $<$ 4.1. To include support for python 
-language bindings you may need to build and install those packages from source.
+\textbf{Nota:} Per i bindings in linguaggio python SIP $>$= 4.5 e PyQt4 $>$= 4.1 è necessario! Alcuna distribuzioni stabili GNU/Linux (ad es. Debian o SuSE) forniscono soltanto SIP $<$ 4.5 e PyQt4 $<$ 4.1. Per includere il support per i bindings in linguaggio python può essere necessario compilare e istallare quei pacchetti dal sorgente.
 
-If you do not have cmake installed already:
+Se non si ha già cmake istallato:
 
 \begin{verbatim}
 sudo apt-get install cmake
 \end{verbatim}
 
-\subsection{GRASS Specific Steps}
-\textbf{Note:} If you don't need to build with GRASS support,  you can
-skip this section.
+\subsection{Passaggi specifici GRASS}
+\textbf{Nota:} Se non si ha bisogno di compilare con il supporto GRASS, si può saltare questa sezione.
 
-Now you can install grass from dapper:
+Ora si può istallare grass dal dapper:
 
 \begin{verbatim}
 sudo apt-get install grass libgrass-dev libgdal1-1.4.0-grass 
 \end{verbatim}
 
-/!$\backslash$ You may need to explicitly state your grass version e.g. libgdal1-1.3.2-grass
+/!$\backslash$ Può essere necessario specificare l'esatta versione grass, ad es. libgdal1-1.3.2-grass
 
-\subsection{Setup ccache (Optional)}
-You should also setup ccache to speed up compile times:
+\subsection{Impostare ccache (Opzionale)}
+Si dovrebbe anche impostare ccache per velocizzare i tempi di compilazione:
 
 \begin{verbatim}
 cd /usr/local/bin 
@@ -668,9 +655,8 @@ sudo ln -s /usr/bin/ccache gcc
 sudo ln -s /usr/bin/ccache g++ 
 \end{verbatim}
 
-\subsection{Prepare your development environment}
-As a convention I do all my development work in \$HOME/dev/$<$language$>$, so in
-this case we will create a work environment for C++ development work like
+\subsection{Preparare il proprio ambiente di sviluppo}
+Per convenzione svolgo tutto il mio lavor di sviluppo in \$HOME/dev/$<$language$>$, così in questo caso creeremo un ambiente di lavoro per lo sviluppo in C++ come
 this:
 
 \begin{verbatim}
@@ -678,30 +664,26 @@ mkdir -p ${HOME}/dev/cpp
 cd ${HOME}/dev/cpp 
 \end{verbatim}
 
-This directory path will be assumed for all instructions that follow.
+Questo percorso alla directory sarà assunto anche per tutte le istruzioni seguenti.
 
-\subsection{Check out the QGIS Source Code}
-There are two ways the source can be checked out. Use the anonymous method
-if you do not have edit privaleges for the QGIS source repository, or use
-  the developer checkout if you have permissions to commit source code
-  changes.
+\subsection{Check out del codice sorgente QGIS}
+Ci sono due modi per fare il check out del sorgente. Usare il metodo anonimo se non si hanno i privilegi per l'archivio dei sorgenti QGIS, o usare il check out da sviluppatore se si hanno i permessi per fare commit di cambiamenti al codice sorgente.
 
-1. Anonymous Checkout
+1.  Checkout Anonimo
 
 \begin{verbatim}
 cd ${HOME}/dev/cpp 
 svn co https://svn.osgeo.org/qgis/trunk/qgis qgis
 \end{verbatim}
 
-2. Developer Checkout
+2. Checkout Sviluppatore
 
 \begin{verbatim}
 cd ${HOME}/dev/cpp 
 svn co --username <yourusername> https://svn.osgeo.org/qgis/trunk/qgis qgis 
 \end{verbatim}
 
-The first time you check out the source you will be prompted to accept the
-qgis.org certificate. Press 'p' to accept it permanently:
+La prima volt ache si fa check out del sorgente verrà richiesto di accettare il certificato qgis.org. Premere 'p' per accettarlo permanentemente:
 
 \begin{verbatim}
 Error validating server certificate for 'https://svn.qgis.org:443':
@@ -716,19 +698,16 @@ Error validating server certificate for 'https://svn.qgis.org:443':
      accept (t)emporarily or accept (p)ermanently?  
 \end{verbatim}
 
-\subsection{Starting the compile}
-\textbf{Note:} The next section describes howto build debian packages
+\subsection{Cominciare a compilare}
+\textbf{Nota:} La prossima sezione descrive come compilare i pacchetti debian
 
-I compile my development version of QGIS into my \~{}/apps directory to avoid
-conflicts with Ubuntu packages that may be under /usr. This way for example
-you can use the binary packages of QGIS on your system along side with your
-development version. I suggest you do something similar:
+Io compilo le mie versioni di svilupppo di QGIS nella directory \~{}/apps per evitare che confliggano con i pacchetti Ubuntu che possono essere in /usr. In questo modo per esempio si può usare il pacchetto binario di QGIS sul proprio sitema insieme con la propira versione di sviluppo. Suggerisco che facciate qualcosa di simile:
 
 \begin{verbatim}
 mkdir -p ${HOME}/apps 
 \end{verbatim}
 
-Now we create a build directory and run ccmake:
+Ora si crea una directory di compilazione e si esegue ccmake:
 
 \begin{verbatim}
 cd qgis
@@ -737,52 +716,38 @@ cd build
 ccmake ..
 \end{verbatim}
 
-When you run ccmake (note the .. is required!), a menu will appear where 
-you can configure various aspects of the build. If you do not have root
-access or do not want to overwrite existing QGIS installs (by your
-packagemanager for example), set the CMAKE\_BUILD\_PREFIX to somewhere you
-have write access to (I usually use /home/timlinux/apps). Now press
-'c' to configure, 'e' to dismiss any error messages that may appear.
-and 'g' to generate the make files. \textbf{Note:} that sometimes 'c' needs to 
-be pressed several times before the 'g' option becomes available.
-After the 'g' generation is complete, press 'q' to exit the ccmake 
-interactive dialog.
+Quando si esegue ccmake (notare che il .. è richiesto!), un menu apparirà dove si possono configurare i vari aspetti della compilazione. Se non si ha accesso alla root o non si vuole sovrascrivere istallazioni QGIS preesistenti (per mezzo del packagemanager per esempio), impostare il CMAKE\_BUILD\_PREFIX per una posizione dove si hanno i privilegi di scrittura (di solito uso /home/timlinux/apps). Ora premere 'c' per configurare, 'e' perignorare qualsiasi messaggio d'errore che possa apparire e 'g' per generare il file make. \textbf{Nota:} a volte 'c' deve essere premuto più volte prima che l'opzione 'g' divenga disponibile. Dopo che la generazione 'g' è completa, premere 'q' per uscire dalla finestra di dialogo interattiva di ccmake.
 
-Now on with the build:
+Ora avanti con la compilazione:
 
 \begin{verbatim}
 make
 make install
 \end{verbatim}
 
-It may take a little while to build depending on your platform.
+Ci può volere un po' mentre si costruiscono le dipendenze sulla propria piattaforma.
 
-\subsection{Building Debian packages}
-Instead of creating a personal installation as in the previous step you can
-also create debian package.  This is done from the qgis root directory, where
-you'll find a debian directory.
+\subsection{Compilare i pacchetti Debian}
+Invece di creare un'istallazione personale come nel precedente passaggio si può anche creare un pacchetto debian. Questo si fa dalla directory root di qgis, dove si trava una directory debian.
 
-First you need to install the debian packaging tools once:
+Prima è necessario istallare gli strumenti di impacchettamento debian:
 
 \begin{verbatim}
 apt-get install build-essential
 \end{verbatim}
 
-The QGIS packages will be created with:
+I pacchetti QGIS saranno creati con:
 
 \begin{verbatim}
 dpkg-buildpackage -us -us -b
 \end{verbatim}
 
-\textbf{Note:} If \texttt{dpkg-buildpackage} complains about unmet build dependencies
-you can install them using \texttt{apt-get} and re-run the command.
+\textbf{Nota:} Se \texttt{dpkg-buildpackage} si lamenta riguardo dipendenze che non sono state incontrate, queste si possono istallare usando \texttt{apt-get} e rieseguire il comando.
 
-\textbf{Note:} If you have \texttt{libqgis1-dev} installed, you need to remove it first
-using \texttt{dpkg -r libqgis1-dev}.  Otherwise \texttt{dpkg-buildpackage} will complain about a
-build conflict.
+\textbf{Nota:} Se si ha \texttt{libqgis1-dev} installato, bisogna rimuoverlo prima usando \texttt{dpkg -r libqgis1-dev}.  Altrimenti \texttt{dpkg-buildpackage} si lamenterà riguardo un conflitto di compilazione.
 
-The the packages are created in the parent directory (ie. one level up).
-Install them using dpkg.  E.g.:
+I pacchetti vengono creati nella direntory di origine (cioè un livello superiore).
+Installarli usando dpkg.  Ad esempio:
 
 \begin{verbatim}
 sudo dpkg -i \
@@ -793,15 +758,14 @@ sudo dpkg -i \
 	../python-qgis_1.0preview16_amd64.deb
 \end{verbatim}
 
-\subsection{Running QGIS}
-Now you can try to run QGIS:
+\subsection{Eseguire QGIS}
+Ora si può provare ad eseguire QGIS:
 
 \begin{verbatim}
 $HOME/apps/bin/qgis 
 \end{verbatim}
 
-If all has worked properly the QGIS application should start up and appear
-on your screen.
+Se tutto ha funzionato in modo giusto l'applicazione QGIS dovrebbe avviarsi e apparire sul vostro schermo.
 
 
 \section{Creation of MSYS environment for compilation of Quantum GIS}
