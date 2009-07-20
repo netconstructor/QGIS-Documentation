@@ -1,189 +1,189 @@
 % vim:autoindent:set textwidth=78:
 
-\section{Working with Projections}\label{label_projections}
+\section{Trabajando con proyecciones}\label{label_projections}
 \index{Projections!working with}
 
 % when the revision of a section has been finalized, 
 % comment out the following line:
 %\updatedisclaimer
 
-QGIS allows users to define a global and project-wide CRS (Coordinate
-Reference System) for layers without a pre-defined CRS. It also allows the
-user to define custom coordinate reference systems and supports on-the-fly
-(OTF) projection of vector layers. All these features allow the user to
-display layers with different CRS and have them overlay properly.
+QGIS permite a los usuarios definir un SRC (Sistema de Referencia de
+Coordenadas) global y un SRC con \'ambito de proyecto para capas sin un SRC predefinido. Tambien permite al
+usuario definir sistemas de referencia de coordenadas personalizados y soporta proyecciones de capas
+vectoriales al vuelo(OTF, on the fly). Todas estas caracter\'{\i}sticas permiten al usuario mostrar
+capas con diferentes SRC y sobreponerlos apropiadamente.
 
-\subsection{Overview of Projection Support}\label{label_projoverview}
+\subsection{Descripci\'on general del soporte de proyecciones}\label{label_projoverview}
 
-QGIS has support for approximately 2,700 known CRS. Definitions for 
-each of these CRS are stored in a SQLite database that is installed with
-QGIS. Normally you do not need to manipulate the database directly. In fact,
-doing so may cause projection support to fail. Custom CRS are stored in a
-user database. See Section \ref{sec:customprojections} for
-information on managing your custom coordinate reference systems.
+QGIS tiene soporte para aproximadamente 2,700 SRC conocidos. Las definiciones para 
+cada uno de estos SRC est\'a almacenada en una base de datos SQLite database que es instalada con
+QGIS. Normalmente no tiene  necesidad de manipular la base de datos directamente. De hecho,
+hacerlo puede causar que el soporte de proyecciones falle. Los SRC personalizados son almacenados en una
+base de datos de usuario. Vea la secci\'on \ref{sec:customprojections} para 
+informaci\'on en el manejo de sus sistemas de referencia de coordenadas personalizados.
 
-The CRS available in QGIS are based on those defined by
-EPSG\index{EPSG} and are largely abstracted from the spatial\_references 
-table in PostGIS\index{PostGIS} version 1.x. The EPSG identifiers are
-present in the database and can be used to specify a CRS in QGIS.
+Los SRC disponibles en QGIS est\'an basados en los definidos por la
+EPSG\index{EPSG} y son abstraidos en gran medida de la tabla spatial\_references 
+en PostGIS\index{PostGIS} version 1.x. Los identificadore EPSG est\'an
+presentes en la base de datos y pueden ser usados para especificar un SRC en QGIS.
 
-In order to use OTF projection, your data must contain information about its
-coordinate reference system or you have to define a global, layer or
-project-wide CRS. For PostGIS layers QGIS uses the spatial reference
-identifier that was specified when the layer was created. For data supported
-by OGR, QGIS relies on the presence of a format specific means of specifying
-the CRS. In the case of shapefiles, this means a file containing the Well
-Known Text (WKT)\index{WKT} specification of the CRS. The projection file
-has the same base name as the shapefile and a prj extension. For example, a
-shapefile named \filename{alaska.shp} would have a corresponding projection
-file named \filename{alaska.prj}.
+Con el fin de usar proyecci\'on al vuelo(OTF), sus datos deden contener informaci\'on acerca de su
+sistema de referencia de coordenadas o debe definir un SRC global, de capa o
+de proyecto. Para capas de PostGIS QGIS usa el identificador de referencia espacial
+que fue especificado cuando la capa fue creada. Para datos soportados
+por OGR, QGIS depende de la presencia de una manera de formato de especificar
+el SRC. En el caso de shapefiles, esta manera es un archivo conteniendo la especificacion Well
+Known Text (WKT)\index{WKT} de el CRS. El archivo de proyecci\'on
+tiene el mismo nombre base que el shapefile y una extensi\'on prj. Por ejemplo, un
+shapefile llamado \filename{alaska.shp} tendr\'{\i}a un nombre de archivo de proyecci\'on
+correspondiente \filename{alaska.prj}.
 
-\subsection{Specifying a Projection}
+\subsection{Especificando una proyecci\'on}
 \index{Projections!specifying}
 \label{sec:projection-specifying}
 
-QGIS no longer sets the map CRS to the coordinate reference system of the
-first layer loaded. When you start a QGIS session with layers that do not
-have a CRS, you need to control and define the CRS definition for these
-layers. This can be done globally or project-wide in the \tab{CRS} tab under
-\mainmenuopt{Edit} > \dropmenuopttwo{mActionOptions}{Options} (Gnome, OSX) 
-or \mainmenuopt{Settings} > \dropmenuopttwo{mActionOptions}{Options} (KDE, Windows). 
+QGIS ya no establece el SRC del mapa al sistema de referencia de coordenadas de la
+primera capa cargada. Cuando comienza una sesi\'on de QGIS con capas que no tienen
+un CRS, necesita controlar y definir la dedinici\'on de SRC para estas
+capas. Esto puede ser realizado globalmente o en el proyecto en la pesta\~na \tab{SRC} bajo
+\mainmenuopt{Editar} > \dropmenuopttwo{mActionOptions}{Opciones} (Gnome, OSX) 
+or \mainmenuopt{Configuraci\'on} > \dropmenuopttwo{mActionOptions}{Opciones} (KDE, Windows). 
 See Figure~\ref{fig:crsdialog}. 
 
 \begin{itemize}
-\item \checkbox{Prompt for CRS} 
-\item \checkbox{Project wide default CRS will be used}
-\item \checkbox{Global default CRS displayed below will be used}
+\item \checkbox{Preguntar SRC} 
+\item \checkbox{Usar el SRC predeterminado del proyecto}
+\item \checkbox{Usar el SRC global predeterminado mostrado abajo}
 \end{itemize}
 
-The global default CRS \texttt{proj=longlat +ellps=WGS84 +datum=WGS84
-+no\_defs} comes predefined in QGIS but can of course be changed, and the new
-definition will be saved for subsequent QGIS sessions.    
+El SRC global predeterminado \texttt{proj=longlat +ellps=WGS84 +datum=WGS84
++no\_defs} viene predefinido en QGIS pero puede ser cambiado, y la nueva definici\'on
+ser\'a almacenada para sesiones subsecuentes de QGIS.    
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{CRS tab in the QGIS Options Dialog \nixcaption}\label{fig:crsdialog}\smallskip
+   \caption{Pesta\~na SRC en el di\'alogo de opciones de QGIS \nixcaption}\label{fig:crsdialog}\smallskip
    \includegraphics[clip=true, width=12cm]{crsdialog}
 \end{center}
 \end{figure}
 
-If you want to define the coordinate reference system for a certain layer
-without CRS information, you can also do that in the \tab{General} tab of the
-raster (\ref{label_generaltab}) and vector (\ref{vectorgeneraltab}) properties 
-dialog. If your layer already has a CRS defined, it
-will be displayed as shown in Figure~\ref{fig:vector_symbology}.
+Si quiere definir el sistema de referencia de coordenadas para una capa espec\'{\i}fica
+sin informaci\'on de SRC, puede hacerlo en la pesta\~na \tab{General} del
+di\'alogo de propiedades raster (\ref{label_generaltab}) y vector (\ref{vectorgeneraltab}).  
+Si su capa ya tiene un SRC definido, ser\'a
+mostrada como en la figure~\ref{fig:vector_symbology}.
 
-\subsection{Define On The Fly (OTF) Projection}\label{label_projstart}
+\subsection{Definir proyecci\'on al vuelo(OTF)}\label{label_projstart}
 
-QGIS does not have OTF projection enabled by default, and this function is
-currently only supported for vector layers. To use OTF projection, you must
-open the \dropmenuopttwo{mActionOptions}{Project Properties} dialog, select a
-CRS and activate the \checkbox{Enable on the fly projection} checkbox.
-There are two ways to open the dialog:
+QGIS no tiene activo la proyecci\'on al vuelo en forma predeterminada, y esta funci\'on actualmentes solo
+es soportada para capas vectoriales. Para usar proyecci\'on al vuelo, debe
+abrir el di\'alogo \dropmenuopttwo{mActionOptions}{Propiedades del proyecto}, seleccionar un
+SRC y activar la caja de verificaci\'o \checkbox{Activar transformaci\'on de SRC al vuelo}.
+Hay dos forma de abrir el di\'alogo:
 
 \begin{enumerate}
-\item Select \dropmenuopttwo{mActionOptions}{Project Properties} from the
-\mainmenuopt{Edit} (Gnome, OSX) or \mainmenuopt{Settings} (KDE, Windows) menu.
-\item Click on the \toolbtntwo{mIconProjectionDisabled}{projector} icon in the
-lower right-hand corner of the statusbar.
+\item Seleccionando \dropmenuopttwo{mActionOptions}{Propiedades del proyecto} del men\'u
+\mainmenuopt{Editar} (Gnome, OSX) or \mainmenuopt{Configuraci\'on} (KDE, Windows).
+\item Clic en el \'{\i}cono \toolbtntwo{mIconProjectionDisabled}{proyector} de la
+esquina inferior derecha de la barra de estado.
 \end{enumerate}
 
-If you have already loaded a layer, and want to enable OTF projection, the
-best practice is to open the \tab{Coordinate Reference System} tab of the
-\dialog{Project Properties} dialog, select the CRS of the currently loaded
-layer, and activate the \checkbox{Enable on the fly projection} checkbox. The
-\toolbtntwo{mIconProjectionEnabled}{projector} icon will show a green hook
-and all subsequently loaded vector layers will be OTF projected to the
-defined CRS.
+Si tiene una capa cargada, y quiere activar proyecci\'on al vuelo, la
+mejor pr\'actica es abrir la pesta\~na \tab{Sistema de referencia de coordenadas} del
+di\'alogo \dialog{Propiedades del proyecto}, seleccionar el SRC de la capa actualmente cargada,
+y activar la caja de verificaci\'on \checkbox{Activar transformaci\'on de SRC al vuelo}. El
+\'{\i}cono \toolbtntwo{mIconProjectionEnabled}{proyector} mostrar\'a un gancho verde
+y todas las capas vectoriales subsecuentemente cargadas ser\'an proyectadas al vuelo a el
+SRC definido.
  
-The \tab{Coordinate Reference System} tab of the \dialog{Project Properties}
-dialog contains four important components as shown in Figure
-\ref{fig:projections} and described below.
+La pesta\~na \tab{Sistema de referencia de coordenadas} del di\'alogo \dialog{Propiedades del proyecto}
+contiene 4 importantes componentes como se muestra en la figura
+\ref{fig:projections} y descrita abajo.
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{Projection Dialog \nixcaption}\label{fig:projections}\smallskip
+   \caption{Di\'alogo proyecci\'on \nixcaption}\label{fig:projections}\smallskip
    \includegraphics[clip=true, width=12cm]{projectionDialog}
 \end{center}  
 \end{figure}
 
 \begin{enumerate}
-\item \textbf{Enable on the fly projection}\index{Projections!enabling} -
-this checkbox is used to enable or disable OTF projection. When off, each
-layer is drawn using the coordinates as read from the data source. When on,
-the coordinates in each layer are projected to the coordinate reference
-system defined for the map canvas.
-\item \textbf{Coordinate Reference System} - this is a list of all CRS
-supported by QGIS, including Geographic, Projected and Custom coordinate
-reference systems. To use a CRS, select it from the list by expanding
-the appropriate node and selecting the CRS. The active CRS is preselected.
-\item \textbf{Proj4 text} - this is the CRS string used by the Proj4
-projection engine. This text is read-only and provided for informational
-purposes.
-\item \textbf{Search} - if you know the EPSG identifier or the name 
-for a Coordinate Reference System, you can use the search feature to find it.
-Enter the identifier and click on \button{Find}.
-\item \textbf{Recently used CRS} - if you have certain CRS that you frequently 
-use in your everyday GIS work, these will be displayed as 'quick access' buttons 
-at the bottom of the Projection Dialog. Click on one of these buttons to select 
-the associated CRS.
+\item \textbf{Activar transformaci\'on de SRC al vuelo}\index{Projections!enabling} -
+esta caja de verificaci\'on es usada para activar o desactivar la proyecci\'on al vuelo. Cuando est\'a desactivado, cada
+capa es dibujada usando las coordenadas como son leidad del conjunto de datos. Cuando est\'a activo,
+las coordenadas de cada capa son proyectados al sistema de referencia de coordenadas
+definido para el mapa.
+\item \textbf{Sistema de referencia de coordenadas} - esta es una lista de todas las SRC
+soportados por QGIS, incluyendo Geogr\'aficas, Projectadas and sistemas de referencia
+de coordenadas personalizados. Para usar un SRC, seleccionelo de la lista expandiendo
+el nodo apropiado y seleccionando el SRC. El SRC activo es preseleccionado.
+\item \textbf{Texto Proj4} - este es la cadeba SRC usada por el motor de proyecciones Proj4.
+Este texto es de solo lectura y se provee para prop\'ositos de
+informaci\'on.
+\item \textbf{Buscar} - si usted conoce el identificador EPSG o el nombre 
+para un sistema de referencia de coordenadas, puede usar la funcionalidad buscar para encontrarla.
+Escriba el identificador y haga clic en \button{Encontrar}.
+\item \textbf{SRC usados recientemente} - si tiene SRC espec\'{\i}fico que usa frecuentemente 
+en su trabajo diario de GIS, este ser\'a mostrado como botones de 'acceso r\'apido' 
+en la parte de abajo del di\'alogo de proyecci\'on. Haga clic en uno de estos botones para seleccionar
+el SRC asociado.
 \end{enumerate}
 
 \begin{Tip}
-\caption{\textsc{Project Properties Dialog}}
+\caption{\textsc{Di\'alogo de propiedades del proyecto}}
 \qgistip{
-If you open the \dialog{Project Properties} dialog from the
-\mainmenuopt{Edit} (Gnome, OSX) or \mainmenuopt{Settings} 
-(KDE, Windows) menu, you must click on the \tab{Coordinate Reference
-System} tab to view the CRS settings. Opening the dialog from the
-\toolbtntwo{mIconProjectionEnabled}{projector} icon will automatically bring
-the \tab{Coordinate Reference System} tab to the front.
+Si abre el di\'alogo de \dialog{Propiedades del proyecto} desde el
+men\'u \mainmenuopt{Editar} (Gnome, OSX) or \mainmenuopt{Configuraci\'on} 
+(KDE, Windows), debe hacer clic en la pesta\~na \tab{Sistema de referencia de coordenadas
+} para ver las configuraciones SRC. Abriendo el di\'alogo desde el
+\'{\i}cono \toolbtntwo{mIconProjectionEnabled}{proyector} traer\'a
+la pesta\~na \tab{Sistema de referencia de coordenadas} al frente.
 }
 \end{Tip}
 
-\subsection{Custom Coordinate Reference System}\label{sec:customprojections}
+\subsection{Sistema de referencia de coordenadas personalizado}\label{sec:customprojections}
 \index{Projections!custom}
 
-If QGIS does not provide the coordinate reference system you need, you
-can define a custom CRS. To define a CRS, select
-\dropmenuopttwo{mIconNew}{Custom CRS} from the \mainmenuopt{Edit} 
-(Gnome, OSX) or \mainmenuopt{Settings} (KDE, Windows) menu.
-Custom CRS are stored in your QGIS user database. In addition to your custom
-CRS, this database also contains your spatial bookmarks and other custom data. 
+Si QGIS no provee el sistema de referencia de coordenadas que necesita, puede
+definir SRC personalizado. Para definir un SRC, selecciones
+\dropmenuopttwo{mIconNew}{SRC personalizado} desde el men\'u \mainmenuopt{Editar} 
+(Gnome, OSX) or \mainmenuopt{Configuraci\'on} (KDE, Windows).
+Los SRC personalizados son almacenados en su base de datos de usuario. Adicionalmente a su
+SRC personalizado, esta base de datos tambien contiene sus marcadores espaciales y otros datos personalizados. 
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{Custom CRS Dialog \nixcaption}\label{fig:customprojections}\smallskip
+   \caption{Di\'alogo de SRC personalizado \nixcaption}\label{fig:customprojections}\smallskip
    \includegraphics[clip=true, width=12cm]{customProjectionDialog}
 \end{center}  
 \end{figure}
 
-Defining a custom CRS in QGIS requires a good understanding of the Proj.4
-projection library. To begin, refer to the Cartographic Projection Procedures
+Definir un CRS personalizado en QGIS requiere una buena comprensi\'on de la
+librer\'{\i}a de proyecciones Proj.4. Para comenzar, rem\'{\i}taze a Cartographic Projection Procedures
 for the UNIX Environment - A User's Manual by Gerald I. Evenden, U.S.
 Geological Survey Open-File Report 90-284, 1990 (available at \url{ftp://ftp.remotesensing.org/proj/OF90-284.pdf}).
-This manual describes the use of the \usertext{proj.4} and related command line
-utilities. The cartographic parameters used with \usertext{proj.4} are
-described in the user manual, and are the same as those used by QGIS. 
+Este manual describe el uso del \usertext{proj.4} y las utilerias de
+l\'{\i}nea de comandos. Los par\'ametros cartogr\'aficos usados con \usertext{proj.4} son
+descritos en el manual de usuario, y son los mismos que los usados por QGIS. 
 
-The \dialog{Custom Coordinate Reference System Definition} dialog requires
-only two parameters to define a user CRS: 
+El di\'alogo \dialog{Definici\'on de sistemas de referencia de coordenadas personalizados} requiere
+solo dos par\'ametros para definir un SRC de usuario: 
 \begin{enumerate}
-\item a descriptive name and
-\item the cartographic parameters in PROJ.4 format.
+\item un nombre descriptivo y
+\item los par\'ametros cartogr\'aficos en formato PROJ.4.
 \end{enumerate}
-To create a new CRS, click the \toolbtntwo{mIconNew}{New} button and enter a
-descriptive name and the CRS parameters. After that you can save your CRS by
-clicking the button \toolbtntwo{mActionFileSave}{Save}.
+Para crear un nuevo SRC, haga clic en el bot\'on \toolbtntwo{mIconNew}{Nuevo} y escriba un
+nombre descriptivo y los par\'ametros SRC. Despues de eso puede guardar su SRC haciendo clic
+en el bot\'on \toolbtntwo{mActionFileSave}{Guardar}.
 
-Note that the \guilabel{Parameters} must begin with a \usertext{+proj=}-block,
-to represent the new coordinate reference system.
+Note que los \guilabel{Par\'ametros} deben comenzar con un bloque \usertext{+proj=},
+para representar el nuevo sistema de referencia de coordenadas.
 
-You can test your CRS parameters to see if they give sane results by
-clicking on the \button{Calculate} button inside the \guiheading{Test} block 
-and pasting your CRS parameters into
-the \guilabel{Parameters} field. Then enter known WGS 84 latitude and longitude
-values in \guilabel{North} and \guilabel{East} fields respectively. 
-Click on \button{Calculate} and compare the results with the known values in
-your coordinate reference system. 
+Puede probar los par\'ametros de se SRC para ver si dan resultados sanos
+haciendo clic en el bot\'on \button{Calcular} dentro del bloque \guiheading{Probar} 
+y pegando sus par\'ametros SRC dentro del
+campo \guilabel{Par\'ametros}. Entonces capture los valores conocidos WGS 84 latitud y longitud
+en los campos \guilabel{Norte} y \guilabel{Este} respectivamente. 
+Haga clic en \button{Calcular} y compare los resultados con los valores conocidos en
+sus sistema de referencia de coordenadas. 
 
