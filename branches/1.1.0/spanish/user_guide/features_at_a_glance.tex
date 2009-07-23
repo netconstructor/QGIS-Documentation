@@ -1,39 +1,40 @@
 % vim:autoindent:set textwidth=78:
 
-\section{Features at a Glance}\label{feature_glance}
+\section{Características de un vistazo}\label{feature_glance}
 
 % when the revision of a section has been finalized, 
 % comment out the following line:
 %\updatedisclaimer
 
-After a first and simple sample session in Section \ref{label_getstarted} we now 
-want to give you a more detailed overview of the features of QGIS. 
-Most features presented in the following chapters will be explained and described in 
-own sections later in the manual.
+Después de una primera y sencilla sesión en la Sección \ref{label_getstarted}, ahora
+queremos mostrarle una ojeada más detallada de las características de QGIS. 
+La mayoría de las características presentadas en los siguientes capítulos se explicarán
+y describirán en sus propias secciones más adelante en el manual.
 
-\subsection{Starting and Stopping QGIS}\label{label_startinqgis}
+\subsection{Iniciar y detener QGIS}\label{label_startinqgis}
 
-In Section \ref{samplesession} you already learned how to start QGIS. We will 
-repeat this here and you will see that QGIS also provides further command line options. 
+En la Secciónn \ref{samplesession} ya aprendió como iniciar QGIS. Repetiremos
+esto aquí y verá que QGIS también proporciona más opciones de línea de órdenes. 
 
 \begin{itemize}
-\item \nix{Assuming that QGIS is installed in the PATH, you can start QGIS 
-by typing: \usertext{qgis}  at a command prompt or by double clicking on the QGIS
-application link (or shortcut) on the desktop.} 
-\item \win{Start QGIS using the Start menu or desktop shortcut, 
-or double click on a QGIS project file.}
-\item \osx{Double click the icon in your Applications folder.}
+\item \nix{suponiendo que tiene QGIS instalado en el PATH, puede iniciar QGIS
+tecleando: \usertext{qgis} en la línea de órdenes o haciendo doble clic sobre el enlace a QGIS 
+(o acceso directo) del escritorio.}
+\item \win{inicie QGIS usando el menú Inicio o un acceso directo del escritorio, 
+o haga doble clic en un archivo de proyecto de QGIS.}
+\item \osx{doble clic en el icono de la carpeta Aplicaciones.}
 \end{itemize} 
 
-To stop QGIS, click the menu options \{\nix{}\win{File} \osx{QGIS}\} > Quit,
-or use the shortcut \keystroke{Ctrl+Q}.
+Para detener QGIS, pulse las opciones de menú \{\nix{}\win{Archivo} \osx{QGIS}\} > Salir,
+o use el atajo de teclado \keystroke{Ctrl+Q}.
 
-\subsubsection{Command Line Options}\index{command line options}
+\subsubsection{Opciones de línea de órdenes}\index{command line options}
 \label{label_commandline}
 
-\nix QGIS supports a number of options when started from the command line. To
-get a list of the options, enter \usertext{qgis ---help} on the command line.
-The usage statement for QGIS is:
+\nix QGIS admite un buen número de opciones cuando se inicia desde la línea de 
+órdenes. Para obtener la lista de opciones, teclee \usertext{qgis ---help} en la
+línea de órdenes.
+La sentencia de uso para QGIS es:
 
 \small
 \begin{verbatim}
@@ -60,155 +61,155 @@ Usage: qgis [options] [FILES]
 \end{verbatim}
 \normalsize
 
-\begin{Tip} \caption{\textsc{Example Using command line arguments}}
-\qgistip{You can start QGIS by specifying one or more data files
-on the command line. For example, assuming you are in the 
-qgis\_sample\_data directory, you could start QGIS with a vector layer 
-and a raster file set to load on startup using the following command: 
+\begin{Tip} \caption{\textsc{Ejemplo utilizando argumentos en línea de órdenes}}
+\qgistip{Puede iniciar QGIS especificando uno o más archivos de datos sobre la
+línea de órdenes. Por ejemplo, suponiendo que está en el directorio 
+qgis\_sample\_data, podría iniciar QGIS con una capa vectorial 
+y un archivo ráster preparados para cargarlos 
+en el arranque utilizando la siguiente orden: 
 \usertext{qgis ./raster/landcover.img ./gml/lakes.gml}
 }
 \end{Tip}
 
-\minisec{Command line option \usertext{---snapshot}}
-This option allows you to create a snapshot in PNG format from the current view.
-This comes in handy when you have a lot of projects and want to 
-generate snapshots from your data.
+\minisec{Opción de línea de órdenes \usertext{---snapshot}}
+Esta opción permite crear una captura de pantalla en formato PNG de la vista actual.
+Esto puede ser útil cuando se tienen muchos proyectos y se quieren generar capturas de los datos.
 
-Currently it generates a PNG-file with 800x600 pixels. A filename can be added after
+Actualmente esto genera un fichero PNG con 800x600 píxeles. Se puede añadir un nombre después de
 \usertext{---snapshot}.
 
-\minisec{Command line option \usertext{---lang}}
-Based on your locale QGIS, selects the correct localization. If you would like 
-to change your language, you can specify a language code. For example: 
+\minisec{Opción de línea de órdenes \usertext{---lang}}
+En base a su configuración local, QGIS selecciona la localización correcta. Si se quiere 
+cambiar el idioma, se puede especificar el código del idioma. Por ejemplo:
 \usertext{---lang=it}
-starts QGIS in italian localization. A list of currently supported
-languages with language code is provided at
-\url{http://wiki.qgis.org/qgiswiki/TranslatorsCorner} 
+arranca QGIS con la localización en italiano. En \url{http://wiki.qgis.org/qgiswiki/TranslatorsCorner}
+se proporciona una lista de los idiomas admitidos actualmente con su código.
 
-\minisec{Command line option \usertext{---project}}
-Starting QGIS with an existing project file is also possible. Just
-add the command line option \usertext{---project} followed by your project
-name and QGIS will open with all layers loaded described in the given file.
+\minisec{Opción de línea de órdenes \usertext{---project}}
+También es posible iniciar QGIS con un proyecto existente. Simplemente añada 
+la opción \usertext{---project} seguida del nombre de su proyecto y QGIS se abrirá 
+con todas las capas cargadas definidas en el fichero dado.
 
-\minisec{Command line option \usertext{---extent}}
-To start with a specific map extent use this option. You need to add the bounding
-box of your extent in the following order separated by a comma:
+\minisec{Opción de línea de órdenes \usertext{---extent}}
+Para arrancar con una extensión específica del mapa utilice esta opción. Es necesario
+añadir los límites en el siguiente orden separados por comas:
 \begin{verbatim}
 --extent xmin,ymin,xmax,ymax
 \end{verbatim}
 
 
-\subsection{QGIS GUI}\index{main window}
+\subsection{Interfaz Gráfica de Usuario (GUI) de QGIS}\index{main window}
 \label{label_qgismainwindow}
 
-When QGIS starts, you are presented with the GUI as shown below
-(the numbers 1 through 6 in yellow ovals refer to the six major areas of the
-interface as discussed below):
+Cuando QGIS arranca, se encuentra con la GUI como se muestra abajo
+(los números del 1 hasta el 6 en ovalos amarillos señalan las seis áreas principales 
+de la interfaz que se describen abajo):
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{QGIS GUI with Alaska sample data \nixcaption}
+   \caption{Interfaz de QGIS con datos de ejemplo de Alaska \nixcaption}
 	 \label{fig:startup}
    \includegraphics[clip=true, width=17cm]{startup}
 \end{center} 
 \end{figure}
 
-\textbf{Note:} Your window decorations (title bar, etc.) may appear
-different depending on your operating system and window manager.
+\textbf{Nota:} La decoración de su ventana (barra de título, etc.) puede aparecer 
+distinta dependiendo del sistema operativo y administrador de ventanas.
 
-The QGIS GUI is divided into six areas:
+La Interfaz Gráfica de Usuario (GUI) de QGIS está dividida en seis áreas:
 
 \begin{tabbing}
-1. Menu Bar \hspace{3cm}\= 4. Map View \\
-2. Tool Bar \hspace{3cm}\> 5. Map Overview  \\
-3. Map Legend \hspace{3cm}\> 6. Status Bar   
+1. Barra de menús \hspace{3cm}\= 4. Vista del mapa \\
+2. Barra de herramientas \hspace{3cm}\> 5. Vista general del mapa \\
+3. Capas \hspace{3cm}\> 6. Barra de estado   
 \end{tabbing}
 
-These six components of the QGIS interface are described in more detail in
-the following sections.
+Estos seis componentes de la interfaz de QGIS se describen con más detalle
+en las siguientes secciones.
 
-\subsubsection{Menu Bar}\label{label_menubar}
+\subsubsection{Barra de menús}\label{label_menubar}
 \index{menus}
 
-The menu bar provides access to various QGIS features using a standard 
-hierarchical menu. The top-level menus and a summary of some of the
-menu options are listed below, together with the icons of the corresponding 
-tools as they appear on the toolbar, as well as keyboard shortcuts.
-Although most menu options have a corresponding tool and vice-versa,
-the menus are not organized quite like the toolbars. 
-The toolbar containing the tool is listed after each menu option as a checkbox
-entry. For more information about tools and toolbars, see Section \ref{label_toolbars}.
+La barra de menús proporciona acceso a varias características de QGIS utilizando 
+menús jerárquicos estándar. A continuación se lista el nivel superior de los menús
+y un resumen de algunas opciones de menú, junto con los iconos de las herramientas
+correspondientes tal como aparece en la barra de herramientas, así como atajos de
+teclado. Aunque la mayoría de opciones de menú tiene una herramientas y viceversa,
+los menús no están organizados igual que las barras de herramientas. La barra de
+herramientas que contiene cada herramienta se indica después de cada opción de menú
+como una casilla de verificación. Para más información sobre herramientas y barras
+de herramientas, vea la Sección \ref{label_toolbars}.
 
 \begin{tabbing}
-\hspace{5.5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
-\hspace{1cm} Menu Option \> Shortcut \> Reference \> Toolbar\\
+\hspace{6.5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
+\hspace{1cm} Opción de menú \> Atajo \> Referencia \> Barra de herramientas\\
 \end{tabbing}
 
 \begin{itemize}
-\item \mainmenuopt{File}
+\item \mainmenuopt{Archivo}
 \begin{tabbing}
-\hspace{4.5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
-\dropmenuopttwo{mActionFileNew}{New Project}
+\hspace{5.5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
+\dropmenuopttwo{mActionFileNew}{Nuevo proyecto}
 	\> \keystroke{Ctrl+N}
-	\> see Section \ref{sec:projects}
-	\> \dropmenucheck{File} \\
-\dropmenuopttwo{mActionFileOpen}{Open Project}
+	\> Ver sección \ref{sec:projects}
+	\> \dropmenucheck{Archivo} \\
+\dropmenuopttwo{mActionFileOpen}{Abrir proyecto}
 	\> \keystroke{Ctrl+O}
-	\> see Section \ref{sec:projects}
-	\> \dropmenucheck{File} \\
-\dropmenuopt{Open Recent Projects}
+	\> Ver sección \ref{sec:projects}
+	\> \dropmenucheck{Archivo} \\
+\dropmenuopt{Abrir proyectos recientes}
 	\>
-	\> see Section \ref{sec:projects} \\
-\dropmenuopttwo{mActionFileSave}{Save Project}
+	\> Ver sección \ref{sec:projects} \\
+\dropmenuopttwo{mActionFileSave}{Guardar proyecto}
 	\> \keystroke{Ctrl+S}
-	\> see Section \ref{sec:projects}
-	\> \dropmenucheck{File} \\
-\dropmenuopttwo{mActionFileSaveAs}{Save Project As}
+	\> Ver sección \ref{sec:projects}
+	\> \dropmenucheck{Archivo} \\
+\dropmenuopttwo{mActionFileSaveAs}{Guardar proyecto como}
 	\> \keystroke{Ctrl+Shift+S}
-  \> see Section \ref{sec:projects}
-	\> \dropmenucheck{File} \\
-\dropmenuopttwo{mActionSaveMapAsImage}{Save as Image}
+  \> Ver sección \ref{sec:projects}
+	\> \dropmenucheck{Archivo} \\
+\dropmenuopttwo{mActionSaveMapAsImage}{Guardar como imagen}
 	\>
-	\> see Section \ref{sec:output} \\
-\dropmenuopttwo{mActionFilePrint}{Print Composer}
+	\> Ver sección \ref{sec:output} \\
+\dropmenuopttwo{mActionFilePrint}{Diseñador de impresión}
 	\> \keystroke{Ctrl+P}
-	\> see Section \ref{label_printcomposer}
-	\> \dropmenucheck{File} \\
-\dropmenuopttwo{mActionFileExit}{Exit} 
+	\> Ver sección \ref{label_printcomposer}
+	\> \dropmenucheck{Archivo} \\
+\dropmenuopttwo{mActionFileExit}{Salir} 
 	\> \keystroke{Ctrl+Q} \\
 \end{tabbing}
 
-\item \mainmenuopt{Edit}
+\item \mainmenuopt{Edición}
 \begin{tabbing}
-\hspace{4.5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
-\dropmenuopttwo{mActionEditCut}{Cut Features} 
+\hspace{5.5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
+\dropmenuopttwo{mActionEditCut}{Cortar objetos espaciales} 
 	\> \keystroke{Ctrl+X}
-	\> see Section \ref{sec:edit_existing_layer} 
-	\> \dropmenucheck{Digitizing} \\
-\dropmenuopttwo{mActionEditCopy}{Copy Features}
+	\> Ver sección \ref{sec:edit_existing_layer} 
+	\> \dropmenucheck{Digitalización} \\
+\dropmenuopttwo{mActionEditCopy}{Copiar objetos espaciales}
 	\> \keystroke{Ctrl+C}
-	\> see Section \ref{sec:edit_existing_layer} 
-	\> \dropmenucheck{Digitizing} \\
-\dropmenuopttwo{mActionEditPaste}{Paste Features} 
+	\> Ver sección \ref{sec:edit_existing_layer} 
+	\> \dropmenucheck{Digitalización} \\
+\dropmenuopttwo{mActionEditPaste}{Pegar objetos espaciales} 
 	\> \keystroke{Ctrl+V}
-	\> see Section \ref{sec:edit_existing_layer} 
-	\> \dropmenucheck{Digitizing} \\
-\dropmenuopttwo{mActionCapturePoint}{Capture Point}
+	\> Ver sección \ref{sec:edit_existing_layer} 
+	\> \dropmenucheck{Digitalización} \\
+\dropmenuopttwo{mActionCapturePoint}{Añadir punto}
 	\> \keystroke{.}
-	\> see Section \ref{sec:edit_existing_layer} 
-	\> \dropmenucheck{Digitizing} \\
-\dropmenuopttwo{mActionCaptureLine}{Capture Line}
+	\> Ver sección \ref{sec:edit_existing_layer} 
+	\> \dropmenucheck{Digitalización} \\
+\dropmenuopttwo{mActionCaptureLine}{Añadir línea}
 	\> \keystroke{/}
-	\> see Section \ref{sec:edit_existing_layer} 
-	\> \dropmenucheck{Digitizing} \\
-\dropmenuopttwo{mActionCapturePolygon}{Capture Polygon}
+	\> Ver secciónn \ref{sec:edit_existing_layer} 
+	\> \dropmenucheck{Digitalización} \\
+\dropmenuopttwo{mActionCapturePolygon}{Añadir polígono}
 	\> \keystroke{Ctrl+/}
-	\> see Section \ref{sec:edit_existing_layer} 
-	\> \dropmenucheck{Digitizing} \\
-And Other Edit Menu Items
+	\> Ver sección \ref{sec:edit_existing_layer} 
+	\> \dropmenucheck{Digitalización} \\
+Y otros elementos del menú Edición
 	\>
-	\> see Section \ref{sec:edit_existing_layer} 
-	\> \dropmenucheck{Digitizing} \\
+	\> Ver sección \ref{sec:edit_existing_layer} 
+	\> \dropmenucheck{Digitalización} \\
 %\dropmenuopt{Move Feature}
 %	\> \> \dropmenucheck{Edit} \\
 %\dropmenuopt{Split Features}
@@ -230,183 +231,183 @@ And Other Edit Menu Items
 \end{tabbing}
 
 
-\item \mainmenuopt{View}
+\item \mainmenuopt{Ver}
 \begin{tabbing}
-\hspace{4.5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
-\dropmenuopttwo{mActionPan}{Pan Map}
+\hspace{5.5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
+\dropmenuopttwo{mActionPan}{Desplazar mapa}
 	\>
-	\> \> \dropmenucheck{Map Navigation} \\
-\dropmenuopttwo{mActionZoomIn}{Zoom In}
+	\> \> \dropmenucheck{Navegación de mapas} \\
+\dropmenuopttwo{mActionZoomIn}{Acercar zum}
 	\> \keystroke{Ctrl++}
-	\> \> \dropmenucheck{Map Navigation} \\
-\dropmenuopttwo{mActionZoomOut}{Zoom Out}
+	\> \> \dropmenucheck{Navegación de mapas} \\
+\dropmenuopttwo{mActionZoomOut}{Alejar zum}
 	\> \keystroke{Ctrl+-}
-	\> \> \dropmenucheck{Map Navigation} \\
-\dropmenuopttwo{mActionSelect}{Select Features}
+	\> \> \dropmenucheck{Navegación de mapas} \\
+\dropmenuopttwo{mActionSelect}{Seleccionar objetos espaciales}
 	\>
-	\> \> \dropmenucheck{Attributes} \\
-\dropmenuopttwo{mActionIdentify}{Identify Features}
+	\> \> \dropmenucheck{Atributos} \\
+\dropmenuopttwo{mActionIdentify}{Identificar objetos espaciales}
 	\> \keystroke{I}
-	\> \> \dropmenucheck{Attributes} \\
-\dropmenuopttwo{mActionMeasure}{Measure Line}
+	\> \> \dropmenucheck{Atributos} \\
+\dropmenuopttwo{mActionMeasure}{Regla}
 	\> \keystroke{M}
-	\> \> \dropmenucheck{Attributes} \\
-\dropmenuopttwo{mActionMeasureArea}{Measure Area}
+	\> \> \dropmenucheck{Atributos} \\
+\dropmenuopttwo{mActionMeasureArea}{Medir áreas}
 	\> \keystroke{J}
-	\> \> \dropmenucheck{Attributes} \\
-\dropmenuopttwo{mActionOpenTable}{Zoom Full}
+	\> \> \dropmenucheck{Atributos} \\
+\dropmenuopttwo{mActionOpenTable}{Zum general}
 	\> \keystroke{F}
-	\> \> \dropmenucheck{Map Navigation} \\
-\dropmenuopttwo{mActionZoomToLayer}{Zoom To Layer}
+	\> \> \dropmenucheck{Navegación de mapas} \\
+\dropmenuopttwo{mActionZoomToLayer}{Zum a la capa}
 	\>
-	\> \> \dropmenucheck{Map Navigation} \\
-\dropmenuopttwo{mActionZoomToSelected}{Zoom To Selection}
+	\> \> \dropmenucheck{Navegación de mapas} \\
+\dropmenuopttwo{mActionZoomToSelected}{Zum a la selección}
 	\> \keystroke{Ctrl+J}
-	\> \> \dropmenucheck{Map Navigation} \\
-\dropmenuopttwo{mActionZoomLast}{Zoom Last}
+	\> \> \dropmenucheck{Navegación de mapas} \\
+\dropmenuopttwo{mActionZoomLast}{Zum anterior}
 	\>
-		\> \> \dropmenucheck{Map Navigation} \\
-\dropmenuopttwo{mActionZoomNext}{Zoom Next}
+		\> \> \dropmenucheck{Navegación de mapas} \\
+\dropmenuopttwo{mActionZoomNext}{Zum siguiente}
 	\>
-	\> \> \dropmenucheck{Map Navigation} \\
-\dropmenuopt{Zoom Actual Size}
+	\> \> \dropmenucheck{Navegación de mapas} \\
+\dropmenuopt{Zum al tamaño real}
 	\>
 	\> \>  \\
-\dropmenuopttwo{mActionMapTips}{Map Tips}
+\dropmenuopttwo{mActionMapTips}{Avisos del mapa}
 	\>
-	\> \> \dropmenucheck{Attributes} \\
-\dropmenuopttwo{mActionNewBookmark}{New Bookmark}
+	\> \> \dropmenucheck{Atributos} \\
+\dropmenuopttwo{mActionNewBookmark}{Nuevo marcador}
 	\> \keystroke{Ctrl+B}
-	\> see Section \ref{sec:bookmarks} 
-\> \dropmenucheck{Attributes} \\
-\dropmenuopttwo{mActionShowBookmarks}{Show Bookmarks}
+	\> Ver sección \ref{sec:bookmarks} 
+\> \dropmenucheck{Atributos} \\
+\dropmenuopttwo{mActionShowBookmarks}{Mostrar marcadores}
 	\> \keystroke{B}
-	\> see Section \ref{sec:bookmarks} 
-	\> \dropmenucheck{Attributes} \\
-\dropmenuopttwo{mActionDraw}{Refresh}
+	\> Ver sección \ref{sec:bookmarks} 
+	\> \dropmenucheck{Atributos} \\
+\dropmenuopttwo{mActionDraw}{Actualizar}
 	\> \keystroke{Ctrl+R}
-	\> \> \dropmenucheck{Map Navigation} \\
+	\> \> \dropmenucheck{Navegación de mapas} \\
 \end{tabbing}
 
-\item \mainmenuopt{Layer}
+\item \mainmenuopt{Capa}
 \begin{tabbing}
-\hspace{4.5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
-\dropmenuopttwo{mActionNewVectorLayer}{New Vector Layer}
+\hspace{5.5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
+\dropmenuopttwo{mActionNewVectorLayer}{Nueva capa vectorial}
 	\> \keystroke{N}
 	\>          	
-	see Section \ref{sec:create shape}
-	\> \dropmenucheck{Manage Layers} \\
-\dropmenuopttwo{mActionAddNonDbLayer}{Add a Vector Layer}       
+	Ver sección \ref{sec:create shape}
+	\> \dropmenucheck{Administrar capas} \\
+\dropmenuopttwo{mActionAddNonDbLayer}{Añadir capa vectorial}       
 	\> \keystroke{V}
 	\>          	
-	see Section \ref{label_workingvector}
-	\> \dropmenucheck{File} \\
-\dropmenuopttwo{mActionAddRasterLayer}{Add a Raster Layer}       
+	Ver sección \ref{label_workingvector}
+	\> \dropmenucheck{Archivo} \\
+\dropmenuopttwo{mActionAddRasterLayer}{Añadir capa ráster}       
 	\> \keystroke{R}
 	\>          	
-	see Section \ref{label_raster}
-	\> \dropmenucheck{File} \\
-\dropmenuopttwo{mActionAddLayer}{Add a PostGIS Layer}      
+	Ver sección \ref{label_raster}
+	\> \dropmenucheck{Archivo} \\
+\dropmenuopttwo{mActionAddLayer}{Añadir capa PostGIS}      
 	\> \keystroke{D}
 	\>          	
-	see Section \ref{label_postgis}
-	\> \dropmenucheck{File} \\
-\dropmenuopttwo{mActionAddWmsLayer}{Add a WMS Layer}          
+	Ver sección \ref{label_postgis}
+	\> \dropmenucheck{Archivo} \\
+\dropmenuopttwo{mActionAddWmsLayer}{Añadir capa WMS}          
 	\> \keystroke{W}
 	\>          	
-	see Section \ref{sec:ogc-wms}
-	\> \dropmenucheck{File} \\
-\dropmenuopttwo{mActionOpenTable}{Open Attribute Table}
+	Ver sección \ref{sec:ogc-wms}
+	\> \dropmenucheck{Archivo} \\
+\dropmenuopttwo{mActionOpenTable}{Abrir tabla de atributos}
 	\> \>
-	\> \dropmenucheck{Attributes} \\
-\dropmenuopttwo{mActionToggleEditing}{Toggle editing}
+	\> \dropmenucheck{Atributos} \\
+\dropmenuopttwo{mActionToggleEditing}{Conmutar edición}
 	\> \>
-	\> \dropmenucheck{Digitizing} \\
-\dropmenuopt{Save As Shapefile}
+	\> \dropmenucheck{Digitalización} \\
+\dropmenuopt{Guardar como archivo shape}
 	\\
-\dropmenuopt{Save Selection As Shapefile}
+\dropmenuopt{Guardar la selección como archivo shape}
 	\\
-\dropmenuopttwo{mActionRemoveLayer}{Remove Layer}
+\dropmenuopttwo{mActionRemoveLayer}{Eliminar capa}
 	\> \keystroke{Ctrl+D}
 	\>          	
-	\> \dropmenucheck{Manage Layers} \\
-\dropmenuopt{Properties}
+	\> \dropmenucheck{Administrar capas} \\
+\dropmenuopt{Propiedades}
 	\\
-\dropmenuopttwo{mActionInOverview}{Add to Overview}
+\dropmenuopttwo{mActionInOverview}{Añadir a la vista general}
 	\> \keystroke{O}
 	\>          	
-	\> \dropmenucheck{Manage Layers} \\
-\dropmenuopttwo{mActionAddAllToOverview}{Add All To Overview}
+	\> \dropmenucheck{Administrar capas} \\
+\dropmenuopttwo{mActionAddAllToOverview}{Añadir todo a la vista general}
 	\> \keystroke{+}
 	\>          	
 	\\
-\dropmenuopttwo{mActionRemoveAllFromOverview}{Remove All From Overview}
+\dropmenuopttwo{mActionRemoveAllFromOverview}{Eliminar todo de la vista general}
 	\> \hspace{1cm}\keystroke{-}
 	\>          	
 	\\
-\dropmenuopttwo{mActionHideAllLayers}{Hide All Layers}
+\dropmenuopttwo{mActionHideAllLayers}{Ocultar todas las capas}
 	\> \keystroke{H}
 	\>          	
-	\> \dropmenucheck{Manage Layers} \\
-\dropmenuopttwo{mActionShowAllLayers}{Show All Layers}
+	\> \dropmenucheck{Administrar capas} \\
+\dropmenuopttwo{mActionShowAllLayers}{Mostrar todas las capas}
 	\> \keystroke{S}
 	\>          	
-	\> \dropmenucheck{Manage Layers} \\
+	\> \dropmenucheck{Administrar capas} \\
 \end{tabbing}
 
-\item \mainmenuopt{Settings}
+\item \mainmenuopt{Configuración}
 \begin{tabbing}
-\hspace{4.5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
-\dropmenuopt{Panels}  
+\hspace{5.5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
+\dropmenuopt{Paneles}  
 	\>           
 	\>          	
 	\\
-\dropmenuopt{Toolbars}  
+\dropmenuopt{Barras de herramientas}  
 	\>           
 	\>          	
 	\\
-\dropmenuopt{Toggle Fullscreen Mode}  
+\dropmenuopt{Conmutar el modo de pantalla completa}  
 	\>
 	\>          	
 	\\
-\dropmenuopttwo{mActionProjectProperties}{Project Properties}  
+\dropmenuopttwo{mActionProjectProperties}{Propiedades del proyecto}  
 	\> \keystroke{P}
 	\>          	
-	see Section \ref{sec:projects}
+	Ver sección \ref{sec:projects}
 	\\
-\dropmenuopttwo{mActionCustomProjection}{Custom CRS}   
+\dropmenuopttwo{mActionCustomProjection}{SRC personalizado}   
 \> \>          	
-see Section \ref{sec:customprojections}
+Ver sección \ref{sec:customprojections}
 	\\
-\dropmenuopttwo{mActionOptions}{Options}             
+\dropmenuopttwo{mActionOptions}{Opciones}             
 \> \>          	
-see Section \ref{subsec:gui_options}
+Ver sección \ref{subsec:gui_options}
 	\\
 \end{tabbing}
 
-\item \mainmenuopt{Plugins} - (Futher menu items are added by plugins as they are loaded.)
+\item \mainmenuopt{Complementos} - (Se añaden más elementos de menú a medida que se cargan complementos.)
 \begin{tabbing}
-\hspace{4.5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
-\dropmenuopttwo{mActionShowPluginManager}{Plugin Manager}          	   
+\hspace{5.5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
+\dropmenuopttwo{mActionShowPluginManager}{Administrador de complementos}          	   
 \> \>          	
-see Section \ref{sec:managing_plugins}
-	\dropmenucheck{Plugins}\\
+Ver sección \ref{sec:managing_plugins}
+	\dropmenucheck{Complementos}\\
 \end{tabbing}          	
 
-\item \mainmenuopt{Help}
+\item \mainmenuopt{Ayuda}
 \begin{tabbing}
-\hspace{4.5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
-\dropmenuopttwo{mActionHelpContents}{Help Contents}
+\hspace{5.5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
+\dropmenuopttwo{mActionHelpContents}{Contenidos de la ayuda}
 	\> \keystroke{F1}
 	\>           	
-	\> \dropmenucheck{Help}\\
-\dropmenuopttwo{mActionQgisHomePage}{QGIS Home Page}
+	\> \dropmenucheck{Ayuda}\\
+\dropmenuopttwo{mActionQgisHomePage}{Página web de QGIS}
 	\> \keystroke{Ctrl+H}
 	\>          	
 	\\
-\dropmenuopttwo{mActionCheckQgisVersion}{Check QGIS Version}
+\dropmenuopttwo{mActionCheckQgisVersion}{Comprobar versión de QGIS}
 	\\
-\dropmenuopttwo{mActionHelpAbout}{About}
+\dropmenuopttwo{mActionHelpAbout}{Acerca de}
 	\\
 \end{tabbing}
 
@@ -414,96 +415,96 @@ see Section \ref{sec:managing_plugins}
 
 %See Appendix \ref{app_menu} for complete descriptions of the menu items.
 
-\subsubsection{Toolbars}\label{label_toolbars}
+\subsubsection{Barras de herramientas}\label{label_toolbars}
 \index{toolbars}
 
-The toolbars provide access to most of the same functions as the menus,
-plus additional tools for interacting with the map. Each toolbar item has
-popup help available. Hold your mouse over the item and a short description of
-the tool's purpose will be displayed. 
+Las barras de herramientas proporcionan acceso a la mayoría de las mismas funciones que los menús,
+así como a herramientas adicionales para interactuar con el mapa. Cada elemento de barra de herramientas tiene
+una ayuda emergente disponible. Mantenga el ratón sobre el elemento y se mostrará una breve descripción del
+propósito de la herramienta.
 
-Every menubar can be moved around according to your needs. Additionally every
-menubar can be switched off using your right mouse button context menu holding
-the mouse over the toolbars.
+Cada barra de menú se puede mover de acuerdo a sus necesidades. Además, cada
+barra de menú se puede desactivar usando el menú contextual del botón derecho del ratón manteniendo el ratón sobre las barras de herramientas.
 
 \begin{Tip}
-\caption{\textsc{Restoring toolbars}} \index{layout!toolbars}
-\qgistip{If you have accidentally hidden all your toolbars, you can get them
-back by choosing menu option \mainmenuopt{Settings} > \dropmenuopt{Toolbars}.}
+\caption{\textsc{Restaurar las barras de herramientas}} \index{layout!toolbars}
+\qgistip{Si ha ocultado accidentalmente todas sus barras de herramientas, puede recuperarlas
+mediante la opción de menú \mainmenuopt{Configuración} > \dropmenuopt{Barras de herramientas}.}
 \end{Tip}
 
-\subsubsection{Map Legend}\label{label_legend}
+\subsubsection{Capas}\label{label_legend}
 \index{legend}
 
-The map legend area is used to set the visibility and z-ordering of layers.
-Z-ordering means that layers listed nearer the top of the legend are drawn
-over layers listed lower down in the legend. The checkbox in each legend
-entry can be used to show or hide the layer.\index{layer!visibility}
+El área de las capas se usa para establecer la visibilidad y el orden vertical de las capas.
+El orden vertical significa que las capas colocadas cerca de la parte superior se dibujan
+sobre
+las capas mostradas más abajo. La casilla de verificacion de cada entrada de la leyenda
+se puede usar para mostrar u ocultar la capa.\index{layer!visibility}
 
-Layers can be grouped in the legend window by adding a layer group and dragging layers 
-into the group. To do so, move the mouse pointer to the legend window, right click, choose \dropmenuopt{Add group}. 
-A new folder appears. Now drag the layers onto to the folder symbol. It is then possible to toggle the 
-visibility of all the layers in the group with one click. To bring layers out of a group, move 
-the mouse pointer to the layer symbol, right click, and choose \dropmenuopt{Make to toplevel item}. To give the folder a 
-new name, choose \dropmenuopt{Rename} in the right click menu of the group.
+Las capas se pueden agrupar en la ventana Capas añadiendo un grupo de capas y arrastrando las capas 
+dentro del grupo. Para ello, mueva el puntero del ratón a la ventana Capas, haga clic derecho y seleccione \dropmenuopt{Añadir grupo}. 
+Aparecerá una carpeta nueva. Ahora arrastre las capas sobre el símbolo de la carpeta. A continuación es posible
+conmutar la visibilidad de todas las capas del grupo con un clic. Para sacar las capas del grupo, mueva 
+el puntero del ratón al símbolo de la capa, haga clic derecho y seleccione \dropmenuopt{Subir el elemento al nivel superior}. 
+Para poner un nombre a la carpeta, seleccione \dropmenuopt{Cambiar nombre} en el menú del botón derecho del grupo.
 
-The content of the right mouse button context menu depends on whether the loaded legend item you hold your 
-mouse over is a raster or a vector layer. For GRASS vector layers the \dropmenuopt{toggle editing} is not 
-available. See section \ref{grass_digitising} for information on editing GRASS vector layers. 
+El contenido del menú contextual del botón derecho depende de si la capa sobre la que se pasa el
+ratón es ráster o vectorial. Para las capas vectoriales de GRASS no está disponible la opción \dropmenuopt{Conmutar edición}.
+Vea la sección \ref{grass_digitising} para información sobre la edición de capas vectoriales de GRASS. 
 
 \begin{itemize}
 
-\item \textbf{Right mouse button menu for raster layers}
+\item \textbf{Menú del botón derecho del ratón para capas ráster}
 \begin{itemize}
-\item \dropmenuopt{Zoom to layer extent}
-\item \dropmenuopt{Zoom to best scale (100\%)}
-\item \dropmenuopt{Show in overview}
-\item \dropmenuopt{Remove}
-\item \dropmenuopt{Properties}
-\item \dropmenuopt{Rename}
-\item \dropmenuopt{Add Group}
-\item \dropmenuopt{Expand all}
-\item \dropmenuopt{Collapse all}
-\item \dropmenuopt{Show file groups}
+\item \dropmenuopt{Zum a la extensión de la capa}
+\item \dropmenuopt{Zum a la mejor escala (100\%)}
+\item \dropmenuopt{Mostrar en la vista general}
+\item \dropmenuopt{Eliminar}
+\item \dropmenuopt{Propiedades}
+\item \dropmenuopt{Cambiar nombre}
+\item \dropmenuopt{Añadir grupo}
+\item \dropmenuopt{Expandir todo}
+\item \dropmenuopt{Comprimir todo}
+\item \dropmenuopt{Mostrar grupos de archivos}
 \end{itemize}
 
-\item \textbf{Right mouse button menu for vector layers}
+\item \textbf{Menú del botón derecho del ratón para capas vectoriales}
 \begin{itemize}
-\item \dropmenuopt{Zoom to layer extent}
-\item \dropmenuopt{Show in overview}
-\item \dropmenuopt{Remove}
-\item \dropmenuopt{Open attribute table}
-\item \dropmenuopt{Toggle editing (not available for GRASS layers)}
-\item \dropmenuopt{Save as shapefile}
-\item \dropmenuopt{Save selection as shapefile}
-\item \dropmenuopt{Properties}
-\item \dropmenuopt{Make to toplevel item}
-\item \dropmenuopt{Rename}
-\item \dropmenuopt{Add Group}
-\item \dropmenuopt{Expand all}
-\item \dropmenuopt{Collapse all}
-\item \dropmenuopt{Show file groups}
+\item \dropmenuopt{Zum a la extensión de la capa}
+\item \dropmenuopt{Mostrar en la vista general}
+\item \dropmenuopt{Eliminar}
+\item \dropmenuopt{Abrir tabla de atributos}
+\item \dropmenuopt{Conmutar edición (no disponible para capas de GRASS)}
+\item \dropmenuopt{Guardar como archivo shape}
+\item \dropmenuopt{Guardar selección como archivo shape}
+\item \dropmenuopt{Propiedades}
+\item \dropmenuopt{Subir el elemento al nivel superior}
+\item \dropmenuopt{Cambiar nombre}
+\item \dropmenuopt{Añadir grupo}
+\item \dropmenuopt{Expandir todo}
+\item \dropmenuopt{Comprimir todo}
+\item \dropmenuopt{Mostrar grupos de archivos}
 \end{itemize}
 
-\item \textbf{Right mouse button menu for layer groups} 
+\item \textbf{Menú del botón derecho del ratón para grupos de capas} 
 \begin{itemize}
-\item \dropmenuopt{Remove}
-\item \dropmenuopt{Rename}
-\item \dropmenuopt{Add Group}
-\item \dropmenuopt{Expand all}
-\item \dropmenuopt{Collapse all}
-\item \dropmenuopt{Show file groups}
+\item \dropmenuopt{Eliminar}
+\item \dropmenuopt{Cambiar nombre}
+\item \dropmenuopt{Añadir grupo}
+\item \dropmenuopt{Expandir todo}
+\item \dropmenuopt{Comprimir todo}
+\item \dropmenuopt{Mostrar grupos de archivos}
 \end{itemize}
 
 \end{itemize}
 
-If several vector data sources have the same vector type and the same attributes, their 
-symbolisations may be grouped. This means that if the symbolisation of one data source is 
-changed, the others automatically have the new symbolisation as well. To group symbologies, open 
-the right click menu in the legend window and choose \dropmenuopt{Show file groups}. The file groups of the 
-layers appear. It is now possible to drag a file from one file group into another one. If this is done, 
-the symbologies are grouped. Note that QGIS only permits the drag if the two layers are able to share 
-symbology (same vector geometry type and same attributes).  
+Si varias fuentes de datos vectoriales tienen el mismo tipo de vector y el mismo tipo de atributos, su
+simbología se puede agrupar. Esto significa que si cambia la simbología de una fuente de datos, 
+las otras automáticamente tendrán también la nueva simbología. Para agrupar simbologías, abra 
+el menú del botón derecho de la ventana Capas y seleccione \dropmenuopt{Mostrat grupos de archivos}. Aparecerán los 
+grupos de archivos de las capas. Ahora es posible arrastrar un archivoo de un grupo de archivos a otro. Si se hace esto, 
+las simbologías se agrupan. Tenga en cuenta que QGIS sólo permite arrastrar si las dos capas pueden compartir
+la simbología (misma geometría vectorial y mismos atributos). 
 
 %% isn't included in Titan anymore, except for an "toggle overview"
 %Each legend entry can show the following mini icons:
@@ -518,50 +519,44 @@ symbology (same vector geometry type and same attributes).
 %\includegraphics[width=0.7cm]{editable} This is a vector
 %layer that is currently enabled for editing.\\
 
-\subsubsection{Map View}\label{label_mapview}
+\subsubsection{Vista del mapa}\label{label_mapview}
 \index{map!view}
 
-This is the 'business end' of QGIS - maps are displayed in this area! The
-map displayed in this window will depend on the vector and raster layers you
-have chosen to load (see sections that follow for more information on how to
-load layers). The map view can be panned (shifting the focus of the map display
-to another region) and zoomed in and out. Various other operations can be
-performed on the map as described in the toolbar description above.  The map
-view and the legend are tightly bound to each other - the maps in view reflect
-changes you make in the legend area.  
+Este es el «objetivo final» de QGIS - ¡los mapas se muestran en este área! El mapa que se visualice en esta 
+ventana dependerá de las capas vectoriales y ráster que se hayan seleccionado para cargar (vea las secciones que siguen 
+para más información sobre cómo cargar capas). Las vista del mapa se puede desplazar (moviendo el foco de 
+visualización del mapa a otra región) y se puede acercar y alejar el zum. Se pueden realizar otras operaciones 
+sobre el mapa como se indica en la descripción de las barras de herramientas más arriba. La vista del mapa y la 
+ventana Capas están íntimamente relacionadas – los mapas de la vista reflejan los cambios que se hacen en el área de las Capas. 
 
-\begin{Tip}\caption{\textsc{Zooming the Map with the Mouse
-Wheel}}\index{zoom!mouse wheel}
-\qgistip{You can use the mouse wheel to zoom in and out on the map. Place
-the mouse cursor inside the map area and roll the wheel forward (away from you) to
-zoom in and backwards (towards you) to zoom out. The mouse cursor position is the 
-center where the zoom occurs. You can customize the behavior of the mouse
-wheel zoom using the \tab{Map tools} tab under the \mainmenuopt{Settings} >\dropmenuopt{Options} menu.  }
+\begin{Tip}\caption{\textsc{Hacer zum sobre el mapa con la rueda del ratón}}\index{zoom!mouse wheel}
+\qgistip{Se puede usar la rueda del ratón para acercar o alejar el zum sobre el mapa. Sitúe el cursor del ratón 
+dentro del área del mapa y gire la rueda hacia delante para acercar el zum y hacia atrás para alejarlo. El 
+cursor del ratón es el centro sobre el que se hace zum. Puede personalizar el comportamiento del zum con la 
+rueda del ratón usando la pestaña \tab{Herramientas de mapa} bajo el menú \mainmenuopt{Configuración} >\dropmenuopt{Opciones}.  }
 \end{Tip}
 
-\begin{Tip}\caption{\textsc{Panning the Map with the Arrow Keys and Space Bar}}\index{pan!arrow keys}
-\qgistip{You can use the arrow keys to pan in the map. Place the mouse cursor 
-inside the map area and click on the right arrow key to pan East, left arrow 
-key to pan West, up arrow key to pan North and down arrow key to pan South. 
-You can also pan the map using the space bar: just move the mouse while
-holding down space bar.
+\begin{Tip}\caption{\textsc{Desplazar el mapa con las flechas de desplazamiento y la barra espaciadora}}\index{pan!arrow keys}
+\qgistip{Puede usar las flechas de desplazamiento para desplazar el mapa. Sitúe el cursor del ratón 
+dentro del área del mapa y pulse la flecha derecha para desplazarse al Este, la flecha izquierda 
+para desplazarse al Oeste, la flecha arriba para desplazarse al Norte y la  flecha abajo para desplazarse al Sur. 
+También puede desplazar el mapa usando la barra espaciadora: simplemente mueva el ratón mientras mantiene pulsada la barra espaciadora .
 }
 \end{Tip}
 
-\subsubsection{Map Overview}\label{label_mapoverview}
+\subsubsection{Vista general}\label{label_mapoverview}
 \index{map!overview}
 
-The map overview area provides a full extent view of layers added to it.
-Within the view is a rectangle showing the current map extent. This allows
-you to quickly determine which area of the map you are currently viewing. Note
-that labels are not rendered to the map overview even if the layers in the
-map overview have been set up for labeling. 
-You can add a single layer to the overview by right-clicking on it in the legend 
-and select \checkbox{Show in overview}. You can also add layers to, or remove 
-all layers from the overview using the Overview tools on the toolbar.
+La vista general proporciona una vista de toda la extensión de las capas añadidas al mapa. Dentro de la 
+vista hay un rectángulo que muestra la extensión actual del mapa. Esto permite determinar rápidamente que área 
+del mapa se está viendo actualmente. Tenga en cuenta que las etiquetas no se visualizan en la vista general, 
+incluso aunque las capas se hayan configurado para ser etiquetadas. Puede añadir una sola capa a la vista general 
+pulsando con el botón derecho sobre ella en la ventana capas y seleccionando \checkbox{Mostrar en la vista general}. 
+También puede añadir o quitar todas las capas de la vista general usando las herramientas de la vista general en 
+la barra de herramientas.
 
-If you click and drag the red rectangle in the overview that shows your 
-current extent, the main map view will update accordingly.
+Si coge y arrastra el rectángulo rojo de la vista general que muestra la extensión actual, la vista 
+del mapa se actualizará conforme se desplace.
 
 \subsubsection{Status Bar}\label{label_statusbar}
 

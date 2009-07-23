@@ -1,57 +1,57 @@
 % vim:autoindent:set textwidth=78:
 
-\section{Getting Started}\label{label_getstarted}
+\section{Comenzar}\label{label_getstarted}
 
 % when the revision of a section has been finalized, 
 % comment out the following line:
 % \updatedisclaimer
 
-This chapter gives a quick overview of installing QGIS, some sample 
-data from the QGIS web page and running a first and simple session 
-visualizing raster and vector layers.
+Este capítulo ofrece un vistazo rápido de la instalación de QGIS, algunos datos disponibles 
+en la página web de QGIS y cómo ejecutar una primera sesión sencilla
+visualizando capas ráster y vectoriales.
 
-\subsection{Installation}\label{label_installation}
+\subsection{Instalación}\label{label_installation}
 \index{installation}
 
-Installation of QGIS is very simple. Standard installer packages are
-available for MS Windows and Mac OS X. For many flavors of GNU/Linux binary
-packages (rpm and deb) or software repositories to add to your installation
-manager are provided. Get the latest information on binary packages at the
-QGIS website at \url{http://qgis.osgeo.org/download/}.
+La instalación de QGIS es muy sencilla. Hay disponibles paquetes de instalación estándar
+para MS Windows y Mac OS X. Para muchos sabores de GNU/Linux se proporcionan paquetes
+binarios (rpm y deb) o repositorios de software para añadir a su administrador
+de instalación. Consiga la última información sobre paquetes binarios en la web de
+QGIS en \url{http://qgis.osgeo.org/download/}.
 
-\minisec{Installation from source}
+\minisec{Instalación a partir de código fuente}
 
-If you need to build QGIS from source, please refer to the coding and
-compiling guide available at \url{http://qgis.osgeo.org/documentation/}. 
-The installation instructions are also distributed with the QGIS source
-code.
+Si necesita compilar QGIS a partir del código fuente, por favor diríjase a la guía de codificación y
+compilación disponible en \url{http://qgis.osgeo.org/documentation/}. 
+Las instrucciones de instalación se distribuyen con el código fuente de QGIS.
 
-\subsection{Sample Data}\label{label_sampledata}
+\subsection{Datos de muestra}\label{label_sampledata}
 \index{data!sample} 
 
-The user guide contains examples based on the QGIS sample dataset. 
+La guía de usuario contiene ejemplos basados en el conjunto de datos
+de muestra de QGIS.
 
-\win The Windows installer has an option to download the QGIS sample dataset.
-If checked, the data will be downloaded to your \filename{My Documents}
-folder and placed in a folder called \filename{GIS Database}. 
-You may use Windows Explorer to move this folder to any convenient location.
-If you did not select the checkbox to install the sample dataset
-during the initial QGIS installation, you can either
+\win El instalador de Windows tiene una opción para descargar los datos de muestra de QGIS.
+Si se marca, los datos se descargarán en su carpeta \filename{Mis Documentos}
+y se colocarán en una carpeta llamada \filename{GIS Database}. 
+Puede usar el Explorador de Windows para mover esta carpeta a cualquier ubicación apropiada.
+Si no seleccionó la casilla para instalar los datos de muestra
+durante la instalación inicial de QGIS puede
 \begin{itemize}
-\item use GIS data that you already have;
-\item download the sample data from the QGIS website
- \url{http://qgis.osgeo.org/download}; or
-\item uninstall QGIS and reinstall with the data download option checked.
+\item usar datos SIG que ya tenga;
+\item descargar los datos de muestra de la web de QGIS
+ \url{http://qgis.osgeo.org/download}; o
+\item desinstalar QGIS y reinstalarto con la opción de descarga de datos marcada.
 \end{itemize}
 
-\nix \osx For GNU/Linux and Mac OSX there are not yet dataset installation
-packages available as rpm, deb or dmg. To use the sample dataset download the
-file \filename{qgis\_sample\_data} as ZIP or TAR archive from
-\url{http://download.osgeo.org/qgis/data/} and unzip or untar the archive on
-your system. The Alaska dataset includes all GIS data that are used as
-examples and screenshots in the user guide, and also includes a small GRASS
-database. The projection for the QGIS sample dataset is Alaska Albers Equal
-Area with unit feet. The EPSG code is 2964.
+\nix \osx Para GNU/Linux y Mac OSX aún no hay disponibles paquetes de instalación 
+del conjunto de datos en forma de rpm, deb o dmg. Para usar los datos de muestra
+descargue el archivo \filename{qgis\_sample\_data} como archivo ZIP o TAR desde
+\url{http://download.osgeo.org/qgis/data/} y descomprímalo en su equipo.
+El conjunto de datos de Alaska incluye todos los datos SIG que se usan como
+ejemplos y capturas de pantalla en la guía de usuario y también incluye una pequeña
+base de datos de GRASS. La proyección de los datos de muestra de QGIS es Alaska Albers Equal
+Area con unidades en pies. El código EPSG es 2964.
 
 \begin{verbatim}
 PROJCS["Albers Equal Area",
@@ -76,58 +76,57 @@ PROJCS["Albers Equal Area",
     UNIT["us_survey_feet",0.3048006096012192]]
 \end{verbatim}
 
-If you intend to use QGIS as graphical frontend for GRASS, you can find a
-selection of sample locations (e.g. Spearfish or South Dakota) at the
-official GRASS GIS website \\
-\url{http://grass.osgeo.org/download/data.php}. 
+Si pretende usar QGIS como entorno gráfico para GRASS, puede encontrar una
+selección de localizaciones de muestra (ej. Spearfish o Dakota del Sur) en la web
+oficial de GRASS \url{http://grass.osgeo.org/download/data.php}.
 
-\subsection{Sample Session}\label{samplesession}
+\subsection{Sesión de ejemplo}\label{samplesession}
 
-Now that you have QGIS installed and a sample dataset available, we would 
-like to demonstrate a short and simple QGIS sample session. We will visualize 
-a raster and a vector layer. We will use the landcover raster 
-layer \filename{qgis\_sample\_data/raster/landcover.img} and the lakes 
-vector layer \filename{qgis\_sample\_data/gml/lakes.gml}.
+Ahora que tiene instalado QGIS y un conjunto de datos de muestra disponible, nos gustaría 
+mostrarle una corta y sencilla sesión de ejemplo de QGIS. Visualizaremos una capa 
+ráster y una vectorial. Usaremos la capa ráster de cobertura del terreno 
+\filename{qgis\_sample\_data/raster/landcover.img} y la capa vectorial de lagos 
+\filename{qgis\_sample\_data/gml/lakes.gml}.
 
-\minisec{start QGIS}
+\minisec{Iniciar QGIS}
 
 \begin{itemize}
-\item \nix{Start QGIS by typing: \usertext{qgis} at a command prompt.}
-\item \win{Start QGIS using the Start menu or desktop shortcut, 
-or double click on a QGIS project file.}
-\item \osx{Double click the icon in your Applications folder.}
+\item \nix{Arranque QGIS escribiendo: \usertext{qgis} en la línea de órdenes.}
+\item \win{Arranque QGIS usando el menú Inicio o un acceso directo del escritorio, 
+o haciendo doble clic en un archivo de proyecto de QGIS.}
+\item \osx{Doble clic en el icono de su carpeta de Aplicaciones.}
 \end{itemize} 
 
-\minisec{Load raster and vector layers from the sample dataset}
+\minisec{Cargar capas ráster y vectoriales del conjunto de datos de muestra}
 
 \begin{enumerate}
-\item Click on the \toolbtntwo{mActionAddRasterLayer}{Load Raster} icon.
-\item Browse to the folder \filename{qgis\_sample\_data/raster/}, select 
-the ERDAS Img file \filename{landcover.img} and click \button{Open}.
-\item If the file is not listed, check if the Filetype combobox at the
-bottom of the dialog is set on the right type, in this case "Erdas Imagine
+\item Haga clic en el icono \toolbtntwo{mActionAddRasterLayer}{Añadir capa ráster}.
+\item Navegue a la carpeta \filename{qgis\_sample\_data/raster/}, seleccione el
+archivo Img de ERDAS \filename{landcover.img} y pulse el botón \button{Abrir}.
+\item Si el archivo no está en la lista, compruebe si el cuadro combinado Tipos de fichero en la
+parte baja del diálogo está puesto en el tipo correcto, en este caso "Erdas Imagine
 Images (*.img, *.IMG)"
-\item Now click on the \toolbtntwo{mActionAddOgrLayer}{Load Vector} icon.
-\item In the new Add Vector Layer dialog click \button{Browse}.
-\item Browse to the folder \filename{qgis\_sample\_data/gml/}, select "GML"
-from the filetype combobox, then select the GML file \filename{lakes.gml} 
-and click \button{Open}, then in Add Vector dialog click \button{OK}.
-\item Zoom in a bit to your favorite area with some lakes.
-\item Double click the \filename{lakes} layer in the map legend to open the 
-\dialog{Layer Properties} dialog.
-\item Click on the \tab{Symbology} tab and select a blue as fill color.
-\item Click on the \tab{Labels} tab and check the \checkbox{Display labels} 
-checkbox to enable labeling. Choose NAMES field as Field containing label.
-\item Click \button{Apply}.
+\item Ahora pulse en el icono \toolbtntwo{mActionAddOgrLayer}{Añadir capa vectorial}.
+\item En el diálogo Añadir capa vectorial pulse \button{Explorar}.
+\item Navegue a la carpeta \filename{qgis\_sample\_data/gml/}, seleccione "GML"
+en el cuadro combinado Tipo de archivo, luego seleccione
+el archivo GML \filename{lakes.gml} y pulse el botón \button{Abrir}.
+\item Acerque el zum un poco al área que prefiera con algunos lagos.
+\item Haga doble clic en la capa \filename{lakes} en la leyenda del mapa para abrir el 
+diálogo \dialog{Propiedades de la capa}.
+\item Pulse en la pestaña \tab{Simbología} y seleccione un color de relleno azul.
+\item Haga clic en la pestaña \tab{Etiquetas} y marque la casilla \checkbox{Mostrar etiquetas} 
+para activar el etiquetado. Seleccione el campo NAMES como Campo que contiene la etiqueta.
+\item Pulse el botón \button{Aplicar}.
 \end{enumerate} 
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{A Simple QGIS Session \nixcaption}\label{fig:simple_session}\smallskip
+   \caption{Una sesión de QGIS sencilla \nixcaption}\label{fig:simple_session}\smallskip
    \includegraphics[clip=true, width=12cm]{simple_session}
 \end{center}  
 \end{figure}
 
-You can see how easy it is to visualize raster and vector layers in 
-QGIS. Let's move on to the sections that follow to learn more about the 
-available functionality, features and settings and how to use them.
+Puede ver lo fácil que es visulizar capas ráster y vectoriales en 
+QGIS. Vayamos a las secciones que siguen para aprender más sobre las 
+funcionalidades disponibles, características y configuraciones y sobre cómo usarlas.
