@@ -767,34 +767,32 @@ $HOME/apps/bin/qgis
 
 Se tutto ha funzionato in modo giusto l'applicazione QGIS dovrebbe avviarsi e apparire sul vostro schermo.
 
-
 \section{Creation of MSYS environment for compilation of Quantum GIS}
 \subsection{Initial setup}
 \subsubsection{MSYS}
-This is the environment that supplies many utilities from UNIX world in Windows and is needed
-by many dependencies to be able to compile.
+Questo è l'ambiente che offre così tante utilità dal mondo UNIX in Windows ed è necessario a molte dipendenze per riuscire a compilare.
 
-Download from here:
+Scaricabile da qui:
 
 \url{http://puzzle.dl.sourceforge.net/sourceforge/mingw/MSYS-1.0.11-2004.04.30-1.exe}
 
-Install to \texttt{c:$\backslash$msys}
+Installare in \texttt{c:$\backslash$msys}
 
-All stuff we're going to compile is going to get to this directory (resp. its subdirs).
+Tutto ciò che andiamo a comilare andrà a finire in questa directory (resp. sue sottodirectory).
 
 \subsubsection{MinGW}
-Download from here:
+Scaricabile da qui:
 
 \url{http://puzzle.dl.sourceforge.net/sourceforge/mingw/MinGW-5.1.3.exe}
 
-Install to \texttt{c:$\backslash$msys$\backslash$mingw}
+Installare in \texttt{c:$\backslash$msys$\backslash$mingw}
 
-It suffices to download and install only \texttt{g++} and \texttt{mingw-make} components.
+E' sufficiente scaricare e istallare soltanto i componenti \texttt{g++} e \texttt{mingw-make}.
 
-\subsubsection{Flex and Bison}
+\subsubsection{Flex e Bison}
 Flex and Bison are tools for generation of parsers, they're needed for GRASS and also QGIS compilation.
 
-Download the following packages:
+Scaricare i seguenti pacchetti:
 
 \url{http://gnuwin32.sourceforge.net/downlinks/flex-bin-zip.php}
 
@@ -802,12 +800,12 @@ Download the following packages:
 
 \url{http://gnuwin32.sourceforge.net/downlinks/bison-dep-zip.php}
 
-Unpack them all to \texttt{c:$\backslash$msys$\backslash$local}
+Decomprimerli tutti in \texttt{c:$\backslash$msys$\backslash$local}
 
-\subsection{Installing dependencies}
-\subsubsection{Getting ready}
-Paul Kelly did a great job and prepared a package of precompiled libraries for GRASS.
-The package currently includes:
+\subsection{Installare le dipendenze}
+\subsubsection{Messa a punto}
+Paul Kelly ha svolto un ottimo lavoro e ha preparato un pacchetto di librerie precompilate per GRASS.
+Il pacchetto al momento include:
 
 \begin{itemize}
 \item zlib-1.2.3
@@ -820,38 +818,33 @@ The package currently includes:
 \item gdal-1.4.1
 \end{itemize}
 
-It's available for download here:
+Scaricabile da qui:
 
 \url{http://www.stjohnspoint.co.uk/grass/wingrass-extralibs.tar.gz}
 
-Moreover he also left the notes how to compile it (for those interested):
+Inoltre, ha anche lasciato delle note su come compilarlo (per quelli interessati):
 
 \url{http://www.stjohnspoint.co.uk/grass/README.extralibs}
 
-Unpack the whole package to \texttt{c:$\backslash$msys$\backslash$local}
+Decomprimere l'intero pacchetto in \texttt{c:$\backslash$msys$\backslash$local}
 
-\subsubsection{GDAL level one}
-Since Quantum GIS needs GDAL with GRASS support, we need to compile GDAL
-from source - Paul Kelly's package doesn't include GRASS support in GDAL.
-The idea is following:
+\subsubsection{GDAL livello uno}
+Dato che Quantum GIS necessita GDAL con supporto GRASS, si deve compilare GDAL dal sorgente - il pacchetto di Paul Kelly non include il supporto GRASS in GDAL.
+L'idea è la seguente:
 
 \begin{enumerate}
-\item compile GDAL without GRASS
-\item compile GRASS
-\item compile GDAL with GRASS
+\item compilare GDAL senza GRASS
+\item compilare GRASS
+\item compile GDAL con GRASS
 \end{enumerate}
 
-So, start with downloading GDAL sources:
+Quindi, si comincia scaricando i sorgenti di GDAL:
 
 \url{http://download.osgeo.org/gdal/gdal141.zip}
 
-Unpack it to some directory, preferably \texttt{c:$\backslash$msys$\backslash$local$\backslash$src}.
+Decomprimere in una directory, preferibilmente \texttt{c:$\backslash$msys$\backslash$local$\backslash$src}.
 
-Start MSYS console, go to gdal-1.4.1 directory and run the commands below.
-You can put them all to a script, e.g. build-gdal.sh and run them at once.
-The recipe is taken from Paul Kelly's instructions - basically they
-just make sure that the library will be created as DLL and the utility
-programs will be dynamically linked to it...
+Aprire la console MSYS, andare nella directory gdal-1.4.1 ed eseguire i comandi qui sotto. Si possono mettere tutti in uno sript, ad es. build-gdal.sh ed eseguirli tutti in una volta. La ricetta è presa dalle istruzioni di Paul Kelly - in pratica assicurano che la libreria sarà creata come DLL ed i programmi di utilità saranno legati dinamicamente ad essa...
 
 \begin{verbatim}
 CFLAGS="-O2 -s" CXXFLAGS="-O2 -s" LDFLAGS=-s ./configure --without-libtool \
@@ -891,34 +884,34 @@ gdaltindex.exe gdal_rasterize.exe /usr/local/bin
 
 \end{verbatim}
 
-Finally, manually edit \texttt{gdal-config} in \texttt{c:$\backslash$msys$\backslash$local$\backslash$bin} to replace the static library reference with -lgdal:
+Infine, modificare manualmente \texttt{gdal-config} in \texttt{c:$\backslash$msys$\backslash$local$\backslash$bin} per sostituire la libreria staica con -lgdal:
 
 \begin{verbatim}
 CONFIG_LIBS="-L/usr/local/lib -lpng -lz -lgdal"
 \end{verbatim}
-GDAL build procedure can be greatly simplified to use libtool with a libtool line patch:
-configure gdal as below:
+La procedure di compilazione di GDAL può essere enormemente semplificata per usare libtool con una linea di correzione di libtool:
+configurare gdal come di seguito:
 ./configure --with-ngpython --with-xerces=/local/ --with-jasper=/local/ --with-grass=/local/grass-6.3.cvs/ --with-pg=/local/pgsql/bin/pg\_config.exe 
 
-Then fix libtool with:
+Quindi correggere libtool con:
 mv libtool libtool.orig
 cat libtool.orig $|$ sed 's/max\_cmd\_len=8192/max\_cmd\_len=32768/g' $>$ libtool
 
-Libtool on windows assumes a line length limit of 8192 for some reason and tries to page the linking and fails miserably. This is a work around.
+Libtool in windows assume una lunghezza limite di linea di 8192 per qualche ragione e cerca di raggiungere i collegamenti e fallisce miseramente. Questo è un modo per aggirare il problema.
 
-Make and make install should be hassle free after this.
+Compilazione e istallazione dovrebbero essere liberi da impedimenti dopo questo.
 
 \subsubsection{GRASS}
-Grab sources from CVS or use a weekly snapshot, see:
+Scaricare i sorgenti da CVS o usare una foto settimanale, vedere:
 
 	\begin{quotation}
 \htmladdnormallink{http://grass.itc.it/devel/cvs.php}{http://grass.itc.it/devel/cvs.php}
 	\end{quotation}
 
-In MSYS console go to the directory where you've unpacked or checked out sources
+Nella console MSYS andare alla directory dove si è decompresso o verificato i sorgenti
 (e.g. \texttt{c:$\backslash$msys$\backslash$local$\backslash$src$\backslash$grass-6.3.cvs})
 
-Run these commands:
+Eseguire questi comandi:
 
 \begin{verbatim}
 export PATH="/usr/local/bin:/usr/local/lib:$PATH"
@@ -933,26 +926,26 @@ make
 make install
 \end{verbatim}
 
-It should get installed to \texttt{c:$\backslash$msys$\backslash$local$\backslash$grass-6.3.cvs}
+Dovrebbe istallarsi in \texttt{c:$\backslash$msys$\backslash$local$\backslash$grass-6.3.cvs}
 
-By the way, these pages might be useful:
+In ogni caso, queste pagine possono essere utili:
 
 \begin{itemize}
 \item \htmladdnormallink{http://grass.gdf-hannover.de/wiki/WinGRASS\_Current\_Status}{http://grass.gdf-hannover.de/wiki/WinGRASS\_Current\_Status}
 \item \htmladdnormallink{http://geni.ath.cx/grass.html}{http://geni.ath.cx/grass.html}
 \end{itemize}
 
-\subsubsection{GDAL level two}
-At this stage, we'll use GDAL sources we've used before, only the compilation will be a bit different.
+\subsubsection{GDAL livello due}
+A questo stadio useremo i sorgenti GDAL usati prima, solo la compilazione sarà un po' diversa.
 
-But first in order to be able to compile GDAL sources with current GRASS CVS, you need to patch them, here's what you need to change:
+ma prima, per riuscire a compilare i sorgenti GDAL con l'attuale GRASS CVS, è necessario correggerli; ecco cosa si deve cambiare:
 
 	\begin{quotation}
 \htmladdnormallink{http://trac.osgeo.org/gdal/attachment/ticket/1587/plugin\_patch\_grass63.diff}{http://trac.osgeo.org/gdal/attachment/ticket/1587/plugin\_patch\_grass63.diff}
 	\end{quotation}
-(you can patch it by hand or use patch.exe in \texttt{c:$\backslash$msys$\backslash$bin})
+(si può correggere a mano o usare patch.exe in \texttt{c:$\backslash$msys$\backslash$bin})
 
-Now in MSYS console go to the GDAL sources directory and run the same commands as in level one, only with these differences:
+Ora nella console MSYS console si va alla directory dei sorgenti GDAL e si esegue lo stesso comando del livello uno, solo con queste differenze:
 
 \begin{verbatim}
 1) when running ./configure add this argument:
@@ -964,7 +957,7 @@ Now in MSYS console go to the GDAL sources directory and run the same commands a
 -lgrass\_vask -lgrass\_gmath -lgrass\_gis -lgrass\_datetime}
 \end{verbatim}
 
-Then again, edit \texttt{gdal-config} and change line with CONFIG\_LIBS
+Poi ancora, si modifica \texttt{gdal-config} e si cambia la linea con CONFIG\_LIBS
 
 \begin{verbatim}
 CONFIG_LIBS="-L/usr/local/lib -lpng -L/usr/local/grass-6.3.cvs/lib -lgrass_vect \
@@ -973,28 +966,28 @@ CONFIG_LIBS="-L/usr/local/lib -lpng -L/usr/local/grass-6.3.cvs/lib -lgrass_vect 
 -lgrass_datetime -lz -L/usr/local/lib -lgdal" 
 \end{verbatim}
 
-Now, GDAL should be able to work also with GRASS raster layers.
+Ora, GDAL dovrebbe riuscire a lavorare anche coni layer raster di GRASS.
 
 \subsubsection{GEOS}
-Download the sources:
+Scaricare i sorgenti:
 
 \url{http://geos.refractions.net/geos-2.2.3.tar.bz2}
 
-Unpack to e.g. \texttt{c:$\backslash$msys$\backslash$local$\backslash$src}
+Decomprimerli ad es. in \texttt{c:$\backslash$msys$\backslash$local$\backslash$src}
 
-To compile, I had to patch the sources: in file \texttt{source/headers/timeval.h} line 13.
-Change it from:
+Per compilare, correggere il sorgente: nel file \texttt{source/headers/timeval.h} linea 13.
+Cambiarlo da:
 
 \begin{verbatim}
 #ifdef _WIN32
 \end{verbatim}
-to:
+a:
 
 \begin{verbatim}
 #if defined(_WIN32) && defined(_MSC_VER)
 \end{verbatim}
 
-Now, in MSYS console, go to the source directory and run:
+Ora, nella console MSYS console, andare alla directory del sorgente e eseguire:
 
 \begin{verbatim}
 ./configure --prefix=/usr/local
@@ -1003,29 +996,29 @@ make install
 \end{verbatim}
 
 \subsubsection{SQLITE}
-You can use precompiled DLL, no need to compile from source:
+Si può usare DLL precompilate, non c'è bisogno di compilarle dal sorgente:
 
-Download this archive:
+Scaricare questo archivio:
 
 
 \url{http://www.sqlite.org/sqlitedll-3\_3\_17.zip}
 
-and copy sqlite3.dll from it to \texttt{c:$\backslash$msys$\backslash$local$\backslash$lib}
+e copiare sqlite3.dll in \texttt{c:$\backslash$msys$\backslash$local$\backslash$lib}
 
-Then download this archive:
+Quindi scaricare questo archivio:
 
 \url{http://www.sqlite.org/sqlite-source-3\_3\_17.zip}
 
-and copy sqlite3.h to \texttt{c:$\backslash$msys$\backslash$local$\backslash$include}
+e copiare sqlite3.h in \texttt{c:$\backslash$msys$\backslash$local$\backslash$include}
 
 \subsubsection{GSL}
-Download sources:
+Scaricare i sorgenti:
 
 \url{ftp://ftp.gnu.org/gnu/gsl/gsl-1.9.tar.gz}
 
-Unpack to \texttt{c:$\backslash$msys$\backslash$local$\backslash$src}
+Estrarre in \texttt{c:$\backslash$msys$\backslash$local$\backslash$src}
 
-Run from MSYS console in the source directory:
+Eseguire dalla console MSYS nella directory del sorgente:
 
 \begin{verbatim}
 ./configure
@@ -1034,13 +1027,13 @@ make install
 \end{verbatim}
 
 \subsubsection{EXPAT}
-Download sources:
+Scaricare i sorgenti:
 
 \url{http://dfn.dl.sourceforge.net/sourceforge/expat/expat-2.0.0.tar.gz}
 
-Unpack to \texttt{c:$\backslash$msys$\backslash$local$\backslash$src}
+Decomprimere in \texttt{c:$\backslash$msys$\backslash$local$\backslash$src}
 
-Run from MSYS console in the source directory:
+Eseguire dalla console MSYS nella directory del sorgente:
 
 \begin{verbatim}
 ./configure
@@ -1049,79 +1042,70 @@ make install
 \end{verbatim}
 
 \subsubsection{POSTGRES}
-We're going to use precompiled binaries. Use the link below for download:
+Si useranno binari precompilati. Usare questo link below per scaricare:
 
 \begin{verbatim}
 http://wwwmaster.postgresql.org/download/mirrors-ftp?file=\%2Fbinary\%2Fv8.2.4\%2Fwin32 \
 \%2Fpostgresql-8.2.4-1-binaries-no-installer.zip
 \end{verbatim}
 
-copy contents of pgsql directory from the archive to \texttt{c:$\backslash$msys$\backslash$local}
+copiarei contenuti della directory pgsql directory dall'archivio a  \texttt{c:$\backslash$msys$\backslash$local}
 
-\subsection{Cleanup}
-We're done with preparation of MSYS environment. Now you can delete all stuff in \texttt{c:$\backslash$msys$\backslash$local$\backslash$src} - it takes quite a lot
-of space and it's not necessary at all.
+\subsection{Ripulitura}
+Siamo pronti con la preparazione dell'ambiente MSYS. Si può eliminare tutto il materiale in \texttt{c:$\backslash$msys$\backslash$local$\backslash$src} - ci vuole un po'di spazio e questo non è assolutamente necessario.
 
 
-\section{Building with MS Visual Studio}
-/!$\backslash$ This section describes a process where you build all dependencies yourself. See the section
-after this for a simpler procedure where we have all the dependencies you need pre-packaged
-and we focus just on getting Visual Studio Express set up and building QGIS.
+\section{Compilare con MS Visual Studio}
+/!$\backslash$ Questa sezione descrive un processo in cui si compilano tutte le dipendenze da soli. Vedere la sezione seguente per una procedura di compilazione più semplice in cui abbiamo tutte le dipendenze necessarie pre-impacchettate e focalizziamoci solo sull'impostare Visual Studio Express e compilare QGIS.
 
-\textbf{Note:} that this does not currently include GRASS or Python plugins.
+\textbf{Nota:} questo non include al momento i plugin GRASS o Python.
 
-\subsection{Setup Visual Studio}
-This section describes the setup required to allow Visual Studio to be used to build QGIS. 
+\subsection{Impostazioni Visual Studio}
+Questa sezione descrive la messa a punto richiesta per permettere di usare Visual Studio per compilare QGIS. 
 
 \subsubsection{Express Edition}
-The free Express Edition lacks the platform SDK which contains headers and so on that are needed when building QGIS. The platform SDK can be installed as described here:
+La Express Edition gratuita manca della piattaforma SDK che contiene le intestazioni e così via che sono necessarie quando si compila QGIS. La piattaforma SDK può essere istallata come descritto qui:
 
 
 \url{http://msdn.microsoft.com/vstudio/express/visualc/usingpsdk/}
 
-Once this is done, you will need to edit the $<$vsinstalldir$>$$\backslash$Common7$\backslash$Tools$\backslash$vsvars file as follows:
+Una volta che questo sia fatto, bisogna modificare il file $<$vsinstalldir$>$$\backslash$Common7$\backslash$Tools$\backslash$vsvars come segue:
 
 	\begin{quotation}
-Add \texttt{\%PlatformSDKDir\%$\backslash$Include$\backslash$atl} and \texttt{\%PlatformSDKDir\%$\backslash$Include$\backslash$mfc} to the \texttt{@set INCLUDE} entry.
+Aggiungere \texttt{\%PlatformSDKDir\%$\backslash$Include$\backslash$atl} e \texttt{\%PlatformSDKDir\%$\backslash$Include$\backslash$mfc} alla voce \texttt{@set INCLUDE}.
 	\end{quotation}
-This will add more headers to the system INCLUDE path. \textbf{Note:} that this will only work when you use the Visual Studio command prompt when building. Most of the dependencies will be built with this.
-You will also need to perform the edits described here to remove the need for a library that Visual Studio Express lacks:
+Questo aggiungere più intestazioni al percorso di sistema INCLUDE. \textbf{Nota:} questo funzionerà soltanto quando si usa il command prompt di Visual Studio nel compilare. La maggior parte delle dipendenze sarà costruita con questo. Si deve anche fare le modifiche descritte qui per eliminare la necessità di una libreria che manca in Visual Studio Express:
 
 \url{http://www.codeproject.com/wtl/WTLExpress.asp}
 
 
-\subsubsection{All Editions}
-You will need stdint.h and unistd.h. unistd.h comes with GnuWin32 version of flex \& bison binaries (see later). stdint.h can be found here:
+\subsubsection{Tutte le editioni}
+Sono necessari stdint.h and unistd.h. unistd.h è distribuito con la versione GnuWin32 dei binari flex \& bison (vedere oltre). stdint.h si può trovare qui:
 
 \url{http://www.azillionmonkeys.com/qed/pstdint.h}
 
-Copy both of these to $<$vsinstalldir$>$$\backslash$VC$\backslash$include.
+Copiare entrambi in $<$vsinstalldir$>$$\backslash$VC$\backslash$include.
 
-\subsection{Download/Install Dependencies}
-This section describes the downloading and installation of the various QGIS dependencies.
+\subsection{Scaricare/istallare dipendenze}
+Questa sezione descrive come scaricare e istallare le varie dipendenze di QGIS.
 
-\subsubsection{Flex and Bison}
-Flex and Bison are tools for generation of parsers, they're needed for GRASS and also QGIS compilation.
+\subsubsection{Flex e Bison}
+Flex e Bison sono strumenti per la generazione di parsers, sono necessari per la compilazione di GRASS e anche QGIS.
 
-Download the following packages and run the installers:
+Scaricare i seguenti pacchetti e eseguire gli istallatori:
 
 \url{http://gnuwin32.sourceforge.net/downlinks/flex.php} \\
 \url{http://gnuwin32.sourceforge.net/downlinks/bison.php}
 
-\subsubsection{To include  PostgreSQL support in Qt}
-If you want to build Qt with PostgreSQL support you need to download
-PostgreSQL, install it and create a library you can later link with Qt.
+\subsubsection{Per includere il supporto PostgreSQL in Qt}
+Se si vuole compilare Qt con il supporto PostgreSQL bisogna scaricare PostgreSQL, istallarlo e creare una libreria che si possa poi collegare con Qt.
 
-Download from .../binary/v8.2.5/win32/postgresql-8.2.5-1.zip from an
-PostgreSQL.org Mirror and install.
+Scaricare da .../binary/v8.2.5/win32/postgresql-8.2.5-1.zip da un
+PostgreSQL.org Mirror e istallare.
 
-PostgreSQL is currently build with MinGW and comes with headers and libraries
-for MinGW.  The headers can be used with Visual C++ out of the box, but the library
-is only shipped in DLL and archive (.a) form and therefore cannot be used with
-Visual C++ directly.
+PostgreSQL è attualmente comilato con MinGW ed è distribuito con intestazioni e librerie per MinGW. Le intestazioni possono essere usate con Visual C++ fuori dal box, ma la libreria esiste soltanto in forma DLL e archive (.a) e quindi non può essere usata direttamente con Visual C++.
 
-To create a library copy following sed script to the file mkdef.sed in
-PostgreSQL lib directory:
+Per creare una libreria copiare il seguente script sed nel file mkdef.sed nella lib directory di PostgreSQL:
 
 \begin{verbatim}
 /Dump of file / {
@@ -1136,7 +1120,7 @@ EXPORTS
 }
 \end{verbatim}
 
-and process execute in the Visual Studio C++ command line (from Programs menu):
+e eseguire processo nella linea di comandodi Visual Studio C++ (dal menu Programmi):
 
 \begin{verbatim}
 cd c:\Program Files\PostgreSQL\8.2\bin
@@ -1145,27 +1129,27 @@ cd ..\lib
 lib /def:libpq.def /machine:x86
 \end{verbatim}
 
-You'll need an sed for that to work in your path (e.g. from cygwin or msys).
+Sarà necessario un sed per farlo lavorare nel proprio percorso (ad es. da cygwin o msys).
 
-That's almost it. You only need to the include and lib path to INCLUDE and LIB in vcvars.bat respectively.
+Questo è più o meno tutto. E' solo necessario includere i percorsi include e lib verso INCLUDE e LIB in vcvars.bat rispettivamente.
 
 \subsubsection{Qt}
-Build Qt following the instructions here:
+Compilare Qt seguendo le istruzioni qui:
 
 \url{http://wiki.qgis.org/qgiswiki/Building\_QT\_4\_with\_Visual\_C\%2B\%2B\_2005}
 
 \subsubsection{Proj.4}
-Get proj.4 source from here:
+Ottenere il sorgente proj.4 da qui:
 
 \url{http://proj.maptools.org/}
 
-Using the Visual Studio command prompt (ensures the environment is setup properly), run the following in the src directory:
+Usare il command prompt di Visual Studio (assicurarsi che l'ambiente sia impostato correttamente), lanciare il seguente nella directory src:
 
 \begin{verbatim}
 nmake -f makefile.vc
 \end{verbatim}
 
-Install by running the following in the top level directory setting PROJ\_DIR as appropriate:
+Istallare lanciando il seguente nella directory di più alto livello impostando PROJ\_DIR come appropriato:
 
 \begin{verbatim}
 set PROJ_DIR=c:\lib\proj
@@ -1180,32 +1164,31 @@ copy src\*.h %PROJ_DIR%\include
 copy src\*.lib %PROJ_DIR%\lib 
 \end{verbatim}
 
-This can also be added to a batch file.
+Questo può anche essere aggiunto ad un file batch.
 
 \subsubsection{GSL}
-Get gsl source from here:
+Ottenere il sorgente gsl source da qui:
 
 \url{http://david.geldreich.free.fr/downloads/gsl-1.9-windows-sources.zip}
 
-Build using the gsl.sln file
+Compilare usando il file gsl.sln
 
 \subsubsection{GEOS}
-Get geos from svn (svn checkout \htmladdnormallink{http://svn.refractions.net/geos/trunk}{http://svn.refractions.net/geos/trunk} geos).
-Edit geos$\backslash$source$\backslash$makefile.vc as follows:
+Ottenere geos from svn (svn checkout \htmladdnormallink{http://svn.refractions.net/geos/trunk}{http://svn.refractions.net/geos/trunk} geos).
+Modificare geos$\backslash$source$\backslash$makefile.vc come segue:
 
-Uncomment lines 333 and 334 to allow the copying of version.h.vc to version.h.
+Decommentare le linee 333 e 334 per consentire la copiatura di version.h.vc in version.h.
+Decommentare le linee 338 e 339.
 
-Uncomment lines 338 and 339.
+Renominare geos\_c.h.vc a geos\_c.h.in nelle linee 338 e 339 per consentire la copiatura geos\_c.h.in in geos\_c.h.
 
-Rename geos\_c.h.vc to geos\_c.h.in on lines 338 and 339 to allow the copying of geos\_c.h.in to geos\_c.h.
-
-Using the Visual Studio command prompt (ensures the environment is setup properly), run the following in the top level directory:
+Usando il command prompt di Visual Studio (assicurarsi che l'ambiente sia impostato correttamente), lanciare il seguente nella directory di livello più alto:
 
 \begin{verbatim}
 nmake -f makefile.vc 
 \end{verbatim}
 
-Run the following in top level directory, setting GEOS\_DIR as appropriate:
+Lanciare il seguente nella directory di livello più alto, impostando GEOS\_DIR come appropriato:
 
 \begin{verbatim}
 set GEOS_DIR="c:\lib\geos"
@@ -1220,7 +1203,7 @@ copy /Y source\*.lib %GEOS_DIR%\lib
 copy /Y source\*.dll %GEOS_DIR%\bin
 \end{verbatim}
 
-This can also be added to a batch file.
+Questo può anche essere aggiunto in un file batch.
 
 \subsubsection{GDAL}
 Get gdal from svn (svn checkout \htmladdnormallink{https://svn.osgeo.org/gdal/branches/1.4/gdal}{https://svn.osgeo.org/gdal/branches/1.4/gdal} gdal).
