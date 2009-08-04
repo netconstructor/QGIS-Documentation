@@ -1,143 +1,297 @@
-% vim: set textwidth=78 autoindent:
-
-\section{Installation Guide}\label{label_install}
+\section{Guide d'installation}\label{label_install}
 
 % when the revision of a section has been finalized,
 % comment out the following line:
 % \updatedisclaimer
+%
+%The following chapters provide build and installation information for QGIS
+%Version \CURRENT. This document corresponds almost to a \LaTeX~ conversion of
+%the INSTALL.t2t file coming with the QGIS sources from December, 16th 2008.
+%
+%A current version is also available at the wiki, see:
+%\htmladdnormallink{http://wiki.qgis.org/qgiswiki/BuildingFromSource}{
+%http://wiki.qgis.org/qgiswiki/BuildingFromSource}
 
-The following chapters provide build and installation information for QGIS
-Version \CURRENT. This document corresponds almost to a \LaTeX~ conversion of
-the INSTALL.t2t file coming with the QGIS sources from December, 16th 2008.
+Ce chapitre comporte les informations n\'ecessaires \`a la compilation et \`a
+l'installation de QGIS \CURRENT. Ce document est une conversion \LaTeX~ du
+fichier INSTALL.t2t embarqu\'e dans les sources de QGIS depuis le 16 d\'ecembre
+2008.
 
-A current version is also available at the wiki, see:
-\htmladdnormallink{http://wiki.qgis.org/qgiswiki/BuildingFromSource}{http://wiki.qgis.org/qgiswiki/BuildingFromSource}
+Une version est maintenue continuellement sur le wiki :
+\htmladdnormallink{http://wiki.qgis.org/qgiswiki/BuildingFromSource}{
+http://wiki.qgis.org/qgiswiki/BuildingFromSource}
+
+%\subsection{General Build Notes}
+%At version 0.8.1 QGIS no longer uses the autotools for building. QGIS, like a
+%number of major projects (eg. KDE 4.0), now uses cmake
+(\htmladdnormallink{http://www.cmake.org}{http://www.cmake.org})
+%for building from source. The configure script in this directory simply checks
+%for the existence of cmake and provides some clues to build QGIS.
+%
+%For complete information, see the wiki at:
+%  
+% \htmladdnormallink{http://wiki.qgis.org/qgiswiki/Building\_with\_CMake}{
+% http://wiki.qgis.org/qgiswiki/Building\_with\_CMake}
 
 \subsection{General Build Notes}
-At version 0.8.1 QGIS no longer uses the autotools for building. QGIS, like a
-number of major projects (eg. KDE 4.0), now uses cmake (\htmladdnormallink{http://www.cmake.org}{http://www.cmake.org})
-for building from source. The configure script in this directory simply checks
-for the existence of cmake and provides some clues to build QGIS.
+Depuis la version 0.8.1, QGIS n'utilise plus les autotools pour la compilation
+mais le logiciel cmake
+(\htmladdnormallink{http://www.cmake.org}{http://www.cmake.org}). Le script de
+configuration v\'erifie seulement la pr\'esence de cmake.
 
-For complete information, see the wiki at:
-   \htmladdnormallink{http://wiki.qgis.org/qgiswiki/Building\_with\_CMake}{http://wiki.qgis.org/qgiswiki/Building\_with\_CMake}
+Pour plus d'informations :
+  
+\htmladdnormallink{http://wiki.qgis.org/qgiswiki/Building\_with\_CMake}{
+http://wiki.qgis.org/qgiswiki/Building\_with\_CMake}
 
-\subsection{An overview of the dependencies required for building}
+%\subsection{An overview of the dependencies required for building}
+%
+%\textbf{Required build deps}:
+%
+%\begin{itemize}
+%\item CMake $>$= 2.4.3
+%\item Flex, Bison
+%\end{itemize}
+%
+%\textbf{Required runtime deps}:
+%
+%\begin{itemize}
+%\item Qt $>$= 4.3.0
+%\item Proj $>$= ? (known to work with 4.4.x)
+%\item GEOS $>$= 2.2 (3.0 is supported, maybe 2.1.x works too)
+%\item Sqlite3 $>$= ? (probably 3.0.0)
+%\item GDAL/OGR $>$= 1.4.x
+%\end{itemize}
 
-\textbf{Required build deps}:
+\subsection{Un aper\c{c}u des d\'ependances requises}
+
+\textbf{D\'ependances requises pour la compilation}:
 
 \begin{itemize}
 \item CMake $>$= 2.4.3
 \item Flex, Bison
 \end{itemize}
 
-\textbf{Required runtime deps}:
+\textbf{D\'ependances requises pour l'ex\'ecution}:
 
 \begin{itemize}
 \item Qt $>$= 4.3.0
-\item Proj $>$= ? (known to work with 4.4.x)
-\item GEOS $>$= 2.2 (3.0 is supported, maybe 2.1.x works too)
-\item Sqlite3 $>$= ? (probably 3.0.0)
+\item Proj $>$= ? (fonctionne avec la 4.4.x)
+\item GEOS $>$= 2.2 (3.0 est support\'e, la 2.1.x marche peut-etre)
+\item Sqlite3 $>$= ? (probablement 3.0.0)
 \item GDAL/OGR $>$= 1.4.x
 \end{itemize}
 
-\textbf{Optional dependencies}:
+%\textbf{Optional dependencies}:
+%
+%\begin{itemize}
+%\item for GRASS plugin - GRASS $>$= 6.0.0
+%\item for georeferencer - GSL $>$= ? (works with 1.8)
+%\item for postgis support and SPIT plugin - PostgreSQL $>$= 8.0.x
+%\item for gps plugin - expat $>$= ? (1.95 is OK)
+%\item for mapserver export and PyQGIS - Python $>$= 2.3 (2.5+ preferred)
+%\item for PyQGIS - SIP $>$= 4.5, PyQt $>$= must match Qt version
+%\end{itemize}
+%
+%\textbf{Recommended runtime deps}:
+%
+%\begin{itemize}
+%\item for gps plugin - gpsbabel
+%\end{itemize}
+
+\textbf{D\'ependances optionnelles}:
 
 \begin{itemize}
-\item for GRASS plugin - GRASS $>$= 6.0.0
-\item for georeferencer - GSL $>$= ? (works with 1.8)
-\item for postgis support and SPIT plugin - PostgreSQL $>$= 8.0.x
-\item for gps plugin - expat $>$= ? (1.95 is OK)
-\item for mapserver export and PyQGIS - Python $>$= 2.3 (2.5+ preferred)
-\item for PyQGIS - SIP $>$= 4.5, PyQt $>$= must match Qt version
+\item pour l'extension GRASS plugin - GRASS $>$= 6.0.0
+\item pour le g\'eoreferencement - GSL $>$= ? (marche avec la 1.8)
+\item pour le support de PostGIS et de l'extension SPIT - PostgreSQL $>$= 8.0.x
+\item pour l'extension GPS - expat $>$= ? (1.95 is OK)
+\item pour l'exportation vers mapserver PyQGIS - Python $>$= 2.3 (2.5+
+preferred)
+\item pour PyQGIS - SIP $>$= 4.5, PyQt $>$= doit s'accorder avec la version de
+Qt
 \end{itemize}
 
-\textbf{Recommended runtime deps}:
+\textbf{D\'ependances recommand\'ees}:
 
 \begin{itemize}
-\item for gps plugin - gpsbabel
+\item pour l'extension GPS - gpsbabel
 \end{itemize}
 
-\section{Building under windows using msys}\label{sec:install_windows}
-\textbf{Note:} For a detailed account of building all the dependencies yourself you 
-can visit Marco Pasetti's website here:
+%\section{Building under windows using msys}\label{sec:install_windows}
+%\textbf{Note:} For a detailed account of building all the dependencies yourself
+% you 
+%can visit Marco Pasetti's website here:
+%
+%\htmladdnormallink{
+% http://www.webalice.it/marco.pasetti/qgis+grass/BuildFromSource.html}{
+% http://www.webalice.it/marco.pasetti/qgis+grass/BuildFromSource.html}
+%
+%Read on to use the simplified approach with pre-built libraries...
+%
+%\subsection{MSYS:}
+%MSYS provides a unix style build environment under windows. We have created a
+%zip archive that contains just about all dependencies.
+%
+%Get this: 
+%
+%\htmladdnormallink{http://download.osgeo.org/qgis/win32/msys.zip}{
+% http://download.osgeo.org/qgis/win32/msys.zip}
+%
+%and unpack to c:$\backslash$msys
+%
+%If you wish to prepare your msys environment yourself rather than using 
+%our pre-made one, detailed instructions are provided elsewhere in this
+%document.
 
-\htmladdnormallink{http://www.webalice.it/marco.pasetti/qgis+grass/BuildFromSource.html}{http://www.webalice.it/marco.pasetti/qgis+grass/BuildFromSource.html}
+\section{Compiler sous Windows avec msys}\label{sec:install_windows}
+\textbf{Note:} Pour conna\^itre dans le d\'etail la mani\`ere de compiler vous-m\^eme
+les d\'ependances, vous pouvez visiter le site de Marco Pasetti :
 
-Read on to use the simplified approach with pre-built libraries...
+\htmladdnormallink{
+http://www.webalice.it/marco.pasetti/qgis+grass/BuildFromSource.html}{
+http://www.webalice.it/marco.pasetti/qgis+grass/BuildFromSource.html}
 
 \subsection{MSYS:}
-MSYS provides a unix style build environment under windows. We have created a
-zip archive that contains just about all dependencies.
+MSYS fournit un environment de compilation similaire \`a celui d'unix mais sous
+Windows. Nous avons cr\'e\'e une archive zip contenant toutes les d\'ependances, \`a
+t\'el\'echarger ici : 
 
-Get this: 
+\htmladdnormallink{http://download.osgeo.org/qgis/win32/msys.zip}{
+http://download.osgeo.org/qgis/win32/msys.zip}
 
-\htmladdnormallink{http://download.osgeo.org/qgis/win32/msys.zip}{http://download.osgeo.org/qgis/win32/msys.zip}
+et \`a extraire vers c:$\backslash$msys
 
-and unpack to c:$\backslash$msys
+Si vous voulez configurer votre envirnement msys vous-m\^eme, de plus amples
+instructions sont disponibles dans ce document.
 
-If you wish to prepare your msys environment yourself rather than using 
-our pre-made one, detailed instructions are provided elsewhere in this
-document.
+%\subsection{Qt4.3}
+%Download qt4.3 opensource precompiled edition exe and install (including the
+%download and install of mingw) from here:
+%
+%\htmladdnormallink{http://www.trolltech.com/developer/downloads/qt/windows}{
+% http://www.trolltech.com/developer/downloads/qt/windows}
+%
+%When the installer will ask for MinGW, you don't need to download and install
+%it, just point the installer to c:$\backslash$msys$\backslash$mingw
+%
+%When Qt installation is complete:
+%
+%Edit C:$\backslash$Qt$\backslash$4.3.0$\backslash$bin$\backslash$qtvars.bat and
+% add the following lines:
 
 \subsection{Qt4.3}
-Download qt4.3 opensource precompiled edition exe and install (including the
-download and install of mingw) from here:
+T\'el\'echargez l'\'edition open source de Qt 4.3 (incluant mingw) \`a cette adresse : 
 
-\htmladdnormallink{http://www.trolltech.com/developer/downloads/qt/windows}{http://www.trolltech.com/developer/downloads/qt/windows}
+\htmladdnormallink{http://www.trolltech.com/developer/downloads/qt/windows}{
+http://www.trolltech.com/developer/downloads/qt/windows}
 
-When the installer will ask for MinGW, you don't need to download and install
-it, just point the installer to c:$\backslash$msys$\backslash$mingw
+Quand l'installateur vous demande MinGW, vous n'avez pas besoin de le
+t\'el\'echarger et de l'installer, mais juste de pointer vers le r\'epertoire
+c:$\backslash$msys$\backslash$mingw
 
-When Qt installation is complete:
+Quand l'installation de Qt est termin\'ee :
 
-Edit C:$\backslash$Qt$\backslash$4.3.0$\backslash$bin$\backslash$qtvars.bat and add the following lines:
+\'Editez C:$\backslash$Qt$\backslash$4.3.0$\backslash$bin$\backslash$qtvars.bat et
+rajoutez les lignes suivantes:
+
+%\begin{verbatim}
+%set PATH=%PATH%;C:\msys\local\bin;c:\msys\local\lib 
+%set PATH=%PATH%;"C:\Program Files\Subversion\bin" 
+%\end{verbatim}
+%
+%I suggest you also add
+% C:$\backslash$Qt$\backslash$4.3.0$\backslash$bin$\backslash$ to your
+% Environment
+% %Variables Path in the windows system preferences.
+% %If you plan to do some debugging, you'll need to compile debug version of Qt:
+% %C:$\backslash$Qt$\backslash$4.3.0$\backslash$bin$\backslash$qtvars.bat
+% compile\_debug
+% %
+% %\textbf{Note:} there is a problem when compiling debug version of Qt 4.3, the
+% script ends with
+%this message  "mingw32-make: *** No rule to make target `debug'.  Stop.". To 
+%compile the debug version you have to go out of src directory and execute the
+%following command:
+%
+%\begin{verbatim}
+%c:\Qt\4.3.0 make 
+%\end{verbatim}
 
 \begin{verbatim}
 set PATH=%PATH%;C:\msys\local\bin;c:\msys\local\lib 
 set PATH=%PATH%;"C:\Program Files\Subversion\bin" 
 \end{verbatim}
 
-I suggest you also add C:$\backslash$Qt$\backslash$4.3.0$\backslash$bin$\backslash$ to your Environment Variables Path in
-the windows system preferences.
+Je vous sug\`ere \'egalement d'ajouter
+C:$\backslash$Qt$\backslash$4.3.0$\backslash$bin$\backslash$ aux variables
+d'environnements de votre syst\`eme.
 
-If you plan to do some debugging, you'll need to compile debug version of Qt:
-C:$\backslash$Qt$\backslash$4.3.0$\backslash$bin$\backslash$qtvars.bat compile\_debug
+Si vous comptez faire du d\'ebuggage, vous devrez compiler une version debug de Qt
+:
+C:$\backslash$Qt$\backslash$4.3.0$\backslash$bin$\backslash$qtvars.bat
+compile\_debug
 
-\textbf{Note:} there is a problem when compiling debug version of Qt 4.3, the script ends with
-this message  "mingw32-make: *** No rule to make target `debug'.  Stop.". To 
-compile the debug version you have to go out of src directory and execute the
-following command:
+\textbf{Note:} il existe un probl\`eme lors de la compilation d'une version debug
+de Qt 4.3, le script se finit avec le message 'minggw32-make: *** No rule to make target `debug'. Stop.".
+Pour r\'eussir la compilation, vous devez allez dans le r\'epertoire src et lancez la commande suivante :
 
 \begin{verbatim}
 c:\Qt\4.3.0 make 
 \end{verbatim}
 
-\subsection{Flex and Bison}
-\textbf{Note:} I think this section can be removed as it should be installed int the msys image already.
+% \subsection{Python stuff: (optional)}
+% Follow this section in case you would like to use Python bindings for QGIS.  To
+% be able to compile bindings, you need to compile SIP and PyQt4 from sources as
+% their installer doesn't include some development files which are necessary.
 
-Get Flex
+ \subsection{Python : (optionnel)}
 
-\url{http://sourceforge.net/project/showfiles.php?group\_id=23617&package\_id=16424} (the zip bin) and extract it into c:$\backslash$msys$\backslash$mingw$\backslash$bin
+%\subsubsection{Download and install Python - use Windows installer}
+%(It doesn't matter to what folder you'll install it)
+%
+%\htmladdnormallink{http://python.org/download/}{http://python.org/download/}
+%
+%\subsubsection{Download SIP and PyQt4 sources}
+%\url{http://www.riverbankcomputing.com/software/sip/download} \\
+%\url{http://www.riverbankcomputing.com/software/pyqt/download}
+%
+%Extract each of the above zip files in a temporary directory. Make sure
+%to get versions that match your current Qt installed version.
 
-\subsection{Python stuff: (optional)}
-Follow this section in case you would like to use Python bindings for QGIS.  To
-be able to compile bindings, you need to compile SIP and PyQt4 from sources as
-their installer doesn't include some development files which are necessary.
-
-\subsubsection{Download and install Python - use Windows installer}
-(It doesn't matter to what folder you'll install it)
+\subsubsection{T\'el\'echarger et installer Python - utilisation de l'installateur sous Windows}
+(le r\'epertoire d'installation n'a aucune importance)
 
 \htmladdnormallink{http://python.org/download/}{http://python.org/download/}
 
-\subsubsection{Download SIP and PyQt4 sources}
+\subsubsection{T\'el\'echarger SIP et les sources de PyQt4}
 \url{http://www.riverbankcomputing.com/software/sip/download} \\
 \url{http://www.riverbankcomputing.com/software/pyqt/download}
 
-Extract each of the above zip files in a temporary directory. Make sure
-to get versions that match your current Qt installed version.
+Il faut extraire chacune des archives zip dans un r\'epertoire temporaire. Assurez-vous d'avoir des versions qui correspondent bien \`a votre version de Qt.
 
-\subsubsection{Compile SIP}
+%\subsubsection{Compile SIP}
+%\begin{verbatim}
+%c:\Qt\4.3.0\bin\qtvars.bat 
+%python configure.py -p win32-g++ 
+%make 
+%make install 
+%\end{verbatim}
+%
+%\subsubsection{Compile PyQt}
+%\begin{verbatim}
+%c:\Qt\4.3.0\bin\qtvars.bat 
+%python configure.py 
+%make 
+%make install 
+%\end{verbatim}
+%
+%\subsubsection{Final python notes}
+%
+%\textbf{Note:} You can delete the directories with unpacked SIP and PyQt4 sources after a
+%successfull install, they're not needed anymore.
+
+\subsubsection{Compiler SIP}
 \begin{verbatim}
 c:\Qt\4.3.0\bin\qtvars.bat 
 python configure.py -p win32-g++ 
@@ -145,7 +299,7 @@ make
 make install 
 \end{verbatim}
 
-\subsubsection{Compile PyQt}
+\subsubsection{Compiler PyQt}
 \begin{verbatim}
 c:\Qt\4.3.0\bin\qtvars.bat 
 python configure.py 
@@ -153,56 +307,54 @@ make
 make install 
 \end{verbatim}
 
-\subsubsection{Final python notes}
+\subsubsection{Notes finales pour Python}
 
-\textbf{Note:} You can delete the directories with unpacked SIP and PyQt4 sources after a
-successfull install, they're not needed anymore.
+\textbf{Note :} Vous pouvez effacer les r\'epertoires contenants les fichiers d\'esarchiv\'es de SIP et PyQt4 apr\`es l'installation, ils ne sont plus n\'ecessaires.
 
-\subsection{Subversion:}
-In order to check out QGIS sources from the repository, you need Subversion
-client. This installer should work fine:
+\subsection{Subversion :}
+De mani\`ere \`a obtenir les sources depuis le r\'epertoire svn de QGIS, vous avez besoin de Subversion :
 
-\htmladdnormallink{http://subversion.tigris.org/files/documents/15/36797/svn-1.4.3-setup.exe}{http://subversion.tigris.org/files/documents/15/36797/svn-1.4.3-setup.exe}
+\htmladdnormallink{
+http://subversion.tigris.org/files/documents/15/36797/svn-1.4.3-setup.exe}{
+http://subversion.tigris.org/files/documents/15/36797/svn-1.4.3-setup.exe}
 
-\subsection{CMake:}
-CMake is build system used by Quantum GIS. Download it from here:
+\subsection{CMake :}
+CMake est le syst\`eme de compilation de Quantum GIS. T\'el\'echargez le ici :
 
-\htmladdnormallink{http://www.cmake.org/files/v2.4/cmake-2.4.6-win32-x86.exe}{http://www.cmake.org/files/v2.4/cmake-2.4.6-win32-x86.exe}
+\htmladdnormallink{http://www.cmake.org/files/v2.4/cmake-2.4.6-win32-x86.exe}{
+http://www.cmake.org/files/v2.4/cmake-2.4.6-win32-x86.exe}
 
-\subsection{QGIS:}
-Start a cmd.exe window ( Start -$>$ Run -$>$ cmd.exe ) Create development 
-directory and move into it
+\subsection{QGIS :}
+Lancez une fen\^etre cmd.exe ( D\'emarrer -$>$ Ex\'ecuter -$>$ cmd.exe ). Cr\'eez un r\'epertoire de d\'eveloppement et d\'eplacez bous dedans :
 
 \begin{verbatim}
 md c:\dev\cpp 
 cd c:\dev\cpp 
 \end{verbatim}
 
-Check out sources from SVN For svn head:
+Obtenez les derni\`eres versions des sources avec svn:
 
 \begin{verbatim}
 svn co https://svn.osgeo.org/qgis/trunk/qgis 
 \end{verbatim}
-For svn 0.8 branch
+
+Pour la branche 1.0
 
 \begin{verbatim}
- svn co https://svn.osgeo.org/qgis/branches/Release-0_8_0 qgis0.8
+svn co https://svn.osgeo.org/qgis/branches/Version-1_0
 \end{verbatim}
 
-\subsection{Compiling:}
+\subsection{Compiler :}
 As a background read the generic building with CMake notes at the end of 
 this document.
 
-Start a cmd.exe window ( Start -$>$ Run -$>$ cmd.exe ) if you don't have one
-already.  Add paths to compiler and our MSYS environment:
+Lancez une fen\^etre cmd.exe ( D\'emarrer -$>$ Ex\'ecuter -$>$ cmd.exe ) si vous ne l'avez pas encore fait. Ajoutez les chemins vers le compilateur et l'environnement MSYS :
 
 \begin{verbatim}
 c:\Qt\4.3.0\bin\qtvars.bat 
 \end{verbatim}
 
-For ease of use add c:$\backslash$Qt$\backslash$4.3.0$\backslash$bin$\backslash$ to your system path in system
-properties so you can just type qtvars.bat when you open the cmd console.
-Create build directory and set it as current directory:
+Pour faciliter les choses, ajoutez aussi c:$\backslash$Qt$\backslash$4.3.0$\backslash$bin$\backslash$ pour que vous n'ayez qu'\`a taper qtvars.bat dans la console. Cr\'eez le r\'epertoire de compilation et \'etablissez-le en tant r\'epertoire courant :
 
 \begin{verbatim}
 cd c:\dev\cpp\qgis 
@@ -215,62 +367,102 @@ cd build
 cmakesetup ..  
 \end{verbatim}
 
-\textbf{Note:} You must include the '..' above.
+\textbf{Note:} Vous devez inclure les '..' marqu\'es ci-dessus.
 
-Click 'Configure' button.  When asked, you should choose 'MinGW Makefiles' as generator.
+Cliquez sur le bouton 'Configure'.  Quand demand\'e, vous devez choisir 'MinGW Makefiles' comme g\'en\'erateur.
 
-There's a problem with MinGW Makefiles on Win2K. If you're compiling on this platform, use 'MSYS Makefiles' generator instead.
+Sous Windows 2000, du fait d'un bug avec MinGW choisissez plut\^ot 'MSYS Makefiles'.
 
-All dependencies should be picked up automatically, if you have set up the Paths correctly. The only thing you need to change is the installation destination (CMAKE\_INSTALL\_PREFIX) and/or set 'Debug'.
+Toutes les d\'ependances devraient \^etre s\'electionn\'ees automatiquement si vous avez sp\'ecifi\'e les chemins correctement. La seule chose que vous ayez \`a changer est la destination de l'installation avec (CMAKE\_INSTALL\_PREFIX)et/ou 'Debug'.
 
-For compatibility with NSIS packaging cripts I recommend to leave the
-install prefix to its default c:$\backslash$program files$\backslash$
+Pour plus de compatibilit\'e avec les scripts NSIS, je vous recommande de laisser le pr\'efixe d'installation par d\'efaut  c:$\backslash$program files$\backslash$
 
-When configuration is done, click 'OK' to exit the setup utility.
+Quand la configuration est termin\'ee, cliquez sur OK pour quitter l'utilitaire d'installation.
 
-\subsection{Compilation and installation}
+\subsection{Compilation et installation}
 \begin{verbatim}
  make make install 
 \end{verbatim}
 
-\subsection{Run qgis.exe from the directory where it's installed (CMAKE\_INSTALL\_PREFIX)}
-Make sure to copy all .dll:s needed to the same directory as the qgis.exe
-binary is installed to, if not already done so, otherwise QGIS will complain
-about missing libraries when started.
+% \subsection{Run qgis.exe from the directory where it's installed
+% (CMAKE\_INSTALL\_PREFIX)}
+% Make sure to copy all .dll:s needed to the same directory as the qgis.exe
+% binary is installed to, if not already done so, otherwise QGIS will complain
+% about missing libraries when started.
+% 
+% The best way to do this is to download both the QGIS current release installer
+% package from
+% \htmladdnormallink{http://qgis.org/uploadfiles/testbuilds/}{
+% http://qgis.org/uploadfiles/testbuilds/} and install it. Now copy
+% the installation dir from C:$\backslash$Program Files$\backslash$Quantum GIS
+% into c:$\backslash$Program
+% Files$\backslash$qgis-0.8.1 (or whatever the current version is. The name should
+% strictly
+% match the version no.) After making this copy you can uninstall the release
+% version of QGIS from your c:$\backslash$Program Files directory using the
+% provided
+% uninstaller. Double check that the Quantum GIS dir is completely gone under
+% program files afterwards.
+% 
+% Another possibility is to run qgis.exe when your path contains
+% c:$\backslash$msys$\backslash$local$\backslash$bin and
+% c:$\backslash$msys$\backslash$local$\backslash$lib directories, so the DLLs will
+% be
+% used from that place.
 
-The best way to do this is to download both the QGIS current release installer
-package from \htmladdnormallink{http://qgis.org/uploadfiles/testbuilds/}{http://qgis.org/uploadfiles/testbuilds/} and install it. Now copy
-the installation dir from C:$\backslash$Program Files$\backslash$Quantum GIS into c:$\backslash$Program
-Files$\backslash$qgis-0.8.1 (or whatever the current version is. The name should strictly
-match the version no.) After making this copy you can uninstall the release
-version of QGIS from your c:$\backslash$Program Files directory using the provided
-uninstaller. Double check that the Quantum GIS dir is completely gone under
-program files afterwards.
+\subsection{Lancez qgis.exe depuis son r\'epertoire d'installation (CMAKE\_INSTALL\_PREFIX)}
+Copiez toutes les .dll:s n\'ecessaire dans le m\^eme r\'epertoire que l'ex\'ecutable de qgis ou QGIS signalera des biblioth\`eques absentes lors de son lancement.
 
-Another possibility is to run qgis.exe when your path contains
-c:$\backslash$msys$\backslash$local$\backslash$bin and c:$\backslash$msys$\backslash$local$\backslash$lib directories, so the DLLs will be
-used from that place.
+La meilleure fa\c{c}on de proc\'eder est de t\'el\'echarger l'installateur de QGIS depuis \htmladdnormallink{http://qgis.org/uploadfiles/testbuilds/}{http://qgis.org/uploadfiles/testbuilds/} et de l'installer. Maintenant, copiez le r\'epertoire d'installation C:$\backslash$Program Files$\backslash$Quantum GIS
+vers c:$\backslash$Program Files$\backslash$qgis-0.8.1 (ou tout autre num\'ero de version. Le nom doit \^etre strictement identique au num\'ero de version.). Une fois que cela est fait, vous pouvez d\'esinstaller la version t\'el\'echarg\'ee. V\'erifiez que le r\'epertoire correspondant n'appara\^it plus dans c:$\backslash$Program Files 
 
-\subsection{Create the installation package: (optional)}
-Downlad and install NSIS from (\htmladdnormallink{http://nsis.sourceforge.net/Main\_Page}{http://nsis.sourceforge.net/Main\_Page})
+Une autre possibilit\'e est de lancer qgis.exe quand vos chemins comportent les r\'epertoires c:$\backslash$msys$\backslash$local$\backslash$bin et c:$\backslash$msys$\backslash$local$\backslash$lib, auquel cas les DLLs seront utilis\'ees depuis ces emplacements.
 
-Now using windows explorer, enter the win\_build directory in your QGIS source
-tree. Read the READMEfile there and follow the instructions. Next right click
-on qgis.nsi and choose the option 'Compile NSIS Script'. 
+% \subsection{Create the installation package: (optional)}
+% Downlad and install NSIS from
+% (\htmladdnormallink{http://nsis.sourceforge.net/Main\_Page}{
+% http://nsis.sourceforge.net/Main\_Page})
+% 
+% Now using windows explorer, enter the win\_build directory in your QGIS source
+% tree. Read the READMEfile there and follow the instructions. Next right click
+% on qgis.nsi and choose the option 'Compile NSIS Script'. 
 
+\subsection{Cr\'eation du fichier d'installation : (optionnel)}
+T\'el\'echargez et installez NSIS depuis (\htmladdnormallink{http://nsis.sourceforge.net/Main\_Page}{http://nsis.sourceforge.net/Main\_Page})
 
-\section{Building on Mac OSX using frameworks and cmake (QGIS $>$ 0.8)}\label{sec:install_macosx}
-In this approach I will try to avoid as much as possible building dependencies
-from source and rather use frameworks wherever possible.
+En passant par l'explorateur de fichier, entrez dans le r\'epertoire win\_build se situant dans l'arborescence des sources de QGIS. Lisez le fichier README  et suivez les instructions. Ensuite, faites un clic droit sur qgis.nsi et s\'electionnez l'option 'Compile NSIS Script'. 
 
-Included are a few notes for building on Mac OS X 10.5 (\underline{Leopard}).
+% \section{Building on Mac OSX using frameworks and cmake (QGIS $>$
+% 0.8)}\label{sec:install_macosx}
+% In this approach I will try to avoid as much as possible building dependencies
+% from source and rather use frameworks wherever possible.
+% 
+% Included are a few notes for building on Mac OS X 10.5 (\underline{Leopard}).
 
-\subsection{Install XCODE}
-I recommend to get the latest xcode dmg from the Apple XDC Web site. Install
-XCODE after the \~{}941mb download is complete.
+\section{Compilation sous Mac OSX en utilisant XCODE et cmake (QGIS $>$
+0.8)}\label{sec:install_macosx}
 
-\textbf{Note:} It may be that you need to create some symlinks after installing 
-the XCODE SDK (in particular if you are using XCODE 2.5 on tiger):
+Avec cette approche, nous allons essayer d'\'eviter de construire les d\'ependances depuis les sources, mais plut\^ot utiliser ce qui est d\'ej\`a disponible.
+
+Quelques notes pour compiler sous Mac OS X 10.5 (\underline{Leopard}) sont \'egalement disponibles.
+
+% \subsection{Install XCODE}
+% I recommend to get the latest xcode dmg from the Apple XDC Web site. Install
+% XCODE after the \~{}941mb download is complete.
+% 
+% \textbf{Note:} It may be that you need to create some symlinks after installing 
+% the XCODE SDK (in particular if you are using XCODE 2.5 on tiger):
+% 
+% \begin{verbatim}
+% cd /Developer/SDKs/MacOSX10.4u.sdk/usr/
+% sudo mv local/ local_
+% sudo ln -s /usr/local/ local
+% \end{verbatim}
+
+\subsection{Installer XCODE}
+Je vous recommande d'obtenir la derni\`ere version de xcode depuis le site Apple XDC.
+
+\textbf{Note:} Il sera peut \^etre n\'ecessaire de cr\'eer des liens symboliques apr\`es l'installation (surtout si vous utilisez xcode 2.5 sur Tiger):
 
 \begin{verbatim}
 cd /Developer/SDKs/MacOSX10.4u.sdk/usr/
@@ -278,35 +470,70 @@ sudo mv local/ local_
 sudo ln -s /usr/local/ local
 \end{verbatim}
 
-\subsection{Install Qt4 from .dmg}
-You need a minimum of Qt4.3.0. I suggest getting the latest (at time of writing).
+% \subsection{Install Qt4 from .dmg}
+% You need a minimum of Qt4.3.0. I suggest getting the latest (at time of
+% writing).
+% 
+% \begin{verbatim}
+% ftp://ftp.trolltech.com/qt/source/qt-mac-opensource-4.3.2.dmg
+% \end{verbatim}
+% 
+% If you want debug libs, Qt also provide a dmg with these:
+% 
+% \begin{verbatim}
+% ftp://ftp.trolltech.com/qt/source/qt-mac-opensource-4.3.2-debug-libs.dmg
+% \end{verbatim}
+% 
+% I am going to proceed using only release libs at this stage as the download for
+% the debug dmg is substantially bigger. If you plan to do any debugging though
+% you probably want to get the debug libs dmg. Once downloaded open the dmg and
+% run the installer. 
+
+\subsection{Installer Qt4 depuis un .dmg}
+Vous aurez besoin d'une version au moins \'egale \`a Qt4.3.0 bien que je vous sugg\`ere de prendre la derni\`ere version en date.
 
 \begin{verbatim}
 ftp://ftp.trolltech.com/qt/source/qt-mac-opensource-4.3.2.dmg
 \end{verbatim}
 
-If you want debug libs, Qt also provide a dmg with these:
+Si vous voulez les biblioth\`eques de d\'ebogage, Qt fournit aussi un .dmg les contenant:
 
 \begin{verbatim}
 ftp://ftp.trolltech.com/qt/source/qt-mac-opensource-4.3.2-debug-libs.dmg
 \end{verbatim}
 
-I am going to proceed using only release libs at this stage as the download for
-the debug dmg is substantially bigger. If you plan to do any debugging though
-you probably want to get the debug libs dmg. Once downloaded open the dmg and run the installer. 
+Une fois le t\'el\'echargement effectu\'e, lancez l'installateur.
 
-\textbf{Note:} you need admin access to install.
+% \textbf{Note:} you need admin access to install.
+% 
+% After installing you need to make two small changes:
+% 
+% First edit \texttt{/Library/Frameworks/QtCore.framework/Headers/qconfig.h} and
+% change 
+% 
+% \textbf{Note:} this doesnt seem to be needed since version 4.2.3
+% 
+% \texttt{QT\_EDITION\_Unknown} to \texttt{QT\_EDITION\_OPENSOURCE}
+% 
+% Second change the default mkspec symlink so that it points to macx-g++:
+% 
+% \begin{verbatim}
+% cd /usr/local/Qt4.3/mkspecs/ 
+% sudo rm default 
+% sudo ln -sf macx-g++ default
+% \end{verbatim}
 
-After installing you need to make two small changes:
+\textbf{Note:} vous avec besoin des acc\`es administrateurs pour l'installation.
 
-First edit \texttt{/Library/Frameworks/QtCore.framework/Headers/qconfig.h} and
-change 
+Apr\`es installation, vous devez faire deux modifications minimes:
 
-\textbf{Note:} this doesnt seem to be needed since version 4.2.3
+Ouvrez \texttt{/Library/Frameworks/QtCore.framework/Headers/qconfig.h} et changez
 
-\texttt{QT\_EDITION\_Unknown} to \texttt{QT\_EDITION\_OPENSOURCE}
+\textbf{Note:} cela ne semble plus n\'ecessaire depuis la version 4.2.3
 
-Second change the default mkspec symlink so that it points to macx-g++:
+\texttt{QT\_EDITION\_Unknown} pour \texttt{QT\_EDITION\_OPENSOURCE}
+
+Le second changement porte sur le lien symbolique de mkspec pour qu'il pointe sur macx-g++:
 
 \begin{verbatim}
 cd /usr/local/Qt4.3/mkspecs/ 
@@ -314,34 +541,67 @@ sudo rm default
 sudo ln -sf macx-g++ default
 \end{verbatim}
 
-\subsection{Install development frameworks for QGIS dependencies}
-Download William Kyngesburye's excellent all in one framework that includes
-proj, gdal, sqlite3 etc
+% \subsection{Install development frameworks for QGIS dependencies}
+% Download William Kyngesburye's excellent all in one framework that includes
+% proj, gdal, sqlite3 etc
+% 
+% \begin{verbatim}
+% http://www.kyngchaos.com/wiki/software:frameworks
+% \end{verbatim}
+% 
+% Once downloaded, open and install the frameworks.
+% 
+% William provides an additional installer package for Postgresql/PostGIS. Its
+% available here:
+% 
+% \begin{verbatim}
+% http://www.kyngchaos.com/wiki/software:postgres 
+% \end{verbatim}
+% 
+% There are some additional dependencies that at the time of writing are not
+% provided as frameworks so we will need to build these from source.
+
+\subsection{Installer l'environnement de d\'eveloppement pour les d\'ependances de QGIS}
+T\'el\'echargez et installez l'excellent environnement de William Kyngesburyequi inclut proj, gdal, sqlite3 etc
 
 \begin{verbatim}
 http://www.kyngchaos.com/wiki/software:frameworks
 \end{verbatim}
 
-Once downloaded, open and install the frameworks.
-
-William provides an additional installer package for Postgresql/PostGIS. Its
-available here:
+William fournit un autre installateur pour Postgresql/PostGIS. Il est disponible ici:
 
 \begin{verbatim}
 http://www.kyngchaos.com/wiki/software:postgres 
 \end{verbatim}
 
-There are some additional dependencies that at the time of writing are not
-provided as frameworks so we will need to build these from source.
+Il y a d'autres d\'ependances qui ne sont pas incluses (au moment o\`u le manuel a \'et\'e \'ecrit) et que nous devrons compiler depuis les sources.
 
-\subsubsection{Additional Dependencies : GSL}
-Retrieve the Gnu Scientific Library from
+% \subsubsection{Additional Dependencies : GSL}
+% Retrieve the Gnu Scientific Library from
+% 
+% \begin{verbatim}
+% curl -O ftp://ftp.gnu.org/gnu/gsl/gsl-1.8.tar.gz 
+% \end{verbatim}
+% 
+% Then extract it and build it to a prefix of /usr/local:
+% 
+% \begin{verbatim}
+% tar xvfz gsl-1.8.tar.gz 
+% cd gsl-1.8 
+% ./configure --prefix=/usr/local 
+% make
+% sudo make install
+% cd ..  
+% \end{verbatim}
+
+\subsubsection{D\'ependances suppl\'ementaires : GSL}
+T\'el\'echargez la Biblioth\`eque Scinetifique Gnu (Gnu Scientific Library)
 
 \begin{verbatim}
 curl -O ftp://ftp.gnu.org/gnu/gsl/gsl-1.8.tar.gz 
 \end{verbatim}
 
-Then extract it and build it to a prefix of /usr/local:
+Puis extrayez l\`a et faites la compilation vers un pr\'efixe de /usr/local:
 
 \begin{verbatim}
 tar xvfz gsl-1.8.tar.gz 
@@ -352,8 +612,24 @@ sudo make install
 cd ..  
 \end{verbatim}
 
-\subsubsection{Additional Dependencies : Expat}
-Get the expat sources:
+% \subsubsection{Additional Dependencies : Expat}
+% Get the expat sources:
+% 
+% \begin{verbatim}
+% http://sourceforge.net/project/showfiles.php?group_id=10127 
+% \end{verbatim}
+% 
+% \begin{verbatim}
+% tar xvfz expat-2.0.0.tar.gz 
+% cd expat-2.0.0 
+% ./configure --prefix=/usr/local
+% make 
+% sudo make install 
+% cd ..  
+% \end{verbatim}
+
+\subsubsection{D\'ependances suppl\'ementaires : Expat}
+Obtenez les sources d'expat:
 
 \begin{verbatim}
 http://sourceforge.net/project/showfiles.php?group_id=10127 
@@ -368,20 +644,56 @@ sudo make install
 cd ..  
 \end{verbatim}
 
-\subsubsection{Additional Dependencies : SIP}
-Make sure you have the latest Python fom 
+% \subsubsection{Additional Dependencies : SIP}
+% Make sure you have the latest Python fom 
+% 
+% \begin{verbatim}
+% http://www.python.org/download/mac/
+% \end{verbatim}
+% 
+% \underline{Leopard note:} Leopard includes a usable Python 2.5.  Though you can
+% install Python from python.org if preferred.
+% 
+% Retrieve the python bindings toolkit SIP from
+% 
+% \url{http://www.riverbankcomputing.com/software/sip/download}
+% 
+% Then extract and build it (this installs by default into the Python framework):
+% 
+% \begin{verbatim}
+% tar xvfz sip-<version number>.tar.gz 
+% cd sip-<version number>
+% python configure.py 
+% make 
+% sudo make install 
+% cd ..  
+% \end{verbatim}
+% 
+% \underline{Leopard notes}
+% 
+% If building on Leopard, using Leopard's bundled Python, SIP wants to install in
+% the system path -- this is not a good idea.  Use this configure command instead
+% of the basic configure above:
+% 
+% \begin{verbatim}
+% python configure.py -d /Library/Python/2.5/site-packages -b \
+% /usr/local/bin -e /usr/local/include -v /usr/local/share/sip
+% \end{verbatim}
+
+\subsubsection{D\'ependances suppl\'ementaires : SIP}
+Soyez s\^ur d'avoir la derni\`ere version de Python
 
 \begin{verbatim}
 http://www.python.org/download/mac/
 \end{verbatim}
 
-\underline{Leopard note:} Leopard includes a usable Python 2.5.  Though you can install Python from python.org if preferred.
+\underline{Note:} Leopard inclut d\'ej\`a Python 2.5.  Vous pouvez cependant utiliser la version de python.org .
 
-Retrieve the python bindings toolkit SIP from
+T\'el\'echargez les liens python de SIP \`a
 
 \url{http://www.riverbankcomputing.com/software/sip/download}
 
-Then extract and build it (this installs by default into the Python framework):
+Puis extrayez-les et faites la compilation (l'installation se fera par d\'efaut dans l'environnement Python):
 
 \begin{verbatim}
 tar xvfz sip-<version number>.tar.gz 
@@ -392,31 +704,70 @@ sudo make install
 cd ..  
 \end{verbatim}
 
-\underline{Leopard notes}
+\underline{Notes}
 
-If building on Leopard, using Leopard's bundled Python, SIP wants to install in the system path -- this is not a good idea.  Use this configure command instead of the basic configure above:
+Si vous compiler sous Leopard avec la version de Python embarqu\'ee, SIP voudra s'installer dans le chemin syst\`eme -- ce qui n'est pas une bonne id\'ee. Utilisez cette commande de configuration \`a la place la commande pr\'ec\'edente:
 
 \begin{verbatim}
 python configure.py -d /Library/Python/2.5/site-packages -b \
 /usr/local/bin -e /usr/local/include -v /usr/local/share/sip
 \end{verbatim}
 
-\subsubsection{Additional Dependencies : PyQt}
-If you encounter problems compiling PyQt using the instructions 
-below you can also try adding python from your frameworks dir
-explicitly to your path e.g.
+% \subsubsection{Additional Dependencies : PyQt}
+% If you encounter problems compiling PyQt using the instructions 
+% below you can also try adding python from your frameworks dir
+% explicitly to your path e.g.
+% 
+% \begin{verbatim}
+% export PATH=/Library/Frameworks/Python.framework/Versions/Current/bin:$PATH$
+% \end{verbatim}
+% 
+% Retrieve the python bindings toolkit for Qt from
+% 
+% \begin{verbatim}
+% http://www.riverbankcomputing.com/software/pyqt/download
+% \end{verbatim}
+% 
+% Then extract and build it (this installs by default into the Python framework):
+% 
+% \begin{verbatim}
+% tar xvfz PyQt-mac<version number here>
+% cd PyQt-mac<version number here>
+% export QTDIR=/Developer/Applications/Qt
+% python configure.py 
+% yes 
+% make 
+% sudo make install 
+% cd ..  
+% \end{verbatim}
+% 
+% \underline{Leopard notes}
+% 
+% If building on Leopard, using Leopard's bundled Python, PyQt wants to install in
+% the system path -- this is not a good idea.  Use this configure command instead
+% of the basic configure above:
+% 
+% \begin{verbatim}
+% python configure.py -d /Library/Python/2.5/site-packages -b /usr/local/bin
+% \end{verbatim}
+% 
+% There may be a problem with undefined symbols in QtOpenGL on Leopard.  Edit
+% QtOpenGL/makefile and add -undefined dynamic\_lookup to LFLAGS.
+
+\subsubsection{D\'ependances suppl\'ementaires : PyQt}
+Si vous rencontrez des probl\`emes pour compiler PyQt en suivant les instructions suivantes, vous pouvez essayez d'ajouter explicitement le chemin vers votre environnement python:
 
 \begin{verbatim}
 export PATH=/Library/Frameworks/Python.framework/Versions/Current/bin:$PATH$
 \end{verbatim}
 
-Retrieve the python bindings toolkit for Qt from
+Obtenez les liens python pour Qt depuis
 
 \begin{verbatim}
 http://www.riverbankcomputing.com/software/pyqt/download
 \end{verbatim}
 
-Then extract and build it (this installs by default into the Python framework):
+Puis extrayez et compilez :
 
 \begin{verbatim}
 tar xvfz PyQt-mac<version number here>
@@ -429,27 +780,27 @@ sudo make install
 cd ..  
 \end{verbatim}
 
-\underline{Leopard notes}
+\underline{Notes}
 
-If building on Leopard, using Leopard's bundled Python, PyQt wants to install in the system path -- this is not a good idea.  Use this configure command instead of the basic configure above:
+Si vous compilez sous Leopard avec la version de Python embarqu\'ee, PyQt voudra s'installer dans le chemin syst\`eme -- ce qui n'est pas une bonne id\'ee. Utilisez cette commande de configuration \`a la place la commande pr\'ec\'edente:
 
 \begin{verbatim}
 python configure.py -d /Library/Python/2.5/site-packages -b /usr/local/bin
 \end{verbatim}
 
-There may be a problem with undefined symbols in QtOpenGL on Leopard.  Edit QtOpenGL/makefile and add -undefined dynamic\_lookup to LFLAGS.
+Un probl\`eme avec des symboles non d\'efinis dans QtOpenGL peut se pr\'esenter sous Leopard.  \'Editez
+QtOpenGL/makefile et ajoutez -undefined dynamic\_lookup aux LFLAGS.
 
-\subsubsection{Additional Dependencies : Bison}
-\underline{Leopard note:} Leopard includes Bison 2.3, so this step can be skipped on Leopard.
+\subsubsection{D\'ependances suppl\'ementaires : Bison}
+\underline{Note:} Leopard inclut Bison 2.3, cette \'etape peut \^etre ignor\'ee.
 
-The version of bison available by default on Mac OSX is too old so you need to
-get a more recent one on your system. Download if from:
+La version par d\'efaut de bison sous Mac OSX est trop ancienne ancienne pour vos besoins, t\'el\'echarger une version plus r\'ecente:
 
 \begin{verbatim}
 curl -O http://ftp.gnu.org/gnu/bison/bison-2.3.tar.gz 
 \end{verbatim}
 
-Now build and install it to a prefix of /usr/local :
+Maintenant compilez et installez dans un pr\'efix de /usr/local:
 
 \begin{verbatim}
 tar xvfz bison-2.3.tar.gz 
@@ -460,88 +811,119 @@ sudo make install
 cd ..  
 \end{verbatim}
 
-\subsection{Install CMAKE for OSX}
-Get the latest release from here:
+\subsection{Installer CMAKE pour OSX}
+Obtenez la derni\`ere version \`a:
 
 \begin{verbatim}
 http://www.cmake.org/HTML/Download.html 
 \end{verbatim}
 
-At the time of writing the file I grabbed was:
+La version utilis\'ee au moment de l'\'ecriture de cette partie est:
 
 \begin{verbatim}
 curl -O http://www.cmake.org/files/v2.4/cmake-2.4.6-Darwin-universal.dmg
 \end{verbatim}
 
-Once downloaded open the dmg and run the installer
+Une fois t\'el\'echarg\'e, installez le fichier .dmg
 
-\subsection{Install subversion for OSX}
-\underline{Leopard note:} Leopard includes SVN, so this step can be skipped on Leopard.
+\subsection{Installer subversion pour OSX}
+\underline{Note:} Leopard inclut SVN, cette \'etape peut donc \^etre ignor\'ee sous Leopard.
 
-The \url{http://sourceforge.net/projects/macsvn/} project has a downloadable
-build of svn. If you are a GUI inclined person you may want to grab their gui
-client too. Get the command line client here:
+Ce \url{http://sourceforge.net/projects/macsvn/} projet a une version t\'el\'echargeable de svn. Si vous pr\'ef\'erez une interface, pensez \`a prendre leur client graphique. T\'el\'echargez l'interface console ici:
 
 \begin{verbatim}
 curl -O http://ufpr.dl.sourceforge.net/sourceforge/macsvn/Subversion_1.4.2.zip 
 \end{verbatim}
 
-Once downloaded open the zip file and run the installer.
-
-You also need to install BerkleyDB available from the same
-\url{http://sourceforge.net/projects/macsvn/}. At the time of writing the file was here:
+Vous devez \'egalement installer BerkleyDB disponible \`a \url{http://sourceforge.net/projects/macsvn/}. 
 
 \begin{verbatim}
-curl -O http://ufpr.dl.sourceforge.net/sourceforge/macsvn/Berkeley_DB_4.5.20.zip 
+curl -O
+http://ufpr.dl.sourceforge.net/sourceforge/macsvn/Berkeley_DB_4.5.20.zip 
 \end{verbatim}
 
-Once again unzip this and run the installer therein. Lastly we need to ensure that the svn commandline executeable is in the path. Add the following line to the end of /etc/bashrc using 
-sudo:
+Une fois encore, extrayez l'archive zip et ex\'ecuter l'installateur qu'elle contient. Enfin, nous devons nous assurer que la commande svn a le bon chemin. Ajoutez la ligne suivante \`a la fin de /etc/bashrc en utilisant sudo:
 
 \begin{verbatim}
 sudo vim /etc/bashrc 
 \end{verbatim}
 
-And add this line to the bottom before saving and quiting:
+Et ajoutez cette ligne en bas avant de sauvegarder et quitter:
 
 \begin{verbatim}
 export PATH=/usr/local/bin:$PATH:/usr/local/pgsql/bin 
 \end{verbatim}
 
-/usr/local/bin needs to be first in the path so that the newer bison (that will be built from source further down) is found before the bison (which is very old) that is installed by MacOSX.
+/usr/local/bin doit \^etre le premier sur le chemin pour que la nouvelle version de bison (que nous allons compiler par la suite) soit trouv\'ee avant celle embarqu\'ee par MacOSX.
 
-Now close and reopen your shell to get the updated vars.
+Maintenant, fermez et rouvrez votre console pour b\'en\'eficier des variables \`a jour.
 
-\subsection{Check out QGIS from SVN}
-Now we are going to check out the sources for QGIS. First we will create a
-directory for working in:
+% \subsection{Check out QGIS from SVN}
+% Now we are going to check out the sources for QGIS. First we will create a
+% directory for working in:
+% 
+% \begin{verbatim}
+% mkdir -p ~/dev/cpp cd ~/dev/cpp 
+% \end{verbatim}
+% 
+% Now we check out the sources:
+% 
+% Trunk:
+% 
+% \begin{verbatim}
+% svn co https://svn.osgeo.org/qgis/trunk/qgis qgis 
+% \end{verbatim}
+% 
+% For svn 0.8 branch
+% 
+% \begin{verbatim}
+% svn co https://svn.osgeo.org/qgis/branches/Release-0_8_0 qgis0.8
+% \end{verbatim}
+% 
+% For svn 0.9 branch
+% 
+% \begin{verbatim}
+% svn co https://svn.qgis.org/qgis/branches/Release-0_9_0 qgis0.9
+% \end{verbatim}
+% 
+% The first time you check out QGIS sources you will probably get a message like
+% this:
+% 
+% \begin{verbatim}
+%  Error validating server certificate for 'https://svn.qgis.org:443':
+%  - The certificate is not issued by a trusted authority. Use the fingerprint to
+%    validate the certificate manually!  Certificate information:
+%  - Hostname: svn.qgis.org
+%  - Valid: from Apr  1 00:30:47 2006 GMT until Mar 21 00:30:47 2008 GMT
+%  - Issuer: Developer Team, Quantum GIS, Anchorage, Alaska, US
+%  - Fingerprint: 2f:cd:f1:5a:c7:64:da:2b:d1:34:a5:20:c6:15:67:28:33:ea:7a:9b
+%    (R)eject, accept (t)emporarily or accept (p)ermanently?  
+% \end{verbatim}
+% 
+% I suggest you press 'p' to accept the key permanently.
+
+\subsection{Obtenir QGIS avec SVN}
+Nous allons d'abord cr\'eer un r\'epertoire de travail:
 
 \begin{verbatim}
 mkdir -p ~/dev/cpp cd ~/dev/cpp 
 \end{verbatim}
 
-Now we check out the sources:
+Maintenant nous t\'el\'echargeons les sources:
 
-Trunk:
+Pour la branche principale:
 
 \begin{verbatim}
 svn co https://svn.osgeo.org/qgis/trunk/qgis qgis 
 \end{verbatim}
 
-For svn 0.8 branch
+Pour la branche de la version 
 
 \begin{verbatim}
-svn co https://svn.osgeo.org/qgis/branches/Release-0_8_0 qgis0.8
+svn co https://svn.osgeo.org/qgis/branches/Version-1_0
 \end{verbatim}
 
-For svn 0.9 branch
-
-\begin{verbatim}
-svn co https://svn.qgis.org/qgis/branches/Release-0_9_0 qgis0.9
-\end{verbatim}
-
-The first time you check out QGIS sources you will probably get a message like
-this:
+Au premier t\'el\'echargement, vous allez sans doute avoir le message suivant:
 
 \begin{verbatim}
  Error validating server certificate for 'https://svn.qgis.org:443':
@@ -554,14 +936,58 @@ this:
    (R)eject, accept (t)emporarily or accept (p)ermanently?  
 \end{verbatim}
 
-I suggest you press 'p' to accept the key permanently.
+Je vous recommande d'appuyer sur 'p' pour accepter la cl\'e de mani\`ere permanente.
 
-\subsection{Configure the build}
-CMake supports out of source build so we will create a 'build' dir for the
-build process. By convention I build my software into a dir called 'apps' in
-my home directory. If you have the correct permissions you may want to build
-straight into your /Applications folder. The instructions below assume you are
-building into a pre-existing \$\{HOME\}/apps directory ...
+% \subsection{Configure the build}
+% CMake supports out of source build so we will create a 'build' dir for the
+% build process. By convention I build my software into a dir called 'apps' in
+% my home directory. If you have the correct permissions you may want to build
+% straight into your /Applications folder. The instructions below assume you are
+% building into a pre-existing \$\{HOME\}/apps directory ...
+% 
+% \begin{verbatim}
+% cd qgis
+% mkdir build
+% cd build
+% cmake -D CMAKE_INSTALL_PREFIX=$HOME/apps/ -D CMAKE_BUILD_TYPE=Release ..
+% \end{verbatim}
+% 
+% \underline{Leopard note:} To find the custom install of SIP on Leopard, add ""-
+% D SIP\_BINARY\_PATH=/usr/local/bin/sip"" to the cmake command above,
+% before the .. at the end, ie:
+% 
+% \begin{verbatim}
+% cmake -D CMAKE_INSTALL_PREFIX=$HOME/apps/ -D CMAKE_BUILD_TYPE=Release -
+% D SIP_BINARY_PATH=/usr/local/bin/sip ..
+% \end{verbatim}
+% 
+% To use the application build of GRASS on OSX, you can optionally use the
+% following cmake invocation (minimum GRASS 6.3 required, substitute the GRASS
+% version as required):
+% 
+% \begin{verbatim}
+% cmake -D CMAKE_INSTALL_PREFIX=${HOME}/apps/ \
+%       -D GRASS_INCLUDE_DIR=/Applications/GRASS-6.3.app/Contents/MacOS/
+%       include \
+%       -D GRASS_PREFIX=/Applications/GRASS-6.3.app/Contents/MacOS \
+%       -D CMAKE_BUILD_TYPE=Release \
+%       ..
+% \end{verbatim}
+% 
+% Or, to use a Unix-style build of GRASS, use the following cmake invocation
+% (minimum GRASS version as stated in the Qgis requirements, substitute the GRASS
+% path and version as required):
+% 
+% \begin{verbatim}
+% cmake -D CMAKE_INSTALL_PREFIX=${HOME}/apps/ \
+%   -D GRASS_INCLUDE_DIR=/user/local/grass-6.3.0/include \
+%   -D GRASS_PREFIX=/user/local/grass-6.3.0 \
+%   -D CMAKE_BUILD_TYPE=Release \
+%   ..
+% \end{verbatim}
+
+\subsection{Configurer la compilation}
+Nous allons cr\'eer un dossier 'build' pour le processus de compilation. Par convention, je compile mes logiciels dans un r\'epertoire 'apps' pr\'esent dans mon dossier personnel /home. Si les permissions sont accrod\'ees, vous pouvez directement compiler dans votre r\'epertoire /Applications. Les instructions qui suivent pr\'esupposent que vous travaillez dans le dossier \$\{HOME\}/apps...
 
 \begin{verbatim}
 cd qgis
@@ -570,18 +996,14 @@ cd build
 cmake -D CMAKE_INSTALL_PREFIX=$HOME/apps/ -D CMAKE_BUILD_TYPE=Release ..
 \end{verbatim}
 
-\underline{Leopard note:} To find the custom install of SIP on Leopard, add ""-
-D SIP\_BINARY\_PATH=/usr/local/bin/sip"" to the cmake command above,
-before the .. at the end, ie:
+\underline{Note:} Pour trouver l'installation personnalis\'ee de SIP sous Leopard, ajoutez ""-D SIP\_BINARY\_PATH=/usr/local/bin/sip"" \`a la commande cmake ci-dessus, avant les .. de la fin:
 
 \begin{verbatim}
 cmake -D CMAKE_INSTALL_PREFIX=$HOME/apps/ -D CMAKE_BUILD_TYPE=Release -
 D SIP_BINARY_PATH=/usr/local/bin/sip ..
 \end{verbatim}
 
-To use the application build of GRASS on OSX, you can optionally use the
-following cmake invocation (minimum GRASS 6.3 required, substitute the GRASS
-version as required):
+Pour utiliser GRASS depuis le dossier Applications sous OSX, vous pouvez utilisez l'option cmake suivante (GRASS 6.3 est la version minimum requise, modifier le num\'ero au besoin):
 
 \begin{verbatim}
 cmake -D CMAKE_INSTALL_PREFIX=${HOME}/apps/ \
@@ -592,9 +1014,7 @@ cmake -D CMAKE_INSTALL_PREFIX=${HOME}/apps/ \
       ..
 \end{verbatim}
 
-Or, to use a Unix-style build of GRASS, use the following cmake invocation
-(minimum GRASS version as stated in the Qgis requirements, substitute the GRASS
-path and version as required):
+Ou, dans un style Unix, utilisez l'option suivante:
 
 \begin{verbatim}
 cmake -D CMAKE_INSTALL_PREFIX=${HOME}/apps/ \
@@ -604,66 +1024,142 @@ cmake -D CMAKE_INSTALL_PREFIX=${HOME}/apps/ \
   ..
 \end{verbatim}
 
-\subsection{Building}
-Now we can start the build process:
+% \subsection{Building}
+% Now we can start the build process:
+% 
+% \begin{verbatim}
+% make 
+% \end{verbatim}
+% 
+% If all built without errors you can then install it:
+% 
+% \begin{verbatim}
+% make install 
+% \end{verbatim}
+% 
+% \section{Building on GNU/Linux}\label{sec:install_linux}
+% \subsection{Building QGIS with Qt4.x}
+% \textbf{Requires:} Ubuntu Hardy / Debian derived distro
+% 
+% These notes are current for Ubuntu 7.10 - other versions and Debian derived 
+% distros may require slight variations in package names.
+% 
+% These notes are for if you want to build QGIS from source. One of the major
+% aims here is to show how this can be done using binary packages for
+% \textbf{*all*}
+% dependencies - building only the core QGIS stuff from source. I prefer this
+% approach because it means we can leave the business of managing system packages
+% to apt and only concern ourselves with coding QGIS! 
+% 
+% This document assumes you have made a fresh install and have a 'clean' system.
+% These instructions should work fine if this is a system that has already been
+% in use for a while, you may need to just skip those steps which are irrelevant
+% to you.
+
+\subsection{Compilation}
+maintenant nous pouvons attaquer la compilation de QGIS:
 
 \begin{verbatim}
 make 
 \end{verbatim}
 
-If all built without errors you can then install it:
+Si tout se passe sans erreurs ou avertissements, vous pouvez l'installer avec:
 
 \begin{verbatim}
 make install 
 \end{verbatim}
 
-\section{Building on GNU/Linux}\label{sec:install_linux}
-\subsection{Building QGIS with Qt4.x}
-\textbf{Requires:} Ubuntu Hardy / Debian derived distro
+\section{Compilation sous GNU/Linux}\label{sec:install_linux}
+\subsection{Compiler QGIS avec Qt4.x}
+\textbf{Requires:} Ubuntu Hardy / Debian
 
-These notes are current for Ubuntu 7.10 - other versions and Debian derived 
-distros may require slight variations in package names.
+Ces notes sont pour Ubuntu 7.10 - d'autres versions ou distributions d\'eriv\'ees de Debian peuvent n\'ecessiter des adaptations l\'eg\`eres.
 
-These notes are for if you want to build QGIS from source. One of the major
-aims here is to show how this can be done using binary packages for \textbf{*all*}
-dependencies - building only the core QGIS stuff from source. I prefer this
-approach because it means we can leave the business of managing system packages
-to apt and only concern ourselves with coding QGIS! 
+Le but principal est de vous montrer que l'on compiler QGIS en utilisant exclusivement des paquets binaires pour \textbf{*toutes*} les d\'ependances - en n'utilisant les sources que pour le coeur de QGIS. Je pr\'ef\`ere cette approche, car elle signifie que nous pouvons concentrer sur QGIS en laissant apt se d\'epatouiller pour toute la gestion.
 
-This document assumes you have made a fresh install and have a 'clean' system.
-These instructions should work fine if this is a system that has already been
-in use for a while, you may need to just skip those steps which are irrelevant
-to you.
+Ce document part du principe que votre installation vient juste d'\^etre install\'ee. Si vous l'avez d\'ej\`a utilis\'ee pendant quelque temps, vous aurez sans doute \`a sauter quelques passages inutiles.
 
-\subsection{Prepare apt}
-The packages qgis depends on to build are available in the "universe" component
-of Ubuntu. This is not activated by default, so you need to activate it:
+% \subsection{Prepare apt}
+% The packages qgis depends on to build are available in the "universe" component
+% of Ubuntu. This is not activated by default, so you need to activate it:
+% 
+% 1. Edit your /etc/apt/sources.list file.  
+% 2. Uncomment the all the lines starting with "deb"
+% 
+% Also you will need to be running (K)Ubuntu 'edgy' or higher in order for 
+% all dependencies to be met.
+% 
+% Now update your local sources database:
+% 
+% \begin{verbatim}
+% sudo apt-get update 
+% \end{verbatim}
 
-1. Edit your /etc/apt/sources.list file.  
-2. Uncomment the all the lines starting with "deb"
+\subsection{Pr\'eparer apt}
+Les paquets desquels d\'epend QGIS sont disponibles dans la source "universe"d'Ubuntu. Vous devez l'activer manuellement:
 
-Also you will need to be running (K)Ubuntu 'edgy' or higher in order for 
-all dependencies to be met.
+1. \'Editez votre fichier /etc/apt/sources.list   
+2. D\'ecommentez toutes les lignes d\'ebut par "deb"
 
-Now update your local sources database:
+Vous aurez besoin d'utiliser (K)Ubuntu 'edgy' ou sup\'erieur pour que toutes les d\'ependances puissent \^etre r\'esolues.
+
+Mettez \`a jour les bases de donn\'ees des sources:
 
 \begin{verbatim}
 sudo apt-get update 
 \end{verbatim}
 
-\subsection{Install Qt4}
+% \subsection{Install Qt4}
+% \begin{verbatim}
+% sudo apt-get install libqt4-core libqt4-debug  \
+% libqt4-dev libqt4-gui libqt4-qt3support libqt4-sql lsb-qt4 qt4-designer \
+% qt4-dev-tools qt4-doc qt4-qtconfig uim-qt gcc libapt-pkg-perl resolvconf
+% \end{verbatim}
+% 
+% \textbf{A Special Note:} If you are following this set of instructions on
+% a system where you already have Qt3 development tools installed, there will
+% be a conflict between Qt3 tools and Qt4 tools. For example, qmake will
+% point to the Qt3 version not the Qt4. Ubuntu Qt4 and Qt3 packages are
+% designed to live alongside each other. This means that for example if you
+% have them both installed you will have three qmake exe's:
+% 
+% \begin{verbatim}
+% /usr/bin/qmake -> /etc/alternatives/qmake 
+% /usr/bin/qmake-qt3
+% /usr/bin/qmake-qt4 
+% \end{verbatim}
+% 
+% The same applies to all other Qt binaries. You will notice above that the
+% canonical 'qmake' is managed by apt alternatives, so before we start to
+% build QGIS, we need to make Qt4 the default. To return Qt3 to default later
+% you can use this same process.
+% 
+% You can use apt alternatives to correct this so that the Qt4 version of
+% applications is used in all cases:
+% 
+% \begin{verbatim}
+% sudo update-alternatives --config qmake
+% sudo update-alternatives --config uic 
+% sudo update-alternatives --config designer 
+% sudo update-alternatives --config assistant 
+% sudo update-alternatives --config qtconfig 
+% sudo update-alternatives --config moc 
+% sudo update-alternatives --config lupdate 
+% sudo update-alternatives --config lrelease 
+% sudo update-alternatives --config linguist 
+% \end{verbatim}
+% 
+% Use the simple command line dialog that appears after running each of the
+% above commands to select the Qt4 version of the relevant applications.
+
+\subsection{Installer Qt4}
 \begin{verbatim}
 sudo apt-get install libqt4-core libqt4-debug  \
 libqt4-dev libqt4-gui libqt4-qt3support libqt4-sql lsb-qt4 qt4-designer \
 qt4-dev-tools qt4-doc qt4-qtconfig uim-qt gcc libapt-pkg-perl resolvconf
 \end{verbatim}
 
-\textbf{A Special Note:} If you are following this set of instructions on
-a system where you already have Qt3 development tools installed, there will
-be a conflict between Qt3 tools and Qt4 tools. For example, qmake will
-point to the Qt3 version not the Qt4. Ubuntu Qt4 and Qt3 packages are
-designed to live alongside each other. This means that for example if you
-have them both installed you will have three qmake exe's:
+\textbf{Note sp\'eciale:} Si vous suivez ce guide sur un syst\`eme o\`u les outils de d\'eveloppements de Qt3 sont d\'ej\`a install\'es, vous risquez des conflits avec Qt4 notemment avec qmake. Ubuntu g\`ere cette situation en fournissant 3 ex\'ecutables diff\'erents pour qmake:
 
 \begin{verbatim}
 /usr/bin/qmake -> /etc/alternatives/qmake 
@@ -671,13 +1167,7 @@ have them both installed you will have three qmake exe's:
 /usr/bin/qmake-qt4 
 \end{verbatim}
 
-The same applies to all other Qt binaries. You will notice above that the
-canonical 'qmake' is managed by apt alternatives, so before we start to
-build QGIS, we need to make Qt4 the default. To return Qt3 to default later
-you can use this same process.
-
-You can use apt alternatives to correct this so that the Qt4 version of
-applications is used in all cases:
+La m\^eme r\`egle s'applique \`a tous les autres ex\'ecutables de Qt. Avant de compiler QGIS, il faut s'assurer les outils Qt4 soient s\'electionn\'es.
 
 \begin{verbatim}
 sudo update-alternatives --config qmake
@@ -691,10 +1181,32 @@ sudo update-alternatives --config lrelease
 sudo update-alternatives --config linguist 
 \end{verbatim}
 
-Use the simple command line dialog that appears after running each of the
-above commands to select the Qt4 version of the relevant applications.
+Utilisez le dialogue console qui se pr\'esente apr\`es chacune de ces commandes pour d\'efinir la version de Qt pour chacune des applications.
 
-\subsection{Install additional software dependencies required by QGIS}
+% \subsection{Install additional software dependencies required by QGIS}
+% \begin{verbatim}
+% sudo apt-get install gdal-bin libgdal1-dev libgeos-dev proj \
+% libgdal-doc libhdf4g-dev libhdf4g-run python-dev \
+% libgsl0-dev g++ libjasper-dev libtiff4-dev subversion \
+% libsqlite3-dev sqlite3 ccache make libpq-dev flex bison cmake txt2tags \
+% python-qt4 python-qt4-dev python-sip4 sip4 python-sip4-dev
+% \end{verbatim}
+% 
+% \textbf{Note:} Debian users should use libgdal-dev above rather
+% 
+% \textbf{Note:} For python language bindings SIP $>$= 4.5 and PyQt4 $>$= 4.1 is
+% required! Some stable GNU/Linux
+% distributions (e.g. Debian or SuSE) only provide SIP $<$ 4.5 and PyQt4 $<$ 4.1.
+% To include support for python 
+% language bindings you may need to build and install those packages from source.
+% 
+% If you do not have cmake installed already:
+% 
+% \begin{verbatim}
+% sudo apt-get install cmake
+% \end{verbatim}
+
+\subsection{Installer les d\'ependances additionnelles requises par QGIS}
 \begin{verbatim}
 sudo apt-get install gdal-bin libgdal1-dev libgeos-dev proj \
 libgdal-doc libhdf4g-dev libhdf4g-run python-dev \
@@ -703,32 +1215,44 @@ libsqlite3-dev sqlite3 ccache make libpq-dev flex bison cmake txt2tags \
 python-qt4 python-qt4-dev python-sip4 sip4 python-sip4-dev
 \end{verbatim}
 
-\textbf{Note:} Debian users should use libgdal-dev above rather
+\textbf{Note:} Les utilisateurs Debian devraient plut\^ot utiliser libgdal-dev ci-dessus.
 
-\textbf{Note:} For python language bindings SIP $>$= 4.5 and PyQt4 $>$= 4.1 is required! Some stable GNU/Linux
-distributions (e.g. Debian or SuSE) only provide SIP $<$ 4.5 and PyQt4 $<$ 4.1. To include support for python 
-language bindings you may need to build and install those packages from source.
+\textbf{Note:} Pour les liens python, SIP $>$= 4.5 and PyQt4 $>$= 4.1 sont requis. Certaines distributions (e.g. Debian ou SuSE) fournissent seulement SIP $<$ 4.5 and PyQt4 $<$ 4.1. Il vous faudra compiler ces paquets depuis les sources.
 
-If you do not have cmake installed already:
+Si cmake n'est pas encore install\'e:
 
 \begin{verbatim}
 sudo apt-get install cmake
 \end{verbatim}
 
-\subsection{GRASS Specific Steps}
-\textbf{Note:} If you don't need to build with GRASS support,  you can
-skip this section.
+% \subsection{GRASS Specific Steps}
+% \textbf{Note:} If you don't need to build with GRASS support,  you can
+% skip this section.
+% 
+% Now you can install grass from dapper:
+% 
+% \begin{verbatim}
+% sudo apt-get install grass libgrass-dev libgdal1-1.4.0-grass 
+% \end{verbatim}
+% 
+% /!$\backslash$ You may need to explicitly state your grass version e.g.
+% libgdal1-1.3.2-grass
 
-Now you can install grass from dapper:
+\subsection{Etapes sp\'ecifiques \`a GRASS}
+\textbf{Note:} Si vous n'avez pas besoin du support de GRASS, vous pouvez passer cette partie.
+
+Vous pouvez installer GRASS depuis dapper:
 
 \begin{verbatim}
 sudo apt-get install grass libgrass-dev libgdal1-1.4.0-grass 
 \end{verbatim}
 
-/!$\backslash$ You may need to explicitly state your grass version e.g. libgdal1-1.3.2-grass
+/!$\backslash$ Vous aurez peut-\^etre \`a d\'efinir votre version de grass, e.g. libgdal1-1.3.2-grass
 
-\subsection{Setup ccache (Optional)}
-You should also setup ccache to speed up compile times:
+% \subsection{Setup ccache (Optional)}
+% You should also setup ccache to speed up compile times:
+\subsection{Installer ccache (Optionnel)}
+Vous pouvez installer ccache pour acc\'el\'erer la compilation:
 
 \begin{verbatim}
 cd /usr/local/bin 
@@ -736,40 +1260,51 @@ sudo ln -s /usr/bin/ccache gcc
 sudo ln -s /usr/bin/ccache g++ 
 \end{verbatim}
 
-\subsection{Prepare your development environment}
-As a convention I do all my development work in \$HOME/dev/$<$language$>$, so in
-this case we will create a work environment for C++ development work like
-this:
+% \subsection{Prepare your development environment}
+% As a convention I do all my development work in \$HOME/dev/$<$language$>$, so in
+% this case we will create a work environment for C++ development work like
+% this:
+% This directory path will be assumed for all instructions that follow.
+
+\subsection{Preparer votre environnement de d\'eveloppement}
+Par convention, je fais mon d\'eveloppement dans \$HOME/dev/$<$langage$>$, donc dans le cas pr\'esent nous allons cr\'eer un r\'epertoire pour le C++:
 
 \begin{verbatim}
 mkdir -p ${HOME}/dev/cpp 
 cd ${HOME}/dev/cpp 
 \end{verbatim}
 
-This directory path will be assumed for all instructions that follow.
+% \subsection{Check out the QGIS Source Code}
+% There are two ways the source can be checked out. Use the anonymous method
+% if you do not have edit privaleges for the QGIS source repository, or use
+%   the developer checkout if you have permissions to commit source code
+%   changes.
+% 
+% 1. Anonymous Checkout
+% 
+% 2. Developer Checkout
+% 
+% The first time you check out the source you will be prompted to accept the
+% qgis.org certificate. Press 'p' to accept it permanently:
 
-\subsection{Check out the QGIS Source Code}
-There are two ways the source can be checked out. Use the anonymous method
-if you do not have edit privaleges for the QGIS source repository, or use
-  the developer checkout if you have permissions to commit source code
-  changes.
+\subsection{Obtenir le code source de QGIS}
+Il ya deux fa\c{c}ons de faire, utilisez la m\'ethode anonyme si vous n'avez aucun droit d'\'edition sur le r\'epertoire svn de QGIS, ou la m\'ethode d\'eveloppeur si vous pouvez soumettre des changements aux sources.
 
-1. Anonymous Checkout
+1. M\'ethode anonyme
 
 \begin{verbatim}
 cd ${HOME}/dev/cpp 
 svn co https://svn.osgeo.org/qgis/trunk/qgis qgis
 \end{verbatim}
 
-2. Developer Checkout
+2.M\'ethode d\'eveloppeur
 
 \begin{verbatim}
 cd ${HOME}/dev/cpp 
 svn co --username <yourusername> https://svn.osgeo.org/qgis/trunk/qgis qgis 
 \end{verbatim}
 
-The first time you check out the source you will be prompted to accept the
-qgis.org certificate. Press 'p' to accept it permanently:
+Au premier essai, il vous faudra accepter le certificat de s\'ecurit\'e de QGIS. Appuyez sur 'p' pour que ce soit permanent:
 
 \begin{verbatim}
 Error validating server certificate for 'https://svn.qgis.org:443':
@@ -784,19 +1319,57 @@ Error validating server certificate for 'https://svn.qgis.org:443':
      accept (t)emporarily or accept (p)ermanently?  
 \end{verbatim}
 
-\subsection{Starting the compile}
-\textbf{Note:} The next section describes howto build debian packages
+% \subsection{Starting the compile}
+% \textbf{Note:} The next section describes howto build debian packages
+% 
+% I compile my development version of QGIS into my \~{}/apps directory to avoid
+% conflicts with Ubuntu packages that may be under /usr. This way for example
+% you can use the binary packages of QGIS on your system along side with your
+% development version. I suggest you do something similar:
+% 
+% \begin{verbatim}
+% mkdir -p ${HOME}/apps 
+% \end{verbatim}
+% 
+% Now we create a build directory and run ccmake:
+% 
+% \begin{verbatim}
+% cd qgis
+% mkdir build
+% cd build
+% ccmake ..
+% \end{verbatim}
+% 
+% When you run ccmake (note the .. is required!), a menu will appear where 
+% you can configure various aspects of the build. If you do not have root
+% access or do not want to overwrite existing QGIS installs (by your
+% packagemanager for example), set the CMAKE\_BUILD\_PREFIX to somewhere you
+% have write access to (I usually use /home/timlinux/apps). Now press
+% 'c' to configure, 'e' to dismiss any error messages that may appear.
+% and 'g' to generate the make files. \textbf{Note:} that sometimes 'c' needs to 
+% be pressed several times before the 'g' option becomes available.
+% After the 'g' generation is complete, press 'q' to exit the ccmake 
+% interactive dialog.
+% 
+% Now on with the build:
+% 
+% \begin{verbatim}
+% make
+% make install
+% \end{verbatim}
+% 
+% It may take a little while to build depending on your platform.
 
-I compile my development version of QGIS into my \~{}/apps directory to avoid
-conflicts with Ubuntu packages that may be under /usr. This way for example
-you can use the binary packages of QGIS on your system along side with your
-development version. I suggest you do something similar:
+\subsection{Commencer la compilation}
+\textbf{Note:} La section suivante explique comment faire un paquet Debian
+
+Je compile les versions de d\'eveloppements de QGIS dans mon r\'epertoire \~{}/apps pour \'eviter des conflits avec les paquets Ubuntu pr\'esents dans /usr. De cette mani\`ere, vous pouvez utiliser une version de d\'eveloppement en m\^eme temps que la version la distribution. Je vous conseille de faire de m\^eme:
 
 \begin{verbatim}
 mkdir -p ${HOME}/apps 
 \end{verbatim}
 
-Now we create a build directory and run ccmake:
+maintenant cr\'eons un r\'epertoire de travail et lan\c{c}ons ccmake:
 
 \begin{verbatim}
 cd qgis
@@ -805,100 +1378,173 @@ cd build
 ccmake ..
 \end{verbatim}
 
-When you run ccmake (note the .. is required!), a menu will appear where 
-you can configure various aspects of the build. If you do not have root
-access or do not want to overwrite existing QGIS installs (by your
-packagemanager for example), set the CMAKE\_BUILD\_PREFIX to somewhere you
-have write access to (I usually use /home/timlinux/apps). Now press
-'c' to configure, 'e' to dismiss any error messages that may appear.
-and 'g' to generate the make files. \textbf{Note:} that sometimes 'c' needs to 
-be pressed several times before the 'g' option becomes available.
-After the 'g' generation is complete, press 'q' to exit the ccmake 
-interactive dialog.
+Quand nous lan\c{c}ons ccmake (les .. sont requis), un menu appara\^it pour vous laisser configurer diff\'erents aspects de la compilation. Si vous n'avez pas l'acc\`es root ou ne voulez pas \'ecraser une version existante, d\'efinissez CMAKE\_BUILD\_PREFIX vers un autre emplacement (/home/timlinux/apps). Maintenant appuyez sur 'c' pour configurer, 'e' pour \'ecarter les diff\'erents messages d'erreurs et 'g' pour g\'en\'erer les fichiers make. \textbf{Note:} quelquefois il faut appuyez sur 'c' \`a plusieurs reprises pour permettre de disposer de 'g'.
+Apr\`es que la g\'en\'eration soit finie, appuyez sur 'q' pour sortir du dialogue interactif de ccmake.
 
-Now on with the build:
+passons \`a la compilation:
 
 \begin{verbatim}
 make
 make install
 \end{verbatim}
 
-It may take a little while to build depending on your platform.
+Cela peut prendre plus ou moins de temps selon votre ordinateur.
 
-\subsection{Building Debian packages}
-Instead of creating a personal installation as in the previous step you can
-also create debian package.  This is done from the qgis root directory, where
-you'll find a debian directory.
+% \subsection{Building Debian packages}
+% Instead of creating a personal installation as in the previous step you can
+% also create debian package.  This is done from the qgis root directory, where
+% you'll find a debian directory.
+% 
+% First you need to install the debian packaging tools once:
+% 
+% \begin{verbatim}
+% apt-get install build-essential
+% \end{verbatim}
+% 
+% The QGIS packages will be created with:
+% 
+% \begin{verbatim}
+% dpkg-buildpackage -us -us -b
+% \end{verbatim}
+% 
+% \textbf{Note:} If \texttt{dpkg-buildpackage} complains about unmet build
+% dependencies
+% you can install them using \texttt{apt-get} and re-run the command.
+% 
+% \textbf{Note:} If you have \texttt{libqgis1-dev} installed, you need to remove
+% it first
+% using \texttt{dpkg -r libqgis1-dev}.  Otherwise \texttt{dpkg-buildpackage} will
+% complain about a
+% build conflict.
+% 
+% The the packages are created in the parent directory (ie. one level up).
+% Install them using dpkg.  E.g.:
+% 
+% \begin{verbatim}
+% sudo dpkg -i \
+%  ../qgis_1.0preview16_amd64.deb \
+%  ../libqgis-gui1_1.0preview16_amd64.deb \
+%  ../libqgis-core1_1.0preview16_amd64.deb \
+%  ../qgis-plugin-grass_1.0preview16_amd64.deb \
+%  ../python-qgis_1.0preview16_amd64.deb
+% \end{verbatim}
 
-First you need to install the debian packaging tools once:
+\subsection{Construire un paquet Debian}
+Au lieu de cr\'eer une installation personnalis\'ee comme dans les \'etapes pr\'ec\'edentes, vous cr\'eer un paquet Debian r\'eutilisable.
+
+vous avez d'abord besoin d'installer les outils de paquetage de Debian:
 
 \begin{verbatim}
 apt-get install build-essential
 \end{verbatim}
 
-The QGIS packages will be created with:
+Le paquet QGIS se cr\'ee avec la commande suivante:
 
 \begin{verbatim}
 dpkg-buildpackage -us -us -b
 \end{verbatim}
 
-\textbf{Note:} If \texttt{dpkg-buildpackage} complains about unmet build dependencies
-you can install them using \texttt{apt-get} and re-run the command.
+\textbf{Note:} Si \texttt{dpkg-buildpackage} se plaint de d\'ependances non r\'esolues, vous devrez les installer avec \texttt{apt-get} et relancer la commande.
 
-\textbf{Note:} If you have \texttt{libqgis1-dev} installed, you need to remove it first
-using \texttt{dpkg -r libqgis1-dev}.  Otherwise \texttt{dpkg-buildpackage} will complain about a
-build conflict.
+\textbf{Note:} Si vous avez install\'e \texttt{libqgis1-dev}, vous devez l'effacer avec \texttt{dpkg -r libqgis1-dev} ou \texttt{dpkg-buildpackage} se plaindra d'un conflit.
 
-The the packages are created in the parent directory (ie. one level up).
-Install them using dpkg.  E.g.:
+Les paquets sont cr\'e\'es dans le r\'epertoire Parent ( ie, un niveau au-dessus).
+Installez-les avec dpkg:
 
 \begin{verbatim}
 sudo dpkg -i \
-	../qgis_1.0preview16_amd64.deb \
-	../libqgis-gui1_1.0preview16_amd64.deb \
-	../libqgis-core1_1.0preview16_amd64.deb \
-	../qgis-plugin-grass_1.0preview16_amd64.deb \
-	../python-qgis_1.0preview16_amd64.deb
+ ../qgis_1.0preview16_amd64.deb \
+ ../libqgis-gui1_1.0preview16_amd64.deb \
+ ../libqgis-core1_1.0preview16_amd64.deb \
+ ../qgis-plugin-grass_1.0preview16_amd64.deb \
+ ../python-qgis_1.0preview16_amd64.deb
 \end{verbatim}
 
-\subsection{Running QGIS}
-Now you can try to run QGIS:
+% \subsection{Running QGIS}
+% Now you can try to run QGIS:
+% 
+% \begin{verbatim}
+% $HOME/apps/bin/qgis 
+% \end{verbatim}
+% 
+% If all has worked properly the QGIS application should start up and appear
+% on your screen.
+
+\subsection{Lancer QGIS}
+Vous pouvez essayer d'ex\'ecuter QGIS:
 
 \begin{verbatim}
 $HOME/apps/bin/qgis 
 \end{verbatim}
 
-If all has worked properly the QGIS application should start up and appear
-on your screen.
+Si tout \`a bien fonctionn\'e, l'application devrait appara\^itre sur votre \'ecran.
 
+% \section{Creation of MSYS environment for compilation of Quantum GIS}
+% \subsection{Initial setup}
+% \subsubsection{MSYS}
+% This is the environment that supplies many utilities from UNIX world in Windows
+% and is needed
+% by many dependencies to be able to compile.
+% 
+% Download from here:
+% 
+% \url{
+% http://puzzle.dl.sourceforge.net/sourceforge/mingw/MSYS-1.0.11-2004.04.30-1.exe}
+% 
+% Install to \texttt{c:$\backslash$msys}
+% 
+% All stuff we're going to compile is going to get to this directory (resp. its
+% subdirs).
 
-\section{Creation of MSYS environment for compilation of Quantum GIS}
-\subsection{Initial setup}
+\section{Cr\'eation d'un environnement MSYS pour la compilation de Quantum GIS}
+\subsection{Installation initiale}
 \subsubsection{MSYS}
-This is the environment that supplies many utilities from UNIX world in Windows and is needed
-by many dependencies to be able to compile.
+Cet environnement fournit des utilitaires UNIX pour Windows et est n\'ecessaire pour compiler nombre de d\'ependances.
 
-Download from here:
+\url{
+http://puzzle.dl.sourceforge.net/sourceforge/mingw/MSYS-1.0.11-2004.04.30-1.exe}
 
-\url{http://puzzle.dl.sourceforge.net/sourceforge/mingw/MSYS-1.0.11-2004.04.30-1.exe}
+Installez le \`a \texttt{c:$\backslash$msys}
 
-Install to \texttt{c:$\backslash$msys}
+Tout ce que nous allons compiler sera plac\'e dans ce r\'epertoire.
 
-All stuff we're going to compile is going to get to this directory (resp. its subdirs).
+% \subsubsection{MinGW}
+% Download from here:
+% 
+% \url{http://puzzle.dl.sourceforge.net/sourceforge/mingw/MinGW-5.1.3.exe}
+% 
+% Install to \texttt{c:$\backslash$msys$\backslash$mingw}
+% 
+% It suffices to download and install only \texttt{g++} and \texttt{mingw-make}
+% components.
 
 \subsubsection{MinGW}
-Download from here:
+A t\'el\'echarger depuis:
 
 \url{http://puzzle.dl.sourceforge.net/sourceforge/mingw/MinGW-5.1.3.exe}
 
-Install to \texttt{c:$\backslash$msys$\backslash$mingw}
+Installez le \`a \texttt{c:$\backslash$msys$\backslash$mingw}
 
-It suffices to download and install only \texttt{g++} and \texttt{mingw-make} components.
+Il suffit de t\'el\'echarger et d'installer les composants \texttt{g++} et \texttt{mingw-make}.
 
-\subsubsection{Flex and Bison}
-Flex and Bison are tools for generation of parsers, they're needed for GRASS and also QGIS compilation.
+% \subsubsection{Flex and Bison}
+% Flex and Bison are tools for generation of parsers, they're needed for GRASS and
+% also QGIS compilation.
+% 
+% Download the following packages:
+% 
+% \url{http://gnuwin32.sourceforge.net/downlinks/flex-bin-zip.php}
+% 
+% \url{http://gnuwin32.sourceforge.net/downlinks/bison-bin-zip.php}
+% 
+% \url{http://gnuwin32.sourceforge.net/downlinks/bison-dep-zip.php}
+% 
+% Unpack them all to \texttt{c:$\backslash$msys$\backslash$local}
 
-Download the following packages:
+\subsubsection{Flex et Bison}
+Flex et Bison sont des outils indispensables \`a la compilation de GRASS et QGIS. 
+
+T\'el\'echargez les paquets suivants:
 
 \url{http://gnuwin32.sourceforge.net/downlinks/flex-bin-zip.php}
 
@@ -906,12 +1552,38 @@ Download the following packages:
 
 \url{http://gnuwin32.sourceforge.net/downlinks/bison-dep-zip.php}
 
-Unpack them all to \texttt{c:$\backslash$msys$\backslash$local}
+extrayez les vers \texttt{c:$\backslash$msys$\backslash$local}
 
-\subsection{Installing dependencies}
-\subsubsection{Getting ready}
-Paul Kelly did a great job and prepared a package of precompiled libraries for GRASS.
-The package currently includes:
+% \subsection{Installing dependencies}
+% \subsubsection{Getting ready}
+% Paul Kelly did a great job and prepared a package of precompiled libraries for
+% GRASS.
+% The package currently includes:
+% 
+% \begin{itemize}
+% \item zlib-1.2.3
+% \item libpng-1.2.16-noconfig
+% \item xdr-4.0-mingw2
+% \item freetype-2.3.4
+% \item fftw-2.1.5
+% \item PDCurses-3.1
+% \item proj-4.5.0
+% \item gdal-1.4.1
+% \end{itemize}
+% 
+% It's available for download here:
+% 
+% \url{http://www.stjohnspoint.co.uk/grass/wingrass-extralibs.tar.gz}
+% 
+% Moreover he also left the notes how to compile it (for those interested):
+% 
+% \url{http://www.stjohnspoint.co.uk/grass/README.extralibs}
+% 
+% Unpack the whole package to \texttt{c:$\backslash$msys$\backslash$local}
+
+\subsection{Installation des d\'ependances}
+\subsubsection{Pr\'eparation}
+Paul Kelly a fourni un \'enorme travail en pr\'eparant un paquet contenant des biblioth\`eques pr\'ecompil\'ees pour GRASS:
 
 \begin{itemize}
 \item zlib-1.2.3
@@ -924,38 +1596,57 @@ The package currently includes:
 \item gdal-1.4.1
 \end{itemize}
 
-It's available for download here:
+C'est disponible \`a:
 
 \url{http://www.stjohnspoint.co.uk/grass/wingrass-extralibs.tar.gz}
 
-Moreover he also left the notes how to compile it (for those interested):
+Et pour ceux int\'eress\'es, il a laiss\'e des notes sur la fa\c{c}on de les compiler:
 
 \url{http://www.stjohnspoint.co.uk/grass/README.extralibs}
 
-Unpack the whole package to \texttt{c:$\backslash$msys$\backslash$local}
+extrayez le tout vers \texttt{c:$\backslash$msys$\backslash$local}
 
-\subsubsection{GDAL level one}
-Since Quantum GIS needs GDAL with GRASS support, we need to compile GDAL
-from source - Paul Kelly's package doesn't include GRASS support in GDAL.
-The idea is following:
+% \subsubsection{GDAL level one}
+% Since Quantum GIS needs GDAL with GRASS support, we need to compile GDAL
+% from source - Paul Kelly's package doesn't include GRASS support in GDAL.
+% The idea is following:
+% 
+% \begin{enumerate}
+% \item compile GDAL without GRASS
+% \item compile GRASS
+% \item compile GDAL with GRASS
+% \end{enumerate}
+% 
+% So, start with downloading GDAL sources:
+% 
+% \url{http://download.osgeo.org/gdal/gdal141.zip}
+% 
+% Unpack it to some directory, preferably
+% \texttt{c:$\backslash$msys$\backslash$local$\backslash$src}.
+% 
+% Start MSYS console, go to gdal-1.4.1 directory and run the commands below.
+% You can put them all to a script, e.g. build-gdal.sh and run them at once.
+% The recipe is taken from Paul Kelly's instructions - basically they
+% just make sure that the library will be created as DLL and the utility
+% programs will be dynamically linked to it...
+
+\subsubsection{GDAL \'etape une}
+Puisque Quantum GIS n\'ecessite GDAL avec un support GRASS, nous avons besoin de compiler GDAL depuis les sources, car le paquet de Paul Kelly ne contient pas ce support.
+Le programme est le suivant:
 
 \begin{enumerate}
-\item compile GDAL without GRASS
-\item compile GRASS
-\item compile GDAL with GRASS
+\item compiler GDAL sansGRASS
+\item compiler GRASS
+\item compiler GDAL avec GRASS
 \end{enumerate}
 
-So, start with downloading GDAL sources:
+Donc, commen\c{c}ons par t\'el\'echarger les sources de GDAL:
 
 \url{http://download.osgeo.org/gdal/gdal141.zip}
 
-Unpack it to some directory, preferably \texttt{c:$\backslash$msys$\backslash$local$\backslash$src}.
+Extrayez \c{c}e dans un r\'epertoire, de pr\'ef\'erence \texttt{c:$\backslash$msys$\backslash$local$\backslash$src}.
 
-Start MSYS console, go to gdal-1.4.1 directory and run the commands below.
-You can put them all to a script, e.g. build-gdal.sh and run them at once.
-The recipe is taken from Paul Kelly's instructions - basically they
-just make sure that the library will be created as DLL and the utility
-programs will be dynamically linked to it...
+Lancez une console MSYS, allez dans le r\'epertoire de gdal-1.4.1 et ex\'ecutez la commande suivante. Vous pouvez toutes les placer dans un script shell, p. ex. build-gdal.sh, puis le lancer. Cette proc\'edure permet de s'assurer que la biblioth\`eque est bien cr\'e\'ee en tant que DLL et que les programmes lui seront dynamiquement li\'es.
 
 \begin{verbatim}
 CFLAGS="-O2 -s" CXXFLAGS="-O2 -s" LDFLAGS=-s ./configure --without-libtool \
@@ -964,17 +1655,22 @@ CFLAGS="-O2 -s" CXXFLAGS="-O2 -s" LDFLAGS=-s ./configure --without-libtool \
 make
 make install
 rm /usr/local/lib/libgdal.a
-g++ -s -shared -o ./libgdal.dll -L/usr/local/lib -lz -lpng ./frmts/o/*.o ./gcore/*.o \
+g++ -s -shared -o ./libgdal.dll -L/usr/local/lib -lz -lpng ./frmts/o/*.o
+./gcore/*.o \
 ./port/*.o ./alg/*.o ./ogr/ogrsf_frmts/o/*.o ./ogr/ogrgeometryfactory.o \
 ./ogr/ogrpoint.o ./ogr/ogrcurve.o ./ogr/ogrlinestring.o ./ogr/ogrlinearring.o \
-./ogr/ogrpolygon.o ./ogr/ogrutils.o ./ogr/ogrgeometry.o ./ogr/ogrgeometrycollection.o \
+./ogr/ogrpolygon.o ./ogr/ogrutils.o ./ogr/ogrgeometry.o
+./ogr/ogrgeometrycollection.o \
 ./ogr/ogrmultipolygon.o ./ogr/ogrsurface.o ./ogr/ogrmultipoint.o \
-./ogr/ogrmultilinestring.o ./ogr/ogr_api.o ./ogr/ogrfeature.o ./ogr/ogrfeaturedefn.o \ 
+./ogr/ogrmultilinestring.o ./ogr/ogr_api.o ./ogr/ogrfeature.o
+./ogr/ogrfeaturedefn.o \ 
 ./ogr/ogrfeaturequery.o ./ogr/ogrfeaturestyle.o ./ogr/ogrfielddefn.o \
 ./ogr/ogrspatialreference.o ./ogr/ogr_srsnode.o ./ogr/ogr_srs_proj4.o \
 ./ogr/ogr_fromepsg.o ./ogr/ogrct.o ./ogr/ogr_opt.o ./ogr/ogr_srs_esri.o \
-./ogr/ogr_srs_pci.o ./ogr/ogr_srs_usgs.o ./ogr/ogr_srs_dict.o ./ogr/ogr_srs_panorama.o \
-./ogr/swq.o ./ogr/ogr_srs_validate.o ./ogr/ogr_srs_xml.o ./ogr/ograssemblepolygon.o \
+./ogr/ogr_srs_pci.o ./ogr/ogr_srs_usgs.o ./ogr/ogr_srs_dict.o
+./ogr/ogr_srs_panorama.o \
+./ogr/swq.o ./ogr/ogr_srs_validate.o ./ogr/ogr_srs_xml.o
+./ogr/ograssemblepolygon.o \
 ./ogr/ogr2gmlgeometry.o ./ogr/gml2ogrgeometry.o
 install libgdal.dll /usr/local/lib
 cd ogr
@@ -990,45 +1686,88 @@ g++ -s gdalwarp.o -o gdalwarp.exe -L/usr/local/lib -lpng -lz -lgdal
 g++ -s gdal_contour.o -o gdal_contour.exe -L/usr/local/lib -lpng -lz -lgdal
 g++ -s gdaltindex.o -o gdaltindex.exe -L/usr/local/lib -lpng -lz -lgdal
 g++ -s gdal_rasterize.o -o gdal_rasterize.exe -L/usr/local/lib -lpng -lz -lgdal
-install gdalinfo.exe gdal_translate.exe gdaladdo.exe gdalwarp.exe gdal_contour.exe \
+install gdalinfo.exe gdal_translate.exe gdaladdo.exe gdalwarp.exe
+gdal_contour.exe \
 gdaltindex.exe gdal_rasterize.exe /usr/local/bin
 
 \end{verbatim}
 
-Finally, manually edit \texttt{gdal-config} in \texttt{c:$\backslash$msys$\backslash$local$\backslash$bin} to replace the static library reference with -lgdal:
+% Finally, manually edit \texttt{gdal-config} in
+% \texttt{c:$\backslash$msys$\backslash$local$\backslash$bin} to replace the
+% static library reference with -lgdal:
+% 
+% \begin{verbatim}
+% CONFIG_LIBS="-L/usr/local/lib -lpng -lz -lgdal"
+% \end{verbatim}
+% GDAL build procedure can be greatly simplified to use libtool with a libtool
+% line patch:
+% configure gdal as below:
+% ./configure --with-ngpython --with-xerces=/local/ --with-jasper=/local/
+% --with-grass=/local/grass-6.3.cvs/ --with-pg=/local/pgsql/bin/pg\_config.exe 
+% 
+% Then fix libtool with:
+% mv libtool libtool.orig
+% cat libtool.orig $|$ sed 's/max\_cmd\_len=8192/max\_cmd\_len=32768/g' $>$
+% libtool
+% 
+% Libtool on windows assumes a line length limit of 8192 for some reason and tries
+% to page the linking and fails miserably. This is a work around.
+% 
+% Make and make install should be hassle free after this.
+
+Finalement, \'editez manuellement \texttt{gdal-config} dans \texttt{c:$\backslash$msys$\backslash$local$\backslash$bin} pour remplacer les r\'ef\'erences au lien statique par -lgdal:
 
 \begin{verbatim}
 CONFIG_LIBS="-L/usr/local/lib -lpng -lz -lgdal"
 \end{verbatim}
-GDAL build procedure can be greatly simplified to use libtool with a libtool line patch:
-configure gdal as below:
-./configure --with-ngpython --with-xerces=/local/ --with-jasper=/local/ --with-grass=/local/grass-6.3.cvs/ --with-pg=/local/pgsql/bin/pg\_config.exe 
+la proc\'edure de compilation de GDAL peut \^etre simplifi\'e en utilisant libtool gr\^a\c{c}e \`a un petit rectificatif, configurer libtool comme il suit:
+./configure --with-ngpython --with-xerces=/local/ --with-jasper=/local/
+--with-grass=/local/grass-6.3.cvs/ --with-pg=/local/pgsql/bin/pg\_config.exe 
 
-Then fix libtool with:
+puis fixer libtool avec:
 mv libtool libtool.orig
-cat libtool.orig $|$ sed 's/max\_cmd\_len=8192/max\_cmd\_len=32768/g' $>$ libtool
+cat libtool.orig $|$ sed 's/max\_cmd\_len=8192/max\_cmd\_len=32768/g' $>$
+libtool
 
-Libtool on windows assumes a line length limit of 8192 for some reason and tries to page the linking and fails miserably. This is a work around.
+Libtool sous Windows s'attend \`a limite de 8192 lignes pour d'obscures raisons et se plante lamentablement. 
 
-Make and make install should be hassle free after this.
+Make et make install devraient fonctionner sans souci apr\`es \c{c}a.
+
+% \subsubsection{GRASS}
+% Grab sources from CVS or use a weekly snapshot, see:
+% 
+%  \begin{quotation}
+% \htmladdnormallink{http://grass.itc.it/devel/cvs.php}{
+% http://grass.itc.it/devel/cvs.php}
+%  \end{quotation}
+% 
+% In MSYS console go to the directory where you've unpacked or checked out sources
+% (e.g.
+% \texttt{
+% c:$\backslash$msys$\backslash$local$\backslash$src$\backslash$grass-6.3.cvs})
+% 
+% Run these commands:
 
 \subsubsection{GRASS}
-Grab sources from CVS or use a weekly snapshot, see:
+Obtenez les sources depuis CVS ou t\'el\'echargez un instentan\'e hebdomadaire:
 
-	\begin{quotation}
-\htmladdnormallink{http://grass.itc.it/devel/cvs.php}{http://grass.itc.it/devel/cvs.php}
-	\end{quotation}
+ \begin{quotation}
+\htmladdnormallink{http://grass.itc.it/devel/cvs.php}{
+http://grass.itc.it/devel/cvs.php}
+ \end{quotation}
 
-In MSYS console go to the directory where you've unpacked or checked out sources
-(e.g. \texttt{c:$\backslash$msys$\backslash$local$\backslash$src$\backslash$grass-6.3.cvs})
+Dans la console MSYS allez dans le r\'epertoire o\`u vous avez plac\'e les sources (e.g. \texttt{c:$\backslash$msys$\backslash$local$\backslash$src$\backslash$grass-6.3.cvs})
 
-Run these commands:
+Lancez ces commandes:
 
 \begin{verbatim}
 export PATH="/usr/local/bin:/usr/local/lib:$PATH"
-./configure --prefix=/usr/local --bindir=/usr/local --with-includes=/usr/local/include \
---with-libs=/usr/local/lib --with-cxx --without-jpeg --without-tiff --with-postgres=yes \
---with-postgres-includes=/local/pgsql/include --with-pgsql-libs=/local/pgsql/lib \
+./configure --prefix=/usr/local --bindir=/usr/local
+--with-includes=/usr/local/include \
+--with-libs=/usr/local/lib --with-cxx --without-jpeg --without-tiff
+--with-postgres=yes \
+--with-postgres-includes=/local/pgsql/include --with-pgsql-libs=/local/pgsql/lib
+\
 --with-opengl=windows --with-fftw --with-freetype \
 --with-freetype-includes=/mingw/include/freetype2 \
 --without-x --without-tcltk \
@@ -1037,68 +1776,113 @@ make
 make install
 \end{verbatim}
 
-It should get installed to \texttt{c:$\backslash$msys$\backslash$local$\backslash$grass-6.3.cvs}
+% It should get installed to
+% \texttt{c:$\backslash$msys$\backslash$local$\backslash$grass-6.3.cvs}
+% 
+% By the way, these pages might be useful:
 
-By the way, these pages might be useful:
+L'installation devrait se faire dans \texttt{c:$\backslash$msys$\backslash$local$\backslash$grass-6.3.cvs}
+
+Ces pages pourraient \^etre utile:
 
 \begin{itemize}
-\item \htmladdnormallink{http://grass.gdf-hannover.de/wiki/WinGRASS\_Current\_Status}{http://grass.gdf-hannover.de/wiki/WinGRASS\_Current\_Status}
-\item \htmladdnormallink{http://geni.ath.cx/grass.html}{http://geni.ath.cx/grass.html}
+\item
+\htmladdnormallink{http://grass.gdf-hannover.de/wiki/WinGRASS\_Current\_Status}{
+http://grass.gdf-hannover.de/wiki/WinGRASS\_Current\_Status}
+\item
+\htmladdnormallink{http://geni.ath.cx/grass.html}{http://geni.ath.cx/grass.html}
 \end{itemize}
 
-\subsubsection{GDAL level two}
-At this stage, we'll use GDAL sources we've used before, only the compilation will be a bit different.
+% \subsubsection{GDAL level two}
+% At this stage, we'll use GDAL sources we've used before, only the compilation
+% will be a bit different.
+% 
+% But first in order to be able to compile GDAL sources with current GRASS CVS,
+% you need to patch them, here's what you need to change:
+% 
+%  \begin{quotation}
+% \htmladdnormallink{
+% http://trac.osgeo.org/gdal/attachment/ticket/1587/plugin\_patch\_grass63.diff}{
+% http://trac.osgeo.org/gdal/attachment/ticket/1587/plugin\_patch\_grass63.diff}
+%  \end{quotation}
+% (you can patch it by hand or use patch.exe in
+% \texttt{c:$\backslash$msys$\backslash$bin})
+% 
+% Now in MSYS console go to the GDAL sources directory and run the same commands
+% as in level one, only with these differences:
 
-But first in order to be able to compile GDAL sources with current GRASS CVS, you need to patch them, here's what you need to change:
+\subsubsection{GDAL \'etape deux}
+\`A cette \'etape nous allons utiliser les sources de GDAL que nous avons utilis\'e pr\'ec\'edemment, seule la compilation diff\`ere.
 
-	\begin{quotation}
-\htmladdnormallink{http://trac.osgeo.org/gdal/attachment/ticket/1587/plugin\_patch\_grass63.diff}{http://trac.osgeo.org/gdal/attachment/ticket/1587/plugin\_patch\_grass63.diff}
-	\end{quotation}
-(you can patch it by hand or use patch.exe in \texttt{c:$\backslash$msys$\backslash$bin})
+Mais d'abord, vous devez pouvoir compiler GDAL avec le CVS actuel de GRASS en le fixant avec:
 
-Now in MSYS console go to the GDAL sources directory and run the same commands as in level one, only with these differences:
+ \begin{quotation}
+\htmladdnormallink{
+http://trac.osgeo.org/gdal/attachment/ticket/1587/plugin\_patch\_grass63.diff}{
+http://trac.osgeo.org/gdal/attachment/ticket/1587/plugin\_patch\_grass63.diff}
+ \end{quotation}
+(vous pouvez les fixer \`a la main ou avec patch.exe dans \texttt{c:$\backslash$msys$\backslash$bin})
+
+maintenant dans la console MSYS allez dans le r\'epertoire des sources de GDAL et lancez les m\^emes commandes que l'\'etape une, avec une diff\'erence:
 
 \begin{verbatim}
-1) when running ./configure add this argument:
+1)rajoutez cet argument lors de ./configure:
 --with-grass=/usr/local/grass-6.3.cvs
 
-2) when calling g++ on line 5 (which creates libgdal.dll), add these arguments: 
--L/usr/local/grass-6.3.cvs/lib -lgrass\_vect -lgrass\_dig2 -lgrass\_dgl -lgrass\_rtree \
--lgrass\_linkm -lgrass\_dbmiclient -lgrass\_dbmibase -lgrass\_I -lgrass\_gproj \ 
+2) quand vous faites appel \`a g++ \`a la ligne 5 (ce qui cr\'ee libgdal.dll), ajoutez ces arguments: 
+-L/usr/local/grass-6.3.cvs/lib -lgrass\_vect -lgrass\_dig2 -lgrass\_dgl
+-lgrass\_rtree \
+-lgrass\_linkm -lgrass\_dbmiclient -lgrass\_dbmibase -lgrass\_I -lgrass\_gproj
+\ 
 -lgrass\_vask -lgrass\_gmath -lgrass\_gis -lgrass\_datetime}
 \end{verbatim}
 
-Then again, edit \texttt{gdal-config} and change line with CONFIG\_LIBS
+% Then again, edit \texttt{gdal-config} and change line with CONFIG\_LIBS
+Puis encore une fois \'editez \texttt{gdal-config} et changez la ligne CONFIG\_LIBS
 
 \begin{verbatim}
-CONFIG_LIBS="-L/usr/local/lib -lpng -L/usr/local/grass-6.3.cvs/lib -lgrass_vect \
+CONFIG_LIBS="-L/usr/local/lib -lpng -L/usr/local/grass-6.3.cvs/lib -lgrass_vect
+\
 -lgrass_dig2 -lgrass_dgl -lgrass_rtree -lgrass_linkm -lgrass_dbmiclient \
--lgrass_dbmibase -lgrass_I -lgrass_gproj -lgrass_vask -lgrass_gmath -lgrass_gis \
+-lgrass_dbmibase -lgrass_I -lgrass_gproj -lgrass_vask -lgrass_gmath -lgrass_gis
+\
 -lgrass_datetime -lz -L/usr/local/lib -lgdal" 
 \end{verbatim}
 
-Now, GDAL should be able to work also with GRASS raster layers.
+% Now, GDAL should be able to work also with GRASS raster layers.
+Maintenant GDAL devrait fonctionner avec les couches vecteurs de GRASS.
+
+% \subsubsection{GEOS}
+% Download the sources:
+% 
+% \url{http://geos.refractions.net/geos-2.2.3.tar.bz2}
+% 
+% Unpack to e.g. \texttt{c:$\backslash$msys$\backslash$local$\backslash$src}
+% 
+% To compile, I had to patch the sources: in file
+% \texttt{source/headers/timeval.h} line 13.
+% Change it from:
 
 \subsubsection{GEOS}
-Download the sources:
+T\'el\'echargez les sources depuis:
 
 \url{http://geos.refractions.net/geos-2.2.3.tar.bz2}
 
-Unpack to e.g. \texttt{c:$\backslash$msys$\backslash$local$\backslash$src}
+Extrayez les vers \texttt{c:$\backslash$msys$\backslash$local$\backslash$src}
 
-To compile, I had to patch the sources: in file \texttt{source/headers/timeval.h} line 13.
-Change it from:
+Pour compiler, j'ai du changer le fichier \texttt{source/headers/timeval.h} \`a la ligne 13:
 
 \begin{verbatim}
 #ifdef _WIN32
 \end{verbatim}
-to:
+vers:
 
 \begin{verbatim}
 #if defined(_WIN32) && defined(_MSC_VER)
 \end{verbatim}
 
-Now, in MSYS console, go to the source directory and run:
+% Now, in MSYS console, go to the source directory and run:
+Dans la console MSYS, allez dans le r\'epertoire source et faites:
 
 \begin{verbatim}
 ./configure --prefix=/usr/local
@@ -1106,30 +1890,58 @@ make
 make install
 \end{verbatim}
 
+% \subsubsection{SQLITE}
+% You can use precompiled DLL, no need to compile from source:
+% 
+% Download this archive:
+% 
+% 
+% \url{http://www.sqlite.org/sqlitedll-3\_3\_17.zip}
+% 
+% and copy sqlite3.dll from it to
+% \texttt{c:$\backslash$msys$\backslash$local$\backslash$lib}
+% 
+% Then download this archive:
+% 
+% \url{http://www.sqlite.org/sqlite-source-3\_3\_17.zip}
+% 
+% and copy sqlite3.h to
+% \texttt{c:$\backslash$msys$\backslash$local$\backslash$include}
+
 \subsubsection{SQLITE}
-You can use precompiled DLL, no need to compile from source:
-
-Download this archive:
-
-
+Vous pouvez utiliser la DLL pr\'ecompil\'e en t\'el\'echargeant cette archive:
 \url{http://www.sqlite.org/sqlitedll-3\_3\_17.zip}
 
-and copy sqlite3.dll from it to \texttt{c:$\backslash$msys$\backslash$local$\backslash$lib}
+et copiez sqlite3.dll vers \texttt{c:$\backslash$msys$\backslash$local$\backslash$lib}
 
-Then download this archive:
+Puis t\'el\'echarger:
 
 \url{http://www.sqlite.org/sqlite-source-3\_3\_17.zip}
 
-and copy sqlite3.h to \texttt{c:$\backslash$msys$\backslash$local$\backslash$include}
+et copiez sqlite3.h vers \texttt{c:$\backslash$msys$\backslash$local$\backslash$include}
 
+% \subsubsection{GSL}
+% Download sources:
+% 
+% \url{ftp://ftp.gnu.org/gnu/gsl/gsl-1.9.tar.gz}
+% 
+% Unpack to \texttt{c:$\backslash$msys$\backslash$local$\backslash$src}
+% 
+% Run from MSYS console in the source directory:
+% 
+% \begin{verbatim}
+% ./configure
+% make
+% make install
+% \end{verbatim}
 \subsubsection{GSL}
-Download sources:
+Sources \`a t\'el\'echarger:
 
 \url{ftp://ftp.gnu.org/gnu/gsl/gsl-1.9.tar.gz}
 
-Unpack to \texttt{c:$\backslash$msys$\backslash$local$\backslash$src}
+A extraire vers \texttt{c:$\backslash$msys$\backslash$local$\backslash$src}
 
-Run from MSYS console in the source directory:
+Allez dans le r\'epertoire des sources via la console MSYS:
 
 \begin{verbatim}
 ./configure
@@ -1137,14 +1949,29 @@ make
 make install
 \end{verbatim}
 
+% \subsubsection{EXPAT}
+% Download sources:
+% 
+% \url{http://dfn.dl.sourceforge.net/sourceforge/expat/expat-2.0.0.tar.gz}
+% 
+% Unpack to \texttt{c:$\backslash$msys$\backslash$local$\backslash$src}
+% 
+% Run from MSYS console in the source directory:
+% 
+% \begin{verbatim}
+% ./configure
+% make
+% make install
+% \end{verbatim}
+
 \subsubsection{EXPAT}
-Download sources:
+T\'el\'echargez les sources:
 
 \url{http://dfn.dl.sourceforge.net/sourceforge/expat/expat-2.0.0.tar.gz}
 
-Unpack to \texttt{c:$\backslash$msys$\backslash$local$\backslash$src}
+Extrayez vers \texttt{c:$\backslash$msys$\backslash$local$\backslash$src}
 
-Run from MSYS console in the source directory:
+Allez dans le r\'epertoire des sources via la console MSYS:
 
 \begin{verbatim}
 ./configure
@@ -1152,95 +1979,171 @@ make
 make install
 \end{verbatim}
 
+% \subsubsection{POSTGRES}
+% We're going to use precompiled binaries. Use the link below for download:
+% 
+% \begin{verbatim}
+% http://wwwmaster.postgresql.org/download/mirrors-ftp?file=\%2Fbinary\%2Fv8.2.4\%
+% 2Fwin32 \
+% \%2Fpostgresql-8.2.4-1-binaries-no-installer.zip
+% \end{verbatim}
+% 
+% copy contents of pgsql directory from the archive to
+% \texttt{c:$\backslash$msys$\backslash$local}
+
 \subsubsection{POSTGRES}
-We're going to use precompiled binaries. Use the link below for download:
+On va utiliser les binaires pr\'ecompil\'es que vous pouvez t\'el\'echarger ici:
 
 \begin{verbatim}
-http://wwwmaster.postgresql.org/download/mirrors-ftp?file=\%2Fbinary\%2Fv8.2.4\%2Fwin32 \
+http://wwwmaster.postgresql.org/download/mirrors-ftp?file=\%2Fbinary\%2Fv8.2.4\%
+2Fwin32 \
 \%2Fpostgresql-8.2.4-1-binaries-no-installer.zip
 \end{verbatim}
 
-copy contents of pgsql directory from the archive to \texttt{c:$\backslash$msys$\backslash$local}
+copiez le contenu du r\'epertoire pgsql depuis l'archive vers \texttt{c:$\backslash$msys$\backslash$local}
 
-\subsection{Cleanup}
-We're done with preparation of MSYS environment. Now you can delete all stuff in \texttt{c:$\backslash$msys$\backslash$local$\backslash$src} - it takes quite a lot
-of space and it's not necessary at all.
+% \subsection{Cleanup}
+% We're done with preparation of MSYS environment. Now you can delete all stuff in
+% \texttt{c:$\backslash$msys$\backslash$local$\backslash$src} - it takes quite a
+% lot
+% of space and it's not necessary at all.
 
+\subsection{Nettoyage}
+Nous avons termin\'e la cr\'eation d'un environnement MSYS, vous pouvez effacer tout ce qui ce trouve dans \texttt{c:$\backslash$msys$\backslash$local$\backslash$src},ce n'est plus utile et g\^ache de l'espace disque.
 
-\section{Building with MS Visual Studio}
-/!$\backslash$ This section describes a process where you build all dependencies yourself. See the section
-after this for a simpler procedure where we have all the dependencies you need pre-packaged
-and we focus just on getting Visual Studio Express set up and building QGIS.
+% \section{Building with MS Visual Studio}
+% /!$\backslash$ This section describes a process where you build all dependencies
+% yourself. See the section
+% after this for a simpler procedure where we have all the dependencies you need
+% pre-packaged
+% and we focus just on getting Visual Studio Express set up and building QGIS.
+% 
+% \textbf{Note:} that this does not currently include GRASS or Python plugins.
 
-\textbf{Note:} that this does not currently include GRASS or Python plugins.
+\section{Compiler avec MS Visual Studio}
+/!$\backslash$ Cette section d\'ecrit comment compiler soi-m\^eme toutes les d\'ependances. Lisez la prochaine section pour une proc\'edure plus simple o\`u toutes les d\'ependances sont d\'ej\`a pr\'epar\'ees.
 
-\subsection{Setup Visual Studio}
-This section describes the setup required to allow Visual Studio to be used to build QGIS. 
+\textbf{Note:} Cela n'inclut actuellement pas GRASS et Python.
+
+% \subsection{Setup Visual Studio}
+% This section describes the setup required to allow Visual Studio to be used to
+% build QGIS. 
+
+\subsection{Installer Visual Studio}
+Cette sous-section d\'ecrit comment mettre en place MS Visual Studio. 
+
+% \subsubsection{Express Edition}
+% The free Express Edition lacks the platform SDK which contains headers and so on
+% that are needed when building QGIS. The platform SDK can be installed as
+% described here:
 
 \subsubsection{Express Edition}
-The free Express Edition lacks the platform SDK which contains headers and so on that are needed when building QGIS. The platform SDK can be installed as described here:
-
+La version Express est gratuite mais ne dispose pas du SDK qui contient les en-t\^etes qui sont indispensables \`a la compilation de QGIS. Le SDK peut \^etre install\'e comme d\'ecrit ici:
 
 \url{http://msdn.microsoft.com/vstudio/express/visualc/usingpsdk/}
 
-Once this is done, you will need to edit the $<$vsinstalldir$>$$\backslash$Common7$\backslash$Tools$\backslash$vsvars file as follows:
+% Once this is done, you will need to edit the
+% $<$vsinstalldir$>$$\backslash$Common7$\backslash$Tools$\backslash$vsvars file as
+% follows:
+% 
+%  \begin{quotation}
+% Add \texttt{\%PlatformSDKDir\%$\backslash$Include$\backslash$atl} and
+% \texttt{\%PlatformSDKDir\%$\backslash$Include$\backslash$mfc} to the
+% \texttt{@set INCLUDE} entry.
+%  \end{quotation}
+% This will add more headers to the system INCLUDE path. \textbf{Note:} that this
+% will only work when you use the Visual Studio command prompt when building. Most
+% of the dependencies will be built with this.
+% You will also need to perform the edits described here to remove the need for a
+% library that Visual Studio Express lacks:
+% 
+% \url{http://www.codeproject.com/wtl/WTLExpress.asp}
 
-	\begin{quotation}
-Add \texttt{\%PlatformSDKDir\%$\backslash$Include$\backslash$atl} and \texttt{\%PlatformSDKDir\%$\backslash$Include$\backslash$mfc} to the \texttt{@set INCLUDE} entry.
-	\end{quotation}
-This will add more headers to the system INCLUDE path. \textbf{Note:} that this will only work when you use the Visual Studio command prompt when building. Most of the dependencies will be built with this.
-You will also need to perform the edits described here to remove the need for a library that Visual Studio Express lacks:
+Une fois cela fait, vous devez \'editez le fichier $<$vsinstalldir$>$$\backslash$Common7$\backslash$Tools$\backslash$vsvars comme il suit:
+
+ \begin{quotation}
+Ajoutez \texttt{\%PlatformSDKDir\%$\backslash$Include$\backslash$atl} et \texttt{\%PlatformSDKDir\%$\backslash$Include$\backslash$mfc} \`a l'entr\'ee \texttt{@set INCLUDE}.
+ \end{quotation}
+Cela ajoutera plus d'en-t\^etes dans le chemin INCLUDE du syst\`eme. \textbf{Note:} Cela ne fonctionne que si vous utilisez la console de commandes quand vous compilez avec Visual Studio. Vous devez \'egalement faire une modification pour pallier l'absence d'une biblioth\`eque dans Visual Studio Express:
 
 \url{http://www.codeproject.com/wtl/WTLExpress.asp}
 
+% \subsubsection{All Editions}
+% You will need stdint.h and unistd.h. unistd.h comes with GnuWin32 version of
+% flex \& bison binaries (see later). stdint.h can be found here:
+% 
+% \url{http://www.azillionmonkeys.com/qed/pstdint.h}
+% 
+% Copy both of these to $<$vsinstalldir$>$$\backslash$VC$\backslash$include.
 
-\subsubsection{All Editions}
-You will need stdint.h and unistd.h. unistd.h comes with GnuWin32 version of flex \& bison binaries (see later). stdint.h can be found here:
+\subsubsection{Toutes les \'Editions}
+Vous avez besoin de stdint.h et unistd.h. unistd.h vient avec la version GnuWin32 des binaires de flex \& bison (\`a voir par la suite). stdint.h peut se trouver ici:
 
 \url{http://www.azillionmonkeys.com/qed/pstdint.h}
 
-Copy both of these to $<$vsinstalldir$>$$\backslash$VC$\backslash$include.
+Copiez les deux vers $<$vsinstalldir$>$$\backslash$VC$\backslash$include.
 
-\subsection{Download/Install Dependencies}
-This section describes the downloading and installation of the various QGIS dependencies.
+% \subsection{Download/Install Dependencies}
+% This section describes the downloading and installation of the various QGIS
+% dependencies.
 
-\subsubsection{Flex and Bison}
-Flex and Bison are tools for generation of parsers, they're needed for GRASS and also QGIS compilation.
+\subsection{T\'el\'echarger/Installer les D\'ependances}
+Cette section d\'ecrit le t\'el\'echargement et l'installation des diff\'erentes d\'ependances de QGIS.
 
-Download the following packages and run the installers:
+% \subsubsection{Flex and Bison}
+% Flex and Bison are tools for generation of parsers, they're needed for GRASS and
+% also QGIS compilation.
+% 
+% Download the following packages and run the installers:
+
+\subsubsection{Flex et Bison}
+T\'el\'echarger les paquets suivants et lancez les installateurs:
 
 \url{http://gnuwin32.sourceforge.net/downlinks/flex.php} \\
 \url{http://gnuwin32.sourceforge.net/downlinks/bison.php}
 
-\subsubsection{To include  PostgreSQL support in Qt}
-If you want to build Qt with PostgreSQL support you need to download
-PostgreSQL, install it and create a library you can later link with Qt.
+% \subsubsection{To include  PostgreSQL support in Qt}
+% If you want to build Qt with PostgreSQL support you need to download
+% PostgreSQL, install it and create a library you can later link with Qt.
+% 
+% Download from .../binary/v8.2.5/win32/postgresql-8.2.5-1.zip from an
+% PostgreSQL.org Mirror and install.
+% 
+% PostgreSQL is currently build with MinGW and comes with headers and libraries
+% for MinGW.  The headers can be used with Visual C++ out of the box, but the
+% library
+% is only shipped in DLL and archive (.a) form and therefore cannot be used with
+% Visual C++ directly.
+% 
+% To create a library copy following sed script to the file mkdef.sed in
+% PostgreSQL lib directory:
 
-Download from .../binary/v8.2.5/win32/postgresql-8.2.5-1.zip from an
-PostgreSQL.org Mirror and install.
+\subsubsection{Pour inclure le support de PostgreSQL dans Qt}
+Vous devez t\'el\'echarger PostgreSQL, l'installer et cr\'eer une biblioth\`eque que vous pourrez ensuite lier \`a Qt.
 
-PostgreSQL is currently build with MinGW and comes with headers and libraries
-for MinGW.  The headers can be used with Visual C++ out of the box, but the library
-is only shipped in DLL and archive (.a) form and therefore cannot be used with
+T\'el\'echargez  .../binary/v8.2.5/win32/postgresql-8.2.5-1.zip depuis un serveur de PostgreSQL.org.
+
+PostgreSQL est actuellement compil\'e avec MinGW et dispose d'en-t\^etes et une biblioth\`eque pour MinGW.   Les en-t\^etes peuvent \^etre utilis\'es directement avec Visual C++ mais la biblioth\`eque est seulement fournit sous forme DLL ou archive (.a) et ne peut donc pas \^etre utilis\'es directement avec VC++.
 Visual C++ directly.
 
-To create a library copy following sed script to the file mkdef.sed in
-PostgreSQL lib directory:
+Pour cr\'eer une biblioth\`eque, copiez le script sed suivant dans le fichier mkdef.sed dans r\'epertoire lib de PostgreSQL:
 
 \begin{verbatim}
 /Dump of file / {
-	s/Dump of file \([^	 ]*\)$/LIBRARY \1/p
-	a\
+ s/Dump of file \([^  ]*\)$/LIBRARY \1/p
+ a\
 EXPORTS
 }
-/[ 	]*ordinal hint/,/^[	]*Summary/ {
- /^[ 	]\+[0-9]\+/ {
-   s/^[ 	]\+[0-9]\+[ 	]\+[0-9A-Fa-f]\+[ 	]\+[0-9A-Fa-f]\+[ 	]\+\([^ 	=]\+\).*$/	\1/p
+/[  ]*ordinal hint/,/^[ ]*Summary/ {
+ /^[  ]\+[0-9]\+/ {
+   s/^[  ]\+[0-9]\+[  ]\+[0-9A-Fa-f]\+[  ]\+[0-9A-Fa-f]\+[ 
+]\+\([^  =]\+\).*$/ \1/p
  }
 }
 \end{verbatim}
 
-and process execute in the Visual Studio C++ command line (from Programs menu):
+% and process execute in the Visual Studio C++ command line (from Programs menu):
+et \'exucter ces commandes dans la console de Visual Studio C++:
 
 \begin{verbatim}
 cd c:\Program Files\PostgreSQL\8.2\bin
@@ -1249,27 +2152,49 @@ cd ..\lib
 lib /def:libpq.def /machine:x86
 \end{verbatim}
 
-You'll need an sed for that to work in your path (e.g. from cygwin or msys).
+% You'll need an sed for that to work in your path (e.g. from cygwin or msys).
+% 
+% That's almost it. You only need to the include and lib path to INCLUDE and LIB
+% in vcvars.bat respectively.
 
-That's almost it. You only need to the include and lib path to INCLUDE and LIB in vcvars.bat respectively.
+Vous aurez besoin de sed pour que \c{c}a marche (e.g. venant de cygwin ou de msys).
+
+On y est presque. Vous devez modifier les chemins INCLUDE et LIB dans vcvars.bat.
 
 \subsubsection{Qt}
-Build Qt following the instructions here:
+% Build Qt following the instructions here:
+Compiler Qt avec ces instructions:
 
-\url{http://wiki.qgis.org/qgiswiki/Building\_QT\_4\_with\_Visual\_C\%2B\%2B\_2005}
+\url{
+http://wiki.qgis.org/qgiswiki/Building\_QT\_4\_with\_Visual\_C\%2B\%2B\_2005}
+
+% \subsubsection{Proj.4}
+% Get proj.4 source from here:
+% 
+% \url{http://proj.maptools.org/}
+% 
+% Using the Visual Studio command prompt (ensures the environment is setup
+% properly), run the following in the src directory:
+% 
+% \begin{verbatim}
+% nmake -f makefile.vc
+% \end{verbatim}
+% 
+% Install by running the following in the top level directory setting PROJ\_DIR as
+% appropriate:
 
 \subsubsection{Proj.4}
-Get proj.4 source from here:
+T\'el\'echargez les sources de proj.4 source depuis:
 
 \url{http://proj.maptools.org/}
 
-Using the Visual Studio command prompt (ensures the environment is setup properly), run the following in the src directory:
+Avec la commande de Visual Studio, ex\'ecutez ce qui suit dans le r\'epertoire src:
 
 \begin{verbatim}
 nmake -f makefile.vc
 \end{verbatim}
 
-Install by running the following in the top level directory setting PROJ\_DIR as appropriate:
+Installez en lan\c{c}ant les commandes suivantes dans le r\'epertoire sup\'erieur pour configurer correctement PROJ\_DIR:
 
 \begin{verbatim}
 set PROJ_DIR=c:\lib\proj
@@ -1284,32 +2209,61 @@ copy src\*.h %PROJ_DIR%\include
 copy src\*.lib %PROJ_DIR%\lib 
 \end{verbatim}
 
-This can also be added to a batch file.
+Vous pouvez rassembler ces commandes dans un script.
+
+% \subsubsection{GSL}
+% Get gsl source from here:
+% 
+% \url{http://david.geldreich.free.fr/downloads/gsl-1.9-windows-sources.zip}
+% 
+% Build using the gsl.sln file
 
 \subsubsection{GSL}
-Get gsl source from here:
+A t\'el\'echarger depuis:
 
 \url{http://david.geldreich.free.fr/downloads/gsl-1.9-windows-sources.zip}
 
-Build using the gsl.sln file
+Compilez en utilisant le fichier gsl.sln.
+
+% \subsubsection{GEOS}
+% Get geos from svn (svn checkout
+% \htmladdnormallink{http://svn.refractions.net/geos/trunk}{
+% http://svn.refractions.net/geos/trunk} geos).
+% Edit geos$\backslash$source$\backslash$makefile.vc as follows:
+% 
+% Uncomment lines 333 and 334 to allow the copying of version.h.vc to version.h.
+% 
+% Uncomment lines 338 and 339.
+% 
+% Rename geos\_c.h.vc to geos\_c.h.in on lines 338 and 339 to allow the copying of
+% geos\_c.h.in to geos\_c.h.
+% 
+% Using the Visual Studio command prompt (ensures the environment is setup
+% properly), run the following in the top level directory:
+% 
+% \begin{verbatim}
+% nmake -f makefile.vc 
+% \end{verbatim}
+% 
+% Run the following in top level directory, setting GEOS\_DIR as appropriate:
 
 \subsubsection{GEOS}
-Get geos from svn (svn checkout \htmladdnormallink{http://svn.refractions.net/geos/trunk}{http://svn.refractions.net/geos/trunk} geos).
-Edit geos$\backslash$source$\backslash$makefile.vc as follows:
+T\'el\'echargez geos depuis svn (svn checkout \htmladdnormallink{http://svn.refractions.net/geos/trunk}{http://svn.refractions.net/geos/trunk} geos).
+Editez geos$\backslash$source$\backslash$makefile.vc comme il suit:
 
-Uncomment lines 333 and 334 to allow the copying of version.h.vc to version.h.
+D\'ecommentez les lignes 333 et 334 pour permettre de copier de la version.h.vc vers la version.h.
 
-Uncomment lines 338 and 339.
+D\'ecommentez les lignes 338 et 339.
 
-Rename geos\_c.h.vc to geos\_c.h.in on lines 338 and 339 to allow the copying of geos\_c.h.in to geos\_c.h.
+Renommez geos\_c.h.vc vers geos\_c.h.in aux lignes 338 and 339 pour permettre de copier geos\_c.h.in vers geos\_c.h.
 
-Using the Visual Studio command prompt (ensures the environment is setup properly), run the following in the top level directory:
+Avec la commande de Visual Studio (assurez que l'environnement est bien configur\'e), lancez \c{c}a dans le r\'epertoire sup\'erieur:
 
 \begin{verbatim}
 nmake -f makefile.vc 
 \end{verbatim}
 
-Run the following in top level directory, setting GEOS\_DIR as appropriate:
+Lancez les commandes suivantes dans le r\'epertoire sup\'erieur pour configurer correctement GEOS\_DIR:
 
 \begin{verbatim}
 set GEOS_DIR="c:\lib\geos"
@@ -1324,167 +2278,172 @@ copy /Y source\*.lib %GEOS_DIR%\lib
 copy /Y source\*.dll %GEOS_DIR%\bin
 \end{verbatim}
 
-This can also be added to a batch file.
-
 \subsubsection{GDAL}
-Get gdal from svn (svn checkout \htmladdnormallink{https://svn.osgeo.org/gdal/branches/1.4/gdal}{https://svn.osgeo.org/gdal/branches/1.4/gdal} gdal).
+T\'el\'echargez gdal depuis svn(svn checkout \htmladdnormallink{https://svn.osgeo.org/gdal/branches/1.4/gdal}{https://svn.osgeo.org/gdal/branches/1.4/gdal} gdal).
 
-Edit nmake.opt to suit, it's pretty well commented.
+Editez nmake.opt pour qu'il s'int\`egre correctement, le tout est assez bien comment\'e.
 
-Using the Visual Studio command prompt (ensures the environment is setup properly), run the following in the top level directory:
+Avec la commande de Visual Studio (assurez que l'environnement est bien configur\'e), lancez \c{c}a dans le r\'epertoire sup\'erieur:
 
 \begin{verbatim}
 nmake -f makefile.vc 
 \end{verbatim}
 
-and
+et
 
 \begin{verbatim}
 nmake -f makefile.vc devinstall 
 \end{verbatim}
 
 \subsubsection{PostGIS}
-Get PostGIS and the Windows version of PostgreSQL from here:
+T\'el\'echarger la version Windows de PostgreSQl et PostGIS ici:
 
 \url{http://postgis.refractions.net/download/}
 
-\textbf{Note:} the warning about not installing the version of PostGIS that comes with the PostgreSQL installer. Simply run the installers.
+\textbf{Note:} the warning about not installing the version of PostGIS that
+comes with the PostgreSQL installer. Simply run the installers.
 
 \subsubsection{Expat}
-Get expat from here:
+T\'el\'echargez Expat depuis:
 
 \url{http://sourceforge.net/project/showfiles.php?group\_id=10127}
 
-You'll need expat-win32bin-2.0.1.exe.
+Vous avez besoin de expat-win32bin-2.0.1.exe.
 
-Simply run the executable to install expat.
+Lancez l'ex\'ecutable pour installer expat.
 
 \subsubsection{CMake}
-Get CMake from here:
-
+T\'el\'echarger CMake depuis:
 
 \url{http://www.cmake.org/HTML/Download.html}
 
-You'll need cmake-$<$version$>$-win32-x86.exe. Simply run this to install CMake.
+Vous avez besoin de cmake-$<$version$>$-win32-x86.exe. Lancez-le pour installer CMake.
 
 \subsection{Building QGIS with CMAKE}
-Get QGIS source from svn (svn co \htmladdnormallink{https://svn.osgeo.org/qgis/trunk/qgis}{https://svn.osgeo.org/qgis/trunk/qgis} qgis).
+T\'el\'echargez les sources QGIS depuis svn (svn co \htmladdnormallink{https://svn.osgeo.org/qgis/trunk/qgis}{https://svn.osgeo.org/qgis/trunk/qgis} qgis).
 
-Create a 'Build' directory in the top level QGIS directory. This will be where all the build output will be generated.
+Cr\'eer un r\'epertoire 'Build' dans le dossier sup\'erieur de QGIS pour accueillir le r\'esultat de la compilation.
 
-Run Start--$>$All Programs--$>$CMake--$>$CMake. 
+Cliquez sur D\'emarrer--$>$Tout les programmes--$>$CMake--$>$CMake. 
 
-In the 'Where is the source code:' box, browse to the top level QGIS directory.
+% In the 'Where is the source code:' box, browse to the top level QGIS directory.
+% 
+% In the 'Where to build the binaries:' box, browse to the 'Build' directory you
+% created in the top level QGIS directory.
+% 
+% Fill in the various *\_INCLUDE\_DIR and *\_LIBRARY entries in the 'Cache Values'
+% list.
+% 
+% Click the Configure button. You will be prompted for the type of makefile that
+% will be generated. Select Visual Studio 8 2005 and click OK.
+% 
+% All being well, configuration should complete without errors. If there are
+% errors, it is usually due to an incorrect path to a header or library directory.
+% Failed items will be shown in red in the list.
 
-In the 'Where to build the binaries:' box, browse to the 'Build' directory you created in the top level QGIS directory.
+Dans la bo\^ite 'Where is the source code:', allez jusqu'au r\'epertoire sup\'erieur de QGIS.
 
-Fill in the various *\_INCLUDE\_DIR and *\_LIBRARY entries in the 'Cache Values' list.
+Dans la bo\^ite 'Where to build the binaries:', allez dans ler\'epertoire 'Build' que vous avez cr\'e\'e.
 
-Click the Configure button. You will be prompted for the type of makefile that will be generated. Select Visual Studio 8 2005 and click OK.
+Remplissez les diff\'erentes entr\'ees *\_INCLUDE\_DIR et *\_LIBRARY dans la liste 'Cache Values'.
 
-All being well, configuration should complete without errors. If there are errors, it is usually due to an incorrect path to a header or library directory. Failed items will be shown in red in the list.
+Cliquez le bouton Configure. Il vous est demand\'e quel type de makefile va \^etre g\'en\'er\'e, s\'electionnez Visual Studio 8 2005 et cliquez OK.
 
-Once configuration completes without error, click OK to generate the solution and project files.
+Si tout va bien la compilation devrait se faire sans erreurs. Si il y en a, c'esthabituellement d\^u \`a un chemin incorrect vers le r\'epertoire de l'en-t\^ete ou de la biblioth\`eque. Les objets qui ont \'echou\'e sont marqu\'es en rouge.
 
-With Visual Studio 2005, open the qgis.sln file that will have been created in the Build directory you created earlier.
+% Once configuration completes without error, click OK to generate the solution
+% and project files.
+% 
+% With Visual Studio 2005, open the qgis.sln file that will have been created in
+% the Build directory you created earlier.
+% 
+% Build the ALL\_BUILD project. This will build all the QGIS binaries along with
+% all the plugins.
+% 
+%  Install QGIS by building the INSTALL project. By default this will install to
+% c:$\backslash$Program Files$\backslash$qgis$<$version$>$ (this can be changed by
+% changing the CMAKE\_INSTALL\_PREFIX variable in CMake). 
+% 
+%  You will also either need to add all the dependency dlls to the QGIS install
+% directory or add their respective directories to your PATH.
 
-Build the ALL\_BUILD project. This will build all the QGIS binaries along with all the plugins.
+Une fois la configuration correctement termin\'ee, cliquez sur OK pour g\'en\'erer les fichiers de projet.
 
- Install QGIS by building the INSTALL project. By default this will install to c:$\backslash$Program Files$\backslash$qgis$<$version$>$ (this can be changed by changing the CMAKE\_INSTALL\_PREFIX variable in CMake). 
+Avec Visual Studio 2005, ouvrezle fichier qgis.sln qui a \'et\'e cr\'e\'e dans le r\'epertoire 'Build'.
 
- You will also either need to add all the dependency dlls to the QGIS install directory or add their respective directories to your PATH.
+Compiler le projet ALL\_BUILD. Cela compilera tout les binaires QGIS ainsi que toutes les extensions.
 
-\section{Building under Windows using MSVC Express}
-\textbf{Note:}: Building under MSVC is still a work in progress. In particular the following dont work yet: python, grass, postgis connections.
+Installez QGIS en lan\c{c}ant le projet INSTALL. Par d\'efaut, l'installation se fera dans c:$\backslash$Program Files$\backslash$qgis$<$version$>$ (ce qui peut \^etre chang\'e avec la variable CMAKE\_INSTALL\_PREFIX de CMake). 
 
-/!$\backslash$ This section of the document is in draft form and is not ready to be used yet.
+Vous allez aussi avoir besoin d'ajouter toutes les DLLs des d\'ependances dans le r\'epertoire d'installation de QGIS ou bien ajouter leurs r\'epertoires respectifs dans votre chemin (PATH).
+
+\section{Compiler sous Windows avec MSVC Express}
+\textbf{Note:}: Building under MSVC is still a work in progress. In particular
+the following dont work yet: python, grass, postgis connections.
+
+/!$\backslash$ This section of the document is in draft form and is not ready to
+be used yet.
 
 Tim Sutton, 2007
 
-\subsection{System preparation}
-I started with a clean XP install with Service Pack 2 and all patches applied.
-I have already compiled all the dependencies you need for gdal, expat etc,
-so this tutorial wont cover compiling those from source too. Since compiling 
-these dependencies was a somewhat painful task I hope my precompiled libs 
-will be adequate. If not I suggest you consult the individual projects for
-specific build documentation and support. Lets go over the process in a nutshell 
-before we begin:
+\subsection{Pr\'eparation du syst\`eme}
+J'ai commenc\'e avec une installation r\'ecente de Windows XP avec le Service Pack 2 et tous les correctifs appliqu\'es. J'aid\'ej\`a compil\'e toutes les d\'ependances que vous n\'ecessitez pour gdal, expat etc, donc ce guide ne couvrira \'egalement pas leurs compilation depuis les sources. Du fait de la difficult\'e de les compiler, j'esp\`ere que mes binaires vous seront utiles. Dans le cas contraire, je vous conseille de consulter les documentations sp\'ecifiques des diff\'erents projets. R\'esumons rapidement le processus avant de commencer:
 
- * Install XP (I used a Parallels virtual machine)
- * Install the premade libraries archive I have made for you
- * Install Visual Studio Express 2005 sp1
- * Install the Microsoft Platform SDK
- * Install command line subversion client
- * Install library dependencies bundle
- * Install Qt 4.3.2
- * Check out QGIS sources
- * Compile QGIS
- * Create setup.exe installer for QGIS
+ * Installer XP 
+ * Installer les binaires que j'ai fait
+ * Installer Visual Studio Express 2005 sp1
+ * Installer le Microsoft Platform SDK
+ * Installer le client console de SVN
+ * Installer l'ensemble des d\'ependances
+ * Installer Qt 4.3.2
+ * obtenir les sources de QGIS
+ * Compiler QGIS
+ * Cr\'eer un installateur setup.exe pour QGIS
 
-\subsection{Install the libraries archive}
-Half of the point of this section of the MSVC setup procedure is to make 
-things as simple as possible for you. To that end I have prepared an
-archive that includes all dependencies needed to build QGIS except Qt 
-(which we will build further down). Fetch the archive from:
+\subsection{Installer les biblioth\`eques}
+Cette proc\'edure a essentiellement pour but de vous simplifier les choses. A cette fin j'ai cr\'e\'e une archive qui inclue  toutes les d\'ependances n\'ecessaires pour compiler QGIS \`a l'exception de Qt (que nous compilerons par la suite). R\'ecup\'erer ce fichier \`a:
 
 \begin{verbatim}
 http://qgis.org/uploadfiles/msvc/qgis_msvc_deps_except_qt4.zip
 \end{verbatim}
 
-Create the following directory structure:
+Cr\'eez cette structure de r\'epertoire:
 
 \begin{verbatim}
 c:\dev\cpp\
 \end{verbatim}
 
-And then extract the libraries archive into a subdirectory of the above
-directory so that you end up with:
+Extrayez l'archive dans un sous-r\'epertoire de mani\`ere \`a avoir:
 
 \begin{verbatim}
 c:\dev\cpp\qgislibs-release
 \end{verbatim}
 
-\textbf{Note:} that you are not obliged to use this directory layout, but you 
-should adjust any instructions that follow if you plan to do things 
-differently.
+\textbf{Note:} vous n'\^etes pas oblig\'es se suivre cette structure, mais dans ce cas vous devrez adapt\'e les instructions qui suivent.
 
-\subsection{Install Visual Studio Express 2005}
-First thing we need to get is MSVC Express from here:
+\subsection{Installer Visual Studio Express 2005}
+la premi\`ere chose \`a faire est de t\'el\'echarger MSVC Express depuis:
 
-\htmladdnormallink{http://msdn2.microsoft.com/en-us/express/aa975050.aspx}{http://msdn2.microsoft.com/en-us/express/aa975050.aspx}
+\htmladdnormallink{http://msdn2.microsoft.com/en-us/express/aa975050.aspx}{
+http://msdn2.microsoft.com/en-us/express/aa975050.aspx}
 
-The page is really confusing so dont feel bad if you cant actually find the 
-download at first! There are six coloured blocks on the page for the various  
-studio family members (vb / c\# / j\# etc). Simply choose your language under 
-the 'select your language' combo under the yellow C++ block, and your download 
-will begin. Under internet explorer I had to disable popup blocking for the 
-download to be able to commence.
+Voici les options que j'ai choisies :
 
-Once the setup commences you will be prompted with various options. Here is what 
-I chose :
+ * Envoyer les informations d'usage \`a Microsoft (Non)
+ * Options d'installation:
+   * IDE  graphique                      (Oui)
+   * Microsoft MSDN Express Edition        (Non)
+   * Microsoft SQL Server Express Edition  (Non)
+ * Installation vers le dossier C:$\backslash$Program Files$\backslash$Microsoft Visual
+Studio 8$\backslash$   (default)
 
- * Send useage information to Microsoft   (No)
- * Install options:
-   * Graphical IDE                        (Yes)
-   * Microsoft MSDN Express Edition       (No)
-   * Microsoft SQL Server Express Edition (No)
- * Install to folder: C:$\backslash$Program Files$\backslash$Microsoft Visual Studio 8$\backslash$   (default)
+\subsection{Installer Microsoft Platform SDK2}
+Allez \`a cette page:
 
-It will need to download around 90mb of installation files and reports 
-that the install will consume 554mb of disk space.
+\htmladdnormallink{http://msdn2.microsoft.com/en-us/express/aa700755.aspx}{
+http://msdn2.microsoft.com/en-us/express/aa700755.aspx}
 
-\subsection{Install Microsoft Platform SDK2}
-Go to this page:
-
-\htmladdnormallink{http://msdn2.microsoft.com/en-us/express/aa700755.aspx}{http://msdn2.microsoft.com/en-us/express/aa700755.aspx}
-
-Start by using the link provided on the above page to download and install the
-platform SDK2.
-
-The actual SDK download page is once again a bit confusing since the links for 
-downloading are hidden amongst a bunch of other links. Basically look for these 
-three links with their associated 'Download' buttons and choose the correct 
-link for your platform:
+Cherchez ces 3 fichiers et s\'electionnez celui qui correspond \`a votre plateforme:
 
 \begin{verbatim}
 PSDK-amd64.exe  1.2 MB  Download 
@@ -1492,84 +2451,75 @@ PSDK-ia64.exe   1.3 MB  Download
 PSDK-x86.exe    1.2 MB  Download
 \end{verbatim}
 
-When you install make sure to choose 'custom install'. These instructions 
-assume you are installing into the default path of:
+Faites une installation personnalis\'ee et installez le logiciel vers:
 
 \begin{verbatim}
 C:\Program Files\Microsoft Platform SDK for Windows Server 2003 R2\
 \end{verbatim}
 
-We will go for the minimal install that will give us a working environment, 
-so on the custom installation screen I made the following choices:
+Nous allons faire une installation minimale pour avoir un environnement fonctionnel:
 
 \begin{verbatim}
 Configuration Options
-  + Register Environmental Variables            (Yes)
+  + Register Environmental Variables            (Oui)
 Microsoft Windows Core SDK
-  + Tools                                       (Yes)
-    + Tools (AMD 64 Bit)                        (No unless this applies)
-    + Tools (Intel 64 Bit)                      (No unless this applies)
+  + Tools                                       (Oui)
+    + Tools (AMD 64 Bit)                        (Non \`a moins que ce soit le cas)
+    + Tools (Intel 64 Bit)                      (Non \`a moins que ce soit le cas)
   + Build Environment
-    + Build Environment (AMD 64 Bit)            (No unless this applies)
-    + Build Environment (Intel 64 Bit)          (No unless this applies)
-    + Build Environment (x86 32 Bit)            (Yes)
-  + Documentation                               (No)
-  + Redistributable Components                  (Yes)
-  + Sample Code                                 (No)
-  + Source Code                                 (No)
-    + AMD 64 Source                             (No)
-    + Intel 64 Source                           (No)
-Microsoft Web Workshop                          (Yes) (needed for shlwapi.h)
-  + Build Environment                           (Yes)
-  + Documentation                               (No)
-  + Sample Code                                 (No)
-  + Tools                                       (No)
-Microsoft Internet Information Server (IIS) SDK (No)
-Microsoft Data Access Services (MDAC) SDK       (Yes) (needed by GDAL for odbc)
+    + Build Environment (AMD 64 Bit)            (Non \`a moins que ce soit le cas)
+    + Build Environment (Intel 64 Bit)          (Non \`a moins que ce soit le cas)
+    + Build Environment (x86 32 Bit)            (Oui)
+  + Documentation                               (Non)
+  + Redistributable Components                  (Oui)
+  + Sample Code                                 (Non)
+  + Source Code                                 (Non)
+    + AMD 64 Source                             (Non)
+    + Intel 64 Source                           (Non)
+Microsoft Web Workshop                          (Oui) (n\'ecessaire pour shlwapi.h)
+  + Build Environment                           (Oui)
+  + Documentation                               (Non)
+  + Sample Code                                 (Non)
+  + Tools                                       (Non)
+Microsoft Internet Information Server (IIS) SDK (Non)
+Microsoft Data Access Services (MDAC) SDK       (Oui) (n\'ecessaire pour GDAL/odbc)
   + Tools
-    + Tools (AMD 64 Bit)                        (No)
-    + Tools (AMD 64 Bit)                        (No)
-    + Tools (x86 32 Bit)                        (Yes)
+    + Tools (AMD 64 Bit)                        (Non)
+    + Tools (AMD 64 Bit)                        (Non)
+    + Tools (x86 32 Bit)                        (Oui)
   + Build Environment
-    + Tools (AMD 64 Bit)                        (No)
-    + Tools (AMD 64 Bit)                        (No)
-    + Tools (x86 32 Bit)                        (Yes)
-  + Documentation                               (No)
-  + Sample Code                                 (No)
-Microsodt Installer SDK                         (No)
-Microsoft Table PC SDK                          (No)
-Microsoft Windows Management Instrumentation    (No)
-Microsoft DirectShow SDK                        (No)
-Microsoft Media Services SDK                    (No)
-Debuggin Tools for Windows                      (Yes)
+    + Tools (AMD 64 Bit)                        (Non)
+    + Tools (AMD 64 Bit)                        (Non)
+    + Tools (x86 32 Bit)                        (Oui)
+  + Documentation                               (Non)
+  + Sample Code                                 (Non)
+Microsodt Installer SDK                         (Non)
+Microsoft Table PC SDK                          (Non)
+Microsoft Windows Management Instrumentation    (Non)
+Microsoft DirectShow SDK                        (Non)
+Microsoft Media Services SDK                    (Non)
+Debuggin Tools for Windows                      (Oui)
 \end{verbatim}
 
-\textbf{Note:} that you can always come back later to add extra bits if you like.
+\textbf{Note:} vous pouvez toujours rajouter des \'el\'ements de mani\`ere ult\'erieure.
 
-\textbf{Note:} that installing the SDK requires validation with the 
-Microsoft Genuine Advantage application. Some people have a philosophical 
-objection to installing this software on their computers. If you are one 
-of them you should probably consider using the MINGW build instructions 
-described elsewhere in this document.
+\textbf{Note:} l'installation du SDk requiert la validation du Microsoft Genuine Advantage application. Si vous ne pouvez ou ne voulez pas, il vous faudra recourir aux instructions de compilations avec MINGW  de ce document.
 
-The SDK installs a directory called
+Le SDK cr\'e\'e un r\'epertoire nomm\'e
 
 \begin{verbatim}
 C:\Office10
 \end{verbatim}
 
-Which you can safely remove.
+Que vous pouvez effacer sans crainte.
 
-After the SDK is installed, follow the remaining notes on the page link 
-above to get your MSVC Express environment configured correctly. For your 
-convenience, these are summarised again below, and I have added a couple 
-more paths that I discovered were needed:
+Apr\`es son installation, suivez les notes restantes sur la page indiqu\'ee pr\'ec\'edemment pour finir la configuration de votre environnement MSVC Express. Pour votre confort, voici un bref r\'esum\'e de ces \'etapes avec quelques autres d\'etails:
 
-1) open Visual Studio Express IDE
+1) Ouvrez Visual Studio Express IDE
 
 2) Tools -$>$ Options -$>$ Projects and Solutions -$>$ VC++ Directories
 
-3) Add:
+3) Ajoutez:
 
 \begin{verbatim}
 Executable files: 
@@ -1579,41 +2529,42 @@ Include files:
   C:\Program Files\Microsoft Platform SDK for Windows Server 2003 R2\Include
   C:\Program Files\Microsoft Platform SDK for Windows Server 2003 R2\Include\atl
   C:\Program Files\Microsoft Platform SDK for Windows Server 2003 R2\Include\mfc
-Library files: C:\Program Files\Microsoft Platform SDK for Windows Server 2003 R2\Lib
+Library files: C:\Program Files\Microsoft Platform SDK for Windows Server 2003
+R2\Lib
 \end{verbatim}
 
-4) Close MSVC Express IDE
+4) Fermer MSVC Express IDE
 
-5) Open the following file with notepad:
+5) Ouvrez le fichier suivant avec notepad:
 
 \begin{verbatim}
-C:\Program Files\Microsoft Visual Studio 8\VC\VCProjectDefaults\corewin_express.vsprops
+C:\Program Files\Microsoft Visual Studio
+8\VC\VCProjectDefaults\corewin_express.vsprops
 \end{verbatim}
 
-and change the property:
+et changez la propri\'et\'e:
 
 \begin{verbatim}
 AdditionalDependencies="kernel32.lib"
 \end{verbatim}
 
-To read:
+Pour:
 
 \begin{verbatim}
-AdditionalDependencies="kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib 
-                        advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib"
+AdditionalDependencies="kernel32.lib user32.lib gdi32.lib winspool.lib
+comdlg32.lib 
+                        advapi32.lib shell32.lib ole32.lib oleaut32.lib
+uuid.lib"
 \end{verbatim}
 
-The notes go on to show how to build a mswin32 application which you can try if you like - 
-I'm not going to recover that here.
-
-\subsection{Edit your vsvars}
-Backup your vsvars32.bat file in 
+\subsection{Editer vos vsvars}
+Faites une sauvegarde de votre fichier vsvars32.bat pr\'esent dans
 
 \begin{verbatim}
 C:\Program Files\Microsoft Visual Studio 8\Common7\Tools
 \end{verbatim}
 
-and replace it with this one:
+et remplacez le par:
 
 \begin{verbatim}
 @SET VSINSTALLDIR=C:\Program Files\Microsoft Visual Studio 8
@@ -1632,24 +2583,30 @@ and replace it with this one:
 @set DevEnvDir=C:\Program Files\Microsoft Visual Studio 8\Common7\IDE
 
 @set PATH=C:\Program Files\Microsoft Visual Studio 8\Common7\IDE;C:\Program \
-Files\Microsoft Visual Studio 8\VC\BIN;C:\Program Files\Microsoft Visual Studio 8\ \
+Files\Microsoft Visual Studio 8\VC\BIN;C:\Program Files\Microsoft Visual Studio
+8\ \
 Common7\Tools;C:\Program Files\Microsoft Visual Studio 8\SDK\v2.0\bin; \
-C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727;C:\Program Files\Microsoft Visual \
+C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727;C:\Program Files\Microsoft Visual
+\
 Studio 8\VC\VCPackages;%PATH%
 @rem added by Tim
-@set PATH=C:\Program Files\Microsoft Platform SDK for Windows Server 2003 R2\Bin;%PATH%
+@set PATH=C:\Program Files\Microsoft Platform SDK for Windows Server 2003
+R2\Bin;%PATH%
 @set INCLUDE=C:\Program Files\Microsoft Visual Studio 8\VC\INCLUDE; \
 %INCLUDE%
 @rem added by Tim
-@set INCLUDE=C:\Program Files\Microsoft Platform SDK for Windows Server 2003 R2\ \
+@set INCLUDE=C:\Program Files\Microsoft Platform SDK for Windows Server 2003 R2\
+\
 Include;%INCLUDE%
-@set INCLUDE=C:\Program Files\Microsoft Platform SDK for Windows Server 2003 R2\ \
+@set INCLUDE=C:\Program Files\Microsoft Platform SDK for Windows Server 2003 R2\
+\
 Include\mfc;%INCLUDE%
 @set INCLUDE=%INCLUDE%;C:\dev\cpp\qgislibs-release\include\postgresql
 @set LIB=C:\Program Files\Microsoft Visual Studio 8\ \
 VC\LIB;C:\Program Files\Microsoft Visual Studio 8\SDK\v2.0\lib;%LIB%
 @rem added by Tim
-@set LIB=C:\Program Files\Microsoft Platform SDK for Windows Server 2003 R2\Lib;%LIB%
+@set LIB=C:\Program Files\Microsoft Platform SDK for Windows Server 2003
+R2\Lib;%LIB%
 @set LIB=%LIB%;C:\dev\cpp\qgislibs-release\lib
 @set LIBPATH=C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727
 
@@ -1667,28 +2624,32 @@ VC\LIB;C:\Program Files\Microsoft Visual Studio 8\SDK\v2.0\lib;%LIB%
 
 \end{verbatim}
 
-\subsection{Environment Variables}
-Right click on 'My computer' then select the 'Advanced' tab. Click environment variables and 
-create or augment the following '''System''' variables (if they dont already exist):
+\subsection{Variables d'environnement}
+Clic-droit sur 'Poste de travail' puis s\'electionnez le panneau 'Avanc\'e'. Cliquez sur les variables d'environnement et cr\'eez ou ouvrez les variables '''Syst\`eme''':
 
 \begin{verbatim}
 Variable Name:     Value:
 --------------------------------------------------------------------------
 EDITOR             vim
-INCLUDE            C:\Program Files\Microsoft Platform SDK for Windows Server 2003 R2 \
+INCLUDE            C:\Program Files\Microsoft Platform SDK for Windows Server
+2003 R2 \
 \Include\.
-LIB                C:\Program Files\Microsoft Platform SDK for Windows Server 2003 R2 \
+LIB                C:\Program Files\Microsoft Platform SDK for Windows Server
+2003 R2 \
 \Lib\.
 LIB_DIR            C:\dev\cpp\qgislibs-release
 PATH               C:\Program Files\CMake 2.4\bin;
                    %SystemRoot%\system32;
                    %SystemRoot%;
                    %SystemRoot%\System32\Wbem;
-                   C:\Program Files\Microsoft Platform SDK for Windows Server 2003 R2 \
+                   C:\Program Files\Microsoft Platform SDK for Windows Server
+2003 R2 \
                    \Bin\.;
-                   C:\Program Files\Microsoft Platform SDK for Windows Server 2003 R2\  \
+                   C:\Program Files\Microsoft Platform SDK for Windows Server
+2003 R2\  \
                    \Bin\WinNT\;
-                   C:\Program Files\svn\bin;C:\Program Files\Microsoft Visual Studio 8 \
+                   C:\Program Files\svn\bin;C:\Program Files\Microsoft Visual
+Studio 8 \
                    \VC\bin;
                    C:\Program Files\Microsoft Visual Studio 8\Common7\IDE;
                    "c:\Program Files\Microsoft Visual Studio 8\Common7\Tools";
@@ -1698,25 +2659,23 @@ QTDIR              c:\Qt\4.3.2
 SVN_SSH            "C:\\Program Files\\PuTTY\\plink.exe"
 \end{verbatim}
 
-\subsection{Building Qt4.3.2}
-You need a minimum of Qt 4.3.2 here since this is the first version to officially 
-support building the open source version of Qt for windows under MSVC.
+\subsection{Compiler Qt4.3.2}
+Qt 4.3.2 est la version miniale requise puisque c'est la premi\`ere version \`a supporter la compilation la version Open source de Qt avec MSVC.
 
-Download Qt 4.x.x source for windows from
+T\'el\'echargez les sources Qt 4.x.x depuis:
 
 \begin{verbatim}
 http:\\www.trolltech.com
 \end{verbatim}
 
-Unpack the source to 
+Extrayez les sources vers 
 
 \begin{verbatim}
 c:\Qt\4.x.x\
 \end{verbatim}
 
-\subsubsection{Compile Qt}
-Open the Visual Studio C++ command line and cd to c:$\backslash$Qt$\backslash$4.x.x where you
-extracted the source and enter:
+\subsubsection{Compiler Qt}
+Ouvrez la ligne de commande de Visual Studio C++ et d\'eplacez-vous vers c:$\backslash$Qt$\backslash$4.x.x et entrez:
 
 \begin{verbatim}
 configure -platform win32-msvc2005
@@ -1724,22 +2683,18 @@ nmake
 nmake install
 \end{verbatim}
 
-Add -qt-sql-odbc -qt-sql-psql to the configure line if your want odbc and
-PostgreSQL support build into Qt.
+Ajoutez -qt-sql-odbc -qt-sql-psql dans ligne  'configure' si vous voulez le support odbc et PostgreSQL dans Qt.
 
-\textbf{Note:} For me in some cases I got a build error on qscreenshot.pro. If you
-are only interested in having the libraries needed for building Qt apps, you 
-can probably ignore that. Just check in c:$\backslash$Qt$\backslash$4.3.2$\backslash$bin to check all dlls and 
-helper apps (assistant etc) have been made.
+\textbf{Note:}J'ai eu quelques erreurs avec qscreenshot.pro. Si vous ne voulez que compiler des applications Qt vous pouvez l'ignorer. V\'erifiez dans c:$\backslash$Qt$\backslash$4.3.2$\backslash$bin que toutes les DLLs et les aides (assistant, etc.) ont \'et\'e cr\'e\'e.
 
-\subsubsection{Configure Visual C++ to use Qt}
-After building configure the Visual Studio Express IDE to use Qt:
+\subsubsection{Configuration de Visual C++ pour utiliser Qt}
+Apr\`es la compilation, configurez Visual Studio Express IDE pour utiliser Qt:
 
-1) open Visual Studio Express IDE
+1) ouvrez Visual Studio Express IDE
 
 2) Tools -$>$ Options -$>$ Projects and Solutions -$>$ VC++ Directories
 
-3) Add:
+3) Ajoutez:
 
 \begin{verbatim}
 Executable files: 
@@ -1754,7 +2709,8 @@ Include files:
   $(QTDIR)\include\QtSvg
   $(QTDIR)\include\QtXml
   $(QTDIR)\include\Qt3Support
-  $(LIB_DIR)\include   (needed during qgis compile to find stdint.h and unistd.h)
+  $(LIB_DIR)\include   (needed during qgis compile to find stdint.h and
+unistd.h)
 
 Library files: 
   $(QTDIR)\lib
@@ -1769,7 +2725,8 @@ Hint:  You can also add
 QString = t=<d->data, su>, size=<d->size, i>
 \end{verbatim}
 
-to AutoExp.DAT in C:$\backslash$Program Files$\backslash$Microsoft Visual Studio 8$\backslash$Common7$\backslash$Packages$\backslash$Debugger before 
+to AutoExp.DAT in C:$\backslash$Program Files$\backslash$Microsoft Visual Studio
+8$\backslash$Common7$\backslash$Packages$\backslash$Debugger before 
 
 \begin{verbatim}
 [Visualizer]
@@ -1780,24 +2737,12 @@ watch a variable in the debugger.  There are probably much more additions -
 feel free to add some - I just needed QString and took the first hit in google
 I could find.
 
-\subsection{Install Python}
-Download \htmladdnormallink{http://python.org/ftp/python/2.5.1/python-2.5.1.msi}{http://python.org/ftp/python/2.5.1/python-2.5.1.msi} and install it.
+\subsection{Installer Python}
+T\'el\'echarger \htmladdnormallink{http://python.org/ftp/python/2.5.1/python-2.5.1.msi}{http://python.org/ftp/python/2.5.1/python-2.5.1.msi} et installez-le.
 
-\subsection{Install SIP}
-Download \htmladdnormallink{http://www.riverbankcomputing.com/Downloads/sip4/sip-4.7.1.zip}{http://www.riverbankcomputing.com/Downloads/sip4/sip-4.7.1.zip} and extract it 
-into your c:$\backslash$dev$\backslash$cpp directory.
-From a Visual C++ command line cd to the directory where you extract SIP and run:
-
-\begin{verbatim}
-c:\python25\python configure.py -p win32-msvc2005
-nmake
-nmake install
-\end{verbatim}
-
-\subsection{Install PyQt4}
-Download \htmladdnormallink{http://www.riverbankcomputing.com/Downloads/PyQt4/GPL/PyQt-win-gpl-4.3.1.zip}{http://www.riverbankcomputing.com/Downloads/PyQt4/GPL/PyQt-win-gpl-4.3.1.zip} and extract it 
-into your c:$\backslash$dev$\backslash$cpp directory.
-From a Visual C++ command line cd to the directory where you extracted PyQt4 and run:
+\subsection{Installer SIP}
+T\'el\'echargez \htmladdnormallink{http://www.riverbankcomputing.com/Downloads/sip4/sip-4.7.1.zip}{http://www.riverbankcomputing.com/Downloads/sip4/sip-4.7.1.zip}et extrayez le dans votre r\'epertoire c:$\backslash$dev$\backslash$cpp.
+Depuis la console de Visual C++, d\'eplacez vous dans ce dossier et faites:
 
 \begin{verbatim}
 c:\python25\python configure.py -p win32-msvc2005
@@ -1805,31 +2750,44 @@ nmake
 nmake install
 \end{verbatim}
 
-\subsection{Install CMake}
-Download and install cmake 2.4.7 or better, making sure to enable the option: \texttt{Update path for all users}
+\subsection{Installer PyQt4}
+T\'el\'echargez \htmladdnormallink{http://www.riverbankcomputing.com/Downloads/PyQt4/GPL/PyQt-win-gpl-4.3.1.zip}{http://www.riverbankcomputing.com/Downloads/PyQt4/GPL/PyQt-win-gpl-4.3.1.zip} et extrayez-le dans votre r\'epertoire c:$\backslash$dev$\backslash$cpp.
+Depuis la console de Visual C++, d\'eplacez-vous dans ce dossier et faites:
 
-\subsection{Install Subversion}
-You '''must''' install the command line version if you want the CMake svn scripts to work.
-Its a bit tricky to find the correct version on the subversion download site as they have 
-som misleadingly named similar downloads. Easiest is to just get this file:
+\begin{verbatim}
+c:\python25\python configure.py -p win32-msvc2005
+nmake
+nmake install
+\end{verbatim}
 
-\htmladdnormallink{http://subversion.tigris.org/downloads/1.4.5-win32/apache-2.2/svn-win32-1.4.5.zip}{http://subversion.tigris.org/downloads/1.4.5-win32/apache-2.2/svn-win32-1.4.5.zip}
+\subsection{Installer CMake}
+T\'el\'echargez et installez cmake 2.4.7 ou plus r\'ecent, assurez-vous d'activer cette option:
+\texttt{Update path for all users}
 
-Extract the zip file to
+\subsection{Installer Subversion}
+Vous '''devez''' installer la version en ligne de commande si vous voulez que les scripts CMake pour svn fonctionnent. Il est difficile de trouver la version correcte sur le site du projet subversion du fait de noms parfois similaires, dirigez-vous plut\^ot vers ce fichier:
+
+\htmladdnormallink{
+http://subversion.tigris.org/downloads/1.4.5-win32/apache-2.2/svn-win32-1.4.5.zi
+p}{
+http://subversion.tigris.org/downloads/1.4.5-win32/apache-2.2/svn-win32-1.4.5.zi
+p}
+
+Extrayez le fichier zip vers
 \begin{verbatim}
 C:\Program Files\svn
 \end{verbatim}
 
-And then add
+Et ajoutez
 
 \begin{verbatim}
 C:\Program Files\svn\bin
 \end{verbatim}
 
-To your path.
+\`a votre chemin.
 
-\subsection{Initial SVN Check out}
-Open a cmd.exe window and do:
+\subsection{R\'ecup\'eration SVN initiale}
+Ouvrer une fen\^etre cmd.exe et faites:
 
 \begin{verbatim}
 cd \
@@ -1838,7 +2796,7 @@ cd cpp
 svn co https://svn.osgeo.org/qgis/trunk/qgis 
 \end{verbatim}
 
-At this point you will probably get a message like this:
+A ce point, vous allez s\^urement avoir un message comme celui-ci:
 
 \begin{verbatim}
 C:\dev\cpp>svn co https://svn.osgeo.org/qgis/trunk/qgis
@@ -1853,14 +2811,10 @@ Certificate information:
 (R)eject, accept (t)emporarily or accept (p)ermanently?
 \end{verbatim}
 
-Press 'p' to accept and the svn checkout will commence.
+Appuyez sur 'p' pour accepter et la r\'ecup\'eration svn devrait d\'ebuter.
 
-\subsection{Create Makefiles using cmakesetup.exe}
-I wont be giving a detailed description of the build process, because 
-the process is explained in the first section (where you manually build 
-all dependencies) of the windows build notes in this document. Just skip 
-past the parts where you need to build GDAL etc, since this simplified 
-install process does all the dependency provisioning for you.
+\subsection{Cr\'eer des Makefiles avec cmakesetup.exe}
+Je ne vais pas donner une description d\'etaill\'ee du processus de compilation car il est d\'ej\`a expliqu\'e dans la premi\`ere partie de ce guide. Sautez les \'etapes sur la compilation de GDAL etc., puisque ce processus d'installation simplifi\'e prend en charge les d\'ependances \`a votre place.
 
 \begin{verbatim}
 cd qgis
@@ -1869,28 +2823,18 @@ cd build
 cmakesetup ..
 \end{verbatim}
 
-Cmakesetup should find all dependencies for you automatically (it uses the 
-LIB\_DIR environment to find them all in c:$\backslash$dev$\backslash$cpp$\backslash$qgislibs-release). 
-Press configure again after the cmakesetup gui appears and when all the red 
-fields are gone, and you have made any personalisations to the setup, press 
-ok to close the cmake gui.
+Cmakesetup devrait r\'ecup\'erer toutes les d\'ependances pour vous, et ce automatiquement (il utilise l'environnement LIB\_DIR pour les rep\'erer dans c:$\backslash$dev$\backslash$cpp$\backslash$qgislibs-release). 
+Appuyez encore sur configurer apr\`es l'apparition de l'interface de cmakesetup et quand tout les champs rouges ont disparu, appuyez sur OK pour fermer cmake.
 
-Now open Visual Studio Express and do: \texttt{File -$>$ Open -$>$ Project / Solution}
+Maintenat ouvrez Visual Studio Express et faites: \texttt{File -$>$ Open -$>$ Project /Solution}
 
-Now open the cmake generated QGIS solution which should be in :
+Puis ouvrez le fichier QGIS g\'en\'er\'e par cmake qui devrait \^etre dans:
 
 \begin{verbatim}
 c:\dev\cpp\qgis\build\qgisX.X.X.sln
 \end{verbatim}
 
-Where X.X.X represents the current version number of QGIS. Currently I 
-have only made release built dependencies for QGIS (debug versions will follow 
-in future), so you need to be sure to select 'Release' from the solution 
-configurations toolbar. Next right click on ALL\_BUILD in the solution browser, and then choose build. Once the build completes right click on INSTALL in the solution browser and 
-choose build. This will by default install qgis into c:$\backslash$program files$\backslash$qgisX.X.X.
+O\`u X.X.X repr\'esente la version actuelle de QGIS. Pour le moment j'ai seulement distribu\'e les d\'ependances pour QGIS, les versions de d\'ebug devraient suivre, vous devez donc s\'electionner 'Release' dans la barre de configuration. Ensuite, faites un clic droit sur ALL\_BUILD dans le navigateur et choisissez 'build'. Une fois la compilation achev\'ee, faites un clic droit sur INSTALL dans le navigateur et choisissez 'build'. Cela installera par d\'efaut QGIS dans c:$\backslash$program files$\backslash$qgisX.X.X.
 
-\subsection{Running and packaging}
-To run QGIS you need to at the minimum copy the dlls from c:$\backslash$dev$\backslash$cpp$\backslash$qgislibs-release$\backslash$bin 
-into the c:$\backslash$program files$\backslash$qgisX.X.X directory.
-
-
+\subsection{Executer et empaqueter}
+Pour lancer QGIS vous aurez besoin d'une copie des DLLs de c:$\backslash$dev$\backslash$cpp$\backslash$qgislibs-release$\backslash$bin vers c:$\backslash$program files$\backslash$qgisX.X.X directory.
