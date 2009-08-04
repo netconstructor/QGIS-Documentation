@@ -558,98 +558,94 @@ la barra de herramientas.
 Si coge y arrastra el rectángulo rojo de la vista general que muestra la extensión actual, la vista 
 del mapa se actualizará conforme se desplace.
 
-\subsubsection{Status Bar}\label{label_statusbar}
+\subsubsection{Barra de estado}\label{label_statusbar}
 
-The status bar shows you your current position in map coordinates (e.g.
-meters or decimal degrees) as the mouse pointer is moved across the map view.
-To the left of the coordinate display in the status bar is a small button that 
-will toggle between showing coordinate position or the view extents of the 
-map view as you pan and zoom in and out. 
+La barra de estado muestra su posición actual en las coordenadas del mapa (ej.: 
+metros o grados decimales) a medida que el puntero del ratón se mueve por la vista del mapa. 
+A la izquierda de la visualización de las coordenadas hay un pequeño botón que alterna entre 
+mostrar las coordenadas de la posición o la extensión de la 
+vista del mapa a medida que desplaza el mapa o modifica el nivel del zum. 
 
-A progress bar in the status bar shows progress of rendering
-as each layer is drawn to the map view. In some cases, such as the gathering
-of statistics in raster layers, the progress bar will be used to show the
-status of lengthy operations. 
+Una barra de progreso en la barra de estado muestra el progreso de la representación de cada capa que se está 
+dibujando en la vista del mapa. En algunos casos, tales como la recopilación de estadísticas en capas ráster, 
+la barra de progreso se usará para mostrar el estado de operaciones prolongadas.
 
-If a new plugin or a plugin update is available, you will see a message in the 
-status bar. On the right side of the status bar is a small
-checkbox which can be used to temporarily prevent layers being rendered to the
-map view (see Section \ref{subsec:redraw_events} below). At the far right of
-the status bar is a projector icon. Clicking on this opens the projection
-properties for the current project.
+Si hay disponible un complemento nuevo o una actualización de complementos, verá un mensaje en la barra de estado. 
+Puede pulsar en el mensaje para abrir el Administrador de complementos e instalar o actualizar los complementos.
+En la parte derecha de la barra de estado hay una pequeña casilla de verificación 
+que se puede usar para 
+evitar temporalmente que se representen las capas en la vista del mapa (vea la Sección 
+\ref{subsec:redraw_events} más abajo). 
+En el extremo derecho de la barra de estado hay un icono de un proyector. 
+Pulsando en él se abren 
+las propiedades del proyecto actual.
 
-\begin{Tip}\caption{\textsc{Calculating the correct Scale of your Map Canvas}}\index{scale!calculate}
-\qgistip{When you start QGIS, degrees is the default unit, and it tells QGIS 
-that any coordinate in your layer is in degrees. To get correct scale values, 
-you can either change this to meter manually in the \tab{General} tab under 
-\mainmenuopt{Settings} >\dropmenuopt{Project Properties} or you can select a project 
-Coordinate Reference System (CRS) clicking on the
-\toolbtntwo{mIconProjectionDisabled}{projector} 
-icon in the lower right-hand corner of the statusbar. In the last case, the 
-units are set to what the project projection specifies, e.g. '+units=m'.
+\begin{Tip}\caption{\textsc{Calcular la escala correcta de su vista del mapa}}\index{scale!calculate}
+\qgistip{Cuando arranca QGIS, la unidad predeterminada son grados y ésto le dice a QGIS 
+que cualquier coordenada
+en sus capas está en grados. Para conseguir valores de escala correctos, 
+puede o cambiar esto a 
+metros manualmene en la pestaña \tab{General} bajo \mainmenuopt{Configuración} >\dropmenuopt{Propiedades 
+del proyecto} o puede seleccionar un Sistema de Referencia de Coordenadas (SRC) del proyecto pulsando en el 
+icono \toolbtntwo{mIconProjectionEnabled}{Proyector} en la esquina inferior derecha de la barra de estado. En el 
+último caso, las unidades se fijan a lo que especifique la proyección del proyecto, por ejemplo '+units=m'.
 }
 \end{Tip}
 
-\subsection{Rendering}\label{subsec:redraw_events}\index{rendering}
+\subsection{Representación}\label{subsec:redraw_events}\index{rendering}
 
-By default, QGIS renders all visible layers whenever the map canvas must be
-refreshed. The events that trigger a refresh of the map canvas include:
+Por omisión, QGIS representa todas las capas visibles cada vez que la vista del mapa se debe refrescar. Los eventos 
+que desencadenan un refresco de la vista del mapa incluyen:
 
 \begin{itemize}
-\item Adding a layer
-\item Panning or zooming
-\item Resizing the QGIS window
-\item Changing the visibility of a layer or layers
+\item Añadir una capa.
+\item Desplazamiento o zum.
+\item Redimensionar la ventana de QGIS.
+\item Cambiar la visibilidad de una o más capas.
 \end{itemize}
 
-QGIS allows you to control the rendering process in a number of ways.
+QGIS permite controlar el proceso de representación de distintas formas.
 
-\subsubsection{Scale Dependent Rendering}\index{rendering!scale dependent}
+\subsubsection{Representación dependiente de la escala}\index{rendering!scale dependent}
 \label{label_scaledepend}
 
-Scale dependent rendering allows you to specify the minimum and maximum
-scales at which a layer will be visible.  To set scale dependency rendering,
-open the \dialog{Properties} dialog by double-clicking on the layer in the 
-legend. On the \tab{General} tab, set the minimum and maximum scale values and then
-click on the \checkbox{Scale dependent visibility} checkbox.
+La representación dependiente de la escala permite especificar las escalas máxima y mínima a las que una capa será 
+visible. Para establecer la representación dependiente de la escala, abra el diálogo  \dialog{Propiedades} haciendo 
+doble clic sobre una capa en la ventana Capas. En la pestaña \tab{General}, establezca la escala mínima y máxima y luego marque la casilla \checkbox{Utilizar 
+representación dependiente de la escala}.
 
-You can determine the scale values by first zooming to the level you want
-to use and noting the scale value in the QGIS status bar.\index{scale}
+Puede determinar los valores de escala haciendo zum primero al nivel que quiera usar y anotando el valor de la 
+escala mostrado en la barra de estado de QGIS.\index{scale}
 
-\subsubsection{Controlling Map Rendering}\label{label_controlmap}
+\subsubsection{Controlar la representación del mapa}\label{label_controlmap}
 
-Map rendering can be controlled in the following ways:
+La representación del mapa se puede controlar de las siguientes formas:
 
-\minisec{a) Suspending Rendering}\index{rendering!suspending}
+\minisec{a) Suspender la representación}\index{rendering!suspending}
 \label{label_suspendrender}
 
-To suspend rendering, click the \checkbox{Render} checkbox in the lower right
-corner of the statusbar. When the \checkbox{Render} box is not checked, QGIS
-does not redraw the canvas in response to any of the events described in
-Section \ref{subsec:redraw_events}. Examples of when you might want to suspend
-rendering include:
+Para suspender la representación, desmarque la casilla \checkbox{Representar} en la esquina inferior derecha de la 
+barra de estado. Cuando la casilla \checkbox{Representar} no está marcada, QGIS no redibuja la vista del mapa en 
+respuesta a ninguno de los eventos descritos en la Sección
+\ref{subsec:redraw_events}. Entre los ejemplos de cuándo puede desear suspender la representación se incluyen:
 
 \begin{itemize}
-\item Add many layers and symbolize them prior to drawing
-\item Add one or more large layers and set scale dependency before drawing
-\item Add one or more large layers and zoom to a specific view before drawing
-\item Any combination of the above
+\item Añadir muchas capas y simbolizarlas antes de que se dibujen.
+\item Añadir una o más capas grandes y establecer la dependencia de la escala antes de dibujarlas.
+\item Añadir una o más capas grandes y hacer zum a una zona específica antes de dibujarla.
+\item Cualquier combinación de las anteriores.
 \end{itemize}
 
-Checking the \checkbox{Render} box enables rendering and causes and immediate
-refresh of the map canvas.
+Marcar la casilla \checkbox{Representar} activa la representación y desencadena el refresco inmediato de la vista del mapa.
 
-\minisec{b) Setting Layer Add Option}\label{label_settinglayer}
+\minisec{b) Establecer opción al añadir capas}\label{label_settinglayer}
 \index{rendering!options}\index{layers!initial visibility}
 
-You can set an option to always load new layers without drawing them. This
-means the layer will be added to the map, but its visibility checkbox in the
-legend will be unchecked by default. To set this option, choose
-menu option \mainmenuopt{Settings} > \dropmenuopt{Options} and click on the
-\tab{Rendering} tab. Uncheck the \checkbox{By default new layers added to the map 
-should be
-displayed} checkbox. Any layer added to the map will be off (invisible) by
-default.
+Se puede establecer una opción para que siempre se carguen las capas nuevas sin dibujarlas. Esto
+significa que las capas se añadirán al mapa, pero su casilla de verificación de visualización en la ventana Capas estará 
+desmarcada por omisión. Para establecer esta opción, seleccione la opción de menú \mainmenuopt{Configuración} > \dropmenuopt{Opciones}
+y pulse en la pestaña \tab{Representación}. Desmarque la casilla \checkbox{Por omisión, las nuevas capas añadidas 
+al mapa se deben visualizar}. Cualquier capa que añada al mapa estará desactivada (invisible) por omisión.
 
 %\minisec{Stopping Rendering}\index{rendering!halting}
 %\label{label_stoprender}
@@ -661,257 +657,260 @@ default.
 %\textbf{NOTE}: It is currently not possible to stop rendering - this was disabled 
 %in qt4 port because of User Interface (UI) problems and crashes.
 
-\minisec{c) Updating the Map Display During Rendering}
+\minisec{c) Actualizar la vista del mapa durante la representación}
 \label{label_updatemap}\index{rendering!update during drawing}
 
-You can set an option to update the map display as features are drawn. By
-default, QGIS does not display any features for a layer until the entire
-layer has been rendered. To update the display as features are read from the
-datastore, choose menu option \mainmenuopt{Settings} > \dropmenuopt{Options}
-click on the \tab{Rendering} tab. Set the feature count to an
-appropriate value to update the display during rendering. Setting a value of 0
-disables update during drawing (this is the default). Setting a value too low
-will result in poor performance as the map canvas is continually updated
-during the reading of the features. A suggested value to start with is 500. 
+Puede establecer una opción para actualizar la vista del mapa a medida que se dibujan los objetos espaciales. Por
+omisión, QGIS no muestra ningún objeto espacial de una capa hasta que toda la capa se ha renderizado. 
+Para actualizar la vista a medida que se leen los objetos espaciales, seleccione la opción de menú
+\mainmenuopt{Configuración} > \dropmenuopt{Opciones} y pulse en la pestaña \tab{Representación}. 
+Establezca el número de objetos espaciales a un valor adecuado para actualizar la vista durante la representación.
+Establecer un valor de 0 desactiva la actualización durante la representación (es el valor predeterminado).
+Establecer un valor demasiado bajo dará como resultado un rendimiento bajo, ya que el lienzo del mapa se está
+actualizando continuamente mientras se leen los objetos espaciales. Se sugiere un valor de 500 para empezar. 
 
-\minisec{d) Influence Rendering Quality}
+\minisec{d) Influir en la calidad de la representación}
 \label{label_renderquality}\index{rendering!quality}
 
-To influence the rendering quality of the map you have 3 options. Choose menu 
-option \mainmenuopt{Settings} > \dropmenuopt{Options} click on the 
-\tab{Rendering} tab and select or deselect following checkboxes.
+Para influir en la calidad de la representación del mapa tiene tres opciones. Seleccione la opción de menú
+\mainmenuopt{Configuración} > \dropmenuopt{Opciones}, pulse en la pestaña 
+\tab{Representación} 
+y marque o desmarque las siguientes casillas:
 
 \begin{itemize}
-\item \checkbox{Make lines appear less jagged at the expense of some drawing performance}
-\item \checkbox{Fix problems with incorrectly filled polygons}
-\item \checkbox{Continuously redraw the map when dragging the legend/map divider}
+\item \checkbox{Hacer que las líneas se muestren menos quebradas a expensas del rendimiento de la representación}
+\item \checkbox{Solucionar problemas con polígonos rellenados incorrectamente}
+\item \checkbox{Redibujar el mapa continuamente mientras se desplaza el separador entre mapa y leyenda}
 \end{itemize}
 
 
-\subsection{Measuring}\label{sec:measure}\index{measure}
+\subsection{Medir}\label{sec:measure}\index{measure}
 
-Measuring works within projected coordinate systems only (e.g., UTM). If 
-the loaded map is defined with a geographic coordinate system
-(latitude/longitude), the results from line or area measurements will be 
-incorrect. To fix this you need to set an appropriate map coordinate system 
-(See Section~\ref{label_projections}).
+Las mediciones funcionan únicamente en sistemas de coordenadas proyectadas (ej.: UTM). Si el mapa cargado
+está definido con un sistema de coordenadas geográficas (latitud/longitud), los resultados de las medidas
+de líneas o polígonos serán incorrectos. Para solucionarlo necesita establecer un sistema de coordenadas
+adecuado (vea la sección~\ref{label_projections}).
 
-\subsubsection{Measure length and areas}\index{measure:line length}\index{measure:areas}
+\subsubsection{Medir longitudes y áreas}\index{measure:line length}\index{measure:areas}
 \includegraphics[width=0.7cm]{mActionMeasure} 
-QGIS is also able to measure real distances between given 
-points according to a defined ellipsoid. To configure this, choose menu option 
-\mainmenuopt{Settings} > \dropmenuopt{Options}, 
-click on the \tab{Map tools} tab and choose the appropriate ellipsoid. The tool then allows you to 
-click points on the map. Each segment-length shows up in the measure-window and additionally the total 
-length is printed. To stop measuring click your right mouse button. \\
-\includegraphics[width=0.7cm]{mActionMeasureArea} Areas can also be measured. 
-The window shows the accumulated area-size in the measure window 
+QGIS también es capaz de medir distancias reales entre puntos dados, de acuerdo con el elipsoide definido.
+Para configurar esto, seleccione la opción de menú \mainmenuopt{Configuración} > \dropmenuopt{Opciones}, 
+pulse en la pestaña \tab{Herramientas de mapa} y seleccione el elipsoide adecuado. La herramienta le 
+permite entonces pulsar puntos en el mapa. La longitud de cada segmento se muestra en la ventana de medidas
+así como el total. Para detener la medición, pulse el botón derecho del ratón. \\
+\includegraphics[width=0.7cm]{mActionMeasureArea} También se pueden medir áreas. 
+La ventana muestra el área acumulada. 
 
 \begin{figure}[h]
-\caption{Measure tools in action \nixcaption} \label{fig:measure}
+\caption{Herramientas de medida en acción \nixcaption} \label{fig:measure}
 \centering
-   \subfigure[Measure lines] {\label{subfig:measure_line}\includegraphics[clip=true, width=0.3\textwidth]{measure_line}}\goodgap
-   \subfigure[Measure areas]{\label{subfig:measure_area}\includegraphics[clip=true, width=0.3\textwidth]{measure_area}}
+   \subfigure[Medir líneas] {\label{subfig:measure_line}\includegraphics[clip=true, width=0.3\textwidth]{measure_line}}\goodgap
+   \subfigure[Medir áreas]{\label{subfig:measure_area}\includegraphics[clip=true, width=0.3\textwidth]{measure_area}}
 \end{figure}
 
-\subsection{Projects}\label{sec:projects}\index{projects}
+\subsection{Proyectos}\label{sec:projects}\index{projects}
 
-The state of your QGIS session is considered a Project.  QGIS
-works on one project at a time.  Settings are either considered
-as being per-project, or as a default for new projects (see
-Section \ref{subsec:gui_options}). QGIS can save the state of your 
-workspace into a project file using the menu options 
-\mainmenuopt{File} > \dropmenuopttwo{mActionFileSave}{Save Project}
-or \mainmenuopt{File} > \dropmenuopttwo{mActionFileSaveAs}{Save Project As}.
+El estado de su sesión de QGIS se considera un proyecto. QGIS
+trabaja en un proyecto en cada momento. Las configuraciones se considera que son
+por proyecto o como predeterminadas para nuevos proyectos (vea 
+la sección \ref{subsec:gui_options}). QGIS puede guardar el estado de su entorno de trabajo
+en un archivo de proyecto usando las opciones de menú 
+\mainmenuopt{Archivo} > \dropmenuopttwo{mActionFileSave}{Guardar proyecto}
+o \mainmenuopt{Archivo} > \dropmenuopttwo{mActionFileSaveAs}{Guardar proyecto como}.
 
-Load saved projects into a QGIS session using 
-\mainmenuopt{File} > \dropmenuopttwo{mActionFileOpen}{Open Project}
-or \mainmenuopt{File} > \dropmenuopt{Open Recent Project}.
-If you wish to clear your session and start fresh, choose
-\mainmenuopt{File} > \dropmenuopttwo{mActionFileNew}{New Project}.
-Either of these menu options will prompt you to save the existing project
-if changes have been made since it was opened or last saved.
+Cargue proyectos guardados en una sesión de QGIS usando 
+\mainmenuopt{Archivo} > \dropmenuopttwo{mActionFileOpen}{Abrir proyecto}
+o \mainmenuopt{Archivo} > \dropmenuopt{Abrir proyectos recientes}.
+Si desea limpiar su sesión y comenzar una en blanco, seleccione
+\mainmenuopt{Archivo} > \dropmenuopttwo{mActionFileNew}{Nuevo proyecto}.
+Cualquiera de estas opciones de menú le pedirá que guarde el proyecto activo si se han
+realizado cambios desde que se abrió o se guardó por última vez.
 
-The kinds of information saved in a project file include:
+El tipo de información guardada en un archivo de proyecto incluye:
 
 \begin{itemize}
-\item Layers added
-\item Layer properties, including symbolization
-\item Projection for the map view
-\item Last viewed extent
+\item Capas añadidas.
+\item Propiedades de las capas, incluyendo la simbología.
+\item Proyección de la vista del mapa.
+\item Última extensión visualizada.
 \end{itemize}
 
-The project file is saved in XML format, so it is possible to edit
-the file outside QGIS if you know what you are doing. The file format 
-was updated several times compared to earlier QGIS versions. Project files 
-from older QGIS versions may not work properly anymore. To be made aware of this, 
-in the \tab{General} tab under \mainmenuopt{Settings} > \dropmenuopt{Options} 
-you can select \checkbox{Warn when opening a project file saved with an older 
-version of QGIS}.
+El proyecto se guarda en un archivo con formato XML, así que es posible editarlo
+fuera de QGIS si sabe lo que está haciendo. El formato de archivo se ha actualizado
+varias veces en relación con versiones anteriores de QGIS. Los archivos de proyectos 
+de versiones anteriores de QGIS puede que ya no funcionen correctamente. Para hacerle
+consciente de esto, en la pestaña \tab{General} bajo \mainmenuopt{Configuración} > \dropmenuopt{Opciones} 
+puede seleccionar la casilla \checkbox{Avisar cuando se abra
+un proyecto guardado con una versión anterior de QGIS}.
 
-\subsection{Output}\label{sec:output}\index{output!save as image!print composer!quick print}
-There are several ways to generate output from your QGIS session.
-We have discussed one already in Section \ref{sec:projects}: saving as a project file. 
-Here is a sampling of other ways to produce output files:
+\subsection{Salida}\label{sec:output}\index{output!save as image!print composer!quick print}
+Hay varias formas para generar una salida de su sesión de QGIS.
+Ya hemos visto una en la sección \ref{sec:projects}: guardar como un archivo de proyecto. 
+Aquí hay una muestra de otras formas de producir archivos de salida:
 \begin{itemize}
-\item Menu option \dropmenuopttwo{mActionSaveMapAsImage}{Save as Image} opens a
-file dialog where you select the name, path and type of image (PNG or JPG format). From this
-release, a world file with extension PNGW or JPGW saved in the same folder georeferences the image.
-\item Menu option \dropmenuopttwo{mActionFilePrint}{Print Composer} opens a dialog 
-where you can layout and print the current map canvas (see Section~\ref{label_printcomposer}).
+\item Opción de menú \dropmenuopttwo{mActionSaveMapAsImage}{Guardar como imagen} abre un
+diálogo de archivo donde seleccionar el nombre, ruta y tipo de imagen (formato PNG o JPG). Desde esta
+versión, se guarda un archivo de georreferenciación con extensión PNGW o JPGW en la misma carpeta.
+\item Opción de menú \dropmenuopttwo{mActionFilePrint}{Diseñador de impresión} abre un
+diálogo en el que puede organizar e imprimir la vista del mapa actual (vea la
+sección~\ref{label_printcomposer}).
 \end{itemize}
 
 
-\subsection{GUI Options}
+\subsection{Opciones de la Interfaz}
 \label{subsec:gui_options}
 \includegraphics[width=0.7cm,clip=true]{mActionOptions} 
-Some basic options for QGIS
-can be selected using the \dialog{Options} dialog. Select the 
-menu option \mainmenuopt{Settings} >
- \dropmenuopttwo{mActionOptions}{Options}. The tabs where you can 
-optmize your options are:
+Se pueden seleccionar algunas opciones básicas de QGIS usando el diálogo \dialog{Opciones}.
+Seleccione la opción de menú \mainmenuopt{Configuración} >
+ \dropmenuopttwo{mActionOptions}{Opciones}. Las pestañas en las que puede optimizar
+sus opciones son:
 
-\minisec{General Tab}
+\minisec{Pestaña General}
 
 \begin{itemize}
-\item \checkbox{Ask to save project changes when required}
-\item \checkbox{Warn when opening a project file saved with an older version of QGIS}
-\item \checkbox{Change Selection and backgroud Color}
-\item Change the icon theme (choose between default, classic, gis and nkids)
-\item \checkbox{Capitalise layer names in legend}
-\item \checkbox{Display classification attribute names in legend}
-\item \checkbox{Hide splash screen at startup}
-\item \checkbox{Open attribute table in a dock window}
-\item Define attribute table behavior (choose between show all features, show 
-selected features and show features in current canvas)
+\item \checkbox{Preguntar si guardar cambios en el proyecto cuando sea necesario}
+\item \checkbox{Avisar cuando se abra un proyecto guardado con una versión anterior de QGIS}
+\item \checkbox{Cambiar el color de selección y de fondo}
+\item Cambiar el tema de iconos (elija entre predeterminado (default), classic, gis y nkids)
+\item \checkbox{Comenzar el nombre de las capas con mayúsculas en la leyenda}
+\item \checkbox{Mostrar nombre de atributos de clasificación en la ventana Capas}
+\item \checkbox{Ocultar la pantalla de bienvenida al iniciar la aplicación}
+\item \checkbox{Abrir tabla de atributos en una ventana adosada}
+\item Definir el comportamiento de la tabla de atributos (elija entre mostrar todos los
+objetos espaciales, mostrar los objetos espaciales seleccionados o mostrar los objetos
+espaciales del lienzo actual)
 \end{itemize}
 
-\minisec{Rendering Tab}
+\minisec{Pestaña Representación}
 
 \begin{itemize}
-\item \checkbox{By deafult new layers added to the map should be displayed}
-\item Define number of features to draw before updating the display.
-\item \checkbox{Make lines appear less jagged at the expense of some drawing performance}
-\item \checkbox{Fix problems with incorrectly filled polygons}
-\item \checkbox{Continously redraw when dragging the legend/map divider} 
+\item \checkbox{Por omision las nuevas capas añadidas al mapa se deben visualizar}
+\item Definir el número de objetos espaciales a dibujar antes de actualizar la visualización.
+\item \checkbox{Hacer que las líneas se muestren menos quebradas a expensas del rendimiento de la representación}
+\item \checkbox{Solucionar problemas con polígonos rellenados incorrectamente}
+\item \checkbox{Redibujar el mapa continuamente mientras se desplaza el separador entre
+mapa y leyenda} 
 \end{itemize}
 
-\minisec{Map tools Tab}
+\minisec{Pestaña Herramientas de mapa}
 
 \begin{itemize}
-\item Define Search Radius as a percentage of the map width
-\item Define Ellipsoid for distance calculations
-\item Define Rubberband Color for Measure Tools
-\item Define Mouse wheel action (Zoom, Zoom and recenter, Zoom to mouse cursor, Nothing)
-\item Define Zoom factor for wheel mouse
+\item Definir el radio de búsqueda como porcentaje de la anchura del mapa
+\item Definir el elipsoide para el cálculo de distancias
+\item Definir el color de la banda de medida
+\item Definir la accion de la rueda del ratón (zum, zum y centrar, zum al cursor del
+ratón, nada)
+\item Definir el factor de zum para la rueda del ratón
 \end{itemize}
 
-\minisec{Digitizing Tab}
+\minisec{Pestaña Digitalización}
 
 \begin{itemize}
-\item Define Rubberband Color and line width for Digitizing
-\item Define default snap mode (to vertex, to segment, to vertex and segment)
-\item Define default snapping tolerance in layer units
-\item Define search radius for vertex edits in layer units
-\item Define vertex marker style (Cross or semi transparent circle)
+\item Definir la anchura y color de la línea de digitalización
+\item Definir el modo de autoensamblado por omisión (a vértice, a segmento, a vértice y
+segmento)
+\item Definir la tolerancia de autoensamblado predeterminada en unidades de la capa
+\item Definir el radio de búsqueda para la edición de vértices en unidades de la capa
+\item Definir el estilo del marcador de vértices (cruz o círculo semitransparente)
 \end{itemize}
 
-\minisec{CRS Tab}
+\minisec{Pestaña SRC}
 
 \begin{itemize}
-\item \checkbox{Prompt for Coordinate Reference System (CRS)}
-\item \checkbox{Project wide default Coordinate Reference System (CRS) will be used}
-\item \checkbox{Global default Coordinate Reference System (CRS) displayed below will be used}
-\item Select global default Coordinate Reference System (CRS)
+\item \checkbox{Preguntar el sistema de referencia de coordenadas (SRC)}
+\item \checkbox{Usar el SRC predeterminado del proyecto}
+\item \checkbox{Usar el SRC global predeterminado mostrado debajo}
+\item Seleccionar SRC global predeterminado
 \end{itemize}
 
-\minisec{Locale Tab}
+\minisec{Pestaña Idioma}
 
 \begin{itemize}
-\item \checkbox{Overwrite system locale and use defined locale instead}
-\item Information about active system locale
+\item \checkbox{Ignorar el idioma del sistema y usar un idioma definido en su lugar}
+\item Información sobre el idioma activo del sistema
 \end{itemize}
 
-\minisec{Proxy Tab}
+\minisec{Pestaña Proxy}
 
 \begin{itemize}
-\item \checkbox{Use proxy for web access} and define host, port, user, and password.
-\item Set the \dropmenuopt{Proxy type} according to your needs
+\item \checkbox{Usar proxy para acceso web} y definir servidor, puerto, usuario y
+contraseña.
+\item Establecer el \dropmenuopt{Tipo de proxy} según sus necesidades
  \begin{itemize}
-  \item \dropmenuopt{Default Proxy}: Proxy is determined based on the application proxy set using
-  \item \dropmenuopt{Socks5Proxy}: Generic proxy for any kind of connection. Supports TCP, UDP, binding to a port (incoming connections) and authentication.
-  \item \dropmenuopt{HttpProxy}: Implemented using the "CONNECT" command, supports only outgoing TCP connections; supports authentication.
-  \item \dropmenuopt{HttpCachingProxy}: Implemented using normal HTTP commands, it is useful only in the context of HTTP requests
-  \item \dropmenuopt{FtpCachingProxy}: Implemented using an FTP proxy, it is useful only in the context of FTP requests
+  \item \dropmenuopt{Proxy predeterminado}: el proxy se determina en base a la configuración del proxy de la aplicación en uso
+  \item \dropmenuopt{Socks5Proxy}: proxy genérico para cualquier tipo de conexión. Admite TCP, UDP, enlazar a un puerto (conexiones entrantes) y autenticación.
+  \item \dropmenuopt{HttpProxy}: implementado usando la orden "CONNECT", admite sólo conexiones TCP de salida; permite autenticación.
+  \item \dropmenuopt{HttpCachingProxy}: implementado usando órdenes HTTP normales, sólo es útil en el contexto de solicitudes HTT.
+  \item \dropmenuopt{FtpCachingProxy}: implementado usando un proxy FTP, sólo es útil en el contexto de solicitudes FTP.
  \end{itemize}
 \end{itemize}
 
-Excluding some URLs can be added to the textbox below the proxy-settings (see
-fig. \ref{fig:proxy-settings}) by pressing the \button{Add}-button. After that
-double-click into the just created URL-field and enter the URL you would like
-to exclude from using the proxy. Obviously the button \button{Remove} removes the selected
-entry.
+Se puede añadir la exclusión de algunas URL al cuadro de texto que hay debajo de la configuración del proxy (ver
+fig. \ref{fig:proxy-settings}) pulsando el botón \button{Añadir}. Después de eso
+haga doble clic en el campo 
+URL recién creado e introduzca la URL que quiera excluir para usar el proxy. Obviamente el botón \button{Eliminar} 
+elimina la entrada seleccionada.
 
-If you need more detailed information about the different proxy-settings,
-please refer to the manual of the unterlaying QT-library-documentation at
+Si necesita información más detallada sobre las distinas configuraciones del proxy,
+por favor diríjase al manual de la biblioteca QT subyacente en
 \url{http://doc.trolltech.com/4.5/qnetworkproxy.html#ProxyType-enum}.
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{Proxy-settings in QGIS \nixcaption}
+   \caption{Configuración de proxy en QGIS \nixcaption}
    \includegraphics[clip=true, width=10cm]{proxy-settings}
    \label{fig:proxy-settings}
 \end{center} 
 \end{figure}
 
-\begin{Tip} \caption{\textsc{Using Proxies}}
-\qgistip{Using proxies can sometimes be tricky. It is useful to 'trial and
-error' the above proxy types and check if they succeed in your case.
+\begin{Tip} \caption{\textsc{Usar proxys}}
+\qgistip{Usar proxys a veces puede ser complicado. Es útil el 'ensayo y error' con los tipos de proxy anteriores 
+y comprobar si son válidos en su caso.
 }
 \end{Tip}
 
-You can modify the options according to your needs. Some of the changes may 
-require a restart of QGIS before they will be effective.
+Puede modificar las opciones de acuerdo con sus necesidades. Algunos 
+de los cambios pueden requerir que reinicie QGIS para que tengan efecto.
 
 \begin{itemize}
-\item \nix{settings are saved in a texfile: \$HOME/.config/QuantumGIS/qgis.conf}
-\item \osx{you can find your settings in: \$HOME/Library/Preferences/org.qgis.qgis.plist}
-\item \win{settings are stored in the registry under:}
+\item \nix{la configuración se guarda en un archivo de texto: \$HOME/.config/QuantumGIS/qgis.conf}
+\item \osx{puede encontrar su configuración en: \$HOME/Library/Preferences/org.qgis.qgis.plist}
+\item \win{la configuración se guarda en el registro bajo:}
 \begin{verbatim}
 \\HKEY\CURRENT\USER\Software\QuantumGIS\qgis
 \end{verbatim}
 \end{itemize}
 
 
-\subsection{Spatial Bookmarks}\label{sec:bookmarks}
+\subsection{Marcadores espaciales}\label{sec:bookmarks}
 \index{bookmarks}
 \index{spatial bookmarks|\see{bookmarks}}
 
-Spatial Bookmarks allow you to ``bookmark'' a geographic location and return to it later.
+Los marcadores espaciales le permiten ``marcar'' una región geográfica y volver a ella
+más tarde.
 
-\subsubsection{Creating a Bookmark}
-To create a bookmark:
+\subsubsection{Crear un marcador}
+Para crear un marcador:
 \begin{enumerate}
-\item Zoom or pan to the area of interest.
-\item Select the menu option \mainmenuopt{View} > \dropmenuopt{New Bookmark} or press \keystroke{Ctrl-B}.
-\item Enter a descriptive name for the bookmark (up to 255 characters).
-\item Click \button{OK} to add the bookmark or \button{Cancel} to exit without adding the bookmark.
+\item Haga zum o desplácese al área de interés.
+\item Seleccione la opción de menú \mainmenuopt{Ver} > \dropmenuopt{Nuevo marcador} o pulse \keystroke{Ctrl-B}.
+\item Introduzca un nombre descriptivo para el marcador (hasta 255 caracteres).
+\item Pulse \button{Aceptar} para añadir el marcador o \button{Cancelar} para salir sin añadir el marcador.
 \end{enumerate}
 
-Note that you can have multiple bookmarks with the same name.
+Tenga en cuenta que puede tener múltiples marcadores con el mismo nombre.
 
-\subsubsection{Working with Bookmarks}
-To use or manage bookmarks, select the menu 
-option \mainmenuopt{View} > \dropmenuopt{Show Bookmarks}.
-The \dialog{Geospatial Bookmarks} dialog allows you to zoom to or delete a bookmark.
-You can not edit the bookmark name or coordinates.
+\subsubsection{Trabajar con marcadores}
+Para usar o administrar marcadores, seleccione la opción de 
+menú \mainmenuopt{Ver} > \dropmenuopt{Mostrar marcadores}.
+El diálogo \dialog{Marcadores geoespaciales} le permite hacer zum a un marcador o eliminarlo.
+No se puede editar el nombre ni las coordenadas de los marcadores.
 
-\subsubsection{Zooming to a Bookmark}
-From the \dialog{Geospatial Bookmarks} dialog, select the desired bookmark by clicking on it, 
-then click \button{Zoom To}.
-You can also zoom to a bookmark by double-clicking on it.
+\subsubsection{Hacer zum a un marcador}
+En el diálogo \dialog{Marcadores geoespaciales} seleccione el marcador deseado y
+pínchelo, luego pulse \button{Zum a}. También puede hacer zum a un marcador haciendo
+doble clic sobre él.
 
-\subsubsection{Deleting a Bookmark}
-To delete a bookmark from the \dialog{Geospatial Bookmarks} dialog, click on it then click
- \button{Delete}.
-Confirm your choice by clicking \button{Yes} or cancel the delete by clicking \button{No}.
+\subsubsection{Borrar un marcador}
+Para borrar un marcador del diálogo \dialog{Marcadores geoespaciales}, pinche en él y luego pulse
+ \button{Borrar}.
