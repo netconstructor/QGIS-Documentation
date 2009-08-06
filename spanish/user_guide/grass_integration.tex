@@ -1,121 +1,101 @@
 % vim: set textwidth=78 autoindent:
 
-\section{GRASS GIS Integration}\label{sec:grass}\index{GRASS}
+\section{Integración de GRASS GIS}\label{sec:grass}\index{GRASS}
 
 % when the revision of a section has been finalized, 
 % comment out the following line:
 %\updatedisclaimer
 
-The GRASS plugin provides access to GRASS GIS~\cite{GRASSweb} databases and 
-functionalities. This includes visualization of GRASS raster and vector 
-layers, digitizing vector layers, editing vector attributes, creating new 
-vector layers and analysing GRASS 2D and 3D data with more than 300 GRASS 
-modules.
+El complemento de GRASS proporciona acceso a los conjuntos de datos y las funcionalidades de GRASS GIS~\cite{GRASSweb}.
+Esto incluye la visualización de capas ráster y vectoriales, digitalización de capas vectoriales, edición de atributos
+de vectoriales, crear nuevas capas vectoriales y análisis de datos 2D y 3D de GRASS con más de 300 módulos de GRASS.
 
-In this Section we'll introduce the plugin functionalities and give some 
-examples on managing and working with GRASS data. Following main features 
-are provided with the toolbar menu, when you start the GRASS plugin, as 
-described in Section~\ref{sec:starting_grass}:
+En esta sección presentaremos las funcionalidades del complemento y daremos algunos ejemplos sobre la organización 
+y trabajo con datos de GRASS. A continuación se proporcionan las principales funciones con el menú de la barra de 
+herramientas, cuando inicia el complemento de GRASS, como se describe en la Sección~\ref{sec:starting_grass}:
  
 \begin{itemize}
-\item \toolbtntwo{grass_open_mapset}{Open mapset}
-\item \toolbtntwo{grass_new_mapset}{New mapset}
-\item \toolbtntwo{grass_close_mapset}{Close mapset}
-\item \toolbtntwo{grass_add_vector}{Add GRASS vector layer}
-\item \toolbtntwo{grass_add_raster}{Add GRASS raster layer}
-\item \toolbtntwo{grass_new_vector_layer}{Create new GRASS vector}
-\item \toolbtntwo{grass_edit}{Edit GRASS vector layer}
-\item \toolbtntwo{grass_tools}{Open GRASS tools}
+\item \toolbtntwo{grass_open_mapset}{Abrir directorio de mapas}
+\item \toolbtntwo{grass_new_mapset}{Nuevo directorio de mapas}
+\item \toolbtntwo{grass_close_mapset}{Cerrar directorio de mapas}
+\item \toolbtntwo{grass_add_vector}{Añadir capa vectorial de GRASS}
+\item \toolbtntwo{grass_add_raster}{Añadir capa ráster de GRASS}
+\item \toolbtntwo{grass_new_vector_layer}{Crear nuevo vectorial de GRASS}
+\item \toolbtntwo{grass_edit}{Editar capa vectorial de GRASS}
+\item \toolbtntwo{grass_tools}{Abrir herramientas de GRASS}
 %\item \toolbtntwo{grass_shell}{Open GRASS Shell}
-\item \toolbtntwo{grass_region}{Display current GRASS region} 
-\item \toolbtntwo{grass_region_edit}{Edit current GRASS region}
+\item \toolbtntwo{grass_region}{Visualizar la región actual de GRASS} 
+\item \toolbtntwo{grass_region_edit}{Editar la región actual de GRASS}
 \end{itemize}
 
-\subsection{Starting the GRASS plugin}\label{sec:starting_grass}
+\subsection{Iniciar el complemento de GRASS}\label{sec:starting_grass}
 \index{GRASS!starting QGIS}
 
-To use GRASS functionalities and/or visualize GRASS vector and raster layers 
-in QGIS, you must select and load the GRASS plugin with the Plugin Manager. 
-Therefore click the menu \mainmenuopt{Plugins} > \mainmenuopt{Manage Plugins}, 
-select \dropmenuopt{GRASS} and click \button{OK}. 
+Para usar las funciones de GRASS y/o visualizar capas vectoriales o ráster de GRASS en QGIS, debe seleccionar y cargar 
+el complemento de GRASS con el administrador de complementos. 
+A continuacion pulse el menú 
+\mainmenuopt{Complementos} > \mainmenuopt{Administrar complementos}, 
+seleccione \dropmenuopt{GRASS} y pulse \button{Aceptar}. 
 
-You can now start loading raster and vector layers from an existing GRASS 
-\filename{LOCATION} (see Section \ref{sec:load_grassdata}). Or you create a 
-new GRASS \filename{LOCATION} with QGIS (see Section \ref{sec:create_loc}) 
-and import some raster and vector data (see Section \ref{sec:import_loc_data}) 
-for further analysis with the GRASS Toolbox (see Section 
-\ref{subsec:grass_toolbox}).
+Ahora puede comenzar a cargar capas ráster y vectoriales desde una  
+\filename{LOCALIZACIÓN} existente de 
+GRASS (ver Sección \ref{sec:load_grassdata}). O puede crear una \filename{LOCALIZACIÓN} nueva con QGIS (ver Sección \ref{sec:create_loc}) 
+e importar algunos datos ráster y vectoriales (ver Sección \ref{sec:import_loc_data}) 
+para análisis posteriores con la
+caja de herramientas de GRASS (ver Sección \ref{subsec:grass_toolbox}).
 
-\subsection{Loading GRASS raster and vector layers}\label{sec:load_grassdata}\index{GRASS!loading data}
+\subsection{Cargar capas ráster y vectoriales de GRASS}\label{sec:load_grassdata}\index{GRASS!loading data}
 
-With the GRASS plugin, you can load vector or raster layers using the
-appropriate button on the toolbar menu. As an example we use the QGIS alaska
-dataset (see Section \ref{label_sampledata}). It includes a small sample 
-GRASS \filename{LOCATION} with 3 vector layers and 1 raster elevation map.
+Con el complemento de GRASS, puede cargar capas vectoriales o ráster usando los botones adecuados de la barra de herramientas. 
+Como ejemplo usaremos el conjunto de datos de QGIS de alaska
+(ver Sección \ref{label_sampledata}), que incluye una pequeña \filename{LOCALIZACIÓN} de ejemplo con 3 capas vectoriales y 1 mapa ráster de elevación.
 
 \begin{enumerate}
-  \item Create a new folder \filename{grassdata}, download the QGIS alaska
-  dataset \filename{qgis\_sample\_data.zip} from
-  \url{http://download.osgeo.org/qgis/data/} and unzip the file into
+  \item Cree una carpeta nueva \filename{grassdata}, descargue el conjunto de datos de QGIS de alaska \filename{qgis\_sample\_data.zip} desde
+  \url{http://download.osgeo.org/qgis/data/} y descomprima el archivo en
   \filename{grassdata}. 
-  \item Start QGIS.
-  \item If not already done in a previous QGIS session, load the GRASS plugin
-  clicking on \mainmenuopt{Plugins} > \mainmenuopt{Manage Plugins} and
-  selecting \dropmenuopt{GRASS}. The GRASS toolbar appears on the toolbar menu.
-  \item In the GRASS toolbar, click the \toolbtntwo{grass_open_mapset}{Open
-  mapset} icon to bring up the \filename{MAPSET} wizard.
-  \item For \filename{Gisdbase} browse and select or enter the path to the
-  newly created folder \filename{grassdata}.
-  \item You should now be able to select the \filename{LOCATION alaska}
-  and the MAPSET \filename{demo}. 
-  \item Click \button{OK}. Notice that some previously disabled tools in the 
-  GRASS toolbar are now enabled.
-  \item Click on \toolbtntwo{grass_add_raster}{Add GRASS raster layer},
-  choose the map name \filename{gtopo30} and click \button{OK}. The elevation
-  layer will be visualized.
-  \item Click on \toolbtntwo{grass_add_vector}{Add GRASS vector layer},
-  choose the map name \filename{alaska} and click \button{OK}. The alaska
-  boundary vector layer will be overlayed on top of the gtopo30 map. You can
-  now adapt the layer properties as described in chapter \ref{sec:vectorprops},
-  e.g. change opacity, fill and outline color.
-  \item Also load the other two vector layers \filename{rivers} and
-  \filename{airports} and adapt their properties.
+  \item Inicie QGIS.
+  \item Si no la ha hecho ya en una sesión anterior de QGIS, cargue el complemento de GRASS pinchando en \mainmenuopt{Complementos} > \mainmenuopt{Administrar complementos} y
+  seleccionando \dropmenuopt{GRASS}. Aparecerá la barra de herramientas de GRASS en el menú de barras de herramientas.
+  \item En la barra de herramientas de GRASS, pulse el icono \toolbtntwo{grass_open_mapset}{Abrir directorio de mapas} para iniciar el asistente  \filename{DIRECTORIO DE MAPAS}.
+  \item Para \filename{Gisdbase} explore y seleccione o introduzca la ruta a la carpeta recién creada \filename{grassdata}.
+  \item Ahora debería poder seleccionar la \filename{LOCALIZACIÓN alaska}
+  y el DIRECTORIO DE MAPAS \filename{demo}. 
+  \item Pulse \button{Aceptar}. Note como algunas de las herramientas de la barra de herramientas de GRASS que estaban desactivadas ahora están activadas.
+  \item Pulse en \toolbtntwo{grass_add_raster}{Añadir capa ráster de GRASS}, seleccione el mapa llamado \filename{gtopo30} y pulse \button{Aceptar}. Se visualizará la capa de elevaciones.
+  \item Pulse en \toolbtntwo{grass_add_vector}{Añadir capa vectorial de GRASS},
+  seleccione el mapa \filename{alaska} y pulse \button{Aceptar}. La capa con el contorno de Alaska se superpondrá sobre el mapa gtopo30. Ahora puede adaptar las propiedades de la capa como se describe en el capítulo \ref{sec:vectorprops}, por ejemplo, cambiar la opacidad o el color de relleno o de línea exterior.
+  \item Cargue también las otras dos capas vectoriales \filename{rivers} y
+  \filename{airports} y adapte sus propiedades.
 \end{enumerate}
 
-As you see, it is very simple to load GRASS raster and vector layers in QGIS. 
-See following Sections for editing GRASS data and creating a new 
-\filename{LOCATION}. More sample GRASS \filename{LOCATIONs} are available at 
-the GRASS website at \url{http://grass.osgeo.org/download/data.php}.
+Como puede ver, es muy sencillo cargar capas ráster y vectoriales de GRASS en QGIS. Vea las siguientes secciones para editar 
+datos de GRASS y crear nuevas \filename{LOCALIZACIONES}. Hay más \filename{LOCALIZACIONES} de 
+muestra disponibles en la web de GRASS en \url{http://grass.osgeo.org/download/data.php}.
 
-\begin{Tip}\caption{\textsc{GRASS Data Loading}}
-\qgistip{If you have problems loading data or QGIS terminates abnormally,
-check to make sure you have loaded the GRASS plugin properly as described in
-Section \ref{sec:starting_grass}.
+\begin{Tip}\caption{\textsc{Cargar datos de GRASS}}
+\qgistip{Si tiene problemas para cargar datos o QGIS termina de forma anormal, asegúrese de que ha cargado el complemento de GRASS correctamente como se describe en la Sección \ref{sec:starting_grass}.
 }
 \end{Tip} 
 
-\subsection{GRASS LOCATION and MAPSET}\label{sec:about_loc}
+\subsection{LOCALIZACIÓN Y DIRECTORIO DE MAPAS DE GRASS}\label{sec:about_loc}
 
-GRASS data are stored in a directory referred to as GISDBASE. This directory 
-often called \filename{grassdata}, must be created before you start working 
-with the GRASS plugin in QGIS. Within this directory, the GRASS GIS data 
-are organized by projects stored in subdirectories called \filename{LOCATION}. 
-Each \filename{LOCATION} is defined by its coordinate system, map projection 
-and geographical boundaries. Each \filename{LOCATION} can have several 
-\filename{MAPSETs} (subdirectories of the \filename{LOCATION}) that are used 
-to subdivide the project into different topics, subregions, or as workspaces 
-for individual team members (Neteler \& Mitasova 2008 
-\cite{neteler_mitasova08}). In order to analyze vector and raster layers with 
-GRASS modules, you must import them into a GRASS \filename{LOCATION}.
-\footnote{This is not strictly true - with the GRASS modules 
-\filename{r.external} and \filename{v.external} you can create read-only links 
-to external GDAL/OGR-supported data sets without importing them. But because 
-this is not the usual way for beginners to work with GRASS, this functionality 
-will not be described here.}
+Los datos de GRASS se guardan en un directorio denominado GISDBASE. Este directorio, 
+a menudo llamado \filename{grassdata}, 
+se debe crear antes de empezar a trabajar con el complemento de GRASS en QGIS. Dentro de ese directorio, los datos SIG de GRASS están
+organizados por proyectos guardados en subdirectorios llamados \filename{LOCALIZACIÓN}. 
+Cada \filename{LOCALIZACIÓN} se define 
+por su sistema de coordenadas, proyección del mapa y límites geográficos. Cada \filename{LOCALIZACIÓN} puede tener 
+varios \filename{DIRECTORIOs DE MAPAS} (subdirectorios de la \filename{LOCALIZACIÓN}) que se usan para subdividir el proyecto 
+en diferentes temas, subregiones o entornos de trabajo para distintos miembros de un equipo de trabajo (Neteler \& Mitasova 2008 
+\cite{neteler_mitasova08}). Para poder analizar capas vectoriales y ráster con los módulos de GRASS, debe importarlos a una \filename{LOCALIZACIÓN} de GRASS.
+\footnote{Esto no es estrictamente cierto - con los módulos de GRASS 
+\filename{r.external} y \filename{v.external} puede crear enlaces de sólo lectura a conjuntos de datos externos admitidos por 
+GDAL/OGR sin importarlos. Pero como esta no es la forma habitual de empezar a trabajar con GRASS para principiantes, esta funcionalidad no se describirá aquí.}
 
 \begin{figure}[ht]
 \begin{center}
-\caption{GRASS data in the alaska LOCATION (adapted from Neteler \& 
+\caption{Datps de GRASS en la LOCALIZACIÓN alaska (adaptado de Neteler \& 
 Mitasova 2008 \cite{neteler_mitasova08})}\label{fig:grass_location}\smallskip
 \includegraphics[clip=true]{grass_location}
 \end{center}  
