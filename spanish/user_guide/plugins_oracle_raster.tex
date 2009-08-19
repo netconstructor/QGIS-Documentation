@@ -6,68 +6,68 @@
 % comment out the following line:
 % \updatedisclaimer
 
-En bases de datos Oracle, los datos raster pueden ser almacenados en objetos SDO\_GEORASTER disponibles con la extensiÛn Oracle Spatial. En QGIS, el \toolbtntwo{oracle_raster}{Complemento Oracle GeoRaster} 
-es soportado por GDAL, y depende del producto de Bases de Datos Oracle instalado y trabajando en tu m·quina. Mientras Oracle es software propietario, ellos proveen su software gratis para propÛsitos de desarrollo y pruebas. AquÌ est· un ejemplo simple de como cargar im·genes raster a GeoRaster:
+En bases de datos Oracle, los datos raster pueden ser almacenados en objetos SDO\_GEORASTER disponibles con la extensi√≥n Oracle Spatial. En QGIS, el \toolbtntwo{oracle_raster}{Complemento Oracle GeoRaster} 
+es soportado por GDAL, y depende del producto de Bases de Datos Oracle instalado y trabajando en tu m√°quina. Mientras Oracle es software propietario, ellos proveen su software gratis para prop√≥sitos de desarrollo y pruebas. Aqu√≠ est√° un ejemplo simple de como cargar im√°genes raster a GeoRaster:
 
 \begin{verbatim} 
 $ gdal_translate -of georaster input_file.tif geor:scott/tiger@orcl
 \end{verbatim}
 
-Esto cargar· el raster dentro de la tabla predeterminada GDAL\_IMPORT, como una columna llamada RASTER.
+Esto cargar√° el raster dentro de la tabla predeterminada GDAL\_IMPORT, como una columna llamada RASTER.
 
 \subsubsection{Administrando conexiones}
 
-Primeramente, el complemento Oracle GeoRaster debe estar activado usando el Administrador de complementos (vea la secciÛn 
-\ref{sec:load_core_plugin}). La primer vez que carga un GeoRaster en QGIS, debe crear una conexiÛn 
+Primeramente, el complemento Oracle GeoRaster debe estar activado usando el Administrador de complementos (vea la secci√≥n 
+\ref{sec:load_core_plugin}). La primer vez que carga un GeoRaster en QGIS, debe crear una conexi√≥n 
 a la base de datos de Oracle que contiene los datos. Para hacer esto, comience haciendo clic en 
-el botÛn de la barra de herramientas \toolbtntwo{oracle_raster}{Seleccionar GeoRaster}, abrir· el di·logo Seleccionar GeoRaster Espacial. Clic en \button{Nuevo} para abrir el di·logo, y especificar los par·metros 
-de conexiÛn (vea la figura \ref{fig:oracle_create}):
+el bot√≥n de la barra de herramientas \toolbtntwo{oracle_raster}{Seleccionar GeoRaster}, abrir√° el di√°logo Seleccionar GeoRaster Espacial. Clic en \button{Nuevo} para abrir el di√°logo, y especificar los par√°metros 
+de conexi√≥n (vea la figura \ref{fig:oracle_create}):
 
 \begin{itemize}
-\item \textbf{Nombre}: Escriba un nombre para la conexiÛn de base de datos.
-\item \textbf{Instancia de la base de datos}: Escriba el nombre de la base de datos a la que se conectar·.
-\item \textbf{Nombre de usuario}: Especifique el nombre de usuario que usar· para accesar a la base de datos.
-\item \textbf{ContraseÒa}: La contraseÒa asociada con el nombre de usuario requerido para accesar la base de datos.
+\item \textbf{Nombre}: Escriba un nombre para la conexi√≥n de base de datos.
+\item \textbf{Instancia de la base de datos}: Escriba el nombre de la base de datos a la que se conectar√°.
+\item \textbf{Nombre de usuario}: Especifique el nombre de usuario que usar√° para accesar a la base de datos.
+\item \textbf{Contrase√±a}: La contrase√±a asociada con el nombre de usuario requerido para accesar la base de datos.
 \end{itemize}
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{Di·logo crear conexiÛn a Oracle \nixcaption}\label{fig:oracle_create}\smallskip
+   \caption{Di√°logo crear conexi√≥n a Oracle \nixcaption}\label{fig:oracle_create}\smallskip
    \includegraphics[clip=true, width=9cm]{oracle_create_dialog}
 \end{center}
 \end{figure}
 
-Ahora, de regreso en el di·logo principal de Oracle GeoRaster espacial (vea la figura \ref{fig:oracle_select}), use la lista desplegable para elegir una conexiÛn, y use el  
-botÛn \button{Connectar} para establecer una conexiÛn. Puede tambiÈn 
-\button{Editar} la conexiÛn abriendo el di·logo previo y haciendo cambios a la informaciÛn de conexiÛn, o use el botÛn \button{Eliminar} para remover la conexiÛn desde la lista desplegable.
+Ahora, de regreso en el di√°logo principal de Oracle GeoRaster espacial (vea la figura \ref{fig:oracle_select}), use la lista desplegable para elegir una conexi√≥n, y use el  
+bot√≥n \button{Connectar} para establecer una conexi√≥n. Puede tambi√©n 
+\button{Editar} la conexi√≥n abriendo el di√°logo previo y haciendo cambios a la informaci√≥n de conexi√≥n, o use el bot√≥n \button{Eliminar} para remover la conexi√≥n desde la lista desplegable.
 
 \subsubsection{Seleccionando un GeoRaster}
 
-Una vez que la conexiÛn ha sido establecida, la ventana de subconjuntos de datos mostrar· los nombres de todas las tablas que contiene columnas GeoRaster en la base de datos en el formato de un nombre de subconjunto de datos de GDAL.
+Una vez que la conexi√≥n ha sido establecida, la ventana de subconjuntos de datos mostrar√° los nombres de todas las tablas que contiene columnas GeoRaster en la base de datos en el formato de un nombre de subconjunto de datos de GDAL.
 
-Haga clic en uno de los subconjuntos listados y entonces clic en \button{Seleccionar} para elegir el nombre de tabla. Ahora otra lista de subconjuntos de datos se mostra¥ra con los nombres de columnas GeoRaster en esa tabla. Esta es usualmente una lista pequeÒa, ya que la mayorÌa de los usuarios no tendr·n mas de una o dos columnas GeoRaster en la misma tabla.
+Haga clic en uno de los subconjuntos listados y entonces clic en \button{Seleccionar} para elegir el nombre de tabla. Ahora otra lista de subconjuntos de datos se mostrar√° con los nombres de columnas GeoRaster en esa tabla. Esta es usualmente una lista peque√±a, ya que la mayor√≠a de los usuarios no tendr√°n mas de una o dos columnas GeoRaster en la misma tabla.
 
-Haga clic en uno de los subconjuntos listados y entonces clic en el botÛn \button{Seleccionar} para elegir una de la combinaciÛn tabla/columna. El di·logo ahora mostrar· todas las filas que contienen objetos GeoRaster. Note que la lista de subconjuntos de datos ahora miostrar· pares de la tabla de datos raster   e ids raster.
+Haga clic en uno de los subconjuntos listados y entonces clic en el bot√≥n \button{Seleccionar} para elegir una de la combinaci√≥n tabla/columna. El di√°logo ahora mostrar√° todas las filas que contienen objetos GeoRaster. Note que la lista de subconjuntos de datos ahora mostrar√° pares de la tabla de datos raster   e ids raster.
 
-En cualquier momento la entrada de la selecciÛn puede ser editada para ir directamente a un GeoRaster conocido o ir al inicio y seleccionar otra tabla.
+En cualquier momento la entrada de la selecci√≥n puede ser editada para ir directamente a un GeoRaster conocido o ir al inicio y seleccionar otra tabla.
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{Di·logo seleccionar Oracle GeoRaster \nixcaption}\label{fig:oracle_select}\smallskip
+   \caption{Di√°logo seleccionar Oracle GeoRaster \nixcaption}\label{fig:oracle_select}\smallskip
    \includegraphics[clip=true, width=9cm]{oracle_select_dialog}
 \end{center}
 \end{figure}
 
-La selecciÛn de datos de entrada puede tambiÈn ser usada para escribir clausulas Where al final de la cadena de identificaciÛn, ej., 
-``geor:scott/tiger@orcl,gdal\_import,raster,geoid=''. vea \url{http://www.gdal.org/frmt_georaster.html} para mas informaciÛn.
+La selecci√≥n de datos de entrada puede tambi√©n ser usada para escribir clausulas Where al final de la cadena de identificaci√≥n, ej., 
+``geor:scott/tiger@orcl,gdal\_import,raster,geoid=''. vea \url{http://www.gdal.org/frmt_georaster.html} para mas informaci√≥n.
 
 \subsubsection{Mostrando GeoRaster}
 
-Finalmente, seleccionando un GeoRaster de la lista de Tablas de Datos Raster e Ids Raster, la imagen raster ser· cargada a QGIS.
+Finalmente, seleccionando un GeoRaster de la lista de Tablas de Datos Raster e Ids Raster, la imagen raster ser√° cargada a QGIS.
 
-El di·logo seleccionar Oracle GeoRaster Espacial puede ser cerrado ahora y la siguiente vez que la abra mantendr· la misma conexiÛn, y mostrar· la misma lista previa de subconjuntos de datos haciendo muy f·cil abrir otra imagen del mismo contexto.
+El di√°logo seleccionar Oracle GeoRaster Espacial puede ser cerrado ahora y la siguiente vez que la abra mantendr√° la misma conexi√≥n, y mostrar√° la misma lista previa de subconjuntos de datos haciendo muy f√°cil abrir otra imagen del mismo contexto.
 
-\textbf{Nota:} GeoRasters que contienen pir·mides se mostrar·n mucho mas r·pido pero las pir·mides necesitan ser generadas fuera de QGIS usando Oracle PL/SQL o gdaladdo.
+\textbf{Nota:} GeoRasters que contienen pir√°mides se mostrar√°n mucho mas r√°pido pero las pir√°mides necesitan ser generadas fuera de QGIS usando Oracle PL/SQL o gdaladdo.
 
 El siguiente es un ejemplo usando gdaladdo:
 
