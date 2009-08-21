@@ -1,7 +1,7 @@
 % vim: set textwidth=78 autoindent:
 
 %\section{Creating PyQGIS Applications}
-\section{Cr\'eer des applications PyQGIS}
+\section{Créer des applications PyQGIS}
 %\item [Traductrice :] Marie Silvestre
 
 % when the revision of a section has been finalized, 
@@ -15,34 +15,34 @@
 %either C++ or Python is possible. We recommend you use QGIS 1.0.0 or greater
 %as the basis for your pythong applications because since this version we now
 %provide a stable consistent API.
-Un des objectifs de QGIS est de fournir non seulement une application mais \'egalement un jeu de biblioth\`eques pouvant \^etre utilis\'ees pour cr\'eer de nouvelles applications. Cet objectif a \'et\'e rempli par le reformatage des biblioth\`eques qui a eut lieu apr\`es la sortie de la version 0.8. Depuis la version 0.9, le d\'eveloppement d'applications autonomes est possible en utilisant les langages C++ ou Python. Nous vous recommandons d'utiliser QGIS 1.0.0 ou une version plus r\'ecente comme base pour vos applications Python car c'est depuis cette version que nous proposons une API stable et coh\'erente.
+Un des objectifs de QGIS est de fournir non seulement une application mais également un jeu de bibliothèques pouvant être utilisées pour créer de nouvelles applications. Cet objectif a été rempli par le reformatage des bibliothèques qui a eut lieu après la sortie de la version 0.8. Depuis la version 0.9, le développement d'applications autonomes est possible en utilisant les langages C++ ou Python. Nous vous recommandons d'utiliser QGIS 1.0.0 ou une version plus récente comme base pour vos applications Python car c'est depuis cette version que nous proposons une API stable et cohérente.
 
 %In this chapter we'll take a brief look at the process for creating a
 %standalone Python application. The QGIS blog has several examples of creating
 %PyQGIS\footnote{An application created using Python and the QGIS bindings}
 %applications. We'll use one of them as a starting point to get a look at how
 %to create an application.
-Dans ce chapitre nous allons d\'ecrire rapidement le processus de cr\'eation d'une application Python autonome. Le blog QGIS propose quelques exemples de cr\'eation d'applications PyQGIS \footnote{Une application cr\'e\'ee en utilisant Python et la mise \`a disposition par encapsulation (\textit{bindings}) des biblioth\`eques de QGIS}.
+Dans ce chapitre nous allons décrire rapidement le processus de création d'une application Python autonome. Le blog QGIS propose quelques exemples de création d'applications PyQGIS \footnote{Une application créée en utilisant Python et la mise à disposition par encapsulation (\textit{bindings}) des bibliothèques de QGIS}.
 
 %The features we want in the application are:
-Les fonctionnalit\'es que nous souhaitons avoir dans cette application sont :
+Les fonctionnalités que nous souhaitons avoir dans cette application sont :
 
 \begin{itemize}
 %\item Load a vector layer
 \item Charger une couche vecteur
 %\item Pan
-\item D\'eplacements panoramiques
+\item Déplacements panoramiques
 %\item Zoom in and out
 \item Zoom + et -
 %\item Zoom to the full extent of the layer
-\item Zoom sur l'\'etendue globale de la couche
+\item Zoom sur l'étendue globale de la couche
 %\item Set custom colors when the layer is loaded
 \item Choix des couleurs au chargement de la couche
 \end{itemize} 
 
 %This is a pretty minimal feature set. Let's start by designing the GUI using
 %Qt Designer. 
-Il s'agit ici des fonctionnalit\'es minimales et relativement essentielles. Commen\c{c}ons par cr\'eer l'interface en utilisant Qt Designer.
+Il s'agit ici des fonctionnalités minimales et relativement essentielles. Commençons par créer l'interface en utilisant Qt Designer.
 
 %\subsection{Designing the GUI}
 \subsection{Design de l'interface}
@@ -51,32 +51,32 @@ Il s'agit ici des fonctionnalit\'es minimales et relativement essentielles. Comm
 %approach with the GUI. Using Qt Designer, we create a simple MainWindow with
 %no menu or toolbars. This gives us a blank slate to work with. To create the
 %MainWindow:
-Comme nous cr\'eons une application minimaliste, nous allons avoir la m\^eme approche pour l'interface. En nous servant de Qt Designer, nous cr\'eons une simple fen\^etre principale (\textit{MainWindow}) sans menu ni barre d'outils. Nous aurons une fen\^etre vide sur laquelle nous allons pouvoir travailler. Pour cr\'eer la fen\^etre principale :
+Comme nous créons une application minimaliste, nous allons avoir la même approche pour l'interface. En nous servant de Qt Designer, nous créons une simple fenêtre principale (\textit{MainWindow}) sans menu ni barre d'outils. Nous aurons une fenêtre vide sur laquelle nous allons pouvoir travailler. Pour créer la fenêtre principale :
 
 \begin{enumerate}
 %\item Create a directory for developing the application and change to it
-\item Cr\'eez un r\'epertoire pour le d\'eveloppement de l'application et d\'efinissez-le comme r\'epertoire de travail
+\item Créez un répertoire pour le développement de l'application et définissez-le comme répertoire de travail
 %\item Run Qt Designer
 \item Lancez Qt Designer
 %\item The \qtdialog{New Form} dialog should appear. If it doesn't, choose
 %\qtdropmenuopt{New Form...} from the \qtmainmenuopt{File} menu.
-\item La bo\^ite de dialogue \qtdialog{New Form} devrait appara\^itre. Si ce n'est pas le cas, choisissez \qtdropmenuopt{New Form...} dans le menu \qtmainmenuopt{File}.
+\item La boîte de dialogue \qtdialog{New Form} devrait apparaître. Si ce n'est pas le cas, choisissez \qtdropmenuopt{New Form...} dans le menu \qtmainmenuopt{File}.
 %\item Choose \qtdropmenuopt{Main Window} from 
 %the \qtdropmenuopt{templates/forms} list
 \item Choisissez \qtdropmenuopt{Main Window} dans la liste \qtdropmenuopt{templates/forms}
 %\item Click \qtdropmenuopt{Create} 
 \item Cliquez sur \qtdropmenuopt{Create} 
 %\item Resize the new window to something manageable
-\item Redimensionnez la nouvelle fen\^etre \`a une taille convenable
+\item Redimensionnez la nouvelle fenêtre à une taille convenable
 %\item Find the \qtdropmenuopt{Frame} widget in the list 
 %(under \qtdropmenuopt{Containers}) and drag it to
 %the main window you just created
-\item Trouvez le widget \qtdropmenuopt{Frame} dans la liste (dans \qtdropmenuopt{Containers}) et faites-le glisser dans la fen\^etre principale pr\'ec\'edemment cr\'e\'ee.
-%\item Click outside the frame to select the main window area   (je laisse le terme Frame pour des questions de coh\'erence et de compr\'ehension)
-\item Cliquez en dehors du ``frame'' pour s\'electionner la fen\^etre principale 
+\item Trouvez le widget \qtdropmenuopt{Frame} dans la liste (dans \qtdropmenuopt{Containers}) et faites-le glisser dans la fenêtre principale précédemment créée.
+%\item Click outside the frame to select the main window area   (je laisse le terme Frame pour des questions de cohérence et de compréhension)
+\item Cliquez en dehors du ``frame'' pour sélectionner la fenêtre principale 
 %\item Click on the \qtdropmenuopt{Lay Out in a Grid} tool. When you do, the frame
 %will expand to fill your entire main window
-\item Cliquez sur l'outil \qtdropmenuopt{Lay Out in a Grid}. Le ``frame'' vient alors remplir toute la fen\^etre principale.
+\item Cliquez sur l'outil \qtdropmenuopt{Lay Out in a Grid}. Le ``frame'' vient alors remplir toute la fenêtre principale.
 %\item Save the form as \usertext{mainwindow.ui} 
 \item Sauvegardez le formulaire sous \usertext{mainwindow.ui} 
 %\item \qtdropmenuopt{Exit} Qt Designer
@@ -92,16 +92,16 @@ Compilez ensuite le formulaire en utilisant le compilateur d'interface PyQt :
 
 %This creates the Python source for the main window GUI. Next we need to create
 %the application code to fill the blank slate with some tools we can use.
-Ceci permet de cr\'eer le code source Python pour l'interface constitu\'ee de la fen\^etre principale. Ensuite nous devons cr\'eer le code de l'application qui ajoutera \`a cette fen\^etre vide quelques outils que nous pourrions utiliser.
+Ceci permet de créer le code source Python pour l'interface constituée de la fenêtre principale. Ensuite nous devons créer le code de l'application qui ajoutera à cette fenêtre vide quelques outils que nous pourrions utiliser.
 
 %\subsection{Creating the MainWindow}
-\subsection{Cr\'eation de la fen\^etre principale}
+\subsection{Création de la fenêtre principale}
 
 %Now we are ready to write the \classname{MainWindow} class that will do the real work.
 %Since it takes up quite a few lines, we'll look at it in chunks, starting
 %with the import section and environment setup:
-Nous pouvons maintenant \'ecrire la classe \classname{MainWindow} qui effectuera effectivement le travail.
-Comme cela n\'ecessite un grand nombre de lignes de code, nous allons les d\'ecrire par morceaux en commen\c{c}ant par la section import et la pr\'eparation de l'environnement :
+Nous pouvons maintenant écrire la classe \classname{MainWindow} qui effectuera effectivement le travail.
+Comme cela nécessite un grand nombre de lignes de code, nous allons les décrire par morceaux en commençant par la section import et la préparation de l'environnement :
 
 \begin{verbatim}
 1 # Loosely based on:
@@ -125,13 +125,13 @@ Comme cela n\'ecessite un grand nombre de lignes de code, nous allons les d\'ecr
 \end{verbatim}
 
 %Some of this should look familiar from our plugin, especially the PyQt4 and QGIS imports. Some specific things to note are the import of our GUI in line 14 and the import of our CORE library on line 9.
-Certaines lignes doivent vous sembler famili\`eres de nos extensions, notamment les importations PyQt4 et QGIS. Les sp\'ecificit\'es \`a noter sont les importations de notre IHM ligne 14 et de notre biblioth\`eque CORE ligne 9.
+Certaines lignes doivent vous sembler familières de nos extensions, notamment les importations PyQt4 et QGIS. Les spécificités à noter sont les importations de notre IHM ligne 14 et de notre bibliothèque CORE ligne 9.
 
 %Our application needs to know where to find the QGIS installation. Because of this, we set the \usertext{QGISHOME} environment variable to point to the install directory of QGIS 1.x In line 20 we store this value from the environment for later use.
-Notre application a besoin de savoir o\`u se trouve l'installation de QGIS. C'est pour cette raison que nous d\'efinissons la variable d'environnement \usertext{QGISHOME} pour pointer sur le r\'epertoire d'installation de QGIS 1.x. \`a la ligne 18, nous stockons cette valeur pour une utilisation ult\'erieure.
+Notre application a besoin de savoir où se trouve l'installation de QGIS. C'est pour cette raison que nous définissons la variable d'environnement \usertext{QGISHOME} pour pointer sur le répertoire d'installation de QGIS 1.x. à la ligne 18, nous stockons cette valeur pour une utilisation ultérieure.
 
 %Next we need to create our \classname{MainWindow} class which will contain all the logic of our application.
-Ensuite, nous devons cr\'eer notre classe \classname{MainWindow} qui d\'eterminera la logique de fonctionnement de notre application.
+Ensuite, nous devons créer notre classe \classname{MainWindow} qui déterminera la logique de fonctionnement de notre application.
 \begin{verbatim}
 21 class MainWindow(QMainWindow, Ui_MainWindow):
 22 
@@ -193,25 +193,25 @@ Ensuite, nous devons cr\'eer notre classe \classname{MainWindow} qui d\'etermine
 \end{verbatim}
 
 %Lines 21 through 27 are the basic declaration and initialization of the \classname{MainWindow} and the set up of the user interface using the \method{setupUi} method. This is required for all applications.
-Les lignes 21 \`a 27 constituent la d\'eclaration et l'initialisation basiques de \classname{MainWindow} et la l'installation de l'interface utilisateur par la m\'ethode \method{setupUi}. Ceci est n\'ecessaire pour toutes les applications.
+Les lignes 21 à 27 constituent la déclaration et l'initialisation basiques de \classname{MainWindow} et la l'installation de l'interface utilisateur par la méthode \method{setupUi}. Ceci est nécessaire pour toutes les applications.
 
 %Next we set the title for the application so it says something more interesting than \usertext{MainWindow} (line 30). Once that is complete, we are ready to complete the user interface. When we created it in Designer, we left it very sparse---just a main window and a frame. You could have added a menu and the toolbar using Designer, however we'll do it with Python.
-Ensuite nous d\'efinissons le titre de l'application qui soit plus significatif que \usertext{MainWindow} (ligne 30). Une fois cela effectu\'e, nous sommes pr\^ets \`a terminer l'interface utilisateur. Lors de sa cr\'eation dans Designer, nous l'avons laiss\'e tr\`es simple --- juste une fen\^etre principale et un frame. Vous auriez pu ajouter un menu et une barre d'outils en utilisant Designer mais nous allons le faire avec Python.
+Ensuite nous définissons le titre de l'application qui soit plus significatif que \usertext{MainWindow} (ligne 30). Une fois cela effectué, nous sommes prêts à terminer l'interface utilisateur. Lors de sa création dans Designer, nous l'avons laissé très simple --- juste une fenêtre principale et un frame. Vous auriez pu ajouter un menu et une barre d'outils en utilisant Designer mais nous allons le faire avec Python.
 
 %In lines 33 through 38 we set up the map canvas, set the background color to a light blue, and enable antialiasing.  We also tell it not to use a \classname{QImage} for rendering (trust me on this one) and then set the canvas to visible by calling the \method{show} method.
-Des lignes 33 \`a 38, nous cr\'eons le canevas de la carte, d\'efinissons la couleur de l'arri\`ere plan \`a bleu clair et activons l'antialiasing. Nous pr\'ecisons \'egalement de ne pas utiliser \classname{QImage} pour le rendu (faites moi confiance) et enfin nous rendons le canevas visible en appelant la m\'ethode \method{show}.
+Des lignes 33 à 38, nous créons le canevas de la carte, définissons la couleur de l'arrière plan à bleu clair et activons l'antialiasing. Nous précisons également de ne pas utiliser \classname{QImage} pour le rendu (faites moi confiance) et enfin nous rendons le canevas visible en appelant la méthode \method{show}.
 
 %Next we set the layer to use a vertical box layout within the frame and add the map canvas to it in line 43.
 Ensuite nous indiquons qu'il faut utiliser un alignement vertical dans le cadre et, ligne 43, y ajoutons le canevas de la carte.
 
 %Lines 48 to 63 set up the actions and connections for the tools in our toolbar. For each tool, we create a \classname{QAction} using the icon we defined in the QGIS classic theme.  Then we connect up the \usertext{activated} signal from the tool to the method in our class that will handle the action. This is similar to how we set things up in the plugin example.
-Des lignes 48 \`a 63, nous d\'efinissons les actions et les connexions pour les outils de la barre d'outils. Pour chaque outil, nous cr\'eons un \classname{QAction} utilisant l'ic\^one que nous avons d\'efini dans le th\`eme classique de QGIS. Ensuite nous connectons le signal \usertext{activated} de l'outil \`a la m\'ethode de notre classe qui va g\'erer l'action. Ceci est similaire \`a la mani\`ere dont nous d\'efinissons les choses dans l'exemple de l'extension.
+Des lignes 48 à 63, nous définissons les actions et les connexions pour les outils de la barre d'outils. Pour chaque outil, nous créons un \classname{QAction} utilisant l'icône que nous avons défini dans le thème classique de QGIS. Ensuite nous connectons le signal \usertext{activated} de l'outil à la méthode de notre classe qui va gérer l'action. Ceci est similaire à la manière dont nous définissons les choses dans l'exemple de l'extension.
 
 %Once we have the actions and connections, we need to add them to the toolbar. In lines 66 through 72 we create the toolbar and add each tool to it.
-Une fois que nous avons les actions et les connexions, nous avons besoin de les ajouter \`a la barre d'outils. Ligne 66 \`a 72, nous cr\'eons la barre d'outils et y ajoutons chacun des outils.
+Une fois que nous avons les actions et les connexions, nous avons besoin de les ajouter à la barre d'outils. Ligne 66 à 72, nous créons la barre d'outils et y ajoutons chacun des outils.
 
 %Lastly we create the three map tools for the application (lines 75 through 77). We'll use the map tools in a moment when we define the methods to make our application functional. Let's look at the methods for the map tools.
-Enfin, nous cr\'eons les trois outils cartographiques pour l'application (ligne 75 \`a 77). Nous allons utiliser les outils cartographiques dans un instant, quand nous d\'efinirons les m\'ethodes qui rendront notre application fonctionnelle. Jetons un oeil aux m\'ethodes des outils cartographiques.
+Enfin, nous créons les trois outils cartographiques pour l'application (ligne 75 à 77). Nous allons utiliser les outils cartographiques dans un instant, quand nous définirons les méthodes qui rendront notre application fonctionnelle. Jetons un oeil aux méthodes des outils cartographiques.
 
 \begin{verbatim}
 78   # Set the map tool to zoom in
@@ -232,10 +232,10 @@ Enfin, nous cr\'eons les trois outils cartographiques pour l'application (ligne 
 \end{verbatim}
 
 %For each map tool, we need a method that corresponds to the connection we made for each action. In lines 79 through 88 we set up a method for each of the three tools that interact with the map. When a tool is activated by clicking on it in the toolbar, the corresponding method is called that ``tells'' the map canvas it is the active tool. The active tool governs what happens when the mouse is clicked on the canvas.
-Pour chaque outil, nous avons besoin d'une m\'ethode qui correspond \`a la connexion que nous avons faite pour chaque action. Ligne 79 \`a 88, nous d\'efinissons une m\'ethode pour chacun des trois outils qui interagissent avec la carte. Quand un outil est activ\'e par un clic dans la barre d'outils, la m\'ethode correspondante est appel\'ee ce qui ``dit'' \`a la carte qu'il s'agit de l'outil activ\'e. Cet outil activ\'e d\'ecide de ce qu'il se passe quand l'utilisateur clique sur le canevas.
+Pour chaque outil, nous avons besoin d'une méthode qui correspond à la connexion que nous avons faite pour chaque action. Ligne 79 à 88, nous définissons une méthode pour chacun des trois outils qui interagissent avec la carte. Quand un outil est activé par un clic dans la barre d'outils, la méthode correspondante est appelée ce qui ``dit'' à la carte qu'il s'agit de l'outil activé. Cet outil activé décide de ce qu'il se passe quand l'utilisateur clique sur le canevas.
 
 %The \usertext{zoom to full extent} tool isn't a map tool---it does its job without requiring a click on the map. When it is activated, we call the \method{zoomFullExtent} method of the map canvas (line 92).  This completes the implementation of all our tools except one---the \usertext{Add Layer} tool. %FIXME 
-L'outil \usertext{zoom sur l'\'etendue compl\`ete} n'est pas un outil cartographique -- il fait son travail sans n\'ecessiter de clic sur la carte. Quand il est activ\'e, la m\'ethode \method{zoomFullExtent} du canevas de la carte est appel\'ee (ligne 92). Ceci termine l'impl\'ementation de tous nos outils except\'e l'outil \usertext{Ajouter une couche}.
+L'outil \usertext{zoom sur l'étendue complète} n'est pas un outil cartographique -- il fait son travail sans nécessiter de clic sur la carte. Quand il est activé, la méthode \method{zoomFullExtent} du canevas de la carte est appelée (ligne 92). Ceci termine l'implémentation de tous nos outils excepté l'outil \usertext{Ajouter une couche}.
 
 %Let's look at it next:
 Regardons cela tout de suite :
@@ -270,16 +270,16 @@ Regardons cela tout de suite :
 \end{verbatim}
 
 %In the \method{addLayer} method we use a \classname{QFileDialog} to get the name of the shapefile to load. This is done in line 96. Notice that we specify a ``filter'' so the dialog will only show files of type \filename{.shp}.
-Dans la m\'ethode \method{addLayer}, nous utilisons un \classname{QFileDialog} pour r\'ecup\'erer le nom du shapefile \`a charger. Ceci est fait ligne 96. Notez que nous sp\'ecifions un ``filtre''de sorte que la bo\^ite de dialogue ne montrera que les fichiers d'extension \filename{.shp}.
+Dans la méthode \method{addLayer}, nous utilisons un \classname{QFileDialog} pour récupérer le nom du shapefile à charger. Ceci est fait ligne 96. Notez que nous spécifions un ``filtre''de sorte que la boîte de dialogue ne montrera que les fichiers d'extension \filename{.shp}.
 
 %Next in line 97 we create a \classname{QFileInfo} object from the shapefile path.  Now the layer is ready to be created in line 100. Using the \classname{QFileInfo} object to get the file name from the path we specify it  for the name of the layer when it is created.  To make sure that the layer is  valid and won't cause any problems when loading, we check it in line 102. If it's bad, we bail out and don't add it to the map canvas.
-Ensuite ligne 97 nous cr\'eons un objet \classname{QFileInfo} avec le chemin du shapefile. Maintenant la couche est pr\^ete \`a \^etre cr\'e\'ee \`a la ligne 100. En utilisant l'objet \classname{QFileInfo} pour r\'ecup\'erer le nom du fichier \`a partir du chemin, nous donnons le nom du fichier comme nom de la couche quand elle sera cr\'e\'ee. Pour s'assurer que la couche est valide et ne va pas causer des probl\`emes au chargement, nous la v\'erifions ligne 102. Si elle est mauvaise, nous l'ignorons et ne l'ajoutons pas au canevas de la carte.
+Ensuite ligne 97 nous créons un objet \classname{QFileInfo} avec le chemin du shapefile. Maintenant la couche est prête à être créée à la ligne 100. En utilisant l'objet \classname{QFileInfo} pour récupérer le nom du fichier à partir du chemin, nous donnons le nom du fichier comme nom de la couche quand elle sera créée. Pour s'assurer que la couche est valide et ne va pas causer des problèmes au chargement, nous la vérifions ligne 102. Si elle est mauvaise, nous l'ignorons et ne l'ajoutons pas au canevas de la carte.
 
 %Normally layers are added with a random color. Here we want to tweak the colors for the layer to make a more pleasing display. Plus we know we are going to add the \filename{world\_borders} layer to the map and this will make it look nice on our blue background. To change the color, we need to get the symbol used for rendering and use it to set a new fill color. This is done in lines 106 through 108. 
-Normalement les couches sont ajout\'ees avec des couleurs al\'eatoires. Ici, nous souhaitons personnaliser les couleurs pour un affichage plus plaisant. De plus, nous savons que nous allons ajouter la couche \filename{world\_borders} \`a la carte et cela sera joli sur notre fond bleu. Pour changer la couleur, nous devons r\'ecup\'erer le symbole utilis\'e pour le rendu et l'utiliser pour d\'efinir une nouvelle couleur de remplissage. Ceci est fait ligne 106 \`a 108.
+Normalement les couches sont ajoutées avec des couleurs aléatoires. Ici, nous souhaitons personnaliser les couleurs pour un affichage plus plaisant. De plus, nous savons que nous allons ajouter la couche \filename{world\_borders} à la carte et cela sera joli sur notre fond bleu. Pour changer la couleur, nous devons récupérer le symbole utilisé pour le rendu et l'utiliser pour définir une nouvelle couleur de remplissage. Ceci est fait ligne 106 à 108.
 
 %All that's left is to actually add the layer to the registry and a few other housekeeping items (lines 111 through 119). This stuff is standard for adding a layer and the end result is the world borders on a light blue background. The only thing you may not want to do is set the extent to the layer, if you are going to be adding more than one layer in your application.
-Tout ce qu'il reste \`a faire est d'ajouter la couche au registre et quelques autres t\^aches (ligne 111 \`a 119). Tout ceci est standard pour ajouter une couche et le r\'esultat final correspond aux fronti\`eres du monde sur un fond bleu clair. La derni\`ere chose \`a faire est de d\'efinir l'\'etendue de la carte \`a celle de la couche, ce que vous ne souhaitez peut-\^etre pas faire si vous voulez ajouter d'autres couches \`a votre application.
+Tout ce qu'il reste à faire est d'ajouter la couche au registre et quelques autres tâches (ligne 111 à 119). Tout ceci est standard pour ajouter une couche et le résultat final correspond aux frontières du monde sur un fond bleu clair. La dernière chose à faire est de définir l'étendue de la carte à celle de la couche, ce que vous ne souhaitez peut-être pas faire si vous voulez ajouter d'autres couches à votre application.
 
 %That's the heart of the application and completes the \classname{MainWindow} class. 
 Ceci le coeur de l'application et termine la classe \classname{MainWindow}.
@@ -320,9 +320,9 @@ Ceci le coeur de l'application et termine la classe \classname{MainWindow}.
 \subsection{Lancer l'application}
 
 %Now we can run the application and see what happens. Of course if you are like most developers, you've been testing it out as you went along. 
-Nous pouvons maintenant lancer notre application et voir ce qu'il se passe. Bien entendu, comme la plupart des d\'eveloppeurs, vous l'avez d\'ej\`a test\'e r\'eguli\`erement en la d\'eveloppant.
+Nous pouvons maintenant lancer notre application et voir ce qu'il se passe. Bien entendu, comme la plupart des développeurs, vous l'avez déjà testé régulièrement en la développant.
 %Before we can run the application, we need to set some environment variables. 
-Avant de lancer l'application, nous devons d\'efinir quelques variables d'environnement.
+Avant de lancer l'application, nous devons définir quelques variables d'environnement.
 
 \nix{}\osx{}
 \begin{verbatim}
@@ -342,44 +342,44 @@ set QGISHOME=C:\qgis
 Nous supposons que :
 \begin{itemize}
 %\item\nix{}\osx{}QGIS is installed in your home directory in \filename{qgis}. 
-\item\nix{}\osx{}QGIS est install\'e dans votre r\'epertoire home dans \filename{qgis}. 
+\item\nix{}\osx{}QGIS est installé dans votre répertoire home dans \filename{qgis}. 
 %\item\win{}QGIS is installed in \filename{C:\textbackslash qgis}.
-\item\win{}QGIS est install\'e dans \filename{C:\textbackslash qgis}.
+\item\win{}QGIS est installé dans \filename{C:\textbackslash qgis}.
 \end{itemize}
 
-%ATTENTION : partie laiss\'ee en commentaire dans la VO :
+%ATTENTION : partie laissée en commentaire dans la VO :
 %When the application starts up, it looks like this:
-%Lorsque l'application se lance, elle devrait ressembler \`a \c{c}a :
+%Lorsque l'application se lance, elle devrait ressembler à ça :
 %\begin{figure}[ht]
 %\begin{center}
 %  \caption{Starting the new demo application}\label{fig:demo_app_startup}%\smallskip
-%\caption{Lancement de la nouvelle application de d\'emo}\label{fig:demo_app_startup}%\smallskip
+%\caption{Lancement de la nouvelle application de démo}\label{fig:demo_app_startup}%\smallskip
 %  \includegraphics[scale=0.8]{getdsn}
 %\end{center}
 %\end{figure}
 
 %To add the \filename{world\_borders} layer, click on the \usertext{Add Layer} tool and navigate to the data directory. Select the shapefile and click \button{Open} to add it to the map. 
-Pour ajouter la couche \filename{world\_borders}, cliquez sur l'outil \usertext{Ajouter une couche} et s\'electionnez le r\'epertoire de donn\'ees. S\'electionnez le shapefile et cliquez sur \button{Ouvrir} pour l'ajouter \`a la carte.
+Pour ajouter la couche \filename{world\_borders}, cliquez sur l'outil \usertext{Ajouter une couche} et sélectionnez le répertoire de données. Sélectionnez le shapefile et cliquez sur \button{Ouvrir} pour l'ajouter à la carte.
 
-%ATTENTION : partie laiss\'ee en commentaire dans la VO :
+%ATTENTION : partie laissée en commentaire dans la VO :
 %Our custom fill color is applied and the result is:
-%Notre couleur de remplissage par d\'efaut est appliqu\'ee et voici le r\'esultat :
+%Notre couleur de remplissage par défaut est appliquée et voici le résultat :
 %\begin{figure}[ht]
 %\begin{center}
 %  \caption{Adding a layer the demo application}\label{fig:demo_app_done}%\smallskip
-%  \caption{Ajout d'une couche dans l'application de d\'emo}\label{fig:demo_app_done}%\smallskip
+%  \caption{Ajout d'une couche dans l'application de démo}\label{fig:demo_app_done}%\smallskip
 %  \includegraphics[scale=0.8]{getdsn}
 %\end{center}
 %\end{figure}
 
 %Creating a PyQGIS application is really pretty simple.  In less than 150 lines of code we have an application that can load a shapefile and navigate the map. If you play around with the map, you'll notice that some of the built-in features of the canvas also work, including mouse wheel scrolling and panning by holding down the \keystroke{Space} bar and moving the mouse.
-Cr\'eer une application PyQGIS est vraiment facile. En moins de 150 lignes de code, nous avons une application qui permet de charger un shapefile et de naviguer sur la carte. Si vous jouez un peu avec la carte, vous vous apercevrez que certaines fonctionnalit\'es int\'egr\'ees du canevas marchent \'egalement, dont la molette de la souris, le d\'eplacement en maintenant la barre \keystroke{espace} et en bougeant la souris.
+Créer une application PyQGIS est vraiment facile. En moins de 150 lignes de code, nous avons une application qui permet de charger un shapefile et de naviguer sur la carte. Si vous jouez un peu avec la carte, vous vous apercevrez que certaines fonctionnalités intégrées du canevas marchent également, dont la molette de la souris, le déplacement en maintenant la barre \keystroke{espace} et en bougeant la souris.
 
 %Some sophisticated applications have been created with PyQGIS and more are in  the works. This is pretty impressive, considering that this development has  taken place even before the official release of QGIS 1.0.
-Des applications sophistiqu\'ees ont d\'ej\`a \'et\'e cr\'e\'ees avec PyQGIS et beaucoup sont en travaux. C'est assez impressionnant d'autant plus que ces d\'eveloppements ont eu lieu avant la sortie officielle de QGIS 1.0.
+Des applications sophistiquées ont déjà été créées avec PyQGIS et beaucoup sont en travaux. C'est assez impressionnant d'autant plus que ces développements ont eu lieu avant la sortie officielle de QGIS 1.0.
 
 %\begin{Tip}\caption{\textsc{Documentation For PyQGIS}}
 \begin{Astuce}\caption{\textsc{Documentation sur PyQGIS}}
 %\qgistip{Whether you are writing a plugin or a PyQGIS application, you are going to need to refer to both the QGIS API documentation (\url{http://doc.qgis.org}) and the PyQt Python Bindings Reference Guide (\url{http://www.riverbankcomputing.com/Docs/PyQt4/pyqt4ref.html}). These documents provide information about the classes and methods you'll use to bring your Python creation to life.
-\qgistip{Que vous \'ecriviez une extension ou une application PyQGIS, vous allez avoir besoin de vous r\'ef\'erer \`a la fois \`a la documentation de l'API QGIS (\url{http://doc.qgis.org}) et au Guide des PyQt Python Bindings Reference (\url{http://www.riverbankcomputing.com/Docs/PyQt4/pyqt4ref.html}). Ces documents fournissent les informations n\'ecessaires sur les classes et les m\'ethodes que vous allez utiliser pour donner vie \`a vos cr\'eations Python.}
+\qgistip{Que vous écriviez une extension ou une application PyQGIS, vous allez avoir besoin de vous référer à la fois à la documentation de l'API QGIS (\url{http://doc.qgis.org}) et au Guide des PyQt Python Bindings Reference (\url{http://www.riverbankcomputing.com/Docs/PyQt4/pyqt4ref.html}). Ces documents fournissent les informations nécessaires sur les classes et les méthodes que vous allez utiliser pour donner vie à vos créations Python.}
 \end{Astuce} 
