@@ -22,9 +22,9 @@ QGISPLUGINSOURCE=/software/qgis_head/src/plugins
 all: 
 	make pics
 	latex $(FILE)
-	#bibtex $(FILE)
-	bibtex $(FILE)1
-	bibtex $(FILE)2
+# 	#bibtex $(FILE)
+# 	bibtex $(FILE)1
+# 	bibtex $(FILE)2
 	#now loop over Latex files, until stable:
 	echo Rerun > $(FILE).log
 	while grep Rerun $(FILE).log >/dev/null 2>&1 ; do latex $(FILE).tex ; done
@@ -61,7 +61,8 @@ ps:
 #make PDF:
 pdf:
 	make all
-	dvipdf  $(FILE).dvi
+# 	dvipdf $(FILE).dvi
+	pdflatex $(FILE).tex
 
 # make pics
 pics:
@@ -97,6 +98,8 @@ pics:
 	(cd ./creating_applications_screenies && make)
 #	(cd ./help_and_support_screenies && make)
 	(cd ./operating_system_icons && make)
+	(cd ./finalpix/ && ebb -b *.png)
+	(cd ./finalpix/ && ebb -b *.jpg)
 
 # make html
 # requires: latex2html oder tex4ht

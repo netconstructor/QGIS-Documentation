@@ -61,7 +61,8 @@ PNG=analysis.eps\
 all: $(PNG) $(JPG)
 	if [ ! -d ../finalpix/ ]; then mkdir ../finalpix; fi
 	#do not use move (mv):
-	cp *.eps ../finalpix/
+# 	cp *.eps ../finalpix/
+	cp *.png ../finalpix/
 
 #$(EPS):	%.eps: %.fig
 #	fig2dev -L eps $< > $@
@@ -72,12 +73,12 @@ all: $(PNG) $(JPG)
 $(PNG): %.eps: %.png
 	# Workaround for PDF
 	#convert -geometry 300x -depth 1 $< $@
-	convert $< $@ 
+# 	convert $< $@ 
 
 $(JPG): %.eps: %.jpg
 	# Workaround for PDF
 	#convert -geometry 300x -depth 1 $< $@
-	convert $< $@
+# 	convert $< $@
 
 clean:
 	rm -f *.bak *~ *.pdf $(PNG) $(JPG)
