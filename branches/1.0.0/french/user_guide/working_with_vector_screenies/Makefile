@@ -33,7 +33,8 @@ PNG=shapefileloaded.eps \
 all: $(PNG) $(JPG)
 	if [ ! -d ../finalpix/ ]; then mkdir ../finalpix; fi
 	#please, don't use mv:
-	cp *.eps ../finalpix/
+# 	cp *.eps ../finalpix/
+	cp *.png ../finalpix/
 
 #$(EPS):	%.eps: %.fig
 #	fig2dev -L eps $< > $@
@@ -44,7 +45,7 @@ all: $(PNG) $(JPG)
 $(PNG): %.eps: %.png
 	# Workaround for PDF version
 	#convert -geometry 300x -depth 1 $< $@
-	convert $< $@ 
+# 	convert $< $@ 
 
 #$(JPG): %.eps: %.jpg
 	# Workaround for PDF version

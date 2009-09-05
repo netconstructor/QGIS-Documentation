@@ -18,7 +18,8 @@ PNG=simple_session.eps\
 all: $(PNG) $(JPG)
 	if [ ! -d ../finalpix/ ]; then mkdir ../finalpix; fi
 	#do not use move (mv):
-	cp *.eps ../finalpix/
+# 	cp *.eps ../finalpix/
+	cp *.png ../finalpix/
 
 #$(EPS):	%.eps: %.fig
 #	fig2dev -L eps $< > $@

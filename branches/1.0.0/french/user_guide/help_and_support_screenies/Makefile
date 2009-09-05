@@ -21,6 +21,7 @@
 #	if [ ! -d ../finalpix/ ]; then mkdir ../finalpix; fi
 	#do not use mv:
 #	cp *.eps ../finalpix/
+# 	cp *.png ../finalpix/
 
 #$(EPS):	%.eps: %.fig
 #	fig2dev -L eps $< > $@
