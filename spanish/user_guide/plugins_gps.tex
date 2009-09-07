@@ -1,120 +1,114 @@
-% vim: set textwidth=78 autoindent:
+﻿% vim: set textwidth=78 autoindent:
 
-\subsection{GPS Plugin}\label{label_plugingps}
+\subsection{Complemento GPS}\label{label_plugingps}
 
 % when the revision of a section has been finalized, 
 % comment out the following line:
 % \updatedisclaimer
 
-\subsubsection{What is GPS?}\label{whatsgps}
+\subsubsection{¿ Qué es GPS?}\label{whatsgps}
 
-GPS, the Global Positioning System, is a satellite-based system that allows anyone with a GPS receiver to find their exact position anywhere in the world.
-It is used as an aid in navigation, for example in airplanes, in boats and by hikers.
-The GPS receiver uses the signals from the satellites to calculate its latitude, longitude and (sometimes) elevation.
-Most receivers also have the capability to store locations (known as \emph{waypoints}), sequences of locations that make up a planned \emph{route} and a tracklog or \emph{track} of the receivers movement over time.
-Waypoints, routes and tracks are the three basic feature types in GPS data.
-QGIS displays waypoints in point layers while routes and tracks are displayed in linestring layers.
+GPS, el Sistema Global de Posicionamiento, es un sistema basado en satélite que permite a cualquiera con un receptor GPS encontrar su posición exacta en cualquier lugar en el mundo.
+Es usado como auxiliar en la navegación, por ejemplo en aeroplanos, en botes y por excursionistas.
+El receptor GPS usa las señales de satélites para calcular su latitud, longitud, y (algunas veces) elevación.
+La mayoría de los receptores tienen la capacidad de almacenar lugares (conocidos como \emph{waypoints}), secuencias de lugares que forman una \emph{ruta} planeada y un tracklog o \emph{track} de los movimientos de los receptores en el tiempo.
+Waypoints, rutas y tracks solo los tres tipos de objetos básicos en datos GPS.
+QGIS muestra waypoints en capas de puntos mientras que las rutas y tracks son mostrados en capas de cadena de líneas.
 
-\subsubsection{Loading GPS data from a file}\label{label_loadgps}
+\subsubsection{Cargando datos GPS desde un archivo}\label{label_loadgps}
 
-There are dozens of different file formats for storing GPS data.
-The format that QGIS uses is called GPX (GPS eXchange format), which is a standard interchange format that can contain any number of waypoints, routes and tracks in the same file.
+Hay docenas de diferentes formatos de archivo para almacenar datos GPS.
+El formato que QGIS usa es llamado GPX (GPS eXchange format), el cual es un formato de intercambio estandar que puede contener cualquier número de waypoints, rutas y tracks en el mismo archivo.
 
-To load a GPX file you first need to load the plugin.
-\mainmenuopt{Plugins} > \dropmenuopttwo{mActionShowPluginManager}{Plugin
-Manager...} > \checkbox{GPS Tools}. When this plugin is loaded a button with a 
-small handheld GPS device will show up in the toolbar. An example GPX file is 
-available in the QGIS sample dataset:
-\filename{/qgis\_sample\_data/gps/national\_monuments.gpx}. See
-Section~\ref{label_sampledata} for more information about the sample data.
+Para cargar una archivo GPX  primero necesita cargar el complemento.
+\mainmenuopt{Complementos} > \dropmenuopttwo{mActionShowPluginManager}{Administrador de complementos...} > \checkbox{Herramientas GPS}. Cuando este complemento es cargado un botón con un pequeño dispositivo GPS de mano será mostrado en la barra de herramientas. Un ejemplo de archivo GPX está disponible en el conjunto de datos de ejemplo de QGIS:
+\filename{/qgis\_sample\_data/gps/national\_monuments.gpx}. Vea 
+la sección~\ref{label_sampledata} para mas información acerca de los datos de ejemplo.
 
 \begin{enumerate}
-\item Click on the \toolbtntwo{gps_importer}{GPS Tools} icon and open the
-\tab{Load GPX file} tab (see figure \ref{figure gpxloader}).
-\item \button{Browse} to the folder \filename{qgis\_sample\_data/gps/},
-select the GPX file \filename{national\_monuments.gpx} and click \button{Open}.
+\item Clic en el ícono \toolbtntwo{gps_importer}{Herramientas GPS} y abra la
+pestaña \tab{Cargar archivo GPX} (vea la figura \ref{figure gpxloader}).
+\item \button{Explorar} al directorio \filename{qgis\_sample\_data/gps/},
+seleccione el archivo GPX \filename{national\_monuments.gpx} y haga clic \button{Abrir}.
 \end{enumerate}
 
 \begin{figure}[ht]
    \begin{center}
-\caption{\label{gpxloader}The \emph{GPS Tools} dialog window \nixcaption}
+\caption{\label{gpxloader}El diálogo de \emph{Herramientas GPS} \nixcaption}
 \includegraphics[clip=true, width=12cm]{loadgpx}
 \end{center}
 \end{figure}
 
-Use the browse button \browsebutton to select the GPX file, then use the
-checkboxes to select the feature types you want to load from that GPX file.
-Each feature type will be loaded in a separate layer when you click \button{OK}.
-The file \filename{national\_monuments.gpx} only includes waypoints.
+Use el botó explorar \browsebutton para seleccionar el archivo GPX, entonces use las
+cajas de verificación para seleccionar los tipos de objetos espaciales que desea cargar desde el archvo GPX.
+Cada tipo de objeto espacial será cargado en una capa separada cuando haga clic en \button{OK}.
+El archivo \filename{national\_monuments.gpx} solo incluye waypoints.
 
 \subsubsection{GPSBabel}
 
-Since QGIS uses GPX files you need a way to convert other GPS file formats to GPX.
-This can be done for many formats using the free program GPSBabel, which is available at \url{http://www.gpsbabel.org}.
-This program can also transfer GPS data between your computer and a GPS device.
-QGIS uses GPSBabel to do these things, so it is recommended that you install it.
-However, if you just want to load GPS data from GPX files you will not need it.
-Version 1.2.3 of GPSBabel is known to work with QGIS, but you should be able to use later versions without
-any problems.
+Dado que QGIS usa archivos GPX necesita una forma de convertir otros formatos de archivo GPS a GPX.
+Esto puede ser realizado para muchos formatos usando el programa gratuito GPSBabel, el cual está disponible en \url{http://www.gpsbabel.org}.
+Este programa también puede transferir datos GPS entre su computadora y un dispositivo GPS.
+QGIS usa GPSBabel para hacer esas cosas, de manera que es recomendable que lo instale.
+Sin embargo, si solo desea cargar datos GPS desde archivos GPX no lo necesitará.
+La versión 1.2.3 de GPSBabel trabaja con QGIS, pero usted podrá usar cualquier versión posterior sin problemas.
 
 
-\subsubsection{Importing GPS data}
+\subsubsection{Importando datos GPS}
 
-To import GPS data from a file that is not a GPX file, you use the tool \tab{Import other file} in the GPS Tools dialog.
-Here you select the file that you want to import (and the file type), which feature type you want to import from it, where you want to store the converted GPX file and what the name of the new layer should be.  Note that not all GPS 
-data formats will support all three feature types, so for many formats 
-you will only be able to choose between one or two types. 
+Para importar datos GPS desde un archivo que no es un archivo GPX, use la herramienta \tab{Importar otro archivo} en el diálogo de Herramientas GPS.
+Aquí selecciona el archivo que desea importar (y el tipo de archivo), cuales tipos de objeto desea importar de el, donde desea almacenar los archivos GPX convertidos y el nombre de la nueva capa. Note que no todos los formatos de datos GPS soportarán los tres tipos de objetos, de manera que para muchos formatos solo podrá elegir entre uno o dos tipos.  
 
-\subsubsection{Downloading GPS data from a device}
 
-QGIS can use GPSBabel to download data from a GPS device directly as new vector layers.
-For this we use the \tab{Download from GPS} tab of the GPS Tools dialog (see Figure \ref{figure_download}). Here, we 
-select the type of GPS device, the port that it is connected to (or usb if your GPS supports this), the feature type that you want to download, the GPX file where the data should be stored, and the name of the new layer.
+\subsubsection{Descargando datos GPS desde un dispositivo}
+
+QGIS puede usar GPSBabel para descargar datos desde un dispositivo GPS directamente como una nueva capa vectorial.
+Para esto usamos la pestaña \tab{Descargar desde GPS} del diálogo de Herramientas GPS(vea la figura \ref{figure_download}). Aquí, seleccionamos el tipo de dispositivo GPS, el puerto al que está conectado (o usb si su GPS lo suporta), el tipo de objeto que quiere bajar, el archivo GPX donde los datos deberían ser almacenados, y el nombre de la nueva capa.
 
 \begin{figure}[ht]
    \begin{center}
-\caption{\label{figure_download}The download tool \nixcaption}
+\caption{\label{figure_download}La herramienta para descargar \nixcaption}
 \includegraphics[clip=true, width=12cm]{download}
    \end{center}
 \end{figure}
 
-The device type you select in the GPS device menu determines how GPSBabel tries to communicate with your GPS device.
-If none of the available types work with your GPS device you can create a new type (see section \ref{sec:Defining-new-device}).
+El tipo de dispositivo que seleccione en el menú de dispositivo GPS determina como GPSBabel trata de comunicarse con su dispositivo GPS.
+Si ninguno de los tipos disponibles trabajan con su dispositivo GPS puede crear un nuevo tipo (vea la sección \ref{sec:Defining-new-device}).
 
-The port may be a file name or some other name that your operating system uses as a reference to the physical port in your computer that the GPS device is connected to. It may also be simply usb, for usb enabled GPS units.
-\nix On Linux this is something like /dev/ttyS0 or /dev/ttyS1 and on \win Windows it's COM1 or COM2.
+El puerto puede ser un nombre de archivo o algún otro nombre que su sistema operativo use como referencia al puerto físico en su computadora a la que el dispositivo GPS está conectado. Puede ser simplemente usb, para unidades GPS usb.
+\nix en Linux esto es algo como esto /dev/ttyS0 o /dev/ttyS1 y en \win Windows es COM1 o COM2.
 
-When you click \button{OK} the data will be downloaded from the device and appear as a layer in QGIS.
+Cuando hace clic \button{OK} los datos serán descargados del dispositivo y aparecen como una capa en QGIS.
 
-\subsubsection{Uploading GPS data to a device}
+\subsubsection{Cargando datos GPS a un dispositivo}
 
-You can also upload data directly from a vector layer in QGIS to a GPS device using the \tab{Upload to GPS} tab of the GPS Tools dialog. To do this you simply select the layer that you want to upload (which must be a GPX layer), 
-your GPS device type, and the port (or usb) that it is connected to.
-Just as with the download tool you can specify new device types if your device isn't in the list.
+También puede cargar datos directamente de una capa vectorial en QGIS a un dispositivo GPS usando la pestaña \tab{Cargar a GPS} del diálogo herramientas GPS. Para hacer esto simplemente seleccione la capa que desea cargar (la cual debe ser una capa GPX), 
+su tipo de dispositivo GPS, y el puerto(o usb) al cual está conectado.
+Al igual que la herramienta de descarga puede especificar nuevos tipos de dispositivos si su dispositivo no está en la lista.
 
-This tool is very useful in combination with the vector editing capabilities of QGIS. It allows you to load a map, create waypoints and routes, and then upload them and use them on your GPS device.
+Esta herramienta es muy útil en combinación con las capacidades de edición de vectores de QGIS. Te permite cargar un mapa, crear waypoints y rutas, y después cargarlas y usarlas en su dispositivo GPS.
 
-\subsubsection{\label{sec:Defining-new-device}Defining new device types}
+\subsubsection{\label{sec:Defining-new-device}Definiendo nuevos tipos de dispositivos}
 
-There are lots of different types of GPS devices.
-The QGIS developers can't test all of them, so if you have one that does not work with any of the device types listed in the \tab{Download from GPS} and \tab{Upload to GPS} tools you can define your own device type for it.
-You do this by using the GPS device editor, which you start by clicking the \button{Edit devices} button in the download or the upload tabs.
+Hay muchos diferentes tipos de dispositivos GPS.
+Los desarrolladores de QGIS no pueden probar a todos ellos, de manera que si usted tiene uno que no trabaja con alguno de los dispositivos listados en la pestañas de herramientas \tab{Descargar de GPS} y \tab{Cargar a GPS} puede definir su propio dispositivo.
+Usted hace esto usando el editor de dispositivos GPS, el cual inicia haciendo clic en el botón \button{Editar dispositivos} en las pestañas de descarga y carga.
 
-To define a new device you simply click the \button{New device} button, enter a name, a download command and an upload command for your device, and click the \button{Update device} button.
-The name will be listed in the device menus in the upload and download windows, and can be any string.
-The download command is the command that is used to download data from the device to a GPX file.
-This will probably be a GPSBabel command, but you can use any other command line program that can create a GPX file.
-QGIS will replace the keywords \usertext{\%type}, \usertext{\%in}, and \usertext{\%out} when it runs the command.
+Para definir un nuevo dispositivo simplemente haga clic en el botón \button{Nuevo dispositivo}, capture un nombre, un comando para descarga y un comando para descarga para su dispositivo, y clic en el botón \button{Actualizar dispositivo}.
+El nombre será listado en los menús de dispositivos en las ventanas de carga y descarga, y puede ser cualquier cadena.
+El comando de descarga es el comando que es usado para descargar datos del dispositivo a un archivo GPX.
+Este será probablemente un comando de GPSBabel, pero puede usar cualquier otro programa de línea de comandos que pueda crear un archivo GPX.
+QGIS reemplazará las palabras clave \usertext{\%type}, \usertext{\%in}, and \usertext{\%out} cuando ejecute el comando.
 
-\usertext{\%type} will be replaced by {}``\usertext{-w}'' if you are downloading waypoints, {}``\usertext{-r}'' if you are downloading routes and {}``\usertext{-t}'' if you are downloading tracks.
-These are command line options that tell GPSBabel which feature type to download.
+\usertext{\%type} será reemplazado por {}``\usertext{-w}'' si está descargando waypoints, {}``\usertext{-r}'' si está descargando rutas y {}``\usertext{-t}'' si está descargando tracks.
+Estas son opciones de línea de comandos que dicen a GPSBabel cual tipo de objeto espacial descargar.
 
-\usertext{\%in} will be replaced by the port name that you choose in the download window and \usertext{\%out} will be replaced by the name you choose for the GPX file that the downloaded data should be stored in.
-So if you create a device type with the download command {}``\usertext{gpsbabel \%type -i garmin -o gpx \%in \%out}'' (this is actually the download command for the predefined device type \selectstring{GPS device:}{Garmin serial})and then use it to download waypoints from port {}``\usertext{/dev/ttyS0}'' to the file {}``\usertext{output.gpx}'', QGIS will replace the keywords and run the command {}``\usertext{gpsbabel -w -i garmin -o gpx /dev/ttyS0 output.gpx}''.
+\usertext{\%in} será reemplazado por el nombre del puerto que eligió en la ventana de descarga y \usertext{\%out} será reemplazado por el nombre que eligió para el archivo GPX donde los datos serán almacenados.
+De manera que si crea un tipo de dispositivo con el comando de descarga {}``\usertext{gpsbabel \%type -i garmin -o gpx \%in \%out}'' (este es actualmente el comando de descarga para el tipo de dispositivo predefinido \selectstring{Dispositivo GPS:}{Garmin serial})y entonces uselo para descargar waypoints del puerto {}``\usertext{/dev/ttyS0}'' al archivo {}``\usertext{output.gpx}'', QGIS reemplazará las palabras clave y ejecutar el comando {}``\usertext{gpsbabel -w -i garmin -o gpx /dev/ttyS0 output.gpx}''.
 
-The upload command is the command that is used to upload data to the device.
-The same keywords are used, but \usertext{\%in} is now replaced by the name of the GPX file for the layer that is being uploaded, and \usertext{\%out} is replaced by the port name.
+El comando de carga es el comando que es usado para cargar datos a los dispositivos.
+Las mismas palabras clave son usadas, pero, \usertext{\%in} es ahora reemplazado por el nombre  del archivo GPX  para la capa que está siendo cargada, y \usertext{\%out} es reemplazado por el nombre del puerto.
 
-You can learn more about GPSBabel and it's available command line options at \url{http://www.gpsbabel.org}
+Puede aprender mas acerca de GPSBabel y la lista de comandos disponibles en \url{http://www.gpsbabel.org}
 
-Once you have created a new device type it will appear in the device lists for the download and upload tools.
+Una vez que ha creado un nuevo tipo de dispositivo este aparecerá en la lista de dispositivos para las herramientas de carga y descarga.
