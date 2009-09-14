@@ -95,92 +95,83 @@ GDAL/OGR sin importarlos. Pero como esta no es la forma habitual de empezar a tr
 
 \begin{figure}[ht]
 \begin{center}
-\caption{Datps de GRASS en la LOCALIZACIÓN alaska (adaptado de Neteler \& 
+\caption{Datos de GRASS en la LOCALIZACIÓN alaska (adaptado de Neteler \& 
 Mitasova 2008 \cite{neteler_mitasova08})}\label{fig:grass_location}\smallskip
 \includegraphics[clip=true]{grass_location}
 \end{center}  
 \end{figure}
 
-\subsubsection{Creating a new GRASS LOCATION}\label{sec:create_loc}
+\subsubsection{Crear una nueva LOCALIZACIÓN de GRASS}\label{sec:create_loc}
 
-As an an example you find the instructions how the sample GRASS
-\filename{LOCATION alaska}, which is projected in Albers Equal Area
-projection with unit feet was created for the QGIS sample dataset. This
-sample GRASS \filename{LOCATION alaska} will be used for all examples and
-exercises in the following GRASS GIS related chapters. It is useful to
-download and install the dataset on your computer \ref{label_sampledata}).
+Como ejemplo mostramos las instrucciones de cómo se creó la \filename{LOCALIZACIÓN Alaska} de GRASS,
+que está en la proyección Albers Equal Area, para el conjunto de datos de muestra de QGIS. Esta
+\filename{LOCALIZACIÓN Alaska} de GRASS se usará para todos los ejemplos y ejercicios en los siguientes capítulos
+relacionados con GRASS GIS. Es útil descargar e instalar el conjunto de datos en su ordenador \ref{label_sampledata}).
 
 \begin{figure}[ht]
 \begin{center}
-\caption{Creating a new GRASS LOCATION or a new MAPSET in QGIS \nixcaption}
+\caption{Crear una nueva LOCALIZACIÓN de GRASS o un nuevo DIRECTORIO DE MAPAS en QGIS \nixcaption}
 \label{fig:create_grass_location}\smallskip
 \includegraphics[clip=true, width=10cm]{create_grass_location}
 \end{center}  
 \end{figure}
 
 \begin{enumerate}
-  \item Start QGIS and make sure the GRASS plugin is loaded
-  \item Visualize the \filename{alaska.shp} Shapefile (see Section
-  \ref{sec:load_shapefile}) from the QGIS alaska dataset~\ref{label_sampledata}.
-  \item In the GRASS toolbar, click on the \toolbtntwo{grass_open_mapset}{Open
-    mapset} icon to bring up the \filename{MAPSET} wizard.
-  \item Select an existing GRASS database (GISDBASE) folder 
-  \filename{grassdata} or create one for the new \filename{LOCATION} using a 
-  file manager on your computer. Then click \button{Next}. 
-  \item We can use this wizard to create a new \filename{MAPSET} within an 
-  existing \filename{LOCATION} (see Section~\ref{sec:add_mapset}) or to create 
-  a new \filename{LOCATION} altogether. Click on the radio button
-  \radiobuttonon{Create new location} (see Figure \ref{fig:create_grass_location}).
-  \item Enter a name for the \filename{LOCATION} - we used alaska and click 
-  \button{Next} 
-  \item Define the projection by clicking on the radio button
-  \radiobuttonon{Projection} to enable the projection list 
-  \item We are using Albers Equal Area Alaska (feet) projection. Since we
-  happen to know that it is represented by the EPSG ID 2964, we enter it in
-  the search box. (Note: If you want to repeat this process for another 
-  \filename{LOCATION} and projection and haven't memorized the EPSG ID, 
-  click on the
-  \toolbtntwo{mIconProjectionEnabled}{projector} icon in the lower right-hand
-  corner of the status bar (see Section \ref{label_projstart})).
-  \item Click \button{Find} to select the projection
-  \item Click \button{Next} 
-  \item To define the default region, we have to enter the \filename{LOCATION} 
-  bounds in north, south, east, and west direction. Here we simply click on 
-  the button \button{Set current QGIS extent}, to apply the extend of the 
-  loaded layer \filename{alaska.shp} as the GRASS default region extend.
-  \item Click \button{Next} 
-  \item We also need to define a \filename{MAPSET} within our new 
-  \filename{LOCATION}. You can name it whatever you like - we used demo.
-  \footnote{When creating a new \filename{LOCATION}, GRASS automatically 
-  creates a special \filename{MAPSET} called \filename{PERMANENT} designed to 
-  store the core data for the project, its default spatial extend and 
-  coordinate system definitions (Neteler \& Mitasova 2008 
+  \item Inicie QGIS y asegúrese de que el complemento de GRASS está cargado.
+  \item Visualice el archivo shape \filename{alaska.shp} (ver Sección
+  \ref{sec:load_shapefile}) del conjunto de datos alaska de QGIS~\ref{label_sampledata}.
+  \item En la barra de herramientas de GRASS, pulse en el icono \toolbtntwo{grass_open_mapset}{abrir
+    directorio de mapas} para llamar al asistente \filename{DIRECTORIO DE MAPAS}.
+  \item Seleccione una carpeta de base de datos de GRASS (GISDBASE) existente 
+  \filename{grassdata} o cree una para la nueva \filename{LOCALIZACIÓN} usando un administrador de archivos 
+  de su ordenador. Pulse luego \button{Siguiente}. 
+  \item Podemos usar el asistente para crear un nuevo \filename{DIRECTORIO DE MAPAS} dentro de una 
+   \filename{LOCALIZACIÓN} existente (ver Sección~\ref{sec:add_mapset}) o para crear 
+  una nueva \filename{LOCALIZACIÓN} todo junto. Marque el botón circular
+  \radiobuttonon{Crear nueva localización} (ver Imagen \ref{fig:create_grass_location}).
+  \item Introduzca un nombre para la \filename{LOCALIZACIÓN} - nosotros usamos alaska y pulse 
+  \button{Siguiente} 
+  \item Defina la proyección pulsando el botón circular
+  \radiobuttonon{Proyección} para activar la lista de proyecciones.
+  \item Estamos usando la proyección Albers Equal Area Alaska (pies). Como sabemos que está representada por el EPSG ID 2964, lo introducimos 
+  en la casilla de búsqueda. (Nota: Si quiere repetir este proceso para otra 
+  \filename{LOCALIZACIÓN} y proyección y no ha memorizado el EPSG ID, 
+  pulse en el icono
+  \toolbtntwo{mIconProjectionEnabled}{proyector} en la esquina inferior derecha de la barra de estado (ver Sección \ref{label_projstart})).
+  \item Pulse \button{Encontrar} para seleccionar la proyección.
+  \item Pulse \button{Siguiente} 
+  \item TPara definir la región predeterminada, tenemos que introducir los límites de la \filename{LOCALIZACIÓN} en dirección Norte, Sur, Este y Oeste. 
+  Aquí simplemente pulsaremos el botón \button{Establecer la extensión actual de QGIS}, para aplicar la extensión de la  
+  capa cargada \filename{alaska.shp} como extensión de la región predeterminada de GRASS.
+  \item Pulse \button{Siguiente} 
+  \item Tambión tenemos que definir un \filename{DIRECTORIO DE MAPAS} dentro de nuestra nueva 
+  \filename{LOCALIZACIÓN}. Póngale el nombre que prefiera - nosotros usamos demo.
+  \footnote{Cuando se crea una nueva \filename{LOCALIZACIÓN}, GRASS automáticamente 
+  crea un \filename{DIRECTORIO DE MAPAS} especial llamado \filename{PERMANENT} diseñado para 
+  guardar los datos básicos del proyecto, su extensión espacial predeterminada y 
+  la deficición del sistema de coordenadas (Neteler \& Mitasova 2008 
   \cite{neteler_mitasova08}).}
-  \item Check out the summary to make sure it's correct and click
-  \button{Finish} 
-  \item The new \filename{LOCATION alaska} and two \filename{MAPSETs demo}
-  and \filename{PERMANENT} are created. The currently opened working set is
-  \filename{MAPSET demo}, as you defined.
-  \item Notice that some of the tools in the GRASS toolbar that were 
-  disabled are now enabled.
+  \item Compruebe el resumen para asegurarse que es correcto y pulse
+  \button{Terminar} 
+  \item Se creará la nueva \filename{LOCALIZACIÓN alaska} y dos \filename{DIRECTORIO DE MAPAS demo}
+  y \filename{PERMANENT}. El conjunto de trabajo abierto actual es el
+  \filename{DIRECTORIO DE MAPAS demo}, como lo ha definido.
+  \item Vea como algunas de las herramientas de la barra de herramientas de GRASS que estaban desactivadas ahora están activadas.
 \end{enumerate}
 
-If that seemed like a lot of steps, it's really not all that bad and a very 
-quick way to create a \filename{LOCATION}. The \filename{LOCATION alaska} is 
-now ready for data import (see Section \ref{sec:import_loc_data}).
-You can also use the already existing vector and raster data in the sample 
-GRASS \filename{LOCATION alaska} included in the QGIS alaska dataset 
-\ref{label_sampledata} and move on to Section \ref{label_vectmodel}.
+Si le parecieron muchos pasos, ésto no es tan malo y sí una forma muy rápida de crear una \filename{LOCALIZACIÓN}. La \filename{LOCALIZACIÓN alaska} ahora está lista para importar datos (ver Sección \ref{sec:import_loc_data}).
+También puede usar los datos vectoriales y ráster ya existentes en la \filename{LOCALIZACIÓN alaska} de muestra incluida en el conjunto de datos de Alaska de QGIS 
+\ref{label_sampledata} e ir a la Sección \ref{label_vectmodel}.
 
-\subsubsection{Adding a new MAPSET}\label{sec:add_mapset}
+\subsubsection{Añadir un nuevo DIRECTORIO DE MAPAS}\label{sec:add_mapset}
 
-A user has only write access to a GRASS \filename{MAPSET} he created. This 
-means, besides access to his own \filename{MAPSET}, each user can also read 
-maps in other user's \filename{MAPSETs}, but he can modify or remove only 
-the maps in his own \filename{MAPSET}. All \filename{MAPSETs} include a 
-\filename{WIND} file that stores the current boundary coordinate values and 
-the currently selected raster resolution (Neteler \& Mitasova 2008 
-\cite{neteler_mitasova08}, see Section \ref{sec:grass_region}). 
+Un usuario sólo tiene permiso de escritura en el \filename{DIRECTORIO DE MAPAS} de GRASS que ha creado. Esto 
+significa, además de acceder a su propio \filename{DIRECTORIO DE MAPAS}, cada usuario también puede leer mapas en los 
+\filename{DIRECTORIOS DE MAPAS} de otros usuarios, pero sólo puede modificar o eliminar los mapas de su propio 
+\filename{DIRECTORIO DE MAPAS}. Todos los \filename{DIRECTORIOS DE MAPAS} incluyen un archivo 
+\filename{WIND} que guarda los valores de coordenadas del contorno actual y 
+la resolución ráster actualmente seleccionada (Neteler \& Mitasova 2008 
+\cite{neteler_mitasova08}, ver Sección \ref{sec:grass_region}). 
 
 \begin{enumerate}
   \item Start QGIS and make sure the GRASS plugin is loaded
@@ -194,7 +185,7 @@ the currently selected raster resolution (Neteler \& Mitasova 2008
   \item We can use this wizard to create a new \filename{MAPSET} within an 
   existing \filename{LOCATION} or to create a new \filename{LOCATION} 
   altogether. Click on the radio button \radiobuttonon{Select location} 
-  (see Figure \ref{fig:create_grass_location}) and click \button{Next}.
+  (ver Imagen \ref{fig:create_grass_location}) and click \button{Next}.
   \item Enter the name \filename{text} for the new \filename{MAPSET}. Below 
   in the wizard you see a list of existing \filename{MAPSETs} and its owners.
   \item Click \button{Next}, check out the summary to make sure it's all 
@@ -217,7 +208,7 @@ dataset \ref{label_sampledata}.
   alaska dataset, as \filename{LOCATION alaska}, as \filename{MAPSET} 
   \filename{demo} and click \button{OK}.
   \item Now click the \toolbtntwo{grass_tools}{Open GRASS tools} icon. The 
-  GRASS Toolbox (see Section \ref{subsec:grass_toolbox}) dialog appears.
+  GRASS Toolbox (ver Sección \ref{subsec:grass_toolbox}) dialog appears.
   \item To import the raster map \filename{landcover.img}, click the module 
   \filename{r.in.gdal} in the \tab{Modules Tree} tab. This GRASS module 
   allows to import GDAL supported raster files into a GRASS 
@@ -310,11 +301,11 @@ In GRASS it is possible to organize all sort of geometry types (point, line
 and area) in one layer, because GRASS uses a topological vector model, so you 
 don't need to select the geometry type when creating a new GRASS vector. This 
 is different from Shapefile creation with QGIS, because Shapefiles use the 
-Simple Feature vector model (see Section \ref{sec:create shape}).
+Simple Feature vector model (ver Sección \ref{sec:create shape}).
 
 \begin{Tip}\caption{\textsc{Creating an attribute table for a new GRASS vector layer}}
 \qgistip{
-If you want to assign attributes to your digitized geometry features, make sure to create an attribute table with columns before you start digitizing (see Figure \ref{fig:grass_digitizing_table}).
+If you want to assign attributes to your digitized geometry features, make sure to create an attribute table with columns before you start digitizing (ver Imagen \ref{fig:grass_digitizing_table}).
 }
 \end{Tip} 
 
@@ -456,7 +447,7 @@ settings for various geometry types and their topological status (e.g. closed
 
 The \tab{Table} tab provides information about the database table for
 a given 'layer'. Here you can add new columns to an existing attribute table,
-or create a new database table for a new GRASS vector layer (see Section 
+or create a new database table for a new GRASS vector layer (ver Sección 
 \ref{sec:creating_new_grass_vectors}).
 
 \begin{figure}[h]
