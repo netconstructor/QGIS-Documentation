@@ -1,25 +1,25 @@
 % vim: set textwidth=78 autoindent:
 
-\subsection{Delimited Text Plugin}\label{label_dltext}    
+\subsection{Complemento de Texto Delimitado}\label{label_dltext}    
 
 % when the revision of a section has been finalized, 
 % comment out the following line:
 %\updatedisclaimer
 
-The Delimited Text plugin allows you to load a delimited text file as a layer in QGIS. 
+El complemento de texto delimitado permite cargar un archivo de texto delimitado como una capa en QGIS. 
 
-\minisec{Requirements}
+\minisec{Requerimientos}
 
-To view a delimited text file as layer, the text file must contain:
+Para ver un archivo de texto delimitado como una capa, el texto debe contener:
 
 \begin{enumerate}      
-\item A delimited header row of field names. This must be the first line in the text file.
-\item The header row must contain an X and Y field. These fields can have any name.
-\item The x and y coordinates must be specified as a number. The coordinate system is not important.
+\item Una línea de cabecera de nombres de campos. Esta debe ser la primera línea en el archivo de texto.
+\item La línea de cabecera debe contener un campo X y Y. Estos campos pueden tener cualquier nombre.
+\item Las coordenadas x y y deben ser especificadas como un número. El sistema de coordenadas no es importante.
 \end{enumerate}
 
-As an example of a valid text file we import the elevation point data file 
-\filename{elevp.csv} coming with the QGIS sample dataset (See Section~\ref{label_sampledata}):
+Como un ejemplo de un archivo de texto válido nosotros importamos el archivo de puntos de datos de elevación 
+\filename{elevp.csv} que viene con el conjunto de datos de ejemplo de QGIS (Vea la sección ~\ref{label_sampledata}):
 
 \begin{verbatim} 
 X;Y;ELEV
@@ -29,36 +29,32 @@ X;Y;ELEV
 [...]
 \end{verbatim}
 
-Some items of note about the text file are:
+Algunos elementos para notar acerca del archivo de texto son:
 
 \begin{enumerate}
-\item The example text file uses \mbox{$;$} as delimiter. Any character can be used to delimit the fields.
-\item The first row is the header row. It contains the fields X, Y and ELEV.
-\item No quotes ({\tt{}"{}}) are used to delimit text fields.
-\item The x coordinates are contained in the {\em X} field.
-\item The y coordinates are contained in the {\em Y} field.
+\item El archivo de texto de ejemplo usa \mbox{$;$} como delimitador. Cualquier caracter puede ser usado para delimitar los campos.
+\item La primer fila es la fila de cabecera. Contiene los campos X, Y y ELEV.
+\item No se usan ({\tt{}"{}}) para delimitar los campos de texto.
+\item Las coordenadas x están contenidas en el campo {\em X}.
+\item Las coordenadas y estám contenidas en el campo {\em Y}.
 \end{enumerate}
 
-\minisec{Using the Plugin}
-To use the plugin you must first enable it as described in Section \ref{sec:managing_plugins}.
+\minisec{Usando el complemento}
+Para usar el complemento primero debe activarlo como se describe en la sección \ref{sec:managing_plugins}.
 
-Click the new toolbar icon \toolbtntwo{delimited_text}{Add Delimited Text Layer} to open the Delimited Text dialog as shown in Figure \ref{fig:delim_text_plugin_dialog}.
+Haga clic en el nuevo ícono de la barra de herramientas \toolbtntwo{delimited_text}{Añadir Capa de Texto Delimitado} para abrir el diálogo de Texto Delimitado como se muestra en la figura \ref{fig:delim_text_plugin_dialog}.
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{Delimited Text Dialog \nixcaption}\label{fig:delim_text_plugin_dialog}\smallskip
+   \caption{Diálogo de Texto Delimitado \nixcaption}\label{fig:delim_text_plugin_dialog}\smallskip
    \includegraphics[clip=true, width=9cm]{delimited_text_dialog}
    \end{center}  
 \end{figure}
 
-First select the file (e.g., \filename{qgis\_sample\_data/csv/elevp.csv}) to import by clicking 
-on the \button{Browse} button. Once the file is selected, the plugin attempts to parse the file 
-using the last used delimiter, in this case a semi-colon (\mbox{$;$}). To properly parse the file, it 
-is important to select the correct delimiter. To change the delimiter to tab use 
-\mbox{$\backslash$}t (this is a regular expression for the tab character).
-After changing the delimiter, click \button{Parse}.
+Primero seleccione el archivo (ej., \filename{qgis\_sample\_data/csv/elevp.csv}) para importarlo haciendo clic en el botón \button{Navegar}. Una vez que el archivo es seleccionado, el complemento intenta analizar el archivo usando el último delimitador usado, en este caso un punto y coma (\mbox{$;$}). Para analizar propiamente el archivo, es importante seleccionar el delimitador correcto. Para cambiar el delimitador al tabulador use 
+\mbox{$\backslash$}t (esta es una expresión regular para el caracter tabulador).
+Despues de cambiar el delimitador, haga clic \button{analizar}.
 
-Once you have parsed the file, choose the X and Y fields from the drop down lists and 
-enter a Layer name (e.g., \filename{elevp} ) as shown in Figure 
-\ref{fig:delim_text_plugin_dialog}. To add the layer to the map, click 
-\button{Add Layer}. The delimited text file now behaves as any other map layer in QGIS.
+Una vez que ha analizado el archivo, elija los campos X y Y de la lista desplegable y capture un nombre de capa (ej., \filename{elevp} ) como se muestra en la figura 
+\ref{fig:delim_text_plugin_dialog}. Para agregar una capa al mapa, haga clic en
+\button{Añadir Capa}. El archivo de texto delimitado ahora se comporta como cualquier otra capa del mapa de QGIS.
