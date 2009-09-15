@@ -21,7 +21,7 @@ QGISPLUGINSOURCE=/software/qgis_head/src/plugins
 
 all: 
 	make pics
-	latex $(FILE)
+# 	latex $(FILE)
 # 	#bibtex $(FILE)
 # 	bibtex $(FILE)1
 # 	bibtex $(FILE)2
@@ -60,7 +60,7 @@ ps:
 
 #make PDF:
 pdf:
-	make all
+	make pics
 # 	dvipdf $(FILE).dvi
 	pdflatex $(FILE).tex
 
