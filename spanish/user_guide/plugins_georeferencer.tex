@@ -1,101 +1,96 @@
 % vim: set textwidth=78 autoindent:
 
-\subsection{Georeferencer Plugin}
+\subsection{Complemento Georeferenciador}
 
 % when the revision of a section has been finalized, 
 % comment out the following line:
 %\updatedisclaimer
 
-The Georeferencer Plugin is a tool for generating world files for rasters.
-It allows you to reference rasters to geographic or projected coordinate systems by creating a 
-world file, or by transforming the raster to a new coordinate system. The basic approach to georeferencing a raster is to locate points on the raster for which you can accurately determine their coordinates. The source of the coordinates can be:
+El complementeo Georeferenciador es una herramienta para la generación de archivos world para rasters.
+Permite referenciar rasters a sistemas de coordenadas geográficas o proyectadas creando un archivo world, o transformando el raster a un sistema de coordenadas nuevo. La técnica básica para georeferenciar un raster es localizar puntos en el raster para los cuales puede determinar en forma precisa sus coordenadas. La fuente de las coordenadas puede ser:
 
 \begin{enumerate}
-\item The raster itself, sometimes coordinates are literally `written' on the raster. 
-In this case you can enter the coordinates manually.
-\item Other georeferenced data, this can be either vector or raster data that contain the same objects/features that you have on the raster that you want to georeference. In this case you can enter the coordinates by clicking on the reference dataset loaded in QGIS map canvas.
+\item El mismo raster, algunas veces las coordenadas son literalmente `escritas' en l raster. 
+En este caso puede capturar las coordenadas manualmente.
+\item Otros datos georeferenciados, estos pueden ser datos vectoriales o raster que contengan los mismos objetos espaciales que tiene en el raster que desea georeferenciar. En este caso puedes capturar las coordenadas haciendo clic en el conjunto de datos de referencia cargado en el canvas de mapa de Qgis.
 \end{enumerate}
 
-The usual procedure for georeferencing an image involves selecting multiple points on the raster, 
-specifying their coordinates, and choosing a relevant transformation type. Based on the input parameters and data, the plugin will compute the world file parameters. The more coordinates you provide, the better the result will be.
+El procedimiento usual para georeferenciar una imagen envuelve el seleccionar múltiples puntos en el raster, especificando sus coordenadas, y eligiendo un tipo de transformación relevante. Basado en los datos de parámetros de entrada, el complemento calculará los parámetros del archivo world. Mientras mas coordenadas provea, mejor será el resultado.
 
-The first step is to start QGIS and load the Georeferencer Plugin (see Section 
-\ref{sec:load_core_plugin}) and click on the \toolbtntwo{georeferencer}{Georeferencer} 
-icon which appears in the QGIS toolbar menu. The Georeferencer Plugin dialog appears as 
-shown in Figure \ref{fig:georefplugin}.
+El primer paso es iniciar QGIS y cargar el complemento Georeferenciador (vea la sección 
+\ref{sec:load_core_plugin}) y haga clic en el ícono \toolbtntwo{georeferencer}{Georeferenciador} que aparece en la barra de menus de QGIS. El diálogo del complemento georeferenciador aparecerá como se muestra en la figura \ref{fig:georefplugin}.
   
-For this example, we are using a topo sheet of South Dakota from SDGS. It can later be visualized 
-together with the data from the GRASS spearfish60 location. You can download the topo sheet here: 
+Para este ejemplo, estamos usando un hoja topográfica de Dakota del Sur de la SDGS. Puede despues ser visualizada con el conjunto de datos del location spearfish60 de GRASS. Puede descargar la hoja topográfica de aquí: 
 \url{http://grass.osgeo.org/sampledata/spearfish\_toposheet.tar.gz}
 
 \begin{figure}[ht]
 \begin{center}
-  \caption{Georeferencer Plugin Dialog \nixcaption}\label{fig:georefplugin}\smallskip
+  \caption{Diálogo del Complemento Georeferenciador \nixcaption}\label{fig:georefplugin}\smallskip
   \includegraphics[clip=true, width=12cm]{georefplugin}
 \end{center}
 \end{figure}
 
-\minisec{Entering ground control points (GCPs)}\label{georeferencer_entering}
+\minisec{Capturando puntos de control de tierra (GCPs)}\label{georeferencer_entering}
 
 \begin{enumerate}
-\item To start georeferencing an unreferenced raster, we must load it using the \browsebutton browse button. The raster will show up in the main working area of the dialog. Once the raster is loaded, we can start to enter reference points.
+\item Para iniciar georeferenciando un raster no referenciado, debemos cargarlo usando el botón \browsebutton navegar. El raster se mostrará en el área principal de trabajo del dialogo. Una vez que el raster es cargado, podemos empezar a capturar los puntos de referencias.
 
-\item Using the \toolbtntwo{mActionCapturePoint}{Add Point} button, add points to the main working area and enter their coordinates (See Figure \ref{fig:choose_points}). For this procedure you have two options:
+\item Usando el botón \toolbtntwo{mActionCapturePoint}{Añadir punto}, añada puntos al área de trabajo principal y capture las coordenadas (Vea la figura \ref{fig:choose_points}). Para este procedimiento tiene dos opciones:
 
 \begin{enumerate}
-\item Click on a point in the raster map and enter the X and Y coordinates manually
-\item Click on a point in the raster map and choose the button \toolbtntwo{pencil}{from map canvas} to add the X and Y coordinates with the help of a georeferenced map already loaded in QGIS.
+\item Hacer clic en un punto en el mapa raster y capturar las coordenadas X y Y manualmente
+\item Hacer clic en un punto en el mapa raster y elegir el botón \toolbtntwo{pencil}{del canvas del mapas} para añadir las coordenadas X y Y con la ayuda de mapa georeferenciado cargado en QGIS.
 \end{enumerate}
-\item Continue entering points. You should have at least 4 points, and the more coordinates you can provide, the better the result will be. There are additional tools on the plugin dialog to zoom and pan the working area in order to locate a relevant set of GCP points.
+\item Continue capturando puntos. Debe tener al menos 4 puntos, y mientras mas coordenadas pueda proveer, mejor será el resultado. Hay herramientas adicionales en el diálogo del complementos para hacer zoom y moverse en el área de trabajo para poder localizar el conjuntos de puntos GCP de relevancia.
 \end{enumerate}
 
 \begin{figure}[ht]
 \begin{center}
-  \caption{Add points to the raster image \nixcaption}\label{fig:choose_points}\smallskip
+  \caption{Añadir puntos a la imagen raster\nixcaption}\label{fig:choose_points}\smallskip
   \includegraphics[clip=true,width=9cm]{choose_points}
 \end{center}
 \end{figure}
 
-The points that are added to the map will be stored in a separate text file ([filename].points) which is stored together with the raster image. This allows us to reopen the Georeferencer plugin at a later date and add new points or delete existing ones to optimize the result. The points file contains values of the form: mapX, mapY, pixelX, pixelY. You can also \button{Load GCPs} and \button{Save GCPs} to different directories if you like.
+Los puntos que han sido añadidos al mapa serán almacenados en un archivo de texto separado ([filename].points) el cual es almacenado junto con la imagen raster. Esto nos permite reabrir el complementos georeferenciados en una fecha posterior y añadir o eliminar puntos para optimizar el resultado. El archivo de puntos contiene valores en la forma de: mapX, mapY, pixelX, pixelY. Puede también \button{Caergar GCPs} y \button{Guardar GCPs} a diferentes directorios si lo desea.
 
-\minisec{Choosing the transformation}\label{georeferencer_transformation}
+\minisec{Eligiendo la transformación}\label{georeferencer_transformation}
 
-After you have added your GCPs to the raster image, you need to select the transformation type for the georeferencing process. Depending on how many ground control point you have captured, you may want to use different transformation algorithms. Choice of transformation algorithm is also dependent on the type and quality of input data and the amount of geometric distortion that you are willing to introduce to final result.
+Después de que ha agregado su GCPs a la imagen raster, necesita seleccionar el tipo de transformación para el proceso de georeferenciación. Dependiendo de cuantos puntos de control haya capturado, pudiera utilizar diferentes algoritmos de transformación. La elección del algoritmo de transformación es también dependiente del tipo y calidad de los datos de entrada y la cantidad de distorción geométrica que está desenado introducir al resultado final.
 
-Currently, several algorithms are available:
+Actualmente, múltiples algoritmos están disponibles:
 
 \begin{enumerate}
 \item Linear
 \item Helmert
-\item Polynomial 1
-\item Polynomial 2
-\item Polynomial 3
+\item Polínomial 1
+\item Polínomial 2
+\item Polínomial 3
 \item Thin plate spline (TPS)
 \end{enumerate}
 
 \begin{itemize}
-\item The Linear algorithm is used to create a world-file, and is different from the other algorithms, as it does not actually transform the raster. This algorithm likely won't be sufficient if you are dealing with scanned material.
-\item The Helmert transformation performs simple scaling and rotation transformations. 
-\item The Polynomial algorithms are among the most widely used algorithms for georeferencing, and each one differs by the degree of distortion introduced to match source and destination ground control points. The most widely used polynomial algorithm is the second order polynomial transformation, which allows some curvature. First order polynomial transformation (affine) preserves colliniarity and allows scaling, translation and rotation only.
-\item The Thin plate spline (TPS) algorithm is a more modern georeferencing method, which is able to introduce local deformations in the data. This algorithm is useful when very low quality originals are being georeferenced.
+\item El algoritmo lineal es usado para crear un archivo world, y es diferente de los otros algoritmos, ya que no transforma el raster. Este algoritmos probablemente no será necesario si esta tratando con material escaneado.
+\item La transformación Helmert realiza transformaciones de escalado simple y rotación. 
+\item Los algoritmos polinomiales están entre los algoritmos mas ampliamente usados para georeferenciación, y cada uno difiere por el grado de distorsión introducido para hacer coincidir puntos de control de tierra fuente y destino. El algoritmo polinomial mas ampliamente usado es la transformación de segundo orden, la cual permite un poco de curvatura. La transformación de primer orden polinomial (afín) preserva colinearidad y permite solamente escalamiento, traslado y rotación.
+\item El algoritmo Thin plate spline (TPS) es un método de georeferenciación moderno, el cual permite introducir deformaciones locales en los datos. Este algoritmo es útil cuando originales de muy baja calidad están siendo georeferenciados.
 \end{itemize}
 
-\minisec{Running the transformation}\label{georeferencer_running}
+\minisec{Ejecutando la transformación}\label{georeferencer_running}
 
 \begin{enumerate}
-\item When the GCPs have been collected, and the transformation has been chosen, press either \button{Create} to create a new raster or \button{Create and load layer} to automatically add the new raster to the layer list.
-\item A warning message will appear that will inform you that a new raster (in GeoTIFF format) will be created.
-\item After hitting OK, you will also be asked to choose a resampling method. There are three methods available:
+\item Cuando los GCPs han sido recogidos, y la transformación ha sido elegida, presione bien \button{Crear} para crear un nuevo raster o \button{Crear y cargar capas} para agregar automáticamente el nuevo raster a la lista de capas.
+\item Un mensaje de alerta aparecerá informándole que un nuevo raster(en formato GeoTIFF) será creado.
+\item Después de presionar OK, también le preguntará elegir el método de remuestreo. Hay tres métodos disponibles:
 
 \begin{enumerate}
-\item Nearest neighbour
-\item Linear
-\item Cubic
+\item Vecino mas cercano (Nearest neighbour)
+\item Lineal
+\item Cúbico
 \end{enumerate}
 \end{enumerate}
 
-\begin{Tip}\caption{\textsc{Choosing the resampling method}}
-\qgistip{The type of resampling you choose will likely depending on your input data and the ultimate objective of the exercise. If you don't want to change statistics of the image, you might want to choose Nearest neighbour, whereas a Cubic resampling will likely provide a more smoothed result.}
+\begin{Tip}\caption{\textsc{Eligiendo el método de remuestreo}}
+\qgistip{El tipo de remuestreo que elija dependerá de sus datos de entrada y el último objetivo del ejercicio. Si no quiere cambiar estadísticas de la imagen, querrá elegir el remuestreo de Vecino mas Cercano, debido a que el remuestreo Cúbico le proveerá un resultado mas  alisado.}
 \end{Tip}
 
 
