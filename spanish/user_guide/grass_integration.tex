@@ -86,7 +86,7 @@ se debe crear antes de empezar a trabajar con el complemento de GRASS en QGIS. D
 organizados por proyectos guardados en subdirectorios llamados \filename{LOCALIZACIÓN}. 
 Cada \filename{LOCALIZACIÓN} se define 
 por su sistema de coordenadas, proyección del mapa y límites geográficos. Cada \filename{LOCALIZACIÓN} puede tener 
-varios \filename{DIRECTORIOs DE MAPAS} (subdirectorios de la \filename{LOCALIZACIÓN}) que se usan para subdividir el proyecto 
+varios \filename{DIRECTORIOS DE MAPAS} (subdirectorios de la \filename{LOCALIZACIÓN}) que se usan para subdividir el proyecto 
 en diferentes temas, subregiones o entornos de trabajo para distintos miembros de un equipo de trabajo (Neteler \& Mitasova 2008 
 \cite{neteler_mitasova08}). Para poder analizar capas vectoriales y ráster con los módulos de GRASS, debe importarlos a una \filename{LOCALIZACIÓN} de GRASS.
 \footnote{Esto no es estrictamente cierto - con los módulos de GRASS 
@@ -129,7 +129,7 @@ relacionados con GRASS GIS. Es útil descargar e instalar el conjunto de datos e
    \filename{LOCALIZACIÓN} existente (ver Sección~\ref{sec:add_mapset}) o para crear 
   una nueva \filename{LOCALIZACIÓN} todo junto. Marque el botón circular
   \radiobuttonon{Crear nueva localización} (ver Imagen \ref{fig:create_grass_location}).
-  \item Introduzca un nombre para la \filename{LOCALIZACIÓN} - nosotros usamos alaska y pulse 
+  \item Introduzca un nombre para la \filename{LOCALIZACIÓN} - nosotros usamos alaska - y pulse 
   \button{Siguiente} 
   \item Defina la proyección pulsando el botón circular
   \radiobuttonon{Proyección} para activar la lista de proyecciones.
@@ -140,11 +140,11 @@ relacionados con GRASS GIS. Es útil descargar e instalar el conjunto de datos e
   \toolbtntwo{mIconProjectionEnabled}{proyector} en la esquina inferior derecha de la barra de estado (ver Sección \ref{label_projstart})).
   \item Pulse \button{Encontrar} para seleccionar la proyección.
   \item Pulse \button{Siguiente} 
-  \item TPara definir la región predeterminada, tenemos que introducir los límites de la \filename{LOCALIZACIÓN} en dirección Norte, Sur, Este y Oeste. 
+  \item Para definir la región predeterminada, tenemos que introducir los límites de la \filename{LOCALIZACIÓN} en dirección Norte, Sur, Este y Oeste. 
   Aquí simplemente pulsaremos el botón \button{Establecer la extensión actual de QGIS}, para aplicar la extensión de la  
   capa cargada \filename{alaska.shp} como extensión de la región predeterminada de GRASS.
   \item Pulse \button{Siguiente} 
-  \item Tambión tenemos que definir un \filename{DIRECTORIO DE MAPAS} dentro de nuestra nueva 
+  \item También tenemos que definir un \filename{DIRECTORIO DE MAPAS} dentro de nuestra nueva 
   \filename{LOCALIZACIÓN}. Póngale el nombre que prefiera - nosotros usamos demo.
   \footnote{Cuando se crea una nueva \filename{LOCALIZACIÓN}, GRASS automáticamente 
   crea un \filename{DIRECTORIO DE MAPAS} especial llamado \filename{PERMANENT} diseñado para 
@@ -153,7 +153,7 @@ relacionados con GRASS GIS. Es útil descargar e instalar el conjunto de datos e
   \cite{neteler_mitasova08}).}
   \item Compruebe el resumen para asegurarse que es correcto y pulse
   \button{Terminar} 
-  \item Se creará la nueva \filename{LOCALIZACIÓN alaska} y dos \filename{DIRECTORIO DE MAPAS demo}
+  \item Se creará la nueva \filename{LOCALIZACIÓN alaska} y dos \filename{DIRECTORIOS DE MAPAS demo}
   y \filename{PERMANENT}. El conjunto de trabajo abierto actual es el
   \filename{DIRECTORIO DE MAPAS demo}, como lo ha definido.
   \item Vea como algunas de las herramientas de la barra de herramientas de GRASS que estaban desactivadas ahora están activadas.
@@ -189,20 +189,20 @@ la resolución ráster actualmente seleccionada (Neteler \& Mitasova 2008
   (ver Imagen \ref{fig:create_grass_location}) y pulse \button{Siguiente}.
   \item Introduzca el nombre \filename{text} para el nuevo \filename{DIRECTORIO DE MAPAS}. En la parte de abajo 
   del asistente verá una lista de \filename{DIRECTORIOS DE MAPAS} existente y sus propietarios.
-  \item Pulse \button{Siguiente}, Compruebe el resumen para asegurarse de que todo está correcto y pulse \button{Finalizar} 
+  \item Pulse \button{Siguiente}, compruebe el resumen para asegurarse de que todo está correcto y pulse \button{Finalizar}.
 \end{enumerate}
 
 \subsection{Importar datos a una LOCALIZACIÓN de GRASS}\label{sec:import_loc_data}
 
 Esta Sección da un ejemplo de cómo importar datos ráster y vectoriales a la 
 \filename{LOCALIZACIÓN} 
-\filename{alaska} de GRASS proporcionada por el conjunto de datos alaska de QGIS. Por lo tanti usaremos un mapa ráster de cobertura
+\filename{alaska} de GRASS proporcionada por el conjunto de datos alaska de QGIS. Por lo tanto usaremos un mapa ráster de cobertura
 del terreno \filename{landcover.img} y un archivo vectorial GML \filename{lakes.gml} del conjunto de datos alaska de QGIS \ref{label_sampledata}.
 
 \begin{enumerate}
   \item Inicie QGIS y asegúrese de que el complemento de GRASS está cargado.
   \item En la barra de herramientas de GRASS, pulse en el icono 
-  \toolbtntwo{grass_open_mapset}{Abrir DIRECTORIO DE MAPAS} para lanzar el asistente
+  \toolbtntwo{grass_open_mapset}{Abrir directorio de mapas} para lanzar el asistente
   \filename{DIRECTORIO DE MAPAS}.
   \item Seleccione como base de datos de GRASS la carpeta \filename{grassdata} del conjunto 
   de datos alaska de QGIS, la \filename{LOCALIZACIÓN alaska}, y el \filename{DIRECTORIO DE MAPAS} 
@@ -214,7 +214,7 @@ del terreno \filename{landcover.img} y un archivo vectorial GML \filename{lakes.
   \tab{Árbol de módulos}. Este módulo de GRASS le permite importar archivos ráster admitidos por GDAL a una 
   \filename{LOCALIZACIÓN} de GRASS. Aparecerá el diálogo del módulo para \filename{r.in.gdal}.
   \item Navegue a la carpeta \filename{raster} en el conjunto de datos alaska de QGIS y seleccione el archivo \filename{landcover.img}.
-  \item Como nombre del ráster de salid defina \filename{landcover\_grass} y pulse 
+  \item Como nombre del ráster de salida defina \filename{landcover\_grass} y pulse 
   \button{Ejecutar}. En la pestaña \tab{Salida} se ve la orden de GRASS que se está ejecutando actualmente 
   \filename{r.in.gdal -o input=/path/to/landcover.img 
   output=landcover\_grass}.
@@ -224,7 +224,7 @@ del terreno \filename{landcover.img} y un archivo vectorial GML \filename{lakes.
   \filename{v.in.ogr} en la pestaña \tab{Árbol de módulos}. Este módulo de GRASS permite importar archivos vectoriales admitidos 
   por OGR a una \filename{LOCALIZACIÓN} de GRASS. Aparecerá el dialogo del módulo para
   \filename{v.in.ogr}.
-  \item Navegue a la carpeta \filename{gml} del conjunto de datos alaske de QGIS y seleccione el archivo \filename{lakes.gml} como archivo OGR.
+  \item Navegue a la carpeta \filename{gml} del conjunto de datos alaska de QGIS y seleccione el archivo \filename{lakes.gml} como archivo OGR.
   \item Como nombre del vectorial de salida defina \filename{lakes\_grass} y pulse 
   \button{Ejecutar}. No tiene que preocuparse 
   de las otras opciones en este ejemplo. En la pestaña \tab{Salida} se ve la instrucción de GRASS que se está ejecutando
@@ -269,8 +269,8 @@ La mejor forma de aprender el modelo vectorial de GRASS y sus capacidades es des
 
 \subsection{Crear una nueva capa vectorial de GRASS}\label{sec:creating_new_grass_vectors}\index{GRASS!Creating new vectors|see{editing!creating a new layer}}
 
-Para crear una neuva capa vectorial de GRASS con el complemento de GRASS pulse el icono de la barra de herramientas 
-\toolbtntwo{grass_new_vector_layer}{Crear nuevo vectorial de GRAS}. Introduca un nombre en el cuadro de texto y puede comenzar 
+Para crear una nueva capa vectorial de GRASS con el complemento de GRASS pulse el icono de la barra de herramientas 
+\toolbtntwo{grass_new_vector_layer}{Crear nuevo vectorial de GRAS}. Introduzca un nombre en el cuadro de texto y puede comenzar 
 a digitalizar puntos, líneas o polígonos, siguiendo el procedimiento descrito en la Sección 
 \ref{grass_digitising}. 
 
@@ -304,7 +304,7 @@ y no al contorno.
 
 \minisec{Barra de herramientas}\label{label_grasstoolbar}
 
-En la Figura \ref{fig:grass_digitizing_toolbar} puede ver tlas herramientas de digitalización proporcionadas por el complemento de GRASS. La Tabla \ref{tab:grass_tools}
+En la Figura \ref{fig:grass_digitizing_toolbar} puede ver las herramientas de digitalización proporcionadas por el complemento de GRASS. La Tabla \ref{tab:grass_tools}
 explica las funcionalidades disponibles.
 
 \begin{figure}[h]
@@ -324,264 +324,220 @@ explica las funcionalidades disponibles.
 \hline \includegraphics[width=0.7cm]{grass_new_boundary} & Nuevo contorno & Digitalizar un contorno nuevo (finaliza al seleccionar una herramienta nueva)\\
 \hline \includegraphics[width=0.7cm]{grass_new_centroid} & Nuevo centroide & Digitalizar un centroide nuevo (etiquetar un área existente)\\
 \hline \includegraphics[width=0.7cm]{grass_move_vertex} & Mover vértice & Seleccionar un vértice de una línea o contorno existente e identificar una nueva posición\\
-\hline \includegraphics[width=0.7cm]{grass_add_vertex} & Add vertex & Add a
-new vertex to existing line\\
-\hline \includegraphics[width=0.7cm]{grass_delete_vertex} & Delete vertex &
-Delete vertex from existing line (confirm selected vertex by another click)\\
-\hline \includegraphics[width=0.7cm]{grass_move_line} & Move element & Move
-selected boundary, line, point or centroid and click on new position\\
-\hline \includegraphics[width=0.7cm]{grass_split_line} & Split line & Split
-an existing line to 2 parts\\
-\hline \includegraphics[width=0.7cm]{grass_delete_line} & Delete element &
-Delete existing boundary, line, point or centroid (confirm selected element by
-another click)\\
-\hline \includegraphics[width=0.7cm]{grass_edit_attributes} & Edit attributes
-& Edit attributes of selected element (note that one element can represent
-more features, see above)\\
-\hline \includegraphics[width=0.7cm]{grass_close_edit} & Close & Close
-session and save current status (rebuilds topology afterwards)\\
+\hline \includegraphics[width=0.7cm]{grass_add_vertex} & Añadir vértice & Añadir un vértice nuevo a una línea existente\\
+\hline \includegraphics[width=0.7cm]{grass_delete_vertex} & Borrar vértice & Borrar un vértice de una línea existente (confirmar el vértice seleccionado con otra pulsación)\\
+\hline \includegraphics[width=0.7cm]{grass_move_line} & Mover elemento & Mover el contorno, línea, punto o centroide seleccionado a la nueva posición\\
+\hline \includegraphics[width=0.7cm]{grass_split_line} & Dividir línea & Dividir una línea existente en dos partes\\
+\hline \includegraphics[width=0.7cm]{grass_delete_line} & Borrar elemento & Borrar un contorno, línea, punto o centroide existente (confirmar el elemento seleccionado con otra pulsación)\\
+\hline \includegraphics[width=0.7cm]{grass_edit_attributes} & Editar atributos & Editar los atributos de un elemento existente (tenga en cuenta que un elemento puede representar a más objetos espaciales, vea arriba)\\
+\hline \includegraphics[width=0.7cm]{grass_close_edit} & Cerrar & Cerrar la sesión de digitalización (reconstruye la topología a continuación)\\
 \hline
 \end{tabular}
 \end{table}
 
-\minisec{Category Tab}\index{GRASS!category settings}
+\minisec{Pestaña Categoría}\index{GRASS!category settings}
 
-The \tab{Category} tab allows you to define the way in which the category 
-values will be assigned to a new geometry element.
+La pestaña \tab{Categoría} le permite establecer la forma en que se asignará la categoría a cada nuevo objeto espacial.
 
 \begin{figure}[h]
  \begin{center}
-  \caption{GRASS Digitizing Category Tab \nixcaption}\label{fig:grass_digitizing_category}
+  \caption{Pestaña Categoría de digitalización de GRASS \nixcaption}\label{fig:grass_digitizing_category}
   \includegraphics[clip=true,width=10cm]{grass_digitizing_category}
  \end{center}
 \end{figure}
 
 \begin{itemize}
-\item \textbf{Mode}: what category value shall be applied to new geometry 
-elements.
+\item \textbf{Modo}: qué valor de categoría se aplicará a los elementos de la nueva geometría.
 \begin{itemize}
-\item Next not used - apply next not yet used category value to geometry
-element.
-\item Manual entry - manually define the category value for the geometry
-element in the 'Category'-entry field.
-\item No category - Do not apply a category value to the geometry element.
-This is e.g. used for area boundaries, because the category values are
-connected via the centroid.
+\item La siguiente sin usar: aplicar el siguiente valor de categoría que aún no está usado al elemento de la geometría.
+\item Entrada manual: definir manualmente la categoría para el elemento de la geometría en el campo de entrada «Categoría».
+\item Ninguna categoría: no aplicar ningún valor de categoría al elemento de la geometría.
+Esto se usa por ejemplo para contornos de áreas, porque los valores de la categoría están conectados mediante el centroide.
 \end{itemize}
-\item \textbf{Category} - A number (ID) is attached to each digitized geometry
-element. It is used to connect each geometry element with its attributes.
-\item \textbf{Field (layer)} - Each geometry element can be connected with
-several attribute tables using different GRASS geometry layers. Default layer
-number is 1. 
+\item \textbf{Categoría}: un número (ID) que se adjunta a cada elemento de la geometría 
+digitalizado. Se usa para conectar cada elemento de la geometría con sus atributos.
+\item \textbf{Campo (capa)} - Cada elemento de la geometría puede conectarse con varias
+tablas de atributos usando diferentes capas de geometría de GRASS. El número de capa predeterminado es 1. 
 \end{itemize}
 
-\begin{Tip}\caption{\textsc{Creating an additional GRASS 'layer' with QGIS}}
-\qgistip{If you would like to add more layers to your dataset, just add a new
-number in the 'Field (layer)' entry box and press return. In the Table tab
-you can create your new table connected to your new layer.
+\begin{Tip}\caption{\textsc{Crear «capas» adicionales de GRASS con QGIS}}
+\qgistip{Si quiere añadir más capas a su conjunto de datos, simplemente añada un nuevo número en el cuadro de entrada 
+«Campo (capa)» y pulse Intro. En la pestaña Tabla puede crear una nueva tabla conectada a su nueva capa.
 }
 \end{Tip}
 
-\minisec{Settings Tab}\label{label_settingtab}\index{GRASS!snapping
+\minisec{Pestaña Configuración}\label{label_settingtab}\index{GRASS!snapping
 tolerance}
 
-The \tab{Settings} tab allows you to set the snapping in screen pixels. The
-threshold defines at what distance new points or line ends are snapped to
-existing nodes. This helps to prevent gaps or dangles between boundaries. The
-default is set to 10 pixels.
+La pestaña \tab{Configuración} le permite establecer el autoensamblado en píxeles de la pantalla. Esto es el umbral en 
+el que los nuevos puntos o finales de líneas son ensamblados de forma automática a nodos existentes. Esto ayuda a evitar 
+saltos o balanceos entre contornos. El valor predeterminado es 10 píxeles.
 
 \begin{figure}[h]
  \begin{center}
- \caption{GRASS Digitizing Settings Tab \nixcaption}\label{fig:grass_digitizing_settings}
+ \caption{Pestaña Configuración de digitalización de GRASS \nixcaption}\label{fig:grass_digitizing_settings}
  \includegraphics[clip=true,width=8cm]{grass_digitizing_settings}
  \end{center}
 \end{figure}
 
-\minisec{Symbology Tab}\index{GRASS!symbology settings}
+\minisec{Pestaña Simbología}\index{GRASS!symbology settings}
 
-The \tab{Symbology} tab allows you to view and set symbology and color
-settings for various geometry types and their topological status (e.g. closed
-/ opened boundary).
+La pestaña \tab{Simbología} le permite ver y establecer la simbología y la configuración del color para varios tipos de geometría y su estado topológico (ej.: contorno cerrado / abierto).
 
 \begin{figure}[h]
  \begin{center}
- \caption{GRASS Digitizing Symbolog Tab \nixcaption}\label{fig:grass_digitizing_symbology}
+ \caption{Pestaña Simbología de la digitalización de GRASS \nixcaption}\label{fig:grass_digitizing_symbology}
  \includegraphics[clip=true,width=8cm]{grass_digitizing_symbology}
  \end{center}
 \end{figure}
 
-\minisec{Table Tab} \index{GRASS!table editing}
+\minisec{Pestaña tabla} \index{GRASS!table editing}
 
-The \tab{Table} tab provides information about the database table for
-a given 'layer'. Here you can add new columns to an existing attribute table,
-or create a new database table for a new GRASS vector layer (ver Sección 
+La pestaña \tab{Tabla} proporciona información sobre la tabla de la base de datos de una «capa» dada. Aquí puede añadir 
+nuevas columnas a una tabla de atributos existente o crear  una nueva tabla de base de datos para una nueva capa 
+vectorial de GRASS (ver Sección 
 \ref{sec:creating_new_grass_vectors}).
 
 \begin{figure}[h]
  \begin{center}
- \caption{GRASS Digitizing Table Tab \nixcaption}\label{fig:grass_digitizing_table}
+ \caption{Pestaña tabla de la digitalización de GRASS \nixcaption}\label{fig:grass_digitizing_table}
  \includegraphics[clip=true,width=10cm]{grass_digitizing_table}
  \end{center}
 \end{figure}
 
-\begin{Tip}\caption{\textsc{GRASS Edit Permissions}}\index{GRASS!edit
+\begin{Tip}\caption{\textsc{Permisos de edición de GRASS}}\index{GRASS!edit
 permissions}
-\qgistip{You must be the owner of the GRASS \filename{DIRECTORIO DE MAPAS} you want to 
-edit. It is impossible to edit data layers in a \filename{DIRECTORIO DE MAPAS} that is not 
-yours, even if you have write permissions.
+\qgistip{Tiene que ser el propietario del \filename{DIRECTORIO DE MAPAS} de GRASS que quiera editar. Es imposible editar 
+capas de datos en \filename{DIRECTORIOS DE MAPAS} que no sean suyos, incluso si tiene permiso de escritura.
 }
 \end{Tip} 
 
-\subsection{The GRASS region tool}\label{sec:grass_region}\index{GRASS!region}
+\subsection{La herramienta Región de GRASS}\label{sec:grass_region}\index{GRASS!region}
 
-The region definition (setting a spatial working window) in GRASS is important 
-for working with raster layers. Vector analysis is per default not limited
-to any defined region definitions. All newly-created rasters will have the
-spatial extension and resolution of the currently defined GRASS region,
-regardless of their original extension and resolution. The current GRASS
-region is stored in the \filename{\$LOCATION/\$MAPSET/WIND} file, and it 
-defines north, south, east and west bounds, number of columns and rows, 
-horizontal and vertical spatial resolution.
+La definición de la región (establecer una ventana de trabajo espacial) en GRASS es importante para trabajar con capas
+ráster. El análisis vectorial no está limitado de forma predeterminada a ninguna región definida. Todos los ráster de nueva 
+creación tienen la extensión espacial y resolución de la región actual, no importa cuál sea su extensión y resolución original. La región actual de GRASS se guarda en el archivo \filename{\$LOCATION/\$MAPSET/WIND}, y define los límites Norte, Sur, Este y Oeste, número de columnas y filas y la resolución espacial horizontal y vertical.
 
-It is possible to switch on/off the visualization of the GRASS region in the
-QGIS canvas using the \toolbtntwo{grass_region}{Display current GRASS region}
-button. \index{GRASS!region!display}.
+Se puede activar/descactivar la visualización de la región de GRASS en la vista del mapa de QGIS usando el botón 
+\toolbtntwo{grass_region}{Mostrar región actual de GRASS}. \index{GRASS!region!display}.
 
-With the \toolbtntwo{grass_region_edit}{Edit current GRASS region} icon you 
-can open a dialog to change the current region and the symbology of the GRASS 
-region rectangle in the QGIS canvas. Type in the new region bounds and 
-resolution and click \button{OK}. It also allows to select a new region 
-interactively with your mouse on the QGIS canvas. Therefore click with the 
-left mouse button in the QGIS canvas, open a rectangle, close it using the 
-left mouse button again and click \button{OK}.\index{GRASS!region!editing}
-The GRASS module \filename{g.region} provide a lot more parameters to define 
-an appropriate region extend and resolution for your raster analysis. You can 
-use these parameters with the GRASS Toolbox, described in Sección 
+Con el icono \toolbtntwo{grass_region_edit}{Editar la región actual de GRASS} puede abrir un diálogo en el que puede 
+cambiar la región actual y la simbología del rectángulo de la región de GRASS en la vista del mapa de QGIS. Escriba
+los nuevos límites y resolución y pulse \button{Aceptar}. Cuando se está ejecutando la herramienta también es posible 
+seleccionar una nueva región de forma interactiva con el ratón sobre el lienzo de QGIS.
+Para ello pulse con el botón 
+izquierdo del ratón en el lienzo de QGIS, abra un rectángulo, cierrelo usando el botón izquierdo de nuevo y pulse 
+\button{Aceptar}.\index{GRASS!region!editing}
+El módulo de GRASS \filename{g.region} proporciona muchos más parámetros para definir una extensión y resolución adecuadas
+de la región para su análisis ráster. Puede usar estos parámetros con la Caja de herramientas de GRASS, descrita en la Sección 
 \ref{subsec:grass_toolbox}.
 
-\subsection{The GRASS toolbox}\label{subsec:grass_toolbox}\index{GRASS!toolbox}
+\subsection{La Caja de herramientas de GRASS}\label{subsec:grass_toolbox}\index{GRASS!toolbox}
 
-The \toolbtntwo{grass_tools}{Open GRASS Tools} box provides GRASS module 
-functionalities to work with data inside a selected GRASS \filename{LOCALIZACIÓN} 
-and \filename{DIRECTORIO DE MAPAS}. To use the GRASS toolbox you need to open a 
-\filename{LOCALIZACIÓN} and \filename{DIRECTORIO DE MAPAS} where you have write-permission 
-(usually granted, if you created the \filename{DIRECTORIO DE MAPAS}). This is necessary, 
-because new raster or vector layers created during analysis need to be written 
-to the currently selected \filename{LOCALIZACIÓN} and \filename{DIRECTORIO DE MAPAS}.
+El cuadro \toolbtntwo{grass_tools}{Abrir herramientas de GRASS} proporciona funciones de los módulos de GRASS para trabajar 
+con datos dentro de una \filename{LOCALIZACIÓN} y \filename{DIRECTORIO DE MAPAS} seleccionados. Para usar la caja 
+de herramientas de GRASS necesita abrir una \filename{LOCALIZACIÓN} y un \filename{DIRECTORIO DE MAPAS} en el que 
+tenga permiso de escritura (normalmente lo tendrá si creó el \filename{DIRECTORIO DE MAPAS}). Esto es necesario porque 
+se tienen que escribir nuevas capas ráster o vectoriales en la \filename{LOCALIZACIÓN} y el \filename{DIRECTORIO DE MAPAS} 
+seleccionados creadas durante el análisis.
 
-\subsubsection{Working with GRASS modules}\index{GRASS!toolbox}
-
-\begin{figure}[h]
-\centering
-\caption{GRASS Toolbox and searchable Modules List \nixcaption}\label{fig:grass_modules}
-   \subfigure[Modules Tree] {\label{subfig:grass_module_tree}\includegraphics[clip=true, width=0.4\textwidth]{grass_toolbox_moduletree}}\goodgap
-   \subfigure[Searchable Modules List] {\label{subfig:grass_module_list}\includegraphics[clip=true, width=0.4\textwidth]{grass_toolbox_modulelist}}
-\end{figure}
-
-The GRASS Shell inside the GRASS Toolbox provides access to almost all (more 
-than 300) GRASS modules in command line modus. To offer a more user
-friendly working environment, about 200 of the available GRASS modules and 
-functionalities are also provided by graphical dialogs. These dialogs are 
-grouped in thematic blocks, but are searchable as well. You find a complete 
-list of GRASS modules available in QGIS version \CURRENT
-in appendix \ref{appdx_grass_toolbox_modules}. It is also possible to 
-customize the GRASS Toolbox content. It is described in Sección 
-\ref{sec:toolbox-customizing}.
-
-As shown in Figure \ref{fig:grass_modules}, you can look for the appropriate 
-GRASS module using the thematically grouped \tab{Modules Tree} or the 
-searchable \tab{Modules List} tab. 
-
-Clicking on a grapical module icon a new tab will be added to the toolbox 
-dialog providing three new sub-tabs \tab{Options}, \tab{Output} and 
-\tab{Manual}. In Figure \ref{fig:grass_module_dialog} you see an example 
-for the GRASS module \filename{v.buffer}.
+\subsubsection{Trabajar con módulos de GRASS}\index{GRASS!toolbox}
 
 \begin{figure}[h]
 \centering
-\caption{GRASS Toolbox Module Dialogs \nixcaption}\label{fig:grass_module_dialog}
-   \subfigure[Module Options] {\label{subfig:grass_module_option}\includegraphics[clip=true, width=0.3\textwidth]{grass_module_option}}\goodgap
-   \subfigure[Modules Output] {\label{subfig:grass_module_output}\includegraphics[clip=true, width=0.3\textwidth]{grass_module_output}}\goodgap
-   \subfigure[Module Manual] {\label{subfig:grass_module_manual}\includegraphics[clip=true, width=0.3\textwidth]{grass_module_manual}}
+\caption{Caja de herramientas de GRASS y Lista de búsqueda de módulos \nixcaption}\label{fig:grass_modules}
+   \subfigure[Árbol de módulos] {\label{subfig:grass_module_tree}\includegraphics[clip=true, width=0.4\textwidth]{grass_toolbox_moduletree}}\goodgap
+   \subfigure[Lista de búsqueda de módulos] {\label{subfig:grass_module_list}\includegraphics[clip=true, width=0.4\textwidth]{grass_toolbox_modulelist}}
 \end{figure}
 
-\minisec{Options}
+La consola de GRASS dentro de la caja de herramientas de GRASS proporciona acceso a casi todos (más de 300) los módulos de
+ GRASS en modo línea de órdenes. Para ofrecer un entorno de trabajo más amigable, unos 200 de los módulos y funcionalidades 
+disponibles de GRASS también se proporcionan mediante diáologos gráficos. Estos diálogos están agrupados en bloques temáticos, 
+pero también se pueden buscar. Encontrará una lista completa de los módulos de GRASS disponibles en la versión de QGIS \CURRENT
+en el apédice \ref{appdx_grass_toolbox_modules}. También es posible personalizar el contenido de la caja de herramientas de 
+GRASS. Esto se describe en la Sección \ref{sec:toolbox-customizing}.
 
-The \tab{Options} tab provides a simplified module dialog where you can 
-usually select a raster or vector layer visualized in the QGIS canvas and 
-enter further module specific parameters to run the module. The provided 
-module parameters are often not complete to keep the dialog clear. If you want 
-to use further module parameters and flags, you need to start the GRASS Shell 
-and run the module in the command line.
+Como se muestra en la Figura \ref{fig:grass_modules}, puede buscar el módulo adecuado usando las pestañas \tab{Árbol de módulos} o \tab{Lista de módulos}.
 
-\minisec{Output}
+Al pulsar en el icono de un módulo se añadirá una nueva pestaña a su caja de herramientas que proporciona tres 
+nuevas subpestañas \tab{Opciones}, \tab{Salida} y \tab{Manual}. En la Figura \ref{fig:grass_module_dialog} se 
+ve un ejemplo para el módulo de GRASS \filename{v.buffer}.
 
-The \tab{Output} tab provides information about the output status of the 
-module. When you click the \button{Run} button, the module switches to the 
-\tab{Output} tab and you see information about the analysis process. If all 
-works well, you will finally see a \usertext{Successfully finished} message.
+\begin{figure}[h]
+\centering
+\caption{Diálogos de módulo de la caja de herramientas de GRASS \nixcaption}\label{fig:grass_module_dialog}
+   \subfigure[Opciones del módulo] {\label{subfig:grass_module_option}\includegraphics[clip=true, width=0.3\textwidth]{grass_module_option}}\goodgap
+   \subfigure[Salida del módulo] {\label{subfig:grass_module_output}\includegraphics[clip=true, width=0.3\textwidth]{grass_module_output}}\goodgap
+   \subfigure[Manual del módulo] {\label{subfig:grass_module_manual}\includegraphics[clip=true, width=0.3\textwidth]{grass_module_manual}}
+\end{figure}
+
+\minisec{Opciones}
+
+La pestaña \tab{Opciones} proporciona un diálogo simplificado del módulo en el que normalmente puede seleccionar una 
+capa ráster o vectorial visualizada en el lienzo de QGIS e introducir otros parámetros específicos del módulo seleccionado 
+para ejecutarlo. Los parámetros del módulo proporcionados a menudo no están completos, para mantener despejado el diálogo.
+Si quiere usar más parámetros y opciones del módulo, necesitará iniciar la consola de GRASS y ejecutar el módulo en línea
+de órdenes.
+
+\minisec{Salida}
+
+La pestaña \tab{Salida} proporciona información sobre el estado de salida del módulo. Cuando se pulsa el botón \button{Ejecutar}, 
+el módulo pasa a la pestaña \tab{Salida} y verá información sobre el proceso de análisis. Si todo va bien, al final verá 
+el mensaje \usertext{Finalizado correctamente}.
 
 \minisec{Manual}
 
-The \tab{Manual} tab shows the HTML help page of the GRASS module. You can 
-use it to check further module parameters and flags or to get a deeper 
-knowledge about the purpose of the module. At the end of each module 
-manual page you see further links to the \filename{Main Help index}, the 
-\filename{Thematic index} and the \filename{Full index}. These links provide 
-the same information as if you use the module \filename{g.manual} 
+La pestaña \tab{Manual} muesta la página de ayuda HTML del módulo de GRASS. Puede usarla para comprobar más parámetros y 
+opciones del módulo o para obtener un conocimiento mayor sobre el objetivo del módulo. Al final de la página de cada módulo 
+hay más enlaces al \filename{Índice principal de la Ayuda}, al \filename{Índice temático} y al \filename{Índice completo}. 
+Estos enlaces proporcionan la misma información que si usa el módulo \filename{g.manual} 
 
-\begin{Tip}\caption{\textsc{Display results immediately}}\index{GRASS!display results}
-\qgistip{If you want to display your calculation results immediately in your 
-map canvas, you can use the 'View Output' button at the bottom of the 
-module tab.
+\begin{Tip}\caption{\textsc{Mostrar resultados inmediatamente}}\index{GRASS!display results}
+\qgistip{Si quiere mostrar los resultados de sus cálculos inmediatamente en el lienzo de su mapa, puede usar el botón «Ver salida» de la parte inferior de la pestaña del módulo.
 }
 \end{Tip} 
 
-\subsubsection{Working with the GRASS LOCALIZACIÓN browser} \index{GRASS!toolbox!Browser}
+\subsubsection{Trabajar con el explorador de LOCALIZACIONES de GRASS} \index{GRASS!toolbox!Browser}
 
-Another useful feature inside the GRASS Toolbox is the GRASS 
-\filename{LOCALIZACIÓN} browser. In Figure~\ref{fig:grass_mapset_browser} you 
-can see the current working \filename{LOCALIZACIÓN} with its \filename{MAPSETs}.
+Otra función útil dentro de la Caja de herramientas de GRASS es el explorador de 
+\filename{LOCALIZACIONES} de GRASS. En la Figura~\ref{fig:grass_mapset_browser} puede ver la \filename{LOCALIZACIÓN} actual de trabajo con sus \filename{DIRECTORIOS DE MAPAS}.
 
-In the left browser windows you can browse through all \filename{MAPSETs} 
-inside the current \filename{LOCALIZACIÓN}. The right browser window shows some 
-meta information for selected raster or vector layers, e.g. resolution, 
-bounding box, data source, connected attribute table for vector data and a 
-command history.
+En la ventana de la izquierda del explorador puede navegar por todos sus \filename{DIRECTORIOS DE MAPAS} 
+dentro de la \filename{LOCALIZACIÓN} actual. La parte derecha de la ventana del explorador muestra alguna metainformación 
+de las capas ráster o vectoriales seleccionadas, por ejemplo la resolución, cuadro delimitador, fuente de datos, tabla 
+de atributos conectada para datos vectoriales y un historial de órdenes.
 
 \begin{figure}[h]
  \begin{center}
- \caption{GRASS LOCALIZACIÓN browser \nixcaption}\label{fig:grass_mapset_browser}
+ \caption{Explorador de LOCALIZACIONES de GRASS \nixcaption}\label{fig:grass_mapset_browser}
  \includegraphics[clip=true,width=10cm]{grass_mapset_browser}
  \end{center}
 \end{figure}
 
-The toolbar inside the \tab{Browser} tab offers following tools to manage 
-the selected \filename{LOCALIZACIÓN}:
+La barra de herramientas que hay dentro de la pestaña \tab{Explorador} la proporciona las siguientes herramientas para administrar la \filename{LOCALIZACIÓN} seleccionada:
 
 \begin{itemize}
-\item \toolboxtwo{grass_add_map}{Add selected map to canvas}
-\item \toolboxtwo{grass_copy_map}{Copy selected map}
-\item \toolboxtwo{grass_rename_map}{Rename selected map}
-\item \toolboxtwo{grass_delete_map}{Delete selected map}
-\item \toolboxtwo{grass_set_region}{Set current region to selected map}
-\item \toolboxtwo{grass_refresh}{Refresh browser window}
+\item \toolboxtwo{grass_add_map}{Añadir el mapa seleccionado a la vista del mapa}
+\item \toolboxtwo{grass_copy_map}{Copiar el mapa seleccionado}
+\item \toolboxtwo{grass_rename_map}{Cambiar el nombre al mapa seleccionado}
+\item \toolboxtwo{grass_delete_map}{Borrar el mapa seleccionado}
+\item \toolboxtwo{grass_set_region}{Establecer la región actual al mapa seleccionado}
+\item \toolboxtwo{grass_refresh}{Actualizar la ventana del explorador}
 \end{itemize}
 
-The \toolboxtwo{grass_rename_map}{Rename selected map} and 
-\toolboxtwo{grass_delete_map}{Delete selected map} only work with maps inside 
-your currently selected \filename{DIRECTORIO DE MAPAS}. All other tools also work with 
-raster and vector layers in another \filename{DIRECTORIO DE MAPAS}.
+\toolboxtwo{grass_rename_map}{Cambiar el nombre al mapa seleccionado} y 
+\toolboxtwo{grass_delete_map}{Borrar el mapa seleccionado} 
+sólo funcionan con mapas que estén dentro de su \filename{DIRECTORIO DE MAPAS} actualmente seleccionado. Todas las 
+demás herramientas también funcionan con capas ráster y vectoriales de otros \filename{DIRECTORIOS DE MAPAS}.
 
-\subsubsection{Customizing the GRASS Toolbox} \index{GRASS!toolbox!customize}
+\subsubsection{Personalizar la Caja de herramientas de GRASS} \index{GRASS!toolbox!customize}
 \label{sec:toolbox-customizing}
 
-Nearly all GRASS modules can be added to the GRASS toolbox. A XML 
-interface is provided to parse the pretty simple XML files which configures 
-the modules appearance and parameters inside the toolbox.
+Casi todos los módulos de GRASS se pueden añadir a la caja de herramientas de GRASS. Se proporciona una interfaz XML para 
+analizar los sencillos archivos XML que configuran el aspecto y los parámetros de los módulos dentro de la caja de herramientas. 
 
-A sample XML file for generating the module \usertext{v.buffer} (v.buffer.qgm) 
-looks like this:
+Un ejemplo de archivo XML para generar el módulo \usertext{v.buffer} (v.buffer.qgm) 
+tiene este aspecto:
 \begin{verbatim}
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE qgisgrassmodule SYSTEM "http://mrcc.com/qgisgrassmodule.dtd">
@@ -593,8 +549,8 @@ looks like this:
 </qgisgrassmodule>
 \end{verbatim}
 
-The parser reads this definition and creates a new tab inside the toolbox 
-when you select the module. A more detailed description for adding new 
-modules, changing the modules group, etc. can be found on the QGIS wiki at \\
+El analizador lee esta definición y crea una pestaña nueva dentro de la caja de herramientas cuando selecciona el 
+módulo. Se puede encontrar una descripción más detallada sobre cómo añadir nuevos módulos, cambiar los grupos de 
+módulos, etc. en el wiki de QGIS en \\
 \url{http://wiki.qgis.org/qgiswiki/Adding\_New\_Tools\_to\_the\_GRASS\_Toolbox}.
 
