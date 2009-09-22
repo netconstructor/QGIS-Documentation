@@ -1,262 +1,244 @@
 % vim:autoindent:set textwidth=78:
 
-\section{Print Composer}\label{label_printcomposer}
+\section{Diseñador de impresión}\label{label_printcomposer}
 
 % when the revision of a section has been finalized, 
 % comment out the following line:
 % \updatedisclaimer
 
-The print composer provides growing layout and printing
-capabilities. It allows you to add elements such as the QGIS map canvas, 
-legend, scalebar, images, and text labels. You can size, group 
-align and position each element and adjust the properties to create your
-layout. The layout can be printed (also to Postscript and PDF), exported to
-image formats or to SVG \footnote{Export to SVG supported, but it
-is not working properly with some recent QT4 versions. You should try and
-check individual on your system} and you can save the layout as template and
-load it again in another session. See a list of tools in
-table~\ref{tab:printcomposer_tools}:
+El diseñador de impresión provee crecientes capacidades de diseño e impresión. Permite agregar elementos tales como el map canvas de QGIS, 
+leyenda, barra de escala, imágenes, y etiquetas de texto. Puede ajustar tamaño, agrupar, alinear y posicionar cada elemento y ajustar sus propiedades para crear su diseño. El diseño puede ser impreso (también a Postscript y PDF), exportado a formatos de imagen, o a SVG \footnote{Exportar a SVG es soportado, pero no está trabajando apropiadamente con algunas versiones recientes de QT4. Debería intentar y verificar individualmente en su sistema} y puede almacenar el diseño como una plantilla y cargarla nuevamente en otra sesión. Vea una lista de herramientas en la tabla~\ref{tab:printcomposer_tools}:
 
 \begin{table}[h]\index{Print composer!tools}
 \centering
-\caption{Print Composer Tools}\label{tab:printcomposer_tools}\medskip
+\caption{Herramientas del diseñador de impresión}\label{tab:printcomposer_tools}\medskip
  \begin{tabular}{|l|p{6.9cm}|l|p{6.9cm}|}
- \hline \textbf{Icon} & \textbf{Purpose} & \textbf{Icon} &
- \textbf{Purpose} \\
+ \hline \textbf{Ícono} & \textbf{Propósito} & \textbf{Ícono} &
+ \textbf{Propósito} \\
  \hline \includegraphics[width=0.7cm]{mActionFolder}
- & Load from template &
- \includegraphics[width=0.7cm]{mActionFileSaveAs} & Save as template \\
+ & Cargar desde plantilla &
+ \includegraphics[width=0.7cm]{mActionFileSaveAs} & Guardar como plantilla \\
  \hline \includegraphics[width=0.7cm]{mActionExportMapServer}
- & Export to an image format & 
- \includegraphics[width=0.7cm]{mActionSaveAsSVG} & Export print composition 
- to SVG \\
- \hline \includegraphics[width=0.7cm]{mActionFilePrint} & Print or 
- export as PDF or Postscript &
- \includegraphics[width=0.7cm]{mActionZoomFullExtent} & Zoom to
- full extend \\
- \hline \includegraphics[width=0.7cm]{mActionZoomIn} & Zoom in &
- \includegraphics[width=0.7cm]{mActionZoomOut} & Zoom out \\
- \hline \includegraphics[width=0.7cm]{mActionDraw} & Refresh 
- view &
- \includegraphics[width=0.7cm]{mActionAddRasterLayer} & Add 
- new map from QGIS map canvas \\
- \hline \includegraphics[width=0.7cm]{mActionSaveMapAsImage} & Add Image to 
- print composition &
- \includegraphics[width=0.7cm]{mActionLabel} & Add label to print composition \\
- \hline \includegraphics[width=0.7cm]{mActionAddLegend} & Add new legend to 
- print composition & 
- \includegraphics[width=0.7cm]{mActionScaleBar} & Add new scalebar to print
- composition\\
- \hline \includegraphics[width=0.7cm]{mActionSelectPan} & Select/Move item in 
- print composition &
- \includegraphics[width=0.7cm]{mActionMoveItemContent} & Move content within
- an item \\
- \hline \includegraphics[width=0.7cm]{mActionGroupItems} & Group items of 
- print composition & 
- \includegraphics[width=0.7cm]{mActionUngroupItems} & Ungroup items of print 
- composition \\
- \hline \includegraphics[width=0.7cm]{mActionRaiseItems} & Raise selected
- items  &
- \includegraphics[width=0.7cm]{mActionLowerItems} & Lower selected items \\
- \hline \includegraphics[width=0.7cm]{mActionMoveItemsToTop} & Move selected
- items to top & 
- \includegraphics[width=0.7cm]{mActionMoveItemsToBottom} & Move selected
- items to bottom \\
- \hline \includegraphics[width=0.7cm]{mActionAlignLeft} & Align selected 
- items left &
- \includegraphics[width=0.7cm]{mActionAlignRight} & Align selected items 
- right \\
- \hline \includegraphics[width=0.7cm]{mActionAlignHCenter} & Align selected 
- items center &
- \includegraphics[width=0.7cm]{mActionAlignVCenter} & Align selected items
- center vertical \\
- \hline \includegraphics[width=0.7cm]{mActionAlignTop} & Align selected
- items top &
- \includegraphics[width=0.7cm]{mActionAlignBottom} & Align selected
- items bottom \\
+ & Exportar a un formato imagen & 
+ \includegraphics[width=0.7cm]{mActionSaveAsSVG} & Exportar diseño de impresión 
+ a SVG \\
+ \hline \includegraphics[width=0.7cm]{mActionFilePrint} & Imprimir o 
+ exportar como PDF o Postscript &
+ \includegraphics[width=0.7cm]{mActionZoomFullExtent} & Zoom a
+ la extensión completa \\
+ \hline \includegraphics[width=0.7cm]{mActionZoomIn} & Acercar &
+ \includegraphics[width=0.7cm]{mActionZoomOut} & Alejar \\
+ \hline \includegraphics[width=0.7cm]{mActionDraw} & Refrescar 
+ vista &
+ \includegraphics[width=0.7cm]{mActionAddRasterLayer} & Agregar 
+ nuevo mapa desde el canvas de mapa de QGIS  \\
+ \hline \includegraphics[width=0.7cm]{mActionSaveMapAsImage} & Agregar imágenes a  
+ diseño de impresión &
+ \includegraphics[width=0.7cm]{mActionLabel} & Agregar etiqueta a diseño de impresión \\
+ \hline \includegraphics[width=0.7cm]{mActionAddLegend} & Agregar nueva leyenda a 
+ diseño de impresión & 
+ \includegraphics[width=0.7cm]{mActionScaleBar} & Agregar nueva barra de escala al diseño de impresión \\
+ \hline \includegraphics[width=0.7cm]{mActionSelectPan} & Seleccionar/Mover elemento en 
+ diseño de impresión &
+ \includegraphics[width=0.7cm]{mActionMoveItemContent} & Mover contenido dentro
+ de un elemento \\
+ \hline \includegraphics[width=0.7cm]{mActionGroupItems} & Agrupar elementos de diseño 
+ de impresión & 
+ \includegraphics[width=0.7cm]{mActionUngroupItems} & Desagrupar elementos de diseño 
+ de impresión \\
+ \hline \includegraphics[width=0.7cm]{mActionRaiseItems} & Elevar elementos
+ seleccionados  &
+ \includegraphics[width=0.7cm]{mActionLowerItems} & Bajar elementos seleccionados \\
+ \hline \includegraphics[width=0.7cm]{mActionMoveItemsToTop} & Mover elementos
+ seleccionados al frente & 
+ \includegraphics[width=0.7cm]{mActionMoveItemsToBottom} & Mover elementos
+ seleccionados al fondo \\
+ \hline \includegraphics[width=0.7cm]{mActionAlignLeft} & Alinear elementos 
+ seleccionados a la izquierda &
+ \includegraphics[width=0.7cm]{mActionAlignRight} & Alinear elementos seleccionados 
+ a la derecha \\
+ \hline \includegraphics[width=0.7cm]{mActionAlignHCenter} & Alinear elementos 
+ seleccionados al centro &
+ \includegraphics[width=0.7cm]{mActionAlignVCenter} & Alinear elementos seleccionados
+ al centro vertical \\
+ \hline \includegraphics[width=0.7cm]{mActionAlignTop} & Alinear elementos
+ seleccionados a arriba &
+ \includegraphics[width=0.7cm]{mActionAlignBottom} & Alinear elementos
+ seleccionados a abajo \\
 \hline
 \end{tabular}
 \end{table}
 
-To access the print composer, click on the \toolbtntwo{mActionFilePrint}{Print}
-button in the toolbar or choose \mainmenuopt{File} > \dropmenuopttwo{mActionFilePrint}{Print Composer}.
+Para acceder al diseñador de impresión, haga clic en el botón \toolbtntwo{mActionFilePrint}{Imprimir}
+en la barra de herramientas elija \mainmenuopt{Archivo} > \dropmenuopttwo{mActionFilePrint}{Diseñador de impresión}.
 
-\subsection{Using Print Composer}\label{label_useprintcomposer} 
+\subsection{Usando el Diseñador de Impresión}\label{label_useprintcomposer} 
 
-Before you start to work with the print composer, you need to load some 
-raster and vector layers in the QGIS map canvas and adapt their properties 
-to suite your own convinience. After everything is rendered and symbolized to 
-your liking you click the \toolbtntwo{mActionFilePrint}{Print Composer} icon.
+Antes que inicie a trabajar con el diseñador de impresión, necesita cargar algunas 
+capas raster y vectoriales en el canvas de mapa de QGIS y adaptar sus propiedades 
+para ajustarlas a su conveniencia. Después que todo es presentado y simbolizado a 
+a su gusto haga clic en el ícono \toolbtntwo{mActionFilePrint}{Diseñador de impresión}.
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{Print Composer \nixcaption}\label{fig:print_composer_blank}\smallskip
+   \caption{Diseñador de Impresión \nixcaption}\label{fig:print_composer_blank}\smallskip
    \includegraphics[clip=true, width=\textwidth]{print_composer_blank}
 \end{center}  
 \end{figure}
 
-Opening the print composer provides you with a blank canvas to which you can 
-add the current QGIS map canvas, legend, scalebar, images and text. Figure
-\ref{fig:print_composer_blank} shows the initial view of the print composer 
-with an activated \checkbox{Snap to grid} modus but before any elements are
-added. The print composer provides two tabs:
+Al abrir el diseñador de impresión este le provee un canvas en blanco al cual le puede
+agregar el canvas de mapa de QGIS actual, leyenda, barra de escala, imágenes y texto. La figura
+\ref{fig:print_composer_blank} muestra la vista inicial del diseñador de impresión 
+con un modo activado de \checkbox{Autoensamblado al grid} pero antes de que cualquier elemento haya
+sido agregado. El diseñador de impresión provee dos pestañas:
 
 \begin{itemize}
-\item The \tab{General} tab allows you to set paper size, orientation, the
-print quality for the output file in dpi and to activate snapping to a grid
-of a defined resolution. Please note, the \checkbox{Snap to grid} feature
-only works, if you define a grid resolution > 0. Furthermore you can also
-activate the \checkbox{Print as raster} checkbox. This means all elements
-will be rastered before printing or saving as Postscript of PDF.
-\item The \tab{Item} tab displays the properties for the selected map element. 
-Click the \toolbtntwo{mActionSelectPan}{Select/Move item} 
-icon to select an element (e.g. legend, scalebar or label) on the canvas. 
-Then click the Item tab and customize the settings for the selected 
-element.
+\item La pestaña \tab{General} le permite establecer el tamaño de papel, orientación, la
+calidad de impresión para el archivo de salida en dpi y para activar el autoensamblado al grid
+de una resolución definida. Note por favor, que la característica \checkbox{Autoensamblar a grid}
+solo trabaja, si define una resolución de grid > 0. Además también puede
+activar la caja de verificación \checkbox{Imprimir como raster}. Esto significa que todos los elementos
+serán rasterizados antes de imprimir o guardar como Postscript o PDF.
+\item La pestaña \tab{elemento} muestra las propiedades para el elemento de mapa seleccionado. 
+Haga clic el ícono \toolbtntwo{mActionSelectPan}{Seleccionar/Mover elemento} 
+para seleccionar un elemento (ej. leyenda, barra de escala o etiqueta) en el canvas. 
+Entonces haga clic en la pestaña elemento y personalice las configuraciones para el elemento seleccionado.
 \end{itemize}
 
-You can add multiple elements to the composer. It is also possible to have 
-more than one map view or legend or scalebar in the print composer canvas. 
-Each element has its own properties and in the case of the map, its own 
-extent.
+Puede agregar múltiples elementos al diseñador. También es posible tener 
+mas de una vista del mapa, leyenda o barra de escala en al canvas del diseñador de impresión. 
+Cada elemento tiene sus propias propiedades y en el caso del mapa, su propia 
+extensión.
 
-\subsubsection{Adding a current QGIS map canvas to the Print Composer}
+\subsubsection{Añadir el canvas del mapas actual de QGIS al diseñador de impresión}
 
-To add the QGIS map canvas, click on the \toolbtntwo{mActionAddRasterLayer}{Add new map 
-from QGIS map canvas} button in the print composer toolbar and drag a 
-rectangle on the composer canvas with the left mouse button to add the map. 
-You will see an empty box with a \textit{"Map will be printed here"} message.
-To display the current map, you can choose between three different modes in
-the map \tab{Item} tab:
+Para añadir el canvas de Qgis al mapa, haga clic en el botón \toolbtntwo{mActionAddRasterLayer}{Añadir nuevo mapa desde el canvas de Qgis} en la barra del diseñador de impresión y arrastre un 
+rectángulo en el canvas del diseñador con el botón izquierdo del ratón para agregarlo al mapa. 
+Usted verá una caja vacía con un mensaje \textit{"El mapa será impreso aquí"}.
+Para mostrar el mapa actual, puede elegir entre tres modos diferentes en el mapas en la pestaña \tab{Elemento}:
 
 \begin{itemize}
-\item \selectstring{Preview}{Rectangle} is the default setting. It only
-displays an empty box with a message \textit{"Map will be printed here"}. 
-\item \selectstring{Preview}{Cache} renders the map in the current screen
-resolution. If case you zoom in or out the composer window, the map is not
-rendered again but the image will be scaled.
-\item \selectstring{Preview}{Render} means, that if you zoom in or out the
-composer window, the map will be rendered again, but for space reasons, only
-up to a maximum resolution.
+\item \selectstring{Vista previa}{Rectángulo} es la configuración predeterminada. Solo muestra
+una caja vacía con un mensaje \textit{"El mapa será impreso aquí"}. 
+\item \selectstring{Vista previa}{Cache} muestra el mapa en la resolución actual de la ventana. En caso que se acerque o aleje en la ventana del diseñador, el mapas no es visualizado nuevamente
+pero la imagen será escalada.
+\item \selectstring{Vista previa}{Representar} significa, que si acerca o aleja la 
+ventana del diseñador, el mapa será representado nuevamente, pero por razones de espacio, solo
+hasta una resolución máxima.
 \end{itemize}
 
 \begin{figure}[ht]
 \centering
-\caption{Print Composer map item tab content \nixcaption}\label{fig:print_composer_map_item}
-   \subfigure[Width, height and extend dialog] {\label{subfig:print_composer_map_item1}\includegraphics[clip=true, width=0.4\textwidth]{print_composer_map_item1}}\goodgap
+\caption{Diseñador de impresión, contenido de mapa de la pestaña elemento \nixcaption}\label{fig:print_composer_map_item}
+   \subfigure[Ancho , alto y diálogo de extensión] {\label{subfig:print_composer_map_item1}\includegraphics[clip=true, width=0.4\textwidth]{print_composer_map_item1}}\goodgap
    \subfigure[Properties dialog] {\label{subfig:print_composer_map_item2}\includegraphics[clip=true, width=0.4\textwidth]{print_composer_map_item2}}
 \end{figure}
 
-You can resize the map later by clicking on the \toolbtntwo{mActionSelectPan}{Select/Move item} 
-button, selecting the element, and dragging one of the blue handles in the corner of the map. With the 
-map selected, you can now adapt more properties in the map \tab{Item} tab. Resize the map 
-item specifying the width and height or the scale. Define the map extend using Y and 
-X min/max values or clicking the \button{set to map canvas extend} button. Update the 
-map preview and select, whether to see a preview from cache or an empty rectangle with 
-a \textit{"Map will be printed here"} message. Define colors and outline width for the 
-element frame, set a background color and opacity for the map canvas. And you can also 
-select or unselect to display an element frame with the \checkbox{frame} checkbox 
-(see Figure~\ref{fig:print_composer_map_item}). If you change the view on the QGIS 
-map canvas by zooming or panning or changing vector or raster properties, you can 
-update the print composer view selecting the map element in the print composer and clicking 
-the \button{Update Preview} button in the map \tab{Item} tab 
-(see Figure~\ref{fig:print_composer_map_item}). 
+Puede cambiar el tamaño del mapa haciendo clic en el botón \toolbtntwo{mActionSelectPan}{Seleccionar/Mover elemento}, seleccionando el elemento, y arrastrando una de las asas azules en las esquinas del mapa. Con el mapa seleccionado, ahora puede adaptar mas propiedades en mapa de la pestaña \tab{Elemento}. Cambiar el tamaño del elemento mapa especificando el ancho, altura o escala. Definir la extensión del mapa usando valores Y y 
+X min/max o haciendo clic en el botón \button{establecer extensión del canvas del mapas}. Actualizar la 
+vista previa del mapa y seleccionar, entre ver desde cache o un rectángulo  con un mensaje 
+\textit{" El mapa será impreso aquí"}. Definir colores ancho del contorno para el elemento 
+marco, establecer un color de fondo y opacidad para el canvas del mapa. También puede seleccionar 
+o deseleccionar para mostrar un elemento marco con la caja de selección \checkbox{marco}  
+(vea la figura ~\ref{fig:print_composer_map_item}). Si cambia la vista en el canvas del mapa de QGIS 
+haciendo zoom, moviendose o cambiando las propiedades de vectores o raster, puede actualizar  
+el diseñador de impresión seleccionando el elemento mapa y haciendo clic 
+en el botón \button{Actualizar vista previa} en el elemento mapa de la pestaña \tab{Elemento} 
+(vea la figura~\ref{fig:print_composer_map_item}). 
 
-To move layers within the map element select the map element, click 
-the \toolbtntwo{mActionMoveItemContent}{Move item content} icon 
-and move the layers within the map element frame with the left mouse button.
+Para mover capas dentro del elemento mapa seleccione el elemento mapa, haciendo clic 
+en el ícono \toolbtntwo{mActionMoveItemContent}{Mover contenido del elemento} 
+y mueva las capas dentro del elemento frame del mapa con el botón izquierdo del ratón.
 
-\subsubsection{Navigation tools}
+\subsubsection{Herramientas de navegación}
 
-For map navigation the print composer provides 4 general tools:
+Para la navegación en el mapa el diseñador de impresión provee 4 herramientas generales:
 
 \begin{itemize}
-\item \toolbtntwo{mActionZoomOut}{Zoom in},
-\item \toolbtntwo{mActionZoomOut}{Zoom out},
-\item \toolbtntwo{mActionZoomFullExtent}{Zoom to full extend} and
-\item \toolbtntwo{mActionDraw}{Refresh the view}, if you find the view in an
-inconsistent state.
+\item \toolbtntwo{mActionZoomOut}{Acercar},
+\item \toolbtntwo{mActionZoomOut}{Alejar},
+\item \toolbtntwo{mActionZoomFullExtent}{Zoom a extensión completa} y
+\item \toolbtntwo{mActionDraw}{Refrescar la vista}, si encuentra la vista en un estado inconsistente.
 \end{itemize}
 
 
-\subsubsection{Adding other elements to the Print Composer} 
+\subsubsection{Añadir otros elementos al diseñador de impresión} 
 
-Besides adding a current QGIS map canvas to the Print Composer, it is also possible 
-to add, position, move and customize legend, scalebar, images and label elements.
+Además de agregar el canvas del mapa actual al diseñador de impresión, también es posible 
+agregar, posicionar, mover y personalizar leyenda, barra de escala, imágenes y etiquetas.
 
-\minisec{Label and images}
+\minisec{Etiquetas e imágenes}
 
-To add a label or an image, click the \toolbtntwo{mActionLabel}{Add label} or 
-\toolbtntwo{mActionSaveMapAsImage}{Add image} icon, place the element with
-the left mouse button on the print composer canvas and position and customize
-their appearance in the \tab{Item} tab. 
-
-\begin{figure}[ht]
-\centering
-\caption{Customize print composer label and images \nixcaption}\label{fig:print_composer_tab2}
-   \subfigure[label item tab] {\label{subfig:print_composer_label_item}\includegraphics[clip=true, width=0.4\textwidth]{print_composer_label_item}}\goodgap
-   \subfigure[image item tab] {\label{subfig:print_composer_image_item}\includegraphics[clip=true, width=0.4\textwidth]{print_composer_image_item}}
-\end{figure}
-
-\minisec{Legend and scalebar}
-
-To add a map legend or a scalebar, click the \toolbtntwo{mActionAddLegend}{Add new legend} or 
-\toolbtntwo{mActionScaleBar}{Add new scalebar} icon, place the element with the left 
-mouse button on the print composer canvas and position and customize their appearance in the \tab{Item} tab.
+Para agregar etiquetas a una imagen, haga clic en el ícono \toolbtntwo{mActionLabel}{Añadir etiqueta} o 
+\toolbtntwo{mActionSaveMapAsImage}{Añadir imagen}, colocar un elemento con
+el botón en el canvas del diseñador de impresión, posicionar y personalizar
+su apariencia en la pestaña \tab{Elemento}. 
 
 \begin{figure}[ht]
 \centering
-\caption{Customize print composer legend and scalebar \nixcaption}\label{fig:print_composer_tab1}
-   \subfigure[legend item tab] {\label{subfig:print_composer_legend_item}\includegraphics[clip=true, width=0.4\textwidth]{print_composer_legend_item}}\goodgap
-   \subfigure[scalebar item tab] {\label{subfig:print_composer_scalebar_item}\includegraphics[clip=true, width=0.4\textwidth]{print_composer_scalebar_item}}
+\caption{Personalizar etiquetas e imágenes del diseñador de impresión \nixcaption}\label{fig:print_composer_tab2}
+   \subfigure[etiqueta pestaña elemento] {\label{subfig:print_composer_label_item}\includegraphics[clip=true, width=0.4\textwidth]{print_composer_label_item}}\goodgap
+   \subfigure[imagen pestaña elemento] {\label{subfig:print_composer_image_item}\includegraphics[clip=true, width=0.4\textwidth]{print_composer_image_item}}
 \end{figure}
 
-\subsubsection{Raise, lower and align elements}
+\minisec{Leyenda y barra de escala}
 
-Raise or lower functionalities for elements are inside the
-\toolbtntwo{mActionRaiseItems}{Raise selected items} pulldown menu. Choose an
-element on the print composer canvas and select the matching functionality to
-raise or lower the selected element compared to the other elements (see
-table~\ref{tab:printcomposer_tools}). 
+Para añadir una leyenda de mapa o una barra de escala, haga clic en \toolbtntwo{mActionAddLegend}{Añadir nueva leyenda} o 
+\toolbtntwo{mActionScaleBar}{Añadir nueva barra de escala}, colocar el elemento con el botón izquierdo del ratón en el canvas del diseñador de impresión, posicionar y personalizar su apariencia en la pestaña \tab{Elemento}.
 
-There are several alignment functionalities available within the
-\toolbtntwo{mActionAlignLeft}{Align selected items} pulldown menu (see
-table~\ref{tab:printcomposer_tools}). To use an alignment functionality , you
-first select some elements and then click on the matching alignment icon. All
-selected will then be aligned within to their common bounding box.       
+\begin{figure}[ht]
+\centering
+\caption{Personalizar la leyenda y barra de escala del diseñador de impresión \nixcaption}\label{fig:print_composer_tab1}
+   \subfigure[leyenda pestaña elemento] {\label{subfig:print_composer_legend_item}\includegraphics[clip=true, width=0.4\textwidth]{print_composer_legend_item}}\goodgap
+   \subfigure[barra de escala pestaña elemento] {\label{subfig:print_composer_scalebar_item}\includegraphics[clip=true, width=0.4\textwidth]{print_composer_scalebar_item}}
+\end{figure}
 
-\subsubsection{Creating Output}
+\subsubsection{Levantar, bajar y alinear elementos}
 
-Figure \ref{fig:print_composer_complete} shows the print composer with an example 
-print layout including each type of map element described in the sections above.
+Las funcionalidades de levantar y bajar elementos están dentro del menú desplegable 
+\toolbtntwo{mActionRaiseItems}{Levantar elementos seleccionados}. Elija un elemento
+del canvas del diseñador de impresión y seleccione la funcionalidad coincidente a
+levantar o bajar el elemento seleccionado comparado a los otros elementos (vea la
+tabla~\ref{tab:printcomposer_tools}). 
+
+Hay múltiples funcionalidades de alineación disponibles dentro del menú desplegable
+\toolbtntwo{mActionAlignLeft}{Alinear elementos seleccionados} (vea la
+tabla~\ref{tab:printcomposer_tools}). Para usar la funcionalidad de alineación , primero
+seleccione algunos elementos y entonces haga clic en el ícono de alineación que coincida. Todo
+lo seleccionado será entonces alineado dentro de un cuadro delimitador común.       
+
+\subsubsection{Creando la salida}
+
+La figura \ref{fig:print_composer_complete} muestra la salida del diseñador de impresión con un ejemplo 
+de diseño de impresión incluyendo cada tipo de elemento de mapa descrito en las secciones de arriba.
 
 \begin{figure}[h]
    \begin{center}
-   \caption{Print Composer with map view, legend, scalebar, and text added \nixcaption}
+   \caption{Diseñador de impresión con vista de mapa, leyenda, barra de escala, y texto agregados \nixcaption}
    \label{fig:print_composer_complete}\smallskip
    \includegraphics[clip=true, width=\textwidth]{print_composer_complete}
 \end{center}  
 \end{figure}
 
-The print composer allows you to create several output formats and it is possible to 
-define the resolution (print quality) and paper size:
+El diseñador de impresión le permite crear múltiples formatos de salida y es posible definir 
+la resolución (calidad de impresión) y tamaño de papel:
 
 \begin{itemize}
-\item The \toolbtntwo{mActionFilePrint}{Print} icon allows to print the layout 
-to a connected printer or as PDF or Postscript file depending on installed printer 
-drivers.
-\item The \toolbtntwo{mActionExportMapServer}{Export as image} icon exports the 
-composer canvas in several image formats such as PNG, BPM, TIF, JPG, \dots
-\item The \toolbtntwo{mActionSaveAsSVG}{Export as SVG} icon saves the print 
-composer canvas as a SVG (Scalable Vector Graphic). \textbf{Note:} Currently the 
-SVG output is very basic. This is not a QGIS problem, but a problem of the underlaying 
-Qt library. This will hopefully be sorted out in future versions.
+\item El ícono \toolbtntwo{mActionFilePrint}{Imprimir} permite imprimir el diseño 
+a una impresora conectada o como archivo PDF o Postscript dependiendo de los controladores 
+de impresora instalados.
+\item El ícono \toolbtntwo{mActionExportMapServer}{Exportar como imagen} exporta el 
+canvas del diseñador en múltiples formatos de imágenes como PNG, BPM, TIF, JPG, \dots
+\item El ícono \toolbtntwo{mActionSaveAsSVG}{Exportar como SVG} guarda el canvas del diseñador 
+de impresión como un SVG (Gráficas Vectoriales Escalables). \textbf{Nota:} Actualmente la 
+salida SVG es muy básica. Este no es un problema de QGIS, sino un problema de la  
+librería Qt. Esto esperamos sea corregido en futuras versiones.
 \end{itemize}
 
-\subsubsection{Saving and loading a print composer layout}
+\subsubsection{Guardando y cargando una plantilla del diseñador de impresión}
 
-With the \toolbtntwo{mActionFileSaveAs}{Save as template} and
-\toolbtntwo{mActionFolder}{Load from template} icons you can save the current
-state of a print composer session as a  *.qpt template and load the template
-again in another session.
+Con los íconos \toolbtntwo{mActionFileSaveAs}{Guardar como plantilla} y
+\toolbtntwo{mActionFolder}{Cargar como plantilla} puede guardar el estado actual
+de la sesión del diseñador de impresión como una  plantilla *.qpt y cargar la plantilla
+nuevamente en otra sesión.
 
