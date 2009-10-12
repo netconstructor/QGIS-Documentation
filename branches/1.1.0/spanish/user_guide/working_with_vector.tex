@@ -1,6 +1,6 @@
 % vim:autoindent:set textwidth=78:
 
-\section{Trabajando con datos vectoriales}\label{label_workingvector}
+\section{Trabajar con datos vectoriales}\label{label_workingvector}
 \index{vector layers|(}
 
 % when the revision of a section has been finalized,
@@ -8,40 +8,40 @@
 %\updatedisclaimer
 
 
-QGIS suporta datos vectoriales en un n\'umero de formatos, incluyendo los formatos soportados por el proveedor de datos de la librer\'{\i}a OGR, tales como ESRI shapefiles,
+QGIS admite datos vectoriales en un distintos formatos, incluyendo aquellos soportados por el proveedor de datos de la biblioteca OGR, tales como archivos shape de ESRI,
 \index{shapefiles}\index{ESRI!shapefiles}\index{SHP files}
 MapInfo MIF (formato de intercambio)\index{MIF files}\index{MapInfo!MIF files}
 y MapInfo TAB (formato nativo).\index{TAB files}\index{MapInfo!TAB files}
 Puede encontrar una lista de los formatos vectoriales soportados por OGR en el Ap\'endice~\ref{appdx_ogr}.
 
-QGIS tambien soporta capas de PostGIS\index{PostGIS}\index{PostgreSQL!PostGIS} en una base de datos PostgreSQL usando el proveedor de datos PostgreSQL. El soporte para tipos de datos adicionales (ej. texto delimitado) se provee a trav\'es de proveedores de datos adicionales.\index{delimited text}
+QGIS también admite capas de PostGIS\index{PostGIS}\index{PostgreSQL!PostGIS} en una base de datos PostgreSQL usando el proveedor de datos PostgreSQL. El soporte para tipos de datos adicionales (ej. texto delimitado) se provee a trav\'es de proveedores de datos adicionales.\index{delimited text}
 
-Esta secci\'on describe como trabajar con diferentes formatos comunes:
-ESRI shapefiles, capas de PostGIS, y capas de SpatialLite. Muchas de las caracter\'{\i}sticas disponibles en QGIS trabajan de la misma forma, independientemente de la fuente de datos vectoriales.
-Esto es por dise\~no e incluyen las funciones de identificar, seleccionar, etiquetar y de atributos.
+Esta secci\'on describe cómo trabajar con diferentes formatos comunes:
+archivos shape de ESRI, capas de PostGIS y capas de SpatialLite. Muchas de las funciones disponibles en QGIS trabajan de la misma forma, independientemente de la fuente de datos vectoriales.
+Esto es así por dise\~no e incluye las funciones de identificar, seleccionar, etiquetar y de atributos.
 
-El c\'omo trabajar con vectores de GRASS se describe en la Secci\'on \ref{sec:grass}.
+La forma de trabajar con vectores de GRASS se describe en la Secci\'on \ref{sec:grass}.
 
-\subsection{ESRI Shapefiles}
+\subsection{Archivos shape de ESRI}
 \index{vector layers!ESRI shapefiles}
 \index{shapefiles}
 \index{ESRI!shapefiles}
 \index{SHP files}
 
-El formato de archivo vectorial estandar usado en QGIS es el ESRI Shapefile. El soporte se provee a trav\'es de la librer\'{\i}a OGR Simple Feature (\url{http://www.gdal.org/ogr/})
-\index{OGR}. Un shapefile actualmente consiste de m\'ultiples archivos. Los siguientes tres son requeridos:
+El formato de archivo vectorial estándar usado en QGIS es el archivos shape de ESRI. El soporte se provee a trav\'es de la biblioteca OGR Simple Feature (\url{http://www.gdal.org/ogr/})
+\index{OGR}. Un archivo shape en realidad consiste de m\'ultiples archivos. Se requieren al menos los tres siguientes:
 \index{shapefile!format}
 
 \begin{itemize}
-\item \filename{.shp} archivo que contiene las geometr\'{\i}as de las caracter\'{\i}sticas.
+\item \filename{.shp} archivo que contiene las geometr\'{\i}as del objeto espacial.
 \item \filename{.dbf} archivo que contiene los atributos en formato dBase.
 \item \filename{.shx} archivo de \'{\i}ndices.
 \end{itemize}
 
-Los shapefiles tambien pueden incluir un archivo con un sufijo \filename{.prj}, que contiene la informaci\'on de proyecci\'on. Mientras es muy \'util tener un archivo de proyecci\'on, no es obligatorio. Un conjunto de datos shapefile puede contener archivos adicionales. Para mayores detalles vea la especificaci\'on t\'ecnica de ESRI en  \url{http://www.esri.com/library/whitepapers/pdfs/shapefile.pdf}
+Los archivos shape también pueden incluir un archivo con un sufijo \filename{.prj}, que contiene la informaci\'on de la proyecci\'on. Aunque es muy \'util tener un archivo de proyecci\'on, no es obligatorio. Un conjunto de datos shape puede contener archivos adicionales. Para mayores detalles vea la especificaci\'on t\'ecnica de ESRI en  \url{http://www.esri.com/library/whitepapers/pdfs/shapefile.pdf}
 \index{shapefile!specification}.
 
-\subsubsection{Cargando un Shapefile}\label{sec:load_shapefile}
+\subsubsection{Cargar un Shapefile}\label{sec:load_shapefile}
 
 \begin{figure}[ht]
    \begin{center}
@@ -71,7 +71,7 @@ QGIS y haga clic en el bot\'on \toolbtntwo{mActionAddNonDbLayer} de la barra de 
 De los botones de selecci\'on disponibles verifique \radiobuttonon{Archivo}. Clic en \button{Explorar}. Eso traer\'a un di\'alogo de abrir archivo estandar (vea la Figura \ref{fig:openshapefile}) que permite navegar el sistema de archivos y cargar un  shapefile o cualquier otra fuente de datos soportada. 
 La caja de selecci\'on \selectstring{Ficheros de tipo}{\ldots} permite preseleccionar algunos formatos de archivos OGR soportados.
 
-Puede seleccionar tambien el tipo de codificaci\'on deseado para el shapefile.
+Puede seleccionar también el tipo de codificaci\'on deseado para el shapefile.
 
 Seleccionando un shapefile de la lista y haciendo clic en \button{Abrir} lo carga dentro de QGIS. La Figura
 \ref{fig:loadedshapefile} muestra QGIS despues de cargar el archivo \filename{alaska.shp}.
@@ -141,7 +141,7 @@ para definir que caracter\'{\i}sticas cargar desde la capa.
 \subsubsection{Creando una conexi\'on almacenada}\index{PostgreSQL!connection}\label{sec:postgis_stored}
 
 \includegraphics[width=0.7cm]{mActionAddLayer} La primera vez que utilize un conjunto de datos PostGIS, debe crear una conexi\'on a la base de datos PostgreSQL que contiene los datos. Comienze haciendo clic en el bot\'on \toolbtntwo{mActionAddLayer}{A\~nadir capa de PostGIS} de la barra de herramientas, seleccionando la opci\'on 
-\dropmenuopttwo{mActionAddLayer}{A\~nadir capa de PostGIS...} del men\'u \mainmenuopt{Capa} o presionando la tecla \keystroke{D}. Tambien puede abrir el di\'alogo \dialog{A\~nadir capa vectorial} y seleccionar \radiobuttonon{Base de datos}.
+\dropmenuopttwo{mActionAddLayer}{A\~nadir capa de PostGIS...} del men\'u \mainmenuopt{Capa} o presionando la tecla \keystroke{D}. también puede abrir el di\'alogo \dialog{A\~nadir capa vectorial} y seleccionar \radiobuttonon{Base de datos}.
 Se abrir\'a el di\'alogo \dialog{A\~nadir tabla(s) PostGIS}. Para accesar al manejador de conexiones \index{PostgreSQL!connectionmanager}, haga clic en el bot\'on \button{Nueva} para mostrar el di\'alogo  \dialog{Crear una nueva conexi\'on a PostGIS}. Los par\'ametros requeridos para una conexi\'on se muestran en la tabla \ref{tab:postgis_connection_parms}.
 
 \begin{table}[ht]\index{PostgreSQL!connection parameters}
@@ -248,7 +248,7 @@ Esto crea una capa llamada \usertext{lakes\_new} en la base de datos \usertext{g
 
 \begin{Tip}
 \caption{\textsc{Exportando conjuntos de datos desde PostGIS}\index{PostGIS!Exporting}}
-\qgistip{Al igual que la herramienta de importaci\'on \filename{shp2pgsql} hay tambien una herramienta para exportar
+\qgistip{Al igual que la herramienta de importaci\'on \filename{shp2pgsql} hay también una herramienta para exportar
 conjuntos de datos PostGIS a shapefiles: \filename{pgsql2shp}. Esta se encuentra en 
 su distribuci\'on PostGIS.} 
 \end{Tip}
@@ -351,7 +351,7 @@ la cual es un archivo con una extensi\'on \filename{.sqlite}.
 El di\'alogo \dialog{Propiedades de la capa} para una capa vectorial 
 provee informaci\'on acerca de la capa, configuraciones
 de simbolog\'{\i}a y opciones de etiquetado. Si su capa vectorial ha sido cargada desde
-un almacen de datos PostgreSQL / PostGIS, tambien puede alterar el SQL subyacente para la
+un almacen de datos PostgreSQL / PostGIS, también puede alterar el SQL subyacente para la
 capa - bien manualmente editando el SQL en la pesta\~na \tab{General} o invocando
 el di\'alogo \dialog{Constructor de consultas} en la pesta\~na \tab{General}. 
 Para accesar al di\'alogo
@@ -419,7 +419,7 @@ seleccionada tiene la posibilidad de clasificar sus caracter\'{\i}sticas del map
 
 Al menos las siguientes opciones de estilo pueden aplicarse para casi todos los presentadores:
 \begin{description}
- \item[Estilo de l\'{\i}nea exterior] - estilo de lapiz para la l\'{\i}nea exterior de las caracter\'{\i}sticas. Tambien puede establecer
+ \item[Estilo de l\'{\i}nea exterior] - estilo de lapiz para la l\'{\i}nea exterior de las caracter\'{\i}sticas. también puede establecer
  esto a 'sin lapiz'.
  \item[Color de l\'{\i}nea exterior] - color de l\'{\i}nea exterior de las caracter\'{\i}sticas.
  \item[Ancho de de l\'{\i}nea exterior] - ancho de la l\'{\i}nea exterior de las caracter\'{\i}sticas.
@@ -430,13 +430,13 @@ Al menos las siguientes opciones de estilo pueden aplicarse para casi todos los 
  \filename{*.jpeg, *.xpm, and *.png}.
 \end{description}
 
-Una vez que ha estilizado su capa tambien puede almacenar su estilo de capa a
+Una vez que ha estilizado su capa también puede almacenar su estilo de capa a
 un archivo separado (con extensi\'on \filename{*.qml}).
 Para hacer esto, use el bot\'on \button{Guardar estilo \ldots}. No hay necesidad de decir que
 \button{Cargar estilo \ldots} carga el archivo de estilo previamente almacenado.
 
 Si desea usar un estilo particular siempre que la capa es cargada, 
-use el bot\'on \button{Guardar como predeterminado} para hacer su estilo el predeterminado. Tambien, 
+use el bot\'on \button{Guardar como predeterminado} para hacer su estilo el predeterminado. también, 
 si hace cambios al estilo con los cuales no esta contento, use el bot\'on \button{Restaurar 
 Estilo Predeterminado} para revertir a su estilo predeterminado.
 
@@ -483,7 +483,7 @@ Ahora tenemos etiquetas. ?`C\'omo se ven? Probablemente muy grandes y pobremente
 marcador para los lagos.
 
 Seleccione la entrada \tab{Fuente} y use los botones  \button{Fuente} y \button{Color}
-para establecer la fuente y el color. Tambien puede cambiar el \'angulo y la posici\'on de la etiqueta de texto.
+para establecer la fuente y el color. también puede cambiar el \'angulo y la posici\'on de la etiqueta de texto.
 
 
 Para cambiar la posici\'on del texto relativo a la caracter\'{\i}stica:
@@ -522,7 +522,7 @@ Si no est\'a feliz con los resultados, afine las configuraciones y pruebe nuevam
 haciendo clic en \button{Aplicar}.
 
 Un buffer de un 1 punto parece dar un buen resultado.
-Note que puede tambien especificar un tama\~no de buffer en unidades de mapa si eso trabaja mejor
+Note que puede también especificar un tama\~no de buffer en unidades de mapa si eso trabaja mejor
 para usted.
 
 Las entradas restantes en la pestan\~a \tab{Etiquetas} permiten controlar la apariencia de las
@@ -686,19 +686,19 @@ lago. En la caja de resultados ahora ver\'a que nuestra acci\'on est\'a visible:
 \end{figure}
 
 Cuando hacemos clic en la acci\'on, se abre el Firefox y navega a la URL
-\url{http://www.google.com/search?q=Tustumena}. Tambien es posible agregar mas 
+\url{http://www.google.com/search?q=Tustumena}. también es posible agregar mas 
 campos de atributos a la acci\'on. Por lo tanto puede agregar un ``+'' al final del texto de la acci\'on, 
 seleccionar otro campo y hacer clic en el bot\'on \button{Insertar campo}. En este ejemplo no
 hay otro campo disponible que tenga sentido buscar.
 
 Puede definir m\'ultiples acciones para una capa y cada una se mostrar\'a en el
-di\'alogo \dialog{Identificar resultados}. Puede tambien invocar acciones desde la tabla de atributos
+di\'alogo \dialog{Identificar resultados}. Puede también invocar acciones desde la tabla de atributos
 seleccionando una fila y haciendo clic derecho, entonces eligiendo la acci\'on desde el men\'u
 emergente.
 
 Puede pensar en todos los tipos de usos para las acciones. Por ejemplo, si tiene una capa de puntos
 que contenga lugares de im\'agenes o fotos junto con un nombre de archivo, puede
-crear una acci\'on para lanzar un visualizador para mostrar la imagen. Tambien puede usar
+crear una acci\'on para lanzar un visualizador para mostrar la imagen. también puede usar
 acciones para lanzar reportes web para un campo de atributos o combinaci\'on de
 campos, especific\'andolos en la misma forma que hicimos con el ejemplo de b\'usqueda en Google.
 
@@ -713,7 +713,7 @@ El bot\'on \button{Conmutar modo de edici\'on} activa o desactiva este modo.
 
 \minisec{Widget de edici\'on}
 
-Dentro de la pesta\~na \tab{Atributos} tambien encontrar\'a un \texttt{Widget de edici\'on} y una columna 
+Dentro de la pesta\~na \tab{Atributos} también encontrar\'a un \texttt{Widget de edici\'on} y una columna 
 \texttt{valores}. Estas dos columnas pueden ser usadas para definir valores o un rango 
 de valores que son permitidos para agregarse a las columnas de la tabla de atributos especifica. 
 Son usadas para producir diferentes widgets de edici\'on en el di\'alogo de atributos. Estos 
@@ -725,11 +725,11 @@ n\'umeros para atributos n\'umericos).
 \item valor \'unico: una lista de atributos \'unicos de las caracter\'{\i}sticas existentes
 es generada y presentada en una caja de selecci\'on para su selecci\'on.
 \item  valor  \'unico (editable): una combinaci\'on de `l\'{\i}nea de edici\'on' y `valor \'unico'.
-El campo de edici\'on completa los valores ingresados a un valor \'unico, pero tambien permite
+El campo de edici\'on completa los valores ingresados a un valor \'unico, pero también permite
 escribir valores nuevos.
 \item mapa de valores: una caja de selecci\'on para seleccionar desde un conjunto de valores especificados en la
 columna \texttt{value} de la pesta\~na \tab{Atributos}.  Los posibles valores son 
-delimitados por un punto y coma (ej. \verb|alto;medio;bajo|). Tambien es posible
+delimitados por un punto y coma (ej. \verb|alto;medio;bajo|). también es posible
 anteponer una etiqueta a cada valor, la cual es delimitada por signo de igual (ej.
 \verb|alto=1;medio=2;bajo=3|). La etiqueta es mostrada en la caja de selecci\'on en lugar
 del valor.
@@ -828,7 +828,7 @@ bot\'on del rat\'on, en lugar de autoensamblarlo a una v\'ertice y/o segmento.
 \mainmenuopt{Configuraci\'on} > \dropmenuopttwo{mActionOptions}{Opciones}. 
 (En Mac: vaya a  \mainmenuopt{QGIS} > Preferencias, en Linux: \mainmenuopt{Edici\'on} > \dropmenuopttwo{mActionOptions}{Opciones}.)
 En la pesta\~na de \tab{Digitalizaci\'on} puede elegir entre a v\'ertice, a segmento o  a v\'ertice y
-segmento como modo de autoensamblado predeterminado. Tambien puede definir una tolerancia de
+segmento como modo de autoensamblado predeterminado. también puede definir una tolerancia de
 autoensamblado predeterminado y un radio de b\'usqeuda para edici\'on de v\'ertices. La tolerancia puede ser establecida bien
 en unidades de mapa o en pixeles.
 En nuestro proyecto de digitalizaci\'on (trabajando con el conjunto de datos de Alaska),
@@ -869,7 +869,7 @@ tolerancia de snapping general para el proyecto.
 
 Ademas de las opciones basadas en capa la pesta\~na \tab{General} en el men\'u 
 \mainmenuopt{Configuraci\'on} -> \dropmenuopttwo{mActionOptions}{Propiedades del proyecto\dots} 
-tambien provee algunas funcionalidades topol\'ogicas. 
+también provee algunas funcionalidades topol\'ogicas. 
 En el grupo de opciones Digitalizaci\'on puede \checkbox{Activar edici\'on topol\'ogica} y/o activar 
 \checkbox{Evitar intersecciones de nuevos pol\'{i}gonos}.
 
@@ -919,7 +919,7 @@ porque esta funcionalidad fue recientemente implementada en GDAL/OGR > 1.6.0
 \begin{Tip}[ht]\caption{\textsc{Guarde regularmente}}
 \qgistip{Recuerde desactivar \toolbtntwo{mActionToggleEditing}{Conmutar edici\'on} regularmente.  
 Esto le permite guardar los cambios recientes,
-y tambien confirmar que los conjuntos de datos pueden aceptar todos los cambios.
+y también confirmar que los conjuntos de datos pueden aceptar todos los cambios.
 }
 \end{Tip}
 
@@ -972,7 +972,7 @@ el cursor del rat\'on dentro del \'area de mapa presione la tecla flecha derecha
 desplazamiento al este, tecla de flecha izquierda para desplazarse al oeste, tecla de flecha hacia arriba para desplazarse al norte y tecla de flecha hacia abajo 
 para desplazarse al sur.
 
-Tambien puede usar la barra espaciadora para temporalmente causar movimientos del mouse para hacer desplazamientos 
+también puede usar la barra espaciadora para temporalmente causar movimientos del mouse para hacer desplazamientos 
 al mapa. Las teclas ReP\'ag y AvP\'ag en su teclado causar\'an que la vista se acerque 
 o aleje sin interrumpir su sesi\'on de digitalizaci\'on.
 
@@ -1112,7 +1112,7 @@ de la barra de herramientas.
 Note que, no tiene sentido eliminar el v\'ertice de un objeto espacial puntual!
 En lugar de eso elimine el objeto espacial completo.
 
-Similarment, una l\'{\i}nea de un solo v\'ertice o un pol\'{\i}gono de dos v\'ertices tambien es
+Similarment, una l\'{\i}nea de un solo v\'ertice o un pol\'{\i}gono de dos v\'ertices también es
 bastante inutil y llevar\'a a resultados impredecibles en alg\'un otro lugar en
 QGIS, as\'{\i} que no haga eso.
 
@@ -1120,7 +1120,7 @@ QGIS, as\'{\i} que no haga eso.
 como hace clic con el rat\'on cerca de un objeto espacial elegible.
 Para deshacerlo, necesitara desactivar
 la edici\'on y despues descartar sus cambios.
-(Claro esto significar\'a que otros cambios sin guardar ser\'an perdidos, tambien.)
+(Claro esto significar\'a que otros cambios sin guardar ser\'an perdidos, también.)
 
 \minisec{A\~nadir Anillo}
 \index{vector layers!add!ring}
@@ -1149,7 +1149,7 @@ Las objetos espaciales seleccionados pueden ser cortados, copiados y pegados ent
 de QGIS, siempre y cuado de antemano las capas de destino han sido establecidos a  
 \toolbtntwo{mActionToggleEditing}{Conmutar edici\'on}.
 
-Los objetos espaciales pueden tambien ser pegadas a aplicaciones externas como texto:  Esto es,
+Los objetos espaciales pueden también ser pegadas a aplicaciones externas como texto:  Esto es,
 los objetos espaciales son presentadas en formato CSV con los datos de geometr\'{\i}a 
 en el formato Well-Known Text (WKT) de la OGC.
 
@@ -1204,9 +1204,9 @@ herramienta \toolbtntwo{mActionDeleteSelected}{Borrar lo Seleccionado} para elim
 pero recuerde que su capa no ha cambiado realmente hasta que pare la edici\'on y elija 
 guardar los cambios. De esta manera si comete alg\'un error, siempre puede cancelar el guardar.
 
-La herramienta \toolbtntwo{mActionEditCut}{Cortar Objetos Espaciales} en la barra de herramientas de digitalizaci\'on tambien puede
+La herramienta \toolbtntwo{mActionEditCut}{Cortar Objetos Espaciales} en la barra de herramientas de digitalizaci\'on también puede
 ser usada para eliminar objetos espaciales. Esto efectivamente elimina los objetos espaciales pero
-tambien la coloca en un lugar especial llamado ``portapapeles espacial". De esta manera cortamos el objetos espacial a eliminar. 
+también la coloca en un lugar especial llamado ``portapapeles espacial". De esta manera cortamos el objetos espacial a eliminar. 
 Podemos entonces usar la \toolbtntwo{mActionEditPaste}{Herramienta pegar} para regresarla, d\'andonos la funcionalidad de deshacer de un nivel. 
 Cortar, copiar, y pegar trabajan sobre los objetos espaciales seleccionados actualmente, 
 significando que podemos operar en mas de uno al mismo tiempo.
@@ -1275,7 +1275,7 @@ que se describe en la Secci\'on anterior \ref{sec:edit_existing_layer}.
 
 Para abrir la tabla de atributos para una capa vectorial, active la capa haciendo clic en ella en el \'area de leyenda del mapa. 
 Entonces use el men\'u  capa\mainmenuopt{Capa} del men\'u principal y elija \dropmenuopttwo{mActionOpenTable}{Abrir tabla de atributos} 
-desde el men\'u. Tambien es posible hacer clic derecho en la capa y elegir \dropmenuopttwo{mActionOpenTable}{Abrir Tabla de Atributos} 
+desde el men\'u. también es posible hacer clic derecho en la capa y elegir \dropmenuopttwo{mActionOpenTable}{Abrir Tabla de Atributos} 
 desde el men\'u desplegable. Esto abrir\'a una nueva ventana que mostrar\'a los atributos para cada objeto espacial en la capa 
 (figure \ref{fig:attributetable}).
 
@@ -1296,8 +1296,8 @@ la Secci\'on \ref{sec:select_by_query}.
 
 Para solo mostrar los registros, use la caja de selecci\'on \checkbox{Mostrar solo los registros seleccionados}.
 Usando los botones en la parte inferior izquierda  de la ventana, campos seleccionados pueden ser removidos, 
-movidos a la parte superior de la tabla, o la selecci\'on puede ser invertida. Los objetos espaciales seleccionados tambien pueden ser
-copiadas al portapapeles, que tambien puede ser hecho con \keystroke{Ctrl-C}. Puede hacer zoom 
+movidos a la parte superior de la tabla, o la selecci\'on puede ser invertida. Los objetos espaciales seleccionados también pueden ser
+copiadas al portapapeles, que también puede ser hecho con \keystroke{Ctrl-C}. Puede hacer zoom 
 a los objetos espaciales seleccionados en el mapa. Conmutando la edici\'on permite editar valores de atributos. 
 
 \subsection{Constructor de consultas}\label{sec:query_builder}
@@ -1336,7 +1336,7 @@ di\'alogo  de vectores \dialog{Propiedades de la capa} haciendo doble clic en la
 \index{query builder!PostgreSQL}
 \index{query builder!PostGIS}
 
-Con QGIS tambien es posible seleccionar objetos espaciales usando una interface similar al constructor de consultas utilizado en \ref{sec:query_builder}. En la secci\'on superior el prop\'osito del constructor de consultas es solo mostrar los objetos espaciales cumpliendo el filtro como una 'capa virtual'/subconjunto. El prop\'osito de la funci\'on seleccionar por consulta es resaltar todas los objetos espaciales que cumplan con un criterio particular. Seleccionar por consulta puede ser usado con todos los proveedores de datos.
+Con QGIS también es posible seleccionar objetos espaciales usando una interface similar al constructor de consultas utilizado en \ref{sec:query_builder}. En la secci\'on superior el prop\'osito del constructor de consultas es solo mostrar los objetos espaciales cumpliendo el filtro como una 'capa virtual'/subconjunto. El prop\'osito de la funci\'on seleccionar por consulta es resaltar todas los objetos espaciales que cumplan con un criterio particular. Seleccionar por consulta puede ser usado con todos los proveedores de datos.
 
 Para hacer una 'selecci\'on por consulta' en una capa cargada, haga clic en el bot\'on \toolbtntwo{mActionOpenTable}{Abrir tabla de atributos} para abrir la tabla de atributos de la capa. Entonces clic en el bot\'on \button{Avanzado...} en la parte inferior. Esto inicia el Constructor de Consultas que permite definir un subconjunto de una tabla y mostrarlo como se describe en la Secci\'on \ref{sec:query_builder}.
 
