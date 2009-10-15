@@ -8,11 +8,11 @@
 %\updatedisclaimer
 
 
-QGIS admite datos vectoriales en un distintos formatos, incluyendo aquellos soportados por el proveedor de datos de la biblioteca OGR, tales como archivos shape de ESRI,
+QGIS admite datos vectoriales en distintos formatos, incluyendo aquellos soportados por el proveedor de datos de la biblioteca OGR, tales como archivos shape de ESRI,
 \index{shapefiles}\index{ESRI!shapefiles}\index{SHP files}
 MapInfo MIF (formato de intercambio)\index{MIF files}\index{MapInfo!MIF files}
 y MapInfo TAB (formato nativo).\index{TAB files}\index{MapInfo!TAB files}
-Puede encontrar una lista de los formatos vectoriales soportados por OGR en el Ap\'endice~\ref{appdx_ogr}.
+Puede encontrar una lista de los formatos vectoriales admitidos por OGR en el Ap\'endice~\ref{appdx_ogr}.
 
 QGIS también admite capas de PostGIS\index{PostGIS}\index{PostgreSQL!PostGIS} en una base de datos PostgreSQL usando el proveedor de datos PostgreSQL. El soporte para tipos de datos adicionales (ej. texto delimitado) se provee a trav\'es de proveedores de datos adicionales.\index{delimited text}
 
@@ -28,8 +28,8 @@ La forma de trabajar con vectores de GRASS se describe en la Secci\'on \ref{sec:
 \index{ESRI!shapefiles}
 \index{SHP files}
 
-El formato de archivo vectorial estándar usado en QGIS es el archivos shape de ESRI. El soporte se provee a trav\'es de la biblioteca OGR Simple Feature (\url{http://www.gdal.org/ogr/})
-\index{OGR}. Un archivo shape en realidad consiste de m\'ultiples archivos. Se requieren al menos los tres siguientes:
+El formato de archivo vectorial estándar usado en QGIS es el archivo shape de ESRI. El soporte se provee a trav\'es de la biblioteca OGR Simple Feature (\url{http://www.gdal.org/ogr/})
+\index{OGR}. Un archivo shape en realidad consiste en m\'ultiples archivos. Se requieren al menos los tres siguientes:
 \index{shapefile!format}
 
 \begin{itemize}
@@ -41,63 +41,63 @@ El formato de archivo vectorial estándar usado en QGIS es el archivos shape de 
 Los archivos shape también pueden incluir un archivo con un sufijo \filename{.prj}, que contiene la informaci\'on de la proyecci\'on. Aunque es muy \'util tener un archivo de proyecci\'on, no es obligatorio. Un conjunto de datos shape puede contener archivos adicionales. Para mayores detalles vea la especificaci\'on t\'ecnica de ESRI en  \url{http://www.esri.com/library/whitepapers/pdfs/shapefile.pdf}
 \index{shapefile!specification}.
 
-\subsubsection{Cargar un Shapefile}\label{sec:load_shapefile}
+\subsubsection{Cargar un archivo shape}\label{sec:load_shapefile}
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{Di\'alogo Abrir Capa Vectorial \nixcaption}\label{fig:addvectorlayer}\smallskip
+   \caption{Di\'alogo Abrir capa vectorial \nixcaption}\label{fig:addvectorlayer}\smallskip
    \includegraphics[clip=true, width=12cm]{addvectorlayerdialog}
 \end{center} 
 \end{figure}
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{Di\'alogo Abrir una Capa Vectorial de OGR \nixcaption}\label{fig:openshapefile}\smallskip
+   \caption{Di\'alogo Abrir una capa vectorial de OGR \nixcaption}\label{fig:openshapefile}\smallskip
    \includegraphics[clip=true, width=14cm]{shapefileopendialog}
 \end{center} 
 \end{figure}
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{QGIS con un shapefile de Alaska cargado \nixcaption}\label{fig:loadedshapefile}\smallskip
+   \caption{QGIS con un archivo shape de Alaska cargado \nixcaption}\label{fig:loadedshapefile}\smallskip
    \includegraphics[clip=true, width=16cm]{shapefileloaded}
 \end{center} 
 \end{figure}
 
-\includegraphics[width=0.7cm]{mActionAddNonDbLayer} Para cargar un shapefile, inicie
-QGIS y haga clic en el bot\'on \toolbtntwo{mActionAddNonDbLayer} de la barra de herramientas{A\~nadir una capa vectorial}
-\index{shapefile!loading} o simplemente presione la tecla \keystroke{V}. Esto abrir\'a una nueva ventana (vea la Figura \ref{fig:addvectorlayer}).  
+\includegraphics[width=0.7cm]{mActionAddNonDbLayer} Para cargar un archivo shape, inicie
+QGIS y haga clic en el bot\'on \toolbtntwo{mActionAddNonDbLayer}{A\~nadir capa vectorial} de la barra de herramientas
+\index{shapefile!loading} o simplemente presione la tecla \keystroke{V}. Esto abrir\'a una nueva ventana (vea la Figura \ref{fig:addvectorlayer}).
 
-De los botones de selecci\'on disponibles verifique \radiobuttonon{Archivo}. Clic en \button{Explorar}. Eso traer\'a un di\'alogo de abrir archivo estandar (vea la Figura \ref{fig:openshapefile}) que permite navegar el sistema de archivos y cargar un  shapefile o cualquier otra fuente de datos soportada. 
+De los botones de selecci\'on disponibles marque \radiobuttonon{Archivo}. Pulse \button{Explorar}. Eso abrir\'a un di\'alogo de abrir archivo estándar (vea la Figura \ref{fig:openshapefile}) que permite navegar el sistema de archivos y cargar un archivo shape o cualquier otra fuente de datos admitida. 
 La caja de selecci\'on \selectstring{Ficheros de tipo}{\ldots} permite preseleccionar algunos formatos de archivos OGR soportados.
 
-Puede seleccionar también el tipo de codificaci\'on deseado para el shapefile.
+Puede seleccionar también el tipo de codificaci\'on deseado para el archivo shape.
 
-Seleccionando un shapefile de la lista y haciendo clic en \button{Abrir} lo carga dentro de QGIS. La Figura
-\ref{fig:loadedshapefile} muestra QGIS despues de cargar el archivo \filename{alaska.shp}.
+Seleccionando un archivo shape de la lista y haciendo clic en \button{Abrir} lo carga dentro de QGIS. La Figura
+\ref{fig:loadedshapefile} muestra QGIS después de cargar el archivo \filename{alaska.shp}.
 
 
 \begin{Tip}\caption{\textsc{Colores de la capa}}
 \qgistip{Cuando agrega una capa al mapa, se le asigna un color de manera aleatoria. Cuando se
-agrega mas de una capa al mismo tiempo, se le asigna diferentes colores a cada capa. }
+agrega más de una capa al mismo tiempo, se le asignan diferentes colores a cada capa. }
 \end{Tip}
 
-Una vez cargado, puede hacer acercamientos o alejamientos al shapefile usando las herramientas de navegaci\'on del mapa.
-Para cambiar la simbolog\'ia de la capa, abra el di\'alogo \dialog{Propiedades de la capa} haciendo doble clic en el nombre de la capa o haciendo clic derecho en el nombre de la capa en la leyenda y eligiendo \dropmenuopt{Propiedades} del men\'u emergente. Vea la  Secci\'on \ref{sec:symbology} para mas informaci\'on sobre como configurar la simbolog\'{\i}a para capas vectoriales.
+Una vez cargado, puede hacer acercamientos o alejamientos al archivo shape usando las herramientas de navegaci\'on del mapa.
+Para cambiar la simbolog\'ia de la capa, abra el di\'alogo \dialog{Propiedades de la capa} haciendo doble clic en el nombre de la capa o haciendo clic derecho en el nombre de la capa en la leyenda y eligiendo \dropmenuopt{Propiedades} del men\'u emergente. Vea la  Secci\'on \ref{sec:symbology} para más informaci\'on sobre cómo configurar la simbolog\'{\i}a de las capas vectoriales.
   
-\subsubsection{Mejorando el rendimiento}
+\subsubsection{Mejorar el rendimiento}
 
-Para mejorar el rendimiento del dibujado de un shapefile, puede crear un \'{\i}ndice espacial. Un \'{\i}ndice espacial \index{spatial index!shapefiles} mejorar\'a la velocidad en las operaciones de acercar, alejar y desplazar. Los \'{\i}ndices espaciales usados por QGIS tienen una extensi\'on \filename{.qix}.
+Para mejorar el rendimiento del dibujado de un archivo shape, puede crear un \'{\i}ndice espacial. Un \'{\i}ndice espacial \index{spatial index!shapefiles} mejorar\'a la velocidad en las operaciones de acercar, alejar y desplazar. Los \'{\i}ndices espaciales usados por QGIS tienen una extensi\'on \filename{.qix}.
 
 Use estos pasos para crear el \'{\i}ndice:
 
 \begin{itemize}
-\item Cargue un shapefile.
-\item Abra el di\'alogo \dialog{Propiedades de la capa} haciendo doble clic en el nombre del shapefile en la leyenda o haciendo clic derecho en el nombre de la capa en la leyenda y eligiendo \dropmenuopt{Propiedades} del men\'u emergente.
-\item En la pesta\~na general \tab{General} haga clic en el bot\'on \button{Crear \'Indice Espacial}.
+\item Cargue un archivo shape.
+\item Abra el di\'alogo \dialog{Propiedades de la capa} haciendo doble clic en el nombre del archivo shape en la leyenda o haciendo clic derecho en el nombre de la capa en la leyenda y eligiendo \dropmenuopt{Propiedades} del men\'u emergente.
+\item En la pesta\~na \tab{General} haga clic en el bot\'on \button{Crear \'indice espacial}.
 \end{itemize}
 
-\subsubsection{Cargando una capa de MapInfo}
+\subsubsection{Cargar una capa de MapInfo}
 \index{vector layers!MapInfo}
 
 Para cargar una capa de MapInfo, haga clic en el bot\'on  \toolbtntwo{mActionAddNonDbLayer}{A\~nadir capa vectorial}
@@ -105,7 +105,7 @@ de la barra de herramientas o presione la tecla \keystroke{V}, cambie el filtro 
 \selectstring{Ficheros de tipo}{[OGR] MapInfo (*.mif
 *.tab *.MIF *.TAB)} y seleccione la capa que desea cargar.
 
-\subsubsection{Cargando un ArcInfo Binary Coverage}
+\subsubsection{Cargar un ArcInfo Binary Coverage}
 \index{vector layers!ArcInfo Binary Coverage}
 
 Para cargar un ArcInfo binary coverage haga clic en el bot\'on  
@@ -114,7 +114,7 @@ o presione la tecla \keystroke{V} para abrir el di\'alogo
 \dialog{A\~nadir capa vectorial}.  Seleccione \radiobuttonon{Directorio}. Cambie a \selectstring {Tipo}{Arc/Ingo Binary Coverage}. 
 Navegue al directorio que contiene los archivos de coberturas y selecci\'onelo.
 
-Similarmente, puede cargar vectores basados en directorio como el formato UK National Transfer as\'{\i} como el 
+De forma similar, puede cargar vectores basados en directorio como el formato UK National Transfer, as\'{\i} como el 
 formato raw TIGER del US Census Bureau.
 
 \subsection{Capas PostGIS}
@@ -122,53 +122,53 @@ formato raw TIGER del US Census Bureau.
 \index{PostGIS!layers}
 \label{label_postgis} 
 
-Las capas de PostGIS son almacenadas en una base de datos PostgreSQL. Las ventajas de PostGIS
-son indexamiento espacial, filtrado y las capacidades de consulta que provee. Usando POstgis, funciones
-vectoriales tales como seleccionar e identificar funcionan mucho mas eficazmente que con
+Las capas de PostGIS se almacenan en una base de datos PostgreSQL. Las ventajas de PostGIS
+son indexamiento espacial, filtrado y las capacidades de consulta que provee. Usando PostGIS, funciones
+vectoriales tales como seleccionar e identificar funcionan mucho más eficazmente que con
 capas OGR en QGIS.
 
-Para usar capas de PostGIS debe de:\index{PostgreSQL!loading layers}
+Para usar capas de PostGIS debe:\index{PostgreSQL!loading layers}
 \begin{itemize}
 \item Crear una conexi\'on almacenada en QGIS a la base de datos PostgreSQL (si no ha sido
 previamente definida).\index{PostgreSQL!connection}
 \item Conectarse a la base de datos.
 \item Seleccionar la capa a agregar al mapa.
 \item Opcionalmente proveer una clausula SQL \usertext{where}
-para definir que caracter\'{\i}sticas cargar desde la capa.
+para definir qué caracter\'{\i}sticas cargar desde la capa.
 \item Cargar la capa.
 \end{itemize}
 
-\subsubsection{Creando una conexi\'on almacenada}\index{PostgreSQL!connection}\label{sec:postgis_stored}
+\subsubsection{Crear una conexi\'on almacenada}\index{PostgreSQL!connection}\label{sec:postgis_stored}
 
 \includegraphics[width=0.7cm]{mActionAddLayer} La primera vez que utilize un conjunto de datos PostGIS, debe crear una conexi\'on a la base de datos PostgreSQL que contiene los datos. Comienze haciendo clic en el bot\'on \toolbtntwo{mActionAddLayer}{A\~nadir capa de PostGIS} de la barra de herramientas, seleccionando la opci\'on 
-\dropmenuopttwo{mActionAddLayer}{A\~nadir capa de PostGIS...} del men\'u \mainmenuopt{Capa} o presionando la tecla \keystroke{D}. también puede abrir el di\'alogo \dialog{A\~nadir capa vectorial} y seleccionar \radiobuttonon{Base de datos}.
-Se abrir\'a el di\'alogo \dialog{A\~nadir tabla(s) PostGIS}. Para accesar al manejador de conexiones \index{PostgreSQL!connectionmanager}, haga clic en el bot\'on \button{Nueva} para mostrar el di\'alogo  \dialog{Crear una nueva conexi\'on a PostGIS}. Los par\'ametros requeridos para una conexi\'on se muestran en la tabla \ref{tab:postgis_connection_parms}.
+\dropmenuopttwo{mActionAddLayer}{A\~nadir capa de PostGIS...} del men\'u \mainmenuopt{Capa} o presionando la tecla \keystroke{D}. También puede abrir el di\'alogo \dialog{A\~nadir capa vectorial} y seleccionar \radiobuttonon{Base de datos}.
+Se abrir\'a el di\'alogo \dialog{A\~nadir tabla(s) PostGIS}. Para acceder al administrador de conexiones \index{PostgreSQL!connectionmanager}, haga clic en el bot\'on \button{Nueva} para mostrar el di\'alogo  \dialog{Crear una nueva conexi\'on a PostGIS}. Los par\'ametros requeridos para una conexi\'on se muestran en la tabla \ref{tab:postgis_connection_parms}.
 
 \begin{table}[ht]\index{PostgreSQL!connection parameters}
 \centering
 \caption{Par\'ametros de conexi\'on a PostGIS}\label{tab:postgis_connection_parms}\medskip
  \begin{tabular}{|l|p{5in}|}
-\hline Nombre & Un nombre para esta conexi\'on. Puede ser la misma que \textsl{Base de datos}.
+\hline Nombre & Un nombre para esta conexi\'on. Puede ser el mismo que \textsl{Base de datos}.
 \\
 \hline Servidor \index{PostgreSQL!host}
-& Nombre del servidor de bases de datos. Este debe ser un nombre de servidor que pueda ser resuelto como puediera
-ser usado para abrir una conexi\'on telnet o hacer un ping al servidor. Si la base de datos est\'a 
-en la misma computadora que QGIS, simplemente introdusca 'localhost' aqu\'{\i}. \\
+& Nombre del servidor de bases de datos. Este debe ser un nombre de servidor que pueda ser resuelto igual al que usaría
+para abrir una conexi\'on telnet o hacer un ping al servidor. Si la base de datos est\'a 
+en la misma computadora que QGIS, simplemente introduzca 'localhost' aqu\'{\i}. \\
 \hline Base de datos \index{PostgreSQL!database} & Nombre de la base de datos.  \\
 \hline Puerto \index{PostgreSQL!port}& N\'umero del puerto en el que el servidor 
-de base de datos PostgreSQL escucha. El puerto por defecto es el 5432.\\
-\hline Nombre de Usuario \index{PostgreSQL!username}& El nombre de usuario es usado para iniciar sesi\'on
-a la base de datos. \\
-\hline Contrase\~na \index{PostgreSQL!password}& Contrase\~na usada para
-\textsl{Nombre de usuario} conectarse a la base de datos.\\
+de base de datos PostgreSQL escucha. El puerto predeterminado es el 5432.\\
+\hline Nombre de usuario \index{PostgreSQL!username}& El nombre de usuario se usa para iniciar sesi\'on
+en la base de datos. \\
+\hline Contrase\~na \index{PostgreSQL!password}& Contrase\~na usada por
+\textsl{Nombre de usuario} para conectarse a la base de datos.\\
 \hline Modo SSL \index{PostgreSQL!sslmode}& Como ser\'a negociada la conexi\'on SSL con el servidor. Estas son las opciones: 
 \begin {itemize}
-\item desactivar: solo tratar una conexi\'on SSL no encriptada;
-\item permitir: tratar una conexi\'on sin SSL, si falla, intentar una conexi\'on SSL;
+\item desactivar: sólo intentar una conexi\'on SSL no encriptada;
+\item permitir: intentar una conexi\'on sin SSL, si ésto falla, intentar una conexi\'on SSL;
 \item preferir (predeterminada): intentar una conexi\'on SSL, si falla, intentar una conexi\'on no-SSL;
 \item requerir: solo intentar una conexi\'on SSL.
 \end {itemize}
-Note se puede alcanzar aumentos masivos en la velocidad de presentado de capas PostGIS desactivando SSL en el editor de conexiones. \\
+Tenga en cuenta que se pueden alcanzar aumentos masivos en la velocidad de dibujado de capas PostGIS desactivando SSL en el editor de conexiones. \\
 \hline
 \end{tabular}
 \end{table}
@@ -177,40 +177,40 @@ Opcionalmente puede activar las siguientes casillas:
 
 \begin{itemize}
 \item \checkbox{Guardar contrase\~na}
-\item \checkbox{Solo buscar en la tabla geometry\_columns}
-\item \checkbox{Solo buscar en el esquema 'public'}
+\item \checkbox{Sólo buscar en la tabla geometry\_columns}
+\item \checkbox{Sólo buscar en el esquema 'public'}
 \end{itemize}
 
-Una vez que todos los par\'ametros y opciones son establecidos, puede probar la conexi\'on haciendo clic 
-en el bot\'on \button{Probar Conexi\'on} \index{PostgreSQL!connection!testing}.
+Una vez que ha establecido todos los par\'ametros y opciones, puede probar la conexi\'on haciendo clic 
+en el bot\'on \button{Probar conexi\'on} \index{PostgreSQL!connection!testing}.
 
 \begin{Tip}\caption{\textsc{Configuraciones de Usuario y Seguridad de QGIS}}\index{settings}\index{security}
-\qgistip{Sus configuraciones personalizadas para QGIS son almacenadas en el sistema
-operativo. En \nix, las configuraciones son almacenadas en su directorio home en
-\filename{.qt/qgisrc}. En \win, las configuraciones son almacenadas en el registro. Dependiendo de su
-ambiente de computo, almacenar contrase\~nas en sus configuraciones de QGIS puede ser
+\qgistip{Sus configuración personalizada para QGIS se almacena dependiendo del sistema
+operativo. En \nix, la configuración se almacena en su directorio home en
+\filename{.qt/qgisrc}. En \win, la configuración se almacena en el registro. Dependiendo de su
+ambiente de computo, almacenar contrase\~nas en su configuración de QGIS puede ser
 un riesgo de seguridad.
 }
 \end{Tip}
 
-\subsubsection{Cargando una capa PostGIS}\index{PostgreSQL!loading layers}
+\subsubsection{Cargar una capa PostGIS}\index{PostgreSQL!loading layers}
 
-\includegraphics[width=0.7cm]{mActionAddLayer} Una vez que tiene una o mas
+\includegraphics[width=0.7cm]{mActionAddLayer} Una vez que tiene una o más
 conexiones definidas, puede cargar capas desde la base de datos PostgreSQL. Claro
 que esto requiere tener datos en PostgreSQL. Vea la secci\'on
 \ref{sec:loading_postgis_data} para una discusi\'on sobre importar datos dentro de la
 base de datos. 
 
-Para cargar una capa de PostGIS, realize los siguientes pasos:
+Para cargar una capa de PostGIS, realice los siguientes pasos:
 
 \begin{itemize}
-\item Si el di\'alogo \dialog{A\~nadir tabla(s) PostGIS} no esta abierto aun, haga clic en el bot\'on
-\toolbtntwo{mActionAddLayer}{A\~nadir Capa PostGIS}de la barra de herramientas.
+\item Si el di\'alogo \dialog{A\~nadir tabla(s) PostGIS} no esta abierto aún, haga clic en el bot\'on
+\toolbtntwo{mActionAddLayer}{A\~nadir capa PostGIS} de la barra de herramientas.
 \item Elija la conexi\'on de la lista desplegable y haga clic en \button{Conectar}.
 \item Encuentre la capa que desea agregar en la lista de capas disponibles.
 \item Seleccionela haciendo clic en ella. Puede seleccionar m\'ultiples capas presionando
 la tecla \keystroke{shift} mientras hace clic. Vea la secci\'on \ref{sec:query_builder} para
-informaci\'on sobre usar el Constructor de Consultas de PostgreSQL para definir con mas precisi\'on la capa.
+informaci\'on sobre usar el Constructor de cronsultas de PostgreSQL para definir con más precisi\'on la capa.
 \item Clic en el bot\'on \button{A\~nadir} para agregar una capa al mapa.
 \end{itemize}
 
@@ -236,45 +236,45 @@ Si no es posible encontrar una columna adecuada, QGIS no cargar\'a la capa. Si e
 
 Cuando QGIS trabaja con vistas, analiza la definici\'on de la vista y 
 
-\subsubsection{Importando datos a PostgreSQL}\label{sec:loading_postgis_data} \index{PostGIS!SPIT!importing data} \minisec{shp2pgsql}
+\subsubsection{Importar datos a PostgreSQL}\label{sec:loading_postgis_data} \index{PostGIS!SPIT!importing data} \minisec{shp2pgsql}
 Los datos pueden ser importados a PostgreSQL usando un n\'umero de m\'etodos. PostGIS
-incluye una utiler\'{\i}a llamada \filename{shp2pgsql} que puede ser usada para importar shapefiles a una base de datos PostgreSQL con PostGIS activado. Por ejemplo para importar un shapefile llamado \filename{lakes.shp} a una base de datos PostgreSQL llamada \usertext{gis\_data}, use el siguiente comando:
+incluye una utiler\'{\i}a llamada \filename{shp2pgsql} que puede ser usada para importar archivos shape a una base de datos PostgreSQL con PostGIS activado. Por ejemplo para importar un archivo shape llamado \filename{lakes.shp} a una base de datos PostgreSQL llamada \usertext{gis\_data}, use el siguiente comando:
 
 \begin{verbatim} 
   shp2pgsql -s 2964 lakes.shp lakes_new | psql gis_data
 \end{verbatim}
 
-Esto crea una capa llamada \usertext{lakes\_new} en la base de datos \usertext{gis\_data}. La nueva capa tendr\'a un identificador del sistema espacial de referencia (SRID) de 2964. Vea la secci\'on \ref{label_projections} para mas informaci\'on de sistemas de referencia espaciales y proyecciones.
+Esto crea una capa llamada \usertext{lakes\_new} en la base de datos \usertext{gis\_data}. La nueva capa tendr\'a un identificador del sistema espacial de referencia (SRID) de 2964. Vea la secci\'on \ref{label_projections} para más informaci\'on de sistemas de referencia espaciales y proyecciones.
 
 \begin{Tip}
-\caption{\textsc{Exportando conjuntos de datos desde PostGIS}\index{PostGIS!Exporting}}
+\caption{\textsc{Exportar conjuntos de datos desde PostGIS}\index{PostGIS!Exporting}}
 \qgistip{Al igual que la herramienta de importaci\'on \filename{shp2pgsql} hay también una herramienta para exportar
-conjuntos de datos PostGIS a shapefiles: \filename{pgsql2shp}. Esta se encuentra en 
+conjuntos de datos PostGIS a archivos shape: \filename{pgsql2shp}. Esta se encuentra en 
 su distribuci\'on PostGIS.} 
 \end{Tip}
 
 \minisec{SPIT Plugin}
 \includegraphics[width=0.7cm]{spiticon} QGIS viene con un complemento llamado 
 SPIT (Shapefile to PostGIS Import Tool)\index{PostGIS!SPIT}.
-SPIT puede ser usado para cargar m\'ultiples shapefiles al mismo tiempo e inluye soporte para esquemas. Para usar SPIT, abra el Manejador de Complementos del men\'u \mainmenuopt{Complementos}, verifique la caja de selecci\'on siguiente \checkbox{SPIT} y haga clic en el bot\'on \button{OK}. El \'{\i}cono de SPIT ser\'a agregado a la barra de herramientas de complementos \index{PostGIS!SPIT!loading}. 
+SPIT puede ser usado para cargar m\'ultiples archivos shape al mismo tiempo e inluye soporte para esquemas. Para usar SPIT, abra el Manejador de Complementos del men\'u \mainmenuopt{Complementos}, verifique la caja de selecci\'on siguiente \checkbox{SPIT} y haga clic en el bot\'on \button{OK}. El \'{\i}cono de SPIT ser\'a agregado a la barra de herramientas de complementos \index{PostGIS!SPIT!loading}. 
 
-Para importar un shapefile, haga clic en \'{\i}cono de la barra de herramientas \toolbtntwo{spiticon}{SPIT} para abrir el di\'alogo \dialog{SPIT - Herramienta para importar archivos shape a PostGIS}. Seleccione la base de datos PostGIS a la que desea conectarse y haga clic en el bot\'on \button{Connectar}. Ahora puede agregar uno o mas archivos a la cola haciendo clic en el bot\'on   \button{A\~nadir}. Para procesar los archivos, haga clic en el bot\'on  
-\button{OK}. El progreso de la importaci\'on as\'{i} como cualquier error/advertencia ser\'a mostrado conforme cada shapefile sea procesado.
+Para importar un archivo shape, haga clic en \'{\i}cono de la barra de herramientas \toolbtntwo{spiticon}{SPIT} para abrir el di\'alogo \dialog{SPIT - Herramienta para importar archivos shape a PostGIS}. Seleccione la base de datos PostGIS a la que desea conectarse y haga clic en el bot\'on \button{Connectar}. Ahora puede agregar uno o más archivos a la cola haciendo clic en el bot\'on   \button{A\~nadir}. Para procesar los archivos, haga clic en el bot\'on  
+\button{OK}. El progreso de la importaci\'on as\'{i} como cualquier error/advertencia ser\'a mostrado conforme cada archivo shape sea procesado.
 
-\begin{Tip}\caption{\textsc{Importando shapefiles que contienen
+\begin{Tip}\caption{\textsc{Importar archivos shape que contienen
 palabras reservadas de PostgreSQL}}\index{PostGIS!SPIT!reserved words}
-\qgistip{ Si es agregado a la cola un shapefile que contenga campos que sean palabras reservadas en la base de datos PostgreSQL se abrir\'a un di\'alogo mostrando el estado de cada campo. Puede editar los nombres de los campos \index{PostGIS!SPIT!editing field names} antes de importar y cambiar cualquier palabra reservada (o cambiar cualquier otro nombre de campo como desee). Intentar importar un shapefile con palabras reservadas como nombres de campos muy probablemente fallar\'a.}
+\qgistip{ Si es agregado a la cola un archivo shape que contenga campos que sean palabras reservadas en la base de datos PostgreSQL se abrir\'a un di\'alogo mostrando el estado de cada campo. Puede editar los nombres de los campos \index{PostGIS!SPIT!editing field names} antes de importar y cambiar cualquier palabra reservada (o cambiar cualquier otro nombre de campo como desee). Intentar importar un archivo shape con palabras reservadas como nombres de campos muy probablemente fallar\'a.}
 \end{Tip} 
 
 \minisec{ogr2ogr}
 Ademas de \filename{shp2pgsql} y \filename{SPIT} hay otra herramienta para alimentar datos espaciales al PostGIS: \filename{ogr2ogr}. Esta herramienta es parte de la instalaci\'on de GDAL.
-Para importar un shapefile a PostGIS, haga lo siguiente:
+Para importar un archivo shape a PostGIS, haga lo siguiente:
 \begin{verbatim}
   ogr2ogr -f "PostgreSQL" PG:"dbname=postgis host=myhost.de user=postgres \
   password=topsecret" alaska.shp
 \end{verbatim}
 
-Esto importar\'a un shapefile  llamado \filename{alaska.shp} dentro de la base de datos PostGIS
+Esto importar\'a un archivo shape  llamado \filename{alaska.shp} dentro de la base de datos PostGIS
 \usertext{postgis}
 usando el usuario \usertext{postgres} con la contrase\~na \usertext{topsecret} en el servidor
 \server{myhost.de}.
@@ -291,9 +291,9 @@ Si desea utilizar comandos \filename{COPY} de PostgreSQL  en lugar del predeterm
   export PG_USE_COPY=YES
 \end{verbatim}
 
-\filename{ogr2ogr} no crea \'{\i}ndices espaciales en forma predeterminada como lo hace \filename{shp2pgsl}. Necesita crearlos manualmente usando despues el comando SQL \filename{CREATE INDEX} como una paso extra (como se describe en la siguiente secci\'on \ref{label_improve}).
+\filename{ogr2ogr} no crea \'{\i}ndices espaciales en forma predeterminada como lo hace \filename{shp2pgsl}. Necesita crearlos manualmente usando después el comando SQL \filename{CREATE INDEX} como una paso extra (como se describe en la siguiente secci\'on \ref{label_improve}).
 
-\subsubsection{Mejorando el rendimiento} \label{label_improve}
+\subsubsection{Mejorar el rendimiento} \label{label_improve}
 
 Recuperar caracter\'{\i}sticas de una base de datos PostgreSQL puede consumir tiempo, especialmente si se trabaja en red. Se puede mejorar el rendimiento del dibujado de capas PostgreSQL asegurando que exista un \'{\i}ndice espacial \index{PostGIS!spatial index} en cada capa de la base de datos. PostGIS suporta la creaci\'on de \'{\i}ndices GiST (Generalized Search Tree) \index{PostGIS!spatial index!GiST} para agilizar consultas espaciales de los datos.
 
@@ -308,7 +308,7 @@ es:
 
 Note que para tablas grandes, la creaci\'on de un \'{\i}ndice puede tomar mucho tiempo. Una vez
 que el \'{\i}ndice es creado, debe realizarse un \usertext{VACUUM ANALYZE}. Vea la documentaci\'on de
-PostGIS \cite{PostGISweb} para mas informaci\'on.
+PostGIS \cite{PostGISweb} para más informaci\'on.
 
 El siguiente es un ejemplo de la creaci\'on de un \'{\i}ndice GiST:
 \begin{verbatim}
@@ -458,11 +458,11 @@ listados de campos y sus tipos de datos, son mostrados en esta pesta\~na. Esta e
 La pesta\~na \tab{Etiquetas} permite activar el etiquetado de caracter\'{\i}sticas y controlar un n\'umero de opciones
 relacionadas con las fuentes, colocaci\'on, estilo, alineaci\'on y buffering.
 
-Ilustraremos esto etiquetando el shapefile lakes de el 
+Ilustraremos esto etiquetando el archivo shape lakes de el 
 \filename{qgis\_example\_dataset}:
 
 \begin{enumerate}
-\item Cargar el shapefile \filename{alaska.shp} y el archivo GML \filename{lakes.gml} en QGIS.
+\item Cargar el archivo shape \filename{alaska.shp} y el archivo GML \filename{lakes.gml} en QGIS.
 \item Ac\'erquese un poco a su \'area favorita con alg\'un lago.
 \item Haga \filename{lakes} la capa activa.
 \item Abra el di\'alogo \dialog{Propiedades de la capa}.
@@ -501,8 +501,8 @@ en el grupo \classname{Ubicaci\'on}. Para fijar las etiquetas, elija el bot\'on 
 Las cosas estan viendose mejor, pero las etiquetas todavia est\'an muy cerca a el marcador. Para
 arreglar esto podemos usar las opciones en la entrada \tab{Posici\'on}. Aqu\'{\i} podemos agregar 
 desplazamientos en las direcciones X y Y. Agregando un desplazamiento de 5 mover\'a las etiquetas
-fuera del marcador y las har\'a mas legibles. Claro si su s\'{i}mbolo marcador
-o fuente es muy grande, mas de un desplazamiento ser\'a requerido.
+fuera del marcador y las har\'a más legibles. Claro si su s\'{i}mbolo marcador
+o fuente es muy grande, más de un desplazamiento ser\'a requerido.
 
 El \'ultimo ajuste que haremos es hacer un \tab{buffer} a las etiqueta. Esto significa
 poner un fondo alrededor de ellas para hacer que se vean mejor. Para hacer un buffer a las
@@ -540,7 +540,7 @@ correr un programa con argumentos creados a partir de los atributos de una carac
 pasando par\'ametros a una herramienta de reportes web.
 
 Las acciones son muy \'utiles frecuentemente desea correr una aplicaci\'on externa o ver
-una p\'agina web basada en uno o mas valores en su capa vectorial. Un ejemplo
+una p\'agina web basada en uno o más valores en su capa vectorial. Un ejemplo
 is realizar una b\'usqueda basada en un valor de atributo. Este concepto es usado en la  
 siguiente discusi\'on.
 
@@ -550,12 +550,12 @@ Las acciones de atributos son definidas desde el di\'alogo de vectores \dialog{P
 acci\'on, abra el di\'alogo de vectores \dialog{Propiedades de la capa} y haga clic en la
 pesta\~na \tab{Acciones}. Provea un nombre descriptivo para la acci\'on. La acci\'on por si misma
 debe contener el nombre de la aplicaci\'on que ser\'a ejecutada cuando la acci\'on es invocada.
-Puede agregar uno o mas valores de campos de atributos como argumentos
+Puede agregar uno o más valores de campos de atributos como argumentos
 a la aplicaci\'on. Cuando la acci\'on es invocada cualquier conjunto de caracteres que empiezan
 con un \% seguido del nombre de un campo ser\'an reemplazados por el valor de ese campo.
 Los caracteres especiales \%\% \index{\%\%}ser\'an reemplazados por el valor
 de el campo que fue seleccionado desde identificar resultados o tabla de atributos (vea
-Usando Acciones abajo).  Pueden ser usadas comillas dobles para agrupar texto dentro
+Usar Acciones abajo).  Pueden ser usadas comillas dobles para agrupar texto dentro
 de un solo argumento para el programa, script o comando. Las comillas dobles ser\'an ignoradas
 si est\'an precedidas por una diagonal invertida.
 
@@ -596,7 +596,7 @@ El segundo ejemplo usa la notaci\'on \%\% la cual no recae en un campo en partic
 para su valor. Cuando la acci\'on es invocada, el \%\% ser\'a reemplazado por
 el valor del campo seleccionado en identificar resultados o tabla de atributos.
 
-\minisec{Usando Acciones}\index{actions!using}\label{label_usingactions}
+\minisec{Usar Acciones}\index{actions!using}\label{label_usingactions}
 Las acciones pueden ser invocadas bien desde el di\'alogo \dialog{Identificar resultados} o el 
  di\'alogo \dialog{Tabla de atributos}. 
 (Recuerde que estos di\'alogos pueden ser abiertos haciendo clic en
@@ -626,7 +626,7 @@ una acci\'on para lograr esto:
   bash -c "echo \"%taxon_name %lat %long\" >> /tmp/species_localities.txt"
 \end{verbatim} 
 
-Despues de seleccionar algunas localidades y correr la acci\'on en cada una, al abrir
+después de seleccionar algunas localidades y correr la acci\'on en cada una, al abrir
 el archivo de salida mostrar\'a algo como esto:
 
 \begin{verbatim}
@@ -686,7 +686,7 @@ lago. En la caja de resultados ahora ver\'a que nuestra acci\'on est\'a visible:
 \end{figure}
 
 Cuando hacemos clic en la acci\'on, se abre el Firefox y navega a la URL
-\url{http://www.google.com/search?q=Tustumena}. también es posible agregar mas 
+\url{http://www.google.com/search?q=Tustumena}. también es posible agregar más 
 campos de atributos a la acci\'on. Por lo tanto puede agregar un ``+'' al final del texto de la acci\'on, 
 seleccionar otro campo y hacer clic en el bot\'on \button{Insertar campo}. En este ejemplo no
 hay otro campo disponible que tenga sentido buscar.
@@ -744,7 +744,7 @@ en un rango y precisi\'on dado.  El rango es especificado por valores m\'{\i}nim
 y un ancho de salto (ej. \verb|0;360;10|) en la columna \texttt{valores} de
 la pesta\~na \tab{Atributos}.
 \item nombre de archivo: un widget de l\'{\i}nea de edici\'on acompa\~nado de un bot\'on. Cuando se
-presiona permite seleccionar un nombre de archivo usando el di\'alogo de archivo estandar.
+presiona permite seleccionar un nombre de archivo usando el di\'alogo de archivo estándar.
 \end{itemize}
 
 \subsubsection{Pesta\~na diagrama}\label{sec:diagram}
@@ -752,7 +752,7 @@ presiona permite seleccionar un nombre de archivo usando el di\'alogo de archivo
 
 La pesta\~na \tab{Diagrama} te permite agregar un sobreposici\'on de gr\'aficos a una capa vectorial.
 Para activar esta caracter\'{\i}stica, abra el Manejador de Complementos y seleccione el complemento  
-de Sobreposici\'on de di\'agramas. Despues de esto, hay una nueva pesta\~na en el di\'alogo de vectores \dialog{Propiedades
+de Sobreposici\'on de di\'agramas. después de esto, hay una nueva pesta\~na en el di\'alogo de vectores \dialog{Propiedades
 de la capa} donde las configuraciones para los diagramas pueden ser capturadas (vea 
 la figura~\ref{fig:diagramtab}).
 
@@ -801,7 +801,7 @@ figure~\ref{fig:climatediagram} da una impresi\'on.
 
 \subsection{Edici\'on}\index{editing}
 
-QGIS suporta capacidades b\'asicas para la edici\'on de geometrias.  Antes de leer mas
+QGIS suporta capacidades b\'asicas para la edici\'on de geometrias.  Antes de leer más
 deber\'{\i}a notar que en esta etapa el soporte para edici\'on es preliminar.
 Antes de realizar cualquier edici\'on, realize siempre una copia de respaldo del conjunto de datos
 a editar. 
@@ -818,7 +818,7 @@ las geometr\'{\i}as de capas vectoriales.
 \minisec{Tolerancia de autoensamblado}
 
 Tolerancia de Autoensamblado es la distancia que QGIS usa para \usertext{buscar} el v\'ertice
-mas cercano y/o segmento al cual trata de conectarse
+más cercano y/o segmento al cual trata de conectarse
 cuando establece un nuevo v\'ertice o mueve un v\'ertice existente. Si no est\'a dentro
 de la tolerancia de autoensamblado, QGIS dejar\'a el v\'ertice donde suelte el
 bot\'on del rat\'on, en lugar de autoensamblarlo a una v\'ertice y/o segmento. 
@@ -851,7 +851,7 @@ y tolerancia en una capa (vea la Figura~\ref{fig:snappingoptions}).
 \minisec{Radio de b\'usqueda}
 
 El radio de b\'usqueda es la distancia que QGIS usa para \usertext{buscar} el v\'ertice
-mas cercano que est\'a tratando de mover cuando hace clic en el
+más cercano que est\'a tratando de mover cuando hace clic en el
 mapa. Si no est\'a dentro del radio de b\'usqueda, QGIS no encontrar\'a y seleccionar\'a
 ning\'un v\'ertice para edici\'on y mostrar\'a un molesto mensaje de advertencia.
 La tolerancia de autoensamblado y el radio de b\'usqueda pueden ser establecidos en unidades de mapa o pixeles, de esta manera puede
@@ -898,7 +898,7 @@ para evitar editar accidentalmente una capa si hay un dezlis del mouse.
 Sin embargo, puede elegir editar una capa siempre y cuando el proveedor de datos lo soporte,
 y el conjunto de datos sea escribible (ej. sus archivos no son de solo escritura).
 
-La edici\'on de capas es mas versatil cuando es usada en conjuntos de datos PostgreSQL/PostGIS. 
+La edici\'on de capas es más versatil cuando es usada en conjuntos de datos PostgreSQL/PostGIS. 
 
 \begin{Tip}[ht]\caption{\textsc{Integridad de datos}}
 \qgistip{Siempre es una buena idea respaldar su conjunto de datos antes de iniciar 
@@ -907,7 +907,7 @@ la integridad de sus datos, no se ofrece garant\'{\i}a en este aspecto.
 }
 \end{Tip}
 
-\begin{Tip}[ht]\caption{\textsc{Manipulando datos de atributos}}
+\begin{Tip}[ht]\caption{\textsc{Manipular datos de atributos}}
 \qgistip{Actualmente solo capas de PostGIS son soportadas para agregar y eliminar columnas de atributos
 dentro de este di\'alogo. En versiones futuras de QGIS, otros conjuntos de datos ser\'an soportados, 
 porque esta funcionalidad fue recientemente implementada en GDAL/OGR > 1.6.0
@@ -924,7 +924,7 @@ y también confirmar que los conjuntos de datos pueden aceptar todos los cambios
 \end{Tip}
 
 \begin{Tip}[ht]\caption{\textsc{Ediciones concurrentes}}
-\qgistip{Esta versi\'on de QGIS no rastrea si alguien mas est\'a editando un objeto espacial al mismo tiempo
+\qgistip{Esta versi\'on de QGIS no rastrea si alguien más est\'a editando un objeto espacial al mismo tiempo
 que usted.  La \'ultima persona en guardar su edici\'on gana.
 }
 \end{Tip}
@@ -995,10 +995,10 @@ Puede realizar las siguiente funciones de edici\'ons:
 \item \toolbtntwo{mActionEditPaste}{Pegar Objeto Espacial}
 \end{itemize}
 
-\minisec{Agregando Objetos Espaciales}
+\minisec{Agregar Objetos Espaciales}
 \index{vector layers!adding!feature}
 
-Antes de iniciar agregando objetos espaciales, use las herramientas \toolbtntwo{mActionPan}{Desplazar mapa}
+Antes de iniciar agregar objetos espaciales, use las herramientas \toolbtntwo{mActionPan}{Desplazar mapa}
 y \toolbtntwo{mActionZoomIn}{Acercar zum}/\toolbtntwo{mActionZoomOut}{Alejar zum} 
 para navegar al \'area de inter\'es.
 
@@ -1007,7 +1007,7 @@ Entonces tiene que usar los \'{\i}conos \toolbtntwo{mActionCapturePoint}{Captura
 \toolbtntwo{mActionCapturePolygon}{Capturar pol\'{\i}gono} en la barra de herramientas para poner el cursor de QGIS
 en modo de digitalizaci\'on.
 
-Para cada objeto espacial, primero digitaliza la geometr\'{\i}a, despues captura sus atributos.
+Para cada objeto espacial, primero digitaliza la geometr\'{\i}a, después captura sus atributos.
 
 Para digitalizar la geometr\'{\i}a, haga clic izquierdo en el \'area del mapa para crear el primer
 punto de su nuevo objeto espacial.
@@ -1023,7 +1023,7 @@ en Alaska.
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{Di\'alogo de Introducir Valores de Atributos despues de digitalizar un nuevo objeto espacial vectorial
+   \caption{Di\'alogo de Introducir Valores de Atributos después de digitalizar un nuevo objeto espacial vectorial
    \nixcaption}\label{fig:vector_digitising}\smallskip
    \includegraphics[clip=true, width=8cm]{editDigitizing}
 \end{center}  
@@ -1031,7 +1031,7 @@ en Alaska.
 
 \begin{Tip}[ht]\caption{\textsc{Tipos de Valores de Atributos}}
 \qgistip{
-Al menos para edici\'on de shapefiles los tipos de atributos son validados durante la
+Al menos para edici\'on de archivos shape los tipos de atributos son validados durante la
 captura. Por esto, no es posible capturar un n\'umero dentro de una columna de texto en el di\'alogo
 \dialog{Introducir Valores de Atributos} o viceversa. Si necesita hacerlo as\'{\i},
 deber\'{\i}a editar los atributos en un segundo paso dentro del di\'alogo \dialog{Tabla
@@ -1051,10 +1051,10 @@ de la barra de herramientas.
 Puede dividir objetos espaciales usando el \'{\i}cono \toolbtntwo{mActionSplitFeatures}{Dividir Objeto Espacial}
 de la barra de herramientas.
 
-\minisec{Editando V\'ertices de un Objeto Espacial}
+\minisec{Editar V\'ertices de un Objeto Espacial}
 \index{vector layers!editing!vertex}
 
-Para ambos tipos de capas PostgreSQL/PostGIS y  shapefile, los v\'ertices de los objetos espaciales pueden ser editados. 
+Para ambos tipos de capas PostgreSQL/PostGIS y  archivo shape, los v\'ertices de los objetos espaciales pueden ser editados. 
 
 Los v\'ertices pueden ser directamente editados, esto es, no tiene
 que elegir cual nuevo objeto espacial editar antes de que pueda cambiar
@@ -1064,17 +1064,17 @@ y de esta manera las siguientes reglas aplican cuando el rat\'on es presionado
 cerca de objetos espaciales del mapa:
 
 \begin{itemize}
-\item \textbf{L\'{\i}neas}    - La l{\'i}nea mas cercana a la posici\'on del rat\'on
+\item \textbf{L\'{\i}neas}    - La l{\'i}nea más cercana a la posici\'on del rat\'on
                           es usada como objeto espacial objetivo.
                           Entonces (para mover y eliminar un v\'ertice)
-                          el v\'ertice mas cercano
+                          el v\'ertice más cercano
                           en esa l\'{\i}nea es el objetivo de edici\'on.
 
 \item \textbf{Pol\'{\i}gonos} - Si el rat\'on est\'a dentro del pol\'{\i}gono, entonces ese
-                          es el objeto espacial objetivo; de lo contrario el pol\'{\i}gono mas cercano
+                          es el objeto espacial objetivo; de lo contrario el pol\'{\i}gono más cercano
                           es usado.
                           Entonces (para mover y eliminar un v\'ertice)
-                          el v\'ertice mas cercano
+                          el v\'ertice más cercano
                           en ese pol\'{\i}gono es el objetivo de edici\'on.                          
 \end{itemize}
 
@@ -1083,17 +1083,17 @@ Necesitar\'a establecer la propiedad
 a un n\'umero mayor que cero.  De lo contrario QGIS no podr\'a decir que objeto espacial est\'a siendo editado.
 
 
-\minisec{Agregando V\'ertices a un Objeto Espacial}
+\minisec{Agregar V\'ertices a un Objeto Espacial}
 \index{vector layers!adding!vertex}
 
 Puede agregar nuevos v\'ertices a un objeto espacial usando el \'{\i}cono
 \toolbtntwo{mActionAddVertex}{A\~nadir V\'ertice} 
 de la barra de herramientas.
 
-Note que, no tiene sentido agregar mas v\'ertices a un objeto espacial puntual!
+Note que, no tiene sentido agregar más v\'ertices a un objeto espacial puntual!
 
 En esta versi\'on de QGIS, los v\'ertices solo pueden ser agregados a un segmento \textit{existente} 
-de un objeto espacial de l\'{\i}nea.  Si quiere extender una l\'{\i}nea mas all\'a de su final,
+de un objeto espacial de l\'{\i}nea.  Si quiere extender una l\'{\i}nea más all\'a de su final,
 necesitar\'a primero mover el v\'ertice final, entonces agregar un nuevo v\'ertice donde
 el terminal solia estar.
 
@@ -1103,7 +1103,7 @@ el terminal solia estar.
 Puede mover v\'ertices usando el \'{\i}cono \toolbtntwo{mActionMoveVertex}{Mover V\'ertice}
 de la barra de herramientas.
 
-\minisec{Eliminando V\'ertices de un Objeto Espacial}
+\minisec{Eliminar V\'ertices de un Objeto Espacial}
 \index{vector layers!deleting!vertex}
 
 Puede eliminar v\'ertices usando el \'{\i}cono \toolbtntwo{mActionDeleteVertex}{Borrar V\'ertice}
@@ -1119,7 +1119,7 @@ QGIS, as\'{\i} que no haga eso.
 \textbf{advertencia:} Un v\'ertice es identificado para eliminaci\'on tan pronto 
 como hace clic con el rat\'on cerca de un objeto espacial elegible.
 Para deshacerlo, necesitara desactivar
-la edici\'on y despues descartar sus cambios.
+la edici\'on y después descartar sus cambios.
 (Claro esto significar\'a que otros cambios sin guardar ser\'an perdidos, también.)
 
 \minisec{A\~nadir Anillo}
@@ -1128,7 +1128,7 @@ la edici\'on y despues descartar sus cambios.
 Puede crear pol\'{\i}gonos anillo usando el \'{\i}cono \toolbtntwo{mActionAddRing}{A\~nadir Anillo}
 de la barra de herramientas. Esto significa que dentro de un \'area existente es posible digitalizar
 otros pol\'{\i}gonos, esto ocurrir\'a como un 'todo', de esta manera solo 
-el \'area entre los l\'{\i}mites del pol\'{\i}gono mas externo y el mas interno permanecen 
+el \'area entre los l\'{\i}mites del pol\'{\i}gono más externo y el más interno permanecen 
 como un pol\'{\i}gono anillo. 
 
 \minisec{A\~nadir Isla}
@@ -1137,7 +1137,7 @@ como un pol\'{\i}gono anillo.
 Puede \toolbtntwo{mActionAddIsland}{A\~nadir isla} a multipol\'{\i}gonos seleccionados. 
 El nuevo pol\'{\i}gono isla tiene que ser digitalizado fuera del multipol\'{\i}gono seleccionado. 
 
-\minisec{Cortando, Copiando y Pegando Objetos Espaciales}
+\minisec{Cortar, Copiar y Pegar Objetos Espaciales}
 \index{vector layers!cut!feature}
 \index{vector layers!copy!feature}
 \index{vector layers!paste!feature}
@@ -1156,7 +1156,7 @@ en el formato Well-Known Text (WKT) de la OGC.
 
 Sin embargo en esta versi\'on de QGIS, el texto de objetos espaciales de fuera de QGIS no pueden 
 ser pegadas a una capa dentro de QGIS. ?`Cu\'ando ser\'{\i}a \'util la funci\'on de copiar y pegar? 
-Bien, resulta que puede editar mas de una capa 
+Bien, resulta que puede editar más de una capa 
 al tiempo que copia y pega caracter\'{\i}sticas entre capas. ?`Por qu\'e querriamos hacer
 eso?  dicho que tenemos que hacer una trabajo sobre una nueva capa pero solo necesita uno o
 dos lagos, no los 5,000 en nuestra capa \filename{big\_lakes}. Podemos crear una nueva capa
@@ -1209,10 +1209,10 @@ ser usada para eliminar objetos espaciales. Esto efectivamente elimina los objet
 también la coloca en un lugar especial llamado ``portapapeles espacial". De esta manera cortamos el objetos espacial a eliminar. 
 Podemos entonces usar la \toolbtntwo{mActionEditPaste}{Herramienta pegar} para regresarla, d\'andonos la funcionalidad de deshacer de un nivel. 
 Cortar, copiar, y pegar trabajan sobre los objetos espaciales seleccionados actualmente, 
-significando que podemos operar en mas de uno al mismo tiempo.
+significando que podemos operar en más de uno al mismo tiempo.
 
 \begin{Tip}[ht]\caption{\textsc{Soporte para la Eliminaci\'on de Objetos Espaciales}}
-\qgistip{Cuando se edita ESRI shapefiles, el borrado
+\qgistip{Cuando se edita ESRI archivos shape, el borrado
 de objetos espaciales solo trabaja si QGIS est\'a compilado con una versi\'on de GDAL version 1.3.2 o superior. 
 Las versiones de QGIS para OS X y Windows disponibles en el sitio de descarga estan compilados 
 usando GDAL 1.3.2 o superior.
@@ -1227,7 +1227,7 @@ establecer la tolerancia de autoensamblado, vaya a
 (En Mac: vaya a  \mainmenuopt{QGIS} > Preferencias, En Linux: \mainmenuopt{Editar} > \dropmenuopttwo{mActionOptions}{Opciones}.)
 Note que la tolerancia de autoensamblado est\'a en unidades de mapa o pixeles.
 
-\minisec{Guardando Capas Editadas}
+\minisec{Guardar Capas Editadas}
 \index{editing!saving changes}
 
 Cuando una capa est\'a en modo de edici\'on, cualquier cambio permanece pendiente en la memoria de QGIS.
@@ -1240,7 +1240,7 @@ Si los cambios no pueden ser guardados (ej. disco lleno, o los atributos tienen
 valores fuera de rango), el estado de memoria de QGIS es preservado.  Esto
 permite que ajuste su edici\'on y lo intente de nuevo.
 
-\subsubsection{Creando una nueva capa}\label{sec:create shape}\index{editing!creating a new layer}
+\subsubsection{Crear una nueva capa}\label{sec:create shape}\index{editing!creating a new layer}
 
 Para crear una nueva capa para edici\'on, elija \toolbtntwo{mActionNewVectorLayer}{Nueva Capa Vectorial} del
  men\'u \mainmenuopt{Capa}. 
@@ -1257,21 +1257,21 @@ l\'{\i}nea o pol\'{\i}gono).
 
 Note que QGIS no soporta aun la creaci\'on de
 objetos espaciales 2.5D (ej. objetos espaciales con coordenadas X,Y,Z) o objetos espaciales de medidas.
-A la fecha solo pueden ser creados shapefiles. En una futura versi\'on de QGIS, la creaci\'on de cualquier tipo
+A la fecha solo pueden ser creados archivos shape. En una futura versi\'on de QGIS, la creaci\'on de cualquier tipo
 de capa OGR o PostgreSQL ser\'a soportado. 
 
 La creaci\'on de capas GRASS es soportada dentro del complemento de GRASS. Vea la secci\'on 
-\ref{sec:creating_new_grass_vectors} para mas informaci\'on de creaci\'on de capas GRASS.
+\ref{sec:creating_new_grass_vectors} para más informaci\'on de creaci\'on de capas GRASS.
 
 Para completar la creaci\'on de una nueva capa, agregue los atributos deseados haciendo
 clic en el bot\'on  \button{A\~nadir atributo} y especificando un campo y el tipo para al atributo.
 Solo los tipos de atributos \selectstring{Tipo}{real}, \selectstring{Tipo}{entero}, y \selectstring{Tipo}{cadena} son soportados. Una vez que esta contento con sus atributos,
-haga clic en \button{OK} y provea un nombre para el shapefile.
+haga clic en \button{OK} y provea un nombre para el archivo shape.
 QGIS autom\'aticamente agregar\'a una extensi\'on \filename{.shp} al nombre que especific\'o. Una vez
 que la capa ha sido creada, ser\'a agregada al mapa y puede ser editada en la misma forma
 que se describe en la Secci\'on anterior \ref{sec:edit_existing_layer}. 
 
-\subsubsection{Trabajando con la tabla de atributos}\label{sec:attribute table}\index{editing!working with the attribute table}
+\subsubsection{Trabajar con la tabla de atributos}\label{sec:attribute table}\index{editing!working with the attribute table}
 
 Para abrir la tabla de atributos para una capa vectorial, active la capa haciendo clic en ella en el \'area de leyenda del mapa. 
 Entonces use el men\'u  capa\mainmenuopt{Capa} del men\'u principal y elija \dropmenuopttwo{mActionOpenTable}{Abrir tabla de atributos} 
@@ -1290,7 +1290,7 @@ Cada columna puede ser ordenada haciendo clic en su encabezado. Una peque\~na fl
 (apuntando hacia abajo significa valores descendentes de la primara columna hacia abajo, apuntando hacia arriba significa valores ascendentes desde la primera columna hacia abajo). 
 Para una selecci\'on simple de atributos en una columna el bot\'on \button{Buscar en} 
 puede ser usado. Seleccione el campo (columna) en la cual la b\'usqueda ser\'a realizada 
-de la caja de selecci\'on y presione el bot\'on \button{Buscar}. Para b\'usquedas mas complejas use
+de la caja de selecci\'on y presione el bot\'on \button{Buscar}. Para b\'usquedas más complejas use
 el bot\'on B\'usquedas Avanzadas \button{...}, el cual lanzar\'a el Constructor de Consultas de B\'usqueda descrito en 
 la Secci\'on \ref{sec:select_by_query}. 
 
@@ -1298,7 +1298,7 @@ Para solo mostrar los registros, use la caja de selecci\'on \checkbox{Mostrar so
 Usando los botones en la parte inferior izquierda  de la ventana, campos seleccionados pueden ser removidos, 
 movidos a la parte superior de la tabla, o la selecci\'on puede ser invertida. Los objetos espaciales seleccionados también pueden ser
 copiadas al portapapeles, que también puede ser hecho con \keystroke{Ctrl-C}. Puede hacer zoom 
-a los objetos espaciales seleccionados en el mapa. Conmutando la edici\'on permite editar valores de atributos. 
+a los objetos espaciales seleccionados en el mapa. Conmutar la edici\'on permite editar valores de atributos. 
 
 \subsection{Constructor de consultas}\label{sec:query_builder}
 \index{Query Builder}
@@ -1321,13 +1321,13 @@ values}. Para agregar un campo seleccionado o valor a la consulta, haga doble cl
 Para probar una consulta, haga clic en el bot\'on \button{Probar} \index{Query Builder!testing
 queries}. Esto regresar\'a un conteo del n\'umero de registros que pueden ser incluidos en la capa. Cuando est\'e satisfecho con la consulta, haga clic en el bot\'on \button{OK}. El SQL para la clausula where ser\'a mostrada en la columna SQL de la lista de capas.
 
-\begin{Tip}\caption{\textsc{Cambiando la Definici\'on de la Capa}}\index{Query
+\begin{Tip}\caption{\textsc{Cambiar la Definici\'on de la Capa}}\index{Query
 Builder!changing layer definitions}
-\qgistip{Puede cambiar la definici\'on de la capa despues de que es cargada alterando
+\qgistip{Puede cambiar la definici\'on de la capa después de que es cargada alterando
 la consulta SQL usada para definir la capa. Para hacer esto, abra el 
 di\'alogo  de vectores \dialog{Propiedades de la capa} haciendo doble clic en la capa en la leyenda y clic en el bot\'on
 \button{Constructor de Consultas} en la pesta\~na \tab{General}. Vea la secci\'on
-\ref{sec:vectorprops} para mas informaci\'on.}
+\ref{sec:vectorprops} para más informaci\'on.}
 \end{Tip}
 
 \subsection{Selecci\'on por consulta}\label{sec:select_by_query}
