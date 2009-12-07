@@ -1,0 +1,86 @@
+--- user guide EN 1.0/working_with_projections.tex	2009-11-30 19:25:27.246714904 +0100
++++ user guide EN 1.3/working_with_projections.tex	2009-11-28 23:05:58.951670690 +0100
+@@ -46,8 +46,9 @@
+ first layer loaded. When you start a QGIS session with layers that do not
+ have a CRS, you need to control and define the CRS definition for these
+ layers. This can be done globally or project-wide in the \tab{CRS} tab under
+-\mainmenuopt{Settings} > \dropmenuopttwo{mActionOptions}{Options} (See
+-Figure~\ref{fig:crsdialog}). 
++\mainmenuopt{Edit} > \dropmenuopttwo{mActionOptions}{Options} (Gnome, OSX) 
++or \mainmenuopt{Settings} > \dropmenuopttwo{mActionOptions}{Options} (KDE, Windows). 
++See Figure~\ref{fig:crsdialog}. 
+ 
+ \begin{itemize}
+ \item \checkbox{Prompt for CRS} 
+@@ -68,8 +69,8 @@
+ 
+ If you want to define the coordinate reference system for a certain layer
+ without CRS information, you can also do that in the \tab{General} tab of the
+-raster properties (\ref{label_generaltab}) and vector properties
+-(\ref{vectorgeneraltab}) dialog. If your layer already has a CRS defined, it
++raster (\ref{label_generaltab}) and vector (\ref{vectorgeneraltab}) properties 
++dialog. If your layer already has a CRS defined, it
+ will be displayed as shown in Figure~\ref{fig:vector_symbology}.
+ 
+ \subsection{Define On The Fly (OTF) Projection}\label{label_projstart}
+@@ -82,20 +83,21 @@
+ 
+ \begin{enumerate}
+ \item Select \dropmenuopttwo{mActionOptions}{Project Properties} from the
+-\mainmenuopt{Settings} menu.
+-\item Click on the \toolbtntwo{mIconProjectionEnabled}{projector} icon in the
++\mainmenuopt{Edit} (Gnome, OSX) or \mainmenuopt{Settings} (KDE, Windows) menu.
++\item Click on the \toolbtntwo{mIconProjectionDisabled}{projector} icon in the
+ lower right-hand corner of the statusbar.
+ \end{enumerate}
+ 
+ If you have already loaded a layer, and want to enable OTF projection, the
+ best practice is to open the \tab{Coordinate Reference System} tab of the
+-\dialog{Project Properties} dialog and find the CRS of the currently loaded
+-layer in the list of CRS, and activate the \checkbox{Enable on the fly
+-projection} checkbox. All subsequently loaded vector layers will then be OTF
+-projected to the defined CRS.
+-
++\dialog{Project Properties} dialog, select the CRS of the currently loaded
++layer, and activate the \checkbox{Enable on the fly projection} checkbox. The
++\toolbtntwo{mIconProjectionEnabled}{projector} icon will show a green hook
++and all subsequently loaded vector layers will be OTF projected to the
++defined CRS.
++ 
+ The \tab{Coordinate Reference System} tab of the \dialog{Project Properties}
+-dialog contains four important components as numbered in Figure
++dialog contains four important components as shown in Figure
+ \ref{fig:projections} and described below.
+ 
+ \begin{figure}[ht]
+@@ -121,13 +123,18 @@
+ \item \textbf{Search} - if you know the EPSG identifier or the name 
+ for a Coordinate Reference System, you can use the search feature to find it.
+ Enter the identifier and click on \button{Find}.
++\item \textbf{Recently used CRS} - if you have certain CRS that you frequently 
++use in your everyday GIS work, these will be displayed as 'quick access' buttons 
++at the bottom of the Projection Dialog. Click on one of these buttons to select 
++the associated CRS.
+ \end{enumerate}
+ 
+ \begin{Tip}
+- \caption{\textsc{Project Properties Dialog}}
++\caption{\textsc{Project Properties Dialog}}
+ \qgistip{
+ If you open the \dialog{Project Properties} dialog from the
+-\mainmenuopt{Settings} menu, you must click on the \tab{Coordinate Reference
++\mainmenuopt{Edit} (Gnome, OSX) or \mainmenuopt{Settings} 
++(KDE, Windows) menu, you must click on the \tab{Coordinate Reference
+ System} tab to view the CRS settings. Opening the dialog from the
+ \toolbtntwo{mIconProjectionEnabled}{projector} icon will automatically bring
+ the \tab{Coordinate Reference System} tab to the front.
+@@ -139,7 +146,8 @@
+ 
+ If QGIS does not provide the coordinate reference system you need, you
+ can define a custom CRS. To define a CRS, select
+-\dropmenuopttwo{mIconNew}{Custom CRS} from the \mainmenuopt{Settings} menu.
++\dropmenuopttwo{mIconNew}{Custom CRS} from the \mainmenuopt{Edit} 
++(Gnome, OSX) or \mainmenuopt{Settings} (KDE, Windows) menu.
+ Custom CRS are stored in your QGIS user database. In addition to your custom
+ CRS, this database also contains your spatial bookmarks and other custom data. 
+ 
