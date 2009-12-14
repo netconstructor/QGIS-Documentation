@@ -1,14 +1,14 @@
  \section{Creare applicazioni C++}
 
-Non tutti vogliono un'applicazione GIS completa. Talvolta si vuole solamente avereun widget nella propria applicazione che mostri una mappa mentre lo scopo principale dell'applicazione è un altro. Forse un database frontend con un mappa? Questa Sezione fornisce due semplici esempi di scritti da Tim Sutton.
-Sono disponibili nell'archivio qgis subversion insieme con altre interessanti guide. L'intero archivio può essere esplorato: 
+Non tutti vogliono un'applicazione GIS completa. Talvolta si vuole solamente avere un widget nella propria applicazione che mostri una mappa mentre lo scopo principale dell'applicazione è un altro. Forse un database frontend con un mappa? Questa Sezione fornisce due semplici esempi di scritti da Tim Sutton.
+Sono disponibili nell'archivio QGIS subversion insieme con altre interessanti guide. L'intero archivio può essere esplorato: 
 \filename{https://svn.osgeo.org/qgis/trunk/code\_examples/}
 
 \subsection{Creare un semplice widget mappa}\label{subsec:simple_widget}
 
-Con questa guida si esplora come creare un semplice widget di mappazione. Esso on farà molto - solo caricare uno shape file e mostrarlo in colori casuali. Ma dovrebbe dare un'idea del potenziale per usare QGIS come un componente di mappazione incorporato. Prima di procedere, molti ringraziamenti a Francis Bolduc che ha scritto l'inizio di questo demo. Egli ha gentilmente acconsentito a rendere il suo lavoro pubblicamente disponibile.
+Con questa guida si esplora come creare un semplice widget di mappazione. Non farà molto, solo caricare uno shape file e mostrarlo in colori casuali. Ma dovrebbe dare un'idea delle potenzialità di QGIS con un componente di mappazione incorporato. Prima di procedere, molti ringraziamenti a Francis Bolduc che ha scritto l'inizio di questa demo. Egli ha gentilmente acconsentito a rendere il suo lavoro pubblicamente disponibile.
 
-Si comincia con la tipica aggiunta del necessario "includes" per la nostra applicazione:
+Si comincia con la tipica aggiunta dei necessari "includes" per la nostra applicazione:
 
 \begin{verbatim}
 //
@@ -28,13 +28,13 @@ Si comincia con la tipica aggiunta del necessario "includes" per la nostra appli
 #include <QWidget>
 \end{verbatim}
 
-Si usa QgsApplication invece di Qt's QApplication, e si ottengono alcuni benmifici aggiuntivi di vari metodi statici che possono essere usati per localizzare i percorsi della libreria e così via.
+Si usa QgsApplication invece di Qt's QApplication, e si ottengono alcuni benefici aggiuntivi di vari metodi statici che possono essere usati per localizzare i percorsi della libreria e così via.
 
-Il registro del provider è un singleton che tiene traccia dei plugin del provider di dati vettoriali. Fa tutto il lavoro di caricare i plugin e così via. Il generatore di singolo simbolo è la più basilare classe di simbologia. Genera punti linee o poligoni in un singolo colore che viene scelto predefinitamente in modo casuale (anche se lo si può impostare in modo personalizzato). Ogni layer vettoriale deve avere una simbologia da esso associata.
+Il registro del provider è un singleton che tiene traccia dei plugin del provider di dati vettoriali. Fa tutto il lavoro di caricare i plugin e così via. Il generatore di singolo simbolo è la più basilare classe di simbologia. Genera punti linee o poligoni in un singolo colore che viene scelto a priori in modo casuale (anche se lo si può impostare in modo personalizzato). Ogni layer vettoriale deve avere una simbologia da esso associata.
 
-Il registro del layer di mapp tiene traccia di tutti i layer in uso. La classe del layer vettoriale eredita da maplayer e lo estende ad includere funzionalità specialistiche per dati vettoriali.
+Il registro del layer di mappa tiene traccia di tutti i layer in uso. La classe del layer vettoriale eredita da maplayer e lo estende ad includere funzionalità specialistiche per dati vettoriali.
 
-Infine il mapcanvas è realmente il nocciolo della questione. E' un widget disegnabile su cui sarà disegnata la mappa.
+Infine il mapcanvas è realmente il nocciolo della questione. È un widget disegnabile su cui sarà disegnata la mappa.
 
 Ora si può andare oltre alla inizializzazione della nostra applicazione....
 
@@ -51,20 +51,20 @@ int main(int argc, char ** argv)
 
 \end{verbatim}
 
-Così ora abbiamo un'applilcazione qgs e abbiamo definito alcue varibili. Dato che ho testato su Ubuntu 8.10, specifico qui le posizione dei plugin del provider vettoriale come nella mia directory di istallazione sviluppo. Probabilmente avrebbe più senso in generale tenere le lilbrerie QGIS libs in uno dei percorsi di ricerca delle library standard del vostro sistemas (ad es. /usr/lib) ma per ora andrà bene anche così.
+Così ora abbiamo un'applicazione qgs e abbiamo definito alcune variabili. Dato che ho testato su Ubuntu 8.10, specifico qui le posizione dei plugin del provider vettoriale come nella mia directory di installazione sviluppo. Probabilmente avrebbe più senso in generale tenere le librerie QGIS libs in uno dei percorsi di ricerca delle library standard del vostro sistema (ad es. /usr/lib) ma per ora andrà bene anche così.
 
 Le prossime due variabili definite qui indicano solo il file shape che si userà (e qui dovreste sostituire i vostri dati).
 
-Il nome del provider è importante - dice a QGIS che provider di dati usare per caricare il file. Tipicamente si userà 'ogr' o 'postgres'.
+Il nome del provider è importante: dice a QGIS che provider di dati usare per caricare il file. Tipicamente si userà 'ogr' o 'postgres'.
 
-Ora possiamo creare il ayer oggetto.
+Ora possiamo creare il layer oggetto.
 
 \begin{verbatim}
   // Instantiate Provider Registry
   QgsProviderRegistry::instance(myPluginsDir);
 \end{verbatim}
 
-Prima si inizializza il registro del provider. E' una classe singleton quindi si usa un'istanza di chiamata statica e si passa il percorso di ricerca della library del provider. Appena inizializzato scansionerà questo percorso alla ricerca di lbrerie del provider.
+Prima si inizializza il registro del provider. È una classe singleton quindi si usa un'istanza di chiamata statica e si passa il percorso di ricerca della library del provider. Appena inizializzato scansionerà questo percorso alla ricerca di lbrerie del provider.
 
 Ora si crea un layer...
 
@@ -92,7 +92,7 @@ QgsSingleSymbolRenderer(mypLayer->geometryType());
 
 \end{verbatim}
 
-Il codice è adeguatamente auto esplicativo qui. Si crea un layer usando le variabili definite prima. Poi si assegna al layer un generatore di immagini. Quando si crea un generatore di immagini, dobbiamo specificare il tipo di geometria, cosa che si fa chiedendo allo stato vettoriale il suo tipo di geometria. Poi si aggiunge il layer ad un set di layer (che è usato da QgsMapCanvas per tenere traccia di quali layer generare graficamente e in che ordineo) e al registro di maplayer. Infine ci si assicura che il layer sarà visibile.
+Il codice è adeguatamente auto esplicativo qui. Si crea un layer usando le variabili definite prima. Poi si assegna al layer un generatore di immagini. Quando si crea un generatore di immagini, dobbiamo specificare il tipo di geometria, cosa che si fa chiedendo allo stato vettoriale il suo tipo di geometria. Poi si aggiunge il layer ad un set di layer (che è usato da QgsMapCanvas per tenere traccia di quali layer generare graficamente e in che ordine) e al registro di maplayer. Infine ci si assicura che il layer sarà visibile.
 Ora si crea un map canvas sul quale disegnare il layer.
 
 \begin{verbatim}
@@ -162,7 +162,7 @@ Nella directory di lavoro per il codice guida si trovano un certo numero di file
 
 \textbf{Nota:} Sarà necessario editare il file .pro nella directory svn soprastante per abbinarlo al proprio sistema.
 
-dato che il codice è lo stesso della precedente guida, ci focalizzeremo sulle specifiche MapTool - il resto dei dettagli di implementazione può essere investigato esplorando il progetto da SVN. Un QgsMapTool è una clasee che interagisce con il MapCanvas usando il puntatore del mouser. QGIS ha un gran numero di QgsMapTools implementati, e si possono fare delle sottoclassi in QgsMapTool per crearsi il proprion. In mainwindow.cpp si può vedere che ho incluso dei capipaginay per il QgsMapTools vicino all'inzionde file:
+dato che il codice è lo stesso della precedente guida, ci focalizzeremo sulle specifiche MapTool - il resto dei dettagli di implementazione può essere investigato esplorando il progetto da SVN. Un QgsMapTool è una clasee che interagisce con il MapCanvas usando il puntatore del mouse. QGIS ha un gran numero di QgsMapTools implementati, e si possono fare delle sottoclassi in QgsMapTool per crearsi i propri. In mainwindow.cpp si può vedere che ho incluso dei capipagina per il QgsMapTools vicino all'inzio del file:
 
 \begin{verbatim}
      //
@@ -235,7 +235,7 @@ Di nuovo, niente qui è molto complicato - si creano le istanze degli strumenti,
 
 Come si vede, ampliare il precedente esempio a qualcosa di più funzionale usando MapTools è veramente molto facile e richiede solo poche righe di codice per ogni MapTool che si voglia fornire.
 
-Si può controllare e costruire questa guiida usando SVN e CMake usando i seguenti passaggi:
+Si può controllare e costruire questa guida usando SVN e CMake usando i seguenti passaggi:
 
 \begin{verbatim}
 svn co https://svn.osgeo.org/qgis/trunk/code_examples/2_basic_main_window

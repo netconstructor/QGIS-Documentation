@@ -6,7 +6,7 @@
 % comment out the following line:
 % \updatedisclaimer
 
-Uno degli obiettivi di QGIS è fornire non soltanto un'applicazione ma anche un set di librerie che possano essere usate per creare nuove applicazioni. Questo obiettivo è stato realizzato mediante la ristrutturazione delle libreria che ha avuto luogo dopo il rilascio della versione 0.8. Dal rilascio dell aversione 0.9, è possibile lo sviluppo di applicazioni indipendenti usando C++ o Python. Si raccomanda di usare QGIS 1.0.0 o superiore come base per le proprie applicazioni python poichè da questa versione si fornisce un API stabile e coerente.
+Uno degli obiettivi di QGIS è fornire non soltanto un'applicazione ma anche un set di librerie che possano essere usate per creare nuove applicazioni. Questo obiettivo è stato realizzato mediante la ristrutturazione delle libreria che ha avuto luogo dopo il rilascio della versione 0.8. Dal rilascio della versione 0.9, è possibile lo sviluppo di applicazioni indipendenti usando C++ o Python. Si raccomanda di usare QGIS 1.0.0 o superiore come base per le proprie applicazioni python poichè da questa versione si fornisce un API stabile e coerente.
 
 In questo capitolo si darà un'occhiata al processo di creazione di un'applicazione Python indipendente. Il blog di QGIS ha vari esempi su come creare applicazioni PyQGIS\footnote{Un'applicazione creata usando Python ed i legami QGIS}. Useremo una di esse come punto di partenza per un'occhiata a come creare un'applicazione.
 
@@ -16,18 +16,18 @@ Le funzioni che vogliamo nell'applicazione sono:
 \item Caricare un layer vettoriale
 \item Panoramica
 \item Ingrandimento e riduzione
-\item Ingrandiamento alla completa estensione del layer
-\item Impostazione di colori personlaizzati al caricamento del layer
+\item Ingrandimento alla completa estensione del layer
+\item Impostazione di colori personalizzati al caricamento del layer
 \end{itemize} 
 
-Questo è un set di funzioni piuttosto minimo. Cominciamo progettando il GUI usando Qt Designer.
+Questo è un set di funzioni piuttosto minimo. Cominciamo progettando l'interfaccia grafica (GUI) usando Qt Designer.
 
-\subsection{Progettare il GUI}
+\subsection{Progettare l'interfaccia grafica (GUI)}
 
-Dato che stiamo creando un'applicazione minimale, useremo lo stesso approccio per il GUI. Usando Qt Designer, si crea una semplice finestra principale (MainWindow) priva di menu e barre degli strumenti. Questo ci da una lavagna bianca per lavorare. Per creare la finestra principale:
+Dato che stiamo creando un'applicazione minimale, useremo lo stesso approccio per l'interfaccia grafica. Usando Qt Designer, si crea una semplice finestra principale (MainWindow) priva di menu e barre degli strumenti. Questo ci da una lavagna bianca per lavorare. Per creare la finestra principale:
 
 \begin{enumerate}
-\item Creare una directory per sviluppare l'applicazione andare in essa
+\item Creare una directory per sviluppare l'applicazione ed entrarci
 \item Lanciare Qt Designer
 \item Dovrebbe apparire la finestra di dialogo \qtdialog{New form}. Se non appare, scegliere
 \qtdropmenuopt{New form...} dal menu \qtmainmenuopt{File}.
@@ -38,7 +38,7 @@ the \qtdropmenuopt{templates/forms}
 \item Trovare nella lista il widget \qtdropmenuopt{Frame} 
 (sotto \qtdropmenuopt{Containers}) e trascinarlo nella finestra principale appena creata
 \item Premere all'esterno della cornice per selezionare l'area della finestra principale 
-\item Premere lo strumento \qtdropmenuopt{Lay Out in a Grid}. Quando si fa questo, ila cornice si allarga a riempire l'intera finestra principale
+\item Premere lo strumento \qtdropmenuopt{Lay Out in a Grid}. Quando si fa questo, ia cornice si allarga a riempire l'intera finestra principale
 \item Salvare il modulo come \usertext{mainwindow.ui} 
 \item \qtdropmenuopt{Exit} Qt Designer
 \end{enumerate} 
@@ -54,7 +54,7 @@ Questo crea la sorgente Python per la finestra principale GUI. Poi si deve crear
 \subsection{Creare la Finestra Principale}
 
 Adesso siamo pronti a scrivere la classe \classname{MainWindow} che farà il vero lavoro.
-Dato che ci vogliono parecchie linee, ci daremo un'occhiata a pezzi, cominciando con la sezione importazione e il settaggio dell'ambiente:
+Dato che ci vogliono parecchie linee, ci daremo un'occhiata a pezzi, cominciando con la sezione importazione e le impostazioni dell'ambiente:
 
 \begin{verbatim}
 1 # Loosely based on:
@@ -78,10 +78,10 @@ Dato che ci vogliono parecchie linee, ci daremo un'occhiata a pezzi, cominciando
 \end{verbatim}
 
 Un po' di questo dovrebbe apparire familiare dal nostro plugin, specialmente le importazioni PyQt4 e
-QGIS. Alcune cose specifiche da notare sono le importazioni del nostro GUI alla linea
+QGIS. Alcune cose specifiche da notare sono le importazioni della nostra GUI alla linea
 14 e l'importazione nella libreria CORE alla linea 9.
 
-La nostra applicazione necessita di sapere dove trovare l'istallazione di QGIS. Per questo, impostiamo l'ambiente variabile \usertext{QGISHOME} in modo che indichi la directory di istallazione di QGIS 1.x Alla linea 20 memorizziamo questo valore dall'mbiente per un uso successivo.
+La nostra applicazione necessita di sapere dove trovare l'installazione di QGIS. Per questo, impostiamo l'ambiente variabile \usertext{QGISHOME} in modo che indichi la directory di installazione di QGIS 1.x Alla linea 20 memorizziamo questo valore dall'ambiente per un uso successivo.
 
 Poi è necessario creare la nostra classe \classname{MainWindow} che conterrà tutta la logica della nostra applicazione.
 \begin{verbatim}
@@ -154,7 +154,7 @@ Nelle linee 33 fino a 38 si impostano il canvas della mappa, il colore di sfondo
 
 Quindi si imposta il layer affinchè usi uno schema a riquadro verticale all'interno della cornice e si aggiunge ad esso il canvas della mappa alla linea 43.
 
-Le linee da 48 a 63 impostano le azioni e le connessioni per gli strumentinella nostra barra degli strumenti. Per ogni strumento, si crea una \classname{QAction} usando l'icona che abbiamo definito nel tema classico di QGIS. Poi colleghiamo il segnale \usertext{activated} dallo strumento al metodo nella nostra classe che gestirà l'azione. Questo è simile a come impostare le cose nell'esempio plugin.
+Le linee da 48 a 63 impostano le azioni e le connessioni per gli strumenti nella nostra barra degli strumenti. Per ogni strumento, si crea una \classname{QAction} usando l'icona che abbiamo definito nel tema classico di QGIS. Poi colleghiamo il segnale \usertext{activated} dallo strumento al metodo nella nostra classe che gestirà l'azione. Questo è simile a come impostare le cose nell'esempio plugin.
 
 Una volta che si hanno l'azione e la connessione, si deve aggiungerle alla barra degli strumenti.
 Nelle linee da 66 a 72 si crea la barra degli strumenti e si aggiunge ad esse ogni strumento.
@@ -180,10 +180,10 @@ Infine si creano tre strumenti mappa per l'applicazione (linee da 75 a
 92     self.canvas.zoomFullExtent()
 \end{verbatim}
 
-Per ogni strumento della mappa, è necessario un metodo che corrisponde alla connessione fatta per ogni azione. Nelle linee da 79 a 88 impostiamo un metodo per ognuno dei tre strumenti che interagiscono con la mappa. Quando uno strumento è attivato premendo il suo pulsante nella barra degli strumenti, è attivato il metodo corrispondente che 'dice' al canvas della mappa che quello è lo strumento attivo. Lo strumento attivo governa cosa avviene quando il maouse è premuto nel canvas.
+Per ogni strumento della mappa, è necessario un metodo che corrisponde alla connessione fatta per ogni azione. Nelle linee da 79 a 88 impostiamo un metodo per ognuno dei tre strumenti che interagiscono con la mappa. Quando uno strumento è attivato premendo il suo pulsante nella barra degli strumenti, è attivato il metodo corrispondente che "dice" al canvas della mappa che quello è lo strumento attivo. Lo strumento attivo governa cosa avviene quando il mouse è premuto nel canvas.
 
 Lo strumento \usertext{zoom to full extent} non è uno strumento mappa---svolge il suo lavoro senza richiedere un  click sulla mappa. Quando è attivato, viene chiamato il metodo del canvas della mappa
-\method{zoomFullExtent} (line 92).  Questo completa l'implementazione di tutti i nostri strumenti eccetto uno---lo strumento \usertext{Add Layer}. %FIXME 
+\method{zoomFullExtent} (line 92).  Questo completa l'implementazione di tutti i nostri strumenti eccetto uno: lo strumento \usertext{Add Layer}. %FIXME 
 Analizziamolo:
 
 
@@ -217,19 +217,19 @@ Analizziamolo:
 119    self.canvas.setLayerSet(layers)
 \end{verbatim}
 
-Nel metodo \method{addLayer} si usa \classname{QFileDialog} per trovare il nome del file da caricare. Questo è fatto alla linea 96. Va notato che si specifica un 'filtro' così la finestra di dialogo mostrerà solamente file di tipo \filename{.shp}.
+Nel metodo \method{addLayer} si usa \classname{QFileDialog} per trovare il nome del file da caricare. Questo è fatto alla linea 96. Va notato che si specifica un "filtro" così la finestra di dialogo mostrerà solamente file di tipo \filename{.shp}.
 
-Di seguito nella 97 si crea un oggetto \classname{QFileInfo} dal percorso del file shape.  Ora il layer è pronto per essere creato nella linea 100. Usando l'oggetto \classname{QFileInfo} per arrivare al file dal percorso abbiamo specificato il nome del layer quando esso viene creato.  Per essere sicuri che il layer sia valido e non causi alcun problem quando ccaricato, controlliamolo nella linea 102. Se non va bene, lo abbandoniamo e non lo aggiungiamo al canvas della mappa.
+Di seguito nella 97 si crea un oggetto \classname{QFileInfo} dal percorso del file shape.  Ora il layer è pronto per essere creato nella linea 100. Usando l'oggetto \classname{QFileInfo} per arrivare al file dal percorso abbiamo specificato il nome del layer quando esso viene creato.  Per essere sicuri che il layer sia valido e non causi alcun problem quando caricato, controlliamolo nella linea 102. Se non va bene, lo abbandoniamo e non lo aggiungiamo al canvas della mappa.
 
-Normalmente i layer sono aggiunti con un colore random. Ora si vogliono modificare i colori del layer per rendere la vista più piacevole. Inoltre sappiamo che si deve aggiungere il layer \filename{world\_borders} alla mappa e questo lo renderà più bello sul nostro sfondo blu. Per cambiare il colore, è necessario prendere il simbolo usato per la rappresentazione grfica e usarlo per impostare un nuovo colore di riempimento. Questo è fatto dalla linea 106 alla 108. 
+Normalmente i layer sono aggiunti con un colore random. Ora si vogliono modificare i colori del layer per rendere la vista più piacevole. Inoltre sappiamo che si deve aggiungere il layer \filename{world\_borders} alla mappa e questo lo renderà più bello sul nostro sfondo blu. Per cambiare il colore, è necessario prendere il simbolo usato per la rappresentazione grafica e usarlo per impostare un nuovo colore di riempimento. Questo è fatto dalla linea 106 alla 108. 
 
-Tutto ciò che rimane ora è aggiungere il layer al registro e alcune allltre voci di manutentzione (linee da 111 a 119). Questa roba è standard nell'aggiungere un layer ed il risultato finale sono i bordi del mondo su uno sfondo celeste. La sola cosa che si potrebbe non voler impostare è l'estensione del layer, se si deve aggiunge più di un layer nell'applicazione.
+Tutto ciò che rimane ora è aggiungere il layer al registro e alcune altre voci di manutenzione (linee da 111 a 119). Questa roba è standard nell'aggiungere un layer ed il risultato finale sono i bordi del mondo su uno sfondo celeste. La sola cosa che si potrebbe non voler impostare è l'estensione del layer, se si deve aggiunge più di un layer nell'applicazione.
 
 Questo è il cuore dell'applicazione e completa la classe \classname{MainWindow}. 
 
 \subsection{Conclusione}
 
-Il resto del codice scritto sotto crea l'oggetto \object{QgsApplication}, imposta il percorso all'istallazione di QGIS, imposta il metodo \method{main} e infine avvia l'applicazione. L'unica altra cosa da notare è che noi muoviamo la finestra dell'applicazione all'angolo superiore sinistro dello schermi. Potremmo anche essere fantasiosi e usare il Qt API per centrarla sullo schermo.
+Il resto del codice scritto sotto crea l'oggetto \object{QgsApplication}, imposta il percorso all'installazione di QGIS, imposta il metodo \method{main} e infine avvia l'applicazione. L'unica altra cosa da notare è che noi muoviamo la finestra dell'applicazione all'angolo superiore sinistro dello schermo. Potremmo anche essere fantasiosi e usare il Qt API per centrarla sullo schermo.
 
 \begin{verbatim}
 120 def main(argv):
@@ -260,9 +260,9 @@ Il resto del codice scritto sotto crea l'oggetto \object{QgsApplication}, impost
 
 \subsection{Lanciare l'applicazione}
 
-Ora si può lanciare l'applicazione e vedere cosa succede. Naturalmente se si è come molti sviluppatori, la si è testata man mano che la si scriveva. 
+Ora si può lanciare l'applicazione e vedere cosa succede. Se si è come molti sviluppatori, probabilmente la si è testata man mano che la si scriveva. 
 
-Prima di lanciare l'applicazione, si devono impostare alcune variabli dell'ambiente. 
+Prima di lanciare l'applicazione, si devono impostare alcune variabli d'ambiente. 
 
 \nix{}\osx{}
 \begin{verbatim}
@@ -280,12 +280,12 @@ set QGISHOME=C:\qgis
 
 Si assume che
 \begin{itemize}
-\item\nix{}\osx{}QGIS sia istalla to nella home directory in 
+\item\nix{}\osx{}QGIS sia installato nella home directory in 
 \filename{qgis}. 
-\item\win{}QGIS sia istallato in \filename{C:\textbackslash qgis}.
+\item\win{}QGIS sia installato in \filename{C:\textbackslash qgis}.
 \end{itemize}
 
-Quando l'applicazione si avvia, appare così:
+All'avvio l'applicazione appare così:
 
 %\begin{figure}[ht]
 %\begin{center}
@@ -296,8 +296,8 @@ Quando l'applicazione si avvia, appare così:
 
 Per aggiunger il layer \filename{world\_borders}, premere lo strumento 
 \usertext{Add Layer} e navigare alla directory dei dati.
-Selezionare il file shape e premere \button{Open} per aggiungerlo alla mappa. 
-Il nostro color di riempimento personalizzato è aggiunto e il risultato è:
+Selezionare lo shapefile e premere \button{Open} per aggiungerlo alla mappa. 
+Il nostro colore di riempimento personalizzato è aggiunto e il risultato è:
 
 %\begin{figure}[ht]
 %\begin{center}
@@ -306,9 +306,9 @@ Il nostro color di riempimento personalizzato è aggiunto e il risultato è:
 %\end{center}
 %\end{figure}
 
-Creare un'applicazione PyQGIS è veramente molto facile.  In meno di 150 linee di codice avete un'applicazione che può caricare un file shapes e navigare la mappa. Se giocate un po' con la mappa, noterete che funzionano anche alcune delle caratteristiche integrate del canvas, incluso lo scroolling del mouse e lo spostamento premendo e tenendo premuta la barra  \keystroke{Space} e contemporaneamente muovendo il mouse.
+Creare un'applicazione PyQGIS è veramente molto facile. In meno di 150 linee di codice avrete un'applicazione che può caricare uno shapefile e navigare la mappa. Se giocate un po' con la mappa, noterete che funzionano anche alcune delle caratteristiche integrate del canvas, incluso lo scorrimento con il mouse e lo spostamento della vista premendo la barra spaziatrice \keystroke{Space} contemporaneamente al mouse.
 
-Alcune applicazioni sofisticate sono state create con PyQGIS e molte sono in lavorazione. Questo è impressionante, se si considera che questo sviluppo è avvenuto anche prima del rilascio ufficiale di QGIS 1.0.
+Diverse applicazioni sofisticate sono state create con PyQGIS e molte altre sono in lavorazione. Questo è impressionante, se si considera che questo sviluppo è avvenuto anche prima del rilascio ufficiale di QGIS 1.0.
 
 \begin{Tip}\caption{\textsc{Documentazione per PyQGIS}}
 \qgistip{Se state scrivendo un plugin o un'applicazione PyQGIS, avrete bisogno di far riferimento alle documentazioni QGIS API (\url{http://doc.qgis.org}) e alla Guida di riferimento di PyQt Python
