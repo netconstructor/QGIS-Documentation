@@ -8,46 +8,45 @@
 % \updatedisclaimer
 
 
-QGIS supporta un gran numero di formati vettoriali, inclusi quelli supportati
-dalla libreria OGR inclusa, come gli ESRI shapefiles,
-\index{shapefiles}\index{ESRI!shapefiles}\index{files SHP}, il formato di
-interscambio MapInfo MIF\index{files MIF}\index{MapInfo!files MIF}
-e il formato nativo MapInfo TAB (native format).\index{files TAB}\index{MapInfo!files TAB}
+QGIS supporta un gran numero di formati vettoriali, compresi quelli supportati
+dalla libreria inclusa OGR, come gli shapefile ESRI,
+\index{shapefile}\index{ESRI!shapefile}\index{file SHP}, il formato di
+interscambio MapInfo MIF\index{file MIF}\index{MapInfo!file MIF}
+e il formato nativo MapInfo TAB (native format).\index{file TAB}\index{MapInfo!file TAB}
 Una lista dei formati vettoriali supportati da OGR si trova nell'Appendice~\ref{appdx_ogr}.
 
-QGIS supporta anche strati PostGIS\index{PostGIS}\index{PostgreSQL!PostGIS}
+QGIS supporta anche layer PostGIS\index{PostGIS}\index{PostgreSQL!PostGIS}
 immagazzinati in un database PostgreSQL usando il plugin di accesso a PostgreSQL.
 Il supporto per altri formati (ad es. testo delimitato) è fornito da
-ulteriori plugins specifici.\index{testo delimitato}
+ulteriori plugin specifici.\index{testo delimitato}
 
 Questa sezione descrive come lavorare con due formati di uso comune:
-ESRI shapefiles e strati PostGIS. Molti degli strumenti disponibili in QGIS
+Shapefile ESRI e layer PostGIS. Molti degli strumenti disponibili in QGIS
 funzionano allo stesso modo con le differenti sorgenti di dati vettoriali (ad
 es. l'identificazione, la selezione, la visualizzazione delle etichette ed
 altre funzioni).
 
-La Sezione \ref{sec:grass} illustra come lavorare con i dati di GRASS.
+La sezione \ref{sec:grass} illustra come lavorare con i dati di GRASS.
 
-\subsection{ESRI Shapefiles}
-\index{layer vettoriali!ESRI shapefiles}
-\index{shapefiles}
-\index{ESRI!shapefiles}
-\index{files SHP}
+\subsection{Shapefile ESRI}
+\index{layer vettoriali!shapefile ESRI}
+\index{shapefile}
+\index{ESRI!shapefile}
+\index{file SHP}
 
-Il formato di file usato come default in QGIS è ESRI Shapefile. Il supporto a
-tale formato è fornito dalla libreria OGR Simple Feature Library (\url{http://www.gdal.org/ogr/})
-\index{OGR}. Uno shapefile consiste di un minimo di tre files:
+Il formato di file usato come default in QGIS è lo shapefile ESRI. Il supporto al formato è fornito dalla libreria OGR Simple Feature Library (\url{http://www.gdal.org/ogr/})
+\index{OGR}. Uno shapefile consiste di un minimo di tre file:
 \index{shapefile!formato}
 
 \begin{itemize}
 \item \filename{.shp} file contente le geometrie.
 \item \filename{.dbf} file contenente gli attributi in formato dBase.
-\item \filename{.shx} file di indice.
+\item \filename{.shx} file d'indice.
 \end{itemize}
 
 Idealmente dovrebbe essere presente un altro file con estensione
 \filename{.prj}, che contiene le informazioni sulla proiezione dello
-shapefile. Ci possono essere ulteriori files che compongono il dataset in
+shapefile. Ci possono essere ulteriori file che compongono il dataset in
 formato shape. Per uno sguardo più ravvicinato al formato shapefile si
 raccomanda di prendere visione delle specifiche tecniche del formato
 disponibili sul sito \url{http://www.esri.com/library/whitepapers/pdfs/shapefile.pdf}.
@@ -78,7 +77,7 @@ porzioni testuali della tabella dello shapefile.
 \end{figure}
 
 Selezionando uno shapefile dalla lista e cliccando su \button{Open} esso viene
-caricato in QGIS. La figura \ref{fig:loadedshapefile} mostra coem appare
+caricato in QGIS. La figura \ref{fig:loadedshapefile} mostra come appare
 l'interfaccia di QGIS dopo aver caricato il file \filename{alaska.shp}.
 
 \begin{figure}[ht]
@@ -89,24 +88,24 @@ l'interfaccia di QGIS dopo aver caricato il file \filename{alaska.shp}.
 \end{figure}
 
 \begin{Tip}\caption{\textsc{Colori del layer}}
-\qgistip{Quando uno strato viene aggiunto alla mappa, gli viene assegnato un
+\qgistip{Quando un layer viene aggiunto alla mappa, gli viene assegnato un
 colore a caso. Aggiungendo più layer in una sola volta, ad ognuno di essi
 viene assegnato un colore differente. }
 \end{Tip}
 
-Una volta caricato, si può zoommare nella mappa usando gli strumenti di navigazione.
+Una volta caricato, si può usare lo zoom nella mappa usando gli strumenti di navigazione.
 Per cambiare la rappresentazione di un layer, aprire la finestra
 \dialog{Proprietà} facendo doppio click sul nome del layer e quindi sulla
-linguetta Simbologia o cliccando con il
+scheda Simbologia o cliccando con il
 tasto destro sul nome del layer nella legenda e scegliendo
-\dropmenuopt{Proprietà} dal menù contestuale. Si veda la Sezione
+\dropmenuopt{Proprietà} dal menu contestuale. Si veda la Sezione
 \ref{sec:symbology} per ulteriori informazioni su come settare la simbologia
 dei layer vettoriali.
 
 \subsubsection{Ottimizzare le prestazioni}
 
 Per migliorare le prestazioni di disegno di uno shapefile, può essere creato
-un indice spaziale. Un \index{indice spaziale!shapefiles} indice spaziale
+un indice spaziale. Un \index{indice spaziale!shapefile} indice spaziale
 migliorerà la velocità di disegno quando si usano le funzioni di zoom e di
 spostamento. Gli indici spaziali usati da QGIS hanno estensione \filename{.qix}.
 
@@ -116,50 +115,50 @@ Per creare un indice, seguire queste indicazioni:
 \item Caricare uno shapefile.
 \item Aprire la finestra di dialogo \dialog{Proprietà} facendo doppio click
 sul nome dello shapefile nella legenda o cliccando su di esso con il tasto
-destro e scegliendo la voce \dropmenuopt{Proprietà} dal menù contestuale.
-\item Nella linguetta \tab{Generale} cliccare sul pulsante \button{Crea indice
+destro e scegliendo la voce \dropmenuopt{Proprietà} dal menu contestuale.
+\item Nella scheda \tab{Generale} cliccare sul pulsante \button{Crea indice
 spaziale}.
 \end{itemize}
 
-\subsubsection{Caricare uno strato MapInfo}
+\subsubsection{Caricare un layer MapInfo}
 \index{layer vettoriali!MapInfo}
 
-Per caricare uno strato MapInfo, cliccare nella barra strumenti sul pulsante
+Per caricare un layer MapInfo, cliccare nella barra strumenti sul pulsante
 \toolbtntwo{mActionAddNonDbLayer}{Aggiungi layer vettoriale} o digitare
-\keystroke{V}, cambiare il filtro sul tipo di file nel menù a tendina a
+\keystroke{V}, cambiare il filtro sul tipo di file nel menu a tendina a
 \selectstring{Files of Type}{[OGR] MapInfo (*.mif *.tab *.MIF *.TAB)} e
-selezionare lo strato che si intende caricare.
+selezionare il layer che si intende caricare.
 
-\subsubsection{Caricare una coverage ArcInfo}
-\index{layer vettoriali!ArcInfo Coverage}
+\subsubsection{Caricare una copertura ArcInfo}
+\index{layer vettoriali!copertura ArcInfo}
 
-Per caricare una coverage ArcInfosi usa lo stesso metodo precedentemente visto
-per shapefiles e layers MapInfo. 
+Per caricare una copertura ArcInfo si usa lo stesso metodo precedentemente visto
+per shapefile e layer MapInfo. 
 Cliccare nella barra strumenti sul pulsante
 \toolbtntwo{mActionAddNonDbLayer}{Aggiungi layer vettoriale} o digitare
 \keystroke{V}, scorrere il filesystem per individuare la cartella contenente
-la coverage che si vuole caricare e selezionare uno dei seguenti file (se
-presenti nella propria coverage):
+la copertura che si vuole caricare e selezionare uno dei seguenti file (se
+presenti nella propria copertura):
 
 \begin{itemize}
-\item \filename{.lab} - per caricare un livello etichette (etichette di poligoni o di punti).
-\item \filename{.cnt} - per caricare un livello contenente i centroidi dei poligoni 
-\item \filename{.arc} - per caricare un livello arc (linee).
-\item \filename{.pal} - per caricare un livello di poligoni.
+\item \filename{.lab} - per caricare un layer etichette (etichette di poligoni o di punti).
+\item \filename{.cnt} - per caricare un layer contenente i centroidi dei poligoni 
+\item \filename{.arc} - per caricare un layer arc (linee).
+\item \filename{.pal} - per caricare un layer di poligoni.
 \end{itemize}
 
-\subsection{Gli strati PostGIS}
+\subsection{Layer PostGIS}
 \index{layer vettoriali!PostGIS|see{PostGIS}}
-\index{PostGIS!layers}
+\index{PostGIS!layer}
 \label{label_postgis} 
 
-I layer layers sono immagazzianti in un database PostgreSQL. I vantaggi
-nell'uso di PostGIS stanno nella capacità di creazione dell'indice spaziale,
-di filtraggio e di interrogazione fornite. Usando PostGIS, le funzioni
+I layer sono immagazzinati in un database PostgreSQL. I vantaggi
+nell'uso di PostGIS stanno nelle capacità fornite di creazione dell'indice spaziale,
+di filtraggio e di interrogazione. Usando PostGIS, le funzioni
 vettoriali come la selezione e l'identificazione in QGIS lavorano con maggiore
-precisione che con i livelli OGR.
+precisione che con i layer OGR.
 
-Per usare livelli PostGIS layers bisogna:\index{PostgreSQL!caricamento layers}
+Per usare layer PostGIS bisogna:\index{PostgreSQL!caricamento layer}
 
 \begin{itemize}
 \item Creare una connessione in QGIS con il database PostgreSQL (se non è già
@@ -177,7 +176,7 @@ definire quali elementi del layer caricare.
 usata una fonte dati PostGIS, bisogna creare una connessione al database
 PostgreSQL che contiene i dati. Cliccare nella barra strumenti sul pulsante
 \toolbtntwo{mActionAddLayer}{Aggiungi layer PostGIS}, oppure selezionare l'opzione
-\dropmenuopttwo{mActionAddLayer}{Aggiungi layer PostGIS...} dal menù
+\dropmenuopttwo{mActionAddLayer}{Aggiungi layer PostGIS...} dal menu
 \mainmenuopt{Layer} o digitare \keystroke{D}. 
 Si aprirà  la finestra di dialogo \dialog{Aggiungi tabella(e) PostGIS}. Per
 accedere al gestore della connessione \index{PostgreSQL!gestore della connessione}
@@ -194,12 +193,12 @@ per la connessione sono mostrati nella tabella \ref{tab:postgis_connection_parms
 \hline Host \index{PostgreSQL!host}
 & Nome del server che ospita il database. Deve essere un host con indirizzo
 raggiungibile, lo stesso che potrebbe essere usato per aprire una connessione
-telnet o per pingare l'host. Se il database è sullo stesso computer sul quale
-è installato QGIS, inserire semplicemente 'localhost'. \\
+telnet o per fare il ping all'host. Se il database è sullo stesso computer sul quale
+è installato QGIS, inserire semplicemente "localhost". \\
 \hline Database \index{PostgreSQL!database} & Nome del database.  \\
 \hline Porta \index{PostgreSQL!porta}& Numero della porta sulla quale il
 database PostgreSQL è in ascoloto. La porta di default è 5432.\\
-\hline Username \index{PostgreSQL!username}& Nome dell'utente che accede al
+\hline Username \index{PostgreSQL!nome utente}& Nome dell'utente che accede al
 database. \\
 \hline Password \index{PostgreSQL!password}& Password usata
 dall'\textsl{Username} per collegarsi al database.\\
@@ -212,13 +211,13 @@ Come opzione, possono essere attivate le seguenti caselle di controllo:
 \begin{itemize}
 \item \checkbox{Salva password}
 \item \checkbox{Cercare solamente nella tabella geometry\_columns}
-\item \checkbox{Cerca solamente nello schema 'public'}
+\item \checkbox{Cerca solamente nello schema "public"}
 \end{itemize}
 
 Quando tutti i parametri sono impostati, la connessione può essere testata
-cliccando sul pulsante \button{Prova connessione} \index{PostgreSQL!connessione!testing}.
+cliccando sul pulsante \button{Prova connessione} \index{PostgreSQL!connessione!prova}.
 
-\begin{Tip}\caption{\textsc{Settaggio e sicurezza delle impostazioni utente in QGIS}}\index{settings}\index{security}
+\begin{Tip}\caption{\textsc{Definizione e sicurezza delle impostazioni utente in QGIS}}\index{impostazioni}\index{sicurezza}
 \qgistip{Le impostazioni personalizzate di QGIS sono salvate in modo diverso
 in base al sistema operativo. \nix, le impostazioni sono salvate nella
 cartella home dell'utente nel file \filename{.qt/qgisrc}. \win, le
@@ -228,43 +227,43 @@ rischio.
 }
 \end{Tip}
 
-\subsubsection{Caricare un layer PostGIS}\index{PostgreSQL!caricamento layers}
+\subsubsection{Caricare un layer PostGIS}\index{PostgreSQL!caricamento layer}
 
 \includegraphics[width=0.7cm]{mActionAddLayer} Una volta definite una o più
-connessioni, possono essere caricati livelli dal database PostgreSQL.
+connessioni, possono essere caricati layer dal database PostgreSQL.
 Ovviamente questo richiede avere dati in PostgreSQL. Si veda la Sezione
 \ref{sec:loading_postgis_data} per informazioni sul come importare dati nel
 database. 
 
-Per caricare livelli da PostGIS, seguire i seguenti passaggi:
+Per caricare layer da PostGIS, seguire i seguenti passaggi:
 
 \begin{itemize}
 \item Se la finestra di dialogo \dialog{Aggiungi tabella(e) PostGIS} non è già
 aperta, cliccare nella barra strumenti sul pulsante
 \toolbtntwo{mActionAddLayer}{Aggiungi layer PostGIS}.
-\item Scegliere la connessione dal menù a tendina e cliccare su \button{Connetti}.
-\item Individuare il livello che si vuole aggiungere nella lista fra quelli disponibili.
-\item Selezionarlo cliccando sul nome. È possibile selezionare più livelli
+\item Scegliere la connessione dal menu a tendina e cliccare su \button{Connetti}.
+\item Individuare il layer che si vuole aggiungere nella lista fra quelli disponibili.
+\item Selezionarlo cliccando sul nome. È possibile selezionare più layer
 tenendo premuto il tasto \keystroke{shift} mentre si seleziona. Si veda la
 Sezione \ref{sec:query_builder} per informazioni su come usare il costruttore
 di query PostgreSQL per definire una selezione al momento del caricamento.
-\item Cliccare sul tasto \button{Aggiungere} per aggiungere il livelllo alla mappa.
+\item Cliccare sul tasto \button{Aggiungere} per aggiungere il livello alla mappa.
 \end{itemize}
 
-\begin{Tip}\caption{\textsc{Livelli PostGIS}}
-\qgistip{Di solito un livello PostGIS è definito da un record nella tabella
+\begin{Tip}\caption{\textsc{layer PostGIS}}
+\qgistip{Di solito un layer PostGIS è definito da un record nella tabella
 geometry\_columns. Dalla versione \OLD % should be 0.9.0 
-in avanti, QGIS può caricare livelli che non hanno tale record nella tabella
+in avanti, QGIS può caricare layer che non hanno tale record nella tabella
 geometry\_columns. Ciò vale sia per le tabelle che per le viste. La
 definizione si una vista spaziale fornisce un mezzo molto potente per
 visualizzare i dati. Fare riferimento al manuale PostgreSQL per informazioni
 su come creare le viste.}
 \end{Tip}
 
-\subsubsection{Alcuni dettagli sui livelli PostgreSQL}\label{sec:postgis_details}
-\index{PostgreSQL!dettagli strato}
+\subsubsection{Alcuni dettagli sui layer PostgreSQL}\label{sec:postgis_details}
+\index{PostgreSQL!dettagli layer}
 
-Questa sezione contiene alcuni dettagli su come QGIS accede agli strati
+Questa sezione contiene alcuni dettagli su come QGIS accede ai layer
 PostgreSQL. La maggior parte delle volte QGIS dovrebbe semplicemente fornire
 una lista di tabelle del database che possono essere caricate, e caricarle su
 richiesta. Tuttavia, se avete difficoltà a caricare una tabella di PostgreSQL
@@ -272,19 +271,19 @@ in QGIS, le informazioni qui sotto possono aiutare a capire tutti i messaggi di 
 dare un'indicazione su come cambiare la definizione di tabella o di vista di PostgreSQL per permettere
 a QGIS di caricarla.
 
-QGIS richiede che gli strati di PostgreSQL contengano una colonna che possa essere usata come
-chiave unica per lo strato. Per le tabelle questo significa che esse devono
+QGIS richiede che i layer di PostgreSQL contengano una colonna che possa essere usata come
+chiave unica per il layer. Per le tabelle questo significa che esse devono
 contenere una chiave primaria o presentino una colonna con un vincolo unico su
 essa. Se una tabella manca di questi
 elementi, verrà usata la colonna oid. QGIS richiede inoltre che questa colonna sia di
 tipo int4 (un numero intero del formato 4 byte). Le prestazioni saranno migliorate se la colonna è
 indicizzata (notare che le chiavi primarie sono automaticamente indicizzate in PostgreSQL).
 
-Se lo strato di PostgreSQL è una vista, esistono gli stessi requisiti, ma le
+Se il layer di PostgreSQL è una vista, esistono gli stessi requisiti, ma le
 viste non hanno chiavi primarie o colonne con i vincoli unici su di loro. In
 questo caso QGIS proverà a trovare una colonna nella vista che provenga da una
 colonna della tabella appropriata. Se non ne viene trovata alcuna, QGIS non
-caricherà il livello. Se questo accade, la soluzione è di alterare la vista in
+caricherà il layer. Se questo accade, la soluzione è di alterare la vista in
 modo che includa una colonna adatta (un tipo di int4 e una chiave primaria o un vincolo unico, spostato e preferibilmente indicizzato).
 
 \subsubsection{Importazione di dati in PostgreSQL}\label{sec:loading_postgis_data}
@@ -293,7 +292,7 @@ modo che includa una colonna adatta (un tipo di int4 e una chiave primaria o un 
 \minisec{shp2pgsql}
 I dati possono essere importati in PostgreSQL in diverse maniere. PostGIS
 include un programma di utilità chiamato \filename{shp2pgsql} che può essere
-usato per importare shapefiles in un database PostGIS. Per esempio, per
+usato per importare shapefile in un database PostGIS. Per esempio, per
 importare lo shapefile chiamato \filename{lakes.shp}
 nel database PostgreSQL chiamato \usertext{gis\_data}, usare il comando
 seguente:
@@ -309,15 +308,15 @@ sui sistemi di spatial reference systems e le proiezioni.
 \begin{Tip}
 \caption{\textsc{Esportare dati da PostGIS}\index{PostGIS!esportazione}}
 \qgistip{Come è presente lo strumento per l'importazione \filename{shp2pgsql}
-c'è anche lo strumento per l'esportazione di dati PostGIS come shapefiles:
+c'è anche lo strumento per l'esportazione di dati PostGIS come shapefile:
 \filename{pgsql2shp}. Esso è incluso nella versione di PostGIS installata.} 
 \end{Tip}
 
 \minisec{SPIT Plugin}
 \includegraphics[width=0.7cm]{spiticon} QGIS include un plugin denominato SPIT (Shapefile to PostGIS Import Tool)\index{PostGIS!SPIT}.
-SPIT può essere usato per caricare più shapefiles in una volta sola e
-include il supporto per gli schemi. Per usare SPIT, aprire il Gestore plugin
-dal menù \mainmenuopt{Plugins}, selezionare la casella di controllo vicina a
+SPIT può essere usato per caricare più shapefile in una volta sola e
+include il supporto per gli schemi. Per usare SPIT, aprire il QGIS Plugin Manager
+dal menu \mainmenuopt{Plugins}, selezionare la casella di controllo vicina a
 \checkbox{SPIT} e cliccate su \button{OK}. L'icona di SPIT verrà aggiunta alla
 barra degli strumenti plugin\index{PostGIS!SPIT!caricamento}. 
 
@@ -327,14 +326,14 @@ nella barra degli strumenti per aprire la finestra di
 dialogo \dialog{SPIT}.
 Selezionare il database PostGIS al quale si desidera connettersi
 e cliccare su \button{Connetti}.
-Ora è possibile aggiungere uno o più files alla coda
-cliccando su \button{Aggiungi}. Per processare i files selezionati, cliccare
+Ora è possibile aggiungere uno o più file alla coda
+cliccando su \button{Aggiungi}. Per processare i file selezionati, cliccare
 su \button{OK}. L'avanzamento dell'importazione ed eventuali
 errori/avvertimenti saranno mostrati mentre ciascuno shapefile viene
 elaborato.
-\begin{Tip}\caption{\textsc{Importare shapefiles contenenti parole riservate a PostgreSQL}}\index{PostGIS!SPIT!parole riservate}
-\qgistip{Se uno shapefile contenente campi che sono parole riservate per il
-database PostgreSQL viene aggiunto alla coda, comparirà una finestra di dialogo
+\begin{Tip}\caption{\textsc{Importare shapefile contenenti parole riservate in PostgreSQL}}\index{PostGIS!SPIT!parole riservate}
+\qgistip{Se alla coda d'importazione uno shapefile contiene campi con parole riservate per il
+database PostgreSQL, comparirà una finestra di dialogo
 che darà informazioni sullo stato di ogni campo. È necessario editare i nomi
 dei campi contenenti tali parole (ed è possibile eventualmente editare anche
 il nome degli altri campi) \index{PostGIS!SPIT!editare il nome dei campi}
@@ -382,7 +381,7 @@ sezione \ref{label_improve}).
 
 Richiamare dati geografici da un database PostgreSQL può richiedere molto
 tempo, specialmente se il server dei dati si trova in rete. È possibile
-migliorare le prestazioni di resa a video di strati PostgreSQL assicurandosi
+migliorare le prestazioni di resa a video di layer PostgreSQL assicurandosi
 di creare un \index{PostGIS!indice spaziale} indice spaziale su ogni layer nel
 database. PostGIS supporta la creazione di un \index{PostGIS!indice
 spaziale!GiST} indice GiST
@@ -423,7 +422,7 @@ gis_data=# \q
 gsherman@madison:~/current$
 \end{verbatim}
 
-\subsection{La finestra delle proprietà dei vettori}\label{sec:vectorprops}
+\subsection{Proprietà dei layer vettoriali}\label{sec:vectorprops}
 \index{layer vettoriali!finestra delle proprietà}
 
 La finestra di dialogo \dialog{Proprietà del vettoriale} fornisce informazioni
@@ -431,11 +430,11 @@ sul layer, sulla sua rappresentazione grafica (simbologia) e opzioni per la
 visualizzazione di etichette sugli elementi che lo compongono. Se il layer
 vettoriale è stato caricato da un archivio dati PostgreSQL/PostGIS, è possbile
 modificare anche l'espressione SQL che lo ha generato - sia a mano editando
-l'espressione SQL nella linguetta \tab{Generale} o richiamando la finestra di
-dialogo \dialog{Costruttore di query} dalla linguetta \tab{Generale}. 
-Per accedere alla fienstra di dialogo \dialog{Proprietà del vettoriale}, fare
+l'espressione SQL nella scheda \tab{Generale} o richiamando la finestra di
+dialogo \dialog{Costruttore di query} dalla scheda \tab{Generale}. 
+Per accedere alla finestra di dialogo \dialog{Proprietà del vettoriale}, fare
 doppio click sul layer nella legenda o click con il tasto destro  sul layer e
-selezionare \dropmenuopt{Proprietà} dal menù contestuale.
+selezionare \dropmenuopt{Proprietà} dal menu contestuale.
 
 \begin{figure}[H]
    \begin{center}
@@ -444,11 +443,11 @@ selezionare \dropmenuopt{Proprietà} dal menù contestuale.
 \end{center}  
 \end{figure}
 
-\subsubsection{Linguetta Generale}\label{vectorgeneraltab}
-La linguetta \tab{Generale} è sostanzialmente simile a quella dei raster. Essa
+\subsubsection{Scheda Generale}\label{vectorgeneraltab}
+La scheda \tab{Generale} è sostanzialmente simile a quella dei raster. Essa
 consente di cambiare il nome del file mostrato, impostare la visualizzazione
 in base alla scala, creare un indice spaziale (solo per i formati supportati
-da OGR e per livelli PostGIS) e vedere o cambiare la proiezione dello
+da OGR e per layer PostGIS) e vedere o cambiare la proiezione dello
 specifico layer vettoriale.
 
 Il pulsante \button{Creatore di query} consente di selezionare un sottoinsieme
@@ -456,11 +455,11 @@ di elementi nel layer - ma questo pulsante è attualmente disponibile
 unicamente quando viene aperta la tabella attributi cliccando sul pulsante
 \button{Avanzate ...}.
 
-\subsubsection{Linguetta simbologia}\label{sec:symbology}
+\subsubsection{Scheda simbologia}\label{sec:symbology}
 \index{layer vettoriali!simbologia}
 
 QGIS supporta diverse modalità di rappresentazione per controllare come gli
-elementi del vettoriale sono mostrati. Attualmente sono disponibili le
+elementi dei layer vettoriali vengono mostrati. Attualmente sono disponibili le
 seguenti modalità:
 
 \begin{description} 
@@ -497,11 +496,11 @@ rappresentazione del layer vettoriale. Secondo l'opzione di visualizzazione
 scelta tra quelle descritte precedentemente si ha la possibilità di
 classificare anche gli elementi della mappa.
 
-Le seguenti opzioni dovrebbero essere disponibili per pressoché tutti le
+Le seguenti opzioni dovrebbero essere disponibili per pressoché tutte le
 simbologie:
 \begin{description}
  \item[Stile esterno] - tipo di tratteggio del contorno degli elementi. Si può
- anche impostare l'opzione 'Nessuna penna' per escludere la rappresentazione
+ anche impostare l'opzione "Nessuna penna" per escludere la rappresentazione
  del contorno.
  \item[Colore esterno] - colore del contorno degli elementi
  \item[Dimensione stile esterno] - larghezza della linea di contorno
@@ -509,7 +508,7 @@ simbologie:
  \item[Stile di riempimento] - stile per il riempimento. Oltre ai retini forniti è possibile scegliere \selectstring{Stile di riempimento}{? Texture} e cliccare su \browsebutton per selezionare un retino personalizzato. Attualmente sono supportati i formati \filename{*.jpeg, *.xpm, and *.png}.
 \end{description}
 
-Una volta impostato lo stile del layer esso può essere salvato in un fiel
+Una volta impostato lo stile del layer esso può essere salvato in un fil
 separato (con estensione \filename{*.qml}).
 Per fare ciò, cliccare sul pulsante \button{Salva stile \ldots}. Ovviamente il
 pulsante \button{Caricamento stile \ldots} carica un file di stile precedentemente
@@ -525,36 +524,36 @@ ritornare allo stile predefinito precedentemente impostato.
 vettoriali!trasparenza}
 QGIS \CURRENT fornisce la possibilità di settare la trasparenza per ogni layer
 vettoriale. Ciò può essere fatto settando l'apposita barra
-\slider{Trasparenza}{0}{20mm} nella linguetta \tab{Symbologia} (si veda la fig. \ref{fig:vector_symbology}).
+\slider{Trasparenza}{0}{20mm} nella scheda \tab{Symbologia} (si veda la fig. \ref{fig:vector_symbology}).
 Ciò può essere molto utile per la visualizzazione di più layer vettoriali
 sovrapposti.
 
-\subsubsection{Linguetta Metadata}
+\subsubsection{Scheda Metadata}
 
-La linguetta \tab{Metadata} contiene informazioni relative allo strato quali il formato, la posizione, il
-numero ed il tipo di geometrie e le possibilità di editing. Nella sezione
+La scheda \tab{Metadata} contiene informazioni relative al layer quali il formato, la posizione, il
+numero ed il tipo di geometrie e le possibilità di modifica. Nella sezione
 \guiheading{Sistema di riferimento spaziale del layer} è visualizzata la proiezione associata al
-dato, mentre quella \guiheading{Informazioni campo atributi} fornisce il nome
+dato, mentre quella \guiheading{Informazioni campo attributi} fornisce il nome
 e il formato dei campi della tabella associata. Questo è un metodo veloce per
 ottenere informazioni sul layer.
 
-\subsubsection{Linguetta Etichette}
+\subsubsection{Scheda Etichette}
 
-La linguetta \tab{Etichette} consente di abilitare la visualizzazione delle
-etichette associate agli elementi dello strato e controlla una serie di
-opzioni legate al posizionamento, allo stile ed ad altre caratteristiche delle
-etichette..
+La scheda \tab{Etichette} consente di abilitare la visualizzazione delle
+etichette associate agli elementi del layer e controlla una serie di
+opzioni legate al posizionamento, allo stile e ad altre caratteristiche delle
+etichette.
 
 Come esempio apporremo le etichette allo shapefile lakes del
 \filename{dataset\_esempio\_di\_qgis}:
 
 \begin{enumerate}
 \item Caricare lo shapefile \filename{alaska.shp} e il file GML \filename{lakes.gml} in QGIS.
-\item Zoommare su un'area a scelta contenente alcuni laghi.
+\item Usare lo zoom su un'area a scelta contenente alcuni laghi.
 \item Rendere attivo il layer \filename{lakes} cliccando su di esso nella
 legenda.
 \item Aprire la finestra di dialogo \dialog{Proprietà del vettoriale}.
-\item Cliccare sulla linguetta \tab{Etichette}.
+\item Cliccare sulla scheda \tab{Etichette}.
 \item Selezionare la casella di controllo \checkbox{Mostra etichette} per
 abilitarne la visualizzaizone.
 \item Scegliere il campo della tabella contenente le etichette da apporre. 
@@ -576,7 +575,7 @@ l'angolo e la posizione delle etichette testuali.
 Per modificare la posizione relativa del testo rispetto agli elementi:
 
 \begin{enumerate} 
-\item Cliccare sulla linguetta \tab{Etichette}.
+\item Cliccare sulla scheda \tab{Etichette}.
 \item Cambiare la posizione selezionando una delle opzioni disponibili nel
 gruppo \classname{Posizionamento}. Nel caso preso in esame, scegliere l'opzione
 \radiobuttonon{Destra}.
@@ -589,8 +588,8 @@ la finestra di dialogo.
 Ora l'aspetto sarà migliore, ma le etichette appaiono ancora troppo vicine
 all'indicatore della loro posizione. Per sistemare il problema è possibile
 utilizzare l'opzione della voce \tab{Posizione}. Può qui essere impostato uno
-scostamento nelle direzioni X e Y. Aggiungengo uno spostamento in X pari a 5
-le etichette verrano scostate dall'indicatore della loro posizione e renderle
+scostamento nelle direzioni X e Y. Aggiungendo uno spostamento in X pari a 5
+le etichette verrano scostate dall'indicatore della loro posizione e rese
 più leggibili. Ovviamente più è grande l'indicatore o il carattere, maggiore
 sarà lo scostamento da applicare.
 
@@ -616,26 +615,26 @@ In genere un buffer di 1 punto fornisce risultati esteticamente gradevoli.
 Si noti che è anche possibile specificare la dimensione del buffer in unità
 della mappa se ciò rende più agevole l'impostazione.
 
-Le rimanenti voci della linguetta \tab{Etichette} consentono di controllare
+Le rimanenti voci della scheda \tab{Etichette} consentono di controllare
 l'aspetto delle etichette usando, se adeguatamente preparati, gli attributi
 del layer. Le voci che iniziano con \tab{Definizione} consentono di settare
 tutti i parametri delle etichette facendo riferimento a campi della tabella
-del livello.
+del layer.
 
-Si noti che la linguetta \tab{Etichette} fornisce una \classname{Anteprima}
+Si noti che la scheda \tab{Etichette} fornisce una \classname{Anteprima}
 nella quale viene mostrata l'etichetta predefinita.
 
-\subsubsection{Linguetta Azioni}\index{azioni}\label{label_actions}
+\subsubsection{Scheda Azioni}\index{azioni}\label{label_actions}
 
 QGIS offre la possibilità di effettuare azioni sulla base degli
-attributi associati ai singoli elementi dello strato vettoriale.
+attributi associati ai singoli elementi del layer vettoriale.
 Questo permette di effettuare un elevato numero di azioni, per esempio,
 lanciare un programma con argomenti costruiti tramite gli attributi
 delle geometrie o passando i parametri ad uno strumento di web reporting.
 
 Definire delle azioni è utile quando si voglia lanciare un'applicazione
 esterna o la visualizzazione di una pagina web sulla base di uno o più valori
-associati allo strato vettoriale. Ad esempio si può lanciare una ricerca web
+associati al layer vettoriale. Ad esempio si può lanciare una ricerca web
 basata sul valore di un attributo. Questo concetto è spiegato nel seguente
 paragrafo.
 
@@ -643,13 +642,13 @@ paragrafo.
 
 Le azioni legate agli attributi sono definite dalla finestra di dialogo
 \dialog{Proprietà del vettoriale}. Per impostare un'azione, aprire la finestra
-di dialogo \dialog{Proprietà del vettoriale} e cliccare sulla linguetta
+di dialogo \dialog{Proprietà del vettoriale} e cliccare sulla scheda
 \tab{Azioni}. Fornire una descrizione per l'azione nel campo Nome. L'azione in
 sé deve contenere il nome o il percorso di una applicazione che verrà eseguita quando
 l'azione viene richiamata. L'azione può venire fatta dipendere da uno o più campi della tabella
-attributi. Quando essa è richiamata ogni stringa testuale che inizia con  \%
+attributi. Quando essa è richiamata ogni stringa testuale che inizia con \%
 seguita dal nome di un campo della tabella attributi verrà rimpiazzata dal
-valore di quel campo. I caratteri speciali  \%\% \index{\%\%}saranno
+valore di quel campo. I caratteri speciali \%\% \index{caratteri speciali \%\%}saranno
 rimpiazzati dal valore del campo nell'elemento selezionato con lo strumento
 "Identifica geometrie" disponibile nella barra strumenti o dalla tabella attributi (si veda il seguente Usare le azioni). Le virgolette
 (") possono essere usate per raggruppare il testo in un singolo argomento da
@@ -688,7 +687,7 @@ Due esempi di azioni sono di seguito indicati:\index{azioni!esempi}
 Nel primo esempio, il browser konqueror viene richiamato con un URL da
 aprire. L'URL crea una ricerca Google sul valore del campo \usertext{nam} nel
 layer vettoriale. Si noti che il programma o lo script richiamato dall'azione
-deve essere nel path impostato come variabile d'ambiente obbure bisogna
+deve essere nel path impostato come variabile d'ambiente oppure bisogna
 fornire il percorso completo all'eseguibile. Per sicurezza, è possibile
 riscrivere il primo esempio come: \usertext{/opt/kde3/bin/konqueror
 http://www.google.com/search?q=\%nam}. In questo modo si sarà sicuri che
@@ -705,8 +704,8 @@ individuati} che da quella della \dialog{Tabella attributo}.
 strumento \toolbtntwo{mActionOpenTable}{Identifica geometrie} o
 \toolbtntwo{mActionOpenTable}{Apri tabella attributi}.)
 Per eseguire l'azione, fare click con il tasto destro sul record e scegliere
-azione dal menù a comparsa. Le azioni sono indicate nel menù a comparsa dal
-nome assegantogli in fase di definizione dell'azione. Cliccare sull'azione che
+azione dal menu a comparsa. Le azioni sono indicate nel menu a comparsa dal
+nome assegnatogli in fase di definizione dell'azione. Cliccare sull'azione che
 si vuole eseguire.
 
 Se si esegue un'azione che usa la notazione \%\%, cliccare con il tasto destro
@@ -742,15 +741,15 @@ impiegare nell'URL per eseguire una ricerca basata su una parola chiave.
 L'espressione si ricava facilmente eseguendo una ricerca dalla pagina di
 Google, la pagina dei risultati avrà un indirizzo, visibile nella barra
 indirizzi del browser, del tipo: \url{http://google.com/search?q=qgis},
-in cui \usertext{qgis} è la parola ricercata. Forniti di questa infomrazione,
+in cui \usertext{qgis} è la parola ricercata. Forniti di questa informazione,
 si può procedere nel seguente modo:
 
 \begin{enumerate}
-\item Assicurarsi che il livello \filename{lakes} sia caricato.
+\item Assicurarsi che il layer \filename{lakes} sia caricato.
 \item Aprire la finestra di dialogo \dialog{Proprietà del vettoriale} facendo
 doppio click sul layer o cliccando su di esso nella legenda con il tasto
-destro e scegliendo  \dropmenuopt{Proprietà} dal menù contestuale.
-\item Cliccare sulla linguetta \tab{Azioni}.
+destro e scegliendo  \dropmenuopt{Proprietà} dal menu contestuale.
+\item Cliccare sulla scheda \tab{Azioni}.
 \item Inserire un nome descrittivo per l'azione, ad esempio \usertext{Ricerca
 su Google}.
 \item Fornire il nome di un programma esterno da eseguire nell'azione. In
@@ -763,7 +762,7 @@ su Google senza includere la parola ricercata, ovvero:
 \item A questo punto il testo nel campo \guilabel{Azioni} dovrebbe apparire
 così:\\
   \usertext{firefox \url{http://google.com/search?q=}}
-\item Cliccare sul menù a tendina contenente i nomi dei campi della tabella
+\item Cliccare sul menu a tendina contenente i nomi dei campi della tabella
 associata al layer \usertext{lakes}, posizionato immediatamente a sinistra del
 pulsante \button{Inserisci campo}.
 \item Dall'elenco apparso scegliere \selectstring{}{NAMES} e cliccare su \button{Inserisci campo}.
@@ -780,8 +779,8 @@ La formulazione finale dell'azione dovrebbe apparire così:
 \end{center}
 
 A questo punto l'azione è pronta per essere usata. Chiudere la finestra
-\dialog{Proprietà del vettoriale} e zoommare su un'area a scelta. Assicurarsi
-che il livello \filename{lakes} sia attivo ed identifichiamo con l'apposito
+\dialog{Proprietà del vettoriale} e usare lo zoom su un'area a scelta. Assicurarsi
+che il layer \filename{lakes} sia attivo ed identifichiamo con l'apposito
 strumento un lago. Nella finestra risultante dovrebbe essere visibile l'azione:
 
 \begin{figure}[H]
@@ -801,7 +800,7 @@ altro campo sul quale avrebbe senso fare una ricerca.
 È possibile definire più di un'azione per ogni layer, ognuna di esse verrà
 mostrata nella finestra \dialog{Risultati individuati}. Si possono anche
 eseguire azioni dalla tabella attributi cliccando con il tasto destro su una
-riga selezionata e scegliendo dal menù contestuale l'azione desiderata.
+riga selezionata e scegliendo dal menu contestuale l'azione desiderata.
 
 Si possono immaginare molti tipi di azione. Ad esempio se un layer di punti
 rappresenta le posizioni alle quali sono state scattate foto o alle quali
@@ -811,16 +810,16 @@ azioni possono essere uate anche per lanciare report sul web per uno o più
 campi della tabella attributo, definendole allo stesso modo definito
 nell'esempio per la ricerca con Google.
 
-\subsubsection{La linguetta Attributi}\index{attributi}\label{label_attributes}
-Nella linguetta \tab{Attributi} è possibile modificare lo schema degli
-attributi del livello selezionato. I pulsanti \button{Nuova colonna} ed
+\subsubsection{Scheda Attributi}\index{attributi}\label{label_attributes}
+Nella scheda \tab{Attributi} è possibile modificare lo schema degli
+attributi del layer selezionato. I pulsanti \button{Nuova colonna} ed
 \button{Elimina colonna} vengono attivati quando il layer è in modalità
-editing, ovvero quando viene premuto il pulsante  \button{Alterna la modalità di editing}. Al momento possono essere editate solo colonne appartenenti a layers
+modifica, ovvero quando viene premuto il pulsante  \button{Alterna la modalità di modifica}. Al momento possono essere editate solo colonne appartenenti a layer
 PostGIS, in quanto questa funzione non è ancora supportata dalla libreria OGR. 
 
 \minisec{modifica widget}
 
-Nella linguetta \tab{Attributi} sono presenti anche le colonna
+Nella scheda \tab{Attributi} sono presenti anche le colonna
 \texttt{modifica widget} e \texttt{valori}. Esse possono essere usate per
 definire un valore o un campo di valori che possono essere aggiunti alla
 specifica colonna della tabella attributi. 
@@ -837,8 +836,8 @@ box per la selezione.
 `valori univoci'. Il campo modifica consente di modificare i valori
 preesistenti o di inserirne di nuovi.
 \item valore mappa: una combobox nella quale è possibile scegliere da un
-insieme di valori specificati nella colonna \texttt{valori} della linguetta
-\tab{Attributi}. I valori possibili sono delimiati da una semicolon (ad es.
+insieme di valori specificati nella colonna \texttt{valori} della scheda
+\tab{Attributi}. I valori possibili sono delimitati da un punto e virgola (ad es.
 \verb|high;medium;low|). È anche possibile preporre un'etichetta ad ogni
 valore, la quale sarà delimitata dal segno dell'uguale (ad es.
 \verb|high=1;medium=2;low=3|). L'etichetta è mostrata nella combobox al posto
@@ -847,26 +846,26 @@ del valore.
 values used for the classes are presented for selection in a combobox.
 \item intervallo (modificabile): un campo di modifica che consente di
 restringere i valori numerici entro un certo intervallo. L'intervallo viene
-specificato inserendo i valori massimi e minimi delimitati da semicolon (ad
-es.\verb|0;360|) nella colonna \texttt{valori} della linguetta \tab{Attributi}.
+specificato inserendo i valori massimi e minimi delimitati da un punto e virgola (ad
+es.\verb|0;360|) nella colonna \texttt{valori} della scheda \tab{Attributi}.
 \item intervallo (cursore): un cursore scorrevole che consente la selezione di
 un valore entro un predefinito intervallo e con una certo passo.
 L'intervallo è definito da un valore minimo, massimo e dall'ampiezza del passo
-(ad es. \verb|0;360;10|) nella colonna \texttt{valori} della linguetta \tab{Attributi} .
+(ad es. \verb|0;360;10|) nella colonna \texttt{valori} della scheda \tab{Attributi}.
 \item nome file: la linea di editazione del "widget" presenta anche un
 pulsante. Premendo il pulsante si può caricare un file usando la finestra di
 dialogo per l'esplorazione delle risorse.
 \end{itemize}
 
-\subsection{Editing}\index{editing}
+\subsection{Modifica}\index{modifica}
 
 QGIS fornisce capacità basilari di editazione delle geometrie vettoriali.
-Prima di procedere si evidenzia che a questo stadio il supporto per l'editing
+Prima di procedere si evidenzia che a questo stadio il supporto per la modifica
 è ancora preliminare.
-Prima di eseguire una qualunque operazione di editing, quindi, fare sempre una
+Prima di eseguire una qualunque operazione di modifica, quindi, fare sempre una
 copia di backup dei dati che si intendono modificare. 
 
-\textbf{Nota} - la procedura per la modifica di livelli GRASS è differente, si
+\textbf{Nota} - la procedura per la modifica di layer GRASS è differente, si
 veda la Sezione \ref{grass_digitising} per dettagli.
 
 \subsubsection{Settare la tolleranza dello snapping e il raggio di ricerca
@@ -887,16 +886,16 @@ agganciarlo ad un vertice e/o segmento esistente.
 
 \begin{enumerate}
 \item Una prima impostazione della tolleranza sullo snapping può essere
-impostata a livello dell'intero progetto scegliendo la voce di menù \mainmenuopt{Impostazioni} > \dropmenuopttwo{mActionOptions}{Opzioni}
-Alla linguetta \tab{Digitalizzazione} è possibile impostare la modalità di
+impostata a livello dell'intero progetto scegliendo la voce di menu \mainmenuopt{Impostazioni} > \dropmenuopttwo{mActionOptions}{Opzioni}
+Alla scheda \tab{Digitalizzazione} è possibile impostare la modalità di
 snap predefinita tra snap al vertice, al segmento o entrambe. Si può anche
 definire una tolleranza sullo snap e un raggio di ricerca per la modifica di
 un vertice, in unità del layer. Nel set di dati Alaska, le unità sono in piedi
 (feet). L'impostazione ottimale può variare, ma in genere 300 piedi può essere
 una impostazione ragionevole per lavorare alla scala 1:10.000.
 \item È anche possibile impostare una tolleranza sullo snapping basata sul
-singolo layer scegliendo la voce di menù \mainmenuopt{Impostazioni} >
-\dropmenuopttwo{mActionOptions}{Proprietà progetto\dots}. Nella linguetta
+singolo layer scegliendo la voce di menu \mainmenuopt{Impostazioni} >
+\dropmenuopttwo{mActionOptions}{Proprietà progetto\dots}. Nella scheda
 \tab{Generale}, alla sezione \classname{Digitalizzazione} si può cliccare sul
 pulsante \button{Opzioni di snap\dots} per abilitare e impostare la tolleranza
 per ogni singolo layer del progetto (si veda la Figura~\ref{fig:snappingoptions}).
@@ -904,7 +903,7 @@ per ogni singolo layer del progetto (si veda la Figura~\ref{fig:snappingoptions}
 
 \begin{figure}[H]
    \begin{center}
-   \caption{Modifica delle opzioni di snapping per singoli layers \nixcaption}\label{fig:snappingoptions}\smallskip
+   \caption{Modifica delle opzioni di snapping per singoli layer \nixcaption}\label{fig:snappingoptions}\smallskip
    \includegraphics[clip=true, width=14cm]{editProjectSnapping} 
 \end{center}  
 \end{figure}
@@ -924,15 +923,15 @@ Impostando invece un raggio di ricerca troppo piccolo impedirà invece a QGIS
 di trovare alcuna geometria da spostare.
 
 Il raggio di ricerca per la modifica di vertici può essere definita in unità
-del layer dalla linguetta \tab{Digitalizzazione} sotto il menù
+del layer dalla scheda \tab{Digitalizzazione} sotto il menu
 \mainmenuopt{Impostazioni} -> \dropmenuopttwo{mActionOptions}{Opzioni}, sotto lo
 stesso percorso dal quale è possibile impostare la tolleranza sullo snapping a
 livello di progetto.
 
-\subsubsection{Editing topologico}
+\subsubsection{Modifiche topologiche}
 
-Oltre alle opzioni di snap a livello di singolo layer la linguetta
-\tab{Generale} sotto la voce di menù \mainmenuopt{Impostazioni} ->
+Oltre alle opzioni di snap a livello di singolo layer la scheda
+\tab{Generale} sotto la voce di menu \mainmenuopt{Impostazioni} ->
 \dropmenuopttwo{mActionOptions}{Proprietà progetto\dots} fornisce anche alcune
 funzionalità per la topologia. 
 Alla voce Digitalizzazione è possibile selezionare l'opzione \checkbox{Abilita
@@ -952,20 +951,20 @@ poligono adiacente.
 La seconda opzione \checkbox{VIeta intersezioni per i nuovi poligoni}
 impedisce la sovrapposizione di poligoni adiacenti, rendendone più spedita la
 digitalizzazione. Se si ha già un poligono, è possibile con questa opzione
-abilitata digitalizzare il secondo in modo che entrambi si intersechino e qgis
-taglierà automaticamente il secondo sul limite comune, con il vantaggio che
-l'utente non deve digitalizzare tutti i vertici del limite comune.
+abilitata digitalizzare il secondo in modo che entrambi si intersechino, QGIS
+taglierà automaticamente il secondo sul limite comune con il vantaggio che
+l'utente non deve digitalizzare tutti i vertici coincidenti.
 
 \subsubsection{Modifica di un layer esistente}
 \index{layer vettoriali!modifica}
-\index{modifica!un layer esistente}
+\index{modifica!layer esistente}
 \label{sec:edit_existing_layer}
 
-Di default i layer sono caricati in QGIS in modalità sola lettura al fine di
+Di default i layer sono caricati in QGIS in modalità solo lettura al fine di
 evitare modifiche involontarie.
-È comunuque in ogni caso modificare qualunque layer se è consentito dalla
+Comunque è sempre possibile modificare i layer se è consentito dalla
 libreria (ovvero se ad es. OGR supporta lo specifico formato in
-lettura/scrittura) e se il dato medesimo è anche scrivibile (ovvero i files
+lettura/scrittura) e se il dato medesimo è anche scrivibile (ovvero i file
 non sono in modalità sola lettura).
 
 Le funzioni di modifica di layer sono più versatili quando sono applicate a
@@ -980,7 +979,7 @@ garanzia che ciò avvenga.
 \end{Tip}
 
 \begin{Tip}[ht]\caption{\textsc{Modifica di attributi}}
-\qgistip{Attualmente solo ai layers PostGIS possono essere aggiunte o
+\qgistip{Attualmente solo ai layer PostGIS possono essere aggiunte o
 eliminate colonne attributi da questa finestra. Nelle versioni di QGIS future
 saranno supportate altre fonti di dati, in quanto questa caratteristica è
 stata recentemente introdotta nelle librerie GDAL/OGR > 1.6.0
@@ -993,22 +992,22 @@ stata recentemente introdotta nelle librerie GDAL/OGR > 1.6.0
 \qgistip{Si ricordi di cambiare lo stato dello strumento
 \toolbtntwo{mActionToggleEditing}{Abilita/disabilita modifica} ad intervalli
 regolari, in modo da consentire il salvataggio delle modifiche recenti e per
-verificare che le stesse sono accettate dalla sorgente di dati.
+verificare che le stesse siano accettate dalla sorgente di dati.
 }
 \end{Tip}
 
 \begin{Tip}[ht]\caption{\textsc{Modifiche concorrenti}}
 \qgistip{Questa versione di QGIS non effettua alcuna verifica sulla
 possibilità che più utenti stiano effettuando contemporaneamente modifiche
-sullo stesso strato, è quindi l'ultimo utente che effettua il salvataggio ad
+sullo stesso layer, è quindi l'ultimo utente che effettua il salvataggio ad
 apportare le modifiche definitive.
 }
 \end{Tip}
 
 \begin{Tip}[ht]\caption{\textsc{Ingrandire prima della modifica}}
-\qgistip{Prima di modificare uno strato, bisognerebbe effettuare un
+\qgistip{Prima di modificare un layer, bisognerebbe effettuare un
 ingrandimento all'area di interesse, in modo da evitare che in modalità
-editing tutti i marker dei vertici visibili vengano resi a video per l'intero
+modifica tutti i marker dei vertici visibili vengano resi a video per l'intero
 layer.
 }
 \end{Tip}
@@ -1018,30 +1017,30 @@ layer.
 La versione di QGIS attuale supporta due tipi di marker per i vertici (in
 modalità modifica): un
 cerchio semitrasparente o una croce. Per cambiare lo stile del marker,
-scegliere la voce \dropmenuopttwo{mActionOptions}{Opzioni} dal menù
-\mainmenuopt{Impostazioni}, cliccare sulla linguetta \tab{Digitalizzazione} e
+scegliere la voce \dropmenuopttwo{mActionOptions}{Opzioni} dal menu
+\mainmenuopt{Impostazioni}, cliccare sulla scheda \tab{Digitalizzazione} e
 selezionare la voce appropriata.
 }
 \end{Tip}
 
 Ogni sessione di modifica può essere inizializzata dall'opzione
 \dropmenuopttwo{mActionToggleEditing}{Attiva/disattiva modifica}, che può
-essere attivata e disattivata cliccando con il tasto destro sul nome del layer nella legenda e scegliendo dal menù contestuale \index{attiva/disattiva modifica} oppure
-dalla barra strumenti cliccando sul pulsante \index{Toggle Editing}
+essere attivata e disattivata cliccando con il tasto destro sul nome del layer nella legenda e scegliendo dal menu contestuale \index{attiva/disattiva modifica} oppure
+dalla barra strumenti cliccando sul pulsante \index{attiva/disattiva modifica}
 \toolbtntwo{mActionToggleEditing}{Attiva/disattiva
 modifica}.\index{modifica!icone} Quando il layer è in modalità modifica, i
 vertici verranno contrassegnati dai markers impostati (croci o cerchi
 semitrasparenti) e ulteriori pulsanti verranno resi disponibili nella barra
-degli strumenti modifica.
+degli strumenti di modifica.
 
-\minisec{Zoommare con la rotella del mouse}
+\minisec{Zoom con la rotella del mouse}
 
 Mentre si digitalizza è possibile usare la rotella del mouse per ingrandire e
 ridurre la mappa, posizionando il cursore nell'area di mappa e girando la
 rotellina verso di sé per ridurre e verso lo schermo per ingrandire. La
 posizione del puntatore del mouse determinerà centro dell'area da
 ingrandire. È possibile personalizzare il comportamento della rotella del
-mouse nella linguetta \tab{Strumenti mappa} alla voce di munù \mainmenuopt{Impostazioni} 
+mouse nella scheda \tab{Strumenti mappa} alla voce di munù \mainmenuopt{Impostazioni} 
 >\dropmenuopt{Opzioni}.
 
 \minisec{Spostare la vista mappa con i tasti freccia}
@@ -1113,7 +1112,7 @@ un fiume fittizio creato in Alaska.
 
 \begin{Tip}[ht]\caption{\textsc{Tipologie di attributo}}
 \qgistip{
-Almeno per gli shapefiles la modifica del tipo di attributo è validata durante
+Almeno per gli shapefile la modifica del tipo di attributo è validata durante
 l'inserimento. A causa di ciò, non è ovviamente possibile inserire un numero
 in una colonna testuale quando compare la finestra \dialog{Inserire i valori
 dell'attributo} o viceversa. Se ciò fosse necessario, si dovrebbero modificare
@@ -1136,8 +1135,8 @@ Si possono dividere elementi scegliendo dalla barra lo strumento \toolbtntwo{mAc
 \minisec{Modificare i vertici di un elemento}
 \index{layer vettoriali!modificare!vertice}
 
-Sia per i layer PostgreSQL/PostGIS che per gli shapefiles, i vertici di un
-elemento possono essere modfiicati. 
+Sia per i layer PostgreSQL/PostGIS che per gli shapefile, i vertici di un
+elemento possono essere modificati. 
 
 I vertici possono essere modificati direttamente senza che si debba
 selezionare l'elemento del quale si voglia modificare la geometria.
@@ -1164,7 +1163,7 @@ Ricordarsi di impostare l'opzione sotto
 \mainmenuopt{Impostazioni}>\dropmenuopttwo{mActionOptions}{Opzioni}>\tab{Digitalizzazione}
 alla casella \selectnumber{Raggio di ricerca per la modifica di un vertice in unità layer}{10}
 ad un valore superiore a zero, altrimenti QGIS non sarà in grado di
-determinare quale elemento deve essere modfiicato.
+determinare quale elemento deve essere modificato.
 
 
 \minisec{Aggiungere vertici ad un elemento}
@@ -1192,7 +1191,7 @@ Si possono spostare vertici scegliendo dalla barra lo strumento \toolbtntwo{mAct
 Si possono cancellare vertici scegliendo dalla barra lo strumento \toolbtntwo{mActionDeleteVertex}{Elimina vertice}.
 
 Si noti che è privo di senso cancellare un vertice da un elemento puntuale,
-poiche questo equvarrebbe a cancellare l'elemento!
+poiché questo equivarrebbe a cancellare l'elemento!
 
 Similmente una linea costituita da un solo vertice o un poligono costituito da
 due vertici non hanno molto senso e potrebbero avere comportamenti imprevisti
@@ -1231,24 +1230,24 @@ che si intende modificare.
 \index{layer vettoriali!tagliare!elemento}
 \index{layer vettoriali!copiare!elemento}
 \index{layer vettoriali!incollare!elemento}
-\index{editing!tagliare elementi}
-\index{editing!copiare elementi}
-\index{editing!incollare elementi}
+\index{modifica!tagliare elementi}
+\index{modifica!copiare elementi}
+\index{modifica!incollare elementi}
 
 Gli elementi selezionati possono essere tagliati, copiati ed incollati
-tra strati dello stesso progetto di QGIS a patto che anche nello strato di destinazione
-sia stata abilitata la modalità di editing tramite l'opzione 
+tra layer dello stesso progetto di QGIS a patto che anche nel layer di destinazione
+sia stata abilitata la modalità di modifica tramite l'opzione 
 \toolbtntwo{mActionToggleEditing}{Attiva/disattiva modifica}.
 
 Gli elementi possono essere anche incollati in applicazioni esterne come testi: gli elementi verrano rappresentati nel formato CSV con le informazioni della geometria espresse nel formato testo OGC Well-Known Text (WKT).
 
 Tuttavia in questa versione di QGIS elementi di testo formattato creati con
-applicazioni esterne non possono essere incollate in un livello dentro QGIS.
+applicazioni esterne non possono essere incollate in un layer dentro QGIS.
 
 Le funzioni di copia/incolla possono essere utili quando si vogliano modificare più layer copiando le modifiche effettuate in uno di questi negli
 altri. Supponendo ad esempio di voler lavorare su un layer contenente un paio
 di laghi, diventa molto più agevole creare un nuovo layer vuoto nel quale
-incollare gli elementi dei quali necessitiamo invece di lavorare sul livello \filename{big\_lakes} contenente 5000 elementi. 
+incollare gli elementi dei quali necessitiamo invece di lavorare sul layer \filename{big\_lakes} contenente 5000 elementi. 
 
 Dovremo quindi effettuare le seguenti operazioni:
 
@@ -1257,7 +1256,7 @@ Dovremo quindi effettuare le seguenti operazioni:
 sorgente)
 \item Caricare o creare il layer nel quale vogliamo incollare gli elementi
 copiati(layer di destinazione) 
-\item Impostare entrambi gli strati in modalità modifica 
+\item Impostare entrambi i layer in modalità modifica 
 \item Rendere attivo il layer sorgente cliccando sul relativo nome nella
 legenda 
 \item Attivare lo strumento \toolbtntwo{mActionSelect}{Seleziona geometrie}
@@ -1280,7 +1279,7 @@ del layer sorgente e di destinazione combacino.
 \begin{Tip}[ht]\caption{\textsc{Congruenza degli elementi incollati}}
 \qgistip{Se il layer sorgente e quello di destinazione usano lo stesso sistema
 di proiezione, gli elementi incollati saranno assolutamente identici a quelli
-dello strato di origine. Nel caso in cui invece la proiezione del layer di
+del layer di origine. Nel caso in cui invece la proiezione del layer di
 destinazione sia differente QGIS non garantisce che la geometria sia identica
 a causa del pur ridotto errore di arrotondamento introdotto nel passaggio da
 un sistema di proiezione all'altro.
@@ -1298,7 +1297,7 @@ definita la selezione, usare lo strumento
 \toolbtntwo{mActionDeleteSelected}{Elimina selezione} per cancellare la
 selezione. Non è possibile annullare l'eliminazione, tuttavia è sempre
 possibile annullare l'eliminazione (ma anche altre eventuali modifiche
-effettuate dall'ultimo salvataggio!) terminando la modalità editing senza
+effettuate dall'ultimo salvataggio!) terminando la modalità di modifica senza
 salvare le modifiche.
 
 Anche lo strumento \toolbtntwo{mActionEditCut}{Taglia geometrie} può essere
@@ -1313,7 +1312,7 @@ attualmente selezionati, consentendo quindi di lavorare su più di un elemento
 alla volta.
 
 \begin{Tip}[ht]\caption{\textsc{Supporto alla cancellazione di elementi}}
-\qgistip{Quando si modificano shapefiles ESRI, la cancellazione di elementi
+\qgistip{Quando si modificano shapefile, la cancellazione di elementi
 funziona solo se QGIS è compilato contro una versione di GDAL pari a 1.3.2 o
 superiore, come accade per le versioni compilate per OS X and Windows
 disponibili sul sito.
@@ -1321,14 +1320,14 @@ disponibili sul sito.
 \end{Tip}
 
 \minisec{Modalità di snap}
-\index{editing!snap}
+\index{modifica!snap}
 QGIS consente di agganciare i vertici digitalizzati ad altri vertici dello
 stesso layer. Per impostare la tolleranza di aggancio, andare alla voce di
-menù \mainmenuopt{Impostazioni}>\dropmenuopttwo{mActionOptions}{Opzioni}->\tab{Digitalizzazione}.
+menu \mainmenuopt{Impostazioni}>\dropmenuopttwo{mActionOptions}{Opzioni}->\tab{Digitalizzazione}.
 Si noti che la tolleranza di aggancio è in unità di mappa.
 
-\minisec{Salvare i livelli modificati}
-\index{editing!salvare modifiche}
+\minisec{Salvare i layer modificati}
+\index{modifica!salvare modifiche}
 
 Quando un layer è in modalità modifica, tutti i cambiamenti rimangono nella
 memoria di QGIS e quindi non sono immediatamente applicati e salvati nei dati
@@ -1341,10 +1340,10 @@ destinazione è pieno o gli attributi contengono valori esterni agli estremi
 ammissibili), lo stato della memoria di QGIS è preservato, consentendo dunque
 di correggere gli errori e riprovare il salvataggio.
 
-\subsubsection{Creare un nuovo layer}\label{sec:create shape}\index{editing!creare un nuovo layer}
+\subsubsection{Creare un nuovo layer}\label{sec:create shape}\index{modifica!creare un nuovo layer}
 
 Per creare un nuovo layer da modificare, scegliere l'opzione
-\toolbtntwo{mActionNewVectorLayer}{Nuovo layer vettoriale} dal menù \mainmenuopt{Layer}. 
+\toolbtntwo{mActionNewVectorLayer}{Nuovo layer vettoriale} dal menu \mainmenuopt{Layer}. 
 Verrà quindi aperta la finestra \dialog{Nuovo layer vettoriale} come mostrato
 in Figure \ref{fig:newvectorlayer}. Scegliere qui il tipo di geometria che si
 intende inserire nel layer (punto, linea o poligono).
@@ -1357,8 +1356,8 @@ intende inserire nel layer (punto, linea o poligono).
 \end{figure}
 
 Si noti che QGIS non supporta la creazione di elementi 2.5D (ad es. elementi
-con coordinate X,Y,Z) o il conteggio degli elementi. Ad oggi inoltre possono
-essere creati solo shapefiles. Il supporto per la creazione di layer OGR o
+con coordinate XYZ) o il conteggio degli elementi. Ad oggi inoltre possono
+essere creati solo shapefile. Il supporto per la creazione di layer OGR o
 PostgreSQL sarà inserito in future versioni di QGIS. 
 
 La creazione di layer di GRASS è supportata dal plugin GRASS. Si faccia
@@ -1375,19 +1374,19 @@ QGIS aggiungerà automaticamente l'estensione \filename{.shp} al nome indicato.
 Una volta creato il layer, esso sarà aggiunto alla mappa e potrà essere
 modificato nello stesso modo descritto alla precedente Sezione \ref{sec:edit_existing_layer}. 
 
-\subsection{Costruttuore di interrogazioni (query builder)}\label{sec:query_builder}
-\index{Query Builder}
+\subsection{Generatore di query (query builder)}\label{sec:query_builder}
+\index{generatore di query}
 
-Il costruttore di query consente di definire (tramite il linguaggio Structured
-Query Language, SQL) un sottoinsieme di una tabella e mostrarlo come strato in
-QGIS. Può essere usato pper tutti i formati OGR, i files di GRASS e gli strati
+Il generatore di query consente di definire (tramite il linguaggio Structured
+Query Language, SQL) un sottoinsieme di una tabella e mostrarlo come layer in
+QGIS. Può essere usato pper tutti i formati OGR, i file di GRASS ed i layer
 di PostGIS. 
 Per esemio, se si ha il file \filename{towns} che contiene un campo
 \usertext{population} nella tabella attributi indicante il numero di residenti
 è possibile selezionare solo le città più grandi inserendo l'espressione
 \usertext{population > 100000} nella casella SQL del costruttore di query. La
 Figura \ref{fig:query_builder} mostra un esempio per il costruttore di query
-popolato con dati provenienti da livelli PostGIS immagazzinati nel database PostgreSQL. 
+popolato con dati provenienti da layer PostGIS immagazzinati nel database PostgreSQL. 
 
 \begin{figure}[ht]
   \begin{center}
@@ -1396,40 +1395,38 @@ popolato con dati provenienti da livelli PostGIS immagazzinati nel database Post
   \end{center}  
 \end{figure}
 
-La finestra del costruttore di query\index{Query Builder} elenca i campi del
+La finestra del costruttore di query\index{generatore di query} elenca i campi del
 database nella casella sulla sinistra. Un campione dei dati selezionabili con
-l'espressione impostata è visibile cliccando sul pulsante \button{Campione} \index{Query
-Builder!generare un campione dei dati}. In questo modo vengono richiamati i primi 25
+l'espressione impostata è visibile cliccando sul pulsante \button{Campione} \index{generatore di query!generare un campione dei dati}. In questo modo vengono richiamati i primi 25
 valori distinti dai campi del database. Per avere una lista completa di tutti
-i valori di un campo, cliccare sul pulsante \button{All} \index{Query Builder!ottenere tutti
+i valori di un campo, cliccare sul pulsante \button{All} \index{generatore di query!ottenere tutti
 i valori}. Per aggiungere un campo o un valore selezionato alla query, fare
-doppio-click su di esso\index{Query Builder!aggiungere campi}. È possibile usare
+doppio-click su di esso\index{generatore di query!aggiungere campi}. È possibile usare
 i vari pulsanti per costruire le interrogazioni oppure digitare direttamente
 il testo dell'interrogazione nella casella SQL.
 
-Per testare un'interrogazione, cliccare sul pulsante \button{Prova}
-\index{Query Builder!testare interrogazioni}. Se l'espressione è correta, verrà
+Per provare una query cliccare sul pulsante \button{Prova}
+\index{generatore di query!provare query}. Se l'espressione è correta, verrà
 restituito un conteggio dei record che verranno inclusi nella selezione.
 Quando l'espressione dell'interrogazione è soddisfacente, cliccare sul
 pulsante \button{OK}. Nella casella SQL verrà mostrato il testo della richiesta.
 
-\begin{Tip}\caption{\textsc{Cambiare la definizione di uno strato}}\index{Query
-Builder!cambiare la definizione di uno strato}
-\qgistip{Si può cambiare la definizione SQL di uno strato caricato da PostGIS anche dopo che questo è stato caricato, aprendo la finestra \dialog{Proprietà del vettoriale}
+\begin{Tip}\caption{\textsc{Cambiare la definizione di un layer}}\index{generatore di query!cambiare la definizione di un layer}
+\qgistip{Si può cambiare la definizione SQL di un layer caricato da PostGIS anche dopo che questo è stato caricato, aprendo la finestra \dialog{Proprietà del vettoriale}
 facendo doppio click sul nome del layer nella legenda e cliccando sul pulsante
-\button{Query Builder} nella liguetta \tab{Generale}. Si veda la Sezione
+\button{Query Builder} nella scheda \tab{Generale}. Si veda la Sezione
 \ref{sec:vectorprops} per ulteriori informazioni.}
 \end{Tip}
 
 \subsection{Selezione mediante interrogazione}\label{sec:select_by_query}
-\index{PostgreSQL!query builder}
-\index{PostGIS!query builder}
-\index{Query Builder!PostgreSQL}
-\index{Query Builder!PostGIS}
+\index{PostgreSQL!generatore di query}
+\index{PostGIS!generatore di query}
+\index{generatore di query!PostgreSQL}
+\index{generatore di query!PostGIS}
 
 Con QGIS è possibile selezionare elementi per mezzo di un'interfaccia simile a
-quella del costruttore di interrogazioni usata in \ref{sec:query_builder}.
-Nella sezione precedente il costruttore di query è stato usato unicamente per
+quella del generatore di query usata in \ref{sec:query_builder}.
+Nella sezione precedente il generatore di query è stato usato unicamente per
 mostrare gli elementi di un layer che soddisfacevano i filtri imposti in un
 "layer virtuale" sottoinsieme di quello originale. Lo scopo della selezione
 mediante interrogazione è invece quello di evidenziare gli elementi di un
@@ -1440,7 +1437,7 @@ vettoriali supportate.
 Per effettuare una selezione mediante interrogazione su un layer caricato,
 cliccare sul pulsante \toolbtntwo{mActionOpenTable}{Apri tabella attributi}
 e cliccare nella finestra sul pulsante \button{Advanzate...} in basso a
-destra. In questo modo viene avviato il costruttore di interrogazioni che
+destra. In questo modo viene avviato il generatore di query che
 consente di definire un sottoinsieme degli elementi e mostrarli come descritto
 alla Sezione \ref{sec:query_builder}.
 
