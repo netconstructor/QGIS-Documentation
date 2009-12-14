@@ -7,14 +7,14 @@
 %\updatedisclaimer
 
 Il plugin GRASS consente l'accesso ai dati e alle funzioni di GRASS
-GIS~\cite{GRASSweb}, inclusa la visualizzazione di strati raster e vettoriali,
-la digitalizzazione di strati vettoriali, la modifica degli attributi e la
+GIS~\cite{GRASSweb}, inclusa la visualizzazione di layer raster e vettoriali,
+la digitalizzazione di layer vettoriali, la modifica degli attributi e la
 creazione di nuovi vettori, e l'analisi di dati GRASS 2D e 3D tramite più di
 300 moduli GRASS.
 
 In questa Sezione verranno forniti un'introduzione sulle funzionalità del plugin
 e qualche esempio sulla gestione e l'utilizzo di dati GRASS. Quando viene
-abilitato il plugin GRASS coem descritto alla Sezione~\ref{sec:starting_grass},
+abilitato il plugin GRASS come descritto alla Sezione~\ref{sec:starting_grass},
 nella barra sono disponibili i seguenti strumenti:
  
 \begin{itemize}
@@ -32,38 +32,38 @@ nella barra sono disponibili i seguenti strumenti:
 \end{itemize}
 
 \subsection{Avviare il plugin GRASS}\label{sec:starting_grass}
-\index{GRASS!starting QGIS}
+\index{GRASS!avviare da QGIS}
 
-Per usare le funzioni GRASS e/o visualizzare livelli raster e vettoriali in
-formato GRASS in QGIS, bisogna selezionare e caricare il plugin GRASS con il
-Gestore plugin. 
-Cliccare quindi sul menù \mainmenuopt{Plugins} > \mainmenuopt{Gestione plugins}, 
+Per usare le funzioni GRASS e/o visualizzare layer raster e vettoriali in
+formato GRASS in QGIS, bisogna prima selezionare e caricare il plugin GRASS con il
+QGIS Plugin Manager. 
+Cliccare quindi sul menu \mainmenuopt{Plugins} > \mainmenuopt{Gestione plugin}, 
 selezionare \dropmenuopt{GRASS} e cliccare \button{OK}. 
 
-Ora è quindi possibile caricare livelli raster e vettoriali da una \filename{LOCATION}
+Ora è possibile caricare layer raster e vettoriali da una \filename{LOCATION}
 GRASS esistente (si veda la Sezione \ref{sec:load_grassdata}). È anche
 possibile creare una nuova \filename{LOCATION} GRASS in QGIS (si veda la
-Sezione \ref{sec:create_loc}) e importare in essa dati raster e vettoriali (si
+Sezione \ref{sec:create_loc}) e importarci dati raster e vettoriali (si
 veda la Sezione \ref{sec:import_loc_data}) per ulteriori analisi con gli
 strumenti GRASS (si veda la Sezione \ref{subsec:grass_toolbox}).
 
-\subsection{Caricare livelli raster e vettoriali GRASS}\label{sec:load_grassdata}\index{GRASS!loading data}
+\subsection{Caricare layer raster e vettoriali GRASS}\label{sec:load_grassdata}\index{GRASS!caricamento dati}
 
 Con il plugin GRASS, possono essere caricati layer raster o vettoriali
 usando il pulsante appropriato nella barra strumenti. Come esempio si
 consideri il set di dati Alaska (si veda la Sezione \ref{label_sampledata}).
-Esso include un piccola \filename{LOCATION} GRASS campione contenente 3 layers
+Esso include un piccolo \filename{LOCATION} GRASS campione contenente tre layer
 vettoriali e una mappa di altitudine raster.
 
 \begin{enumerate}
   \item Creare una nuova cartella \filename{grassdata}, nella quale scaricare
   il set di dati Alaska denominato \filename{qgis\_sample\_data.zip}
   dall'indirizzo web \url{http://download.osgeo.org/qgis/data/} e decomprimere
-  il file nella cartella \filename{grassdata}. 
+  il file nella cartella \filename{grassdata}.
   \item Avviare QGIS.
   \item Se non è già stato fatto in precedenti sessioni di QGIS, caricare il
   plugin GRASS cliccando su\mainmenuopt{Plugins} > \mainmenuopt{Gestione
-  plugins} e selzionare \dropmenuopt{GRASS}. La barra GRASS apparirà nella
+  Plugin} e selezionare \dropmenuopt{GRASS}. La barra GRASS apparirà nella
   barra strumenti.
   \item Nella barra strumenti GRASS, cliccare sull'icona
   \toolbtntwo{grass_open_mapset}{Apri mapset} per aprire la finestra
@@ -80,7 +80,7 @@ vettoriali e una mappa di altitudine raster.
   \item Cliccare su \toolbtntwo{grass_add_vector}{Aggiungi vettoriale GRASS},
   selezionare la mappa denominata \filename{alaska} e cliccare su \button{OK}.
   Il confine dell'Alaska verrà sovrapposto alla mappa gtopo30 map. Ora è
-  possibile adattare le proprietà del layer come descrittto al capitolo
+  possibile adattare le proprietà del layer come descritto al capitolo
   \ref{sec:vectorprops}, ovvero cambiare la trasparenza, il colore di
   riempimento e del contorno dell'elemento.
   \item Caricare anche gli altri due layer vettoriali denominati
@@ -105,14 +105,14 @@ come descritto alla Sezione \ref{sec:starting_grass}.
 GRASS organizza i propri in cartelle alle quali si fa riferimento con la
 denominazione GISDBASE. Queste cartelle, spesso chiamate \filename{grassdata},
 devono essere create prima di iniziare a lavorare con il plugin GRASS in QGIS.
-In queste directori, i dati GRASS sono organizzati per progetti inseriti in
+In queste directory, i dati GRASS sono organizzati per progetti inseriti in
 sottocartelle chiamate \filename{LOCATION}. 
 Ogni \filename{LOCATION} è definita da un sistema di coordinate, da un sistema
 di proiezione e dall'estensione geografica. La \filename{LOCATION} può avere a
 sua volta molte sottocartelle \filename{MAPSETs} usate per suddividere il
 progetto in diversi argomenti, sottoregioni o spazi di lavoro per i diversi
 membri del team che vi sta lavorando (Neteler \& Mitasova 2008
-\cite{neteler_mitasova08}). Per analizzare layers raster e vettoriali con i
+\cite{neteler_mitasova08}). Per analizzare layer raster e vettoriali con i
 moduli GRASS, bisogna importarli in una \filename{LOCATION} GRASS.
 \footnote{Questo non è proprio vero - con i moduli GRASS \filename{r.external}
 e \filename{v.external} è possibile creare collegamenti in sola lettura ai
@@ -123,7 +123,7 @@ questa funzione non verrà descritta.}
 \begin{figure}[ht]
 \begin{center}
 \caption{Organizzazzione dei dati GRASS nella LOCATION campione alaska
-(adattato da from Neteler \& Mitasova 2008 \cite{neteler_mitasova08})}\label{fig:grass_location}\smallskip
+(adattato da Neteler \& Mitasova 2008 \cite{neteler_mitasova08})}\label{fig:grass_location}\smallskip
 \includegraphics[clip=true]{grass_location}
 \end{center}  
 \end{figure}
@@ -192,7 +192,7 @@ ed installare il set di dati sul proprio computer \ref{label_sampledata}).
   disabilitati sono ora attivi.
 \end{enumerate}
 
-Per quanto possa essere apparsa lunga, questa procedura costitiusce un modo
+Per quanto possa essere apparsa lunga, questa procedura costituisce un modo
 veloce per creare una \filename{LOCATION}. La \filename{LOCATION alaska} è ora
 pronta per l'importazione dei dati (si veda la Sezione \ref{sec:import_loc_data}).
 È anche possibile usare dati raster e vettoriali esistenti nella
@@ -252,14 +252,14 @@ medesimo \ref{label_sampledata}.
   GRASS}. Apparirà la finestra degli strumenti di GRASS (si veda la Sezione
   \ref{subsec:grass_toolbox}).
   \item Per importare la mappa raster \filename{landcover.img}, cliccare sul
-  modulo \filename{r.in.gdal} nella linguetta \tab{Albero moduli}. Questo
+  modulo \filename{r.in.gdal} nella scheda \tab{Albero moduli}. Questo
   modulo GRASS consente l'importazione di file supportati da GDAL nella
   \filename{LOCATION} GRASS. Apparirà la finestra di dialogo del modulo
   \filename{r.in.gdal}.
   \item navigare alla cartella \filename{raster} nel set
   di dati QGIS alaska e selezionare il file \filename{landcover.img}.
   \item Come nome del raster in uscita inserire \filename{landcover\_grass} e
-  cliccare su \button{Esegui}. Nella linguetta \tab{Output} è possibile
+  cliccare su \button{Esegui}. Nella scheda \tab{Output} è possibile
   verificare l'avanzamento del comando GRASS \filename{r.in.gdal -o
   input=/path/to/landcover.img output=landcover\_grass}.
   \item Quando compare la dicitura \textbf{Operazione conclusa con successo}
@@ -267,14 +267,14 @@ medesimo \ref{label_sampledata}.
   \filename{landcover\_grass} è ora importato in GRASS e verrà visualizzato
   nella vista mappa di QGIS.
   \item Per importare il vettoriale in formato shape \filename{lakes.gml},
-  cliccae sul module \filename{v.in.ogr} nella linguetta \tab{Albero moduli}.
+  cliccae sul module \filename{v.in.ogr} nella scheda \tab{Albero moduli}.
   Qesto modulo GRASS consente di importare i formati vettoriali supportati da
   OGR in una \filename{LOCATION} GRASS. Apparirà la finestra di dialogo \filename{v.in.ogr}.
   \item Navigare alla cartella \filename{gml} nel set di dati
   QGIS alaska e selezionare il file \filename{lakes.gml} come file OGR.
   \item Come nome della mappa vettoriale in uscita inserire
   \filename{lakes\_grass} e cliccare su \button{esegui}. In questo esempio è
-  possibile trascurare le altre opzioni. Nella linguetta \tab{Output} è
+  possibile trascurare le altre opzioni. Nella scheda \tab{Output} è
   possibile verificare l'avanzamento del comando GRASS \filename{v.in.ogr -o
   dsn=/path/to/lakes.shp output=lakes\_grass}.
   \item Quando compare la dicitura \textbf{Operazione conclusa con successo}
@@ -284,11 +284,11 @@ medesimo \ref{label_sampledata}.
 \end{enumerate}
 
 
-\subsection{Il modello di dato vettoriale in GRASS}\label{label_vectmodel}\index{GRASS!vector data model}
+\subsection{Il modello di dato vettoriale in GRASS}\label{label_vectmodel}\index{GRASS!modello dato vettoriale}
 
 Prima di digitalizzare dati in GRASS è importante capirne la struttura del
-dato vettoriale.\index{GRASS!digitizing} In generale, GRASS usa un modello di
-dato vettoriale topologico.\index{GRASS!topology} Questo significa che le aree
+dato vettoriale.\index{GRASS!digitalizzazione} In generale, GRASS usa un modello di
+dato vettoriale topologico.\index{GRASS!topologia} Questo significa che le aree
 non sono rappresentate con poligoni chiusi singoli, ma da uno o più contorni
 (boundaries). Un  contorno (boundary) tra due aree adiacenti è digitalizzato una
 sola volta, e condiviso da entrambe le aree. Perché un'area sia
@@ -298,24 +298,24 @@ dell'area stessa.
 
 Oltre a contorni e centroidi, una mappa vettoriale può contenere anche punti e
 linee. Tutti questi elementi possono essere mischiati in un singolo layer
-vettoriale e saranno rappresentati in cosiddetti 'layers' differenti in una
-singola mappa vettoriale di GRASS. Quindi in GRASS con  layer non si intende
-una mappa raster o vettoriale ma un livello all'interno di un dato vettoriale.
+vettoriale e saranno rappresentati in cosiddetti "layer" differenti in una
+singola mappa vettoriale di GRASS. Quindi in GRASS con layer non s'intende
+una mappa raster o vettoriale bensì un livello all'interno di un dato vettoriale.
 Questa è una distinzione molto importante da tenere presente.
 \footnote{Sebbene sia possibile mescolare elementi geometrici di diverso tipo
 (punti, linee, contorni e centroidi), ciò è abbastanza insolito e perfino in
 GRASS viene usato solo in casi speciali come ad es. quando si esegue l'analisi
-di una rete vettoriale. DI solito è preferibile che elementi geometrici
+di una rete vettoriale. Di solito è preferibile che elementi geometrici
 diversi vengano digitalizzati su "file" distinti.}
 
-È possibile salvare più 'layers' in un set di dati vettoriale. Per esempio
+È possibile salvare più "layer" in un set di dati vettoriale. Per esempio
 campi, foreste e laghi possono essere salvati in un vettoriale. Foreste e
 laghi adiacenti possono condividere lo stesso contorno, ma avranno tabelle degli
 attributi distinte. È anche possibile assegnare attributi ai contorni. Ad
-esempio se il controrno tra un lago ed una foresta è una strada, può avere una
+esempio se il contorno tra un lago ed una foresta è una strada, può avere una
 diversa tabella degli attributi.
  
-Il 'layer' di un elemento è definito dal 'layer' in GRASS. Al 'layer' viene
+Il "layer" di un elemento è definito dal "layer" in GRASS. Al "layer" viene
 assegnato un indice numerico che definisce se c'è più un gruppo geometrico nel set di dati
 vettoriale, ad es. se la geometria è foresta o lago. Attualmente tale indice può essere
 solo un numero, in versioni di GRASS successive saranno supportati anche i
@@ -323,41 +323,41 @@ nomi dei campi nell'interfaccia utente.
 
 Gli attributi degli elementi geometrici possono essere salvati nella
 \filename{LOCATION} GRASS in formato DBase o SQLITE3 o in database esterni
-come PostgreSQL, MySQL, Oracle, ecc.\index{GRASS!attribute storage}
+come PostgreSQL, MySQL, Oracle, ecc.\index{GRASS!archiviazione attributi}
 
 Gli attributi contenuti nelle tabelle del database sono collegate  alla
-geometria per mezzo di un valore 'category'.\index{GRASS!attribute linkage}
-'Category' (key, ID) è un valore intero collegato alle primitive geometriche
+geometria per mezzo di un valore "category".\index{GRASS!collegamento attributi}
+"Category" (key, ID) è un valore intero collegato alle primitive geometriche
 ed è usato come collegamento ad una colonna chiave nella tabella del database.
 
 \begin{Tip}\caption{\textsc{Conoscere il modello del dato vettoriale in GRASS}}
 \qgistip{
 Il miglior modo per capire il modello di dato vettoriale di GRASS e le sue
-capacità è quello di scaricare uno dei molti tutorial di GRASS nei quali tale
+capacità è quello di scaricare una delle molte guide (tutorial) di GRASS nei quali tale
 modello è descritto più approfonditamente. Si veda
 \url{http://grass.osgeo.org/gdp/manuals.php} per informazioni, libri e
-tutorials in diverse lingue.
+guide in diverse lingue.
 }
 \end{Tip} 
 
-\subsection{Creazione di un nuovo layer vettoriale GRASS}\label{sec:creating_new_grass_vectors}\index{GRASS!Creating new vectors|see{editing!creating a new layer}}
+\subsection{Creazione di un nuovo layer vettoriale GRASS}\label{sec:creating_new_grass_vectors}\index{GRASS!creazione nuovo layer vettoriale}
 
 Per creare un nuovo layer vettoriale GRASS tramite il plugin GRASS cliccare
-sullo strumento \toolbtntwo{grass_new_vector_layer}{Crea nuovo vettoriale GRASS}. 
+sullo strumento \toolbtntwo{grass_new_vector_layer}{Crea nuovo layer vettoriale GRASS}. 
 Inserire un nome nella casella di testo e iniziare la digitalizzazione di
 punti, linee o poligoni, seguendo la procedura descritta alla Sezione
 \ref{grass_digitising}. 
 
 Come detto in GRASS è possibile inserire ogni tipo di geometria (punti, linee
-ed aree) in un singolo livello, in quanto viene impiegato un modello di dato
+ed aree) in un singolo layer, in quanto viene impiegato un modello di dato
 vettoriale topologico, di conseguenza non è necessario selezionare a priori il tipo di
 geometria che si intende digitalizzare quando si crea un vettoriale in formato
-GRASS. In questo si differenzia ad es. dalla creazione di shapefiles con QGIS,
+GRASS. In questo si differenzia ad es. dalla creazione di shapefile con QGIS,
 in quanto questi ultimi usano un modello vettoriale denominato Simple Feature
 (si veda la Sezione \ref{sec:create shape}).
 
 \begin{Tip}\caption{\textsc{Creazione di una tabella attributi per un nuovo
-livello vettoriale GRASS}}
+layer vettoriale GRASS}}
 \qgistip{
 Se si desidera assegnare attributi alla geometria digitalizzata, accertarsi di
 definire lo schema della tabella prima di iniziare a digitalizzare (si veda la
@@ -365,7 +365,7 @@ Figura \ref{fig:grass_digitizing_table}).
 }
 \end{Tip} 
 
-\subsection{Digitalizzazione e modifica di layer vettoriali in GRASS}\index{GRASS!digitizing tools}\label{grass_digitising}
+\subsection{Digitalizzazione e modifica di layer vettoriali in GRASS}\index{GRASS!strumenti di digitalizzazione}\label{grass_digitising}
 
 Gli strumenti di digitalizzazione per i layer vettoriali in GRASS sono
 accessibili dall'icona \toolbtntwo{grass_edit}{Modifica vettoriale GRASS}
@@ -440,14 +440,14 @@ sessione e salva lo stato attuale (ricostruisce conseguentemente la topologia)\\
 \end{tabular}
 \end{table}
 
-\minisec{Linguetta Categoria}\index{GRASS!category settings}
+\minisec{Scheda Categoria}\index{GRASS!impostazioni categoria}
 
-La linguetta \tab{Categoria} consente di definire il modo in cui i valori
+La scheda \tab{Categoria} consente di definire il modo in cui i valori
 della categoria verranno assegnati al nuovo elemento geometrico.
 
 \begin{figure}[h]
  \begin{center}
-  \caption{Linguetta Categoria negli strumenti per la digitalizzazione in GRASS \nixcaption}\label{fig:grass_digitizing_category}
+  \caption{Scheda Categoria negli strumenti per la digitalizzazione in GRASS \nixcaption}\label{fig:grass_digitizing_category}
   \includegraphics[clip=true,width=10cm]{grass_digitizing_category}
  \end{center}
 \end{figure}
@@ -468,22 +468,21 @@ categoria viene collegata tramite il centroide.
 associato ad ogni elemento digitalizzato. Viene usato per collegare ogni
 elemento geometrico con i relativi attributi.
 \item \textbf{Layer} - Ogni elemento geometrico può essere collegato
-con molteplici tabelle attributo usando diversi 'layers' secondo il
+con molteplici tabelle attributo usando diversi "layer" secondo il
 modello GRASS. Il layer di default è il numero 1. 
 \end{itemize}
 
-\begin{Tip}\caption{\textsc{Creare un 'layer' GRASS aggiuntivo con QGIS}}
+\begin{Tip}\caption{\textsc{Creare un "layer" GRASS aggiuntivo con QGIS}}
 \qgistip{Se si vogliono aggiungere ulteriori layer al dato, inserire
-semplicemente un numero nel campo 'Layer' e dare invio. Nella linguetta
+semplicemente un numero nel campo "Layer" e dare invio. Nella scheda
 Tabella sarà a questo punto possibile creare il nuovo schema degli attributi
-da associare a questo 'layer'.
+da associare a questo "layer".
 }
 \end{Tip}
 
-\minisec{Linguetta Preferenze}\label{label_settingtab}\index{GRASS!snapping
-tolerance}
+\minisec{Scheda Preferenze}\label{label_settingtab}\index{GRASS!tolleranza snap}
 
-La linguetta \tab{Preferenze} consente di impostare la tolleranza per
+La scheda \tab{Preferenze} consente di impostare la tolleranza per
 l'aggancio automatico tra elementi (snapping) in pixels dello schermo. La
 soglia definisce a quale distanza massima nuovi punti o linee sono agganciati
 ad altri nodi esistenti. Ciò aiuta ad evitare interruzioni o incroci tra
@@ -491,41 +490,40 @@ contorni. Il valore preimpostato è 10 pixels.
 
 \begin{figure}[h]
  \begin{center}
- \caption{Linguetta Preferenze negli strumenti per la digitalizzazione in GRASS \nixcaption}\label{fig:grass_digitizing_settings}
+ \caption{Scheda Preferenze negli strumenti per la digitalizzazione in GRASS \nixcaption}\label{fig:grass_digitizing_settings}
  \includegraphics[clip=true,width=8cm]{grass_digitizing_settings}
  \end{center}
 \end{figure}
 
-\minisec{Linguetta Simbologia}\index{GRASS!symbology settings}
+\minisec{Scheda Simbologia}\index{GRASS!impostazioni simbologia}
 
-La linguetta \tab{Simbologia} consente di visualizzare e impostare la
+La scheda \tab{Simbologia} consente di visualizzare e impostare la
 simbologia e i colori dei vari tipi geometrici nei vari stati topologici (ad
 es. contorni aperti/chiusi).
 
 \begin{figure}[h]
  \begin{center}
- \caption{Linguetta Simbologia negli strumenti per la digitalizzazione in GRASS \nixcaption}\label{fig:grass_digitizing_symbology}
+ \caption{Scheda Simbologia negli strumenti per la digitalizzazione in GRASS \nixcaption}\label{fig:grass_digitizing_symbology}
  \includegraphics[clip=true,width=8cm]{grass_digitizing_symbology}
  \end{center}
 \end{figure}
 
-\minisec{Liguetta Tabella} \index{GRASS!table editing}
+\minisec{Scheda Tabella} \index{GRASS!modifica tabella}
 
-La linguetta \tab{Tabella} fornisce informazioni sulla struttura della tabella
-nel database per un determinato 'layer'. Qui si possono aggiungere nuove
+La scheda \tab{Tabella} fornisce informazioni sulla struttura della tabella
+nel database per un determinato "layer". Qui si possono aggiungere nuove
 colonne ad una tabella attributi esistente o creare un nuovo schema tabella
-per un nuovo layer vettoriale GRASS o per un nuovo 'layer' (si veda la Sezione 
+per un nuovo layer vettoriale GRASS o per un nuovo "layer" (si veda la Sezione 
 \ref{sec:creating_new_grass_vectors}).
 
 \begin{figure}[h]
  \begin{center}
- \caption{Linguetta Tabella negli strumenti per la digitalizzazione in GRASS \nixcaption}\label{fig:grass_digitizing_table}
+ \caption{Scheda Tabella negli strumenti per la digitalizzazione in GRASS \nixcaption}\label{fig:grass_digitizing_table}
  \includegraphics[clip=true,width=10cm]{grass_digitizing_table}
  \end{center}
 \end{figure}
 
-\begin{Tip}\caption{\textsc{Permessi di modifica in GRASS}}\index{GRASS!edit
-permissions}
+\begin{Tip}\caption{\textsc{Permessi di modifica in GRASS}}\index{GRASS!modifica permessi}
 \qgistip{È necessario essere il proprietario del \filename{MAPSET} GRASS che
 si vuole editare. Non è possibile modificare dati in un {MAPSET} del quale non
 si è proprietari, anche se si possiedono si di esso permessi in scrittura.
@@ -546,7 +544,7 @@ est e ovest, il numero di righe e colonne e la risoluzione spaziale in senso
 orizzontale e verticale.
 
 È possibile abilitare/disabilitare la visualizzazione della region di GRASS
-nella vista mappa in QGIS usando il pulsante \toolbtntwo{grass_region}{Visualizza GRASS regione attuale}. \index{GRASS!region!display}.
+nella vista mappa in QGIS usando il pulsante \toolbtntwo{grass_region}{Visualizza GRASS regione attuale}. \index{GRASS!region!visualizza}.
 
 Con lo strumento \toolbtntwo{grass_region_edit}{Modifica region GRASS attuale}
 è possibile aprire una finestra di dialogo per cambiare le impostazioni
@@ -557,13 +555,13 @@ consente anche di selezionare l'estensione della regione interattivamente con
 il mouse nella vista mappa di QGIS. Cliccando quindi con il tasto sinistro del
 mouse nella vista mappa si imposta il primo angolo del rettangolo che definirà
 la regione e cliccando in un altro punto lo si chiuderà. Cliccare quindi su
-\button{OK} per confermare.\index{GRASS!region!editing}
+\button{OK} per confermare.\index{GRASS!region!modifica}
 Il modulo GRASS \filename{g.region} mette a disposizione molti più parametri
 per definire l'estensione della regione e la risoluzione con la quale si vuole
 condurre l'analisi raster. Si possono usare questi parametri usando lo
 strumento appropriato nella barra GRASS, descritta nella Sezione \ref{subsec:grass_toolbox}.
 
-\subsection{La barra strumenti GRASS}\label{subsec:grass_toolbox}\index{GRASS!toolbox}
+\subsection{La barra strumenti GRASS}\label{subsec:grass_toolbox}\index{GRASS!strumenti}
 
 Lo strumento \toolbtntwo{grass_tools}{Apri strumenti GRASS} fornisce accesso
 alle funzionalità dei moduli GRASS con i quali lavorare nella
@@ -574,7 +572,7 @@ l'utente che ha creato il \filename{MAPSET}). Ciò è necessario in quanto i
 nuovi layer raster o vettoriali creati durante l'analisi devono poter essere
 scritti nella \filename{LOCATION} e nel \filename{MAPSET} selezionato.
 
-\subsubsection{Lavorare con i moduli GRASS}\index{GRASS!toolbox}
+\subsubsection{Lavorare con i moduli GRASS}\index{GRASS!strumenti}
 
 \begin{figure}[h]
 \centering
@@ -594,26 +592,26 @@ personalizzare il contenuto degli strumenti GRASS come descritto alla Sezione
 \ref{sec:toolbox-customizing}.
 
 Come mostrato in Figura \ref{fig:grass_modules}, è possibile cercare il modulo
-GRASS desiderato cercandolo per aree tematiche nella linguetta \tab{Albero
-moduli} o nella linguetta con casella di ricerca \tab{Lista moduli}. 
+GRASS desiderato cercandolo per aree tematiche nella scheda \tab{Albero
+moduli} o nella scheda con casella di ricerca \tab{Lista moduli}. 
 
-Cliccando sull'icona di un modulo grafico verrà aggiunta una nuova linguetta
-alla finestra degli strumenti. In questa linguetta si avranno tre ulteriori
-sottolinguette denominate \tab{Opzioni}, \tab{Output} e \tab{Manuale}. Un
+Cliccando sull'icona di un modulo grafico verrà aggiunta una nuova scheda
+alla finestra degli strumenti. In questa scheda si avranno tre ulteriori
+sottoschede denominate \tab{Opzioni}, \tab{Output} e \tab{Manuale}. Un
 esempio è mostrato in Figura \ref{fig:grass_module_dialog} per il modulo
 \filename{v.buffer}.
 
 \begin{figure}[h]
 \centering
 \caption{Finestre degli strumenti GRASS \nixcaption}\label{fig:grass_module_dialog}
-   \subfigure[Linguetta Opzioni] {\label{subfig:grass_module_option}\includegraphics[clip=true, width=0.3\textwidth]{grass_module_option}}\goodgap
-   \subfigure[Linguetta Output] {\label{subfig:grass_module_output}\includegraphics[clip=true, width=0.3\textwidth]{grass_module_output}}\goodgap
-   \subfigure[Linguetta Manuale] {\label{subfig:grass_module_manual}\includegraphics[clip=true, width=0.3\textwidth]{grass_module_manual}}
+   \subfigure[Scheda Opzioni] {\label{subfig:grass_module_option}\includegraphics[clip=true, width=0.3\textwidth]{grass_module_option}}\goodgap
+   \subfigure[Scheda Output] {\label{subfig:grass_module_output}\includegraphics[clip=true, width=0.3\textwidth]{grass_module_output}}\goodgap
+   \subfigure[Scheda Manuale] {\label{subfig:grass_module_manual}\includegraphics[clip=true, width=0.3\textwidth]{grass_module_manual}}
 \end{figure}
 
 \minisec{Opzioni}
 
-La linguetta \tab{Opzioni} fornisce una finestra semplificata nel quale di
+La scheda \tab{Opzioni} fornisce una finestra semplificata nel quale di
 solito è possibile selezionare un layer raster o vettoriale ed inserire
 ulteriori opzioni specifiche per l'esecuzione del modulo. Per mantenere la
 leggibilità della finestra non sempre sono presenti tutte le opzioni, se si
@@ -622,30 +620,30 @@ shell di GRASS e eseguire il modulo dalla riga di comando.
 
 \minisec{Output}
 
-La linguetta \tab{Output} fornisce informazioni sull'avanzamento delle
+La scheda \tab{Output} fornisce informazioni sull'avanzamento delle
 operazioni eseguite dal modulo. Quando si clicca sul pulsante \button{Esegui},
-viene portata in primo piano la linguetta \tab{Output} nella quale vengono
+viene portata in primo piano la scheda \tab{Output} nella quale vengono
 visualizzate le informazioni sul processo in corso. Se l'operazione va a buon
 fine, si vedrà il messaggio \usertext{Operazione conclusa con successo}.
 
 \minisec{Manuale}
 
-La linguetta \tab{Manual} mostra la pagina di aiuto in formato HTML del modulo
+La scheda \tab{Manual} mostra la pagina di aiuto in formato HTML del modulo
 GRASS scelto. Qui può essere controllata la disponibilità di ulteriori
 parametri o ottenere una conoscenza più approfondita sulle operazioni che il
 modulo può eseguire. Ala fine di ogni pagina di manuale vi sono ulteriori
 collegamenti al \filename{Main Help index}, al \filename{Thematic index} o al
-\filename{Full index}. Questi links forniscono le stesse informazioni che si
+\filename{Full index}. Questi link forniscono le stesse informazioni che si
 avrebbero usando il modulo \filename{g.manual}.
 
-\begin{Tip}\caption{\textsc{Mostrare i risultati immediatamente}}\index{GRASS!display results}
+\begin{Tip}\caption{\textsc{Mostrare i risultati immediatamente}}\index{GRASS!visualizza risultato}
 \qgistip{Se si desidera visualizzare il risultato dell'analisi immediatamente
-nella vista mappa, è possibile cliccare sul pulsante 'Visualizza Output' nella
-porzione inferiore della linguetta.
+nella vista mappa, è possibile cliccare sul pulsante "Visualizza Output" nella
+porzione inferiore della scheda.
 }
 \end{Tip} 
 
-\subsubsection{Lavorare con il browser delle LOCATION GRASS} \index{GRASS!toolbox!Browser}
+\subsubsection{Lavorare con il browser delle LOCATION GRASS} \index{GRASS!strumenti!browser}
 
 Un'altra utile funzione tra quelle presenti negli strumenti GRASS è il browser
 delle \filename{LOCATION}. In Figura~\ref{fig:grass_mapset_browser} è
@@ -666,7 +664,7 @@ comandi che ha generato quel dato.
  \end{center}
 \end{figure}
 
-La barra strumenti nella linguetta \tab{Browser} tab offre i seguenti
+La barra strumenti nella scheda \tab{Browser} tab offre i seguenti
 strumenti per la gestione della \filename{LOCATION} selezionata:
 
 \begin{itemize}
@@ -683,9 +681,9 @@ selezionata}
 Gli strumenti \toolboxtwo{grass_rename_map}{Rinomina la mappa selezionata} e
 \toolboxtwo{grass_delete_map}{Elimina la mappa selezionata} funzionano solo su
 mappe contenute nel \filename{MAPSET} attivo. Tutti gli altri strumenti
-funzionano anche con livelli raster e vettoriali di altri \filename{MAPSET}.
+funzionano anche con layer raster e vettoriali di altri \filename{MAPSET}.
 
-\subsubsection{Personalizzazione degli strumenti GRASS} \index{GRASS!toolbox!customize}
+\subsubsection{Personalizzazione degli strumenti GRASS} \index{GRASS!strumenti!personalizza}
 \label{sec:toolbox-customizing}
 
 Praticamente tutti i moduli GRASS possono essere aggiunti agli strumenti
@@ -693,7 +691,7 @@ GRASS. Per incorporare i file XML di configurazione dei moduli è fornita
 un'interfaccia XML nella quale definire l'aspetto del modulo e i parametri
 da visualizzare nello strumento.
 
-Un esempio di file XML che genera il module \usertext{v.buffer} (v.buffer.qgm)
+Un esempio di file XML che genera il modulo \usertext{v.buffer} (v.buffer.qgm)
 ha il seguente aspetto:
 
 \begin{verbatim}
@@ -707,7 +705,7 @@ ha il seguente aspetto:
 </qgisgrassmodule>
 \end{verbatim}
 
-Il parser legge questa definizione e crea una nuova linguetta negli strumenti
+Il parser legge questa definizione e crea una nuova scheda negli strumenti
 quando si seleziona il modulo. Informazioni più dettagliate su come aggiungere
 moduli, cambiare i gruppi di moduli ecc. sono reperibile sul Wiki di QGIS
 all'indirizzo \\

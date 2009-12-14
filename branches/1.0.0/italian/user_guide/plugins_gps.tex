@@ -9,8 +9,8 @@
 \subsubsection{Cos'è un GPS?}\label{whatsgps}
 
 GPS sta per Global Positioning System ed indica un sistema satellitare che permette a chiunque possegga un ricevitore GPS di trovare la propria posizione ovunque nel mondo.
-Viene usato come ausilio nella navigazione, ad esempio in aereo, in barca o anche facendo escursioni.
-Il ricevitore GPS usa i segnali provenienti dai satelliti per calcolare la propria latitude, longitudine and (talvolta) elevazione.
+Viene usato come ausilio nella navigazione, ad esempio in aereo, in barca o anche per semplici escursioni.
+Il ricevitore GPS usa i segnali provenienti dai satelliti per calcolare la propria latitudine, longitudine and (talvolta) elevazione.
 La maggior parte dei ricevitori ha anche la capacità di archiviare posizioni (note come \emph{waypoints}), sequenze di posizioni che costituiscono una rotta o \emph{route} pianificata e una traccia or \emph{track} dei propri movimenti nel tempo.
 Waypoints, routes e tracks sono i tre elementi base dei dati GPS.
 QGIS mostra i waypoints in layer di punti, mentre routes e tracks vengono mostrati in layer di linee.
@@ -31,7 +31,7 @@ selezionare il file GPX \filename{national\_monuments.gpx} e premere \button{Apr
 
 \begin{figure}[ht]
    \begin{center}
-\caption{\label{gpxloader}La finestra di dialogo \emph{Strumenti GPS}  \nixcaption}
+\caption{\label{gpxloader}La finestra di dialogo \emph{Strumenti GPS} \nixcaption}
 \includegraphics[clip=true, width=12cm]{loadgpx}
 \end{center}
 \end{figure}
@@ -44,8 +44,8 @@ Il file \filename{national\_monuments.gpx} include soltanto waypoints.
 
 Dato che QGIS usa file in formato GPX, è necessario un sistema per converti gli altri formati di file GPS in GPX.
 Questo può essere fatto per molti formati usando il programma gratuito GPSBabel, che è disponibile a \url{http://www.gpsbabel.org}.
-Questo programma può anche trasferire i dati GPS tra il computer e il dispositivo GPS. QGIS usa GPSBabel per fare queste cose, quindi si raccomanda di istallare questo programma. Tuttavia, se si vuole solamente caricare dati GPS da file GPX, l'istallazione non è necessaria.
-E' noto che la versione 1.2.3 di GPSBabel funziona con QGIS, ma non ci dovrebbero essere problemi anche con versioni successive.
+Questo programma può anche trasferire i dati GPS tra il computer e il dispositivo GPS. QGIS usa GPSBabel per fare queste cose, quindi si raccomanda di installare questo programma. Tuttavia, se si vuole solamente caricare dati GPS da file GPX, l'installazione non è necessaria.
+È noto che la versione 1.2.3 di GPSBabel funziona con QGIS, ma non ci dovrebbero essere problemi anche con versioni successive.
 
 
 \subsubsection{Importazione di dati GPS}
@@ -53,7 +53,7 @@ E' noto che la versione 1.2.3 di GPSBabel funziona con QGIS, ma non ci dovrebber
 Per importare dati GPS da un file che non è in formato GPX, si può usare lo strumento \tab{Importa un altro file} nella finestra di dialogo Strumenti GPS.
 Qui si selezione il file che si vuole importare, quali tipi di dati si vogliono importare da esso, dove deve essere archiviato il file convertito GPX e quale deve esser il nome del nuovo layer.
 
-Quando si seleziona il file da importare, si deve anche specificare il formato di quel file usandoil menu nelle finestra di dialogo di selezione file (vedere figura \ref{figure importdialog}). non tutti i formati supportano tutti e tre i tipi di dati, quindi per molti formati si potranno scegliere solamente uno o due tipi.
+Quando si seleziona il file da importare, si deve anche specificare il formato di quel file usando il menu nelle finestra di dialogo di selezione file (vedere figura \ref{figure importdialog}). non tutti i formati supportano tutti e tre i tipi di dati, quindi per molti formati si potranno scegliere solamente uno o due tipi.
 
 \begin{figure}[ht]
    \begin{center}
@@ -89,16 +89,16 @@ Il layer deve essere un layer GPX.
 Per far questo semplicemente si seleziona il layer che si vuole caricare, il tipo di dispositivo GPS e la porta cui è connesso.
 Come per lo strumento di download, bisogna specificare un nuov tipo di dispositivo se quello che si sta usando non è nella lista.
 
-Questo strument è molto utile insieme con le capacità di pubblicazione vettoriali di QGIS.
+Questo strumento è molto utile insieme con le capacità di pubblicazione vettoriali di QGIS.
 Si può caricare una mappa, creare alcuni waypoints e routes e poi caricarli ed utilizzarli nel proprio dispositivo GPS.
 
 \subsubsection{\label{sec:Defining-new-device}Definizione di un nuovo dispositivo}
 
-Ci sono moltitipi diversi di dispositivi GPS.
+Ci sono molti tipi di dispositivi GPS.
 Gli sviluppatori di QGIS non possono testarli tutti, quindi se se ne ha uno che non funziona con nessuno dei tipi elencati negli strumenti \tab{Download from GPS} and \tab{Upload to GPS} si può definire il proprio tipo di dispositivo per esso.
 Questo può essere fatto usando l'editor di periferiche GPS, che si lancia premendo il pulsante \button{Modifica periferiche} nelle finestre di dialogo di download o di upload.
 
-Per definire un nuovo dispositivo, semplicemente si preme il pulsante \button{Nuova periferica}, si sceglie un nome , un comando di download ed uno di upload per il dispositivo, e infine si preme il pulsante \button{Aggiorna periferiche}.
+Per definire un nuovo dispositivo, semplicemente si preme il pulsante \button{Nuova periferica}, si sceglie un nome, un comando di download ed uno di upload per il dispositivo, e infine si preme il pulsante \button{Aggiorna periferiche}.
 Il nome verrà elencato nel menu dei dispositivi nelle finestre di dialogo di upload e download, e può essere qualsiasi stringa.
 Il comando di download è il comando usato per scaricare i dati dal dispositivo GPS al file GPX.
 Questo probabilmente sarà un comando di GPSBabel, ma si può usare qualunque altra linea di comando che possa creare un file GPX.

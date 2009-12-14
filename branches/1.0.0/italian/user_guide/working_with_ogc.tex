@@ -9,11 +9,11 @@
 QGIS supporta sorgenti di dati WMS e WFS. Il supporto WMS è nativo, quello per
 WFS è fornito tramite plugin.
 
-\subsection{Cosa sono i dati OGC}\index{OGC!introduction}
+\subsection{Cosa sono i dati OGC}\index{OGC!introduzione}
 
 L'Open Geospatial Consortium (OGC), è un’organizzazione internazionale che raggruppa più
 di 300 organizzazioni commerciali, governative, nonprofit e di ricerca.
-I suoi membri sviluppano e implementano standards per contenuti e servizi geospaziali,
+I suoi membri sviluppano e implementano standard per contenuti e servizi geospaziali,
 analisi GIS e scambio dati.
 
 Dal Consorzio è stato quindi elaborato un numero crescente di specifiche per i modelli di
@@ -38,16 +38,16 @@ tra cui SFS (tramite il supporto a PostgreSQL/PostGIS, vedi Sezione
 \ref{label_postgis}); e WFS e WMS come client.
 
 
-\subsection{Client WMS}\label{sec:ogc-wms}\index{WMS!client}\index{OGC!WMS!client}\index{rasters!WMS}
+\subsection{Client WMS}\label{sec:ogc-wms}\index{WMS!client}\index{OGC!WMS!client}\index{raster!WMS}
 
-\subsubsection{Panoramica sul servizio WMS}\label{sec:ogc-wms-about}\index{WMS!client!about}
+\subsubsection{Panoramica sul servizio WMS}\label{sec:ogc-wms-about}\index{WMS!client!considerazioni}
 
 QGIS può agire come client WMS, nel rispetto delle specifiche 1.1, 1.1.1 e 1.3.
-E’ stato particolarmente testato nei confronti di server accessibili pubblicamente
+È stato particolarmente testato nei confronti di server accessibili pubblicamente
 quali DEMIS e JPL OnEarth.
 
-I server WMS rispondono alle richieste da parte dei clients (ad es. QGIS) di una mappa raster
-di una determinata estensione, con un determinato insieme di strati, simboli e trasparenza.
+I server WMS rispondono alle richieste da parte dei client (ad es. QGIS) di una mappa raster
+di una determinata estensione, con un determinato insieme di layer, simboli e trasparenze.
 Il server WMS quindi consulta le sue risorse (locali o remote), genera il raster e lo invia
 al client in formato raster, per QGIS tipicamente come immagini JPEG o PNG.
 
@@ -55,33 +55,33 @@ WMS è un servizio REST (Representational State Transfer) piuttosto che un servi
 Come tale, si può prendere la URL (indirizzo del server con specifiche) generata da QGIS e usarla
 in un browser web per ottenere la stessa immagine che QGIS usa internamente. Questo può essere
 utile per identificare le cause di eventuali problemi, dato che esistono vari tipi di server
-WMS e ciascuno ha la sua propria interpretazione degli standards WMS.
+WMS e ciascuno ha la sua propria interpretazione degli standard WMS.
 
-Gli strati WMS possono essere aggiunti molto semplicemente, una volta
+I layer WMS possono essere aggiunti molto semplicemente, una volta
 disponibile l'indirizzo (URL) per accedere al server WMS, una connessione adatta
 e posto che il server usi l’HTTP come meccanismo di trasferimento dati.
 
-\subsubsection{Scegliere un server WMS}\label{sec:ogc-wms-servers}\index{WMS!remote server!selection}
+\subsubsection{Scegliere un server WMS}\label{sec:ogc-wms-servers}\index{WMS!server remoto!selezionare}
 
 La prima volta in cui si vuole utilizzare un servizio WMS, non sono presenti
 server predefiniti. Si può avviare lo strumento cliccando sul pulsante
-\toolbtntwo{mActionAddWmsLayer}{Aggiungi layer WNS} nella barra strumenti, 
-oppure dalla voce di menù
+\toolbtntwo{mActionAddWmsLayer}{Aggiungi layer WMS} nella barra strumenti, 
+oppure dalla voce di menu
 \mainmenuopt{Layer}>\dropmenuopttwo{mActionAddWmsLayer}{Aggiungi layer WMS...}.
 Si aprirà la finestra di dialogo \dialog{Aggiungi layer dal server}. È
-possibile aggiungere alcuni servers cliccando sul pulsante
+possibile aggiungere alcuni server cliccando sul pulsante
 \button{Aggiungi server predefiniti}. Verranno quindi aggiunti almeno tre
-servers WMS, incluso il server della NASA (JPL). Per definire un nuovo server WMS
+server WMS, incluso il server della NASA (JPL). Per definire un nuovo server WMS
 nella sezione \tab{Connessioni server}, cliccare su \button{Nuovo} ed inserire
 i parametri di connessione al server WMS desiderato, seguendo le indicazioni della
 tabella \ref{tab:wms_connection_parms}:
 
-\begin{table}[ht]\index{WMS!client!connection parameters}
+\begin{table}[ht]\index{WMS!client!parametri connessione}
 \centering
-\caption{Parametri del collegamento WMS}\label{tab:wms_connection_parms}\medskip
+\caption{Parametri connessione WMS}\label{tab:wms_connection_parms}\medskip
  \begin{tabular}{|l|p{5in}|}
 \hline Nome & nome per la connessione che consenta di individuarlo nella
-lista dei server WNS nel menù a tendina. \\
+lista dei server WMS nel menu a tendina. \\
 \hline URL \index{WMS!URL} &  indirizzo URL del server che fornisce i dati.
 Deve essere un indirizzo raggiungibile, nello stesso formato che verrebbe
 usato per aprire una connessione telnet o pingare un host. \\
@@ -90,8 +90,8 @@ usato per aprire una connessione telnet o pingare un host. \\
 \end{table}
 
 È possibile, se necessario, impostare nelle opzioni i parametri del proxy per ricevere i servizi WMS da internet.
-Selezionare la voce di menù \mainmenuopt{Impostazioni} >
-\dropmenuopttwo{mActionOptions}{Opzioni} e cliccare sulla linguetta
+Selezionare la voce di menu \mainmenuopt{Impostazioni} >
+\dropmenuopttwo{mActionOptions}{Opzioni} e cliccare sulla scheda
 \tab{Proxy}, nella quale è possibile inserire le impostazioni abilitando la
 casella di controllo \checkbox{Utilizza un proxy per l'accesso web}.
 
@@ -99,20 +99,20 @@ Una volta creata la connessione al server WMS, essa sarà memorizzata e
 disponibile per le successive sessioni di QGIS.
 
 \begin{Tip}[ht]\caption{\textsc{A proposito di indirizzi dei server WMS}}
-\qgistip{Quando si inserisce l'indirizzo del server URL, assicurarsi di
-inserire l'indirizzo di base. Ad esempio non bisogna inserire frammenti tipo
-\usertext{request=GetCapabilities} o \usertext{version=1.0.0} nell'indirizzo.\index{WMS!remote server!URL}
+\qgistip{Quando si inserisce l'indirizzo URL del server assicurarsi di
+usare l'indirizzo di base. Ad esempio non bisogna inserire frammenti tipo
+\usertext{request=GetCapabilities} o \usertext{version=1.0.0} nell'indirizzo.\index{WMS!server remoto!URL}
 }
 \end{Tip}
 
 La tabella \ref{tab:wms_example_urls} mostra alcuni esempi di indirizzi di
 server WMS con i quali iniziare.
 Questi links sono stati controllati l'ultima volta nel Dicembre 2006, ma
-potrebbere essere nel frattempo essere stati modificati:
+potrebbero essere stati modificati nel frattempo:
 
 %FIXME:  WMS URLs should be checked again and maybe extended in QGIS 
 
-\begin{table}[ht]\index{WMS!remote server!URL!examples}
+\begin{table}[ht]\index{WMS!server remoto!esempi URL}
 \centering
 \caption{Esempi di indirizzi di server WMS pubblici}\label{tab:wms_example_urls}\medskip
  \begin{tabular}{|l|l|}
@@ -126,9 +126,9 @@ potrebbere essere nel frattempo essere stati modificati:
 \end{tabular}
 \end{table}
 
-Un elenco esaustivi di servers WMS è reperibile all'indirizzo \url{http://wms-sites.com}.
+Un elenco esaustivo di server WMS è reperibile all'indirizzo \url{http://wms-sites.com}.
 
-\subsubsection{Caricare livelli WMS}\label{sec:ogc-wms-layers}\index{WMS!client!layers}
+\subsubsection{Caricare layer WMS}\label{sec:ogc-wms-layers}\index{WMS!client!layer}
 
 Una volta compilati correttamente i campi, si può premere sul pulsante
 \button{Connetti} per ottenere le capacità del server. Tra queste sono inclusi
@@ -144,7 +144,7 @@ mostra la risposta fornita dal server WMS NASA JPL OnEarth.
 \begin{figure}[ht]
   \begin{center}
   	\caption{Finestra per l'aggiunta di un server WMS, nella quale vengono
-	mostati gli strati disponibili \nixcaption}\label{fig:connection_wms}
+	mostrati i layer disponibili \nixcaption}\label{fig:connection_wms}
 	\includegraphics[clip=true,width=0.6\textwidth]{connection_wms}
   \end{center}
 \end{figure}
@@ -163,28 +163,28 @@ certa perdita di qualità dell'immagine, riducendo d'altro canto il tempo per
 il download dei dati di 5 volte rispetto al formato PNG. Usare invece PNG se
 si vuole una rappresentazione precisa del dato originale e non ci si preoccupa
 del tempo necessario per il trasferimento dei dati.
-\index{WMS!image encoding}
+\index{WMS!codifica immagine}
 }
 \end{Tip}
 
 \minisec{Layers}
 
-La sezione \tab{Layer} elenca i livelli disponibili dal server WMS
-selezionato. Si vedrà che alcuni layers sono espandibili, il che comporta che
-essi possono essere mostrati in diversi stili di immagine.
+La sezione \tab{Layer} elenca i layer disponibili dal server WMS
+selezionato. Si vedrà che alcuni layer sono espandibili, il che comporta che
+possono venir mostrati in diversi stili di immagine.
 
-Possono essere selezionati diversi layers alla volta, ma un solo stile di
+Possono essere selezionati diversi layer alla volta, ma un solo stile di
 immagine per ognuno di essi. Quando si effettua una selezione multipla, i
-livelli vengono richiesti al server e trasmessi a QGIS in un solo blocco.
+layer vengono richiesti al server e trasmessi a QGIS in un solo blocco.
 
-\begin{Tip}[ht]\caption{\textsc{Ordine degli strati WMS}}
-\qgistip{In questa versione di QGIS, i layers WMS caricati sono sovrapposti in
+\begin{Tip}[ht]\caption{\textsc{Ordine dei layer WMS}}
+\qgistip{In questa versione di QGIS, i layer WMS caricati sono sovrapposti in
 base all'ordine in cui sono elencati nella sezione Layer, dall'alto verso il
-basso. Se si desidera sovrapporre gli strati nel senso opposto occorre
+basso. Se si desidera sovrapporre i layer nel senso opposto occorre
 selezionare una seconda volta \toolbtntwo{mActionAddWmsLayer}{Aggiungi layer
 WMS}, scegliere nuovamente lo stesso server e selezionare il secondo gruppo di
-strati che si desidera sovrapporre al primo.
-\index{WMS!remote server!layer ordering}
+layer che si desidera sovrapporre al primo.
+\index{WMS!server remoto!ordinamento layer}
 }
 \end{Tip}
 
@@ -194,25 +194,25 @@ In questa versione di QGIS la trasparenza è impostata per essere sempre
 attiva, se disponibile.
 
 \begin{Tip}[ht]\caption{\textsc{Trasparenza dei Layer WMS}}
-\qgistip{La possibilità di rendere trasparenti gli strati WMS dipenda dalla codifica tramite la quale sono stati caricati: PNG e GIF gestiscono la trasparenza mentre il JPEG no.
-\index{WMS!layer transparency}
+\qgistip{La possibilità di rendere trasparenti i layer WMS dipenda dalla codifica tramite la quale sono stati caricati: PNG e GIF gestiscono la trasparenza mentre il JPEG no.
+\index{WMS!trasparenza layer}
 }
 \end{Tip}
 
 \minisec{Sistema di proiezione delle coordinate (Coordinate Reference System)}
-\index{WMS!CRS}\index{WMS!coordinate reference system}
-\index{OGC!CRS}\index{OGC!coordinate reference system}
-\index{Projections!WMS}
-\index{Projections!CRS}\index{Projections!coordinate reference system}
-\index{CRS}\index{coordinate reference system}
-\index{SRS}\index{Projections!SRS}
+\index{WMS!CRS}\index{WMS!sistema di proiezione delle coordinate}
+\index{OGC!CRS}\index{OGC!sistema di proiezione delle coordinate}
+\index{proiezioni!WMS}
+\index{proiezioni!CRS}\index{proiezioni!sistema di proiezione delle coordinate}
+\index{CRS}\index{sistema di proiezione delle coordinate}
+\index{SRS}\index{proiezioni!SRS}
 
 Un sistema di proiezione delle coordinate (Coordinate Reference System, CRS) è
-il termine OGC per una priezione in QGIS.
+il termine OGC per una proiezione in QGIS.
 
 Ogni layer WMS può essere restituito in molteplici CRS, in funzione delle
 capacità del server. Si noti che il numero di sistemi di riferimento tra cui
-scegleire viene indicato nella dicitura \textsl{Coordinate Sistema di
+scegliere viene indicato nella dicitura \textsl{Coordinate Sistema di
 Riferimento (x disponibili)} quando si seleziona/deseleziona un livello nella
 sezione \tab{Layer}.
 
@@ -229,16 +229,16 @@ effettivamente connettendo.
 il layer WMS, in modo che il sistema di riferimento dell'intero progetto sia
 lo stesso attribuito al layer WMS.
 Si potrà quindi usare la proiezione al volo (si veda la Sezione \ref{sec:projection-specifying})
-per adattare qualunque altro livello vettoriale successivamente aggiunto.
-In questa versione di qgis, aggiungere strati WMS successivamente ad altri
+per adattare qualunque altro layer vettoriale successivamente aggiunto.
+In questa versione di QGIS, aggiungere layer WMS successivamente ad altri
 con un CRS diverso rispetto a quello del progetto, può causare errori.
 }
 \end{Tip}
 
 
 \subsubsection{Uso dello strumento di identificazione}\label{sec:ogc-wms-identify}
-\index{WMS!identify}
-\index{identify!WMS}
+\index{WMS!identificazione}
+\index{identificazione!WMS}
 \index{WMS!GetFeatureInfo}
 
 Una volta aggiunto un server WMS, e se uno dei layer disponibili è
@@ -252,24 +252,23 @@ formattazione dipenderà dalle impostazioni del server WMS.
 
 % FIXME: GetFeatureInfo-Requests are done here?
 
-\subsubsection{Visualizzazione delle proprietà del server}\label{sec:ogc-wms-properties}\index{WMS!properties}
-\index{rasters!properties}
+\subsubsection{Visualizzazione delle proprietà del server}\label{sec:ogc-wms-properties}\index{WMS!proprietà}
+\index{raster!proprietà}
 
 Una volta aggiunto un server WMS, è possibile visualizzarne le le proprietà
 cliccando con il tasto destro sul suo nome nella legenda e selezionando
 \button{Proprietà}.
 
 
-\minisec{Linguetta Metadata}\label{sec:ogc-wms-properties-metadata}
-\index{rasters!metadata}
+\minisec{Scheda Metadata}\label{sec:ogc-wms-properties-metadata}
+\index{raster!metadata}
 \index{WMS!metadata}
-\index{WMS!capabilites}
+\index{WMS!capacità/capabilities}
 
-La linguetta \tab{Metadata} mostra parecchie informazioni sul server WNS,
-generally raccolte dalla affermazione "Capabilities" ritornata dal server alla
-apposita richiesta.
+La scheda \tab{Metadata} mostra parecchie informazioni sul server WMS,
+generalmente raccolte dall'affermazione "Capabilities" ritornata dal server all'apposita richiesta.
 
-Molte definizioni possono essere dedotte leggendo gli standards WMS \cite{OGCWMS010101web}, \cite{OGCWMS010300web}, alcune definizioni utili sono le seguenti:
+Molte definizioni possono essere dedotte leggendo gli standard WMS \cite{OGCWMS010101web}, \cite{OGCWMS010300web}, alcune definizioni utili sono le seguenti:
 
 \begin{itemize}
 \item \textbf{Proprietà server}
@@ -315,10 +314,10 @@ Molte definizioni possono essere dedotte leggendo gli standards WMS \cite{OGCWMS
 %                                    \ref{ogc-wms-transparency}
 %                                    ).
 
-\item \textbf{Può ingrandire}      - Indica se questo strato possa o meno
+\item \textbf{Può ingrandire}      - Indica se questo layer possa o meno
                                      essere ingrandito dal server.
 				     Questa versione di QGIS suppone che tutti i
-                                     livelli WMS abbiano questa opzione settata su \textsl{Sì}.
+                                     layer WMS abbiano questa opzione settata su \textsl{Sì}.
                                      Layers carenti in questa impostazione
 				     possono essere resi a video in modo
 				     anomalo.
@@ -331,18 +330,18 @@ Molte definizioni possono essere dedotte leggendo gli standards WMS \cite{OGCWMS
                                         per ottenere un risultato.
 
 \item \textbf{Larghezza fissa}, \textbf{Altezza fissa}
-                                - Indica se lo strato abbia o meno una
+                                - Indica se lo layer abbia o meno una
 				dimensione del pixel fissata alla sorgente.
                                   Questa versione di QGIS assume che tutti i
 				  layer WMS abbiano vuota questa voce. Layers
 				  con impostazioni diverse possono essere resi
 				  a video in modo anomalo.
 
-\item \textbf{Perimentro WGS 84} - Estensione dello strato in coordinate WGS84. Alcuni server
+\item \textbf{Perimentro WGS 84} - Estensione del layer in coordinate WGS84. Alcuni server
                                    WMS non settano questo parametro correttamente (ad
 				   es. usano coordinate UTM invece di WGS84).
 				   In questo caso sembrerà che la vista
-				   iniziale dello strato
+				   iniziale del layer
                                    sia ad uno zoom molto ridotto. Bisognerebbe
 				   informare di questi errori il webmaster del
 				   server WMS, il quale li dovrebbe
@@ -361,43 +360,43 @@ Molte definizioni possono essere dedotte leggendo gli standards WMS \cite{OGCWMS
 \end{itemize}
 
 
-\subsubsection{Limitazioni del client WMS}\label{sec:ogc-wms-limits}\index{WMS!client!limits}
+\subsubsection{Limitazioni del client WMS}\label{sec:ogc-wms-limits}\index{WMS!client!limitazioni}
 
 Non tutte le possibili funzionalità WMS sono state incluse in questa versione di QGIS. Le eccezioni
 più rilevanti sono:
 
-\minisec{Midificare le impostazioni del layer WMS}
-\index{WMS!layer settings!editing}
+\minisec{Modificare le impostazioni del layer WMS}
+\index{WMS!impostazioni layer!modifica}
 
 Una volta completata la procedura mostrata dalla finestra
 \toolbtntwo{mActionAddWmsLayer}{Aggiungi layer WMS}, non è più possibile
 modificarne i parametri.
 
-Una possibile soluzione è quella di eliminare il livello completamente e
+Una possibile soluzione è quella di eliminare il layer completamente e
 ricaricarlo reimpostando i parametri.
 
-\minisec{Servers WMS che richiedono un'autenticazione}
-\index{WMS!remote server!authentication}
+\minisec{Server WMS che richiedono un'autenticazione}
+\index{WMS!server remoto!autenticazione}
 
 Sono accessibili solo server pubblici. Non è infatti possibile impostare user
 name e password per l'autentificazione al server WMS.
 
-\begin{Tip}[ht]\caption{\textsc{Accesso a livelli OGC con password}}
-\qgistip{Se fosse necessario accedere a livelli protetti con password, è
+\begin{Tip}[ht]\caption{\textsc{Accesso a layer OGC con password}}
+\qgistip{Se fosse necessario accedere a layer protetti con password, è
 possibile usare InteProxy come proxy trasparente, che supporta molti metodi
 di autenticazione. Ulteriori informazioni sono fornite dal manuale di
 InteProxy al sito web \url{http://inteproxy.wald.intevation.org}.
-\index{WMS!secured layers!}\index{OGC!Authentication}
+\index{WMS!layer protetti!}\index{OGC!autenticazione}
 }
 \end{Tip}
 
 
 \subsection{Client WFS}
 
-In QGIS, un layer WFS si comporta come un qualsiasi altro livello vettoriale.
+In QGIS, un layer WFS si comporta come un qualsiasi altro layer vettoriale.
 È possibile identificare e selezionare elementi e visualizzare la tabella
 attributi. L'unica eccezione è che al momento non è supportata la modifica del
-livello. Per avviare il plugin the WFS bisogna andare alla voce di menù
+layer. Per avviare il plugin the WFS bisogna andare alla voce di menu
 \mainmenuopt{Plugins} > \dropmenuopttwo{mActionShowPluginManager}{Gestione
 Plugins...}, attivare la casella di controllo \checkbox{plugin WFS} e cliccare su \button{OK}. 
 
@@ -419,21 +418,21 @@ wfs&REQUEST=GetCapabilities
 
 \begin{enumerate}
   \item Assicurarsi che il plugin WFS sia caricato; in caso contrario aprire
-  il Gestore plugins e caricarlo
+  il QGIS Plugin Manager e caricarlo
   \item Cliccare sullo strumento \toolbtntwo{mIconAddWfsLayer}{Aggiungi layer
-  WFS} nella barra strumenti plugins
+  WFS} nella barra strumenti plugin
   \item Cliccare su \button{Nuovo} 
   \item Inserire \inputtext{Nome}{DM Solutions} come nome
   \item Inserire l'indirizzo precedentemente indicato
   \item Cliccare su \button{OK} 
-  \item Selezionare \selectstring{Connessioni server}{DM Solutions} dal menù a
+  \item Selezionare \selectstring{Connessioni server}{DM Solutions} dal menu a
   tendina
   \item Cliccare su \button{Connetti} 
-  \item Attendere la ricezione dell'elenco layers
-  \item Cliccare sul livello \clicklistitem{Canadian Land}
-  \item Cliccare su \button{OK} per aggiungere il livello alla mappa
-  \item Attendere pazientemente che gli elementi del livello appaiano nella
-  vista mappa dopo essere scaricati dal server
+  \item Attendere la ricezione dell'elenco dei layer
+  \item Cliccare sul layer \clicklistitem{Canadian Land}
+  \item Cliccare su \button{OK} per aggiungere il layer alla mappa
+  \item Attendere pazientemente che gli elementi del layer appaiano nella
+  vista mappa dopo lo scaricamento dal server
 \end{enumerate}
 
 \begin{figure}[ht]
@@ -448,15 +447,15 @@ parte inferiore sinistra della finestra principale di QGIS.
 Quando il layer è caricato, è possibile identificare e selezionare alcuni
 elementi e visualizzare la tabella attributi.
 
-Tenere a mente che il plugin funziona al meglio con servers WFS basati su UMN
-MapServer. Sono ancora possibili comportamenti anomale e crash dello stesso,
+Tenere a mente che il plugin funziona al meglio con server WFS basati su UMN
+MapServer. Sono ancora possibili comportamenti anomali e blocchi del plugin,
 ma ci saranno miglioramenti in future versioni.
 
-\begin{Tip}[ht]\caption{\textsc{Trovare servers WMS e WFS}}
+\begin{Tip}[ht]\caption{\textsc{Trovare server WMS e WFS}}
 \qgistip{È possibile trovare ulteriori server WMS e WFS usando Google o altro
 motore di ricerca preferito. Ci sono anche diversi elenchi di URL pubblici,
 alcuni dei quali aggiornati e altri non più mantenuti.
-\index{WFS!remote server!}
+\index{WFS!server remoto!}
 }
 \end{Tip} 
 
