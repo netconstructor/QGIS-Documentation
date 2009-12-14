@@ -1,14 +1,14 @@
 % vim: set textwidth=78 autoindent:
 
 \section{Lavorare con i dati raster}\label{label_raster}
-\index{raster layers|(}
+\index{layer raster}
 
 % when the revision of a section has been finalized, 
 % comment out the following line:
 %\updatedisclaimer
 
 Questa Sezione descrive come visualizzare ed impostare le proprietà dei dati
-raster. I formati raster attualmente supportati in QGIS includono:\index{raster layers!data formats}
+raster. I formati raster attualmente supportati in QGIS includono:\index{layer raster!formato dati}
 
 \begin{itemize}
 \item Arc/Info Binary Grid
@@ -25,12 +25,12 @@ Considerato che il supporto ai raster in QGIS è fornito dalla libreria GDAL,
 oltre a quelli elencati è possibile che sia possibile caricare anche altri
 formati supportati da GDAL - nel dubbio è comunuque possibile provare ad aprire il file
 in QGIS per verificare l'esito. Ulteriori dettagli sono forniti all'Appendice \ref{appdx_gdal}
-\index{raster layers!GDAL implementation} o all'indirizzo
+\index{layer raster!implementazione GDAL} o all'indirizzo
 \url{http://www.gdal.org/formats_list.html}. Per caricare dati raster di
 GRASS, fare riferimento alla Sezione~\ref{sec:load_grassdata}.
 
 \subsection{Cosa sono i dati raster?}\label{label_whatsraster}
-\index{raster layers!definition}
+\index{layer raster!definizione}
 
 I dati raster nei GIS sono matrici di celle discrete che rappresentano le
 caratteristiche della superficie terrestre o dell'ambiente al di sopra o al di sotto
@@ -49,24 +49,24 @@ posizionamento nella vista mappa.
 
 QGIS utilizza le informazioni di georeferenziazione incorporate nel layer
 raster (ad es. GeoTiff) o in un apposito "world file" per visualizzare
-correttamente i dati.\index{raster layers!georeferenced}
+correttamente i dati.\index{layer raster!georeferenziazione}
 	
-\subsection{Caricati dati raster in QGIS}\label{label_loadraster}
+\subsection{Caricamento dati raster in QGIS}\label{label_loadraster}
 
-I layers raster possono essere caricati sia selezionando nella barra lo
+I layer raster possono essere caricati sia selezionando nella barra lo
 strumento \toolbtntwo{mActionAddRasterLayer}{Aggiungi layer raster} o
-scegliendo la voce di menù
+scegliendo la voce di menu
 \mainmenuopt{Layer}>\dropmenuopttwo{mActionAddRasterLayer}{Aggiungi layer
-raster}. È possibile caricare più di un livello alla volta tenendo premuto il
+raster}. È possibile caricare più di un layer alla volta tenendo premuto il
 tasto \keystroke{Control} o \keystroke{Shift} mentre si effettua la selezione
-multipla con il mouse sui livelli nella finestra di dialogo \dialog{Apre
-unraster supportato da GDAL}.\index{raster layers!loading}
+multipla con il mouse sui layer nella finestra di dialogo \dialog{Apre
+unraster supportato da GDAL}.\index{layer raster!caricamento}
 
 Quando il layer è caricato è possibile cliccare nella legenda sul relativo
 nome con il tasto destro per selezionare ed attivare opzioni specifiche o per
 aprire la finestra per l'impostazione delle proprietà del layer raster.
 
-\minisec{Menù contestuale per layers raster}
+\minisec{Menu contestuale per layer raster}
 
 \begin{itemize}
 \item \dropmenuopt{Zoom all'estensione del layer}
@@ -85,9 +85,9 @@ aprire la finestra per l'impostazione delle proprietà del layer raster.
 
 Per visualizzare ed impostare le proprietà di un layer raster, fare doppio
 click sul nome del raster nella legenda o cliccare su di esso con il tasto
-destro e scegliere \dropmenuopt{Proprietà} dal menù contestuale:\index{raster layers!context menu}
+destro e scegliere \dropmenuopt{Proprietà} dal menu contestuale:\index{layer raster!menu contestuale}
 La figura \ref{fig:raster_properties} mostra la finestra \dialog{Proprietà raster}. 
-Ci sono diverse linguette nella finestra: 
+Ci sono diverse schede nella finestra: 
 
 \begin{itemize}
  \item \tab{Simbologia}
@@ -95,20 +95,20 @@ Ci sono diverse linguette nella finestra:
  \item \tab{Mappa colore}
  \item \tab{Generale}
  \item \tab{Metadata}
- \item \tab{Piramidi}
+ \item \tab{Piramidali}
  \item \tab{Istogramma}
 \end{itemize}
 
 \begin{figure}[h]
   \begin{center}
-   \caption{Finestra delle proprietà dei livelli raster \nixcaption}\label{fig:raster_properties}\smallskip
+   \caption{Finestra delle proprietà dei layer raster \nixcaption}\label{fig:raster_properties}\smallskip
    \includegraphics[clip=true, width=14cm]{rasterPropertiesDialog}
 \end{center}  
 \end{figure}
 
-\subsubsection{Linguetta Simbologia}\label{label_sombology}
+\subsubsection{Scheda Simbologia}\label{label_sombology}
 
-QGIS può rendere a video i raster in due modi:\index{raster layers!supported channels}
+QGIS può rendere a video i raster in due modi:\index{layer raster!canali supportati}
 
 \begin{itemize}
 \item Banda singola grigia - viene campionata una sola banda dell'immagine e
@@ -130,7 +130,7 @@ banda si desidera venga impiegata per la resa a video.
 La seconda opzione offre una selezione di tabelle colori preimpostate per la
 resa a video.
 
-Le scelte possibili disponibili nel menù a tendina sono
+Le scelte possibili disponibili nel menu a tendina sono
 \selectstring{Mappa colore}{Scala di grigi}, impostazione di default.
 Altre scelte possibili sono
 \begin{itemize}
@@ -140,12 +140,12 @@ Altre scelte possibili sono
 \end{itemize}
 
 Quando viene selezionata l'opzione \selectstring{Mappa colore}{Mappa colore},
-viene abilitata la linguetta \tab{Mappa colore}. Si vedano ulteriori
+viene abilitata la scheda \tab{Mappa colore}. Si vedano ulteriori
 informazioni al capitolo \ref{label_colormaptab}.
 
 Per immagini in pseudocolore in QGIS è possibile limitare i dati visualizzati
 per mostrare soltanto le celle i cui valori ricadono all'interno di una deviazione standard
-definita.\index{raster layers!standard deviation} Ciò può essere utile quando
+definita.\index{layer raster!deviazione standard} Ciò può essere utile quando
 nella griglia raster si hanno una o due celle con valori anormalmente alti
 che hanno un impatto negativo sulla resa a video del raster.
 
@@ -159,18 +159,18 @@ raster.
 \begin{Tip}\caption{\textsc{Vedere una singola banda di un raster multibanda}}
 \qgistip{Il modo corretto di visualizzare ad es. la sola banda rossa di
 un'immagine multibanda non è quello di impostare le bande verde e blu a "Non
-impostato" ma di impostare il tipo di immagine come scala di grigi e quindi
+impostato", ma di impostare il tipo di immagine come scala di grigi e quindi
 scegliere il rosso come banda da usare per il grigio.}
 \end{Tip} 
 
-\subsubsection{Linguetta Trasparenza} \label{rastertab:transparency}
+\subsubsection{Scheda Trasparenza} \label{rastertab:transparency}
 
-Questa linguetta consente di impostare in QGIS un diverso grado di trasparenza per ogni livello raster.\index{raster layers!transparency}
+Questa scheda consente di impostare in QGIS un diverso grado di trasparenza per ogni layer raster.\index{layer raster!trasparenza}
 Per settare una \guiheading{Trasparenza globale}, impostare il cursore a scorrimento al livello di trasparenza desiderato
-che consenta di vedere gli eventuali layers sottostanti presenti. 
+in maniera tale da consentire la visualizzazione degli eventuali layer sottostanti. 
 L'uso di questa impostazione può essere molto utile nei casi in cui si
 desideri sovrapporre ad es. ad una mappa delle ombreggiature del rilievo (shaded
-relief-map) una mappa raster contenente delle classificazioni, così da dare un
+relief-map) assieme a una mappa raster contenente delle classificazioni, così da dare un
 aspetto tridimensionale a quest'ultima.
 
 La sezione \guiheading{Nessun valore} consente invece di definire la trasparenza per un certo valore del raster, che sarà quindi letto come un campo privo di dati del tipo {\em NODATA}. Di
@@ -189,8 +189,8 @@ con una trasparenza del 20\%, bisognerà seguire la seguente procedura:
  \item Caricare il raster \filename{landcover}
  \item Aprire la finestra di dialogo \dialog{Proprietà} facendo doppio click
  sul nome del file nella legenda o cliccando su di esso con il tasto destro e
- scegliendo \dropmenuopt{Proprietà} dal menù contestuale
- \item Selezionare la linguetta \tab{Trasparenza}
+ scegliendo \dropmenuopt{Proprietà} dal menu contestuale
+ \item Selezionare la scheda \tab{Trasparenza}
  \item \label{enum:add} Cliccare sul pulsante
  \toolbtntwo{mActionNewAttribute}{Aggiungi un valore manualmente}. Nella lista
  pixel apparirà una nuova riga
@@ -212,11 +212,11 @@ file} per non ripetere la procedura. Il pulsante
 \toolbtntwo{mActionAddRasterLayer}{Importa da file} infatti carica il file
 salvato e applica le impostazioni al raster selezionato.
 
-\subsubsection{Mappa colore} \label{label_colormaptab}
+\subsubsection{Scheda Mappa colore} \label{label_colormaptab}
 % FIXME: Write me
 
-La linguetta \tab{Mappa colore} viene abilitata solo quando si imposta la resa
-a video del raster come "Banda singola grigia" nella linguetta
+La scheda \tab{Mappa colore} viene abilitata solo quando si imposta la resa
+a video del raster come "Banda singola grigia" nella scheda
 \tab{Simbologia} (si veda il capitolo \ref{label_sombology}).
 
 Sono disponibili tre modalità di interpolazione del colore:
@@ -231,7 +231,7 @@ Facendo doppio click sul valore comparso nella colonna "Value" (di default
 0.0) è possibile specificare il valore specifico del raster per il quale si
 vuole modificare il colore.
 Facendo doppio click sulla casella colorata nella colonna "Color" appare
-infatti la finestra  \dialog{Select color} nella quale è possibile definire il
+infatti la finestra \dialog{Select color} nella quale è possibile definire il
 colore da applicare alle celle raster corrispondenti al valore che si sta editando.
 In alternativa è possibile cliccare sul pulsante
 \toolbtntwo{mActionNewAttribute}{Carica mappa colore dalla banda}, con il
@@ -242,44 +242,44 @@ mappe colore per categoria secondo i parametri impostati. È sufficiente
 impostare il numero di classi (valori) per i quali si intende impostare il
 colore nella sezione \selectnumber{Numero di oggetti}{15} e cliccare poi su
 \button{Classifica}. Attualmente è possibile effettuare una classificazione
-solo in modalità \selectstring{Modo di classificazione}{Equal Interval}\index{raster layer!classify}.
+solo in modalità \selectstring{Modo di classificazione}{Equal Interval}\index{layer raster!classificazione}.
 
-\subsubsection{Linguetta Generale}\label{label_generaltab}
+\subsubsection{Scheda Generale}\label{label_generaltab}
 
-La linguetta \tab{Generale} visualizza le informazioni di base sui raster selezionati,
+La scheda \tab{Generale} visualizza le informazioni di base sui raster selezionati,
 incluso il percorso dal quale il layer è caricato e il nome (modificabile a
 piacere) con il quale esso sarà visualizzato in legenda. Viene inoltre
-mostrata una miniatura dello strato, la legenda dei simboli e la gamma di
-colori (se disponibili). \index{raster layers!properties}
+mostrata una miniatura del layer, la legenda dei simboli e la gamma di
+colori (se disponibili). \index{layer raster!proprietà}
 
-È qui possibile attivare la funzione che setta la visibilità dello strato
+È qui possibile attivare la funzione che setta la visibilità del layer
 in base alla scala della mappa, attivando l'apposita casella di controllo ed
 impostando l'intervallo di scale entro il quale si vuole che il layer venga
 reso a video.
 
 Viene inoltre fornita l'indicazione del sistema di riferimento spaziale
-impostato per il livello raster in formato stringa PROJ.4. Esso è modificabile
+impostato per il layer raster in formato stringa PROJ.4. Esso è modificabile
 cliccando sul pulsante \button{Cambia}.
 
-\subsubsection{Linguetta Metadata}\label{label_metatab}
+\subsubsection{Scheda Metadata}\label{label_metatab}
 
-La linguetta \tab{Metadata} mostra una serie di informazioni sul livello
+La scheda \tab{Metadata} mostra una serie di informazioni sul layer
 raster, come ad es. le statistiche riguardanti ogni banda. Le statistiche sono
-disponibili in questa linguetta solo dopo averle raccolte cliccando sulla
-linguetta \tab{Istogramma} e aver cliccato sul pulsante  \button{Aggiorna} in
+disponibili in questa scheda solo dopo averle raccolte cliccando sulla
+scheda \tab{Istogramma} e aver cliccato sul pulsante \button{Aggiorna} in
 basso a destra (si veda il capitolo \ref{label_histogram}.
 
-Si tratta quindi di una linguetta meramente informativa nella quale non è
+Si tratta quindi di una scheda meramente informativa nella quale non è
 possibile modificare alcun valore.
 
-\subsubsection{Linguetta Piramidi}\label{raster_pyramids}
+\subsubsection{Scheda Piramidali}\label{raster_pyramids}
 
-I livelli raster ad alta risoluzione possono rallentare notevolmente
+I layer raster ad alta risoluzione possono rallentare notevolmente
 l'esplorazione della mappa in QGIS. Creando copie a minor risoluzione dei dati
-(Piramidi), le prestazioni possono essere incrementate, poiché QGIS seleziona
+(piramidali), le prestazioni possono essere incrementate, poiché QGIS seleziona
 la risoluzione più appropriata in relazione al livello di zoom.
-\index{raster layers!pyramids}
-\index{raster layers!resolution pyramids}
+\index{layer raster!piramidali}
+\index{layer raster!risoluzione piramidali}
 
 Per creare i piramidali è innanzitutto necessario avere i permessi in scrittura
 sulla cartella contenente il dato originale nel quale verranno salvate le
@@ -290,22 +290,22 @@ Sono disponibili i seguenti metodi di ricampionamento:
 \item Il più vicino possibile (metodo Nearest Neighbour)
 \end{itemize}
 
-Quando viene attivata la casella di controllo \checkbox{Crea piramidi interne
+Quando viene attivata la casella di controllo \checkbox{Crea piramidale interno
 se possibile} QGIS cerca di far sì che, se il formato lo supporta, i vari
-livelli di risoluzione siano immagazzinati nella stesso file raster piuttosto
-che in multiple copie separate.
+layer di risoluzione siano immagazzinati nella stesso file raster piuttosto
+che in copie multiple separate.
 
 Si evidenzia che la costruzione dei piramidali può alterare il dato originale
 in maniera irreversibile, quindi si raccomanda di fare una copia di backup del
 raster di partenza prima di eseguire l'operazione.
 
-\subsubsection{Linguetta Istogramma}\label{label_histogram}
+\subsubsection{Scheda Istogramma}\label{label_histogram}
 
-La linguetta \tab{Istogramma} consente di visualizzare la distribuzione
-\index{raster layers!histogram} delle bande di colore nel livello raster.
+La scheda \tab{Istogramma} consente di visualizzare la distribuzione
+\index{layer raster!istogramma} delle bande di colore nel layer raster.
 Innanzitutto è necessario generare le statistiche del raster cliccando sul
 pulsante \button{Aggiorna}. È possibile selezionare quale banda mostrare nel
-diagramma selezionandola nella lista sulla sinistra della linguetta (è
+diagramma selezionandola nella lista sulla sinistra della scheda (è
 possibile effettuare una selezione multipla cliccando su più voci).
 Possono essere visualizzati due tipi di diagrammi: 
 
@@ -319,15 +319,15 @@ Può essere definito in "Conteggio colonna" il numero di colonne da usare nel gr
 e decidere se si desidera abilitare \checkbox{Permetti approssimazione} e/o
 mostrare valori fuori scala abilitando la casella \checkbox{Fuori intervallo
 OK?}. Una volta visualizzato il grafico, verranno popolati i campi sulle
-statistiche per banda nella linguetta \tab{Metadata}.\index{raster layers!metadata)}
+statistiche per banda nella scheda \tab{Metadata}.\index{layer raster!metadata}
 
 \begin{Tip}\caption{\textsc{Ottenere le statistiche del raster}}
-\qgistip{Per ottenere le statistiche di un livello, impostarne la
+\qgistip{Per ottenere le statistiche di un layer, impostarne la
 rappresentazione in pseudocolore e cliccare su \button{Applica}. L'operazione
 può richiedere molto tempo in funzione della quantità di dati contenuti nel
 raster, delle impostazioni di analisi settate e delle capacità di calcolo
 della macchina usata, attendere quindi pazientemente
-che QGIS termini l'analisi dei dati!\index{raster layers!statistics}
+che QGIS termini tale analisi.\index{layer raster!statistiche}
 }
 \end{Tip}
 
