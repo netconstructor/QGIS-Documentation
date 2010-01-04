@@ -8,18 +8,18 @@ History's (AMNH) Center for Biodiversity and Conservation (CBC)
 2009. Evis (v1.1.0) User's Guide. American Museum of Natural History, Center
 for Biodiversity and Conservation. Erhältlich unter
 \url{http://biodiversityinformatics.amnh.org/}, und unter der GNU FDL
-veröffentlicht} hat das Event Visualization Tool (Evis) entwickelt, ein
-weiteres Software-Tool zur Ergänzung der Sammlung der Erhaltung
-Überwachungs-und Decision Support Tools zur Analyse geschützter Bereiche und
-der Landschaftsplanung. Dieses Plugin ermöglicht die einfache Verknüpfung
-geokodierter Fotos (d.h. referenziert mit Längen-und Breitengrad oder X-und
-Y-Koordinaten) und andere Belege mit die Vektordaten in QGIS.
+veröffentlicht} hat das Event Visualization Tool (eVis) entwickelt, ein
+weiteres, ergänzendes Werkzeug im Bereich Monitoring und Decision 
+Support Tools für die Analyse geschützter Bereiche und die Landschaftsplanung. 
+Dieses Plugin ermöglicht die einfache Verknüpfung geokodierter Fotos 
+(d.h. referenziert mit Längen-und Breitengrad oder X- und Y-Koordinaten) und 
+anderer Dokumente mit die Vektordaten in QGIS.
 
 Das eVis Plugin wird wie alle Kern-Plugins mit dem Plugin-Manager aktiviert
 und deaktiviert (siehe Abschnitt \ref{sec:managing_plugins}). Es besteht aus
 drei Modulen: der eVis-Datenbankverbindung, dem eVis-Ereignis-ID-Werkzeug und
 dem eVis-Ereignisbrowser. Diese Werkzeuge arbeiten zusammen, damit das
-Darstellen von georeferenzierten Fotos und anderen Dokumente, die mit
+Darstellen von georeferenzierten Fotos und anderen Dokumenten, die mit
 Vektorobjekten, Datenbanken oder Tabellen verlinkt sind, funktioniert.
 
 \subsubsection{Ereignisbrowser}\label{evis_browser}
@@ -28,11 +28,11 @@ Der Ereignisbrowser verfügt über Funktionen, um georeferenzierte Fotos
 anzuzeigen, die mit Vektorobjekten verknüpft sind, die im Kartenfenster
 dargestellt sind. Die Punktdaten können dabei z.B. ein in QGIS geladener
 Vektorlayer oder das Ergebnis einer Datenbankabfrage sein. Das Vektorobjekt
-muss Attribute mit Informationen zu dem Ort und den Namen der darzustellenden
-Datei mit dem Lichtbild und, gegebenenfalls, der Kompassrichtung enthalten,
+muss Attribute mit Informationen zu dem Ort und dem Namen der darzustellenden
+Datei mit dem Foto enthalten und gegebenenfalls auch die Himmelsrichtung,
 in welche die Kamera gerichtet war, als das Bild geschossen wurde. Der
 Vektorlayer muss bereits in QGIS geladen sein, bevor Sie den Ereignisbrowser
-starten.
+starten können.
 
 \minisec{Den eVis-Ereignisbrowser starten}\label{evis_launch_browser}
 
@@ -111,8 +111,8 @@ Kontrollkästchen \checkbox{Kompassrichtung anzeigen} auszuwählen, um die
 Spalte mit den Himmelsrichtungen auszuwählen.
 \item \textbf{Kompassversatz}: Der Kompassversatz kann verwendet werden, um
 die magnetische Abweichung zu kompensieren. (Abweichung der magnetischen zur
-wahren Nordenrichtung). Klicken Sie dazu auf den \radiobuttonon{Manuell}, um
-die Abweichung einzugeben, oder auf den \radiobuttonon{Aus Attribut}, um eine
+wahren Nordrichtung). Klicken Sie dazu auf \radiobuttonon{Manuell}, um
+die Abweichung einzugeben, oder auf \radiobuttonon{Aus Attribut}, um eine
 Attributspalte mit den Abweichungen festzulegen. Für beide Optionen sollten
 östliche Abweichungen als postive Zahlenwerte und westliche Abweichungen als
 negative Zahlenwerte angegeben werden. 
@@ -122,8 +122,8 @@ Pfade der Fotos und Dokumente beziehen (siehe Abbildung \ref{evisoptions}).
 ist, wird nur der Dateiname an den Grundpfad angehängt, der als
 Attributspalte im Bereich Dateipfad definiert wurde.
 \item \textbf{Bildpfad auf alle Dokumente anwenden}: Wenn dieses
-Kontrollkästchen aktiviert ist, wird derselbe Grundpfad der für Fotos
-verwendet wird auch auf alle anderen Dokumente (Filme, Texte, usw.)
+Kontrollkästchen aktiviert ist, wird derselbe Grundpfad, der für Fotos
+verwendet wird, auch auf alle anderen Dokumente (Filme, Texte, usw.)
 verwendet. Ansonsten werden die definierten Pfadangaben nur für die Fotos
 verwendet. Alle anderen Dokumente ignorieren den Grundpfad.
 \item \textbf{Dies merken}: Wenn dieses Kontrollkästchen aktiviert ist,
@@ -166,10 +166,10 @@ aus der Referenztabelle.
 
 Der Ort und Name eines Fotos kann über einen absoluten oder relativen Pfad
 festgelegt werden. Wenn das Foto auf einem Webserver liegt, kann auch eine
-URL verwendet werden. Beipiele für die verschiedenen Varianten finden Sie in
-Tabelle \ref{tab:evis_examples}.
+URL verwendet werden. Beispiele für die verschiedenen Varianten finden Sie in
+Tabelle \ref{tab:ev_examples}.
 
-\begin{table}[htp]\label{tab:evis_examples}\index{Plugins!eVis}
+\begin{table}[htp]\label{tab:ev_examples}\index{Plugins!eVis}
 \centering
 \caption{eVis Fotos mit absoluten Pfad, relativen Pfad und URL einbinden}\medskip
  \begin{tabular}{|p{0.55in}|p{0.55in}|p{4.4in}|p{0.7in}|}
@@ -192,13 +192,13 @@ oder abgespielt werden. Dazu ist es notwendig, einen Eintrag in der
 Referenztabelle zu erstellen, über den die Quelle dann geöffnet
 werden kann. Außerdem ist es notwendig, den Pfad oder eine URL in die
 Attributtabelle des Vektorlayers für das entsprechende Objekt einzutragen.
-Eine weitere Regel, die für URLs verwendet werden kann, welche keine
-Dateiendung für das Dokument enthält, das Sie öffnen möchten, besteht darin,
-die Dateierweiterung vor der URL anzugeben. Das Format ist - Dateiendung:URL.
+Eine weitere Regel, die für URLs verwendet werden kann, die keine
+Dateiendung für das Dokument enthalten, das Sie öffnen möchten, besteht darin,
+die Dateierweiterung vor der URL anzugeben. Das Format ist dann - Dateiendung:URL.
 Vor die URL wird die Dateiendung mit einem Doppelpunkt geschrieben. Dies ist
 besonders nützlich für den Zugriff auf Dokumente in Wikis und anderen
-Web-Sites, die eine Datenbank verwenden, um die Webseiten zu verwalten (siehe
-Tabelle \ref{tab:evis_examples}).
+Webseiten, die eine Datenbank verwenden, um die Webseiten zu verwalten (siehe
+Tabelle \ref{tab:ev_examples}).
 
 \minisec{Arbeiten mit dem Ereignisbrowser}\label{evis_using_browser}
 
@@ -210,20 +210,20 @@ wird, kontrollieren Sie die Parameter nochmals.
 
 Wenn auf ein Dokument (oder ein Bild, das nicht über eine eVis bekannte
 Dateierweiterung verfügt) in der Attributtabelle verwiesen wird, wird das
-Feld mit den Dateipfad grün hervorgehoben dargestellt, wenn die
-Dateierweiterung sich in der definierten Referenztabelle befindet im Reiter
-\tab{Externe Applikationen konfigurieren}. Um das Dokument zu öffnen,
+Feld mit dem Dateipfad grün hervorgehoben dargestellt, wenn die
+Dateierweiterung sich in der definierten Referenztabelle im Reiter
+\tab{Externe Applikationen konfigurieren} befindet. Um das Dokument zu öffnen,
 doppelklicken Sie auf die grün markierte Zeile im Attribut
 Informationsfenster. Wenn auf ein Objekt in der Attributtabelle verwiesen
-wird und der Dateipfad ist nicht grün markiert, dann müssen Sie einen Eintrag
+wird und der Dateipfad nicht grün markiert ist, dann müssen Sie einen Eintrag
 für die Dateierweiterung entsprechend ergänzen. Wenn der Dateipfad grün
 markiert ist, sich aber nicht bei einem Doppelklick öffnet, müssen Sie die
 Parameter im Reiter \tab{Optionen} einstellen, damit die Datei von eVis
 gefunden und dargestellt werden kann.
 
 Wenn keine Kompassrichtung vorhanden ist, wird im Reiter \tab{Optionen} ein
-rotes Sternchen angezeigt, sofern das Vektorobjekt mit dem Foto verlinkt ist,
-angezeigt wird. Wenn eine Kompassrichtung vorhanden ist, erscheint ein Pfeil
+rotes Sternchen angezeigt, sofern das Vektorobjekt, das mit dem Foto verlinkt
+ist, angezeigt wird. Wenn eine Kompassrichtung vorhanden ist, erscheint ein Pfeil
 und weist in die Richtung, die durch der Wert in der Anzeige Kompassrichtung
 definiert ist. Der Pfeil wird über dem Vektorpunkt, der mit dem Foto oder
 einem anderen Dokument verknüpft ist, zentriert dargestellt.
@@ -236,10 +236,10 @@ Um den Ereignisbrowser zu schließen, klicken Sie auf den Knopf
 Das Ereignis-ID-Werkzeug ermöglicht es Ihnen, ein Foto oder Dokument
 anzuzeigen, indem Sie auf ein Objekt eines aktivierten Vektorlayers im QGIS
 Kartenfenster klicken. Das Vektorobjekt muss auf Attribute verweisen, welche
-Informationen zum Pfad und Namen der Datei mit dem Bild und gegebenenfalls
-der Kompassrichtung bei der Aufnahme mit einer Kamera enthalten, als das Bild
-geschossen wurde. Der Vektorlayer muss vor der Ausführung des
-Ereignis-ID-Werkzeugs in QGIS geladen worden sein.
+Informationen zum Pfad und Namen der Datei und gegebenenfalls der
+Kompassrichtung während der Aufnahme mit einer Kamera enthalten. Der
+Vektorlayer muss vor der Ausführung des Ereignis-ID-Werkzeugs in QGIS geladen
+worden sein.
 
 \minisec{Starten des Ereignis-ID-Werkzeugs}\label{evis_launch_id}
 
@@ -250,21 +250,21 @@ Um das Ereignis-ID-Werkzeug zu starten, klicken Sie auf das Icon
 einem Pfeil mit einem ``i'' und zeigt an, dass das Ereignis-ID-Werkzeug
 aktiv ist.
 
-Um die mit den Vektorobjektn verlinkten Fotos in dem aktiven Vektorlayer
+Um die mit den Vektorobjekten verlinkten Fotos in dem aktiven Vektorlayer
 anzuzeigen, bewegen Sie den Ereignis-ID Mauszeiger über das Objekt und
-klicken Sie dann auf die linke Maustaste. Nach einem Klick auf das Objekt,
+klicken dann auf die linke Maustaste. Nach einem Klick auf das Objekt,
 wird der Ereignisbrowser geöffnet und die Fotos auf oder in der Nähe des
 angeklickten Ortes werden angezeigt. Wenn mehr als ein Foto zur Verfügung
 steht, können Sie durch die verschiedenen Objekte wandeln, indem Sie auf die
-Schaltflächen \button{Vorgeriges} und \button{Nächstes}. Die anderen
+Schaltflächen \button{Vorgeriges} und \button{Nächstes} drücken. Die anderen
 Steuerelemente sind in Kapitel \ref{evis_browser} beschrieben.
 
 \subsubsection{Datenbankverbindung}\label{evis_database}
 
-Das Datenbankverbindung Modul ermöglicht es, sich mit einer Datenbank oder
-anderen ODBC Quellen, z.B. Excel-Tabellen zu verbinden.
+Der Dialog Datenbankverbindung ermöglicht es, sich mit einer Datenbank oder
+anderen ODBC Quelle, z.B. Excel-Tabellen zu verbinden.
 
-eVis kann direkt mit Microsoft Access, PostgreSQL, MySQL und SQLite
+Das eVis Plugin kann direkt mit Microsoft Access, PostgreSQL, MySQL und SQLite
 Datenbanken verbunden werden. Außerdem können weitere Datenformate über ODBC
 angesprochen werden. Dabei muss der ODBC-Treiber entsprechend auf ihrem
 Betriebssystem konfiguriert werden.
@@ -283,7 +283,7 @@ jeweiligen Aktionen angezeigt.
 \minisec{Verbinden mit einer Datenbank}\label{evis_connect_database}
 
 Drücken Sie auf den Reiter \tab{Datenbankverbindung} und definieren Sie dann
-im Dropdown-Menü den \dropmenuopt{Datenbanktyp}, mit der Sie sich verbinden
+im Dropdown-Menü den \dropmenuopt{Datenbanktyp}, mit dem Sie sich verbinden
 wollen. Wenn ein Passwort oder Benutzername erforderlich ist, können diese
 Informationen in den Feldern Benutzername und Passwort eingegeben werden.
 
@@ -331,7 +331,7 @@ Abfragen'' zu öffnen.
 \item \textbf{OK}: Schließen des Dialogs ``Datenbankverbindung''.
 \end{itemize}
 
-\minisec{SQL-Abfragen durchführen}\label{evis_running_sql}
+\minisec{SQL-Abfrage durchführen}\label{evis_running_sql}
 
 SQL-Abfragen werden verwendet, um Informationen aus einer Datenbank oder
 ODBC-Ressource zu extrahieren. In eVis wird die Abfrage als Vektorlayer zum
@@ -345,7 +345,7 @@ Arbeitsblattes ist.
 
 Klicken Sie dann auf die Knopf \button{Abfrage ausführen}, um den Befehl
 auszuführen. Wenn die Abfrage erfolgreich ist, wird ein Auswahlfenster
-angezeigt. Wenn die Abfrage nicht erfolgreich ist erscheint eine
+angezeigt. Wenn die Abfrage nicht erfolgreich ist, erscheint eine
 Fehlermeldung in der Ausgabekonsole.
 
 Im Datenbank Dateiauswahlfenster geben Sie den Namen des Layers an, der aus
@@ -360,7 +360,7 @@ dem Ergebnis der Abfrage erstellt werden soll.
 
 \begin{itemize}
 \item \textbf{SQL-Abfrage}: Ein Fenster zur Eingabe von SQL-Abfragen.
-\item \textbf{Abfrage ausführen}: Knopf, um die SQL-Abfrage durchzuführen.
+\item \textbf{Abfrage ausführen}: Knopf, um die SQL-Abfrage auszuführen.
 \item \textbf{Ausgabekonsole}: Hier werden Informationen zu den Prozessen
 angezeigt. 
 \item \textbf{Hilfe}: Zeigt die Online-Hilfe an.
@@ -369,7 +369,7 @@ angezeigt.
 
 Verwenden Sie die \dropmenuopt{X Koordinate} und \dropmenuopt{Y Koordinate}
 Dropdown-Menüs, um die Spalten der Datenbank zu selektieren, in denen die
-``X'' (oder Longitude) und ``Y'' (oder Latitude) Koordinaten abgelegt sind.
+``X'' (Longitude) und ``Y'' (Latitude) Koordinaten abgelegt sind.
 Wenn Sie nun auf den \button{OK} Knopf drücken, wird ein Vektorlayer
 entsprechend der SQL-Abfrage erstellt und als neuer Layer in QGIS angezeigt.
 
@@ -394,12 +394,12 @@ abspeichern.
 \minisec{Vordefinierte Abfragen starten}\label{evis_predefined}
 
 Über den Reiter \tab{Vordefinierte Abfragen} können Sie zuvor schriftlich
-erstellte SQL-Abfragen, die als Datei im XML-Format gespeichert werden wieder
+erstellte SQL-Abfragen, die als Datei im XML-Format gespeichert werden, wieder
 aufrufen. Dies ist besonders hilfreich, wenn Sie nicht vertraut sind mit
 SQL-Befehlen. Klicken Sie auf den Reiter \tab{Vordefinierte Abfragen}, um die
 vordefinierte Abfrage-Schnittstelle zu öffnen.
 
-Um eine Reihe von vordefinierten Abfragen zu laden, klicken Sie auf den
+Um eine Reihe von vordefinierten Abfragen zu laden, klicken Sie auf das
 \toolbtntwo{evis_file}{Datei öffnen} Icon. Dann können Sie die Datei mit den
 abgespeicherten SQL-Befehlen auswählen und laden. Danach erscheinen die
 einzelnen Abfragen im Dropdown-Menü. Eine Beschreibung der SQL-Abfrage wird
@@ -412,7 +412,7 @@ erst vergewissern, dass die Datenbankverbindung steht.
 
 Klicken Sie auf den Knopf \button{Abfrage ausführen} im Reiter
 \tab{SQL-Abfrage}. Wenn die Abfrage erfolgreich ist, wird ein Auswahlfenster
-angezeigt. Wenn die Abfrage nicht erfolgreich ist erscheint eine
+angezeigt. Wenn die Abfrage nicht erfolgreich ist, erscheint eine
 Fehlermeldung in der Ausgabekonsole.
 
 \begin{figure}[htp]
@@ -423,8 +423,8 @@ Fehlermeldung in der Ausgabekonsole.
 \end{figure}
 
 \begin{itemize}
-\item \textbf{Öffne Datei:}: Starten den ``Öffne Datei'' Dialog, um eine
-XML-Datei mit vordefinierte Abfragen zu laden.
+\item \textbf{Öffne Datei:}: Startet den ``Datei öffnen'' Dialog, um eine
+XML-Datei mit vordefinierten Abfragen zu laden.
 \item \textbf{Vordefinierte Abfragen}: Eine Dropdown-Liste mit allen Abfragen
 der bereits erstellten XML-Datei.
 \item \textbf{Abfragebeschreibung}: Eine Beschreibung der Abfrage. Diese
@@ -449,7 +449,7 @@ Dropdown-Menü erscheint.\\
 eVis Abfragebeschreibung angezeigt wird.\\
  \hline databasetype & Der Datebanktyp, wie er im Dropdown-Menü Datenbanktyp
 festgelegt wurde.\\
- \hline databaseport & Der definierte Port, über den mit den die Verbindung
+ \hline databaseport & Der definierte Port, über den die Verbindung
 mit der Datenbank stattfindet.\\
  \hline databasename & Der definierte Datenbankname aus dem Reiter
 Datenbankverbindung.\\
