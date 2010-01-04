@@ -11,12 +11,12 @@ weil in vielen Ländern keine freien Geodaten, wie etwa digitale Straßenkarten
 zur Verfügung stehen. Ziel des OSM-Projekts ist es, eine frei editierbare
 Karte der Welt auf Basis von GPS-Daten, Luftaufnahmen oder einfach nur
 Ortskenntnis zu erschaffen. Um diese Idee zu unterstützen, wurde ein QGIS
-Plugin geschrieben, das die Arbeit OSM-Daten ermöglicht.
+Plugin geschrieben, das die Arbeit mit OSM-Daten ermöglicht.
 
 Das Plugin bietet alle grundlegenden Funktionen für die Manipulation von OSM 
 Daten, wie das Laden von Daten, Importieren, Speichern, Herunterladen, Bearbeiten 
-und Hochladen von Daten zurück auf die OpenStreetMap Server. Während der 
-Erstellung des OSM Plugins fanden mehrere Treffen mit OSM Teilnehmern statt. 
+und Hochladen von Daten zurück auf den OpenStreetMap Server. Während der 
+Erstellung des OSM Plugins fanden Treffen mit OSM Nutzern statt. 
 Ziel war es, ihre Ideen einzubeziehen, um ein optimales Ergebnis zu erreichen.
 
 Der folgende Abschnitt gibt eine kurze Einführung in die Prinzipien des OSM
@@ -31,7 +31,7 @@ OpenStreetMap ist ein Projekt, um eine frei editierbare Karte der Welt zu
 erstellen. Die Karten werden aus GPS-Daten, Luftaufnahmen, anderen freien
 Quellen oder einfach aus Ortskenntnis der Teilnehmer generiert. Das Projekt
 wurde gestartet, weil die meisten Karten rechtliche oder technische
-Einschränkungen für ihre Verwendung haben, die den Anwendern daran hindern,
+Einschränkungen für ihre Verwendung haben, die den Anwender daran hindern,
 die Daten für kreative, produktive, oder sonstige Arbeiten und Projekte
 einzusetzen. Beides, die gerenderten Bilder und die Vektordaten des
 OSM-Projektes stehen zum Download bereit unter der Creative Commons
@@ -45,7 +45,7 @@ Attribution ShareAlike 2.0 Lizenz.
 \end{figure}
 
 OpenStreetMap wurde von Seiten wie Wikipedia inspiriert - die Karte
-(siehe Abbildung \ref{fig: osmweb}) verfügt über einen deutlich
+(siehe Abbildung \ref{fig:osmweb}) verfügt über einen deutlich
 hervorgehobenen \tab{Bearbeiten} Reiter sowie eine vollständige Historie der
 durchgeführten Änderungen. Registrierte Nutzer können GPS-Track Protokolle
 hochladen und die Vektordaten unter Verwendung der bereitgestellten
@@ -56,9 +56,9 @@ gespeichert werden kann. Die drei unterstützten Datentypen sind:
 \textbf{Knoten}, \textbf{Weg} und \textbf{Relation}.
 
 \begin{itemize}
-\item \textbf{Ein Knoten} ist ein Latitude/Longitude Koordinatenpaar. Es wird
-als Grundlage für andere Objekte oder selbst als Objekt (Point of Interest),
-wenn es entsprechend gekennzeichnet ist. 
+\item \textbf{Ein Knoten} ist ein Lat/Long Koordinatenpaar. Es wird
+als Grundlage für andere Objekte oder selbst als Objekt (Point of Interest)
+verwendet, wenn es entsprechend gekennzeichnet ist. 
 \item \textbf{Ein Weg} ist eine Liste von mindestens zwei Knoten, die ein
 lineares Objekt beschreiben, z.B. eine Straße. Knoten können Teil von
 multiplen Wegen sein.
@@ -71,8 +71,8 @@ abstraktes Objekt darstellen.
 Eine Vielzahl logischer Objekte können in einer gemeinsamen Karte definiert
 werden (z.B. 'Point Of Interest', 'Straße', 'Straßenbahnlinie' oder 
 'Bushaltestelle'). Diese Kartenobjekte sind allesamt gut in der
-OSM-Community bekannt und werden als sogenannte 'Tags' gespeichert, auf
-Grundlage eines Keys und eines Values. OSM Daten sind in der Regel im
+OSM-Community bekannt und werden als sogenannte 'Tags' auf Grundlage eines 
+Keys und eines Values gespeichert. OSM Daten sind in der Regel im
 XML-Format abgelegt. Für die Kommunikation mit dem OSM-Server wird XML 
 Payload verwendet.
 
@@ -82,7 +82,7 @@ Der erste Teil dieses Abschnitts beschreibt, wie OSM Daten-Primitivs in QGIS
 Vektorlayern angezeigt werden. Wie oben beschrieben, bestehen OSM Daten aus
 Knoten, Wegen und Relationen. In QGIS werden sie als drei verschiedene
 Layertypen angezeigt: Punktlayer, Linienlayer und Polygonlayer. Es ist nicht
-möglich diese Layertypen zu entfernen und stattdessen mit den anderen zu
+möglich, diese Layertypen zu entfernen und stattdessen mit den anderen zu
 arbeiten.
 
 \begin{itemize}
@@ -113,12 +113,12 @@ Standardtools getrennt bearbeitet werden können.
 Das Problem ist, dass Linenlayer aus zwei verschiedenen Arten von OSM
 Objekten bestehen - Wege und Knoten. Warum? Weil im OSM-Format ein Weg aus
 Knoten besteht. Wenn Sie beginnen, einen Linienlayer zu verändern, haben die
-Veränderungen nicht nur Auswirkungen auf die OSM Wege, sondern auch die
+Veränderungen nicht nur Auswirkungen auf die OSM Wege, sondern auch auf die
 OSM Knoten, die dazu gehören.
 
 Die QGIS Standard-Editierwerkzeuge können dem OSM-Provider nicht mitteilen,
 welche Bestandteile welcher Linie geändert wurden und wie. Es wird nur
-mitgeteilt, was die neue Geometrie die Linie ist, und das ist nicht genug, um
+mitgeteilt, was die neue Geometrie err Linie ist, und das ist nicht genug, um
 Änderungen korrekt an die OSM-Datenbank zu übertragen. Der Linienlayer kennt
 auch nicht die Bezeichnung (Relationen) der Linienmitglieder. Das gleiche 
 Problem tritt auf, wenn Sie versuchen, Polygonlayer zu bearbeiten.
@@ -128,7 +128,7 @@ Bearbeitung von OSM Daten bereitstellen, damit diese korrekt editiert werden
 können. Das Plugin besteht aus Werkzeugen für das Erstellen, Löschen und
 Verschieben von Punkten, Linien, Polygonen und Relationen.
 
-\textbf{Note:} Um eine Verbindung zwischen den Editierwerkzeugen von QGIS und
+\textbf{Anmerkung:} Um eine Verbindung zwischen den Editierwerkzeugen von QGIS und
 dem OSM-Plugin zu ermöglichen, wären umfangreiche Änderungen im QGIS Kern
 notwendig.
 
@@ -166,9 +166,9 @@ Daten erfolgreich geladen haben.
 Der Bearbeitungshistorie Dialog wird verwendet, um Veränderungen rückgängig 
 zu machen oder zu wiederholen. Es besteht aber nicht nur aus den typischen 
 \button{Zurücknehmen} und \button{Wiederholen} Tasten, sondern zeigt auch 
-eine Liste mit einer kurzen Beschreibung aller durchgeführter Aktionen. Der 
-Bearbeitungshistorie Dialog ist zu Beginn deaktiviert. Sie können ihn über 
-das Icon 'Bearbeitungshistorie anzeigen/ausblenden aktivieren im OSM Objekt 
+eine Liste mit einer kurzen Beschreibung der bisher durchgeführten Aktionen. 
+Der Bearbeitungshistorie Dialog ist zu Beginn deaktiviert. Sie können ihn über 
+das Icon 'Bearbeitungshistorie anzeigen/ausblenden' aktivieren im OSM Objekt 
 Dialog.
 
 \minisec{OSM Icons in der Werkzeugleiste}
@@ -177,7 +177,7 @@ Dialog.
 \item \toolbtntwo{osm_load}{Load OSM from file}: wird benutzt, um Daten im 
 speziellen XML OSM-Format zu laden.
 \item \toolbtntwo{osm_featureManager}{Show/Hide OSM Feature Manager} wird 
-benutzt, um den OSM Objekt Dialog zu aktivieren oder deaktivieren. Mit dem 
+benutzt, um den OSM Objekt Dialog zu aktivieren oder zu deaktivieren. Mit dem 
 Dialog kann man OSM Objekte abfragen und editieren.
 \item \toolbtntwo{osm_download}{Download OSM data} wird benutzt, um Daten 
 direkt vom OpenStreetMap Server herunterzuladen und zu visualisieren.
@@ -190,8 +190,8 @@ Vektorlayer ausgewählt und ein aktueller OSM-Layer geladen sein.
 wieder als XML-Datei abzuspeichern.
 \end{description}
 
-Weitere Informationen zu den Fenstern, Dialogen und Icons sowie zu den darin 
-enthaltenen Funktionalitäten finden Sie in den entsprechenden Abschnitten 
+Weitere Informationen zu den Fenstern, Dialogen und Icons sowie zu den
+dahinter stehenden Funktionalitäten finden Sie in den entsprechenden Abschnitten 
 dieser Pluginbeschreibung. 
 
 \subsubsection{OSM Daten laden}
@@ -225,7 +225,7 @@ Datensatz wird über seine Attribute (einer Schlüssel-ID und Werte) definiert.
 Mit dieser Option kann festgelegt werden, welche Eigenschaften eines OSM 
 Objektes angezeigt werden sollen, wenn Sie sich detailierte Informationen 
 zu einem QGIS Objekt anzeigen lassen.
-\item \textbf{Aktuelle Daten erstetzen}: Wenn Sie dieses Kontrollkästchen 
+\item \textbf{Aktuelle Daten ersetzen}: Wenn Sie dieses Kontrollkästchen 
 aktiviert haben, werden die aktuellen Daten, mit denen Sie gerade arbeiten 
 durch die neuen Daten ersetzt. Die alten Daten werden dadurch gelöscht. Wenn 
 Sie zum ersten Mal OSM Daten laden, ist diese Option entsprechend nicht 
@@ -258,16 +258,16 @@ Der Reiter \tab{Eigenschaften} zeigt alle Objektattribute. Mit einem Klick auf
 den Reiter \tab{Relationen} werden alle Relationen des Objektes angezeigt.
 
 Wenn Sie sich ein Objekt länger anschauen wollen, um die Eigenschaften und 
-Relationen zu genau zu präüfen, dann klicken Sie auf die linke 
+Relationen genau zu prüfen, dann klicken Sie auf die linke 
 Maustaste während sich der Mauspfeil über dem Objekt befindet. Die Funktion zum 
 Identifizieren von Objekten stoppt dann solange, bis Sie wieder auf die linke 
 Maustaste klicken.
 
 Manchmal gibt es mehr als ein Objekt an einer Stelle, wo der Linksklick 
 durchgeführt wurde. Dies geschieht vor allem, wenn Sie auf Kreuzungen klicken 
-oder wenn nicht weit genug in die Karte hineingezoomt sind. In dieser Situation 
+oder wenn Sie nicht weit genug in die Karte hineingezoomt sind. In dieser Situation 
 wird zwar nur eines der Objekte abgefragt, angezeigt und mit dem Gummiband 
-markiert, aber das Plugin erinnert sich auch an die anderen. Wärend Sie sich 
+markiert, aber das Plugin erinnert sich auch an die anderen. Während Sie sich 
 noch im Pause-Modus der linken Maustaste befinden, können Sie die anderen 
 Objekte durchlaufen, indem Sie nacheinander auf die rechte Maustaste klicken.
 
@@ -301,7 +301,7 @@ Vergessen Sie dabei nicht, vorher ein Objekt abzufragen bzw. zu identifizieren.
 Wenn Sie ein Attribut ändern möchten, klicken Sie einfach doppelt in die 
 entsprechende Zeile der Spalte 'Value' und geben Sie einen neuen Wert ein. Wenn 
 Sie ein Attribut entfernen wollen, klicken Sie in die entsprechende Zeile und 
-dann auf den Knopf \button{Remove selected tags} rechts unterhalb der Tabelle.
+dann auf den Knopf \button{gewählte Elemente löschen} rechts unterhalb der Tabelle.
 
 Um ein neues Attribut zu erstellen, schreiben Sie einfach seinen Schlüssel und 
 den Wert in die letzte Zeile der Tabelle, wo '<next tag value>' geschrieben steht. 
@@ -313,20 +313,21 @@ typischen Werten vorgegeben sind.
 \minisec{Punkte erstellen}
 
 Für das Erstellen von Punkten gibt es das Icon 
-\toolbtntwo{osm_createPoint}{Punkt erstellen} im OSM Objekt Dialog. Klicken Sie 
+\toolbtntwo{osm_createPoint}{Punkt erzeugen} im OSM Objekt Dialog. Klicken Sie 
 einfach auf das Icon und setzen Sie ein paar Punkte in die Karte. Wenn sich der 
 Mauspfeil über existierenden Objekten befindet, werden diese markiert und deren 
 Eigenschaften angezeigt. Wenn an der Stelle, an der Sie einen neuen Punkt 
 erstellen wollen eine Linie oder ein Polygon markiert sind, dann wird der neue Punkt 
 automatisch als neuer Mitgliedsstützpunkt dieses Objektes abgelegt. Wenn der neue 
 Punkt über einem bereits existierenden Punkt erstellt werden soll, dann 
-funktioniert das nicht. Stattdessen wird folgende Fehlermeldung angezeigt.
+funktioniert das nicht. Stattdessen wird eine Fehlermeldung wie in Abbildung
+\ref{fig:osmpoicreat} angezeigt.
 
 \begin{figure}[ht]
    \begin{center}
    \caption{OSM Punkt Erstellungsnachricht \nixcaption}\label{fig:osmpoicreat}\smallskip
    \includegraphics[clip=true, width=8cm]{osm_pointcreation}
-\end{center}
+   \end{center}
 \end{figure}
 
 Der Mechanismus, den Anwender dabei zu unterstützen, eine Linie oder ein Polygon 
@@ -338,7 +339,7 @@ die \keystroke{Strg}-Taste gedrückt halten.
 \minisec{Linien erstellen}
 
 Für das Erstellen von Linien gibt es das Icon
-\toolbtntwo{osm_createLine}{Linie erstellen} im OSM Objekt Dialog. Klicken Sie
+\toolbtntwo{osm_createLine}{Linie erzeugen} im OSM Objekt Dialog. Klicken Sie
 einfach auf das Icon und fügen Sie eine neue Linie in die Karte ein. Jeder Klick 
 wird dabei als ein Mitgliedsstützpunkt der Linie gespeichert. Das Erstellen 
 der Linie wird beendet, indem Sie auf die rechte Maustaste klicken. Die neue 
@@ -355,7 +356,7 @@ die \keystroke{Strg}-Taste gedrückt halten.
 \minisec{Polygone erstellen}
 
 Für das Erstellen von Polygonen gibt es das Icon
-\toolbtntwo{osm_createPolygon}{Polygon erstellen} im OSM Objekt Dialog. Klicken Sie
+\toolbtntwo{osm_createPolygon}{Polygon erzeugen} im OSM Objekt Dialog. Klicken Sie
 einfach auf das Icon und fügen Sie ein neues Polygon in die Karte ein. Jeder Klick
 wird dabei als ein Mitgliedsstützpunkt des Polygons gespeichert. Das Erstellen
 des Polygons wird beendet, indem Sie auf die rechte Maustaste klicken. Das neue
@@ -379,7 +380,7 @@ auswählen, dass Sie verschieben möchten. Wenn ein falsches Objekt an der richtig
 Stelle ausgewählt wurde, bleiben Sie mit dem Mauspfeil an der Stelle und klicken 
 Sie mehrmals auf die rechte Maustaste, bis das richtige Objekt ausgewählt ist. Wenn 
 Sie den Mauspfeil vorher bewegen, können Sie die Auswahl nicht mehr ändern. Nachdem 
-Sie das Objekt verschoben haben, bestätigen Sie mit mit der linken Maustaste. 
+Sie das Objekt verschoben haben, bestätigen Sie mit der linken Maustaste. 
 Um das Verschieben abzubrechen, klicken Sie auf eine andere Maustaste.
 
 Wenn Sie ein Objekt verschieben, das mit einem oder mehren Objekten verbunden ist, 
@@ -389,7 +390,7 @@ an die neue Position des verschobenen Objektes an.
 Snapping wird bei diesen Operationen auch unterstützt, d.h.:
 
 \begin{itemize}
-\item Beim verschieben eines eigenständigen Punktes (nicht Teil einer Linie oder 
+\item Beim Verschieben eines eigenständigen Punktes (nicht Teil einer Linie oder 
 eines Polygons) wird das Snapping auf alle Kartensegmente und Stützpunkte 
 unterstützt.
 \item Beim Verschieben eines Punktes, der ein Mitgliedsstützpunkt von Linien 
@@ -417,16 +418,16 @@ Polygons werden geändert. Die neue Geometrie hat dann also weniger Stützpunkte
 als zuvor.
 
 Wenn das Objekt ein Polygon mit genau drei Stützpunkten war, dann hat die 
-neue Geometrie nur zwei Stützpunkte. Und weil es keine Polygon mit nur 
+neue Geometrie nur zwei Stützpunkte. Und weil es kein Polygon mit nur 
 zwei Stützpunkten gibt, wird der Objekttyp automatisch zur Linie geändert.
 
 Wenn das Objekt eine Linie mit genau zwei Stützpunkten war, dann hat die
-neue Geometrie nur noch einen Stützpunkt. Und weil es keine Linien mit nur
+neue Geometrie nur noch einen Stützpunkt. Und weil es keine Linie mit nur
 einem Stützpunkt gibt, wird der Objekttyp automatisch zum Punkt geändert.
 
 \subsubsection{Relationen editieren}\label{editing_osm_relation}
 
-Aufgrund der Existenz von OSM Beziehungen können OSM Objekte in Gruppen 
+Aufgrund der Existenz von OSM Relationen können OSM Objekte in Gruppen 
 mit gemeinsamen Eigenschaften zusammengefasst werden - so kann jedes 
 mögliche Kartenobjekt dargestellt werden, z.B. die Grenzen einer Region 
 (als Gruppe von Wegen und Punkten) oder eine Busroute. Jedes Mitglied 
@@ -439,7 +440,7 @@ aktualisiert oder entfernt.
 
 Wenn Sie die Eigenschaften von Relationen sehen möchten, identifizieren Sie 
 zuerst ein Objekt. Danach öffnen Sie den Reiter \tab{Relationen} im OSM 
-Objektie Dialog. Oben im Reiter wird eine Liste aller Relationen des 
+Objekte Dialog. Oben im Reiter wird eine Liste aller Relationen des 
 abgefragten Objektes angezeigt. Wählen Sie nun die gewünschte Relation aus, 
 die Informationen dazu werden weiter unten angezeigt. In der ersten Tabelle 
 mit dem Namen 'Relation Tags' finden Sie die Eigenschaften der gewählten 
@@ -460,7 +461,7 @@ das Icon \toolbtntwo{osm_addRelation}{Relation hinzufügen} erstellen.
 \end{enumerate}
 
 In beiden Fällen erscheint ein Dialogfenster. Für den zweiten Fall wird das 
-das gerade ausgewählte Objekt automatisch als das erste Relationsmitglied 
+gerade ausgewählte Objekt automatisch als das erste Relationsmitglied 
 angenommen, so dass der Dialog breits ein wenig vorausgefüllt ist. Bei der 
 Erstellung einer Relation wählen Sie zuerst den Typ. Dabei können Sie 
 einen vordefinierten Relationstyp verwenden oder Sie schreiben Ihren 
@@ -506,8 +507,8 @@ folgende Funktionen:
 \end{figure}
 
 \begin{description}
-\item \textbf{Ausdehnung}: Hier wird ein Downloadbreich in Latitude und 
-Longitude Werten angegeben. Da der OSM Server einige Einschränkungen hat, was 
+\item \textbf{Ausdehnung}: Hier wird ein Downloadbereich als Latitude und
+Longitude angegeben. Da der OSM Server einige Einschränkungen hat, was 
 die Datenmenge beim Download betrifft, darf das definierte Gebiet nicht zu 
 groß sein. Weitere Informationen dazu werden angezeigt, wenn Sie auf das Icon 
 \toolbtntwo{osm_questionMark}{Hilfe} klicken.
@@ -515,10 +516,10 @@ groß sein. Weitere Informationen dazu werden angezeigt, wenn Sie auf das Icon
 dem die heruntergeladene Datei abgespeichert werden soll. Sie können dabei
 auch den \button{\dots} Knopf zur Hilfe nehmen.
 \item \textbf{Daten nach Laden automatisch öffnen}: Damit legen Sie fest, 
-on die Daten nach dem Download direkt dargestellt werden sollen oder nicht. 
+ob die Daten nach dem Download direkt dargestellt werden sollen oder nicht. 
 Wenn Sie die Daten lieber später laden möchten, dann können Sie es 
 mit dem Icon \toolbtntwo{osm_load}{Load OSM from file} tun.
-\item \textbf{Aktuelle Daten erstetzen}: Wenn Sie dieses Kontrollkästchen
+\item \textbf{Aktuelle Daten ersetzen}: Wenn Sie dieses Kontrollkästchen
 aktiviert haben, werden die aktuellen Daten, mit denen Sie gerade arbeiten
 durch die neuen Daten ersetzt. Die alten Daten werden dadurch gelöscht. Wenn
 Sie zum ersten Mal OSM Daten laden, ist diese Option entsprechend nicht
@@ -536,8 +537,8 @@ zwischen den verschiendenen Darstellungsvarianten.
 Klicken Sie nun auf den Knopf \button{Herunterladen}.
 
 Ein Dialogfenster wird Sie über den Stand des Herunterladens informieren. 
-Wenn ein Fehler geschieht, wird die auch angezeigt. Nach erfolgreicher 
-Beendigung schließen sich beide Dialoge automatisch.
+Wenn ein Fehler geschieht, wird dieser angezeigt. Nach erfolgreicher 
+Beendigung schließen sich beide Fenster automatisch.
 
 \subsubsection{OSM Daten hochladen}  
 
@@ -569,9 +570,9 @@ eintragen, die den Upload umschreiben. Schreiben Sie hier kurz, welche
 Datenänderungen Sie vorgenommen haben oder lassen Sie das Feld einfach leer.
 Füllen Sie nun den Bereich 'OSM-Konto' aus, damit Sie sich beim Server 
 authentifizieren können. Wenn Sie noch keinen Account für den OSM Server haben, 
-ist dies die beste Gelegenheit dazu unter der URL 
-\url{http://www.openstreetmap.org}. Danach klicken Sie auf den Knopf 
-\button{Hochladen}, um den Uploadvorgang zu starten.
+können Sie es unter der URL \url{http://www.openstreetmap.org} machen. 
+Danach klicken Sie auf den Knopf \button{Hochladen}, um den Uploadvorgang zu
+starten.
 
 \subsubsection{OSM Daten speichern}  
 
@@ -599,9 +600,9 @@ vorgeschrieben, siehe DTD OSM-XML-Version 0.6. Zudem sind die Objekte in der
 Ausgabedatei nicht geordnet.
 
 Beachten Sie, dass nicht nur Daten aus dem aktuellen Kartenausschnitt 
-gespeichert werden. In der Ausgabe Datei werden komplette Polygone und 
+gespeichert werden. In der Ausgabedatei werden komplette Polygone und 
 Linien gespeichert, auch wenn sich nur ein kleiner Teil von ihnen im aktuellen 
-Kartenausschnitt befinden. Für jede gespeicherte Line und jedes gespeicherte 
+Kartenausschnitt befindet. Für jede gespeicherte Linie und jedes gespeicherte 
 Polygon werden alle Mitgliedstützpunkte mit abgespeichert.
 
 \subsubsection{OSM Daten importieren}  
