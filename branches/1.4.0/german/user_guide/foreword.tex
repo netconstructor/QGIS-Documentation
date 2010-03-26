@@ -1,6 +1,6 @@
 % vim: set textwidth=78 autoindent:
 
-\section{Foreword}\label{label_forward}
+\section{Vorwort}\label{label_forward}
 \pagenumbering{arabic}
 \setcounter{page}{1}
 
@@ -8,178 +8,187 @@
 % comment out the following line:
 % \updatedisclaimer
 
-Welcome to the wonderful world of Geographical Information Systems (GIS)!
-Quantum GIS (QGIS) is an Open Source Geographic Information System. The project
-was born in May of 2002 and was established as a project on SourceForge in June
-of the same year. We've worked hard to make GIS software (which is traditionally
-expensive proprietary software) a viable prospect for anyone with basic access
-to a Personal Computer. QGIS currently runs on most Unix platforms, Windows, and
-OS X. QGIS is developed using the Qt toolkit (\url{http://www.trolltech.com})
-and C++. This means that QGIS feels snappy to use and has a pleasing, easy-to-
-use graphical user interface (GUI). 
+Willkommen in der wunderbaren Welt der Geographischen Informationssysteme
+(GIS)! Quantum GIS ist ein Freies (Open Source) GIS. Die Idee zu dem Projekt wurde
+im Mai 2002 geboren und bereits im Juni desselben Jahres bei SourceForge
+etabliert. Wir haben hart daran gearbeitet, traditionell sehr teure GIS Software
+kostenfrei für jeden, der Zugang zu einem PC hat, bereitzustellen.
+QGIS kann unter den meisten Unices, Windows und MacOSX betrieben werden. QGIS
+wurde mit Hilfe des Qt toolkit (\url{http://www.trolltech.com}) und C++
+entwickelt. Dadurch ist QGIS sehr benutzerfreundlich und besitzt eine einfach
+zu bedienende und intuitive grafische Benutzeroberfläche.
 
-QGIS aims to be an easy-to-use GIS, providing common functions and features.
-The initial goal was to provide a GIS data viewer. QGIS has reached the point
-in its evolution where it is being used by many for their daily GIS data viewing
-needs. QGIS supports a number of raster and vector data formats, with new
-format support easily added using the plugin architecture (see Appendix
-\ref{appdx_data_formats} for a full list of currently supported data formats).
+QGIS soll ein einfach zu benutzendes GIS sein und grundlegende
+GIS-Funktionalitäten bieten. Das anfängliche Ziel bestand darin, einen
+einfachen Geo-Datenviewer zu entwickeln. Dieses Ziel wurde bereits mehr als
+erreicht, so dass QGIS mittlerweile von vielen Anwendern für ihre tägliche
+Arbeit eingesetzt wird. QGIS unterstützt eine Vielzahl von Raster- und
+Vektorformaten. Mit Hilfe der Plugin-Architektur können weitere
+Funktionalitäten einfach ergänzt werden (vgl. Appendix
+\ref{appdx_data_formats} für eine vollständige Liste derzeit
+unterstützter Datenformate).
 
-QGIS is released under the GNU General Public License (GPL). Developing QGIS 
-under this license means that you can inspect and modify the source code,
-and guarantees that you, our happy user, will always have access to a GIS
-program that is free of cost and can be freely modified. You should have
-received a full copy of the license with your copy of QGIS, and you also can
-find it in Appendix \ref{gpl_appendix}.  
+QGIS wird unter der GNU Public License (GPL) herausgegeben. Für die
+Entwicklung des Programms bedeutet dies das Recht, den Quellcode einzusehen
+und entsprechend der Lizens verändern zu dürfen. Für die Anwendung der
+Software ist damit garantiert, dass QGIS kostenfrei aus dem Internet
+heruntergeladen, genutzt und weitergegeben werden kann. Eine vollständige
+Kopie der Lizenz ist dem Programm beigefügt und kann auch im Appendix
+\ref{gpl_appendix} eingesehen werden.
 
-\begin{Tip}\caption{\textsc{Up-to-date Documentation}}\index{documentation}
-\qgistip{The latest version of this document can always be found at 
-\url{http://download.osgeo.org/qgis/doc/manual/}, or in the documentation
-area of the QGIS website at \url{http://qgis.osgeo.org/documentation/}
+\begin{Tip}\caption{\textsc{Aktuelle Dokumentation finden}}\index{Dokumentation}
+\qgistip{Die aktuellste Version dieses Dokumentes wird unter
+\url{http://download.osgeo.org/qgis/doc/manual/} und im Dokumentationsbereich
+der QGIS Webseite \url{http://qgis.osgeo.org/documentation/} bereitgestellt.
 }
 \end{Tip}
 
-\subsection{Features}\label{label_majfeat}
+\subsection{Funktionalitäten}\label{label_majfeat}
 
-QGIS offers many common GIS functionalities provided by core features and
-plugins. As a short summary they are presented in six categories to gain a
-first insight.
+Quantum GIS bietet zahlreiche GIS Funktionalitäten, die über Kernmodule und
+Plugins bereitgestellt werden. Die wichtigsten sind hier als Überblick in
+sechs Kategorien unterteilt aufgelistet.
 
-\minisec{View data}
+\minisec{Daten visualisieren}
 
-You can view and overlay vector and raster data in different formats and
-projections without conversion to an internal or common format. Supported
-formats include:
-
-\begin{itemize}
-\item spatially-enabled PostgreSQL tables using PostGIS, vector 
-formats
-%\footnote{OGR-supported database formats such as Oracle or 
-%mySQL are not yet supported in QGIS.}
- supported by the installed OGR library, including ESRI shapefiles, MapInfo, 
-SDTS and GML (see Appendix \ref{appdx_ogr} for the complete list) .
-\item Raster and imagery formats supported by the installed GDAL (Geospatial
-Data Abstraction Library) library, such as GeoTiff, Erdas Img., ArcInfo Ascii 
-Grid, JPEG, PNG (see Appendix \ref{appdx_gdal} for the complete list).
-\item SpatiaLite databases (see Section \ref{label_spatialite}) 
-\item GRASS raster and vector data from GRASS databases (location/mapset), 
-\item Online spatial data served as OGC-compliant Web Map Service (WMS) or
-Web Feature Service (WFS),
-\item OpenStreetMap data.
-\end{itemize}
-
-\minisec{Explore data and compose maps} 
-
-You can compose maps and interactively explore spatial data with a friendly
-GUI. The many helpful tools available in the GUI include:
+Es ist möglich, Vektor- und Rasterdaten in unterschiedlichen Formaten und aus
+verschiedenen Projektionen anzuschauen und zu überlagern, ohne die Daten
+selbst in irgendeiner Art und Weise konvertieren zu müssen. Zu den
+unterstützten Datenformaten gehören z.B.:
 
 \begin{itemize}
-\item on the fly projection
-\item map composer
-\item overview panel
-\item spatial bookmarks
-\item identify/select features
-\item edit/view/search attributes
-\item feature labeling
-\item change vector and raster symbology
-\item add a graticule layer now via fTools plugin
-\item decorate your map with a north arrow scale bar and copyright label
-\item save and restore projects
+\item PostgreSQL/PostGIS, Vektorformate\footnote{OGR-unterstützte Datenbanken
+wie Oracle oder MySQL werden derzeit noch nicht von QGIS unterstützt.},
+welche durch die installierte OGR Bibliothek unterstützt werden. Dazu zählen
+die Formate ESRI Shape, MapInfo, SDTS oder auch GML (siehe Anhang
+\ref{appdx_ogr} für eine komplette Liste der unterstützten Formate);
+\item Raster- und Bilddatenformate, welche durch die installierte GDAL
+Geospatial Data Abstraction Library) Bibliothek unterstützt werden, wie etwa
+GeoTiff, Erdas Img., ArcInfo Ascii Grid, JPEG oder PNG (siehe Anhang
+\ref{appdx_gdal} für eine komplette Liste der unterstützten Formate);
+\item SpatiaLite Datenbanken (siehe Kapitel~\ref{label_spatialite})
+\item GRASS Raster- und Vektordaten aus einer GRASS Datenbank
+(Location/Mapset); 
+\item Online Geodaten, welche mittels OGC-konforme WMS- (Web Map Service)
+oder WFS-Dienste (Web Feature Service) bereitgestellt werden.
+\item OpenStreetMap Daten
 \end{itemize}
 
-\minisec{Create, edit, manage and export data}
+\minisec{Daten erkunden, abfragen und Karten layouten} 
 
-You can create, edit, manage and export vector maps in several formats. Raster data
-have to be imported into GRASS to be able to edit and export them into other
-formats. QGIS offers the following: 
+In QGIS können Daten mit Hilfe der einfach zu bedienenden grafischen
+Benutzeroberfläche interaktiv erkundet und abgefragt werden. Darüberhinaus
+ist es möglich, druckfertige Karten zu layouten. Zu den zahlreichen
+Funktionalitäten gehört: 
 
 \begin{itemize}
-\item digitizing tools for OGR supported formats and GRASS vector layer
-\item create and edit shapefiles and GRASS vector layers
-\item geocode images with the Georeferencer plugin
-\item GPS tools to import and export GPX format, and convert other GPS
-formats to GPX or down/upload directly to a GPS unit (on Linux, usb: has been added to list of GPS devices)
-\item visualize and edit OpenStreetMap data
-\item create PostGIS layers from shapefiles with the SPIT plugin 
-\item improved handling of PostGIS tables
-\item manage vector attribute tables with the new attribute table (see Section 
-\ref{sec:attribute table}) or Table Manager plugin
-\item save screenshots as georeferenced images
+\item Umprojizieren von Daten "'On The Fly"' (OTF)
+\item Drucklayouts erstellen mit dem Map Composer
+\item Kartenübersichtsfenster
+\item Räumliche Bookmarks
+\item Identifizieren/Selektieren von Objekten
+\item Editieren/Visualisieren/Suchen von Attributdaten
+\item Objekte beschriften
+\item Eigenschaften und Darstellung von Vektor- und Rasterdaten ändern
+\item Überlagerung des Kartenfensters mit einem Gradnetz über das fTool Plugin
+\item Hinzufügen von Nordpfeil, Maßstab und Copyright Informationen
+\item Speichern und Laden von QGIS Projekten
 \end{itemize}
 
-\minisec{Analyse data} 
+\minisec{Daten erstellen, editieren, verwalten und exportieren}
 
-You can perform spatial data analysis on PostgreSQL/PostGIS and other OGR
-supported formats using the fTools python plugin. QGIS currently offers
-vector analysis, sampling, geoprocessing, geometry and database management
-tools. You can also use the integrated GRASS tools, which 
-include the complete GRASS functionality of more than 300 modules (See
-Section \ref{sec:grass}).
+In QGIS können Vektordaten erstellt, editiert, verwaltet und in
+unterschiedliche Formate exportiert werden. Rasterdaten müssen derzeit noch
+in eine GRASS Datenbank importiert werden, um editiert und in andere Formate
+exportiert werden zu können. QGIS bietet aktuell folgende Funktionalitäten:
 
-\minisec{Publish maps on the internet}
+\begin{itemize}
+\item Digitalisierfunktionen für OGR-unterstützte Vektorformate sowie GRASS
+Vektorlayer
+\item Erstellen und Editieren von ESRI Shapes und GRASS Vektorlayern 
+\item Geocodierung von Bilddaten mit Hilfe des Georeferenzier-Plugins
+\item GPS Werkzeuge zum Import und Export von GPX Daten, zur Konvertierung
+anderer GPS-Datenformate ins GPX-Format sowie das direkte Importieren und
+Exportieren von GPX Daten auf ein GPS-Gerät. Unter GNU/Linux auch über USB.
+\item OpenStreetMap Daten visualisieren und editieren.
+\item Erstellen von PostGIS Layern aus ESRI Shapes mit dem SPIT Plugin mit
+erweiterten Funktionen bei der Arbeit mit PostGIS Tabellen.
+\item Verwaltung von Vektor-Attributen in der neuen Attributtabelle (siehe
+Kapitel~(\ref{sec:attribute table})) oder dem Table Manager Plugin.  
+\end{itemize}
 
-QGIS can be used to export data to a mapfile and to publish them on the
-internet using a webserver with UMN MapServer installed. QGIS can also
-be used as a WMS or WFS client, and as WMS server. 
+\minisec{Daten analysieren} 
 
-\minisec{Extend QGIS functionality through plugins} 
+Mit den QGIS fTools können PostgreSQL/PostGIS und OGR-unterstützte
+Vektorformate räumlich analysiert werden. Zu den Funktionalitäten des Plugins
+gehört Geometrie- und Attributdaten Management sowie Module zur Analyse und
+Geoprozessierung von Vektordaten. Mit dem GRASS Plugin können zusätzlich mehr
+als 300 GRASS Module auf Geodaten, die in einer GRASS Datenbank abgelegt
+sind, angewendet werden (siehe Kapitel~\ref{sec:grass}).
 
-QGIS can be adapted to your special needs with the extensible
-plugin architecture. QGIS provides libraries that can be used to create
-plugins.  You can even create new applications with C++ or Python!
+\minisec{Karten im Internet veröffentlichen}
 
-\minisec{Core Plugins}
+QGIS kann auch dazu verwendet werden, um Mapfiles für Daten zu erstellen und
+dann z.B. mit Hilfe eines installierten UMN MapServer über das Internet zur
+Verfügung zu stellen. Darüberhinaus kann QGIS als WMS und WFS Client und als
+WMS Server verwendet werden.
+
+\minisec{Erweiterung der QGIS Funktionalität mittels Plugins} 
+
+QGIS bietet eine erweiterbare Plugin-Architektur und kann dadurch an die
+individuellen Benutzeransprüche angepasst werden. Hierzu stellt QGIS
+Bibliotheken zur Verfügung die verwendet werden können, um eigene Plugins
+oder auch eigenständige Applikationen in C++ oder Python zu schreiben.
+
+\minisec{Kern Plugins}
 
 \begin{enumerate}
-\item Add Delimited Text Layer (Loads and displays delimited text files
-containing x,y coordinates)
-\item Coordinate Capture (Capture mouse coordinates in different CRS)
-\item Decorations (Copyright Label, North Arrow and Scale bar)
-\item Diagram Overlay (Placing diagrams on vector layer)
-\item Dxf2Shp Converter (Convert DXF to Shape)
-\item GPS Tools (Loading and importing GPS data)
-\item GRASS (GRASS GIS integration)
-\item Georeferencer GDAL (Adding projection information to raster using GDAL)
-\item Interpolation plugin (interpolate based on vertices of a vector layer)
-\item Labeling (Smart labeling for vector layers)
-\item Mapserver Export (Export QGIS project file to a MapServer map file)
-\item OGR Layer Converter (Translate vector layer between formats)
-\item OpenStreetMap plugin (Viewer and editor for openstreetmap data)
-\item Oracle Spatial GeoRaster support
-\item Python Plugin Installer (Download and install QGIS python plugins)
-\item Quick Print (Print a map with minimal effort)
-\item Raster terrain analysis (Raster based terrain analysis)
-\item SPIT (Import Shapefile to PostgreSQL/PostGIS)
-\item WFS Plugin (Add WFS layers to QGIS canvas)
-\item eVIS (Event Visualization Tool)
-\item fTools (Tools for vector data analysis and management)
-\item Python Console (Access QGIS environment)
+\item Copyright Label, Nordpfeil und Maßstab hinzufügen
+\item Intelligente Beschriftung von Vektorlayern
+\item Erstellen eines Diagramm-Layers auf Basis von Vektorattributdaten
+\item Dxf2Shp Konverter
+\item GDAL-Georeferenzierer
+\item GPS Werkzeuge
+\item GRASS GIS Integration
+\item Interpolation von Vektorstützpunkten
+\item Import von ASCII-Tabellen
+\item Koordinaten aus dem Kartenfenster aufnehmen
+\item Mapserver Export
+\item OGR Layer in andere Vektorformate konvertieren
+\item OpenStreetMap Daten anzeigen und editieren
+\item Auf Oracle-Spatial-GeoRaster zugreifen
 \item Python Plugin Installer
+\item Rastergeländeanalyse
+\item ESRI Shapes nach PostgreSQL/PostGIS importieren
+\item Einfaches Drucklayout erstellen
+\item WFS Layer hinzufügen
+\item eVIS - Event Visualization Tool
+\item fTools für die Analyse von Shapes
+\item Python Konsole
 \end{enumerate}
 
-\minisec{External Python Plugins}
+\minisec{Externe Python Plugins}
 
-QGIS offers a growing number of external python plugins that are provided by
-the community. These plugins reside in the official PyQGIS repository, and
-can be easily installed using the Python Plugin Installer (See Section
-\ref{sec:plugins}).
+QGIS stellt eine wachsende Anzahl von externen Python Plugins bereit,
+die von Anwendern erstellt wurden. Diese werden in einem offiziellen sowie
+zahlreichen inoffiziellen PyQGIS Repositories vorgehalten und können mit
+Hilfe des Python Plugin Installers in QGIS integriert werden (siehe
+Kapitel~\ref{sec:plugins}).
 
-\subsubsection{What's new in version \CURRENT} 
+\minisec{Was ist neu in Version~\CURRENT}
 
-These are the most relevant additions and improvements:
+Dies sind die wichtigsten Neuerungen und Verbesserungen:
+
 \begin{itemize}
- \item Advanced symbology engine (was Symbology-NG branch) in addition to old engine
- \item Labeling plugin (part of new symbology engine)
- \item User interface cleanups to copyright, delim text and n-arrow plugins, and map composer interface
- \item 'Tools' menu renamed to 'Vector' 
- \item Added 'newgis' theme which is a revision by Anita Graser of the original GIS theme by Robert Szczepanek
- \item Added 'Configure shortcuts' dialog 
- \item Added 'Export to PDF' feature to map composer menu 
- \item Added support to user-specific SVG path in the map composer 
- \item Added 'newgis' icon theme, a revision of the original 'gis' theme
- \item Possibility to add/remove attributes also in attribute table. Small modification to attribute table such that adding / removing columns is visible
- \item Field Calculator
- \item New analysis tools: Zonal statistics, TIN interpolation and Overlay analyzer
+ \item Verbesserung der Darstellungsmöglichkeiten für Vektorlayer
+ \item Verbesserung der Beschriftungsmöglichkeiten für Vektorlayer
+ \item Überarbeitung zahlreicher graphischer Dialogfenster
+ \item 'Werkzeuge' Menü heißt jetzt 'Vektor'
+ \item Neues 'newgis' Icon-Thema von Anita Graser auf Basis des 'gis' Icon-Themas von Robert Szczepanek
+ \item Neuer Dialog zum Festlegen von tastenkürzeln
+ \item Neue 'Export als PDF' Funktion in der Druckzusammenstellung
+ \item Einbinden benutzerdefinierter SVG-Ordner in der Druckzusammenstellung
+ \item Erweiterte Funktionen in der Attributtabelle
+ \item Neuer Feldrechner
 \end{itemize}
-
 
