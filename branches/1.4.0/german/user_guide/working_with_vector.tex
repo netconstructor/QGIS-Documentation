@@ -622,6 +622,7 @@ und wählen Sie eine Bilddatei. Aktuell wird als Datenformat \filename{*.jpeg,
 *.xpm, und *.png} unterstützt.
  \item[Füllfarbe] - Definition der Füllfarbe von Polygonen.
 \end{description}
+\begin{description}
 \item [Umrandungsoptionen]
  \item[Umrandungsfarbe] - Definition der Farbe für Linien und Umrandunglinien
 von Objekten
@@ -652,7 +653,7 @@ sehen. Dies ist sehr nützlich, wenn Sie mehrere Vektorebenen miteinander
 
 \subsubsection{Neue Darstellung - Symbology-NG}
 
-In QGIS \current ist parallel zur oben beschriebenen Darstellung eine 
+In QGIS \CURRENT ist parallel zur oben beschriebenen Darstellung eine 
 neue Darstellung integriert worden. Diese bietet eine Vielzahl von 
 Verbesserungen und neuer Funktionalitäten und wird in einer der zukünftigen 
 QGIS Versionen die aktuelle Standarddarstellung ablösen.
@@ -673,178 +674,192 @@ Multilayer Symbols definiert. Genauso ist es auch möglich, die Breite von
 Liniensymbolen oder die Größe und den Darstellungswinkel von Zeichensymbolen 
 festzulegen.
 
-\minisec{Available symbol layer types}
+\minisec{Vorhandene Typen von Symbolebenen}
 
 \begin{itemize}
-\item \textbf{Simple marker}: Rendering with one of hardcoded markers.
-\item \textbf{Simple line}: Usual rendering of a line (with specified
-width, color and pen style)
-\item \textbf{Simple fill}: Usual rendering of a polygon (with defined
-fill color, fill pattern and outline)
-\item \textbf{SVG marker}: Rendering with a SVG picture
-\item \textbf{Marker line}: A line rendered by repeating a marker symbol
+\item \textbf{SimpleMarker}: Darstellung mit einem defnierten Symbol.
+\item \textbf{SimpleLine}: Darstellen einer Linie (mit festgelegter Breite, 
+Farbe und Linienart).
+\item \textbf{SimpleFill}: Darstellen eines Polygons (mit festgelegter 
+Füllfarbe, Fullmuster und Umrandungslinie).
+\item \textbf{SvgMarker}: Darstellen mit einem SVG-Bild.
+\item \textbf{MarkerLine}: Darstellung einer Linie durch die Wiederholung 
+von Symbolen.
 \end{itemize}
 
-\minisec{Color ramps}
+\minisec{Farbanstieg}
 
-Color ramps are used to define a range of colors that can be used during
-the creation of renderers. The symbol's color will be set from the color ramp.
-There are two types of color ramps:
+Farbanstiege werden verwendet, um eine Spannweite von Farben zu definieren, die 
+für die Darstellung verwendet werden sollen. Die Symbolfarbe wird entsprechend des 
+definierten Farbanstiegs angewendet. Es gibt drei Typen: 
 
 \begin{itemize}
-\item \textbf{Gradient}: Linear gradient from one color to some other.
-\item \textbf{random}: Randomly generated colors from a specified area of
-color space
+\item \textbf{Gradient}: Linearer Gradient von einer zu anderen Farben.
+\item \textbf{Random}: Zufällig erstellte Farben aus einem festgelegten Farbraum.
+\item \textbf{Colorbrewer}: Erstellen von Farbbereichen aus einem Farbschema und einer definierten Anzahl von Farbklassen.
 \end{itemize}
 
-\minisec{Styles}
+Sie können neue Farbanstiege im Stilmanager definieren (siehe Kapitel 
+\ref{subsec:stylemanager}), indem Sie auf Element hinzufügen klicken, 
+als Stilelementtyp Color ramp auswählen und dann einen Farbanstiegtyp 
+auswählen. 
 
-A style groups a set of various symbols and color ramps. You can define your
-prefered or frequently used symbols, and can use it  without having to recreate
-it everytime. Style items (symbols and color ramps) have always a name by which
-they can be queried from the style. There is one default style in QGIS (modifiable)
-and the user can add further styles.
+\minisec{Stile}
 
-\minisec{Renderers}
+Ein Stil gruppiert eine Reihe unterschiedlicher Symbole und Farbanstiege. 
+Dadurch ist es möglich, eigene, bevorzugte oder häufig benutzte Symbole 
+festzulegen und abzuspeichern. Stile (Symbole und Farbanstiege) haben 
+immer einen Namen, über den Sie gesucht werden können. Es gibt einen 
+veränderbaren Standard-Stilin QGIS und Sie können weitere Stile hinzufügen. 
 
-The renderer is responsible for drawing a feature together with the correct
-symbol. There are three types of renderers: single symbol, categorized (called
-unique color in the old symbology), and graduated. There is no continuous color
-renderer, because it is in fact only a special case of the graduated renderer.
-The categorized and graduated renderer can be created by specifying a symbol
-and a color ramp - they will set the colors for symbols appropriately.
+\minisec{Darstellungen}
 
-\subsubsection{Working with the New Generation Symbology}
+Über die Darstellung wird festgelegt, wie Objekte als Symbole angezeigt werden. 
+Es gibt frei Arten der Darstellung: Einzelsymbol, Kategorisiert (in der alten 
+Darstellung auch Eindeutiger Wert genannt) und Abgestuft. Die Vorgabe 
+Fortlaufende Farbe gibt es nicht, da es sich dabei um einen Spezialfall der 
+kategorisierten Darstellung handelt. Die kategorisierte und abgestufte Darstellung 
+wird erreicht, indem ein Symbol mit einem Farbanstieg definiert wird - die 
+Farben der Symbole werden dann passend gesetzt. 
 
-First you have to enable the new generation symbology clicking on the
-\button{new symbology} button in the \tab{General} tab of the
-\dialog{Layer Properties} dialog. The new dialog allows to choose one of the
-three renderers: single symbol, categorized and graduated. Depending on the
-chosen renderer, the symbology tab provides different settings and options, that
-will be described in the following sections.
+\subsubsection{Mit der neuen Darstellung arbeiten}
 
+Als erstes muss die neue Darstellung aktiviert werden, indem Sie auf den 
+Knopf \button{neue Darstellung} im Reiter \tab{Darstellung} des Dialogs 
+\dialog{Layereigenschaften} drücken. Der neue Dialog ermöglicht es, aus drei 
+Darstellungsarten auszuwählen: Einzelsymbol, Kategorisiert und Abgestuft. In 
+Abhängigkeit von der ausgewählten Darstellung bietet der Reiter 
+\tab{Darstellung} unterschiedliche Optionen und Einstellungsmöglichkeiten, die 
+im folgenden Abschnitt beschrieben werden.
 
-\minisec{Single Symbol Renderer}
+\minisec{Einzelsymbol Darstellung}
 
-The Single Symbol Renderer is used to render all features of the layer using a
-single user-defined symbol. The properties, that can be adjusted in the
-Symbology tab, depend partially on the type of the layer, but all types share
-the following structure. In the top left part of the tab, there is a preview of
-the current symbol to be rendered. In the bottom part of the tab, there is a
-list of symbols already defined for the current style, prepared to be used via
-selecting them from the list. The current symbol can be modified using the
-\button{Properties} button, which opens a \dialog{Symbol Properties} dialog, or
-the \button{Set Color} button, which opens an ordinary \dialog{Color} dialog.
-After having done any needed changes, the symbol can be added to the list of
-current style symbols (using the \button{Add to style} button) and then easily
-be used in the future.
+Die Einzelsymbol Darstellung wird verwendet, um alle Objekte eines Vektorlayers 
+mit einem, definierten Symbol darzustellen. Die Eigenschaften, die dabei im 
+\tab{Symbology} Reiter festgelegt werden können, hängen teilweise vom Layertyp ab, 
+aber alle Layertypen (Punkt, Linie und Polygon) nutzen folgende Strukturen. In der 
+oberen linken Ecke des Reiters wird ein Preview des Symbols angezeigt, das dann 
+auch dargestellt wird. Im unteren Bereich des Reiters, wird eine Liste bereits 
+vorhandener Symbole angezeigt, die direkt ausgewählt werden können. Das aktuelle 
+Symbol kann bearbeitet werden, in dem man auf den Knopf \button{Eigenschaften} 
+drückt, woraufhin sich der Dialog \dialog{Symboleigenschaften} öffnet. Oder Sie 
+drücken auf den Knopf \button{Ändern} mit dem aktuellen Farbsymbol und können 
+dann in enem Farbdialog eine neue Farbe definieren. Nachdem Sie alle notwendigen 
+Anpassungen gemacht wurden, können Sie das neue Symbol mit den Knopf 
+\button{Zum Stil hinzufügen} zu der Liste bereits vorhandener Symbole hinzufügen.  
 
 \begin{figure}[h]
 \centering
-\caption{New Single Symbolizing options \nixcaption}
-   \subfigure[Single symbol point properties] {\label{subfig:singleNG1}\includegraphics[clip=true, width=0.3\textwidth]{singlesymbol_ng_point}}\goodgap
-   \subfigure[Single symbol line properties] {\label{subfig:singleNG2}\includegraphics[clip=true, width=0.3\textwidth]{singlesymbol_ng_line}}\goodgap
-   \subfigure[Single symbol area properties] {\label{subfig:singleNG3}\includegraphics[clip=true, width=0.3\textwidth]{singlesymbol_ng_area}}
+\caption{Neue Optionen für die Darstellung von Einzelsymbolen \nixcaption}
+   \subfigure[Eigenschaften von Punkt-Einzelsymbolen] {\label{subfig:singleNG1}\includegraphics[clip=true, width=0.3\textwidth]{singlesymbol_ng_point}}\goodgap
+   \subfigure[Eigenschaften von Linien-Einzelsymbolen] {\label{subfig:singleNG2}\includegraphics[clip=true, width=0.3\textwidth]{singlesymbol_ng_line}}\goodgap
+   \subfigure[Eigenschaften von Polygon-Einzelsymbolen] {\label{subfig:singleNG3}\includegraphics[clip=true, width=0.3\textwidth]{singlesymbol_ng_area}}
 \end{figure}
 
-\minisec{Categorized Renderer}
+\minisec{Kategorisierte Darstellung}
 
-The Categorized Renderer is used to render all features from a layer, using a
-single user-defined symbol, which color reflects the value of a selected
-feature's attribute. The Symbology tab allows you to select:
+Die kategorisierte Darstellung wird verwendet, um alle Objekte eines Vektorlayers
+mit einem, definierten Symbol darzustellen. Dabei reflektiert der Farbwert des 
+Symbols den Wert eines Objektattributs. Im Reiter \tab{Darstellung} kann 
+ausgewählt werden:
 
 \begin{itemize}
-\item The attribute (using the Column listbox)
-\item The symbol (using the Symbol Properties dialog)
-\item The colors (using the Color Ramp listbox)
+\item Das Attribut (über die Auswahl Spalte)
+\item Das Symbol (über die Auswahl Symbol)
+\item Die Farbe (über die Auswahl Farbanstieg)
 \end{itemize}
 
-For convenience, the list in the bottom part of the tab lists the values of
-all currently selected attributes together, including the symbols that will
-be rendered.
-
-The example in figure \ref{fig:catsymNG} shows the category rendering dialog
-used for the rivers layer of the qgis sample dataset.
+Zur Veranschaulichung wird im unteren Teil des Reiters eine Liste mit allen 
+Attributen und der jeweils verwendeten Symbolfarbe angezeigt. Das Beispiel in 
+Abbildung \ref{fig:catsymNG} zeigt den Dialog Kategorisierte Darstellung für 
+den Vektorlayer rivers des QGIS-Beispieldatensatzes. 
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{New Categorized Symbolizing options \nixcaption}\label{fig:catsymNG}\smallskip
+   \caption{Neue Optionen für die Darstellung von kategorisierter Symbole \nixcaption}\label{fig:catsymNG}\smallskip
    \includegraphics[clip=true, width=10cm]{categorysymbol_ng_line}
 \end{center}
 \end{figure}
 
-\minisec{Graduated rendering}
+\minisec{Abgestufte Darstellung}
 
-The Graduated Renderer is used to render all the features from a layer, using
-a single user-defined symbol, whose color reflects the classification of a selected
-feature's attribute to a class.
+Die abgestufte Darstellung wird verwendet, um alle Objekte eines Vektorlayers
+mit einem, definierten Symbol darzustellen, Dabei reflektiert der Farbwert die 
+Klassifikation von Objektattributen innerhalb definierter Klassen.
 
-
-Analogue to the categorized rendered, the symbology tab allows you to select:
+Analog zur kategorisierten Darstellung ermöglicht der Reiter \tab{Darstellung} 
+folgende Einstellungen:
 
 \begin{itemize}
-\item The attribute (using the Column listbox)
-\item The symbol (using the Symbol Properties button)
-\item The colors (using the Color Ramp list)
+\item Das Attribut (über die Auswahl Spalte)
+\item Das Symbol (über die Auswahl Symbol)
+\item Die Farbe (über die Auswahl Farbanstieg)
 \end{itemize}
 
-Additionally, you can specify the number of classes and also the mode how to
-classify features inside the classes (using the Mode list). The listbox in the
-bottom part of the symbology tab lists the classes together with their ranges,
-labels and symbols that will be rendered.
-
-The example in figure \ref{fig:gradsymNG} shows the category rendering dialog
-for the rivers layer of the qgis sample dataset.
+Zusätzlich können Sie die Anzahl der Klassen und den Modus für die Klassifizierung 
+festlegen. Im unteren Teil des Reiters wird eine Liste der Klassen, mit deren 
+Darstellung, der Range und dem Label angezeigt. Das Beispiel in
+Abbildung \ref{fig:gradsymNG} zeigt den Dialog \dialog{Abgestufte Darstellung} 
+für den Vektorlayer rivers des QGIS-Beispieldatensatzes.
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{New Graduated Symbolizing options \nixcaption}\label{fig:gradsymNG}\smallskip
+   \caption{Neue Optionen für die Darstellung abgestufter Symbole \nixcaption}\label{fig:gradsymNG}\smallskip
    \includegraphics[clip=true, width=10cm]{graduatesymbol_ng_line}
 \end{center}
 \end{figure}
 
-\minisec{Symbol Properties}
+\minisec{Symboleigenschaften}
 
-The symbol properties dialog allows the user to specify different properties of
-the symbol to be rendered. In the top left part of the dialog, you find a preview
-of the current symbol as it will be displayed in the map canvas. Below the preview
-is the list of symbol layers. To start the symbol properties dialog, click the
-\dropmenuopttwo{mActionOptions}{Properties} button in the \tab{General} tab of the
-\dialog{Layer Properties} dialog.
+Der Dialog \dialog{Symboleigenschaften} erlaubt es, ein Symbol zu definieren. Im 
+oberen linken Bereich befindet sich immer ein Preview des aktuellen Symbols. 
+Darunter sind die Symbollayer aufgelistet, aus denen sich das Symbol zusammensetzt. 
+Um den Dialog \dialog{Symboleigenschaften} zu öffnen, drücken Sie den Knopf 
+\dropmenuopttwo{mActionOptions}{Eigenschaften} im Reiter \tab{Symbology} des 
+Dialogs \dialog{Layereigenschaften}.
 
-The control panels allow adding or removing layers, changing the position of layers,
-or locking layers for color changes. In the right part of the dialog, there are
-shown the settings applicable to the single symbol layer selected in the symbol
-layer list. The most important is the 'Symbol Layer Type' combo box, which allows
-you to choose the layer type. The available options are \filename{SimpleLine},
-\filename{SvgMarker} and \filename{SimpleFill}.
+Mit den Kontrollknöpfen können Symbollayer hinzugefügt oder entfernt werden, ihre 
+Reihenfolge verändert oder die Layerfarbe gesperrt werden. Im rechten Teil des 
+Dialogs werden die Symbollayereigenschaften dargestellt. Am wichtigsten ist hier 
+die Symbollayertyp Auswahl. Die Optionen sind abhängig vom Layertyp (Punkt, Linie 
+Polygon).   
 
-Depending on the chosen value, these settings are available in the right part
-of the dialog:
-
+\begin{description}
+\item Optionen für den Symbollayertyp bei Punktlayern
 \begin{itemize}
-\item \textbf{SimpleLine}: Color, Pen width, Pen style, Offset, Join style and Cap style;
-\item \textbf{SvgMarker}: Size, Angle, Offset X, Offset Y and SVG Image
-\item \textbf{SimpleFill}: Color, Border color, Fill style.
+\item \textbf{SimpleMarker}: Randfarbe, Füllfarbe, Größe, Winkel, X-,Y-Versatz
+\item \textbf{SvgMarker}: Größe, Winkel, X-,Y-Versatz, SVG Bild
+\end{itemize}
+\item Optionen für den Symbollayertyp bei Linienlayern
+\begin{itemize}
+\item \textbf{LineDecoration}: Farbe
+\item \textbf{MarkerLine}: Marker, Markerintervall, Makerrotation, Linienversatz
+\item \textbf{SimpleLine}: Farbe, Stiftbreite, Stiftstil, Versatz, Verbindungsstil und Endstil; 
+\end{itemize}
+\item Optionen für den Symbollayertyp bei Polygonlayern
+\begin{itemize}
+\item \textbf{SimpleFill}: Farbe, Füllstil, Randfarbe, Randstil, Randbreite.
+\end{itemize}
+\end{description}
 
 \begin{figure}[h]
 \centering
-\caption{Defining symbol properties \nixcaption}
-   \subfigure[Line composed from three simple lines] {\label{subfig:symprops1}\includegraphics[clip=true, width=0.3\textwidth]{symbolproperties1}}\goodgap
-   \subfigure[Symbol properties for point layer] {\label{subfig:symprops2}\includegraphics[clip=true, width=0.3\textwidth]{symbolproperties2}}\goodgap
-   \subfigure[Filling pattern for a polygon] {\label{subfig:symprops3}\includegraphics[clip=true, width=0.3\textwidth]{symbolproperties3}}
+\caption{Symboleigenschaften festlegen \nixcaption}
+   \subfigure[Linie aus drei einfachen Linien] {\label{subfig:symprops1}\includegraphics[clip=true, width=0.3\textwidth]{symbolproperties1}}\goodgap
+   \subfigure[Symboleigenschaften für Punkte] {\label{subfig:symprops2}\includegraphics[clip=true, width=0.3\textwidth]{symbolproperties2}}\goodgap
+   \subfigure[Füllstil für Polygone] {\label{subfig:symprops3}\includegraphics[clip=true, width=0.3\textwidth]{symbolproperties3}}
 \end{figure}
 
-\subsubsection{Style Manager to manage symbols and color ramps}
+\subsubsection{Stilmanager zum managen von Symbolen und Farbanstiegen}\label{subsec:stylemanager}
 
-The Style Manger is a small helper application, that lists symbols and color
-ramps available in a style. It also allows you to add and/or remove items. To
-launch the Style Manager, click on \mainmenuopt{Settings} > \dropmenuopt{Style
-Manager} in the mai menu.
+Der Stilmanager ist eine kleine Applikation, in der alle vohandenen Symbole 
+und Farbanstiege aufgelistet werden. Es ermöglicht außerdem, Symbole hinzuzufügen 
+und/oder zu entfernen. Starten Sie den Stilmanager, indem Sie auf 
+\mainmenuopt{Einstellungen} > \dropmenuopt{Stilmanager} im Hauptmenü klicken.
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{Style Manager to manage symbols and color ramps \nixcaption}\label{fig:stylemanager}\smallskip
+   \caption{Stilmanager zum managen von Symbolen und Farbanstiegen \nixcaption}\label{fig:stylemanager}\smallskip
    \includegraphics[clip=true, width=7cm]{stylemanager}
 \end{center}
 \end{figure}
@@ -1168,8 +1183,10 @@ vorhanden, nach der man im Internet suchen könnte.
 
 Sie können auch mehrere Aktionen für einen Layer definieren. Sie alle werden
 dann bei der Abfrage von Objekten im Dialog \dialog{Abfrageergebnisse}
-angezeigt und können ausgewählt und benutzt werden. Sie können auch eine
-Aktion starten, in dem Sie in der Attributtabelle in eine Zeile gehen und mit
+angezeigt und können ausgewählt und benutzt werden. 
+%%FIXME - no longer valid?
+%%Sie können auch eine
+%%Aktion starten, in dem Sie in der Attributtabelle in eine Zeile gehen und mit
 der rechten Maustaste eine Aktion für genau diesen einen Eintrag ausführen.
 
 Sie sehen, man kann sich eine Vielzahl interessanter Aktionen ausdenken. Wenn
@@ -1215,7 +1232,7 @@ Kartenlegende, um den Dialog \dialog{Layereigenschaften} zu starten.
 \item Klicken Sie auf den Reiter \tab{Diagram Overlay} und wählen Sie
 \button{Balkendiagramm} als Diagrammtyp.
 \item Im Diagramm wollen wir die Werte von drei Attributspalten 
-\filename{T\_F\_JAN, T\_F\_JAN} und \filename{T\_F\_MEAN} anzeigen. Als
+\filename{T\_F\_JAN, T\_F\_JUL} und \filename{T\_F\_MEAN} anzeigen. Als
 erstes selektieren wir \filename{T\_F\_JAN} als Attribute und klicken auf
 \button{Attribute hinzufügen}, dann \filename{T\_F\_JUL} und schließlich
 \filename{T\_F\_MEAN}.
@@ -1230,6 +1247,8 @@ und dann eine entsprechende Farbe auswählen.
 Abbildung~\ref{fig:climatediagram} gibt einen ersten Eindruck.
 \item Abschließend klicken Sie \button{Ok}.
 \end{enumerate}
+
+%% FIXME - does not work in 1.4
 
 \begin{figure}[ht]
    \begin{center}
@@ -1428,12 +1447,8 @@ Werkzeugleiste Digitalisierung können folgende Funktionen ausgeführt werden:
    & Objekte Digitalisieren: Polygon hinzufügen \\
 \hline \includegraphics[width=0.7cm]{mActionMoveFeature}
    & Objekt verschieben
-   & \includegraphics[width=0.7cm]{mActionMoveVertex}
-   & Stützpunkt verschieben \\
-\hline \includegraphics[width=0.7cm]{mActionAddVertex}
-   & Stützpunkt hinzufügen
-   & \includegraphics[width=0.7cm]{mActionDeleteVertex}
-   & Stützpunkt löschen \\
+   & \includegraphics[width=0.7cm]{mActionNodeTool}
+   & Knotenwerkzeug \\
 \hline \includegraphics[width=0.7cm]{mActionDeleteSelected}
    & Ausgewähltes löschen
    & \includegraphics[width=0.7cm]{mActionEditCut}
@@ -1513,7 +1528,9 @@ rechte Maustaste, um anzuzeigen, dass die Geometrie ihres Objektes fertig
 gestellt ist. Dadurch wird das Attributfenster geöffnet und ermöglicht die
 Attribute für das neue Objekt einzutragen. In Abbildung
 \ref{fig:vector_digitising} ist ein Beispiel für einen fiktiven Fluss in
-Alaska gezeigt.
+Alaska gezeigt. Im Reiter \tab{Digitalisierung} des Menüs \mainmenuopt{Einstellungen} 
+>\dropmenuopt{Optionen} kann auch das Kontrollkästchen \checkbox{Eingabe der 
+Attributwerte bei der Erstellung neuer Objekte unterdrücken} aktiviert werden.
 
 \begin{figure}[ht]
    \begin{center}
@@ -1538,70 +1555,55 @@ notwendig sein sollte, können Sie es nachträglich im Fenster der
 Mit dem Werkzeug \toolbtntwo{mActionMoveFeature}{Objekte verschieben} können Sie
 komplette Objekte verschieben.
 
-\minisec{Stützpunkte eines Objektes hinzufügen, verschieben und löschen}
-\index{Vektorlayer!Editierfunktionen!Stützpunkt}
+\minisec{Knotenwerkzeug}
+\index{Vektorlayer!Knotenwerkzeug}
 
-Für PostgreSQL/PostGIS- und Shape-Layer können die Stützpunkte von Objekten
-editiert werden. Stützpunkte können direkt editiert werden, ohne vorher
-auszuwählen, welches Objekt gemeint ist. In einigen Fällen teilen sich
-Objekte dieselben Knotenpunkte. Folgende Regeln kommen daher zum Einsatz:
-
-\begin{itemize}
-\item \textbf{Linien}    - Die zum Mauszeiger nächste Linie wird als 
-			  Zielobjekt
-                          benutzt. Beim Verschieben oder Löschen eines
-                          Stützpunktes wird der zum Mauszeiger nächste
-			  Stützpunkt auf einer Linie editiert.
-
-\item \textbf{Polygone} - Wenn der Mauszeiger sich innerhalb eines Polygons
-                          befindet, ist dies das Zielobjekt, ansonsten wird
-			  das
-                          zum Mauszeiger nächstliegende Objekt benutzt. Beim
-                          Verschieben oder Löschen eines Stützpunktes
-                          wird der zum Mauszeiger nächste Stützpunkt auf dem
-			  Polygon editiert.
-\end{itemize}
+Für PostGIS und Shapedaten ermöglich das \toolbtntwo{mActionNodeTool}{Knotenwerkzeug}, 
+die Stützpunkte von Objekten zu manipulieren, ählich wie ein CAD-Programm. Dazu
+kann man mehrere Stützpunkte gemeinsam selektieren, um sie dann zusammen zu
+verschieben, zu löschen oder hinzuzufügen. Das Knotenwerkzeug funktioniert
+auch mit angeschalteter OTF-Projektion und unterstützt die Funktionen für
+topologisches Editieren. Anders als die anderen Editierfunktionen, bleibt die
+Auswahl für die Veränderungen des Objektes bestehen.
 
 Sie sollten den Suchradius beim Digitalisieren über die Menüleiste unter
 \mainmenuopt{Einstellungen} > \dropmenuopttwo{mActionOptions}{Optionen} >
 \tab{Digitalisierung} größer 0 einstellen. Ansonsten ist QGIS nicht in der
 Lage, ein Objekt auszuwählen.
 
-\minisec{Stützpunkte hinzufügen}
-\index{Vektorlayer!hinzufügen!Stützpunkt}
 
-Sie können einen Stützpunkt zu einem Objekt hinzufügen, indem Sie das Icon
-\toolbtntwo{mActionAddVertex}{Stützpunkt hinzufügen} aus der Werkzeugleiste
-auswählen. Beachten Sie, es macht wenig Sinn, weitere Stützpunkte zu einem
-Punktobjekt zu ergänzen.
+\minisec{Eine einfache Übung}
 
-In dieser QGIS Version können Knotenpunkte nur zu \texttt{bereits
-vorhandenen} Liniensegmenten einer Linie hinzugefügt werden. Wenn Sie eine
-Linie über ihr Ende hinaus verlängern möchten, müssen Sie erst den letzten
-Stützpunkt verschieben und können dann weitere Stützpunkte ergänzen.
+Beginnen Sie, indem Sie das Werkzeug
+\toolbtntwo{mActionNodeTool}{Knotenwerkzeug} aktivieren und dann ein Objekt
+selektieren. Rote Boxen erscheinen an jedem Stützpunkt des Objektes. Nun sind
+folgende Funktionen vorhanden:
 
-\minisec{Stützpunkte verschieben}
-\index{Vektorlayer!verschieben!Stützpunkt}
-
-Sie können Stützpunkte mit dem Icon \toolbtntwo{mActionMoveVertex}{Stützpunkt
-verschieben} aus der Werkzeugleiste verschieben.
-
-\minisec{Stützpunkte löschen}
-\index{Vektorlayer!löschen!Stützpunkt}
-
-Sie können einen Stützpunkt aus einem Objekt löschen, indem Sie das Icon
-\toolbtntwo{mActionDeleteVertex}{Stützpunkt löschen} aus der Werkzeugleiste
-auswählen. Beachten Sie, es macht keinen Sinn, einen Stützpunkt aus einem
-Punktobjekt zu löschen. Löschen Sie in dem Fall das Objekt. Ebenso ist eine
-Linie, die aus einem Stützpunkt besteht oder ein Polygon, das aus zwei
-Stützpunkten besteht sinnlos und führt zu fehlerhaften Ergebnissen.
-
-\textbf{Warnung:} Ein Stützpunkt ist zum Löschen ausgewählt, sobald Sie mit
-bei entsprechend gewählten Suchradius der Maus in die Nähe des Stützpunktes
-klicken. Um dies rückgänggig zu machen, müssen Sie den Editiermodus verlassen
-und bei der Nachfrage, ob die Veränderungen gespeichert werden sollen
-\button{Nein} auswählen. Dadurch werden aber natürlich auch alle anderen bis
-dahin vorgenommenen Änderungen verworfen.
+\begin{itemize}
+\item \textbf{Einen Stützpunkte auswählen}: Das Auswählen ist einfach.
+Klicken Sie einfach auf einen Stützpunkt und die Farbe der Box wechselt nach
+Blau. Sie können mehrere Stützpunkte auswählen, indem Sie die Tasten
+\keystroke{Shift} gedrückt halten. Mit der Taste \keystroke{Ctrl} kann die
+Auswahl umgekehrt werden (selektierte Stützpunkte werden deselektiert, nicht
+ausgwählte Stützpunkte werden ausgewählt). Es ist auch möglich, mehrere
+Stützpunkte auszuwählen, indem Sie ein Rechteck mit der Maus aufziehen. Alle
+Stützpunkte innerhalb des Rechtecks werden dann selektiert. Oder Sie klicken
+auf eine Grenzlinie und beide angrenzenden Stützpunkte werden selektiert.
+\item \textbf{Stützpunkte hinzufügen}: Dazu klicken Sie doppelt in die Nähe
+einer Grenzlinie und ein neuer Stützpunkt erscheint. Beachten Sie, dass der
+Stützpunkt auf der Grenzlinie erscheint, und nicht an der Stelle, wo der
+Mauspfeil ist.
+\item \textbf{Stützpunkte löschen}: Wählen Sie dazu Stützpunkte aus, die
+gelöscht werden sollen und klicken Sie dann auf die Taste
+\keystroke{Entfernen}. Beachten Sie, dass eine Mindestanzahl Stützpunkte für
+den jeweiligen Objekttyp nicht gelöscht wird. Wenn Sie ein komplettes Objekt
+löschen wollen, nutzen Sie das entsprechende Werkzeug.
+\item \textbf{Stützpunkte verschieben}: Wählen Sie alle Stützpunkte aus, die
+verschoben werden sollen. Alle ausgewählten Stützpunkte werden in dieselbe
+Richtung wie der Mauspfeil verschoben. Wenn eine Fangtolerazt eingestellt
+ist, können die Stützpunkte zu dem nächstgelegenen Stützpunkt oder Segment
+snappen.
+\end{itemize}
 
 \minisec{Ausgewählte Objekte löschen}
 \index{Vektorlayer!löschen!Objekte}
@@ -1610,11 +1612,7 @@ Wenn Sie ein ganzes Polygon löschen möchten, selektieren Sie es erst mit dem
 \toolbtntwo{mActionSelect}{Wähle Objekt aus} Werkzeug. Sie können dabei auch
 mehrere Objekte gleichzeitig auswählen. Wenn Sie die Objekte ausgewählt
 haben, klicken Sie auf das Icon
-\toolbtntwo{mActionDeleteSelected}{Ausgewähltes löschen}. Es gibt keine
-Funktion, um das Löschen wieder rückgängig zu machen. Aber bedenken Sie, dass
-die Änderungen erst dann wirksam werden, nachdem Sie den Bearbeitungsstatus
-verändert und die Veränderungen gespeichert haben. Wenn Sie also einen Fehler
-gemacht haben, können Sie einfach das Speichern abbrechen.
+\toolbtntwo{mActionDeleteSelected}{Ausgewähltes löschen}. 
 
 Das Werkzeug \toolbtntwo{mActionEditCut}{Ausgewählte Objekte ausschneiden}
 kann auch benutzt werden, um Objekte zu löschen. Die Objekte werden gelöscht
@@ -1709,7 +1707,7 @@ auch die Spaltennamen und -typen beider layer zueinander passen.
    & \includegraphics[width=0.7cm]{mActionAddRing}
    & Ring hinzufügen\\
 \hline \includegraphics[width=0.7cm]{mActionAddIsland}
-   & Insel hinzufügen
+   & Teil hinzufügen
    & \includegraphics[width=0.7cm]{mActionDeleteRing}
    & Ring löschen \\
 \hline \includegraphics[width=0.7cm]{mActionDeletePart}
@@ -1720,8 +1718,8 @@ auch die Spaltennamen und -typen beider layer zueinander passen.
    & Objekte trennen
    & \includegraphics[width=0.7cm]{mActionMergeFeatures}
    & Gewählte Objekte verschmelzen \\
-\hline \includegraphics[width=0.7cm]{mActionNodeTool}
-   & Knotenwerkzeug
+\hline \includegraphics[width=0.7cm]{mActionRotatePointSymbols}
+   & Punktsymbole drehen
    &
    & \\
 \hline
@@ -1785,12 +1783,12 @@ Polygons weitere Polygone digitalisieren können. Diese erscheinen dann als
 'Loch', so dass nur der Zwischenraum des inneren und des äußeren Polygons als
 Ring-Polygon übrig bleibt.
 
-\minisec{Insel hinzufügen}
-\index{Vektorlayer!hinzufügen!Insel}
+\minisec{Teil hinzufügen}
+\index{Vektorlayer!hinzufügen!Teil}
 
-Mit dem Tool \toolbtntwo{mActionAddIsland}{Insel hinzufügen} können Sie ein
+Mit dem Tool \toolbtntwo{mActionAddIsland}{Teil hinzufügen} können Sie ein
 neues Polygons digitalisieren und einem zuvor selektierten Multipolygon
-zuweisen. Das neue Inselpolygon muss ausserhalb des selektierten
+zuweisen. Das neue Teilpolygon muss ausserhalb des selektierten
 Multipolygons digitalisiert werden.
 
 \minisec{Ring löschen}
@@ -1800,7 +1798,9 @@ Das Werkzeug \toolbtntwo{mActionDeleteRing}{Ring löschen} ermöglicht es,
 Ringpolygone innerhalb eines existierenden Fläche zu löschen. Das Werkzeug
 funktioniert nur mit Polygonlayern und kann für Polygon- und
 Multipolygon-Objekte benutzt werden. Es findet keine Veränderung statt, wenn
-es auf den äußeren Ring eines Polygons angewendet wird. 
+es auf den äußeren Ring eines Polygons angewendet wird. Bevor Sie die 
+Vertices des Ringes selektieren, stellen Sie bitte die Fangtoleranz entsprechend 
+ein.
 
 \minisec{Teil löschen}
 \index{Vektorlayer!löschen!Teil}
@@ -1809,7 +1809,8 @@ Mit dem \toolbtntwo{mActionDeletePart}{Teil löschen} Werkzeug können Teile
 eines Multi-Feature Objektes gelöscht werden (z.B. ein Polygon von einem
 Multipolygon Objekt löschen). Dabei wird der letzte Teil des Multi-Feature
 Objektes nicht gelöscht. Das Werkzeug funktioniert mit alles Multi-Feature
-Geometrien Punkte, Linien und Polygone.
+Geometrien Punkte, Linien und Polygone. Bevor Sie die Vertices des Teils 
+selektieren, stellen Sie bitte die Fangtoleranz entsprechend ein.
 
 \minisec{Objekte überarbeiten}
 \index{Vektorlayer!überarbeiten!Objekte}
@@ -1832,7 +1833,8 @@ die meisten GIS Applikationen, sollte aber beachtet werden.
 \index{Vektorlayer!teilen!Objekte}
 
 Objekte können mit dem Werkzeug \toolbtntwo{mActionSplitFeatures}{Objekt
-teilen} geteilt werden.
+teilen} geteilt werden. Zeichnen Sie dazu einfach eine Linie durch das Objekt, 
+das Sie teilen wollen.
 
 \minisec{Gewählte Objekte verschmelzen}
 \index{Vektorlayer!verschmelzen!Objekte}
@@ -1840,50 +1842,6 @@ teilen} geteilt werden.
 Das Werkzeug \toolbtntwo{mActionMergeFeatures}{Gewählte Objekte verschmelzen}
 erlaubt es, Objekte die eine gemeinsame Grenzlinie und die gleichen Attribute
 tragen zu verschmelzen.
-
-\minisec{Knotenwerkzeug}
-\index{Vektorlayer!Knotenwerkzeug}
-
-Das Werkzeug \toolbtntwo{mActionNodeTool}{Knotenwerkzeug} erlaubt es, die
-Stützpunkte von Objekten zu manipulieren, ählich wie ein CAD-Programm. Dazu
-kann man mehrere Stützpunkte gemeinsam selektieren, um sie dann zusammen zu
-verschieben, zu löschen oder hinzuzufügen. Das Knotenwerkzeug funktioniert
-auch mit angeschalteter OTF-Projektion und unterstützt die Funktionen für
-topologisches Editieren. Anders als die anderen Editierfunktionen, bleibt die
-Auswahl für die Veränderungen des Objektes bestehen.
-
-\minisec{Eine einfache Übung}
-
-Beginnen Sie, indem Sie das Werkzeug
-\toolbtntwo{mActionNodeTool}{Knotenwerkzeug} aktivieren und dann ein Objekt
-selektieren. Rote Boxen erscheinen an jedem Stützpunkt des Objektes. Nun sind
-folgende Funktionen vorhanden:
-
-\begin{itemize}
-\item \textbf{Einen Stützpunkte auswählen}: Das Auswählen ist einfach.
-Klicken Sie einfach auf einen Stützpunkt und die Farbe der Box wechselt nach
-Blau. Sie können mehrere Stützpunkte auswählen, indem Sie die Tasten
-\keystroke{Shift} gedrückt halten. Mit der Taste \keystroke{Ctrl} kann die
-Auswahl umgekehrt werden (selektierte Stützpunkte werden deselektiert, nicht
-ausgwählte Stützpunkte werden ausgewählt). Es ist auch möglich, mehrere
-Stützpunkte auszuwählen, indem Sie ein Rechteck mit der Maus aufziehen. Alle
-Stützpunkte innerhalb des Rechtecks werden dann selektiert. Oder Sie klicken
-auf eine Grenzlinie und beide angrenzenden Stützpunkte werden selektiert.
-\item \textbf{Stützpunkte hinzufügen}: Dazu klicken Sie doppelt in die Nähe
-einer Grenzlinie und ein neuer Stützpunkt erscheint. Beachten Sie, dass der
-Stützpunkt auf der Grenzlinie erscheint, und nicht an der Stelle, wo der
-Mauspfeil ist. 
-\item \textbf{Stützpunkte löschen}: Wählen Sie dazu Stützpunkte aus, die
-gelöscht werden sollen und klicken Sie dann auf die Taste
-\keystroke{Entfernen}. Beachten Sie, dass eine Mindestanzahl Stützpunkte für
-den jeweiligen Objekttyp nicht gelöscht wird. Wenn Sie ein komplettes Objekt
-löschen wollen, nutzen Sie das entsprechende Werkzeug.
-\item \textbf{Stützpunkte verschieben}: Wählen Sie alle Stützpunkte aus, die
-verschoben werden sollen. Alle ausgewählten Stützpunkte werden in dieselbe
-Richtung wie der Mauspfeil verschoben. Wenn eine Fangtolerazt eingestellt
-ist, können die Stützpunkte zu dem nächstgelegenen Stützpunkt oder Segment
-snappen.
-\end{itemize}
 
 \begin{Tip}[h]\caption{\textsc{Deckungsgleichheit eingefügter Objekte}}
 \qgistip{Wenn der Quell- und Ziellayer die gleiche Projektion nutzen, hat das
@@ -1894,6 +1852,31 @@ Grund liegt in auftretenden Rundungsabweichungen bei der Konvertierung
 zwischen Projektionen.
 }
 \end{Tip}
+
+\minisec{Punktsymbole drehen}
+\index{Vektorlayer!Punktsymbole!drehen}
+
+Das \toolbtntwo{mActionRotatePointSymbols}{Punktsymbole drehen} Werkzeug 
+ermöglicht es, die gedrehte Darstellung von Punktsymbolen. Das Werkzeug 
+ist aber nur aktiv, wenn Sie eine Attributspalte mit Drehwinkeln angelegt 
+haben und diese im Reiter \tab{Symbology} des Dialogs 
+\dialog{Layereigenschaften} angegeben haben.
+
+\begin{figure}[ht]
+   \begin{center}
+   \caption{Punktsymbole drehen \nixcaption}\label{fig:rotatepoint}\smallskip
+   \includegraphics[clip=true, width=6cm]{rotatepointsymbol}
+\end{center}
+\end{figure}
+
+Um die Drehung zu ändern, wählen Sie einen Punkt im Kartenfenster aus und drehen 
+diesen, indem Sie die linke Maustaste gedrückt halten. Ein roter Pfeil mit dem 
+Drehwinkel wird dann angezeigt (siehe Abbildung~\ref{fig:rotatepoint}). Wenn Sie 
+die linke Maustaste wieder loslassen, wird der neue Wert in der Attributtabelle 
+aktualisiert.
+
+\textbf{Bemerkung}: Wenn Sie zusätzlich die \keystroke{Ctrl}-Taste gedrückt 
+halten, findet die Drehung in 15 Grad Schritten statt.
 
 \minisec{Fangtoleranz einstellen}
 \index{Editierfunktionen!Fangtoleranz}
@@ -2011,7 +1994,8 @@ Um eine einfache
 Abfrage nach Attributen einer Spalte durchzuführen, kann das \button{Suche
 nach} Feld verwendet werden. Wählen Sie zusätzlich zu dem Attributwert noch
 eine Spalte aus, in welche die Suche erfolgen soll. Danach klicken Sie auf
-\button{Suchen}. Für komplexere Abfragen gibt es den Erweiterte Suche
+\button{Suchen}. Die Anzahl der gefundenen Attribute wird in der Statusleiste 
+angezeigt. Für komplexere Abfragen gibt es den Erweiterte Suche
 \button{...} Knopf. Damit wird der Abfrageeditor gestartet, der in Kapitel
 \ref{sec:query_builder} genauer beschrieben wird.
 
@@ -2030,7 +2014,12 @@ Zwischenablage kopieren} auch mit \keystroke{Strg-C}
 \item \toolbtntwo{mActionZoomToSelected}{Zu den selektierten Zeilen zoomen}
 auch mit \keystroke{Strg-J}
 \item \toolbtntwo{mActionToggleEditing}{Bearbeitungsmodus umschalten}, um
-einen einzelnen Wert zu editieren.
+einen einzelnen Wert zu editieren und weitere Funktionen zu aktivieren.
+\item \toolbtntwo{mActionDeleteSelected}{Gewählte Objekte löschen}
+\item \toolbtntwo{mActionNewAttribute}{Neue Spalte} für PostGIS und OGR Layers ab 
+GDAL Version >= 1.6.
+\item \toolbtntwo{mActionDeleteAttribute}{Spalte löschen} derzeit nur für PostGIS Layers.
+\item \toolbtntwo{mActionCalculateField}{Feldrechner öffnen}
 \end{itemize}
 
 \begin{Tip}[ht]\caption{\textsc{Attributdaten manipulieren}}
@@ -2120,5 +2109,80 @@ Abfrageeditor zu öffnen, und einen geladene OGR- oder GRASS-Layer abzufragen,
 \button{Erweiterte Suche} drücken. Dadurch wird ebenfalls der Abfrageeditor
 gestartet und ermöglicht Abfragen wie im obigen Abschnitt
 \ref{sec:query_builder} für PostGIS beschrieben.
+
+\subsection{Feldrechner}\label{sec:field_calculator}
+\index{PostgreSQL!Feldrechner}
+\index{PostGIS!Feldrechner}
+\index{OGR!Feldrechner}
+\index{Feldrechner!PostgreSQL}
+\index{Feldrechner!PostGIS}
+\index{Feldrechner!OGR}
+
+Der \toolbtntwo{mActionCalculateField}{Feldrechner} Knopf in der Attributtabelle 
+ermöglicht es, auf Basis von Attributwerten oder definierten Funktionen, z.B. 
+Längen- oder Flächenberechnung neue Werte zu berechnen. Die Ergebnisse können 
+in eine neue Attributspalte geschrieben werden oder bereits vorhandene 
+Werte einer bestehenden Attributspalte zu überschreiben. Das Erstellen neuer 
+Attributspalten ist derzeit nur in PostGIS möglich, oder wenn Sie eine GDAL Version 
+>= 1.6.0 installiert haben. 
+
+Erst müssen Sie den Vektorlayer in den Bearbeitungsmodus bringen. Dann 
+können Sie auf das Feldrechner Icon klicken, um den Dialog zu öffnen (siehe 
+Abbildung \ref{fig:field_calculator}). Im Dialog müssen Sie zu Beginn auswählen, 
+ob Sie Werte in einer existierenden Spalte überschreiben wollen, oder ob 
+eine neue Attributspalte für die Ergebnisse erzeugt werden soll.
+
+\begin{figure}[ht]
+  \begin{center}
+    \caption{Feldrechner \nixcaption}\label{fig:field_calculator}\smallskip
+    \includegraphics[clip=true, width=11.5cm]{fieldcalculator}
+  \end{center}
+\end{figure}
+
+Wenn Sie eine neue Attributspalte verwenden wollen, müssen Sie einen Namen 
+dafür angeben, den Ausgabefeldtyp (integer, real or string), die 
+Ausgabefeldbreite und die Ausgabefeldgenauigkeit (Nachkommastellen). Wenn Sie 
+z.B. als Ausgabefeldbreite 10 gewählt haben und eine Ausgabefeldgenauigkeit 
+von 3, bedeutet es, dass sie 6 Zeichen vor dem Trennzeichen, das Trennzeichen und 
+weitere 3 Nachkommastellen in der Spalte zur Verfügung haben.
+
+Die \textbf{Felder Liste} zeigt alle Attributspalten aus der Attributetabelle, 
+die durchsucht werden können. Um eine Attributspalte in den Feldrechnerausdruck zu 
+kopieren, klicken Sie einfach doppelt auf den Namen. Allgemein können Sie die 
+verschiedenen Felder, Werte und Operatoren verwenden, um einen Feldrechnerausdruck 
+zu erstellen, oder Sie tippen den Ausdruck direkt in das Fenster.
+
+Die \textbf{Werte Liste} zeigt die Werte einer Attributspalte. Um alle Werte 
+anzuzeigen, wählen Sie zuerst eine Attributspalte aus und klicken Sie dann auf 
+den Knopf \button{Alle}\index{Feldrechner!Alle Werte anzeigen}. Um die 
+Werteausschnitt aus der Attributtabelle anzuzeigen, klicken Sie auf den Knopf 
+\button{Beispiel}\index{Feldrechner!Werteausschnitt anzeigen}. Das Vorgehen entspricht 
+dem des Abfrageeditors. Um einen Wert in den Feldrechnerausdruck zu kopieren, 
+klicken Sie einfach doppelt auf den Namen. 
+
+Der \textbf{Operatoren Bereich} zeigt alle Operatoren, die derzeit zur Verfügung 
+stehen. Um einen Operator in den Feldrechnerausdruck zu kopieren, klicken Sie einfach 
+auf den entsprechenden Knopf. Als Operatoren stehen mathematische Berechnungen 
+( + , - , * \dots), trigonometrische Funktionen ( sin, cos, tan, \dots) und das 
+Extrahieren geometrischer Informationen ( Länge und Fläche ) bereit. In Zukunft wird 
+die Anzahl der Funktionen sicher noch erweitert werden.
+
+Ein kurzes Beispiel soll zeigen, wie man mit dem Feldrechner arbeitet. Dabei soll 
+die Länge der Zugstrecken in dem Vektorlayer 'railroads' aus dem 
+QGIS-Beispieldatensatz berechnet werden:
+
+\begin{enumerate}
+\item Laden Sie das Shape \filename{railroads.shp} in QGIS und öffnen Sie die den 
+Dialog für die \dialog{Attributtabelle}.
+\item Klicken Sie auf den Knopf \toolbtntwo{mActionToggleEditing}{Bearbeitungsmodus 
+umschalten} und öffnen Sie dann den Dialog des 
+\toolbtntwo{mActionCalculateField}{Feldrechners}.
+\item Deaktivieren Sie das Kontrollkästchen \checkbox{Vorhandenes Feld erneuern}, 
+um den Bereich 'Neues Feld' zu aktivieren.
+\item Setzen Sie 'laenge' als Ausgabefeldname, 'real' als Ausgabefeldtyp und 
+definieren Sie die Ausgabefeldbreite mit 10 und die Ausgabefeldgenauogkeit mit 3.
+\item Nun klicken Sie auf den Operator 'Länge', um es als \$length in den 
+Feldrechnerausdruck zu kopieren und drücken dann auf \button{Ok}.
+\end{enumerate}
 
 
