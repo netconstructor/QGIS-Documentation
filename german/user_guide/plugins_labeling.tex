@@ -1,80 +1,92 @@
 % vim: set textwidth=78 autoindent:
 
-\subsection{Labeling Plugin}
+\subsection{Beschriftungsplugin}\index{Plugins!Beschriftung}
 
-% when the revision of a section has been finalized,
+% when the revision of a section has been finalized, 
 % comment out the following line:
 %\updatedisclaimer
 
-The \toolbtntwo{labeling}{Labeling} plugin provides smart labeling for vector point, 
-line and polygon layers and only requires a few parameters. This plugin will replace 
-the current QGIS labeling and also supports on-the-fly transformated layers.
+Das Plugin \toolbtntwo{labeling}{Beschriftung} bietet intelligente Beschriftung 
+für Vektorlayer (Punkte, Linien und Polygone) und benötigt nur wenige Parameter. 
+Dieses Plugin funktioniert auch bei On-The-Fly transformierten Layern und wird 
+in Zukunft die Standard-Beschriftung in QGIS ablösen. 
 
 \begin{enumerate}
-  \item Start QGIS and load a vector point, line or polygon layer. 
-  \item Load the labeling plugin in the Plugin Manager (see Section 
-  \ref{sec:load_core_plugin}), activate the layer in the legend and click on the 
-  \toolbtntwo{labeling}{Labeling} icon which appears in the QGIS toolbar menu.
+  \item Starten Sie QGIS und laden Sie eine Vektor Punkt-, Linien- oder Polygonlayer.
+  \item Laden Sie das Plugin Beschriftung im Plugin Manager (siehe Kapitel 
+  \ref{sec:load_core_plugin}), aktivieren Sie den Layer in der Legende und klicken 
+  Sie dann auf das Icon \toolbtntwo{labeling}{Beschriftung} in der Werkzeugleiste.
 \end{enumerate}
 
-\minisec{Labeling point layers}
+\minisec{Punktlayer beschriften}
 
-First step is to activate the \checkbox{Label this layer} checkbox and select an attribute 
-column to use for labeling. After that you can define the label placement and text style, 
-labeling priority, scale-based visibility, if every part of multipart feature is to be 
-labeled and if features act as obstacles for labels or not (see Figure \ref{fig:pointlabel}).  
+Als erstes müssen Sie das Kontrollkästchen \checkbox{Diesen Layer beschriften} 
+aktivieren und eine Attributspalte angeben, deren Inhalt für die Beschriftung 
+verwendet werden soll. Danach können Sie die Platzierung, den Textstil, die 
+Priorität der Beschriftung und die Maßstabsabhängige Darstellung festlegen. Über 
+weitere Kontrollkästchen können Sie noch angeben, ob alle Teile eine mehrteiligen 
+beschriftet werden sollen, ob Objekte ein Hindernis für die Beschriftung sein 
+sollen oder nicht (siehe Abbildung \ref{fig:pointlabel}).
 
 \begin{figure}[ht]
 \begin{center}
-   \caption{Smart labeling of vector point layers \nixcaption}\label{fig:pointlabel}\smallskip
+   \caption{Intelligente Beschriftung von Vektor Punktlayern \nixcaption}\label{fig:pointlabel}\smallskip
    \includegraphics[clip=true, width=12cm]{label_points}
 \end{center}
 \end{figure}
 
-\minisec{Labeling line layers}
+\minisec{Linienlayer beschriften}
 
-First step is to activate the \checkbox{Label this layer} checkbox and select an attribute
-column to use for labeling. After that you can define the label placement, orientation, 
-distance to feature, text style, labeling priority, scale-based visibility, if every part 
-of a multipart line is to be labeled, if lines shall be merged to avoid duplicate labels 
-and if features act as obstacles for labels or not (see Figure \ref{fig:linelabel}).
+Als erstes müssen Sie das Kontrollkästchen \checkbox{Diesen Layer beschriften}
+aktivieren und eine Attributspalte angeben, deren Inhalt für die Beschriftung
+verwendet werden soll. Danach können Sie die Platzierung, den Textstil, die
+Priorität der Beschriftung und die Maßstabsabhängige Darstellung festlegen. Über
+weitere Kontrollkästchen können Sie noch angeben, ob alle Teile eine mehrteiligen
+beschriftet werden sollen, ob sich anschließende Linien verbunden werden sollen, 
+um doppelte Beschriftung zu vermeide und ob Objekte ein Hindernis für die 
+Beschriftung sein sollen oder nicht (siehe Abbildung \ref{fig:linelabel}).
 
 \begin{figure}[ht]
 \begin{center}
-   \caption{Smart labeling of vector line layers \nixcaption}\label{fig:linelabel}\smallskip
+   \caption{Intelligente Beschriftung von Vektor Linienlayern \nixcaption}\label{fig:linelabel}\smallskip
    \includegraphics[clip=true, width=12cm]{label_line}
 \end{center}
 \end{figure}
 
-\minisec{Labeling polygon layers}
+\minisec{Polygonlayer beschriften}
 
-First step is to activate the \checkbox{Label this layer} checkbox and select an attribute
-column to use for labeling. After that you can define the label placement, distance and text 
-style, labeling priority, scale-based visibility, if every part of multipart feature is to be
-labeled and if features act as obstacles for labels or not (see Figure \ref{fig:arealabel}).
+Als erstes müssen Sie das Kontrollkästchen \checkbox{Diesen Layer beschriften}
+aktivieren und eine Attributspalte angeben, deren Inhalt für die Beschriftung
+verwendet werden soll. Danach können Sie die Platzierung, den Textstil, die
+Priorität der Beschriftung und die Maßstabsabhängige Darstellung festlegen. Über
+weitere Kontrollkästchen können Sie noch angeben, ob alle Teile eine mehrteiligen
+beschriftet werden sollen, ob Objekte ein Hindernis für die Beschriftung sein
+sollen oder nicht (siehe Abbildung \ref{fig:arealabel}).
 
 \begin{figure}[ht]
 \begin{center}
-   \caption{Smart labeling of vector polygon layers \nixcaption}\label{fig:arealabel}\smallskip
+   \caption{Intelligente Beschriftung von Vektor Polygonlayern \nixcaption}\label{fig:arealabel}\smallskip
    \includegraphics[clip=true, width=12cm]{label_area}
 \end{center}
 \end{figure}
 
-\minisec{Change engine settings}
+\minisec{Beschriftungseinstellungen ändern}
 
-Additionally you can click the \button{Engine settings} button and select the search method, 
-used to find the best label placement. Available is Chain, Popmusic Tabu, Popmusic Chain, 
-Popmusic Tabu Chain and FALP.  
-
+Außerdem können Sie auf den Knopf \button{Beschriftungseinstellungen} drücken und 
+eine Suchmethode für die optimale Beschriftung auswählen, Zur Verfügung steht Kette, 
+Popmusik Tabu, Popmusik Kette, Popmusic Tabu Kette und FALP.
+ 
 \begin{figure}[ht]
 \begin{center}
-   \caption{Dialog to change label engine settings \nixcaption}\label{fig:labelengine}\smallskip
+   \caption{Ändern der Beschriftungseinstellungen \nixcaption}\label{fig:labelengine}\smallskip
    \includegraphics[clip=true, width=7cm]{label_engine}
 \end{center}
 \end{figure}
 
-Furthermore the number of candidates can be defined for point, line and polygon features, 
-and you can define whether to show all labels (including colliding labels) and label 
-candidates for debugging.
 
+Dazu können Sie noch auswählen, ob alle Beschriftungskandidaten angezeigt werden 
+sollten (zur Fehlerbeseitigung) oder ob alle Beschriftungen dargestellt werden 
+sollen, also inklusive der kollidierenden.
+
+\newpage
 

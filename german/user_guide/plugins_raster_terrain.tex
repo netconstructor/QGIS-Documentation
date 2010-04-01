@@ -1,55 +1,55 @@
 % vim: set textwidth=78 autoindent:
 
-\subsection{Raster Terrain Modelling Plugin}
+\subsection{Rastergeländeanalyse Plugin}
 
 % when the revision of a section has been finalized, 
 % comment out the following line:
 %\updatedisclaimer
 
-The Raster Terrain Modelling plugin can be used to calculate the slope, aspect, ruggedness, and
-total curvature for digital elevation models (DEM). It is very simple to handle and provides an
-intiuitive graphical user interface for creating new raster layers (See Figure
-\ref{fig:raster_terrain_dialog}).
-The plugin requires the following parameters to be specified before running:
+Das Rastergeländeanalyse Plugin ermöglicht es, Hangneigung (Neigung), 
+Exposition (Perspektive), Rauhigkeitsindex und Gesamtkrümmung auf 
+Basis eines Höhenmodells (DGM) zu berechnen. Es ist sehr einfach zu 
+handhaben und bietet eine intuitive grafische Benutzeroberfläche 
+(siehe Abbildung \ref{fig:raster_terrain_dialog}).
+Das Plugin benötigt die folgenden Parameter:
 
 \begin{itemize}
-\item \textbf{Analysis}: Can be one of slope, aspect, ruggedness, or total curvature
-\item \textbf{Input layer}: Specify the input raster from a list of loaded
-raster layers.
-\item \textbf{Output layer}: Specify a name and path for the output raster file.
-\item \textbf{Output format}: Specify a format type for the output raster file (Default is GeoTiff).
+\item \textbf{Analyse}: Hier wählen Sie Neigung, Perspektive, 
+Rauhigkeitsindex oder Gesamtkrümmung.
+\item \textbf{Eingabelayer}: Wählen Sie eine Höhendatei aus den 
+geladenen Rasterlayern aus.
+\item \textbf{Ausgabelayer}: Geben Sie hier den Pfad und Namen der 
+Ausgabedatei an.
+\item \textbf{Ausgabeformat}: Wählen Sie das Ausgabeformat der 
+Ausgabedatei (Standard ist GeoTiff).
 \end{itemize}
 
-Slope: Calculates slope angle for each cell in degrees (based on first order derivative estimation).
-
-Aspect: Exposition (starting with 0 for north direction, in degrees counterclockwise).
-
-Ruggedness factor: A quantitative measurement of terrain heterogeneity.
-
-Total curvature: A curvature measure that combines plan- and profile curvature.
+Der Parameter \textbf{Neigung} berechnet den Neigungswinkel für jedes Pixel
+in Grad, basierend auf erster Ordnung oder abgeleiteter Schätzung. Der
+Parameter \textbf{Perspektive} berechnet die Exposition für jedes Pixel in
+Grad, beginnend mit dem Wert 0 für die Nordausrichtung und dann weiter gegen den
+Uhrzeigersinn. Der \textbf{Rauhigkeitsindex} berechnet die quantitative
+Geländerauhigkeit und der Parameter \textbf{Gesamtkrümmung} 
+berechnet die Krümmung kombinert aus vertikaler und horizontaler Krümmung.
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{Raster Terrain Modelling Plugin \nixcaption}\label{fig:raster_terrain_dialog}\smallskip
-   \includegraphics[clip=true, width=9cm]{raster_terrain_dialog}
+   \caption{Rastergeländeanalyse Plugin \nixcaption}\label{fig:raster_terrain_dialog}\smallskip
+   \includegraphics[clip=true, width=6cm]{raster_terrain_dialog}
 \end{center}  
 \end{figure}
 
-\minisec{Using the plugin}\label{raster_terrain_usage}
+\minisec{Das Plugin anwenden}\label{raster_terrain_usage}
 
 \begin{enumerate}
-  \item Start QGIS and load a DEM raster layer. 
-  \item Load the Raster Terrain Modelling plugin in the Plugin Manager (see Section 
-  \ref{sec:load_core_plugin}) and click on the \toolbtntwo{raster_terrain}{Raster Terrain
-Modelling} icon which appears in the QGIS toolbar menu. The Raster Terrain Modelling plugin dialog
-appears as shown in Figure \ref{fig:raster_terrain_dialog}.
-  \item Select an analysis method (e.g. \dropmenuopt{Slope}).
-  \item Specify an output file
-path, and an output file type.
-  \item Click \button{Ok}.
+  \item Starten Sie QGIS und laden Sie einen DGM Rasterlayer. 
+  \item Laden Sie das Rastergeländeanalyse Plugin im Plugin Manager 
+  (siehe Abschnitt \ref{sec:load_core_plugin}) und klicken Sie auf das 
+  Icon \toolbtntwo{raster_terrain}{Rasterbasierende Geländeanalyse} 
+  in der Werkzeugleiste. Der Plugin Dialog erscheint nun, wie in Abbildung 
+  \ref{fig:raster_terrain_dialog} zu sehen.
+  \item Wählen Sie eine Analysemethode (z.B.: \dropmenuopt{Neigung}).
+  \item Geben Sie eine Ausgabedatei mit Pfad und Dateiformat an und 
+  klicken Sie dann auf \button{Ok}.
 \end{enumerate}
-
-\newpage
-
-
 
