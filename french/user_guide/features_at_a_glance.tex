@@ -1,20 +1,21 @@
-\section{Aperçu des fonctionnalités}\label{feature_glance}
+%  !TeX  root  =  user_guide.tex
+\chapter{Aperçu des fonctionnalités}\label{feature_glance}
 
 Après une première prise en main dans le chapitre \ref{label_getstarted}, nous allons maintenant vous donner un aperçu plus détaillé des fonctionnalités de QGIS. La plupart seront décrites plus précisément dans les chapitres qui leur sont dédiés dans la suite du manuel.
 
-\subsection{Démarrer et arrêter QGIS}\label{label_startinqgis}
+\section{Démarrer et arrêter QGIS}\label{label_startinqgis}
 
 Dans le chapitre \ref{samplesession} vous avez appris comment démarrer QGIS ? Nous allons le répéter ici et vous verrez que QGIS propose des options supplémentaires via la ligne de commande.
 
-\begin{itemize}
+\begin{itemize}[label=--]
 \item \nix{en présumant que QGIS est installé dans le PATH (chemin par défaut), vous pouvez le démarrez en tapant : \usertext{qgis}  dans une ligne de commande ou en cliquant sur l'icône de raccourci sur le bureau dans le menu des applications.} 
 \item \win{démarrez QGIS en utilisant le menu Démarrer, l'icône de raccourci présent sur le bureau ou encore, en cliquant sur un fichier de projet QGIS}
-\item \osx{double-cliquez sur l'icône de votre répertoire Applications. Si vous avez besoin d'exécuter QGIS dans une console, lancez avec /chemin-vers-executable/Contents/MacOS/Qgis.}
+\item \osx{double-cliquez sur l'icône de votre répertoire Applications. Si vous avez besoin d'exécuter QGIS dans une console, lancez avec \mbox{/chemin-vers-executable/Contents/MacOS/Qgis}.}
 \end{itemize} 
 
 Pour arrêter QGIS, cliquez sur le menu \{\nix{}\win{Fichier} \osx{QGIS}\} > Quitter, ou utilisez le raccourci clavier \keystroke{Ctrl+Q}.
 
-\subsubsection{Options de ligne de commande}\index{command line options}
+\subsection{Options de ligne de commande}\index{command line options}
 \label{label_commandline}
 
 \nix QGIS supporte un certain nombre d'options lorsque démarrer en passant par la ligne de commande. Pour obtenir une liste de ces options, entrez dans votre console \usertext{qgis ---help}. Le message habituel qui en résulte est :
@@ -47,9 +48,8 @@ Usage: qgis [options] [FILES]
 \normalsize
 
 \begin{Astuce} \caption{\textsc{Exemple utilisant des options de ligne de commande}}
-\qgistip{Vous pouvez démarrer QGIS en spécifiant un ou plusieurs fichiers de données. Par exemple, si vous êtes placé dans le répertoire qgis\_sample\_data vous pouvez démarrer QGIS avec une couche vecteur et un fichier raster dès le démarrage avec la commande suivante : 
+Vous pouvez démarrer QGIS en spécifiant un ou plusieurs fichiers de données. Par exemple, si vous êtes placé dans le répertoire qgis\_sample\_data vous pouvez démarrer QGIS avec une couche vecteur et un fichier raster dès le démarrage avec la commande suivante : 
 \usertext{qgis ./raster/landcover.img ./gml/lakes.gml}
-}
 \end{Astuce}
 
 \minisec{Option \usertext{---snapshot}}
@@ -71,32 +71,34 @@ Pour démarrer avec une étendue cartographique spécifique, utilisez cette opti
 \minisec{Option \usertext{---nologo}}
 Cette commande dissimule l'écran de démarrage qui apparaît lors du lancement de QGIS.
 
-\subsection{Interface de QGIS}\index{fenêtre principale}
+\section{Interface de QGIS}\index{fenêtre principale}
 \label{label_qgismainwindow}
 
-Quand QGIs démarre, l'interface se présente à vous sous la forme affichée ci-dessous (les nombres de 1 à 6 se réfèrent aux six zones majeures de l'interface) :
+Quand QGIs démarre, l'interface se présente à vous sous la forme affichée Figure : \ref{fig:startup}, page \pageref{fig:startup} (les nombres de 1 à 6 se réfèrent aux six zones majeures de l'interface) :
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{Interface de QGIS avec les données d'essai de l'Alaska \nixcaption}
-  \label{fig:startup}
-   \includegraphics[clip=true, width=17cm]{startup}
+   \includegraphics[clip=true, width=12cm]{startup}
+   \caption{Interface de QGIS avec les données d'essai de l'Alaska \nixcaption\\
+   Les numéros cerclés de jaune renvoient aux zones définies dans le texte.}
+   \label{fig:startup}
 \end{center} 
 \end{figure}
 
 \textbf{Note:} Les décorations de fenêtre peuvent vous apparaître différemment sur votre système en fonction de votre système d'exploitation et de votre gestionnaire de fenêtre. \\
 
 L'interface est divisée en 6 zones distinctes :
-
-\begin{tabbing}
-1. Barre de Menu \hspace{3cm}\= 4. Affichage de la carte \\
-2. Barre d'Outils \hspace{3cm}\> 5. Aperçu de la carte  \\
-3. Légende de la carte \hspace{3cm}\> 6. Barre de statut   
-\end{tabbing}
+\begin{center}
+\begin{tabular}{p{5cm} p{5cm}}
+1. Barre de Menu & 4. Affichage de la carte\\
+2. Barre d'Outils & 5. Aperçu de la carte  \\
+3. Légende de la carte & 6. Barre de statut \\  
+\end{tabular}
+\end{center}
 
 Ces 6 composants sont décrits dans les sections suivantes.
 
-\subsubsection{Barre de Menu}\label{label_menubar}
+\subsection{Barre de Menu}\label{label_menubar}
 \index{menus}
 
 La barre de menu fournit un accès aux différentes fonctionnalités de QGIS par le biais de menus hiérarchiques. Le menu supérieur et un résumé de certaines options sont listés ci-dessous, avec les icônes des outils correspondants dans la barre d'outils et leurs raccourcis clavier.\footnote{Les raccourcis clavier peuvent maintenant être configurés manuellement (les raccourcis présentés dans cette section sont ceux par défaut) en utilisant l'outil Configurer les Raccourcis dans le menu Préférences.} Bien que les options de menu aient des outils qui leur correspondent et vice-versa, les menus ne sont pas organisés comme les barres d'outils. La barre contenant l'outil est affichée à la suite de chaque option de menu. Pour plus d'informations sur les outils et les barres d'outils, veuillez lire la section \ref{label_toolbars}.
@@ -106,7 +108,7 @@ La barre de menu fournit un accès aux différentes fonctionnalités de QGIS par
 \hspace{1cm} Option de menu \> Raccourci \> Réference \> Barre d'outils\\
 \end{tabbing}
 
-\begin{itemize}
+\begin{itemize}[label=--]
 \item \mainmenuopt{Fichier}
 \begin{tabbing}
 \hspace{4.5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
@@ -380,7 +382,7 @@ see Section \ref{sec:managing_plugins}
 
 Voir l'annexe \ref{app_menu} pour une description plus aboutie des éléments des menus.
 
-\subsubsection{Barre d'outils}\label{label_toolbars}
+\subsection{Barre d'outils}\label{label_toolbars}
 \index{toolbars}
 
 La barre d'outils fournit un accès à la majorité des fonctions des menus en plus d'outils additionnels destinés à interagir avec la carte. Chaque outil dispose d'une bulle d'aide qui s'affiche lorsque vous placez votre curseur au-dessus, elle affiche une courte description de son rôle.
@@ -389,10 +391,10 @@ Chaque barre de menu peut être déplacée selon vos besoins. Vous pouvez les d�
 
 \begin{Astuce}
 \caption{\textsc{Restaurer la barre d'outil}} \index{layout!toolbars}
-\qgistip{Si vous avez accidentellement masqué toutes vos barres d'outils, vous pouvez les récupérer en sélectionnant \mainmenuopt{Paramétrage} > \dropmenuopt{Barre d'outils}.}
+Si vous avez accidentellement masqué toutes vos barres d'outils, vous pouvez les récupérer en sélectionnant \mainmenuopt{Paramétrage} > \dropmenuopt{Barre d'outils}.
 \end{Astuce}
 
-\subsubsection{Légende cartographique}\label{label_legend}
+\subsection{Légende cartographique}\label{label_legend}
 \index{legend}
 
 La zone de légende cartographique est utilisée pour définir la visibilité et l'ordre d'empilement des couches. Une couche se situant au sommet de la liste de cette légende sera affichée au-dessus de celles qui se situent plus bas dans la liste. La boîte présente à côté de chacune des couches permet d'afficher ou de cacher.\index{layer!visibility}
@@ -401,9 +403,9 @@ Les couches peuvent être rassemblées en créant un groupe et en y glissant les
 
 Le contenu du menu contextuel affiché par un clic droit varie si la couche sélectionnée est un raster ou un vecteur. Pour les couches vectorielles GRASS \dropmenuopt{Basculer en mode édition} n'est pas disponible. Veulliez lire la section \ref{grass_digitising} pour plus d'informations sur l'édition de couches vecteurs GRASS.
 
-\begin{itemize}
+\begin{itemize}[label=--]
 \item \textbf{Menu clic droit pour les couches raster}
-\begin{itemize}
+\begin{itemize}[label=--]
 \item \dropmenuopt{Zoomer sur lémprise de la couche}
 \item \dropmenuopt{Zoomer à la meilleure échelle (100\%)}
 \item \dropmenuopt{Montrer dans l'aperçu}
@@ -417,7 +419,7 @@ Le contenu du menu contextuel affiché par un clic droit varie si la couche sél
 \end{itemize}
 
 \item \textbf{Menu clic droit pour les couches vecteurs}
-\begin{itemize}
+\begin{itemize}[label=--]
 \item \dropmenuopt{Zoomer sur lémprise de la couche}
 \item \dropmenuopt{Montrer dans l\'aperçu}
 \item \dropmenuopt{Effacer}
@@ -435,7 +437,7 @@ Le contenu du menu contextuel affiché par un clic droit varie si la couche sél
 \end{itemize}
 
 \item \textbf{Menu clic droit pour les groupes} 
-\begin{itemize}
+\begin{itemize}[label=--]
 \item \dropmenuopt{Effacer}
 \item \dropmenuopt{Renommer}
 \item \dropmenuopt{Ajouter un groupe}
@@ -448,21 +450,20 @@ Le contenu du menu contextuel affiché par un clic droit varie si la couche sél
 
 Si plusieurs sources de données vecteurs ont le même type de vecteur (points, lignes ou polygones) et les mêmes attributs, leurs représentations peuvent être groupées. Cela signifie que si la représentation d'une couche est modifiée, toutes les autres en bénéficieront automatiquement. Pour grouper la symbologie, faites un clic droit dans la zone de légende et sélectionnez \dropmenuopt{Montrer les groupes de fichiers}. Les groupes de fichiers relatifs aux couches apparaissent, il est maintenant possible de déplacer un fichier d'un groupe à un autre. SI vous le faites, les fichiers seront regroupés. Notez que QGIS le permet seulement si les 2 couches sont susceptibles de partager le même type de symbologie.
 
-\subsubsection{Vue de la carte}\label{label_mapview}
+\subsection{Vue de la carte}\label{label_mapview}
 \index{map!view} 
 
 C'est la partie centrale de QGIS — les cartes sont affichées dans cette partie ! Celle qui s'affiche dépend des couches raster et vecteurs que vous avez choisi de charger (lire les sections suivantes pour savoir comment charger une couche). La vue de la carte peut être modifiée en portant le focus sur une autre région, ou en zoomant en avant ou en arrière. Plusieurs opérations peuvent être effectuées sur la carte comme il est expliqué dans les descriptions des barres d'outils. La vue de la carte et la légende sont étroitement liées — la carte reflète les changements que vous opérez dans la légende.
 
 \begin{Astuce}\caption{\textsc{Zoomer la carte avec la molette de la souris}\index{zoom!mouse wheel}}
-\qgistip{Vouspouvez utiliser la molette de la souris pour changer le niveau de zoom de la carte. Placez votre curseur dans la zone d'affichage de la carte et faites rouler la molette vers l'avant pour agrandir et faites là rouler vers vous pour zoomer en arrière. La position du curseur est le centre sur lequel va s'opérer le zoom. Vous pouvez modifier le comportement du zoom de la souris en utilisant l'onglet \tab{Outils cartographiques} dans le menu \mainmenuopt{Paramètres} >\dropmenuopt{Options}.}
+Vouspouvez utiliser la molette de la souris pour changer le niveau de zoom de la carte. Placez votre curseur dans la zone d'affichage de la carte et faites rouler la molette vers l'avant pour agrandir et faites là rouler vers vous pour zoomer en arrière. La position du curseur est le centre sur lequel va s'opérer le zoom. Vous pouvez modifier le comportement du zoom de la souris en utilisant l'onglet \tab{Outils cartographiques} dans le menu \mainmenuopt{Paramètres} >\dropmenuopt{Options}.
 \end{Astuce}
 
 \begin{Astuce}\caption{\textsc{Déplacer la carte avec les flèches et la barre espace}}\index{pan!arrow keys}
-\qgistip{Vous pouvez utiliser les flèches du clavier pour se déplacer sur la carte? Placez le curseur sur la carte et appuyez sur la flèche droite pour vous diriger vers l'Est, la flèche gauche pour aller vers l'Ouest, la flèche supérieure pour le Nord et la flèche inférieure pour le Sud. Vous pouvez aussi déplacer la carte en gardant la touche espace appuyée et en bougeant la souris.
-}
+Vous pouvez utiliser les flèches du clavier pour se déplacer sur la carte? Placez le curseur sur la carte et appuyez sur la flèche droite pour vous diriger vers l'Est, la flèche gauche pour aller vers l'Ouest, la flèche supérieure pour le Nord et la flèche inférieure pour le Sud. Vous pouvez aussi déplacer la carte en gardant la touche espace appuyée et en bougeant la souris.
 \end{Astuce}
 
-\subsubsection{Aperçu de la carte}\label{label_mapoverview}
+\subsection{Aperçu de la carte}\label{label_mapoverview}
 \index{map!overview}
 
 La zone d'aperçu de la carte permet d'avoir une vue totale de l'emprise des couches ajoutées au projet, elle peut être sélectionnée dans le menu\mainmenuopt{Préférences} >\dropmenuopt{Panneaux}. Au sein de cette fenêtre se situe un rectangle qui représente l'étendue de la carte, cela permet de savoir quelle région de la carte vous êtes en train de visualiser. Les étiquettes ne sont pas affichées dans l'aperçu même si les couches visibles ont l'affichage de leurs étiquettes activées.
@@ -470,7 +471,7 @@ Vous pouvez rajouter une couche dans l'aperçu en faisant un clic-droit dessus d
 
 Si vous cliquez et déplacez le rectangle rouge qui montre votre emprise actuelle, la vue principale se mettra en conséquence.
 
-\subsubsection{Barre de statuts}\label{label_statusbar}
+\subsection{Barre de statuts}\label{label_statusbar}
 
 La barre de statuts montre votre position dans les coordonnées de la carte (p. ex. mètres ou degrés décimaux) lorsque vous déplacez votre curseur. À gauche de l'affichage des coordonnées se trouve un petit bouton qui bascule entre les coordonnées de la position ou l'étendue de la zone que vous visualisez.
 
@@ -479,29 +480,28 @@ Une barre de progression dans la barre de statuts vous montre le cheminement du 
 Si une nouvelle extension ou une mise à jour est disponible, vous verrez un message dans la barre de statut. Sur la droite, une boîte à cocher peut être utilisée pour bloquer le rendu des couches sur la carte (voir Section \ref{subsec:redraw_events}). A l'extrémité se situe l'icône de projection,  un clic dessus ouvrira la fenêtre de propriétés de projection pour le projet en cours.
 
 \begin{Astuce}\caption{\textsc{Calculer l'échelle correcte de la vue de la carte}}\index{scale!calculate}
-\qgistip{Quand vous démarrez QGIS, les degrés sont l'unité par défaut et indique à QGIS que toutes les coordonnées de votre couche sont en degrés. Pour avoir les valeurs correctes de l'échelle, vous pouvez soit passer en mètre manuellement avec l \tab{General} sous le menu \mainmenuopt{Préférences} >\dropmenuopt{Propriétés du projet} ou vous pouvez sélectionner un système de projection de référence en cliquant sur \toolbtntwo{mIconProjectionDisabled}{projector}. Dans ce dernier cas, les unités sont automatiquement choisies selon les spécifications de la projection, p. ex. '+units=m'.
-}
+Quand vous démarrez QGIS, les degrés sont l'unité par défaut et indique à QGIS que toutes les coordonnées de votre couche sont en degrés. Pour avoir les valeurs correctes de l'échelle, vous pouvez soit passer en mètre manuellement avec l \tab{General} sous le menu \mainmenuopt{Préférences} >\dropmenuopt{Propriétés du projet} ou vous pouvez sélectionner un système de projection de référence en cliquant sur \toolbtntwo{mIconProjectionDisabled}{projector}. Dans ce dernier cas, les unités sont automatiquement choisies selon les spécifications de la projection, p. ex. '+units=m'.
 \end{Astuce}
 
-\subsection{Rendu}\label{subsec:redraw_events}\index{rendering}
+\section{Rendu}\label{subsec:redraw_events}\index{rendering}
 
 Par défaut, QGIS effectue le rendu de toutes les couches visibles à chaque fois que l'affichage de la carte a besoin d'être mise à jour. Les événements qui déclenchent ce rafraîchissement incluent :
 
-\begin{itemize}
+\begin{itemize}[label=--]
 \item L'ajout d'une couche
 \item Un déplacement ou un zoom
 \item Un redimensionnement de la fenêtre de QGIS
 \item Un changement de la visibilité d'une couche
 \end{itemize}
 
-\subsubsection{Rendu dépendant de l'échelle}\index{rendering!scale dependent}
+\subsection{Rendu dépendant de l'échelle}\index{rendering!scale dependent}
 \label{label_scaledepend}
 
 Le rendu dépendant de l'échelle permet de spécifier l'échelle minimale et maximale à laquelle la couche doit être visible. Pour définir une échelle de rendu, ouvrez la fenêtre de \dialog{Propriétées} en double-cliquant sur une couche dans la légende et dans l'onglet \tab{Général}, saisissez les valeurs voulues et cocher la case \checkbox{Utiliser le rendu dépendant de la mise à l'échelle}.
 
 Vous pouvez déterminer les valeurs d'échelle en zoomant au niveau que vous voulez utiliser et en notant les valeurs de la barre d'état.\index{scale}
 
-\subsubsection{Contrôler le rendu}\label{label_controlmap}
+\subsection{Contrôler le rendu}\label{label_controlmap}
 
 Le rendu de la carte peut être contrôlé de différentes manières :
 
@@ -510,7 +510,7 @@ Le rendu de la carte peut être contrôlé de différentes manières :
 
 Pour suspendre le rendu, cliquez sur la case \checkbox{Render}dans le coin inférieur droit de la barre de statut. Quand cette case n'est pas coché, QGIS ne redessine pas la carte en réponse aux événements décrits dans la section \ref{subsec:redraw_events}. Voici quelques cas pour lequel vous pourriez vouloir le faire :
 
-\begin{itemize}
+\begin{itemize}[label=--]
 \item Ajouter beaucoup de couches et les symboliser avant d'effectuer un rendu potentiellement long
 \item Ajouter une ou plusieurs couches et définir une échelle
 \item Ajouter une ou plusieurs couches et et zoomer sur un endroit spécifique
@@ -541,31 +541,32 @@ Vous pouvez définir une option pour mettre à jour l'affichage de la carte quan
 
 Pour influencer la qualité du rendu de la carte vous avez trois possibilités. Dans le menu \mainmenuopt{Préférences} > \dropmenuopt{Options} puis l'onglet \tab{Rendu} et sélectionnez/désélectionnez les cases suivantes :
 
-\begin{itemize}
+\begin{itemize}[label=--]
 \item \checkbox{Les lignes semblent moins déchiquetées aux dépens d'une certaine vitesse d'exécution}
 \item \checkbox{Corriger les polygones remplis de manière erronée}
 %\item \checkbox{Rafraîchir en permanence lors du déplacement de la table des matières/carte}
 \end{itemize}
 
-\subsection{Mesurer}\label{sec:measure}\index{measure}
+\section{Mesurer}\label{sec:measure}\index{measure}
 
 Les mesures fonctionnent uniquement au sein des systèmes de coordonnées projetées (exemple : UTM, Lambert 93). SI la couche active est définie par système géographique de coordonnée (latitude/longitude), les résultats d'une mesure de ligne ou d'aires seront incorrects. Pour y remédier, vous devez mettre un système de coordonnées approprié (voir Section~\ref{label_projections}).
 
-\subsubsection{Mesurer une longueur et une aire}\index{measure:line length}\index{measure:areas}
+\subsection{Mesurer une longueur et une aire}\index{measure:line length}\index{measure:areas}
 \includegraphics[width=0.7cm]{mActionMeasure} 
 QGIS peut mesurer des distances réelles entre plusieurs points selon un ellipsoïde défini. Pour le configurer, allez dans le menu \mainmenuopt{Préférences} > \dropmenuopt{Options}puis dans l'onglet \tab{Outils cartographiques} et choisissez l'ellipsoïde approprié. Vous pouvez également modifier ici l'unité de mesure (mètre ou pied). Cet outil permet de placer des points sur la carte. Chaque longueur de segment s'affiche dans la fenêtre de mesure avec la longueur additionnée totale. Pour stopper les mesures, faites un clic droit. \\
 \includegraphics[width=0.7cm]{mActionMeasureArea} Les aires peuvent aussi être mesurées.
 Dasn la fenêtre de mesure apparaît la surface totale mesurée. \\
 En complément, l'outil de mesure s'accrochera à la couche sélectionnée à partir du moment où celle-ci à un seuil d'accrochage défini (voir la section~\ref{snapping_tolerance}). Dpnc si vous voulez mesurez avec exactitude une ligne ou le contour d'un polygone, spécifiez d'abord un seuil d'accrochage puis avec l'outil de mesure chaque clic de souris se situant dans ce seuil s'accrochera aux entités de cette couche.
 
-\begin{figure}[h]
-\caption{Outils de mesure \nixcaption} \label{fig:measure}
+\begin{figure}[ht]
 \centering
-  \subfigure[Mesure de lignes] {\label{subfig:measure_line}\includegraphics[clip=true, width=0.3\textwidth]{measure_line}}\goodgap
-  \subfigure[Mesure d'aires]{\label{subfig:measure_area}\includegraphics[clip=true, width=0.3\textwidth]{measure_area}}
+  \subfloat[Mesure de lignes] {\label{subfig:measure_line}\includegraphics[clip=true, width=0.3\textwidth]{measure_line}}
+  \hspace{1cm}
+  \subfloat[Mesure d'aires]{\label{subfig:measure_area}\includegraphics[clip=true, width=0.3\textwidth]{measure_area}}
+  \caption{Outils de mesure \nixcaption} \label{fig:measure}
 \end{figure}
 
-\subsection{les projets}\label{sec:projects}\index{projets}
+\section{les projets}\label{sec:projects}\index{projets}
 
 L'état de votre session de QGIS est considéré comme étant un projet. QGIS ne peut travailler que sur un projet à la fois. Les propriétés sont considérées comme étant assignées à un projet ou comme étant par défaut pour les nouveaux projets ( voir Section \ref{subsec:gui_options}). QGIS peut enregistrer l'état de votre travail dans un fichier de projet en utilisant le menu the state of your 
 workspace into a project file using the menu options 
@@ -577,7 +578,7 @@ Chacune de ces options vous demandera si vous désirez enregistrer le projet si 
 
 Les types d'informations enregistrées dans un projet sont :
 
-\begin{itemize}
+\begin{itemize}[label=--]
 \item Les couches ajoutées
 \item Les propriétés des couches ainsi que de symbologie
 \item La projection de la carte
@@ -588,28 +589,28 @@ Le fichier de projet est enregistré au format XML, il est donc possible de l'é
 
 \minisec{Propriétés de projet}
 Dans la fenêtre de propriétés du projet vous pouvez mettre des options spécifiques à un projet. Cela inclut :
-\begin{itemize}
+\begin{itemize}[label=--]
  \item Dans l'onglet \tab{Général} le titre du projet, les unités, et la possibilité d'enregister des chemins relatifs vers les couches. L'édtion topologique et les options d'accrochage peuvent être changés ici.
 \item L'onglet \tab{Système de Coordonnées de Référence (SCR)} permet de choisir le système de coordonnées pour ce projet et d'activer la projection à la volée des couches vecteurs utilisants un SCR différent.
 \item Avecle troisième onglet \tab{Identification des couches} vous pouvez activer (ou désactiver) les couches qui répondront à l'outil d'identification (voir le paragraphe sur les outils de la carte dans la section \ref{subsec:gui_options}).
 \end{itemize}
 
-\subsection{Sauvegarder l'affichage}\label{sec:output}\index{output!save as image!print composer!quick print}
+\section{Sauvegarder l'affichage}\label{sec:output}\index{output!save as image!print composer!quick print}
 Il y a plusieurs façons d'enregistrer un fichier depuis votre session. Nous en avons déjà vu une dans la section \ref{sec:projects} : sauvegarder dans un fichier de projet.
 Voici d'autres manières de procéder à l'enregistrement de fichiers :
-\begin{itemize}
+\begin{itemize}[label=--]
 \item Menu option \dropmenuopttwo{mActionSaveMapAsImage}{Sauvagarder comme une Image} ouvre une fenêtre de dialogue où vous devez saisir le nom, le chemin et le type d'images (PNG ou JPEG). Depuis la version 1.1.0, un fichier "world" avec une extension PNGW ou JPGW est enregistré dans le même dossier que l'image géoréférencée.
 \item Menu option \dropmenuopttwo{mActionFilePrint}{Paramètrage de l'impression} ouvre une fenêtre de dialogue où vous pouvez faire une mise en page et imprimer la vue active de la carte (voir Section~\ref{label_printcomposer}).
 \end{itemize}
 
-\subsection{Options d'affichage}\label{subsec:gui_options}
+\section{Options d'affichage}\label{subsec:gui_options}
 \includegraphics[width=0.7cm,clip=true]{mActionOptions} 
 Quelques options basiques peuvent être sélectionnés en allant dans le menu \mainmenuopt{Préférences} >
 \dropmenuopttwo{mActionOptions}{Options}. Les onglets dans lesquels vous pouvez configurer les options sont :
 
 \minisec{Onglet Général}
 
-\begin{itemize}
+\begin{itemize}[label=--]
 \item \checkbox{Demander à sauvegarder les changements apportés au projet si requis}
 \item \checkbox{M'avertir lors de l'ouverture d'un fichier projet sauvegardé avec une version précédente de QGIS}
 \item \checkbox{Changer la couleur de la sélection du fond d'écran}
@@ -625,7 +626,7 @@ Quelques options basiques peuvent être sélectionnés en allant dans le menu \m
 
 \minisec{Onglet de Rendu}
 
-\begin{itemize}
+\begin{itemize}[label=--]
 \item \checkbox{par défaut les couches supplémentaires sont affichées}
 \item Définir le nombre d'entités à dessiner avant d'actualiser l'affichage.
 \item \checkbox{Les lignes semblent moins déchiquetées aux dépens d'une certaine vitesse d'exécution}
@@ -635,7 +636,7 @@ Quelques options basiques peuvent être sélectionnés en allant dans le menu \m
 
 \minisec{Onglet des Outils Cartographiques}
 
-\begin{itemize}
+\begin{itemize}[label=--]
 \item Spécifier le rayon de recherche comme pourcentage de la largeur de la carte)
 \item Définir l'ellipsoïde pour des calculs de distance
 \item Définir la couleur de l'étirement pour les outils de mesure
@@ -651,19 +652,19 @@ Quelques options basiques peuvent être sélectionnés en allant dans le menu \m
 
 \minisec{Onglet de Numérisation}
 
-\begin{itemize}
+\begin{itemize}[label=--]
 \item Définir la couleur et la largeur de la ligne d'étirement
 \item Définir le mode d'accrochage par défaut (à un vertex, un segment, aux vertex et segments)
 \item Définir la tolérance d'accrochage par défaut (en unités de la couche) 
 \item Définir le rayon de recherche pour l'édition des sommets (en unités de la couche) 
 \item Définir les marqueurs de sommet (croix ou cercle semi-transparent)
-\item \checkbox{Montrer les marqueurs seulement pour les entités sélectionnées
+\item \checkbox{Montrer les marqueurs seulement pour les entités sélectionnées}
 \item \checkbox{Supprimer la fenêtre d'attributs apparaissant après chaque création d'entité}
 \end{itemize}
 
 \minisec{Onglet de SCR}
 
-\begin{itemize}
+\begin{itemize}[label=--]
 \item \checkbox{Demander pour le Système de Coordonnées de Référence (SCR)}
 \item \checkbox{La projection globale par défaut du projet qui sera employée. }
 \item \checkbox{La projection par défaut ci-dessous sera employée. }
@@ -672,14 +673,14 @@ Quelques options basiques peuvent être sélectionnés en allant dans le menu \m
 
 \minisec{Onglet de Paramètres du lieu}
 
-\begin{itemize}
+\begin{itemize}[label=--]
 \item \checkbox{Forcer la nationalité du système}
 \item Paramètres de lieu sur votre système 
 \end{itemize}
 
 \minisec{Onglet Proxy}
 
-\begin{itemize}
+\begin{itemize}[label=--]
 \item \checkbox{Utiliser un proxy pour l'accès internet}, définition de l'hôte, du port, de l'utilisateur et du mot de passe.
 \item Modifiez le \dropmenuopt{type de Proxy} selon vos besoins
  \begin{itemize}
@@ -689,7 +690,7 @@ Quelques options basiques peuvent être sélectionnés en allant dans le menu \m
   \item \dropmenuopt{HttpCachingProxy}: utilise les commandes normales HTTP, c'est utile uniquement dans le contexte de requête HTTP.
   \item \dropmenuopt{FtpCachingProxy}: utilise un proxy FTP, ce n'est utile que dans le cas de requête FTP.
 \end{itemize}
-
+\end{itemize}
 L'exclusion d'adresses peut être ajoutée dans la boîte de texte en dessous des paramètres de proxy (voir fig. \ref{fig:proxy-settings}) en pressant le bouton \button{Ajouter}. Ensuite double-cliquer sur l'URL nouvellement créée est entrer l'adresse que vous voudriez exclure du proxy. Le bouton \button{Supprimer} efface l'entrée sélectionnée.
 
 Si vous désirez des informations plus détaillées sur les différents paramètres, veuillez vous référer au manuel de la bibliothèque Qt à \url{http://doc.trolltech.com/4.5/qnetworkproxy.html#ProxyType-enum}.
@@ -702,15 +703,14 @@ Si vous désirez des informations plus détaillées sur les différents paramèt
 \end{center} 
 \end{figure}
 
-\begin{Tip} \caption{\textsc{Using Proxies}}
-\qgistip{Using proxies can sometimes be tricky. It is useful to 'trial and
+\begin{Astuce} \caption{\textsc{Using Proxies}}
+Using proxies can sometimes be tricky. It is useful to 'trial and
 error' the above proxy types and check if they succeed in your case.
-}
-\end{Tip}
+\end{Astuce}
 
 Vous pouvez modifier ces options selon vos besoins, certains de ces changements nécessiteront un redémarrage avant d'être effectifs.
 
-\begin{itemize}
+\begin{itemize}[label=--]
 \item \nix{les paramètres sont enregistrés dans un fichier texte: \$HOME/.config/QuantumGIS/qgis.conf}
 \item \osx{les paramètres sont enregistrés dans: \$HOME/Library/Preferences/org.qgis.qgis.plist}
 \item \win{les paramètres sont enregistrés dans le registre sous:}
@@ -719,13 +719,13 @@ Vous pouvez modifier ces options selon vos besoins, certains de ces changements 
 \end{verbatim}
 \end{itemize}
 
-\subsection{Signets spatiaux}\label{sec:bookmarks}
+\section{Signets spatiaux}\label{sec:bookmarks}
 \index{bookmarks}
 \index{spatial bookmarks|\see{bookmarks}}
 
 Les signets spatiaux vous permettent de marquer une zone de la carte pour y retourner plus tard.
 
-\subsubsection{Créer un signet}
+\subsection{Créer un signet}
 Pour créer un signet :
 \begin{enumerate}
 \item Déplacez-vous sur la zone concernée
@@ -736,14 +736,14 @@ Pour créer un signet :
 
 Vous pouvez avoir plusieurs signets portant le même nom.
 
-\subsubsection{Travailler avec les signets}
+\subsection{Travailler avec les signets}
 Pour utiliser ou gérer les signets allez dans le menu \mainmenuopt{Vue} > \dropmenuopt{Montrer les signets}.
 Le dialogue \dialog{Signets géospatiaux} vous permet de zoomer ou d'effacer un signet.
 Vous ne pouvez pas modifier le nom d'un signet ou ses coordonnées.
 
-\subsubsection{Zoomer sur un signet}
+\subsection{Zoomer sur un signet}
 Depuis la fenêtre \dialog{Signets géospatiaux}, sélectionner le signet voulu en cliquant dessus puis sur le bouton \button{Zoomer sur}. Vous pouvez aussi zoomer en opérant un double-clic.
 
-\subsubsection{Effacer un signet}
+\subsection{Effacer un signet}
 Pour effacer un signet depuis la fenêtre \dialog{Signets géospatiaux}, cliquez dessus puis sur le bouton \button{Effacer}.
 Confirmez votre choix en cliquant sur \button{Oui} ou annuler en cliquant sur \button{Non}.

@@ -1,352 +1,6 @@
-% vim: set textwidth=78 autoindent:
-%%%%%%%%%%%%%%%%8%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% This is a collection of macros to maintain a uniform style throughout
-% the user guide.
-% Many of the styles are intended to mimic the appearance of the GUI.
-% In general, the objective is to use the non-hover appearance, so a user
-% can visually scan the GUI to find something that looks like the instruction
-% in the user guide.
-% Text styles related to coding are used to indicate different kinds of
-% entities, such as classes, methods, etc, and therefore don't correspond to
-% any actual appearance.
-%
-% TEXT STYLES
-% These styles change the text appearance but don't add any shadow boxes
-% and should be used to refer to non-GUI text (command line, code)
-% or non-clickable GUI text (labels).
-%
-% usertext
-% generic style for text that the user should type in from the keyboard
-% Note: for user input into a labelled text field in the GUI, see \inputtext
-% usage: \usertext{qgis ---help}
-\newcommand{\usertext}[1]{\texttt{#1}}
-%
-% filename
-% usage: \filename{lakes.shp}
-\newcommand{\filename}[1]{\texttt{#1}}
-%
-% server
-% usage: \server{myhost.de}
-\newcommand{\server}[1]{\textit{#1}}
-% keystroke
-% style for user input by individual keystrokes
-% usage: \keystroke{p}, \keystroke{Ctrl+B}
-\newcommand{\keystroke}[1]{\cornersize{.6}\ovalbox{\textsf{#1}}}
-%
-% guilabel
-% generic style for text that appears in the GUI
-% usage
-\newcommand{\guilabel}[1]{\textsf{#1}}
-%
-% guiheading
-% style for section heading that appear in dialog boxes
-% such as Vector Layer Properties > metadata
-% usage
-\newcommand{\guiheading}[1]{\textsf{#1}}
-%
-% dialog
-% usage: \dialog{Layer Properties}
-\newcommand{\dialog}[1]{
-\fcolorbox{gray}[rgb]{.95,.95,0.8}{%
-\textbf{\textcolor{black}{#1}}}}
-%
-% Here are some styles for use only when discussing Python coding
-% classname
-% usage: \classname{NewLayer}
-\newcommand{\classname}[1]{\textsf{\textbf{#1}}}
-%
-% object
-% usage
-\newcommand{\object}[1]{\textsf{\textit{#1}}}
-%
-% method
-% usage: \method{classFactory}
-\newcommand{\method}[1]{\textsf{\textit{#1}}}
-%
-% fieldname: part of the set intend to be used to describe Python coding.
-% So "field" in this case refers to data members of a class or object, not 
-% a "field" from a table or database.
-% I have commented out this macro, because it wasn't actually used in the 
-% creating_applications section.
-% For "fields" from a table or database, use one of the following
-% 1. When the field name is something a user should type in, use \usertext
-% 2. When the field name is something that the user will see in the GUI, but not 
-% click on, use \guilabel
-% 3. When the field name is something that the user will select from a selection 
-% field, use \selectstring. This requires two parameters, one for the 
-% label, the other for the selected text.
-%\newcommand{\fieldname}[1]{\textsl{#1}}% 
-
-%
-% ??? these styles are from Gary: use only in 
-%\newcommand{\sqltable}[1]{\textsf{\textbf{#1}}}
-
-
-% CLICKABLE STYLES
-% These styles add a shadow box to indicate the user can click on something
-% this command sets the shadow size for the entire document
-\setlength{\shadowsize}{2pt}%
-
-% button: for any button that only has text, no icon
-% usage: \button{Save as Default}
-\newcommand{\button}[1]{%
-\raisebox{-6pt}{%
-\shadowbox{\guilabel{#1}}
-}}
-% mainmenuopt: for the top level menus such as File
-% usage: \mainmenuopt{Layer}
-\newcommand{\mainmenuopt}[1]{%
-\raisebox{-6pt}{%
-\setlength{\fboxsep}{0pt}%
-\shadowbox{\setlength{\fboxsep}{2pt}%
-\fcolorbox[gray]{0.9}[gray]{0.9}%
-{\guilabel{#1}}%
-}}}
-% dropmenuopt: for dropdown menu items with no icon
-% usage: \mainmenuopt{View} > \dropmenuopt{Toolbar Visibility}
-\newcommand{\dropmenuopt}[1]{%
-\raisebox{-6pt}{{%
-\setlength{\fboxsep}{0pt}%
-\shadowbox{\setlength{\fboxsep}{2pt}%
-\fcolorbox[rgb]{.95,.95,0.8}[rgb]{.95,.95,0.8}%
-{ \guilabel{#1}}}%
-}}}
-% dropmenucheck: for dropdown menu checkboxes
-% usage: \mainmenuopt{View} > \dropmenucheck{Legend}
-\newcommand{\dropmenucheck}[1]{%
-\raisebox{-6pt}{{%
-\setlength{\fboxsep}{0pt}%
-\shadowbox{\setlength{\fboxsep}{2pt}%
-\fcolorbox[rgb]{.95,.95,0.8}[rgb]{.95,.95,0.8}%
-{ $\boxtimes$ \guilabel{#1}}}%
-}}}
-% dropmenuopttwo: for dropdown menu items with icons
-% usage: \mainmenuopt{Layer} > 
-% \dropmenuopttwo{mActionAddRasterLayer}{Add a Raster Layer}
-\newcommand{\dropmenuopttwo}[2]{%
-\raisebox{-6pt}{%
-{%
-\setlength{\fboxsep}{0pt}%
-\shadowbox{\setlength{\fboxsep}{2pt}%
-\fcolorbox[rgb]{.95,.95,0.8}[rgb]{.95,.95,0.8}%
-{\includegraphics[width=3mm]{#1} \guilabel{#2}}}%
-}}}
-% tooltip: for the tooltip that appears when hovering on a tool button
-% usage
-\newcommand{\tooltip}[1]{%
-\raisebox{-2pt}{%
-\fcolorbox{black}[rgb]{1,1,0.8}{\guilabel{#1}}%
-}}
-% toolbtntwo: for toolbar items
-%usage: \toolbtntwo{mActionAddRasterLayer}{Add a Raster Layer}
-%
-\newcommand{\toolbtntwo}[2]{%
-\raisebox{-6pt}{%
-\shadowbox{\includegraphics[width=7mm]{#1}}} %
-\tooltip{#2}%
-}
-%\toolbox
-%Used only for menu items (modules) in the GRASS toolbox. 
-%These icons may use 1 or more 
-%images, and so require different numbers of arguments.
-% \toolboxtwo takes two arguments: one image name and a text label, and so on.
-%The images have names like nviz.1.eps.
-%This naming convention, or something like it, is required because some modules
-%require a set of images to represent them, indicating for example, the
-%starting format and the ending format of a conversion module. When
-%referring to these images in the latex source, it is necessary to
-%include the .eps extension, otherwise the \includegraphics macro looks
-%for nviz.1 and can't find it. 
-% toolboxtwo
-% usage: \toolboxtwo{nviz.1.eps}{nviz - Open 3D-View in NVIZ}
-\newcommand{\toolboxtwo}[2]{%
-\raisebox{-6pt}{%
-\shadowbox{%
-\raisebox{-2pt}{\includegraphics[width=5mm]{#1}}%
-\guilabel{ #2}%
-}}}
-% toolboxthree
-% usage: two icons are used to describe a transformation
-%\toolboxthree{r.in.gdal.1.eps}{r.in.gdal.2.eps}%
-%{r.in.gdal - Import GDAL supported raster file
-%into a binary raster map layer}%
-\newcommand{\toolboxthree}[3]{%
-\raisebox{-6pt}{%
-\shadowbox{%
-\includegraphics[width=5mm]{#1}%
-->%
-\includegraphics[width=5mm]{#2}%
- \guilabel{#3}%
-}}}
-% toolboxfour
-% usage: similar to toolboxthree, but two kinds of inputs
-% are combined to create a third
-\newcommand{\toolboxfour}[4]{%
-\raisebox{-6pt}{%
-\shadowbox{%
-\includegraphics[width=5mm]{#1}%
-+%
-\includegraphics[width=5mm]{#2}%
-->%
-\includegraphics[width=5mm]{#3}%
- \guilabel{#4}%
-}}}
-
-% tab: for tabs in dialog boxes
-% usage: \tab{General}
-\newcommand{\tab}[1]{%
-\raisebox{-6pt}{%
-\shadowbox{\guilabel{#1}}
-}}
-% checkbox: for checkboxes in dialog boxes
-% usage: \checkbox{Render}
-\newcommand{\checkbox}[1]{%
-\raisebox{2pt}{%
-\fbox{%
-\raisebox{-4pt}{%
-\shadowbox{x}} %
-\guilabel{#1}}%
-}}
-% radiobuttonoff: to indicate a radiobutton in the off state
-% usage: \radiobuttonon{Postgis SRID} \radiobuttonoff{EPSG ID}
-\newcommand{\radiobuttonoff}[1]{%
-\raisebox{-4pt}{%
-\setlength{\fboxsep}{1pt}%
-\shadowbox{%
-$\bigcirc$%$
-}} %
-\guilabel{#1}%
-}
-% radiobuttonon: to indicate a radiobutton in the on state
-% usage: \radiobuttonon{Postgis SRID} \radiobuttonoff{EPSG ID}
-\newcommand{\radiobuttonon}[1]{%
-$\odot$ %$
-\guilabel{#1}%
-}
-% selectnumber: a selection field with numerical values
-% usage: \selectnumber{Hue}{60}
-\newcommand{\selectnumber}[2]{%
-\fbox{%
-{#1} \fbox{{#2} %
-\raisebox{-6pt}{%
-\setlength{\fboxsep}{1pt}%
-\shadowbox{%
-${\blacktriangle}\atop{\blacktriangledown}$%$
-}}}}}
-%
-% selectstring: a selection field with string values
-% usage: \selectstring{Outline style}{---Solid Line}
-\newcommand{\selectstring}[2]{%
-\fbox{%
-\guilabel{#1} \fbox{\guilabel{#2} %
-\raisebox{-2pt}{%
-\setlength{\fboxsep}{1pt}%
-\shadowbox{%
-$\blacktriangledown$%$
-}}}}}
-%
-% browsebutton: a button with 3 dots, used to browse for files
-% usage: \browsebutton
-\newcommand{\browsebutton}{%
-\raisebox{-6pt}{%
-\shadowbox{\rule[-1mm]{0mm}{4mm}{$\ldots$}}
-}}
-%
-% selectcolor: a selection field for colors
-% usage: \selectcolor{Outline color}{yellow}
-\newcommand{\selectcolor}[2]{%
-\fbox{\guilabel{#1} %
-\raisebox{-6pt}{%
-\setlength{\fboxsep}{0pt}%
-\shadowbox{\setlength{\fboxsep}{2pt}%
-\fcolorbox{#2}{#2}{\rule{0mm}{5mm}\rule{35mm}{0mm}%
-}}}}}
-%
-% slider: these appear in several dialog boxes
-% usage: \slider{Transparency}{0}{20mm}
-\newcommand{\slider}[3]{%
-\fbox{%
-\guilabel{#1} \guilabel{#2}\% %
-\raisebox{-2pt}{%
-\setlength{\fboxsep}{1pt}%
-\shadowbox{%
-$\triangledown$%
-}}%$
-\negthinspace\rule[1mm]{20mm}{1mm}
-}}
-%
-% input text: a labelled field in a dialog box where the user types in text
-% usage: \inputtext{Display Name}{lakes.shp}
-\newcommand{\inputtext}[2]{%
-\fbox{%
-\guilabel{#1} %
-\raisebox{-6pt}{%
-\shadowbox{\usertext{#2}}%
-}}}
-%
-% clicklistitem: clickable list item in a dialog box
-% the actual text in the list item will depend on the application
-% usage: \clicklistitem{Canadian Land}
-\newcommand{\clicklistitem}[1]{%
-\raisebox{-6pt}{%
-\shadowbox{\guilabel{#1}}
-}}
-
-% NON-CLICKABLE IMAGE STYLES
-% These styles insert images to indicate platform-specific documentation
-% usage:
-% inline usage: for GUI sequences and short text
-% Click \{\nix{}\win{File} \osx{QGIS}\} > Quit to close QGIS.
-% itemized usage: for moderate amounts of text
-%\begin{itemize}
-%\item \nix{do this;} 
-%\item \win{do that;} 
-%\item \osx{do something else.}
-%\end{itemize}
-% paragrahs usage: for larger amounts of text
-%
-%\nix{}Do this and this and this. Then do this
-%and this and this
-%and this and this
-%and this and this
-%and this and this.
-%
-%Note: on OSX the following commands differ from *NIX and Windows
-%- options dialog is called preferences and is found under
-% QGIS->Preferences and the shortcut will always be Command , (command
-% comma)
-%- What is usually the Help->about dialog will always be QGIS->About qgis
-%- File->Quit will always be QGIS->Quit qgis and the keyboard
-% shortcut should always be Command Q
-%- Colour, font and file dialogs will have differences between platforms
-%- if other differences are discovered, please add here
-\newcommand{\nix}[1]{\includegraphics[bb=0 0 120 141, height=5mm]{nix.png} #1}
-\newcommand{\win}[1]{\includegraphics[bb=0 0 69 59, height=5mm]{win.png} #1}
-\newcommand{\osx}[1]{\includegraphics[bb=0 0 50 60, height=5mm]{osx.png} #1}
-%
-% add operation system icons to figure \caption
-% usage: \caption{Text \wincaption}
-\newcommand{\nixcaption}{\protect\includegraphics[bb=0 0 120 141, height=4mm]{nix.png}}
-\newcommand{\wincaption}{\protect\includegraphics[bb=0 0 69 59, height=4mm]{win.png}}
-\newcommand{\osxcaption}{\protect\includegraphics[bb=0 0 50 60, height=4mm]{osx.png}}
-
-
-% OTHER STYLES
-% some styles for the Qt GUI- these are placeholders at present
-\newcommand{\qtmainmenuopt}[1]{\textsf{#1}}
-\newcommand{\qtdropmenuopt}[1]{\textsf{#1}}
-\newcommand{\qtdialog}[1]{\textsf{#1}}
-
- 
-% These styles were used in an earlier version and should not be used anymore
-%\toolbox: use \toolboxtwo instead
-%\newcommand{\toolbox}[2]{%
-%\toolboxtwo{#1}{#2}%
-%}
-
-%
-\subsection{Conventions}\label{label_conventions}
+%  !TeX  root  =  user_guide.tex  
+\newpage
+\addsec{Conventions}\label{label_conventions}
 
 Cette section décrit les symboles qui ponctuent ce manuel, les conventions graphiques sont les suivantes
 
@@ -354,118 +8,72 @@ Cette section décrit les symboles qui ponctuent ce manuel, les conventions grap
 
 Les styles de conventions de l'interface (GUI) dans le texte ressemblent autant que possible à l'apparence du logiciel, l'objectif étant de permettre à l'utilisateur de repérer plus facilement les éléments mentionnés dans les instructions.
 
-\begin{itemize}
-%
-%Use \mainmenuopt for main menu items that have no icon only text
-%Main Menu includes: File, View, Layer, Settings, Plugins, Help
-% \item Menu Options: \mainmenuopt{Layer} > %
-\item Options du menu: \mainmenuopt{Layer} > %
-%
-%Use \dropmenuopttwo for a drop-down menu item with an icon
-%Use \dropmenuoptone for a drop-down menu item with no icon 
-% \dropmenuopttwo{mActionAddRasterLayer}{Add a Raster Layer}
-% 
-% or
-% 
-% \mainmenuopt{Settings} > %
-% \dropmenuopt{Toolbars} > \dropmenucheck{Digitizing}
+\begin{itemize}[label=--,itemsep=5pt]
+\item Options du menu: \mainmenuopt{Layer} \fleche %
 \dropmenuopttwo{mActionAddRasterLayer.png}{Ajouter une couche raster}
 
 ou
 
-\mainmenuopt{Préférences} > %
-\dropmenuopt{Barre d'outils} > \dropmenucheck{Numérisation}
-%
-%Use \toolbtntwo for the toolbar items, including those that open dialogs
-%These have an icon, and display a tooltip on hover
-%Its really important to get the icon in there because that's what a user
-%has to search for. The tooltip adds confirmation
-% \item Tool: \toolbtntwo{mActionAddRasterLayer}{Add a Raster Layer}
+\mainmenuopt{Préférences} \fleche %
+\dropmenuopt{Barre d'outils} \fleche \dropmenucheck{Numérisation}
 \item Outil : \toolbtntwo{mActionAddRasterLayer.png}{Ajouter une couche raster}
-%
-%Use \button for a clickable button which has no icon, just text
-%Save As Default is a button that appears in the Layer Properties dialog.
-% \item Button: \button{Save as Default}
 \item Bouton : \button{Sauvegarder par défaut}
-%
-%
-%Use \dialog for the title of a dialog box
-%such as the Layer Properties dialog.
-%Please use the exact title as it appears in the GUI.
-% \item Dialog Box Title: \dialog{Layer Properties}
 \item Titre de boîte de dialogue : \dialog{Propriétés de la couche}
-%
-%Use \tab for clickable tabs which have no icons, just text
-%General is a tab that appears in the Layer Properties dialog.
-%At the moment, it looks just like \button, but that may change.
-% \item Tab: \tab{General}
 \item Panneau : \tab{Général}
-%
-%Use \toolboxtwo, \toolboxthree or \toolboxfour
-% for GRASS toolbox (not toolbar) items
-%These are what you see in the menu after you click Open GRASS Tools
-%The one you need depends on how many icons are required
-%The number part of the name is the total number of arguments (N)
-%The number of icons is (N-1)
+
 % \item Toolbox Item: \toolboxtwo{nviz.1.eps}{nviz - Open 3D-View in NVIZ}
-\item Objet de boîte d'outils : \toolboxtwo{nviz.png}{nviz - Open 3D-View in NVIZ}
-%
-%Use \checkbox for a checkbox item in a dialog popup
-% \item Checkbox: \checkbox{Render}
+% 
+% 
+% je n'ai pas l'image nviz.png donc j'ai mis un tux
+% 
+% 
+% 
+\item Objet de boîte d'outils : \toolboxtwo{nix}{nviz - Open 3D-View in NVIZ} 
 \item Case à cocher : \checkbox{Rendu}
-%
-%Use \radiobuttonoff for a radio button item in a dialog popup
-% \item Radio Button:  \radiobuttonon{Postgis SRID} \radiobuttonoff{EPSG ID}
 \item Bouton radio :  \radiobuttonon{Postgis SRID} \radiobuttonoff{EPSG ID}
+
+
+%%%%%%%%%%%%%%%%
+%%%%					%%%
+%%%%		A faire		%%%
+%%%%					%%%
+%%%%%%%%%%%%%%%%
+
+
+%\item Sélection d'un chiffre : \selectnumber{Halo}{60}
 %
-% Use \selectnumber for a selection box with up and down arrows
-% and a numerical value
-% \item Select a Number: \selectnumber{Hue}{60}
-\item Sélection d'un chiffre : \selectnumber{Halo}{60}
 %
-% Use \selectstring for a selection box with down arrows
-% and a string value
-% \item Select a String: \selectstring{Outline style}{---Solid Line}
-\item Sélection d'une ligne : \selectstring{Style de bordure externe}{--- Ligne solide}
-%
-%
-% Use \browsebutton for a button that opens a file browser popup
-% \item Browse for a File: \browsebutton 
-\item Parcourir un fichier : \browsebutton 
-%
-% Use \selectcolor for a button which opens a color selector popup
-% \item Select a Color: \selectcolor{Outline color}{yellow}
-\item Sélection d'une couleur : \selectcolor{Couleur de bordure externe}{yellow}
-%
-% \item Slider: \slider{Transparency}{0}{20mm}
-\item Barre coulissante : \slider{Transparence}{0}{20mm}
-%
-% Use \inputtext for a labelled field for user input of text 
-% \item Input Text: \inputtext{Display Name}{lakes.shp}
-% \end{itemize}
-% A shadow indicates a clickable GUI component.
-\item Zone de saisie de texte : \inputtext{Nom affiché}{lakes.shp}
+%%%%%
+%% Use \selectstring for a selection box with down arrows
+%% and a string value
+%% \item Select a String: \selectstring{Outline style}{---Solid Line}
+%\item Sélection d'une ligne : \selectstring{Style de bordure externe}{--- Ligne solide}
+%%
+%%
+%% Use \browsebutton for a button that opens a file browser popup
+%% \item Browse for a File: \browsebutton 
+%\item Parcourir un fichier : \browsebutton 
+%%
+%% Use \selectcolor for a button which opens a color selector popup
+%% \item Select a Color: \selectcolor{Outline color}{yellow}
+%\item Sélection d'une couleur : \selectcolor{Couleur de bordure externe}{yellow}
+%%
+%% \item Slider: \slider{Transparency}{0}{20mm}
+%\item Barre coulissante : \slider{Transparence}{0}{20mm}
+%%
+%% Use \inputtext for a labelled field for user input of text 
+%% \item Input Text: \inputtext{Display Name}{lakes.shp}
+%% \end{itemize}
+%% A shadow indicates a clickable GUI component.
+%\item Zone de saisie de texte : \inputtext{Nom affiché}{lakes.shp}
 \end{itemize}
 Une ombre indique un élément de l'interface qui peut être cliqué.
-
-% \minisec{Text or Keyboard Conventions}
-% 
-% The manual also includes styles related to text, keyboard commands and coding
-% to indicate different entities, such as classes, or methods. They don't
-% correspond to any actual appearance.
 
 \minisec{Conventions de texte ou de clavier}
 
 Le manuel se réfère aussi à des conventions pour le texte, les commandes du clavier et l'encodage pour définir les entités, les classes et les méthodes. Elles ne correspondent pas à l'apparence réelle.
 
-\begin{itemize}
-%
-%Use for all urls. Otherwise, it is not clickable in the document.
-% \item Hyperlinks: \url{http://qgis.org}
-% \item Single Keystroke: press \keystroke{p}
-% \item Keystroke Combinations: press \keystroke{Ctrl+B}, meaning press and
-% hold the Ctrl key and then press the B key.
-% \item Name of a File: \filename{lakes.shp}
+\begin{itemize}[label=--]
 \item Hyperliens : \url{http://qgis.org}
 \item Simple touche : appuyez sur \keystroke{p}
 \item Combinaisons de touches : appuyez sur \keystroke{Ctrl+B}, signifie qu'il faut rester en appui sur la touche Contrôle (Ctrl) tout en pressant la touche B.
@@ -478,58 +86,34 @@ Le manuel se réfère aussi à des conventions pour le texte, les commandes du c
 \item Méthode : \method{classFactory}
 \item Serveur : \server{myhost.de}
 %\item SQL Table: \sqltable{example needed here}    
-%
-%Use usertext for all other text that the user must enter from the keyboard
-%that is not covered by any of the above cases
-% \item User Text: \usertext{qgis ---help}
 \item Texte pour l'utilisateur : \usertext{qgis ---help}
 \end{itemize}
 
-% Code is indicated by a fixed-width font:
 Les codifications sont indiquées par une police à taille fixe :
 \begin{verbatim}
 PROJCS["NAD_1927_Albers",
   GEOGCS["GCS_North_American_1927",
 \end{verbatim}
 
-% \minisec{Platform-specific instructions}
-% 
-% GUI sequences and small amounts of text can be formatted inline: Click
-% \{\nix{}\win{File} \osx{QGIS}\} > Quit to close QGIS. This indicates that on
-% Linux, Unix and Windows platforms, click the File menu option first, then
-% Quit from the dropdown menu, while on Macintosh OSX platforms, click the QGIS
-% menu option first, then Quit from the dropdown menu. Larger amounts of text
-% may be formatted as a list:
-
 \minisec{Instructions spécifiques à une plateforme}
 
 GUI sequences and small amounts of text can be formatted inline: Clic
-\{\nix{}\win{Fichier} \osx{QGIS}\} > Quitter pour fermer QGIS. 
+\{\nix{}\win{Fichier} \osx{QGIS}\} \fleche Quitter pour fermer QGIS. 
 
 Cela indique que sous Windows, Linux et les plateformes Unix il faudra d'abord cliquer sur Fichier puis dans la liste déroulane sur Quitter, alors que sous Mac il faudra cliquer sur le menu Qgis. De grandes portions de textes peuvent être présentées en liste:
 
-\begin{itemize}
+\begin{itemize}[label=--]
 \item \nix{faites ceci ;}
 \item \win{faites cela ;}
 \item \osx{faites autre chose.}
 \end{itemize}
 
-% or as paragraphs.
-% 
-% \nix{} \osx{} Do this and this and this. Then do this and this and this
-% and this and this and this and this and this and this.
 ou comme des paragraphes:
 
 \nix{} \osx{} Faites ceci et cela. Puis cela et ceci, ensuite ceci et cela pour obtenire ceci et cela, etc. 
 
-% \win{}Do that. Then do that and that and that and that and that and that and
-% that and that and that and that and that and that and that and that and that.
-
 \win{}Faites ceci et cela. Puis cela et ceci, ensuite ceci et cela pour obtenire ceci et cela, etc. 
 
-% Screenshots that appear throughout the user guide have been created on
-% different platforms; the platform is indicated by the platform-specific icons
-% at the end of the figure caption.
 Les aperçus d'écrans ont été pris sous différentes plateformes, un icône à la fin de la légende de la figure indique le système en question.
 
 

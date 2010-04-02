@@ -1,40 +1,41 @@
-\section{Avant-propos}\label{label_forward}
-\pagenumbering{arabic}
-\setcounter{page}{1}
+%  !TeX  root  =  user_guide.tex  
+\mainmatter
+\addchap{Avant-propos}\label{label_forward}
 
-Bienvenue dans le monde merveilleux des Systèmes d'Information géographiques (SIG) ! Quantum GIS est un SIG libre qui a débuté en mai 2002 et s'est établi en tant que projet en juin 2002 sur SourceForge. Nous avons travaillé dur pour faire de ce logiciel SIG (qui sont traditionnellement des logiciels propriétaires assez coûteux) un choix viable pour toute personne ayant un ordinateur. QGIS est utilisable sur la majorité des Unix, Mac OS X et Windows. QGIS utilise la bibliothèque logicielle Qt 4 (\url{http://www.trolltech.com}) et le langage C++, ce qui ce traduit par une interface graphique simple et réactive.
 
-QGIS se veut simple à utiliser, fournissant des fonctionnalités courantes. Le but initial était de fournir un visualisateur de données SIG, QGIS a depuis atteint un stade dans son évolution où beaucoup y recourent pour leurs besoins journaliers. QGIS supporte un grand nombre de formats raster et vecteur, avec un support de nouveaux formats facilités par l'architecture des modules d'extension (lisez l'Annexe \ref{appdx_data_formats} pour une liste complète des formats actuellement supportés)
+Bienvenue dans le monde merveilleux des Systèmes d'Information géographiques (SIG) ! Quantum GIS est un SIG libre qui a débuté en mai 2002 et s'est établi en tant que projet en juin 2002 sur SourceForge. Nous avons travaillé dur pour faire de ce logiciel SIG (qui sont traditionnellement des logiciels propriétaires assez coûteux) un choix viable pour toute personne ayant un ordinateur. \qg est utilisable sur la majorité des Unix, Mac OS X et Windows. \qg utilise la bibliothèque logicielle Qt 4 (\url{http://www.trolltech.com}) et le langage C++, ce qui ce traduit par une interface graphique simple et réactive.
 
-QGIS est distribué sous la licence GPL. Ceci vous permet de pouvoir regarder et modifier le code source, tout en vous garantissant un accès à un programme SIG sans coût et librement modifiable. Vous devez avoir reçu une copie complète de la licence avec votre exemplaire de QGIS, vous la trouverez également dans l'Annexe \ref{gpl_appendix}.
+\qg se veut simple à utiliser, fournissant des fonctionnalités courantes. Le but initial était de fournir un visualisateur de données SIG, \qg a depuis atteint un stade dans son évolution où beaucoup y recourent pour leurs besoins journaliers. \qg supporte un grand nombre de formats raster et vecteur, avec un support de nouveaux formats facilités par l'architecture des modules d'extension (lisez l'Annexe \ref{appdx_data_formats} pour une liste complète des formats actuellement supportés)
+
+\qg est distribué sous la licence GPL. Ceci vous permet de pouvoir regarder et modifier le code source, tout en vous garantissant un accès à un programme SIG sans coût et librement modifiable. Vous devez avoir reçu une copie complète de la licence avec votre exemplaire de \qg, vous la trouverez également dans l'Annexe \ref{gpl_appendix}.
 
 \begin{Astuce}\caption{\textsc{Documentation à jour}}\index{documentation}
-\qgistip{La dernière version de ce document est disponible sur \url{http://download.osgeo.org/qgis/doc/manual/}, ou dans la section documentation du site de QGIS \url{http://qgis.osgeo.org/documentation/}
-}
+%\\qgtip{}
+La dernière version de ce document est disponible sur \url{http://download.osgeo.org/qgis/doc/manual/}, ou dans la section documentation du site de \qg \url{http://qgis.osgeo.org/documentation/}
 \end{Astuce}
 
-\subsection{Fonctionnalités}\label{label_majfeat}
+\addsec{Fonctionnalités}\label{label_majfeat}
 
-QGIS offre beaucoup d'outils SIG standards par défaut et via les extensions. Voici un bref résumé en six catégories qui vous donnera un premier aperçu.
+\qg offre beaucoup d'outils SIG standards par défaut et via les extensions. Voici un bref résumé en six catégories qui vous donnera un premier aperçu.
 
 \minisec{Visualiser des données}
 
 Vous pouvez afficher et superposer des couches de données rasters et vecteurs dans différents formats et projections sans avoir à faire de conversion dans un format commun. Les formats supportés incluent :
 
-\begin{itemize}
-\item les tables spatiales de PostgreSQL/PostGIS, les formats vecteurs supportés par la bibliothèque OGR installée, ce qui inclut les fichiers de forme ESRI (shapefiles), MapInfo, STDS et GML (voir l'Annexe \ref{appdx_ogr} pour la liste complète) .
+\begin{itemize}[label=--]
+\item les tables spatiales de \ppg, les formats vecteurs supportés par la bibliothèque OGR installée, ce qui inclut les fichiers de forme ESRI (shapefiles), MapInfo, STDS et GML (voir l'Annexe \ref{appdx_ogr} pour la liste complète) .
 \item les formats raster supportés par la bibliothèque GDAL (Geospatial Data Abstraction Library) tels que GeoTiff, Erads Img., ArcInfo Ascii Grid, JPEG, PNG (voir l'Annexe \ref{appdx_gdal} pour la liste complète).
 
 \item les formats raster et vecteur provenant des bases données GRASS. 
 \item les données spatiales provenant des services réseaux compatibles OGC comme le Web Map Service (WMS) ou le Web Feature Service (WFS).
-\end{itemize}
-\item les bases de données SpatiaLite (lire la section \ref{label_spatialite}) 
 
+\item les bases de données SpatiaLite (lire la section \ref{label_spatialite}) 
+\end{itemize}
 \minisec{Parcourir les données et créer des cartes} 
 
 Vous pouvez créer des cartes et les parcourir de manière interactive avec une interface abordable. Les outils disponibles dans l'interface sont :
 
-\begin{itemize}
+\begin{itemize}[label=--]
 \item projection à la volée
 \item créateur de carte
 \item panneau de navigation
@@ -50,58 +51,62 @@ Vous pouvez créer des cartes et les parcourir de manière interactive avec une 
 
 \minisec{Créer, éditer, gérer et exporter des données}
 
-Vous pouvez créer, éditer, gérer et exporter des données vecteur dans plusieurs formats. Les données raster doivent être importées dans GRASS pour pouvoir être éditées et exporter dans d'autres formats. QGIS permet ce qui suit :  
+Vous pouvez créer, éditer, gérer et exporter des données vecteur dans plusieurs formats. Les données raster doivent être importées dans GRASS pour pouvoir être éditées et exporter dans d'autres formats. \qg permet ce qui suit :  
 
-\begin{itemize}
+\begin{itemize}[label=--]
 \item outils de numérisation pour les formats d'OGR et les couches vecteurs de GRASS
 \item créer et éditer des fichiers de forme (shapefiles) et les couches vecteur de GRASS
 \item géocodifier des images avec l'extension de géoréférencement
 \item outils d'import/export du format GPX pour les données GPS, avec la conversion des autres formats GPS vers le GPX ou l'envoi/réception directement vers une unité GPS
-\item créer des couches PostGIS à partir de fichiers shapefiles avec l'extension SPIT
+\item créer des couches \pg à partir de fichiers shapefiles avec l'extension SPIT
 \item gérer les attributs de tables des couches vecteur grâce à l'extension de gestion des tables ou celle de tables attributaires (voir la section \ref{sec:attribute table})
 \item enregistrer des captures d'écran en tant qu'images géoréférencées
 \end{itemize}
 
 \minisec{Analyser les données} 
 
-Vous pouvez opérer des analyses spatiales sur des données PostgreSQL/PostGIS et autres formats OGR en utilisant l'extension ftools. QGIS permet actuellement l'analyse vectorielle, l'échantillonnage, la gestion de la géométrie et des bases de données. Vous pouvez aussi utiliser les outils GRASS intégrés qui comportent plus de 300 modules (voir la section \ref{sec:grass})
+Vous pouvez opérer des analyses spatiales sur des données \ppg et autres formats OGR en utilisant l'extension ftools. \qg permet actuellement l'analyse vectorielle, l'échantillonnage, la gestion de la géométrie et des bases de données. Vous pouvez aussi utiliser les outils GRASS intégrés qui comportent plus de 300 modules (voir la section \ref{sec:grass})
 
 \minisec{Publier une carte sur Internet}
 
-QGIS peut être employé pour exporter des données vers un mapfile et le publier sur Internet via un serveur web employant l'UMN MapServer. QGIS peut aussi servir de client WMS/WFS ou de serveur WMS.
+\qg peut être employé pour exporter des données vers un mapfile et le publier sur Internet via un serveur web employant l'UMN MapServer. \qg peut aussi servir de client WMS/WFS ou de serveur WMS.
 
-\minisec{Etendre les fonctionnalités de QGIS grâçe à des extensions} 
+\minisec{Étendre les fonctionnalités de \qg grâce à des extensions} 
 
-QGIS peut être adapté à vos besoins particuliers du fait de son architecture d'extensions. QGIS fournit des bibliothèques qui peuvent être employées pour créer des extensions, vous pouvez même créer de nouvelles applications en C++ ou python !
+\qg peut être adapté à vos besoins particuliers du fait de son architecture d'extensions. \qg fournit des bibliothèques qui peuvent être employées pour créer des extensions, vous pouvez même créer de nouvelles applications en C++ ou python !
 
-\begin{itemize}
+\begin{itemize}[label=--]
 \item \textbf{Extensions principales}
-\\  Ajouter une couche WFS 
-\\ Ajouter une couche de texte délimité
-\\ Capture de coordonnées
-\\ Décorations (Étiquette de droit d'auteur, flèche indiquant le nord et barre d'échelle)
-\\ Insertion de diagrammes
-\\ Georérérencement
-\\ fTools
-\\ Convertisseur Dxf2Shp 
-\\ Outils GPS 
-\\ Intégration de GRASS
-\\ Créateur de graticules
-\\ Extension d'interpolation
-\\ Convertisseur de couche OGR
-\\ Impression rapide
-\\ SPIT, outil d'importation de Shapefile vers PostgreSQL/PostGIS
-\\ Exportation vers Mapserver
-\\ Terminal Python
-\\ Installateur d'extensions Python
-\\ \item \textbf{Extensions Python}
-\\ QGIS offre un nombre croissant d'extensions complémentaires en Python fourni par la communauté. Ces extensions sont entreposées dans le répertoire PyQGIS et peuvent être facilement installées en utilisant l'extension d'installation Python (voir Section \ref{sec:extensions}).
+\begin{itemize}[label=,leftmargin=*]
+\item Ajouter une couche WFS 
+\item Ajouter une couche de texte délimité
+\item Capture de coordonnées
+\item Décorations (Étiquette de droit d'auteur, flèche indiquant le nord et barre d'échelle)
+\item Insertion de diagrammes
+\item Georérérencement
+\item fTools
+\item Convertisseur Dxf2Shp
+\item Outils GPS
+\item Intégration de GRASS
+\item Créateur de graticules
+\item Extension d'interpolation
+\item Convertisseur de couche OGR
+\item Impression rapide
+\item SPIT, outil d'importation de Shapefile vers \ppg
+\item Exportation vers Mapserver
+\item Terminal Python
+\item Installateur d'extensions Python
+\end{itemize}
+\item \textbf{Extensions Python}
+\begin{itemize}[label=,leftmargin=*]
+\item \qg offre un nombre croissant d'extensions complémentaires en Python fourni par la communauté. Ces extensions sont entreposées dans le répertoire Py\qg et peuvent être facilement installées en utilisant l'extension d'installation Python (voir Section \ref{sec:extensions}).
+\end{itemize}
 \end{itemize}
 
 \minisec{Quoi de neuf dans la version ~\CURRENT} 
 Voici les ajouts et améliorations les plus notables :
 
-\begin{itemize}
+\begin{itemize}[label=--]
 \item Amélioration significative de la vitesse de la table attributaire
 \item Barre avancée d'édition
 \item Configuration des raccourcis depuis la fenêtre principale
