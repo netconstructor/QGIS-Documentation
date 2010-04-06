@@ -14,7 +14,7 @@
 %%%%%%%%%%%%%%%%
 %%%   lien hypertext     %%%
 %%%%%%%%%%%%%%%%
-\usepackage[bookmarks=true, pdftitle={Guide utilisateur de QGIS}, pdfauthor={Projet QGIS}, pdfsubject={Guide utilisateur de QGIS}, breaklinks=true, colorlinks=true, linkcolor=violet]{hyperref}%,dvips
+\usepackage[bookmarks=true, pdftitle={Guide utilisateur de QGIS}, pdfauthor={Projet QGIS}, pdfsubject={Guide utilisateur de QGIS}, breaklinks=true, colorlinks=true, linkcolor=blue,urlcolor=red]{hyperref}%,dvips
 %%%%%%%%%%%%%%%%
 %%%   images               %%%
 %%%%%%%%%%%%%%%%
@@ -23,7 +23,7 @@
 \usepackage{graphicx}
 \usepackage{tikz}
 \usetikzlibrary{shadows} 
-\graphicspath{{./images/}{./operating_system_icons/}{./getting_started_screenies/}{./features_at_a_glance_screenies/}}
+\graphicspath{{./images/}{./operating_system_icons/}{./getting_started_screenies/}{./features_at_a_glance_screenies/}{./working_with_vector_screenies/}}
 \DeclareGraphicsExtensions{.png,.jpg,.pdf}
 %%%%%%%%%%%%%%%%
 %%%   mise en page      %%%
@@ -61,14 +61,25 @@
 \newfloat{Astuce}{ht}{toa}
 \floatname{Astuce}{Astuce QGIS}
 
-%%%%%%%%%%%%%%%%
+%une commande qui fait rien pour \qgistip dont je ne connais pas l'utilité
+\newcommand{\qgistip}[1]{#1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%   pour les symboles mathématiques      %%%
-%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{amssymb}
 \usepackage{pifont}
+%%%%%%%%%%%%%%%%%%
+%%%   pour les tableaux      %%%
+%%%%%%%%%%%%%%%%%%
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{colortbl}
+\newcolumntype{r}{>{\columncolor{gray!20}}l}
 
-
-
+%%%%%%%%%%%%%%%%%%
+%%%    pour le français       %%%
+%%%%%%%%%%%%%%%%%%
 \usepackage[frenchb]{babel} 
 \frenchbsetup{StandardLists=true} %car j'utilise enumitem pour gérer les listes
 
@@ -88,8 +99,10 @@
 \newcommand{\QG}{Quantum GIS\xspace}
 \newcommand{\pg}{PostGIS\xspace}
 \newcommand{\ppg}{PostgreSQL/PostGIS\xspace}
-
-
+\newcommand{\tux}{GNU/Linux\xspace}
+\newcommand{\mac}{Mac OS X\xspace}
+\newcommand{\mswin}{MS Windows\xspace}
+\newcommand{\grass}{GRASS\xspace}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%														%%%%
@@ -147,8 +160,8 @@
 %%% 	usage:  \dialog{Layer Properties}		%%%
 %%%%%%%%%%%%%%%%%%%%%%%%% %
 \newcommand{\dialog}[1]{
-\begin{tikzpicture}[line width=1pt,baseline=-3pt] 
-\draw (0,0) node[draw=black,rectangle,fill=gray!70]{\textbf{#1}};
+\begin{tikzpicture}[line width=0.5pt,baseline=-3pt] 
+\draw (0,0) node[draw=black,rectangle,fill=gray!50]{\textbf{#1}};
 \end{tikzpicture}
 }
 
@@ -166,8 +179,8 @@
 % tab: for tabs in dialog boxes
 % usage: \tab{General}
 \newcommand{\tab}[1]{%
-\begin{tikzpicture}[line width=1pt,baseline=-3pt] 
-\draw (0,0) node[draw=black,rectangle,top  color=gray!70,bottom  color=white]{#1};
+\begin{tikzpicture}[line width=0.5pt,baseline=-3pt] 
+\draw (0,0) node[draw=black,rectangle,top  color=gray!60,bottom  color=white]{#1};
 \end{tikzpicture}
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -186,16 +199,16 @@
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% 				selecttext				%%%
+%%% 				selecttext			%%%
 %%% 	 sélectionner un texte dans liste		%%%
-%%% 	usage:  \selecttext{Erdas Imagine}	%%%
+%%% 	usage:  \selectsting{Erdas Imagine}	%%%
 %%%%%%%%%%%%%%%%%%%%%%%%% %
-\newcommand{\selecttext}[1]{%
+\newcommand{\selectstring}[1]{%
 \begin{tikzpicture}[line width=1pt,baseline=-3pt] 
-\draw (0,0) node[rectangle,fill=gray!30,drop  shadow]{\guilabel#1\hspace{2cm}
+\draw (0,0) node[rectangle,fill=gray!30,drop  shadow]{\guilabel#1\hspace{.5cm}
 \begin{tikzpicture}[line width=1pt,baseline=4pt] 
 \draw[draw=gray!70] (0,0) -- (0,0.5);
-\end{tikzpicture}\
+\end{tikzpicture}
 \begin{tikzpicture}[scale=0.3]
 \draw[draw=black,line width=2pt,line join=round,line cap=round] (0,0.3) -- (0.5,0.6) -- (1,0.3);
 \draw[draw=black,line width=2pt,line join=round,line cap=round] (0,-0.3) -- (0.5,-0.6) -- (1,-0.3);
@@ -203,6 +216,24 @@
 \end{tikzpicture}
 }
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%	%%%%%%%%
+%%% 				\selectnumber					%%%
+%%% 	 sélectionner un chiffre							%%%
+%%%  selectnumber: a selection field with numerical values	%%%
+% usage: \selectnumber{Hue}{60}						%%%
+%%%%%%%%%%%%%%%%%%%%%%%%% %	%%%%%%%%
+\newcommand{\selectnumber}[2]{%
+\begin{tikzpicture}[line width=1pt,baseline=-3pt] 
+\draw (0,0) node[rectangle,fill=gray!30,drop  shadow]{\guilabel#1
+\begin{tikzpicture}[line width=1pt,baseline=-3pt] 
+\draw (0,0) node[fill=white]  {#2};
+\end{tikzpicture}
+\begin{tikzpicture}[scale=0.3]
+\draw[draw=black,line width=2pt,line join=round,line cap=round] (0,0.3) -- (0.5,0.6) -- (1,0.3);
+\draw[draw=black,line width=2pt,line join=round,line cap=round] (0,-0.3) -- (0.5,-0.6) -- (1,-0.3);
+\end{tikzpicture}};
+\end{tikzpicture}
+}
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% 				mainmenuopt			%%%
 %%% 	 menu principaux comme "Fichier"		%%%
@@ -210,7 +241,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%% %
 \newcommand{\mainmenuopt}[1]{%
 \begin{tikzpicture}[line width=0.5pt,baseline=-3pt] 
-\draw (0,0) node[draw=black,rectangle,top  color=gray,bottom  color=white,drop  shadow]{#1};
+\draw (0,0) node[draw=black,rectangle,top  color=gray!60,bottom  color=white,drop  shadow]{#1};
 \end{tikzpicture}
 }
 
@@ -221,7 +252,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%% %
 \newcommand{\button}[1]{%
 \begin{tikzpicture}[line width=0.5pt,baseline=-3pt,rounded corners=2pt] 
-\draw (0,0) node[draw=black,rectangle,top  color=gray,bottom  color=white,drop  shadow]{#1};
+\draw (0,0) node[draw=black,rectangle,top  color=gray!60,bottom  color=white,drop  shadow]{#1};
 \end{tikzpicture}
 }
 
@@ -264,7 +295,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%% %
 \newcommand{\dropmenuopt}[1]{%
 \begin{tikzpicture}[line width=0.5pt,baseline=-3pt] 
-\draw (0,0) node[draw=black,rectangle,top  color=gray,bottom  color=white,drop  shadow]{\guilabel{#1}\hspace{1cm}$\blacktriangleright$};
+\draw (0,0) node[draw=black,rectangle,top  color=gray!60,bottom  color=white,drop  shadow]{\guilabel{#1}\hspace{1cm}$\blacktriangleright$};
 \end{tikzpicture}
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -279,7 +310,7 @@
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\dropmenuopttwo}[2]{%
 \begin{tikzpicture}[line width=0.5pt,baseline=-3pt] 
-\draw (0,0) node[draw=black,rectangle,top  color=gray,bottom  color=white,drop  shadow]{\includegraphics[width=3mm]{#1} \guilabel{#2}};
+\draw (0,0) node[draw=black,rectangle,top  color=gray!60,bottom  color=white,drop  shadow]{\includegraphics[width=3mm]{#1} \guilabel{#2}};
 \end{tikzpicture}
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -289,7 +320,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%% %%%%%%%%
 \newcommand{\dropmenuoptthree}[2]{%
 \begin{tikzpicture}[line width=0.5pt,baseline=-3pt] 
-\draw (0,0) node[draw=black,rectangle,top  color=gray,bottom  color=white,drop  shadow]{\includegraphics[width=3mm]{#1} \guilabel{#2}\hspace{1cm}$\blacktriangleright$};
+\draw (0,0) node[draw=black,rectangle,top  color=gray!60,bottom  color=white,drop  shadow]{\includegraphics[width=3mm]{#1} \guilabel{#2}\hspace{1cm}$\blacktriangleright$};
 \end{tikzpicture}
 }
 %%%%%%%%%%%%%%%%%%
@@ -371,14 +402,4 @@
 \newcommand{\wincaption}{\protect\includegraphics[height=4mm]{win}}
 \newcommand{\osxcaption}{\protect\includegraphics[height=4mm]{osx}}
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%												%%%%
-%%%%%%%%			couleur								%%%%
-%%%%%%%%												%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\definecolor{bleuWin}{RGB}{218,243,253}
 
