@@ -1,44 +1,44 @@
 %  !TeX  root  =  user_guide.tex
 \chapter{Aperçu des fonctionnalités}\label{feature_glance}
 
-Après une première prise en main dans le chapitre \ref{label_getstarted}, nous allons maintenant vous donner un aperçu plus détaillé des fonctionnalités de QGIS. La plupart seront décrites plus précisément dans les chapitres qui leur sont dédiés dans la suite du manuel.
+Après une première prise en main dans le chapitre \ref{label_getstarted}, nous allons maintenant vous donner un aperçu plus détaillé des fonctionnalités de \qg. La plupart seront décrites plus précisément dans les chapitres qui leur sont dédiés dans la suite du manuel.
 
-\section{Démarrer et arrêter QGIS}\label{label_startinqgis}
+\section{Démarrer et arrêter \qg}\label{label_starting}
 
-Dans le chapitre \ref{samplesession} vous avez appris comment démarrer QGIS ? Nous allons le répéter ici et vous verrez que QGIS propose des options supplémentaires via la ligne de commande.
+Dans le chapitre \ref{samplesession} vous avez appris comment démarrer \qg ? Nous allons le répéter ici et vous verrez que \qg propose des options supplémentaires via la ligne de commande.
 
 \begin{itemize}[label=--]
-\item \nix{en présumant que QGIS est installé dans le PATH (chemin par défaut), vous pouvez le démarrez en tapant : \usertext{qgis}  dans une ligne de commande ou en cliquant sur l'icône de raccourci sur le bureau dans le menu des applications.} 
-\item \win{démarrez QGIS en utilisant le menu Démarrer, l'icône de raccourci présent sur le bureau ou encore, en cliquant sur un fichier de projet QGIS}
-\item \osx{double-cliquez sur l'icône de votre répertoire Applications. Si vous avez besoin d'exécuter QGIS dans une console, lancez avec \mbox{/chemin-vers-executable/Contents/MacOS/Qgis}.}
+\item \nix{en présumant que \qg est installé dans le PATH (chemin par défaut), vous pouvez le démarrez en tapant : \usertext{\qg}  dans une ligne de commande ou en cliquant sur l'icône de raccourci sur le bureau dans le menu des applications.} 
+\item \win{démarrez \qg en utilisant le menu Démarrer, l'icône de raccourci présent sur le bureau ou encore, en cliquant sur un fichier de projet \qg}
+\item \osx{double-cliquez sur l'icône de votre répertoire Applications. Si vous avez besoin d'exécuter \qg dans une console, lancez avec \mbox{/chemin-vers-executable/Contents/MacOS/\qg}.}
 \end{itemize} 
 
-Pour arrêter QGIS, cliquez sur le menu \{\nix{}\win{Fichier} \osx{QGIS}\} > Quitter, ou utilisez le raccourci clavier \keystroke{Ctrl+Q}.
+Pour arrêter \qg, cliquez sur le menu \{\nix{}\win{Fichier} \osx{\qg}\} > Quitter, ou utilisez le raccourci clavier \keystroke{Ctrl+Q}.
 
 \subsection{Options de ligne de commande}\index{command line options}
 \label{label_commandline}
 
-\nix QGIS supporte un certain nombre d'options lorsque démarrer en passant par la ligne de commande. Pour obtenir une liste de ces options, entrez dans votre console \usertext{qgis ---help}. Le message habituel qui en résulte est :
+\nix \qg supporte un certain nombre d'options lorsque démarrer en passant par la ligne de commande. Pour obtenir une liste de ces options, entrez dans votre console \usertext{\qg ---help}. Le message habituel qui en résulte est :
 
 \small
 \begin{verbatim}
-qgis --help
+\qg --help
 Quantum GIS - 1.3.0-Mimas 'Mimas' (exported)
-Quantum GIS (QGIS) est un visualisateur de données spatiales, raster ou vecteur.
-Usage: qgis [options] [FILES]
+Quantum GIS (\qg) est un visualisateur de données spatiales, raster ou vecteur.
+Usage: \qg [options] [FILES]
   options:
 		[--snapshot filename]           emit snapshot of loaded datasets to given file
 		[--width width]                 width of snapshot to emit
 		[--height height]               height of snapshot to emit
 		[--lang language]               use language for interface text
-		[--project projectfile]         load the given QGIS project
+		[--project projectfile]         load the given \qg project
 		[--extent xmin,ymin,xmax,ymax]  set initial map extent
 		[--nologo]                      hide splash screen
 		[--help]                        this text
 
   FILES:
     Files specified on the command line can include rasters,
-    vectors, and QGIS project files (.qgs):
+    vectors, and \qg project files (.qgs):
      1. Rasters - Supported formats include GeoTiff, DEM
         and others supported by GDAL
      2. Vectors - Supported formats include ESRI Shapefiles
@@ -48,19 +48,19 @@ Usage: qgis [options] [FILES]
 \normalsize
 
 \begin{Astuce} \caption{\textsc{Exemple utilisant des options de ligne de commande}}
-Vous pouvez démarrer QGIS en spécifiant un ou plusieurs fichiers de données. Par exemple, si vous êtes placé dans le répertoire qgis\_sample\_data vous pouvez démarrer QGIS avec une couche vecteur et un fichier raster dès le démarrage avec la commande suivante : 
-\usertext{qgis ./raster/landcover.img ./gml/lakes.gml}
+Vous pouvez démarrer \qg en spécifiant un ou plusieurs fichiers de données. Par exemple, si vous êtes placé dans le répertoire \qg\_sample\_data vous pouvez démarrer \qg avec une couche vecteur et un fichier raster dès le démarrage avec la commande suivante : 
+\usertext{\qg ./raster/landcover.img ./gml/lakes.gml}
 \end{Astuce}
 
 \minisec{Option \usertext{---snapshot}}
 Cette option permet de créer une capture d'écran de l'affichage courant au format PNG. C'est pratique quand vous avez une longue série de projets et que vous voulez générer un aperçu de vos données. L'image ainsi créée fait 800x600 pixels, un nom de fichier peut être ajouté après \usertext{---snapshot}. Cette commande peut être adapté en utilisant les arguments \usertext{---width} pour la largeur et \usertext{---height} pour la hauteur.
 
 \minisec{Option \usertext{---lang}}
-QGIS se base sur vos paramètres globaux pour définir la langue de l'interface. Si vous voulez en changer, vous devez le spécifier en saisissant un code. 
+\qg se base sur vos paramètres globaux pour définir la langue de l'interface. Si vous voulez en changer, vous devez le spécifier en saisissant un code. 
 Par exemple, \usertext{---lang=it} provoquera l'utilisation de la version italienne. Une liste des langues intégrées est visible à \url{http://wiki.qgis.org/qgiswiki/TranslatorsCorner}
 
 \minisec{Option \usertext{---project}}
-Démarrer QGIS avec un projet existant est possible, il suffit de rajouter cette option suivie du nom de votre projet et QGIS se lancera avec toutes les couches de ce fichier.
+Démarrer \qg avec un projet existant est possible, il suffit de rajouter cette option suivie du nom de votre projet et \qg se lancera avec toutes les couches de ce fichier.
 
 \minisec{Option \usertext{---extent}}
 Pour démarrer avec une étendue cartographique spécifique, utilisez cette option. Vous devez ajouter les limites de votre étendue dans l'ordre suivant en les séparant par une virgule :
@@ -69,17 +69,17 @@ Pour démarrer avec une étendue cartographique spécifique, utilisez cette opti
 \end{verbatim}
 
 \minisec{Option \usertext{---nologo}}
-Cette commande dissimule l'écran de démarrage qui apparaît lors du lancement de QGIS.
+Cette commande dissimule l'écran de démarrage qui apparaît lors du lancement de \qg.
 
-\section{Interface de QGIS}\index{fenêtre principale}
+\section{Interface de \qg}\index{fenêtre principale}
 \label{label_qgismainwindow}
 
-Quand QGIs démarre, l'interface se présente à vous sous la forme affichée Figure : \ref{fig:startup}, page \pageref{fig:startup} (les nombres de 1 à 6 se réfèrent aux six zones majeures de l'interface) :
+Quand \qg démarre, l'interface se présente à vous sous la forme affichée Figure : \ref{fig:startup}, page \pageref{fig:startup} (les nombres de 1 à 6 se réfèrent aux six zones majeures de l'interface) :
 
 \begin{figure}[ht]
    \begin{center}
    \includegraphics[clip=true, width=12cm]{startup}
-   \caption{Interface de QGIS avec les données d'essai de l'Alaska \nixcaption\\
+   \caption{Interface de \qg avec les données d'essai de l'Alaska \nixcaption\\
    Les numéros cerclés de jaune renvoient aux zones définies dans le texte.}
    \label{fig:startup}
 \end{center} 
@@ -101,284 +101,99 @@ Ces 6 composants sont décrits dans les sections suivantes.
 \subsection{Barre de Menu}\label{label_menubar}
 \index{menus}
 
-La barre de menu fournit un accès aux différentes fonctionnalités de QGIS par le biais de menus hiérarchiques. Le menu supérieur et un résumé de certaines options sont listés ci-dessous, avec les icônes des outils correspondants dans la barre d'outils et leurs raccourcis clavier.\footnote{Les raccourcis clavier peuvent maintenant être configurés manuellement (les raccourcis présentés dans cette section sont ceux par défaut) en utilisant l'outil Configurer les Raccourcis dans le menu Préférences.} Bien que les options de menu aient des outils qui leur correspondent et vice-versa, les menus ne sont pas organisés comme les barres d'outils. La barre contenant l'outil est affichée à la suite de chaque option de menu. Pour plus d'informations sur les outils et les barres d'outils, veuillez lire la section \ref{label_toolbars}.
+La barre de menu fournit un accès aux différentes fonctionnalités de \qg par le biais de menus hiérarchiques. Le menu supérieur et un résumé de certaines options sont listés ci-dessous, avec les icônes des outils correspondants dans la barre d'outils et leurs raccourcis clavier.\footnote{Les raccourcis clavier peuvent maintenant être configurés manuellement (les raccourcis présentés dans cette section sont ceux par défaut) en utilisant l'outil Configurer les Raccourcis dans le menu Préférences.} Bien que les options de menu aient des outils qui leur correspondent et vice-versa, les menus ne sont pas organisés comme les barres d'outils. La barre contenant l'outil est affichée à la suite de chaque option de menu. Pour plus d'informations sur les outils et les barres d'outils, veuillez lire la section \ref{label_toolbars}.
 
-\begin{tabbing}
-\hspace{5.5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
-\hspace{1cm} Option de menu \> Raccourci \> Réference \> Barre d'outils\\
-\end{tabbing}
+{\setlength{\extrarowheight}{10pt}
+\small
+\begin{longtable}{p{6cm} p{2cm} p{2.5cm} p{2.5cm}}
+Option de menu&Raccourci&Référence&Barre d'outils\\
+\endfirsthead
+Option de menu&Raccourci&Référence&Barre d'outils\\
+\endhead
+\multicolumn{4}{r}{Fichier}\\
+\dropmenuopttwo{mActionFileNew}{Nouveau Projet}&\keystroke{Ctrl+N}&voir Section \ref{sec:projects}&\dropmenucheck{Fichier}\\
+\dropmenuopttwo{mActionFileOpen}{Ouvrir le projet}&\keystroke{Ctrl+O}&voir Section \ref{sec:projects}&\dropmenucheck{Fichier}\\
+\dropmenuopt{Ouvrir un projet récent}& &voir Section \ref{sec:projects}&\\
+\dropmenuopttwo{mActionFileSave}{Sauvegarder le projet}&\keystroke{Ctrl+S}&voir Section \ref{sec:projects}&\dropmenucheck{Fichier}\\
+\dropmenuopttwo{mActionFileSaveAs}{Sauvegarder le projet sous}& \keystroke{Ctrl+Shift+S}&voir Section \ref{sec:projects}&\dropmenucheck{Fichier}\\
+\dropmenuopttwo{mActionSaveMapAsImage}{Sauvegarder comme Image}&&voir Section \ref{sec:output}&\\
+\dropmenuopttwo{mActionFilePrint}{Paramétrage de l'impression}& \keystroke{Ctrl+P}& voir Section \ref{label_printcomposer}&\dropmenucheck{Fichier}\\
+\dropmenuopttwo{mActionFileExit}{Quitter}& \keystroke{Ctrl+Q}&&\\
+&&&\\
+\multicolumn{4}{r}{Éditer}\\
+\dropmenuopttwo{mActionUndo}{Undo}&\keystroke{Ctrl+Z}&voir Section \ref{sec:edit_existing_layer}&\dropmenucheck{Digitizing}\\
+\dropmenuopttwo{mActionRedo}{Redo}&\keystroke{Ctrl+Shift+Z}& voir Section \ref{sec:edit_existing_layer}&\dropmenucheck{Digitizing}\\
+\dropmenuopttwo{mActionEditCut}{Couper Entités}& \keystroke{Ctrl+X}& voir Section \ref{sec:edit_existing_layer}& \dropmenucheck{Numérisation}\\
+\dropmenuopttwo{mActionEditCopy}{Copier Entités}& \keystroke{Ctrl+C}&voir Section \ref{sec:edit_existing_layer} &\dropmenucheck{Numérisation}\\
+\dropmenuopttwo{mActionEditPaste}{Coller Entités}& \keystroke{Ctrl+V}&voir Section \ref{sec:edit_existing_layer}&\dropmenucheck{Numérisation}\\
+\dropmenuopttwo{mActionCapturePoint}{Capturer le point}&\keystroke{.}&voir Section \ref{sec:edit_existing_layer}& \dropmenucheck{Numérisation}\\
+\dropmenuopttwo{mActionCaptureLine}{Capturer la Ligne}& \keystroke{/}& voir Section \ref{sec:edit_existing_layer}& \dropmenucheck{Numérisation}\\
+\dropmenuopttwo{mActionCapturePolygon}{Capturer le Polygone}&\keystroke{Ctrl+/}&voir Section \ref{sec:edit_existing_layer}&\dropmenucheck{Numérisation}\\
+Et les autres objets du menu d'édition&& voir Section \ref{sec:edit_existing_layer} & \dropmenucheck{Numérisation}\\
+\dropmenuopt{Deplacer l'entité}&&&\dropmenucheck{Éditer}\\
+\dropmenuopt{Couper entité}&&&\dropmenucheck{Éditer}\\
+\dropmenuopt{Effacer la selection}&&&\dropmenucheck{Éditer}\\
+\dropmenuopt{Ajouter un sommet}&&&\dropmenucheck{Éditer}\\
+\dropmenuopt{Déplacer un sommet}&&&\dropmenucheck{Éditer}\\
+\dropmenuopt{Effacer un sommet}&&& \dropmenucheck{Éditer}\\
+\dropmenuopt{Ajouter Anneau}\footnote{Nouveauté depuis la version 0.9}&&& \dropmenucheck{Éditer}\\
+\dropmenuopt{Ajouter Île}\footnotemark[\value{footnote}] &&&\dropmenucheck{Éditer}\\
+&&&\\
+\multicolumn{4}{r}{Vue}\\
+\dropmenuopttwo{mActionPan}{Se déplacer dans la carte}&&&\dropmenucheck{Navigation}\\
+\dropmenuopttwo{mActionZoomIn}{Zoom +}&\keystroke{Ctrl++}&&\dropmenucheck{Navigation}\\
+\dropmenuopttwo{mActionZoomOut}{Zoom -}& \keystroke{Ctrl+-}&&\dropmenucheck{Navigation}\\
+\dropmenuopttwo{mActionSelect}{Selectionner les entités}&&&\dropmenucheck{Attributs}\\
+\dropmenuopttwo{mActionIdentify}{Identifier les données}&\keystroke{I}&&\dropmenucheck{Attributs}\\
+\dropmenuopttwo{mActionMeasure}{Mesurer une Ligne}&\keystroke{M}&&\dropmenucheck{Attributs}\\
+\dropmenuopttwo{mActionMeasureArea}{Mesurer une Aire}&\keystroke{J}&&\dropmenucheck{Attributs}\\
+\dropmenuopttwo{mActionOpenTable}{Zoom Full}& \keystroke{F}&&\dropmenucheck{Navigation}\\
+\dropmenuopttwo{mActionZoomToLayer}{Zoom sur l'étendue}&&& \dropmenucheck{Navigation}\\
+\dropmenuopttwo{mActionZoomToSelected}{Zoom sur la sélection}&\keystroke{Ctrl+J}&&\dropmenucheck{Navigation}\\
+\dropmenuopttwo{mActionZoomLast}{Zoom precédent}&&&\dropmenucheck{Navigation}\\
+\dropmenuopt{Zoom taille réelle}&&&\\
+\dropmenuopttwo{mActionMapTips}{Infobulles}&&&\dropmenucheck{Attributes}\\
+\dropmenuopttwo{mActionNewBookmark}{Nouveau signet}& \keystroke{Ctrl+B}&voir Section \ref{sec:bookmarks} &\dropmenucheck{Attributes}\\
+\dropmenuopttwo{mActionShowBookmarks}{Montrer les signets}& \keystroke{B}&voir Section \ref{sec:bookmarks}& \dropmenucheck{Attributes}\\
+\dropmenuopttwo{mActionDraw}{Rafraîchir}&\keystroke{Ctrl+R}&&\dropmenucheck{Navigation}\\
+&&&\\
+\multicolumn{4}{r}{Couche}\\
+\dropmenuopttwo{mActionNewVectorLayer}{Nouvelle couche vecteur}&\keystroke{N}& voir Section \ref{sec:create shape}& \dropmenucheck{\scriptsize Gestion des couches}\\
+\dropmenuopttwo{mActionAddNonDbLayer}{Ajouter une couche vecteur}& \keystroke{V}&voir Section \ref{label_workingvector}&\dropmenucheck{Fichier}\\
+\dropmenuopttwo{mActionAddRasterLayer}{Ajouter une couche raster}& \keystroke{R}&voir Section \ref{label_raster}&\dropmenucheck{Fichier}\\
+\dropmenuopttwo{mActionAddLayer}{Ajouter une couche PostGIS}&\keystroke{D}&voir Section \ref{label_postgis}& \dropmenucheck{Fichier}\\
+\dropmenuopttwo{mActionAddWmsLayer}{Ajouter une couche WMS}          &\keystroke{W}&voir Section \ref{sec:ogc-wms}& \dropmenucheck{Fichier}\\
+\dropmenuopttwo{mActionOpenTable}{Ouvrir la table d'attributs}&&&\dropmenucheck{Attributs}\\
+\dropmenuopttwo{mActionToggleEditing}{Activer le mode d'édition}&&&\dropmenucheck{Numérisation}\\
+\dropmenuopt{Enregistrer comme Shapefile}&&&\\
+\dropmenuopt{Sauvegarder la sélection comme Shapefile}&&&\\
+\dropmenuopttwo{mActionRemoveLayer}{Supprimer la couche}& \keystroke{Ctrl+D}&&\dropmenucheck{\scriptsize Gestion des couches}\\
+\dropmenuopt{Propriétés}&&&\\
+\dropmenuopttwo{mActionInOverview}{Ajouter dans l'aperçu}&&&\keystroke{O}\\
+ \dropmenucheck{\scriptsize Gestion des couches}&&&\\
+\dropmenuopttwo{mActionAddAllToOverview}{Ajouter tout dans l'aperçu}&\keystroke{+}&&\\
+\dropmenuopttwo{mActionRemoveAllFromOverview}{Effacer tout de l'aperçu}&\keystroke{-}&&\\
+\dropmenuopttwo{mActionHideAllLayers}{Cacher toutes les couches}&\keystroke{H}&& \dropmenucheck{\scriptsize Gestion des couches}\\
+\dropmenuopttwo{mActionShowAllLayers}{Afficher toutes les couches}&\keystroke{S}&&\dropmenucheck{\scriptsize Gestion des couches}\\
+&&&\\
+\multicolumn{4}{r}{Preférences}\\
+\dropmenuopt{Onglets}&&&\\
+\dropmenuopt{Barres d'outils}&&&\\
+\dropmenuopt{Basculer en mode plein écran}  &&&\\
+\dropmenuopttwo{mActionProjectProperties}{Propriétés du projet}&\keystroke{P}&voir Section \ref{sec:projects}&\\
+\dropmenuopttwo{mActionCustomProjection}{Projection personnalisée}&&voir Section \ref{sec:customprojections}&\\
+\dropmenuopttwo{mActionOptions}{Options} &&voir Section \ref{subsec:gui_options}&\\
+&&&\\
+\multicolumn{4}{r}{Plugins — (D'autres éléments sont rajoutés en fonction des extensions installées)}\\
+\dropmenuopttwo{mActionShowPluginManager}{Gestionnaire d'extension} &&voir Section\ref{sec:managing_plugins}&\dropmenucheck{Extensions}\\
+&&&\\
+\multicolumn{4}{r}{Aide}\\
+\dropmenuopttwo{mActionHelpContents}{Table des matières de l'aide}&\keystroke{F1}&&\dropmenucheck{Help}\\
+\dropmenuopttwo{mActionQgisHomePage}{Site officiel de \qg}&&&\\\keystroke{Ctrl+H}
+\dropmenuopttwo{mActionCheckQgisVersion}{vérifier la version \qg}&&&\\
+\dropmenuopttwo{mActionHelpAbout}{A propos}&&&\\
+\end{longtable}}
 
-\begin{itemize}[label=--]
-\item \mainmenuopt{Fichier}
-\begin{tabbing}
-\hspace{4.5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
-\dropmenuopttwo{mActionFileNew}{Nouveau Projet}
- \> \keystroke{Ctrl+N}
- \> voir Section \ref{sec:projects}
- \> \dropmenucheck{Fichier} \\
-\dropmenuopttwo{mActionFileOpen}{Ouvrir le projet}
- \> \keystroke{Ctrl+O}
- \> voir Section \ref{sec:projects}
- \> \dropmenucheck{Fichier} \\
-\dropmenuopt{Ouvrir un projet récent}
- \>
- \> voir Section \ref{sec:projects} \\
-\dropmenuopttwo{mActionFileSave}{Sauvegarder le projet}
- \> \keystroke{Ctrl+S}
- \> voir Section \ref{sec:projects}
- \> \dropmenucheck{Fichier} \\
-\dropmenuopttwo{mActionFileSaveAs}{Sauvegarder le projet sous}
- \> \keystroke{Ctrl+Shift+S}
- \> voir Section \ref{sec:projects}
- \> \dropmenucheck{Fichier} \\
-\dropmenuopttwo{mActionSaveMapAsImage}{Sauvegarder comme Image}
- \>
- \> voir Section \ref{sec:output} \\
-\dropmenuopttwo{mActionFilePrint}{Paramétrage de l'impression}
- \> \keystroke{Ctrl+P}
- \> voir Section \ref{label_printcomposer}
- \> \dropmenucheck{Fichier} \\
-\dropmenuopttwo{mActionFileExit}{Quitter} 
- \> \keystroke{Ctrl+Q} \\
-\end{tabbing}
-
-\item \mainmenuopt{Éditer}
-\begin{tabbing}
-\hspace{4.5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
-\dropmenuopttwo{mActionUndo}{Undo}
- \> \keystroke{Ctrl+Z}
- \> see Section \ref{sec:edit_existing_layer}
- \> \dropmenucheck{Digitizing} \\
-\dropmenuopttwo{mActionRedo}{Redo}
- \> \keystroke{Ctrl+Shift+Z}
- \> see Section \ref{sec:edit_existing_layer}
-\> \dropmenucheck{Digitizing} \\
-\dropmenuopttwo{mActionEditCut}{Couper Entités} 
- \> \keystroke{Ctrl+X}
- \> voir Section \ref{sec:edit_existing_layer} 
- \> \dropmenucheck{Numérisation} \\
-\dropmenuopttwo{mActionEditCopy}{Copier Entités}
- \> \keystroke{Ctrl+C}
- \> voir Section \ref{sec:edit_existing_layer} 
- \> \dropmenucheck{Numérisation} \\
-\dropmenuopttwo{mActionEditPaste}{Coller Entités} 
- \> \keystroke{Ctrl+V}
- \> voir Section \ref{sec:edit_existing_layer} 
- \> \dropmenucheck{Numérisation} \\
-\dropmenuopttwo{mActionCapturePoint}{Capturer le point}
- \> \keystroke{.}
- \> voir Section \ref{sec:edit_existing_layer} 
- \> \dropmenucheck{Numérisation} \\
-\dropmenuopttwo{mActionCaptureLine}{Capturer la Ligne}
- \> \keystroke{/}
- \> voir Section \ref{sec:edit_existing_layer} 
- \> \dropmenucheck{Numérisation} \\
-\dropmenuopttwo{mActionCapturePolygon}{Capturer le Polygone}
- \> \keystroke{Ctrl+/}
- \> voir Section \ref{sec:edit_existing_layer} 
- \> \dropmenucheck{Numérisation} \\
-Et les autres objets du menu d'édition
- \>
- \> voir Section \ref{sec:edit_existing_layer} 
- \> \dropmenucheck{Numérisation} \\
-\dropmenuopt{Deplacer l'entité}
- \> \> \dropmenucheck{Éditer} \\
-\dropmenuopt{Couper entité}
- \> \> \dropmenucheck{Éditer} \\
-\dropmenuopt{Effacer la selection}
- \> \> \dropmenucheck{Éditer} \\
-\dropmenuopt{Ajouter un sommet}
- \> \> \dropmenucheck{Éditer} \\
-\dropmenuopt{Déplacer un sommet}
- \> \> \dropmenucheck{Éditer} \\
-\dropmenuopt{Effacer un sommet}
- \> \> \dropmenucheck{Éditer} \\
-\dropmenuopt{Ajouter Anneau}\footnote{Nouveauté depuis la version 0.9} 
- \>
- \> \dropmenucheck{Éditer} \\
-\dropmenuopt{Ajouter Île} \footnotemark[\value{footnote}] 
- \>
- \> \dropmenucheck{Éditer} \\
-\end{tabbing}
-
-\item \mainmenuopt{Vue}
-\begin{tabbing}
-\hspace{4.5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
-\dropmenuopttwo{mActionPan}{Se déplacer dans la carte}
- \>
- \> \> \dropmenucheck{Navigation} \\
-\dropmenuopttwo{mActionZoomIn}{Zoom +}
- \> \keystroke{Ctrl++}
- \> \> \dropmenucheck{Navigation} \\
-\dropmenuopttwo{mActionZoomOut}{Zoom -}
- \> \keystroke{Ctrl+-}
- \> \> \dropmenucheck{Navigation} \\
-\dropmenuopttwo{mActionSelect}{Selectionner les entités}
- \>
- \> \> \dropmenucheck{Attributs} \\
-\dropmenuopttwo{mActionIdentify}{Identifier les données}
- \> \keystroke{I}
- \> \> \dropmenucheck{Attributs} \\
-\dropmenuopttwo{mActionMeasure}{Mesurer une Ligne}
- \> \keystroke{M}
- \> \> \dropmenucheck{Attributs} \\
-\dropmenuopttwo{mActionMeasureArea}{Mesurer une Aire}
- \> \keystroke{J}
- \> \> \dropmenucheck{Attributs} \\
-\dropmenuopttwo{mActionOpenTable}{Zoom Full}
- \> \keystroke{F}
- \> \> \dropmenucheck{Navigation} \\
-\dropmenuopttwo{mActionZoomToLayer}{Zoom sur l'étendue}
- \>
- \> \> \dropmenucheck{Navigation} \\
-\dropmenuopttwo{mActionZoomToSelected}{Zoom sur la sélection}
- \> \keystroke{Ctrl+J}
- \> \> \dropmenucheck{Navigation} \\
-\dropmenuopttwo{mActionZoomLast}{Zoom precédent}
- \>
- \> \> \dropmenucheck{Navigation} \\
-\dropmenuopt{Zoom taille réelle}
- \>
- \> \>  \\
-\dropmenuopttwo{mActionMapTips}{Infobulles}
- \>
- \> \> \dropmenucheck{Attributes} \\
-\dropmenuopttwo{mActionNewBookmark}{Nouveau signet}
- \> \keystroke{Ctrl+B}
- \> see Section \ref{sec:bookmarks} 
-\> \dropmenucheck{Attributes} \\
-\dropmenuopttwo{mActionShowBookmarks}{Montrer les signets}
- \> \keystroke{B}
- \> see Section \ref{sec:bookmarks} 
- \> \dropmenucheck{Attributes} \\
-\dropmenuopttwo{mActionDraw}{Rafraîchir}
- \> \keystroke{Ctrl+R}
- \> \> \dropmenucheck{Navigation} \\
-\end{tabbing}
-
-\item \mainmenuopt{Couche}
-\begin{tabbing}
-\hspace{4.5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
-\dropmenuopttwo{mActionNewVectorLayer}{Nouvelle couche vecteur}
- \> \keystroke{N}
- \>           
- see Section \ref{sec:create shape}
- \> \dropmenucheck{Gestion des couches} \\
-\dropmenuopttwo{mActionAddNonDbLayer}{Ajouter une couche vecteur}       
- \> \keystroke{V}
- \>           
- see Section \ref{label_workingvector}
- \> \dropmenucheck{Fichier} \\
-\dropmenuopttwo{mActionAddRasterLayer}{Ajouter une couche raster}       
- \> \keystroke{R}
- \>           
- see Section \ref{label_raster}
- \> \dropmenucheck{Fichier} \\
-\dropmenuopttwo{mActionAddLayer}{Ajouter une couche PostGIS}      
- \> \keystroke{D}
- \>           
- see Section \ref{label_postgis}
- \> \dropmenucheck{Fichier} \\
-\dropmenuopttwo{mActionAddWmsLayer}{Ajouter une couche WMS}          
- \> \keystroke{W}
- \>           
- see Section \ref{sec:ogc-wms}
- \> \dropmenucheck{Fichier} \\
-\dropmenuopttwo{mActionOpenTable}{Ouvrir la table d'attributs}
- \> \>
- \> \dropmenucheck{Attributs} \\
-\dropmenuopttwo{mActionToggleEditing}{Activer le mode d'édition}
- \> \>
- \> \dropmenucheck{Numérisation} \\
-\dropmenuopt{Enregistrer comme Shapefile}
- \\
-\dropmenuopt{Sauvegarder la sélection comme Shapefile}
- \\
-\dropmenuopttwo{mActionRemoveLayer}{Supprimer la couche}
- \> \keystroke{Ctrl+D}
- \>           
- \> \dropmenucheck{Gestion des couches} \\
-\dropmenuopt{Propriétés}
- \\
-\dropmenuopttwo{mActionInOverview}{Ajouter dans l'aperçu}
- \> \keystroke{O}
- \>           
- \> \dropmenucheck{Gestion des couches} \\
-\dropmenuopttwo{mActionAddAllToOverview}{Ajouter tout dans l'aperçu}
- \> \keystroke{+}
- \>           
- \\
-\dropmenuopttwo{mActionRemoveAllFromOverview}{Effacer tout de l'aperçu}
- \> \hspace{1cm}\keystroke{-}
- \>           
- \\
-\dropmenuopttwo{mActionHideAllLayers}{Cacher toutes les couches}
- \> \keystroke{H}
- \>           
- \> \dropmenucheck{Gestion des couches} \\
-\dropmenuopttwo{mActionShowAllLayers}{Afficher toutes les couches}
- \> \keystroke{S}
- \>           
- \> \dropmenucheck{Gestion des couches} \\
-\end{tabbing}
-
-\item \mainmenuopt{Preférences}
-\begin{tabbing}
-\hspace{4.5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
-\dropmenuopt{Onglets}  
- \>           
- \>           
- \\
-\dropmenuopt{Barres d'outils}  
- \>           
- \>           
- \\
-\dropmenuopt{Basculer en mode plein écran}  
- \>
- \>           
- \\
-\dropmenuopttwo{mActionProjectProperties}{Propriétés du projet}  
- \> \keystroke{P}
- \>           
- see Section \ref{sec:projects}
- \\
-\dropmenuopttwo{mActionCustomProjection}{Projection personnalisée}   
-\> \>           
-see Section \ref{sec:customprojections}
- \\
-\dropmenuopttwo{mActionOptions}{Options}             
-\> \>           
-see Section \ref{subsec:gui_options}
- \\
-\end{tabbing}
-
-\item \mainmenuopt{Plugins} — (D'autres éléments sont rajoutés en fonction des extensions installées)
-\begin{tabbing}
-\hspace{4.5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
-\dropmenuopttwo{mActionShowPluginManager}{Gestionnaire d'extension}              
-\> \>           
-see Section \ref{sec:managing_plugins}
- \dropmenucheck{Extensions}\\
-\end{tabbing}
-
-\item \mainmenuopt{Aide}
-\begin{tabbing}
-\hspace{4.5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
-\dropmenuopttwo{mActionHelpContents}{Table des matières de l'aide}
- \> \keystroke{F1}
- \>            
- \> \dropmenucheck{Help}\\
-\dropmenuopttwo{mActionQgisHomePage}{Site officiel de QGIS}
- \> \keystroke{Ctrl+H}
- \>           
- \\
-\dropmenuopttwo{mActionCheckQgisVersion}{vérifier la version QGIS}
- \\
-\dropmenuopttwo{mActionHelpAbout}{A propos}
- \\
-\end{tabbing}
-
-\end{itemize}
 
 Voir l'annexe \ref{app_menu} pour une description plus aboutie des éléments des menus.
 
@@ -448,12 +263,12 @@ Le contenu du menu contextuel affiché par un clic droit varie si la couche sél
 
 \end{itemize}
 
-Si plusieurs sources de données vecteurs ont le même type de vecteur (points, lignes ou polygones) et les mêmes attributs, leurs représentations peuvent être groupées. Cela signifie que si la représentation d'une couche est modifiée, toutes les autres en bénéficieront automatiquement. Pour grouper la symbologie, faites un clic droit dans la zone de légende et sélectionnez \dropmenuopt{Montrer les groupes de fichiers}. Les groupes de fichiers relatifs aux couches apparaissent, il est maintenant possible de déplacer un fichier d'un groupe à un autre. SI vous le faites, les fichiers seront regroupés. Notez que QGIS le permet seulement si les 2 couches sont susceptibles de partager le même type de symbologie.
+Si plusieurs sources de données vecteurs ont le même type de vecteur (points, lignes ou polygones) et les mêmes attributs, leurs représentations peuvent être groupées. Cela signifie que si la représentation d'une couche est modifiée, toutes les autres en bénéficieront automatiquement. Pour grouper la symbologie, faites un clic droit dans la zone de légende et sélectionnez \dropmenuopt{Montrer les groupes de fichiers}. Les groupes de fichiers relatifs aux couches apparaissent, il est maintenant possible de déplacer un fichier d'un groupe à un autre. SI vous le faites, les fichiers seront regroupés. Notez que \qg le permet seulement si les 2 couches sont susceptibles de partager le même type de symbologie.
 
 \subsection{Vue de la carte}\label{label_mapview}
 \index{map!view} 
 
-C'est la partie centrale de QGIS — les cartes sont affichées dans cette partie ! Celle qui s'affiche dépend des couches raster et vecteurs que vous avez choisi de charger (lire les sections suivantes pour savoir comment charger une couche). La vue de la carte peut être modifiée en portant le focus sur une autre région, ou en zoomant en avant ou en arrière. Plusieurs opérations peuvent être effectuées sur la carte comme il est expliqué dans les descriptions des barres d'outils. La vue de la carte et la légende sont étroitement liées — la carte reflète les changements que vous opérez dans la légende.
+C'est la partie centrale de \qg — les cartes sont affichées dans cette partie ! Celle qui s'affiche dépend des couches raster et vecteurs que vous avez choisi de charger (lire les sections suivantes pour savoir comment charger une couche). La vue de la carte peut être modifiée en portant le focus sur une autre région, ou en zoomant en avant ou en arrière. Plusieurs opérations peuvent être effectuées sur la carte comme il est expliqué dans les descriptions des barres d'outils. La vue de la carte et la légende sont étroitement liées — la carte reflète les changements que vous opérez dans la légende.
 
 \begin{Astuce}\caption{\textsc{Zoomer la carte avec la molette de la souris}\index{zoom!mouse wheel}}
 Vouspouvez utiliser la molette de la souris pour changer le niveau de zoom de la carte. Placez votre curseur dans la zone d'affichage de la carte et faites rouler la molette vers l'avant pour agrandir et faites là rouler vers vous pour zoomer en arrière. La position du curseur est le centre sur lequel va s'opérer le zoom. Vous pouvez modifier le comportement du zoom de la souris en utilisant l'onglet \tab{Outils cartographiques} dans le menu \mainmenuopt{Paramètres} >\dropmenuopt{Options}.
@@ -480,17 +295,17 @@ Une barre de progression dans la barre de statuts vous montre le cheminement du 
 Si une nouvelle extension ou une mise à jour est disponible, vous verrez un message dans la barre de statut. Sur la droite, une boîte à cocher peut être utilisée pour bloquer le rendu des couches sur la carte (voir Section \ref{subsec:redraw_events}). A l'extrémité se situe l'icône de projection,  un clic dessus ouvrira la fenêtre de propriétés de projection pour le projet en cours.
 
 \begin{Astuce}\caption{\textsc{Calculer l'échelle correcte de la vue de la carte}}\index{scale!calculate}
-Quand vous démarrez QGIS, les degrés sont l'unité par défaut et indique à QGIS que toutes les coordonnées de votre couche sont en degrés. Pour avoir les valeurs correctes de l'échelle, vous pouvez soit passer en mètre manuellement avec l \tab{General} sous le menu \mainmenuopt{Préférences} >\dropmenuopt{Propriétés du projet} ou vous pouvez sélectionner un système de projection de référence en cliquant sur \toolbtntwo{mIconProjectionDisabled}{projector}. Dans ce dernier cas, les unités sont automatiquement choisies selon les spécifications de la projection, p. ex. '+units=m'.
+Quand vous démarrez \qg, les degrés sont l'unité par défaut et indique à \qg que toutes les coordonnées de votre couche sont en degrés. Pour avoir les valeurs correctes de l'échelle, vous pouvez soit passer en mètre manuellement avec l \tab{General} sous le menu \mainmenuopt{Préférences} >\dropmenuopt{Propriétés du projet} ou vous pouvez sélectionner un système de projection de référence en cliquant sur \toolbtntwo{mIconProjectionDisabled}{projector}. Dans ce dernier cas, les unités sont automatiquement choisies selon les spécifications de la projection, p. ex. '+units=m'.
 \end{Astuce}
 
 \section{Rendu}\label{subsec:redraw_events}\index{rendering}
 
-Par défaut, QGIS effectue le rendu de toutes les couches visibles à chaque fois que l'affichage de la carte a besoin d'être mise à jour. Les événements qui déclenchent ce rafraîchissement incluent :
+Par défaut, \qg effectue le rendu de toutes les couches visibles à chaque fois que l'affichage de la carte a besoin d'être mise à jour. Les événements qui déclenchent ce rafraîchissement incluent :
 
 \begin{itemize}[label=--]
 \item L'ajout d'une couche
 \item Un déplacement ou un zoom
-\item Un redimensionnement de la fenêtre de QGIS
+\item Un redimensionnement de la fenêtre de \qg
 \item Un changement de la visibilité d'une couche
 \end{itemize}
 
@@ -508,7 +323,7 @@ Le rendu de la carte peut être contrôlé de différentes manières :
 \minisec{a) Suspendre le rendu}\index{rendering!suspending}
 \label{label_suspendrender}
 
-Pour suspendre le rendu, cliquez sur la case \checkbox{Render}dans le coin inférieur droit de la barre de statut. Quand cette case n'est pas coché, QGIS ne redessine pas la carte en réponse aux événements décrits dans la section \ref{subsec:redraw_events}. Voici quelques cas pour lequel vous pourriez vouloir le faire :
+Pour suspendre le rendu, cliquez sur la case \checkbox{Render}dans le coin inférieur droit de la barre de statut. Quand cette case n'est pas coché, \qg ne redessine pas la carte en réponse aux événements décrits dans la section \ref{subsec:redraw_events}. Voici quelques cas pour lequel vous pourriez vouloir le faire :
 
 \begin{itemize}[label=--]
 \item Ajouter beaucoup de couches et les symboliser avant d'effectuer un rendu potentiellement long
@@ -534,13 +349,12 @@ Pour arrêter le rendu de la carte, appuyez sur la touche ESC. Ceci stoppera le 
 \minisec{c) Mettre à jour l'affichage de la carte pendant le rendu}
 \label{label_updatemap}\index{rendering!update during drawing}
 
-Vous pouvez définir une option pour mettre à jour l'affichage de la carte quand des entités sont dessinées. Par défaut, QGIS n'affiche pas les entités d'une couche tant que la couche entière n'a pas été rendue. Pour mettre à jour l'affichage à mesure que les entités sont lues dans la table attributaire, sélectionnez le menu \mainmenuopt{Settings} > \dropmenuopt{Options} puis l'onglet \tab{Rendu}. Mettez comme valeur le nombre d'entités à mettre à jour durant le rendu. Si elle est égale à 0, cela désactive la mise à jour durant le dessin (c'est la valeur par défaut). Une valeur trop basse risque d'impacter les performances, car la vue de la carte sera constamment mise à jour durant la lecture des entités. Il est suggéré de commencer à 500.
+Vous pouvez définir une option pour mettre à jour l'affichage de la carte quand des entités sont dessinées. Par défaut, \qg n'affiche pas les entités d'une couche tant que la couche entière n'a pas été rendue. Pour mettre à jour l'affichage à mesure que les entités sont lues dans la table attributaire, sélectionnez le menu \mainmenuopt{Settings} > \dropmenuopt{Options} puis l'onglet \tab{Rendu}. Mettez comme valeur le nombre d'entités à mettre à jour durant le rendu. Si elle est égale à 0, cela désactive la mise à jour durant le dessin (c'est la valeur par défaut). Une valeur trop basse risque d'impacter les performances, car la vue de la carte sera constamment mise à jour durant la lecture des entités. Il est suggéré de commencer à 500.
 
 \minisec{d) Influencer la qualité du rendu}
 \label{label_renderquality}\index{rendering!quality}
 
 Pour influencer la qualité du rendu de la carte vous avez trois possibilités. Dans le menu \mainmenuopt{Préférences} > \dropmenuopt{Options} puis l'onglet \tab{Rendu} et sélectionnez/désélectionnez les cases suivantes :
-
 \begin{itemize}[label=--]
 \item \checkbox{Les lignes semblent moins déchiquetées aux dépens d'une certaine vitesse d'exécution}
 \item \checkbox{Corriger les polygones remplis de manière erronée}
@@ -553,10 +367,10 @@ Les mesures fonctionnent uniquement au sein des systèmes de coordonnées projet
 
 \subsection{Mesurer une longueur et une aire}\index{measure:line length}\index{measure:areas}
 \includegraphics[width=0.7cm]{mActionMeasure} 
-QGIS peut mesurer des distances réelles entre plusieurs points selon un ellipsoïde défini. Pour le configurer, allez dans le menu \mainmenuopt{Préférences} > \dropmenuopt{Options}puis dans l'onglet \tab{Outils cartographiques} et choisissez l'ellipsoïde approprié. Vous pouvez également modifier ici l'unité de mesure (mètre ou pied). Cet outil permet de placer des points sur la carte. Chaque longueur de segment s'affiche dans la fenêtre de mesure avec la longueur additionnée totale. Pour stopper les mesures, faites un clic droit. \\
+\qg peut mesurer des distances réelles entre plusieurs points selon un ellipsoïde défini. Pour le configurer, allez dans le menu \mainmenuopt{Préférences} > \dropmenuopt{Options}puis dans l'onglet \tab{Outils cartographiques} et choisissez l'ellipsoïde approprié. Vous pouvez également modifier ici l'unité de mesure (mètre ou pied). Cet outil permet de placer des points sur la carte. Chaque longueur de segment s'affiche dans la fenêtre de mesure avec la longueur additionnée totale. Pour stopper les mesures, faites un clic droit. \par
 \includegraphics[width=0.7cm]{mActionMeasureArea} Les aires peuvent aussi être mesurées.
-Dasn la fenêtre de mesure apparaît la surface totale mesurée. \\
-En complément, l'outil de mesure s'accrochera à la couche sélectionnée à partir du moment où celle-ci à un seuil d'accrochage défini (voir la section~\ref{snapping_tolerance}). Dpnc si vous voulez mesurez avec exactitude une ligne ou le contour d'un polygone, spécifiez d'abord un seuil d'accrochage puis avec l'outil de mesure chaque clic de souris se situant dans ce seuil s'accrochera aux entités de cette couche.
+Dans la fenêtre de mesure apparaît la surface totale mesurée. \par
+En complément, l'outil de mesure s'accrochera à la couche sélectionnée à partir du moment où celle-ci à un seuil d'accrochage défini (voir la section~\ref{snapping_tolerance}). Donc si vous voulez mesurez avec exactitude une ligne ou le contour d'un polygone, spécifiez d'abord un seuil d'accrochage puis avec l'outil de mesure chaque clic de souris se situant dans ce seuil s'accrochera aux entités de cette couche.
 
 \begin{figure}[ht]
 \centering
@@ -568,12 +382,12 @@ En complément, l'outil de mesure s'accrochera à la couche sélectionnée à pa
 
 \section{les projets}\label{sec:projects}\index{projets}
 
-L'état de votre session de QGIS est considéré comme étant un projet. QGIS ne peut travailler que sur un projet à la fois. Les propriétés sont considérées comme étant assignées à un projet ou comme étant par défaut pour les nouveaux projets ( voir Section \ref{subsec:gui_options}). QGIS peut enregistrer l'état de votre travail dans un fichier de projet en utilisant le menu the state of your 
+L'état de votre session de \qg est considéré comme étant un projet. \qg ne peut travailler que sur un projet à la fois. Les propriétés sont considérées comme étant assignées à un projet ou comme étant par défaut pour les nouveaux projets ( voir Section \ref{subsec:gui_options}). \qg peut enregistrer l'état de votre travail dans un fichier de projet en utilisant le menu the state of your 
 workspace into a project file using the menu options 
 \mainmenuopt{Fichier} > \dropmenuopttwo{mActionFileSave}{Sauvegarder le projet}
 or \mainmenuopt{File} > \dropmenuopttwo{mActionFileSaveAs}{Sauvegarder le projet sous...}.
 
-Pour charger un projet dans une session QGIS, aller dans \mainmenuopt{Fichier} > \dropmenuopttwo{mActionFileOpen}{Ouvrir un Projet} ou \mainmenuopt{Fichier} > \dropmenuopt{Ouvrir un projet récent}. Si vous souhaitez revenir à une session vierge, aller sur \mainmenuopt{Fichier} > \dropmenuopttwo{mActionFileNew}{Nouveau Projet}.
+Pour charger un projet dans une session \qg, aller dans \mainmenuopt{Fichier} > \dropmenuopttwo{mActionFileOpen}{Ouvrir un Projet} ou \mainmenuopt{Fichier} > \dropmenuopt{Ouvrir un projet récent}. Si vous souhaitez revenir à une session vierge, aller sur \mainmenuopt{Fichier} > \dropmenuopttwo{mActionFileNew}{Nouveau Projet}.
 Chacune de ces options vous demandera si vous désirez enregistrer le projet si des changements ont été effectués depuis son ouverture ou sa dernière sauvegarde.
 
 Les types d'informations enregistrées dans un projet sont :
@@ -585,14 +399,14 @@ Les types d'informations enregistrées dans un projet sont :
 \item L'étendue de la dernière zone de visualisation
 \end{itemize}
 
-Le fichier de projet est enregistré au format XML, il est donc possible de l'éditer en dehors de QGIS si vous savez ce que vous faites. Le format a été modifié à plusieurs reprises depuis les versions antérieures de QGIS, les fichiers enregistrés sous ces dernières peuvent ne plus fonctionner correctement. Pour être averti dans genre de cas, allez dans l'onglet \tab{General} du menu \mainmenuopt{Préférences} > \dropmenuopt{Options} et sélectionnez \checkbox{M'avertir lors de l'ouverture d'un fichier projet sauvegardé avec une version précédente de QGIS}.
+Le fichier de projet est enregistré au format XML, il est donc possible de l'éditer en dehors de \qg si vous savez ce que vous faites. Le format a été modifié à plusieurs reprises depuis les versions antérieures de \qg, les fichiers enregistrés sous ces dernières peuvent ne plus fonctionner correctement. Pour être averti dans genre de cas, allez dans l'onglet \tab{General} du menu \mainmenuopt{Préférences} > \dropmenuopt{Options} et sélectionnez\\ \checkbox{\small M'avertir lors de l'ouverture d'un fichier projet sauvegardé avec une version précédente de \qg}.
 
 \minisec{Propriétés de projet}
 Dans la fenêtre de propriétés du projet vous pouvez mettre des options spécifiques à un projet. Cela inclut :
 \begin{itemize}[label=--]
  \item Dans l'onglet \tab{Général} le titre du projet, les unités, et la possibilité d'enregister des chemins relatifs vers les couches. L'édtion topologique et les options d'accrochage peuvent être changés ici.
 \item L'onglet \tab{Système de Coordonnées de Référence (SCR)} permet de choisir le système de coordonnées pour ce projet et d'activer la projection à la volée des couches vecteurs utilisants un SCR différent.
-\item Avecle troisième onglet \tab{Identification des couches} vous pouvez activer (ou désactiver) les couches qui répondront à l'outil d'identification (voir le paragraphe sur les outils de la carte dans la section \ref{subsec:gui_options}).
+\item Avecle troisième onglet \tab{Identification des couches} vous pouvez activer (ou désactiver) les couches qui répondront à l'outil d'identification (voir le paragraphe sur les outils de la carte dans la section \ref{subsec:gui_options})
 \end{itemize}
 
 \section{Sauvegarder l'affichage}\label{sec:output}\index{output!save as image!print composer!quick print}
@@ -600,7 +414,7 @@ Il y a plusieurs façons d'enregistrer un fichier depuis votre session. Nous en 
 Voici d'autres manières de procéder à l'enregistrement de fichiers :
 \begin{itemize}[label=--]
 \item Menu option \dropmenuopttwo{mActionSaveMapAsImage}{Sauvagarder comme une Image} ouvre une fenêtre de dialogue où vous devez saisir le nom, le chemin et le type d'images (PNG ou JPEG). Depuis la version 1.1.0, un fichier "world" avec une extension PNGW ou JPGW est enregistré dans le même dossier que l'image géoréférencée.
-\item Menu option \dropmenuopttwo{mActionFilePrint}{Paramètrage de l'impression} ouvre une fenêtre de dialogue où vous pouvez faire une mise en page et imprimer la vue active de la carte (voir Section~\ref{label_printcomposer}).
+\item Menu option \dropmenuopttwo{mActionFilePrint}{Paramètrage de l'impression} ouvre une fenêtre de dialogue où vous pouvez faire une mise en page et imprimer la vue active de la carte (voir Section~\ref{label_printcomposer})
 \end{itemize}
 
 \section{Options d'affichage}\label{subsec:gui_options}
@@ -612,13 +426,13 @@ Quelques options basiques peuvent être sélectionnés en allant dans le menu \m
 
 \begin{itemize}[label=--]
 \item \checkbox{Demander à sauvegarder les changements apportés au projet si requis}
-\item \checkbox{M'avertir lors de l'ouverture d'un fichier projet sauvegardé avec une version précédente de QGIS}
+\item \checkbox{\small M'avertir lors de l'ouverture d'un fichier projet sauvegardé avec une version précédente de \qg}
 \item \checkbox{Changer la couleur de la sélection du fond d'écran}
 \item Changer le thème des icônes
 \item \checkbox{Mettre les noms de couche en majuscule dans la légende}
 \item \checkbox{Afficher les noms des attributs de classifications dans la légende}
 \item \checkbox{Cacher l'écran de démarrage}
-\item \checkbox{Ouvrir les résultats identifiés dans une fenêtre détachée (redémarrage requis))}
+\item \checkbox{Ouvrir les résultats identifiés dans une fenêtre détachée (redémarrage requis)}
 \item \checkbox{Ouvrir la table d'attributs dans une fenêtre mobile}
 \item \checkbox{Ajouter une couche PostGIS avec un double-clic et sélectionner en mode étendu}
 %\item Définir le comportement de la table d'attributs (choisir entre montrer toutes les entités, celles sélectionnées et celles présentes dans la vue active)
@@ -628,8 +442,8 @@ Quelques options basiques peuvent être sélectionnés en allant dans le menu \m
 
 \begin{itemize}[label=--]
 \item \checkbox{par défaut les couches supplémentaires sont affichées}
-\item Définir le nombre d'entités à dessiner avant d'actualiser l'affichage.
-\item \checkbox{Les lignes semblent moins déchiquetées aux dépens d'une certaine vitesse d'exécution}
+\item Définir le nombre d'entités à dessiner avant d'actualiser l'affichage
+\item \checkbox{\small Les lignes semblent moins déchiquetées aux dépens d'une certaine vitesse d'exécution}
 \item \checkbox{Corriger les polygones remplis de manière erronée}
 %\item \checkbox{Rafraîchir en permanence la table des matières/carte lors du déplacement} 
 \end{itemize}
@@ -646,7 +460,7 @@ Quelques options basiques peuvent être sélectionnés en allant dans le menu \m
 
 \minisec{Revêtement}
 
-\begin{itemize}
+\begin{itemize}[label=--]
 \item Définir l'algorythme de placement des étiquettes (choisir entre le point central (par défaut), chain, popmusic tabu chain, popmusic tabu et popmusic chain)
 \end{itemize}
 
@@ -656,7 +470,7 @@ Quelques options basiques peuvent être sélectionnés en allant dans le menu \m
 \item Définir la couleur et la largeur de la ligne d'étirement
 \item Définir le mode d'accrochage par défaut (à un vertex, un segment, aux vertex et segments)
 \item Définir la tolérance d'accrochage par défaut (en unités de la couche) 
-\item Définir le rayon de recherche pour l'édition des sommets (en unités de la couche) 
+\item Définir le rayon de recherche pour l'édition des sommets (en unités de la couche)
 \item Définir les marqueurs de sommet (croix ou cercle semi-transparent)
 \item \checkbox{Montrer les marqueurs seulement pour les entités sélectionnées}
 \item \checkbox{Supprimer la fenêtre d'attributs apparaissant après chaque création d'entité}
@@ -666,8 +480,8 @@ Quelques options basiques peuvent être sélectionnés en allant dans le menu \m
 
 \begin{itemize}[label=--]
 \item \checkbox{Demander pour le Système de Coordonnées de Référence (SCR)}
-\item \checkbox{La projection globale par défaut du projet qui sera employée. }
-\item \checkbox{La projection par défaut ci-dessous sera employée. }
+\item \checkbox{La projection globale par défaut du projet qui sera employée}
+\item \checkbox{La projection par défaut ci-dessous sera employée}
 \item Sélectionner le Système de Coordonnées de Référence (SCR) par défaut
 \end{itemize}
 
@@ -675,29 +489,29 @@ Quelques options basiques peuvent être sélectionnés en allant dans le menu \m
 
 \begin{itemize}[label=--]
 \item \checkbox{Forcer la nationalité du système}
-\item Paramètres de lieu sur votre système 
+\item Paramètres de lieu sur votre système
 \end{itemize}
 
 \minisec{Onglet Proxy}
-
+{\setlength{\baselineskip}{1.4\baselineskip}
 \begin{itemize}[label=--]
 \item \checkbox{Utiliser un proxy pour l'accès internet}, définition de l'hôte, du port, de l'utilisateur et du mot de passe.
 \item Modifiez le \dropmenuopt{type de Proxy} selon vos besoins
- \begin{itemize}
+ \begin{itemize}[label=--,itemsep=2pt]
   \item \dropmenuopt{Proxy par défaut}: ce proxy est déterminé en basant sur le proxy de l'application
-  \item \dropmenuopt{Socks5Proxy}: proxy générique pour n'importe quel type de connexion. Supporte TCP, UDP, le lien à un port (pour les connexions entrantes) et l'authentication.
-  \item \dropmenuopt{HttpProxy}: utilise la commande "CONNECT", supporte seulement les connexions TCP sortantes et l'authentication.
-  \item \dropmenuopt{HttpCachingProxy}: utilise les commandes normales HTTP, c'est utile uniquement dans le contexte de requête HTTP.
-  \item \dropmenuopt{FtpCachingProxy}: utilise un proxy FTP, ce n'est utile que dans le cas de requête FTP.
+  \item \dropmenuopt{Socks5Proxy}: proxy générique pour n'importe quel type de connexion. Supporte TCP, UDP, le lien à un port (pour les connexions entrantes) et l'authentication
+  \item \dropmenuopt{HttpProxy}: utilise la commande \ og CONNECT \fg, supporte seulement les connexions TCP sortantes et l'authentication
+  \item \dropmenuopt{HttpCachingProxy}: utilise les commandes normales HTTP, c'est utile uniquement dans le contexte de requête HTTP
+  \item \dropmenuopt{FtpCachingProxy}: utilise un proxy FTP, ce n'est utile que dans le cas de requête FTP
 \end{itemize}
-\end{itemize}
+\end{itemize}}
 L'exclusion d'adresses peut être ajoutée dans la boîte de texte en dessous des paramètres de proxy (voir fig. \ref{fig:proxy-settings}) en pressant le bouton \button{Ajouter}. Ensuite double-cliquer sur l'URL nouvellement créée est entrer l'adresse que vous voudriez exclure du proxy. Le bouton \button{Supprimer} efface l'entrée sélectionnée.
 
 Si vous désirez des informations plus détaillées sur les différents paramètres, veuillez vous référer au manuel de la bibliothèque Qt à \url{http://doc.trolltech.com/4.5/qnetworkproxy.html#ProxyType-enum}.
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{Proxy-settings in QGIS \nixcaption}
+   \caption{Proxy-settings in \qg \nixcaption}
    \includegraphics[clip=true, width=10cm]{proxy-settings}
    \label{fig:proxy-settings}
 \end{center} 
@@ -721,7 +535,7 @@ Vous pouvez modifier ces options selon vos besoins, certains de ces changements 
 
 \section{Signets spatiaux}\label{sec:bookmarks}
 \index{bookmarks}
-\index{spatial bookmarks|\see{bookmarks}}
+\index{spatial bookmarks|\voir{bookmarks}}
 
 Les signets spatiaux vous permettent de marquer une zone de la carte pour y retourner plus tard.
 
@@ -729,9 +543,9 @@ Les signets spatiaux vous permettent de marquer une zone de la carte pour y reto
 Pour créer un signet :
 \begin{enumerate}
 \item Déplacez-vous sur la zone concernée
-\item Sélectionnez le menu \mainmenuopt{Vue} > \dropmenuopt{Nouveau signet} ou appuyez sur la touche \keystroke{Ctrl-B}.
-\item Entrez un nom pour décrire le signet (jusqu'à 255 caractères).
-\item Cliquez sur \button{OK} pour ajouter le signet ou sur \button{Annuler} pour sortir de la fenêtre sans l'enregistrer.
+\item Sélectionnez le menu \mainmenuopt{Vue} > \dropmenuopt{Nouveau signet} ou appuyez sur la touche \keystroke{Ctrl-B}
+\item Entrez un nom pour décrire le signet (jusqu'à 255 caractères)
+\item Cliquez sur \button{OK} pour ajouter le signet ou sur \button{Annuler} pour sortir de la fenêtre sans l'enregistrer
 \end{enumerate}
 
 Vous pouvez avoir plusieurs signets portant le même nom.
@@ -746,4 +560,4 @@ Depuis la fenêtre \dialog{Signets géospatiaux}, sélectionner le signet voulu 
 
 \subsection{Effacer un signet}
 Pour effacer un signet depuis la fenêtre \dialog{Signets géospatiaux}, cliquez dessus puis sur le bouton \button{Effacer}.
-Confirmez votre choix en cliquant sur \button{Oui} ou annuler en cliquant sur \button{Non}.
+Confirmez votre choix en cliquant sur \button{Oui} ou annuler en cliquant sur \button{Non}
