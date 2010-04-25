@@ -1,7 +1,7 @@
-% vim: set textwidth=78 autoindent:
+%  !TeX  root  =  user_guide.tex 
 
-%\subsection{Interpolation Plugin}
-\subsection{Extension Interpolation}
+%\section{Interpolation Plugin}
+\section{Extension Interpolation}
 
 % when the revision of a section has been finalized, 
 % comment out the following line:
@@ -18,20 +18,20 @@ création de couches matricielles interpolées (voir la Figure \ref{fig:interpol
 Avant son exécution, l'extension nécessite les réglages suivants:
 
 %\begin{itemize}
-%\item \textbf{Input vector layer}: Specify the input point vector layer(s) from a list of loaded
+%\item[Input vector layer :] Specify the input point vector layer(s) from a list of loaded
 %point layers. If several layers are specified, then data from all layers is used for
 %interpolation. Note: It is possible to insert lines or polygons as constraints for the
 %triangulation, by specifying either ``structure lines'' or ``break lines'' in the
 %\dropmenuopt{Type} dropdown menu.
-%\item \textbf{Interpolation attribute}: Select attribute column to be used for interpolation or 
+%\item[Interpolation attribute :] Select attribute column to be used for interpolation or 
 %enable the \checkbox{Use Z-Coordinate} checkbox to use the layers stored Z values.
-%\item \textbf{Interpolation Method}: Select interpolation method. This can be either \selectstring{Triangulated Irregular 
+%\item[Interpolation Method :] Select interpolation method. This can be either \selectstring{Triangulated Irregular 
 %Network (TIN)}{\ldots} or \selectstring{Inverse Distance Weighted (IDW)}{\ldots}.
-%\item \textbf{Number of columns/rows}: Specify the number row and colums for the output raster file.
-%\item \textbf{Output file}: Specify a name for the output raster file.
+%\item[Number of columns/rows :] Specify the number row and colums for the output raster file.
+%\item[Output file :] Specify a name for the output raster file.
 %\end{itemize}
-\begin{itemize}
-\item \textbf{Couches vecteur}: Spécifier une (ou plusieurs) couche 
+\begin{description}
+\item[Couches vecteur :] Spécifier une (ou plusieurs) couche 
 vectorielle de points parmi la liste de couches vectorielles de points 
 chargées. Si plusieurs couches sont sélectionnées, alors l'ensemble des 
 données de toutes les couches est utilisé pour l'interpolation. 
@@ -39,18 +39,18 @@ Note: il est possible d'insérer des lignes ou des polygones comme contrainte
 pour la triangulation en spécifiant ``lignes de structure'' ou ``break lines'' 
 dans la liste déroulante du sous-menu \dropmenuopt{Type}.
 %===> 'break lines' non traduit dans l'interface utilisateur JRM: c'est corrigé pour la version 1.5 mais effectviement pour la 1.3 on laisse la vo
-\item \textbf{Attribut d'interpolation}: Sélectionner une colonne 
+\item[Attribut d'interpolation :] Sélectionner une colonne 
 attributaire à utiliser pour l'interpolation ou cocher la case 
 \checkbox{Utiliser les coordonnées Z pour l'interpolation} afin d'utiliser une
 couche contenant des valeurs Z.
-\item \textbf{Méthode d'interpolation}: Sélectionner une méthode 
-d'interpolation. Cela peut être \selectstring{Interpolation Triangulaire (TIN)}{\ldots} 
-ou \selectstring{Pondération par Distance Inverse (IDW)}{\ldots}.
-\item \textbf{Nombre de colonnes/cellules}: Définir le nombre de colonnes et 
+\item[Méthode d'interpolation :] Sélectionner une méthode 
+d'interpolation. Cela peut être\\ \selectstring{Interpolation Triangulaire (TIN)}{\ldots} 
+ou\\ \selectstring{Pondération par Distance Inverse (IDW)}{\ldots}.
+\item[Nombre de colonnes/cellules :] Définir le nombre de colonnes et 
 de lignes du raster de sortie.
-\item \textbf{Fichier de sortie}: Attribuer un nom au fichier raster de 
+\item[Fichier de sortie :] Attribuer un nom au fichier raster de 
 sortie.
-\end{itemize}
+\end{description}
 
 %\begin{figure}[ht]
 %   \begin{center}
@@ -60,8 +60,8 @@ sortie.
 %\end{figure}
 \begin{figure}[ht]
    \begin{center}
-   \caption{L'extension Interpolation \nixcaption}\label{fig:interpolation_dialog}\smallskip
    \includegraphics[clip=true, width=9cm]{interpolate_dialog}
+   \caption{L'extension Interpolation \nixcaption}\label{fig:interpolation_dialog}
 \end{center}  
 \end{figure}
 
@@ -93,12 +93,12 @@ sortie.
   d'outils QGIS. La boîte de dialogue de l'extension Interpolation s'ouvre 
   comme montrée dans la Figure \ref{fig:interpolation_dialog}.
   \item Dans le bloc Saisie, sélectionnez une couche vectorielle de départ 
-  (par exemple, \selectstring{elevp}{\ldots}) ainsi qu'une colonne 
+  (par exemple,\\ \selectstring{elevp}{\ldots}) ainsi qu'une colonne 
   attributaire pour l'interpolation (par exemple, \filename{ELEV}).
   \item Dans le bloc Rendu, sélectionnez une méthode d'interpolation 
-  (par exemple, \selectstring{Interpolation Triangulaire}{\ldots}), puis 
-  définissez le nombre de colonnes et de cellules (par exemple, 3663 colonnes 
-  et 1964 lignes (ce qui équivaut à une résolution de 1000 mètres par 
+  (par exemple,\\ \selectstring{Interpolation Triangulaire}{\ldots}), puis 
+  définissez le nombre de colonnes et de cellules (par exemple, \numprint{3663} colonnes 
+  et \numprint{1964} lignes (ce qui équivaut à une résolution de \numprint{1000} mètres par 
   pixels)) ainsi qu'un nom pour le fichier raster de sortie
   (par exemple, \filename{elevation\_tin}).
   \item Appuyez sur \button{Ok}.
@@ -126,9 +126,7 @@ minutes et couvre la partie nord de l'Alaska.
 %\end{figure}
 \begin{figure}[ht]
    \begin{center}
-   \caption{Interpolation IDW sur le fichier elevp \nixcaption}\label{fig:interpolation_idw}\smallskip
    \includegraphics[clip=true, width=10cm]{interpolate_idw}
+   \caption{Interpolation IDW sur le fichier elevp \nixcaption}\label{fig:interpolation_idw}
 \end{center}  
 \end{figure}
-
-\newpage

@@ -1,4 +1,5 @@
-\subsection{L'extension Géoréférencer}
+%  !TeX  root  =  user_guide.tex  
+\section{L'extension Géoréférencer}
 
 %The Georeferencer Plugin is a tool for generating world files for rasters.
 %It allows you to reference rasters to geographic or projected coordinate systems by creating a 
@@ -45,8 +46,8 @@ Elle pourra par la suite être affichée avec les données du secteur GRASS spea
 
 \begin{figure}[ht]
 \begin{center}
-\caption{Fenêtre de l'extension de géoréférencement \nixcaption}\label{fig:georefplugin}\smallskip
-  \includegraphics[clip=true, width=12cm]{georefplugin}
+  \includegraphics[clip=true, width=10cm]{georefplugin}
+  \caption{Fenêtre de l'extension de géoréférencement \nixcaption}\label{fig:georefplugin}
 \end{center}
 \end{figure}
 
@@ -71,9 +72,11 @@ Elle pourra par la suite être affichée avec les données du secteur GRASS spea
 \begin{enumerate}
 \item En cliquant en un point de la carte raster et entrant les coordonnées X et Y manuellement
 \item En cliquant en un point de la carte raster puis sur le bouton \button{from map canvas} pour ajouter les coordonnées X et Y à l'aide d'une carte géoréférencée déjà chargée dans QGIS.
+\end{enumerate}
 \item Continuez de rentrer des points jusqu'à en avoir au moins 4. Des outils additionnels situés dans la partie supérieure de cette fenêtre permettent de zoomer et de se déplacer dans l'espace de travail.
+\end{enumerate}
 
-%\begin{figure}[ht]
+%%\begin{figure}[ht]
 %\begin{center}
 %  \caption{Add points to the raster image \nixcaption}\label{fig:choose_points}\smallskip
 %  \includegraphics[clip=true,width=9cm]{choose_points}
@@ -82,8 +85,8 @@ Elle pourra par la suite être affichée avec les données du secteur GRASS spea
 
 \begin{figure}[ht]
 \begin{center}
-  \caption{Ajout de points à l'image raster \nixcaption}\label{fig:choose_points}\smallskip
   \includegraphics[clip=true,width=9cm]{choose_points}
+  \caption{Ajout de points à l'image raster \nixcaption}\label{fig:choose_points}
 \end{center}
 \end{figure}
 
@@ -114,9 +117,9 @@ Actuellement plusieurs algorithmes sont disponibles :
 \begin{enumerate}
 \item Linéaire
 \item Helmert
-\item Polynomiale de 1er ordre
-\item Polynomiale de 2e ordre
-\item Polynomiale de 3e ordre
+\item Polynomiale de 1\ier ordre
+\item Polynomiale de 2\ieme ordre
+\item Polynomiale de 3\ieme ordre
 \item Thin plate spline (TPS)
 \end{enumerate}
 
@@ -127,7 +130,7 @@ Actuellement plusieurs algorithmes sont disponibles :
 %\item The Thin plate spline (TPS) algorithm is a more modern georeferencing method, which is able to introduce local deformations in the data. This algorithm is useful when very low quality originals are being georeferenced.
 %\end{itemize}
 
-\begin{itemize}
+\begin{itemize}[label=--]
 \item L'algorithme linéaire est utilisé pour créer un fichier world et diffère des autres dans le fait qu'il ne transforme pas vraiment le raster. Il ne sera sans doute pas satisfaisant si vous avez à faire à des travaux scannés.
 \item La transformation de Helmert réalise une simple mise à l'échelle et une rotation.
 \item Les algorithmes polynomiaux sont ceux les plus utilisés pour le géoréfrencement, chacun diffère des autres par le degré de distrotion introduit dans la tentative de de se rapprocher de la source originelle et des points de contrôle. Le plus courant est celui de deuxième ordre qui permet de courber l'image. La transformation de premier ordre (affine) préserve l'aspect et permet seulement la mise à l'échelle, le déplacement et la rotation.
@@ -144,7 +147,7 @@ Actuellement plusieurs algorithmes sont disponibles :
 \begin{enumerate}
 \item Quand les GCPs ont été collectés et la transformation choisie, pressez soit \button{Créer} pour créer un nouveau raster ou \button{Créer et charger la couche} tpour ajouter automatiquement le nouveau raster à la liste des couches.
 \item Un message d'avertissement s'affiche pour vous informer qu'un nouveau raster (au format GeoTIFF) sera créé.
-\item Après avoir cliqué sur OK, il vous sera demandé de choisir une méthode de ré-échantillonnage. Voici les  trois méthodes disponibles :
+\item Après avoir cliqué sur OK, il vous sera demandé de choisir une méthode de ré-échantillonna\-ge. Voici les  trois méthodes disponibles :
 
 \begin{enumerate}
 \item Au plus proche voisin
@@ -157,5 +160,5 @@ Actuellement plusieurs algorithmes sont disponibles :
 %\qgistip{The type of resampling you choose will likely depending on your input data and the ultimate objective of the exercise. If you don't want to change statistics of the image, you might want to choose Nearest neighbour, whereas a Cubic resampling will likely provide a more smoothed result.}
 %\end{Tip}
 \begin{Tip}\caption{\textsc{Choosing the resampling method}}
-\qgistip{Le type de ré-échantillonnage à retenir dépendra de votre donnée en entrée et de l'objectif de l'exercice. Si vous ne voulez pas changer les statistiques de l'image, vous devriez sélectionner la méthode du plus proche voisin tandis que le ré-échantillonnage cubique produira un résultat plus lisse.}
+Le type de ré-échantillonnage à retenir dépendra de votre donnée en entrée et de l'objectif de l'exercice. Si vous ne voulez pas changer les statistiques de l'image, vous devriez sélectionner la méthode du plus proche voisin tandis que le ré-échantillonnage cubique produira un résultat plus lisse.
 \end{Tip}
