@@ -1,14 +1,14 @@
-% vim: set textwidth=78 autoindent:
+%  !TeX  root  =  user_guide.tex 
 
-%\subsection{OpenStreetMap Plugin}
-\subsection{Extension OpenStreetMap}
+%\section{OpenStreetMap Plugin}
+\section{Extension OpenStreetMap}
 
 % when the revision of a section has been finalized, 
 % comment out the following line:
 % \updatedisclaimer
 
-%In recent years the OpenStreetMap project has gained popularity because in many countries no free geo data such as digital roadmaps are available. Target of the OSM project is to create a free editable map of the world from GPS data, aerial photography or simply from local knowledge. To support this idea QGIS provides a plugin that enables its users to work with OSM data.
-Ces dernières années, le projet OpenStreetMap a gagné en popularité, car dans beaucoup de pays, aucune donnée géographique gratuite telle que le réseau routier n'est disponible. L'objectif du projet OSM est de créer une carte du monde éditable à partir de données GPS, de photographies aériennes ou tout simplement des connaissances locales du terrain. Pour soutenir ce projet, QGIS fournit une extension qui permet aux utilisateurs de travailler avec les données OSM.
+%In recent years the OpenStreetMap project has gained popularity because in many countries no free geo data such as digital roadmaps are available. Target of the OSM project is to create a free editable map of the world from GPS data, aerial photography or simply from local knowledge. To support this idea \qg provides a plugin that enables its users to work with OSM data.
+Ces dernières années, le projet OpenStreetMap a gagné en popularité, car dans beaucoup de pays, aucune donnée géographique gratuite telle que le réseau routier n'est disponible. L'objectif du projet OSM est de créer une carte du monde éditable à partir de données GPS, de photographies aériennes ou tout simplement des connaissances locales du terrain. Pour soutenir ce projet, \qg fournit une extension qui permet aux utilisateurs de travailler avec les données OSM.
 
 %The plugin provides all basic functionalities for OSM data manipulation, such as data loading, importing, saving, downloading, editing and uploading data back to the OpenStreetMap server. While implementing OSM plugin an inspiration was taken from existing OSM data editors. The purpose was to combine their functionalities to get the best possible result.
 L'extension fournit toutes les fonctionnalités de base pour manipuler les données OSM : chargement des données, import, sauvegarde, téléchargement en local, édition et téléchargement des données vers le serveur OpenStreetMap. Cette extension s'inspire des éditeurs OSM existants. Le but est de combiner leurs fonctionnalités pour obtenir le meilleur résultat possible.
@@ -23,11 +23,11 @@ Les sous-sections suivantes donnent une brève introduction aux principes du pro
 Le projet OpenStreetMap a pour objectif de créer une carte du monde libre et gratuite. Les cartes sont créées à partir d'appareils GPS portables, de photographie aérienne et d'autres ressources libres ou simplement grâce aux connaissances locales. Le projet a été lancé sur le constat que l'utilisation de la plupart des cartes présente des restrictions légales ou techniques, empêchant les gens à les utiliser de manière créative, productive ou inattendue. Les rendus image ou vectoriel des données OSM sont disponibles au téléchargement sous la licence Creative Commons Attribution ShareAlike 2.0.
 
 \begin{figure}[ht]
-   \begin{center}
+\centering
    %\caption{OpenStreetMap data in the web \nixcaption}\label{fig:osmweb}\smallskip
-   \caption{Données OpenStreetMap sur Internet \nixcaption}\label{fig:osmweb}\smallskip
-   \includegraphics[clip=true, width=\textwidth]{osmweb}
-\end{center}
+  
+   \includegraphics[clip=true, width=12cm]{osmweb}
+   \caption{Données OpenStreetMap sur Internet \nixcaption}\label{fig:osmweb}
 \end{figure}
 
 %OpenStreetMap was inspired by sites such as Wikipedia - the map display (see Figure \ref{fig:osmweb}) features a prominent \tab{Edit} tab and a full revision history is maintained. Registered users can upload GPS track logs and edit the vector data using the given editing tools.
@@ -36,68 +36,67 @@ OpenStreetMap s'est inspiré de sites tel que Wikipedia - l'affichage de la cart
 %OSM data primitive is an object class that can be stored via the API in the server. The three supported types of data are: \textbf{Node}, \textbf{Way} and \textbf{Relation}. 
 La primitive des données OSM est une classe objet qui peut être stockée sur le serveur via une API. Les trois types de données existants sont : le \textbf{noeud}, la \textbf{trace} (Way) et la \textbf{relation}.
 
-\begin{itemize}
-%\item \textbf{A node} is a latitude/longitude pair of coordinates. It is used as building a block for other features and as a feature itself (Points Of Interest), if they are tagged as required. 
-\item \textbf{Un noeud} est une paire de coordonnées latitude/longitude. Il sert de brique de base pour les autres entités, étant lui-même une entité (Point d'intérêt - POI) s'ils sont étiquetés correctement.
-%\item \textbf{A way} is a list of at least two nodes that describe a linear feature such as a street, or similar. Nodes can be members of multiple ways.
-\item \textbf{Une trace} est une liste d'au moins deux noeuds qui décrit une entité linéaire telle qu'une rue. Les noeuds peuvent appartenir à plusieurs traces.
-%\item \textbf{A relation} is a group of zero or more primitives with associated roles. It is used to specify relationships between objects, and may also model an abstract object. 
-\item \textbf{Une relation} est un groupe composé d'aucune primitive ou plus associé à des rôles. C'est utilisé pour définir des relations entre les objets, mais peut également modéliser une abstraction.
-\end{itemize}
+\begin{description}
+%\item[A node} is a latitude/longitude pair of coordinates. It is used as building a block for other features and as a feature itself (Points Of Interest), if they are tagged as required. 
+\item[Un noeud] est une paire de coordonnées latitude/longitude. Il sert de brique de base pour les autres entités, étant lui-même une entité (Point d'intérêt - POI) s'ils sont étiquetés correctement.
+%\item[A way} is a list of at least two nodes that describe a linear feature such as a street, or similar. Nodes can be members of multiple ways.
+\item[Une trace] est une liste d'au moins deux noeuds qui décrit une entité linéaire telle qu'une rue. Les noeuds peuvent appartenir à plusieurs traces.
+%\item[A relation} is a group of zero or more primitives with associated roles. It is used to specify relationships between objects, and may also model an abstract object. 
+\item[Une relation] est un groupe composé d'aucune primitive ou plus associé à des rôles. C'est utilisé pour définir des relations entre les objets, mais peut également modéliser une abstraction.
+\end{description}
 
 %Several different logical features in a common map ('Point Of Interest', 'Street', 'Tram Line', 'Bus Stop' etc.) are defined by these primitives. Map features are well-known in the OSM community and are stored as tags, based of a key and a value. OSM is usually distibuted in XML format. XML payload is used for the communication with the OSM server as well.
-Plusieurs différentes entités logiques sur une carte classique (Point d'intérêt, rue, ligne de tramway, arrêt de bus, etc.) sont définies par ces primitives. Les entités cartographiques sont bien connues dans la communauté OSM et sont stockées en tant que 'tag', basé sur une clé et une valeur. Les données OSM sont en général distribuées au format XML. Un 'XML payload' est également utilisé pour la communication avec le serveur OSM.
+Plusieurs différentes entités logiques sur une carte classique (Point d'intérêt, rue, ligne de tramway, arrêt de bus, etc.) sont définies par ces primitives. Les entités cartographiques sont bien connues dans la communauté OSM et sont stockées en tant que \og tag\fg, basé sur une clé et une valeur. Les données OSM sont en général distribuées au format XML. Un \og XML payload\fg est également utilisé pour la communication avec le serveur OSM.
 
-%\minisec{QGIS - OSM Connection}\label{qgis-osm-connection}
-\minisec{Connexion QGIS - OSM}\label{qgis-osm-connection}
+%\minisec{\qg - OSM Connection}\label{qgis-osm-connection}
+\minisec{Connexion \qg - OSM}\label{qgis-osm-connection}
 
-%The first part of this subsection describes how OSM data primitives are displayed in QGIS vector layers. As written above, OSM data consist of Nodes, Ways and Relations. In QGIS they are displayed in three diffrent layer types: Point layer, Line layer and Polygon layer. It's not possible to remove any of these layers and work with the other ones.
-La première partie de ce paragraphe décrit de quelle manière les primitives des données OSM sont affichées dans des couches vectorielles QGIS. Comme il est précisé ci-dessus, les données OSM se composent de noeuds, de traces et de relations. Dans QGIS, elles sont affichées dans trois couches de type différent : couche de points, de lignes et de polygones. Il est impossible de retirer l'une de ces couches et de travailler avec les autres.
+%The first part of this subsection describes how OSM data primitives are displayed in \qg vector layers. As written above, OSM data consist of Nodes, Ways and Relations. In \qg they are displayed in three diffrent layer types: Point layer, Line layer and Polygon layer. It's not possible to remove any of these layers and work with the other ones.
+La première partie de ce paragraphe décrit de quelle manière les primitives des données OSM sont affichées dans des couches vectorielles \qg. Comme il est précisé ci-dessus, les données OSM se composent de noeuds, de traces et de relations. Dans \qg, elles sont affichées dans trois couches de type différent : couche de points, de lignes et de polygones. Il est impossible de retirer l'une de ces couches et de travailler avec les autres.
 
-\begin{itemize}
+\begin{description}
 %\item A \textbf{Point layer} displays all features of type Node that stands alone. That means that only Nodes that are not included in any Way belongs to the Point layer.
-\item Une \textbf{couche de points} affiche toutes les entités de type noeud isolé. Ce qui signifie que seuls les noeuds qui ne sont pas inclus dans une trace appartiennent à la couche de points.
+\item[Une couche de points ] affiche toutes les entités de type noeud isolé. Ce qui signifie que seuls les noeuds qui ne sont pas inclus dans une trace appartiennent à la couche de points.
 %\item A \textbf{Line layer} displays those OSM features of type Way that are not closed. That means, none of these Ways starts and ends with the same Node.
-\item Une \textbf{couche de lignes} affiche les entités OSM de type trace qui ne sont pas fermées. Cela signifie qu'aucune de ces traces ne commence et finit par le même noeud.
+\item [Une couche de lignes] affiche les entités OSM de type trace qui ne sont pas fermées. Cela signifie qu'aucune de ces traces ne commence et finit par le même noeud.
 %\item A \textbf{Polygon layer} displays all Ways that are not included in Line layer.
-\item Une \textbf{couche de polygones} affiche toutes les traces qui ne sont pas incluses dans la couche de lignes.
-\end{itemize}
+\item[Une couche de polygones] affiche toutes les traces qui ne sont pas incluses dans la couche de lignes.
+\end{description}
 
 %OpenStreetMap has one more data primitive except for the three mentionedabove. This is called \textbf{Relation}. There is purposely no vector layer to display Relations. A Relation defines relation between any number of data primitives. After Point, Line or Polygon is identified on a map, the plugin shows a list of all relations, the identified feature is part of.
 En plus des trois cités ci-dessus, OpenStreetMap possède un dernier type de données, il s'agit des \textbf{Relations}. Il n'y a pas de couche vecteur dédiée à la représentation des relations. Une relation définit la relation entre n'importe quel nombre de primitives. Dès qu'un point, une ligne ou un polygone est identifié sur la carte, l'extension affiche la liste de toutes les relations auxquelles l'entité appartient.
 
-%Challenging was to design the connection between OSM data and the standard QGIS editing tools. These tools are made to edit a single vector layer at a time, no matter of what feature types it displays. This means that if OSM data are loaded to QGIS through the plugin, you could (theoretically) edit Point layer, Line layer or Polygon layer with these standard tools separately.
-Ce fut un vrai challenge de définir la connexion entre les données OSM et les outils standards d'édition de QGIS. Ces outils sont faits pour éditer chaque couche vectorielle séparément, quel que soit le type d'entités. Ce qui signifie que si des données OSM sont chargées dans QGIS via l'extension, vous pourriez théoriquement éditer les couches de points, de lignes et de polygones avec ces outils standards séparément.
+%Challenging was to design the connection between OSM data and the standard \qg editing tools. These tools are made to edit a single vector layer at a time, no matter of what feature types it displays. This means that if OSM data are loaded to \qg through the plugin, you could (theoretically) edit Point layer, Line layer or Polygon layer with these standard tools separately.
+Ce fut un vrai challenge de définir la connexion entre les données OSM et les outils standards d'édition de \qg. Ces outils sont faits pour éditer chaque couche vectorielle séparément, quel que soit le type d'entités. Ce qui signifie que si des données OSM sont chargées dans \qg via l'extension, vous pourriez théoriquement éditer les couches de points, de lignes et de polygones avec ces outils standards séparément.
 
 %The problem is, that Line layer consists of two different types of OSM features - Ways and Nodes. Why? Because in OSM format a Way is composed of Nodes. If you start editing a Line layer and change the shape of some line, your action must affect not only the OSM Way but also the OSM Nodes that are part of it.
 Le problème est que la couche de ligne est composée de deux types différents d'entités OSM - des traces et des noeuds. Pourquoi ? Parce que dans le format OSM, une trace est composée de noeuds. Si vous commencez à éditer une couche de ligne et que vous changez la forme d'une ligne, votre action doit affecter non seulement la trace OSM, mais également les noeuds qui la composent.
 
-%QGIS standard editing tools cannot tell the OSM provider, which members of which line has changed and how. It can tell only what's the new geometry of which line, and that's not enough to propagate changes to the OSM database correctly. The Line layer does also not know the identifiers of the line members. The same problem occurs when you try to edit the Polygon layer.
-Les outils d'édition standards de QGIS ne peuvent pas dire au fournisseur OSM quels sont les noeuds qui ont changé et comment. Ils peuvent seulement dire quelle est la nouvelle géométrie de chaque ligne, mais ce n'est pas suffisant pour propager les changements à la base de données OSM correctement. La couche ligne ne connait pas non plus les identifiants des points des noeuds qui la constituent. Le même problème apparaît lorsque vous essayez d'éditer la couche de polygones.
+%\qg standard editing tools cannot tell the OSM provider, which members of which line has changed and how. It can tell only what's the new geometry of which line, and that's not enough to propagate changes to the OSM database correctly. The Line layer does also not know the identifiers of the line members. The same problem occurs when you try to edit the Polygon layer.
+Les outils d'édition standards de \qg ne peuvent pas dire au fournisseur OSM quels sont les noeuds qui ont changé et comment. Ils peuvent seulement dire quelle est la nouvelle géométrie de chaque ligne, mais ce n'est pas suffisant pour propager les changements à la base de données OSM correctement. La couche ligne ne connait pas non plus les identifiants des points des noeuds qui la constituent. Le même problème apparaît lorsque vous essayez d'éditer la couche de polygones.
 
 %For this reason, the OSM plugin need its own tools for editing OSM data. While they are used, the OSM layers can be changed correctly. The Plugin editing tools consists of tools for Point, Line, Polygon and Relation creation, deletion and moving.
 Pour ces raisons, l'extension OSM a besoin de ses propres outils d'édition des données OSM. Tant qu'ils sont utilisés, les couches OSM peuvent être éditées correctement. Les outils d'édition de l'extension comprennent des outils pour la création, la suppression et le déplacement de points, de lignes, de polygones et de relations.
 
 %\textbf{Note:} To create a connection between the OSM plugin and standard editing tools, changes in QuantumGIS core code would be necessary.
-\textbf{Note :} Pour créer une connexion entre l'extension OSM et les outils standards d'édition, des modifications dans le code principal de QGIS seraient nécessaires. 
+\textbf{Note :} Pour créer une connexion entre l'extension OSM et les outils standards d'édition, des modifications dans le code principal de \qg seraient nécessaires. 
 
-\subsubsection{Installation}
+\subsection{Installation}
 
-%The OpenStreetMap plugin is a core plugin inside QGIS. If you have python support enabled, the 'OpenStreetMap' plugin can be selected in the Plugin Manager as described in section \ref{sec:load_core_plugin}). 
-L'extension OpenStreetMap fait partie des extensions principales de QGIS. Si le support pour Python est activé, l'extension 'OpenStreetMap' peut être sélectionnée dans le Gestionnaire d'extensions tel que décrit dans la section \ref{sec:load_core_plugin}).
+%The OpenStreetMap plugin is a core plugin inside \qg. If you have python support enabled, the 'OpenStreetMap' plugin can be selected in the Plugin Manager as described in section \ref{sec:load_core_plugin}). 
+L'extension OpenStreetMap fait partie des extensions principales de \qg. Si le support pour Python est activé, l'extension \og OpenStreetMap\fg peut être sélectionnée dans le Gestionnaire d'extensions tel que décrit dans la section \ref{sec:load_core_plugin}).
 
-%\subsubsection{Basic user interface}
-\subsubsection{Interface utilisateur de base}
+%\subsection{Basic user interface}
+\subsection{Interface utilisateur de base}
 
-%The first time the OSM plugin is started (and after the first data are loaded), several new OSM plugin icons appear in the QGIS toolbar menu together with new graphical components as shown in Figure \ref{fig:osmwidget}:
+%The first time the OSM plugin is started (and after the first data are loaded), several new OSM plugin icons appear in the \qg toolbar menu together with new graphical components as shown in Figure \ref{fig:osmwidget}:
 Au premier lancement de l'extension OSM (et une fois les premières données chargées), plusieurs nouvelles icônes OSM avec de nouveaux composants graphiques apparaissent dans la barre d'outils d'OSM, comme on peut le voir sur la figure \ref{fig:osmwidget} :
 
 \begin{figure}[ht]
-   \begin{center}
+\centering
    %\caption{OSM plugin user interface \nixcaption}\label{fig:osmwidget}\smallskip
-   \caption{Interface utilisateur de l'extension OSM \nixcaption}\label{fig:osmwidget}\smallskip
-   \includegraphics[clip=true, width=\textwidth]{osm_widgets}
-\end{center}
+   \includegraphics[clip=true, width=12cm]{osm_widgets}
+   \caption{Interface utilisateur de l'extension OSM \nixcaption}\label{fig:osmwidget}
 \end{figure}
 
 %\minisec{OSM Features widget}
@@ -116,7 +115,7 @@ Ce widget Editer l'historique OSM est utilisé pour annuler ou refaire des actio
 \minisec{Icônes de la barre de menu}
 
 \begin{description}
-%\item \toolbtntwo{osm_load}{Load OSM from file}: is used to load data from a special OpenStreetMap XML file.
+%\item \toolbtntwo{osm_load}{Load OSM from file :] is used to load data from a special OpenStreetMap XML file.
 \item \toolbtntwo{osm_load}{Charger OSM depuis un fichier} est utilisé pour charger des données à partir d'un fichier XML spécial OpenStreetMap (.osm)
 %\item \toolbtntwo{osm_featureManager}{Show/Hide OSM Feature Manager} is used to show or hide the OSM Feature widget. The OSM Feature widget is a panel that helps with OSM feature identification and with OSM data editing.
 \item \toolbtntwo{osm_featureManager}{Afficher/Cacher le gestionnaire d'entités OSM} est utilisé pour montrer ou cacher le widget Entité OSM. Il s'agit d'un panneau qui aide à l'identification des entités OSM et l'édition des données OSM.
@@ -133,42 +132,41 @@ Ce widget Editer l'historique OSM est utilisé pour annuler ou refaire des actio
 %More detailed information on all the widgets, buttons and dialogs can be found in appropriate sections of this plugin section according to their functionality (editing, identification, etc.).
 Des informations plus détaillées sur tous les widgets, boutons et fenêtres se trouvent dans les sections correspondant à leur fonction (édition, identification, etc.).
 
-%\subsubsection{Loading OSM data}
-\subsubsection{Charger des données OSM}
+%\subsection{Loading OSM data}
+\subsection{Charger des données OSM}
 
 %The first action that should be done after starting the OSM Plugin is opening data from an OSM file. OSM data can be import as shapefile or downloaded directly from the OpenStreetMap server. Here we are focusing on the first mentioned method.
 La première action qui devrait faire suite au lancement de l'extension OSM est l'ouverture de données depuis un fichier OSM. Les données OSM peuvent être importées comme shapefile ou directement téléchargées depuis le serveur OpenStreetMap. Nous allons nous focaliser ici sur la première méthode mentionnée.
 
-%To load data from a file use the \toolbtntwo{osm_load}{Load OSM from file} icon. If there is no such button, maybe someone disabled OpenStreetMap toolbar in your QGIS instalation. You can enable it again selecting \mainmenuopt{Settings} > \mainmenuopt{Toolbars} > \dropmenuopt{OpenStreetMap}.
-Pour charge des données depuis un fichier, cliquez sur l'icône \toolbtntwo{osm_load}{Charger OSM depuis un fichier}. S'il n'y a pas de tel bouton, la barre d'outils OpenStreetMap n'est peut-être pas activée dans QGIS. Vous pouvez le refaire en sélectionnant \mainmenuopt{Vue} > \mainmenuopt{Barres d'outils} > \dropmenuopt{OpenStreetMap}.
+%To load data from a file use the \toolbtntwo{osm_load}{Load OSM from file} icon. If there is no such button, maybe someone disabled OpenStreetMap toolbar in your \qg instalation. You can enable it again selecting \mainmenuopt{Settings} > \mainmenuopt{Toolbars} > \dropmenuopt{OpenStreetMap}.
+Pour charge des données depuis un fichier, cliquez sur l'icône\\ \toolbtntwo{osm_load}{Charger OSM depuis un fichier}. S'il n'y a pas de tel bouton, la barre d'outils OpenStreetMap n'est peut-être pas activée dans \qg. Vous pouvez le refaire en sélectionnant \mainmenuopt{Vue} > \mainmenuopt{Barres d'outils} > \dropmenuopt{OpenStreetMap}.
 
 \begin{figure}[ht]
-   \begin{center}
+\centering
    %\caption{Load OSM data dialog \nixcaption}\label{fig:osmload}\smallskip
-   \caption{Fenêtre de chargement de données OSM \nixcaption}\label{fig:osmload}\smallskip
    \includegraphics[clip=true, width=12cm]{osmloaddialog}
-\end{center}
+   \caption{Fenêtre de chargement de données OSM \nixcaption}\label{fig:osmload}
 \end{figure}
 
 %Purpose of its elements is explained below.
 Le but de chacun de ses éléments est expliqué ci-dessous :
 
 \begin{description}
-%\item \textbf{OpenStreetMap file to load}: Click on the button to select the .osm file you want to load data from.
-\item \textbf{Fichier OpenStreetMap à charger} : Cliquez sur le bouton pour sélectionner le fichier .osm dont vous voulez charger les données.
-%\item \textbf{Add columns for tags}: This option determines a connection between OSM and QGIS data. Each feature of OSM data has some tags (pairs of key and value), that define the feature properties. Each feature of a QGIS vector layer also has its attributes (key and value). With this option you can define which properties of OSM objects should be visible when displaying detailed information about QGIS features.
-\item \textbf{Ajouter des colonnes pour les tags} : Cette option définit une connexion entre des données OSM et QGIS. Chaque entité de données OSM possède une série de tags (une paire clé valeur) qui définit les propriétés de l'entité. Chaque entité d'une couche vecteur QGIS possède également ses attributs (clé et valeur). Avec cette option, vous pouvez définir quelles propriétés des objets OSM seront visibles lorsque vous affichez les informations détaillées sur les entités QGIS.
-%\item \textbf{Replace current data}: Checking this option means that new data should replace current data the user is working with. Layers of current data will be removed and new ones will be loaded. When loading OSM data for the first time, this option is not active, because there is nothing to replace.
-\item \textbf{Remplacer les données actuelles} : Cocher cette option signifie que les nouvelles données doivent remplacer celles utilisées actuellement. Les couches des données actuelles seront supprimées et les nouvelles chargées. Lorsque vous chargez des données OSM pour la première fois, cette option n'est pas active, car il n'y a rien à remplacer.
-%\item \textbf{Use custom renderer}: This option determines how many details of the map will be used. There are three pre-defined OSM styles for map displaying. Use \button{Small scale} if you want to view OSM data at low level, to see all details and to edit something. If not you can use \button{Medium scale} or \button{Large scale}. QGIS \CURRENT doesn't support changing the renderer style dynamically.
-\item \textbf{Utiliser un rendu prédéfini} : Cette option détermine combien de détails de la carte seront utilisés. Il y a trois styles OSM prédéfinis pour la carte. Utilisez \button{Petite échelle} si vous souhaitez afficher des données OSM à un petit niveau, voir tous les détails et éditer les données. Sinon vous pouvez utiliser \button{Échelle intermédiaire} ou \button{Grande Échelle}. QGIS \CURRENT ne permet pas de changer dynamiquement ces styles de rendu.
+%\item[OpenStreetMap file to load :] Click on the button to select the .osm file you want to load data from.
+\item[Fichier OpenStreetMap à charger :] Cliquez sur le bouton pour sélectionner le fichier .osm dont vous voulez charger les données.
+%\item[Add columns for tags :] This option determines a connection between OSM and \qg data. Each feature of OSM data has some tags (pairs of key and value), that define the feature properties. Each feature of a \qg vector layer also has its attributes (key and value). With this option you can define which properties of OSM objects should be visible when displaying detailed information about \qg features.
+\item[Ajouter des colonnes pour les tags :] Cette option définit une connexion entre des données OSM et \qg. Chaque entité de données OSM possède une série de tags (une paire clé valeur) qui définit les propriétés de l'entité. Chaque entité d'une couche vecteur \qg possède également ses attributs (clé et valeur). Avec cette option, vous pouvez définir quelles propriétés des objets OSM seront visibles lorsque vous affichez les informations détaillées sur les entités \qg.
+%\item[Replace current data :] Checking this option means that new data should replace current data the user is working with. Layers of current data will be removed and new ones will be loaded. When loading OSM data for the first time, this option is not active, because there is nothing to replace.
+\item[Remplacer les données actuelles :] Cocher cette option signifie que les nouvelles données doivent remplacer celles utilisées actuellement. Les couches des données actuelles seront supprimées et les nouvelles chargées. Lorsque vous chargez des données OSM pour la première fois, cette option n'est pas active, car il n'y a rien à remplacer.
+%\item[Use custom renderer :] This option determines how many details of the map will be used. There are three pre-defined OSM styles for map displaying. Use \button{Small scale} if you want to view OSM data at low level, to see all details and to edit something. If not you can use \button{Medium scale} or \button{Large scale}. \qg \CURRENT doesn't support changing the renderer style dynamically.
+\item[Utiliser un rendu prédéfini :] Cette option détermine combien de détails de la carte seront utilisés. Il y a trois styles OSM prédéfinis pour la carte. Utilisez \button{Petite échelle} si vous souhaitez afficher des données OSM à un petit niveau, voir tous les détails et éditer les données. Sinon vous pouvez utiliser \button{Échelle intermédiaire} ou \button{Grande Échelle}. \qg \CURRENT ne permet pas de changer dynamiquement ces styles de rendu.
 \end{description}
 
 %Click \button{Ok} to load your data. If this is the first time OSM file is loaded, the plugin must first parse the database. This may take few seconds or minutes - it depends on the amount of loaded data.
 Cliquez sur \button{Ok} pour charger vos données. S'il s'agit du premier chargement de données OSM, l'extension doit d'abord parcourir la base de données. Cela peut prendre quelques secondes ou minutes selon la quantité de données à charger.
 
-%\subsubsection{Viewing OSM data}
-\subsubsection{Visualiser des données OSM}
+%\subsection{Viewing OSM data}
+\subsection{Visualiser des données OSM}
 
 %After OSM data are loaded, you can identify map features using the appropriate tool. Use the \toolbtntwo{osm_identify}{Identify feature} button on the top-left of OSM Feature widget. Using this tool you can easily explore all map objects. When the mouse cursor is placed over an object, you can see all information on it directly in the OSM Feature widget. There is also a dynamic rubberband displayed on the map so that the user is able to determine which feature is currently identified.
 Une fois les données OSM chargées, vous pouvez identifier les entités cartographiques en utilisant l'outil approprié. Utilisez le bouton \toolbtntwo{osm_identify}{Identifier l'entité} en haut à gauche du widget Entité OSM. Avec cet outil vous pouvez facilement explorer tous les objets cartographiques. Quand le curseur de la souris est placé sur un objet, vous pouvez voir toutes les informations le concernant directement dans le widget Entité OSM. Il y a également une étiquette qui s'affiche sur la carte pour que l'utilisateur puisse déterminer l'entité en cours d'identification.
@@ -182,11 +180,11 @@ Si vous souhaitez prendre le temps de lire les propriétés et les relations d'u
 %Sometimes there are more than one feature at a point where left-clicking was performed. This happens especially when clicking on cross-roads or if you didn't zoom enough into the map. In this situation only one of such features is identified (and marked with the rubberband) but the plugin remembers all of them. Then (still in the pause mode) you can change identified features cyclical with right-clicking.
 Il y a parfois plus d'une entité à l'endroit du point cliqué. Cela arrive surtout lorsque l'on clique sur un croisement de route ou lorsque vous n'avez pas assez zoomé sur la carte. Dans ce cas, seule une entité est identifiée (et marquée par l'étiquette), mais l'extension les garde toutes en mémoire. Ensuite vous pouvez changer les entités identifiées de manière cyclique en faisant un clic-droit.
 
-%\subsubsection{Editing basic OSM data}
-\subsubsection{Éditer des données OSM de base}
+%\subsection{Editing basic OSM data}
+\subsection{Éditer des données OSM de base}
 
 %In the title of this section 'basic data' means non-relation OSM features - nodes and ways. If you prefer reading information on relation editing, just skip this section and read the next one.
-Dans le titre de cette section, 'données de base' signifie entités de type noeud ou trace, pas relation. Si vous souhaitez avoir des informations sur l'édition de relations, sautez cette section et passez à la suivante.
+Dans le titre de cette section, \og données de base\fg signifie entités de type noeud ou trace, pas relation. Si vous souhaitez avoir des informations sur l'édition de relations, sautez cette section et passez à la suivante.
  
 %Basic data editing is a key part of OSM Plugin. You can change property, position or shape of any existing basic feature. You can remove features or add new ones. All such changes on nodes and ways are remembered for comfortable usage of Undo/Redo operations and for easy upload of all changes to OpenStreetMap server.
 L'édition des données de base est une partie clé de l'extension OSM. Vous pouvez changer la propriété, la position ou la forme de n'importe quelle entité de base existante. Vous pouvez en supprimer ou en ajouter de nouvelles. Toutes ces modifications sur les noeuds et les traces sont gardées en mémoire pour faciliter les opérations annuler/refaire et pour faciliter leur chargement sur le serveur d'OpenStreeMap.
@@ -198,15 +196,14 @@ L'édition des données de base est une partie clé de l'extension OSM. Vous pou
 Changer une propriété/un tag d'une entité OSM peut être réalisé directement dans la table des tags de l'entité. Cette table des tags des entités de base se trouve dans le widget Entité OSM. N'oubliez pas d'identifier une entité au préalable.
 
 \begin{figure}[ht]
-   \begin{center}
+\centering
    %\caption{Changing an OSM feature tag \nixcaption}\label{fig:osmchfeattag}\smallskip
-   \caption{Changer le tag d'une entité OSM \nixcaption}\label{fig:osmchfeattag}\smallskip
    \includegraphics[clip=true, width=12cm]{osm_changefeaturetag}
-\end{center}
+   \caption{Changer le tag d'une entité OSM \nixcaption}\label{fig:osmchfeattag}\smallskip
 \end{figure}
 
 %If you want to change a tag value, just double-click in the appropriate row of column 'Value' and type or select a new value. If you want to remove a tag, click in its row, then use button \button{Remove selected tags} on the right bottom under the table.
-Si vous souhaitez changer la valeur d'un tag, double-cliquez simplement sur la ligne appropriée de la colonne 'Valeur' et tapez ou sélectionnez une nouvelle valeur. Si vous souhaitez supprimer un tag, cliquez sur sa ligne puis utilisez le bouton \button{Supprimer les tags sélectionnés} situé en bas à droite sous la table.
+Si vous souhaitez changer la valeur d'un tag, double-cliquez simplement sur la ligne appropriée de la colonne \og Valeur\fg et tapez ou sélectionnez une nouvelle valeur. Si vous souhaitez supprimer un tag, cliquez sur sa ligne puis utilisez le bouton \button{Supprimer les tags sélectionnés} situé en bas à droite sous la table.
 
 %To add new tags just type its key and value into the last row of the table - where '<next tag value>' is written. Notice that you cannot change the key of an existing tag pair. For comfortable usage, there are some combo boxes of all existing tag keys and their typical values.
 Pour ajouter de nouveaux tags, tapez simplement leur clé et leur valeur dans la dernière ligne de la table - où '<next tag value>' est écrit. Notez que vous ne pouvez pas changer la clé d'un tag existant. Pour une utilisation facilitée, il y a des listes déroulantes de toutes les clés de tag existantes et leur valeur typique.
@@ -218,11 +215,10 @@ Pour ajouter de nouveaux tags, tapez simplement leur clé et leur valeur dans la
 Pour la création de points, il y a un bouton \toolbtntwo{osm_createPoint}{Créer un point} dans le widget Entité OSM. Pour créer des points, cliquez simplement sur le bouton puis cliquez sur la carte. Si votre curseur se situe sur une entité déjà existante, elle se retrouve marquée/identifiée immédiatement. Si vous cliquez sur la carte quant une ligne ou un polygone est marqué, un nouveau point est créé directement sur la ligne ou le polygone, en tant que nouveau membre. Si votre curseur se trouve sur un point existant, aucun nouveau point ne peut être créé et l'extension OSM affichera le message suivant :
 
 \begin{figure}[ht]
-   \begin{center}
+\centering
    %\caption{OSM point creation message \nixcaption}\label{fig:osmpoicreat}\smallskip
-   \caption{Message de création de point OSM \nixcaption}\label{fig:osmpoicreat}\smallskip
    \includegraphics[clip=true, width=8cm]{osm_pointcreation}
-\end{center}
+   \caption{Message de création de point OSM \nixcaption}\label{fig:osmpoicreat}
 \end{figure}
 
 %The mechanism of helping a user to hit the line or polygon is called snapping and is enabled by default. If you want to create a point very close to some line (but not on it) you must disable snapping by holding the \keystroke{Ctrl} key first.
@@ -234,7 +230,7 @@ Le mécanisme qui permet d'aider l'utilisateur à cliquer exactement sur une lig
 %For line creation there is a \toolbtntwo{osm_createLine}{Create line} button on the OSM Feature widget. To create a line just click the button and start left-clicking on the map. Each of your left-clicks is remembered as a member vertex of the new line. Line creation ends when first right-click is performed. The new line will immediately appear on the map.
 Pour la création de lignes, il y a un bouton \toolbtntwo{osm_createLine}{Créer une ligne} dans le widget Entité OSM. Pour créer une ligne, cliquez simplement sur le bouton puis faites des clic-gauche sur la carte. Chaque clic-gauche est gardé en mémoire en tant que vertex de la nouvelle ligne. La création de la ligne se termine au premier clic-droit. La nouvelle ligne apparaît alors immédiatement sur la carte.
 
-%\textbf{Note}: A Line with less than two members cannot be created. In such case the operation is ignored.
+%\textbf{Note :] A Line with less than two members cannot be created. In such case the operation is ignored.
 \textbf{Note} : Une ligne composée de moins de deux membres ne peux pas être créée. Dans de tels cas, l'opération est ignorée.
 
 %Snapping is performed to all map vertices - points from Point vector layer and all Line and Polygon members. Snapping can be disabled by holding the \keystroke{Ctrl} key.
@@ -250,7 +246,7 @@ Pour la création de polygones, il y a un bouton \toolbtntwo{osm_createPolygon}{
 \minisec{Déplacement d'une entité cartographique}
 
 %If you want to move a feature (no matter what type) please use the \toolbtntwo{osm_move}{Move feature} button from the OSM Feature widget menu. Then you can browse the map (features are identified dynamically when you go over them) and click on the feature you want to move. If a wrong feature is selected after your click, don't move it from the place. Repeat right-clicking until the correct feature is identified. When selection is done and you move the cursor, you are no more able to change your decision what to move. To confirm the move, click on the left mouse button. To cancel a move, click another mouse button.
-Si vous souhaitez déplacer une entité (quel que soit son type), utilisez le bouton \toolbtntwo{osm_move}{Déplacer une entité} du menu du widget Entité OSM. Vous pouvez ensuite parcourir la carte (les entités sont alors identifiées dynamiquement au passage de la souris) et cliquez sur l'entité que vous souhaitez déplacer. Si la mauvaise entité est sélectionnée par ce clic, ne déplacez pas votre curseur. Refaites des clics-droit jusqu'à ce que la bonne entité soit sélectionnée. Dès que la sélection est faite et que vous déplacez le curseur, vous ne pouvez plus changer d'entité à déplacer. Pour confirmer le déplacement, cliquez sur le bouton gauche de la souris. Pour l'annuler, cliquez sur un autre bouton de la souris.
+Si vous souhaitez déplacer une entité (quel que soit son type), utilisez le bouton\\ \toolbtntwo{osm_move}{Déplacer une entité} du menu du widget Entité OSM. Vous pouvez ensuite parcourir la carte (les entités sont alors identifiées dynamiquement au passage de la souris) et cliquez sur l'entité que vous souhaitez déplacer. Si la mauvaise entité est sélectionnée par ce clic, ne déplacez pas votre curseur. Refaites des clics-droit jusqu'à ce que la bonne entité soit sélectionnée. Dès que la sélection est faite et que vous déplacez le curseur, vous ne pouvez plus changer d'entité à déplacer. Pour confirmer le déplacement, cliquez sur le bouton gauche de la souris. Pour l'annuler, cliquez sur un autre bouton de la souris.
 
 %If you are moving a feature that is connected to another features, these connections won't be damaged. Other features will just adapt themselves to a new position of a moved feature. 
 Si vous déplacez une entité qui est connectée à une autre, ces connexions ne seront pas endommagées. DLes autres entités s'adapteront d'elles-mêmes à la nouvelle position de l'entité déplacée.
@@ -258,7 +254,7 @@ Si vous déplacez une entité qui est connectée à une autre, ces connexions ne
 %Snapping is also supported in this operation, this means: 
 L'accrochage fonctionne également pour cette opération :
 
-\begin{itemize}
+\begin{itemize}[label=--]
 %\item When moving a standalone (not part of any line/polygon) point, snapping to all map segments and vertices is performed.
 \item Lorsque vous déplacez un point seul (ne faisant pas partie d'une ligne ou d'un polygone), l'accrochage est réalisé sur tous les segments et vertex de la carte.
 %\item When moving a point that is a member of some lines/polygons, snapping to all map segments and vertices is performed, except for vertices of point parents.
@@ -282,14 +278,14 @@ Si l'entité parente était un polygone composé de trois vertex, sa nouvelle g�
 %If the parent feature was a line with two vertexes, its new geometry has only one vertex. And because there cannot exist a line with only one vertex, the feature type is automatically changed to Point.
 Si l'entité parente était une ligne avec deux vertex, sa nouvelle géométrie en comprend alors un seul. Mais comme il ne peut exister de ligne à un vertex, l'entité est automatiquement transformée en point.
 
-%\subsubsection{Editing relations}\label{editing_osm_relation}
-\subsubsection{Éditer les relations}\label{editing_osm_relation}
+%\subsection{Editing relations}\label{editing_osm_relation}
+\subsection{Éditer les relations}\label{editing_osm_relation}
 
 %Thanks to existency of OSM relations we can join OSM features into groups and give them common properties - in such way we can model any possible map object: borders of a region (as group of ways and points), roads of a bus, etc. Each member of a relation has its specific role. There is a pretty good support for OSM Relations in our plugin. Let's see how to examine, create, update or remove them.
 Grâce à l'existence des relations dans OSM, nous pouvons lier des entités OSM et leur donner des propriétés communes - de telle sorte que nous pouvons modéliser n'importe quel objet cartographique : des frontières de région (en tant que groupe de lignes et de points), des lignes de bus, etc. Chaque membre de la relation a un rôle spécifique. Les relations OSM sont plutôt bien supportées dans notre extension. Voyons maintenant comment examiner, créer, mettre à jour et supprimer des relations.
 
 %\minisec{Examining relation}\label{examrelation}
-\subsubsection{Examiner une relation}\label{examrelation}
+\subsection{Examiner une relation}\label{examrelation}
 
 %If you want to see relation properties, first identify one of its members. After that open the \tab{Relations} tab on the OSM Feature widget. At the top of the tab you can see a list of all relations the identified feature is part of. Please choose the one you want to examine and look at its information below. In the first table called 'Relation tags' you find the properties of the selected relation. In the table called 'Relation members' you see brief information on the relation members. If you click on a member, the plugin will make a rubberband on it in the map.
 Si vous souhaitez voir les propriétés d'une relation, identifiez d'abord l'un de ses membres. Ensuite, ouvrez l'onglet \tab{Relations} dans le widget Entité OSM. En haut, vous pouvez voir la liste de toutes les relations dont fait partie l'entité identifiée. Choisissez celle que vous souhaitez examiner et regardez en dessous les informations demandées. Dans le premier tableau 'Étiquettes de Relation' se trouvent les propriétés de la relation sélectionnée. Dans le tableau 'Membres de la relation', se trouvent les informations sur les membres de la relation. Si vous cliquez sur un membre, l'extension affichera une étiquette sur la carte.
@@ -319,33 +315,33 @@ Enfin, lorsque le type, les tags et les membres sont choisis, vous pouvez valide
 \minisec{Changer une relation}
 
 %If you want to change an existing relation, identify it first (follow steps written above in Section 'Examining relation'). After that click on the \toolbtntwo{osm_editRelation}{Edit relation} button. You will find it on the OSM Feature widget. A new dialog appears, nearly the same as for the 'create relation' action. The dialog is pre-filled with information on given relations. You can change relation tags, members or even its type. After submiting the dialog your changes will be commited.
-Si vous souhaitez changer une relation existante, identifiez-la (suivez les étapes décrites ci-dessus dans la section 'Examiner une relation'). Ensuite, cliquez sur le bouton \toolbtntwo{osm_editRelation}{Éditer une relation}. Vous le trouverez dans le widget Entité OSM. Une nouvelle fenêtre apparaît, quasiment identique à celle de l'action 'Créer une relation'. La fenêtre est préremplie avec les informations sur la relation. Vous pouvez changer ses tags, ses membres et même son type. Les changements seront effectués une fois la fenêtre validée.
+Si vous souhaitez changer une relation existante, identifiez-la (suivez les étapes décrites ci-dessus dans la section \og Examiner une relation\fg). Ensuite, cliquez sur le bouton\\ \toolbtntwo{osm_editRelation}{Éditer une relation}. Vous le trouverez dans le widget Entité OSM. Une nouvelle fenêtre apparaît, quasiment identique à celle de l'action 'Créer une relation'. La fenêtre est préremplie avec les informations sur la relation. Vous pouvez changer ses tags, ses membres et même son type. Les changements seront effectués une fois la fenêtre validée.
 
-%\subsubsection{Downloading OSM data}  
-\subsubsection{Télécharger des données OSM}  
+%\subsection{Downloading OSM data}  
+\subsection{Télécharger des données OSM}  
 
-%To download data from OpenStreetMap server click on the \toolbtntwo{osm_download}{Download OSM data} button. If there is no such button, the OSM toolbar may be disabled in your QGIS instalation. You can enable it again at \mainmenuopt{Settings} > \mainmenuopt{Toolbars} > \dropmenuopt{OpenStreetMap}. After clicking the button a dialog occurs and provides following functionalities:
-Pour télécharger des données depuis le serveur d'OpenStreetMap, cliquez sur le bouton \toolbtntwo{osm_download}{Télécharger des données OSM}. Si vous ne voyez pas ce bouton, la barre d'outils OSM est peut-être désactivée dans QGIS. Vous pouvez l'activer ou la réactiver dans \mainmenuopt{Vue} > \mainmenuopt{Barres d'outils} > \dropmenuopt{OpenStreetMap}. Après avoir cliqué sur le bouton, une fenêtre apparaît et propose les fonctionnalités suivantes :
+%To download data from OpenStreetMap server click on the \toolbtntwo{osm_download}{Download OSM data} button. If there is no such button, the OSM toolbar may be disabled in your \qg instalation. You can enable it again at \mainmenuopt{Settings} > \mainmenuopt{Toolbars} > \dropmenuopt{OpenStreetMap}. After clicking the button a dialog occurs and provides following functionalities:
+Pour télécharger des données depuis le serveur d'OpenStreetMap, cliquez sur le bouton \toolbtntwo{osm_download}{Télécharger des données OSM}. Si vous ne voyez pas ce bouton, la barre d'outils OSM est peut-être désactivée dans \qg. Vous pouvez l'activer ou la réactiver dans \mainmenuopt{Vue} >\\ \mainmenuopt{Barres d'outils} > \dropmenuopt{OpenStreetMap}. Après avoir cliqué sur le bouton, une fenêtre apparaît et propose les fonctionnalités suivantes :
 
 \begin{figure}[ht]
-   \begin{center}
+\centering
    %\caption{OSM download dialog \nixcaption}\label{fig:osmdownload}\smallskip
-   \caption{Fenêtre de téléchargement de données OSM \nixcaption}\label{fig:osmdownload}\smallskip
+   
    \includegraphics[clip=true, width=8cm]{osm_downloaddialog}
-\end{center}
+   \caption{Fenêtre de téléchargement de données OSM \nixcaption}\label{fig:osmdownload}
 \end{figure}
 
 \begin{description}
-%\item \textbf{Extent}: Specifies an area to download data from intervals of latitude and longitude degrees. Because there is some restriction of OpenStreetMap server on how much data can be downloaded, the intervals must not be too wide. More detailed info on extent specification can is shown after clicking the \toolbtntwo{osm_questionMark}{help} button on the right.
-\item \textbf{Emprise} : Spécifie une zone où télécharger les données à partir d'un intervalle de latitude et de longitude en degrés décimaux. Dû aux restrictions sur la quantité de données aui peuvent être téléchargées en une fois depuis le serveur OpenStreetMap, cette zone ne doit pas être trop étendue. Des informations plus détaillées sur cette étendue sont disponibles en cliquant sur le bouton \toolbtntwo{osm_questionMark}{Aide} sur la droite.
-%\item \textbf{Download to}: Here you are expected to write a path to the file where data will be stored. If you can't remember the structure of your disk, don't panic. The \button{browse} button will help you.
-\item \textbf{Télécharger vers} : A cet endroit vous devez écrire le chemin vers le fichier où seront stockées les données. Si vous ne vous rappelez pas de la structure de votre disque, ne paniquez pas, le bouton \button{parcourir} est là pour vous aider.
-%\item \textbf{Open data automatically after download}: Determines, if the download process should be followed by loading the data process or not. If you prefer not to load data now, you can do it later by using the \toolbtntwo{osm_load}{Load OSM from file} button.
-\item \textbf{Ouvrir les données automatiquement après le téléchargement} : Détermine si le processus de téléchargement doit être suivi de l'affichage des données ou pas. Si vous préférez ne pas afficher les données tout de suite, vous pourrez le faire plus tard en utilisant le bouton \toolbtntwo{osm_load}{Charger OSM depuis un fichier}.
-%\item \textbf{Replace current data}: This option is active only if \radiobuttonon{Open data automatically after download} is checked. Checking this option means that downloaded data should replace current data we are working with now. Layers of the current data will be removed and new ones will be loaded. When starting QGIS and downloading OSM data for the first time, this option is initially inactive, because there is nothing to replace.
-\item \textbf{Remplacer les données actuelles} : Cette option est active uniquement si \radiobuttonon{Ouvrir les données automatiquement après le téléchargement} est coché. Cocher l'option signifie que les données téléchargées remplaceront les données courantes. Les couches des données courantes seront retirées et les nouvelles chargées. Au démarrage de QGIS et au premier chargement de données OSM, cette option n'est pas activée, car il n'y a rien à remplacer.
-%\item \textbf{Use custom renderer}: This option is active only if the \radiobuttonon{Open data automatically after download} checkbox is checked. It determines how many details will be in the map. There are three predefined OSM styles for map displaying. Use \button{Small scale} if you want to view OSM data at low level, to see all details and to edit something. If not you can use \button{Medium scale} or \button{Large scale}. QGIS \CURRENT does not support changing the renderer style dynamically.
-\item \textbf{Utiliser le moteur de rendu personnalisé} : Cette option est active uniquement si \radiobuttonon{Ouvrir les données automatiquement après le téléchargement} est coché. Elle détermine le niveau de détail de la carte. Il y a trois styles OSM prédéfinis pour l'affichage de la carte. Utilisez \button{Petite échelle} si vous souhaitez visualiser des données à un niveau de zoom très rapproché et pour éditer les données. Sinon, vous pouvez utiliser \button{Échelle intermédiaire} ou \button{Grande échelle}. QGIS \CURRENT ne permet pas de changer de style dynamiquement.
+%\item[Extent :] Specifies an area to download data from intervals of latitude and longitude degrees. Because there is some restriction of OpenStreetMap server on how much data can be downloaded, the intervals must not be too wide. More detailed info on extent specification can is shown after clicking the \toolbtntwo{osm_questionMark}{help} button on the right.
+\item[Emprise :] Spécifie une zone où télécharger les données à partir d'un intervalle de latitude et de longitude en degrés décimaux. Dû aux restrictions sur la quantité de données aui peuvent être téléchargées en une fois depuis le serveur OpenStreetMap, cette zone ne doit pas être trop étendue. Des informations plus détaillées sur cette étendue sont disponibles en cliquant sur le bouton \toolbtntwo{osm_questionMark}{Aide} sur la droite.
+%\item[Download to :] Here you are expected to write a path to the file where data will be stored. If you can't remember the structure of your disk, don't panic. The \button{browse} button will help you.
+\item[Télécharger vers :] A cet endroit vous devez écrire le chemin vers le fichier où seront stockées les données. Si vous ne vous rappelez pas de la structure de votre disque, ne paniquez pas, le bouton \button{parcourir} est là pour vous aider.
+%\item[Open data automatically after download :] Determines, if the download process should be followed by loading the data process or not. If you prefer not to load data now, you can do it later by using the \toolbtntwo{osm_load}{Load OSM from file} button.
+\item[Ouvrir les données automatiquement après le téléchargement :] Détermine si le processus de téléchargement doit être suivi de l'affichage des données ou pas. Si vous préférez ne pas afficher les données tout de suite, vous pourrez le faire plus tard en utilisant le bouton \toolbtntwo{osm_load}{Charger OSM depuis un fichier}.
+%\item[Replace current data :] This option is active only if \radiobuttonon{Open data automatically after download} is checked. Checking this option means that downloaded data should replace current data we are working with now. Layers of the current data will be removed and new ones will be loaded. When starting \qg and downloading OSM data for the first time, this option is initially inactive, because there is nothing to replace.
+\item[Remplacer les données actuelles :] Cette option est active uniquement si\\ \radiobuttonon{Ouvrir les données automatiquement après le téléchargement} est coché. Cocher l'option signifie que les données téléchargées remplaceront les données courantes. Les couches des données courantes seront retirées et les nouvelles chargées. Au démarrage de \qg et au premier chargement de données OSM, cette option n'est pas activée, car il n'y a rien à remplacer.
+%\item[Use custom renderer :] This option is active only if the \radiobuttonon{Open data automatically after download} checkbox is checked. It determines how many details will be in the map. There are three predefined OSM styles for map displaying. Use \button{Small scale} if you want to view OSM data at low level, to see all details and to edit something. If not you can use \button{Medium scale} or \button{Large scale}. \qg \CURRENT does not support changing the renderer style dynamically.
+\item[Utiliser le moteur de rendu personnalisé :] Cette option est active uniquement si\\ \radiobuttonon{Ouvrir les données automatiquement après le téléchargement} est coché. Elle détermine le niveau de détail de la carte. Il y a trois styles OSM prédéfinis pour l'affichage de la carte. Utilisez \button{Petite échelle} si vous souhaitez visualiser des données à un niveau de zoom très rapproché et pour éditer les données. Sinon, vous pouvez utiliser \button{Échelle intermédiaire} ou \button{Grande échelle}. \qg \CURRENT ne permet pas de changer de style dynamiquement.
 \end{description}
 
 %Click the \button{Download} button to start the download process.
@@ -354,44 +350,42 @@ Cliquez sur le bouton \button{Télécharger} pour lancer le processus.
 %A progress dialog will continuously inform you about how much of data is already downloaded. When an error occures during the download process, a dialog tells you why. When action finishes succesfully both the progress dialog and download dialog will close themselves.
 Une barre de progression vous informera en continu sur la quantité de données déjà téléchargées. Si une erreur se produit pendant le processus de téléchargement, une fenêtre de dialogue vous l'expliquera. Lorsque le téléchargement est terminé, la barre de progression et la fenêtre de téléchargement se fermeront automatiquement.
 
-%\subsubsection{Uploading OSM data}  
-\subsubsection{Charger des données sur le serveur OSM}  
+%\subsection{Uploading OSM data}  
+\subsection{Charger des données sur le serveur OSM}  
 
 %Note that the upload is always done on current OSM data. Before opening the OSM Upload dialog, please be sure that you really have the right active layer ~ OSM data.
 Notez que le chargement est toujours effectué sur les données OSM courantes. Avant d'ouvrir la fenêtre de dialogue de Chargement OSM, assurez-vous que vous avez la bonne couche OSM active.
 
-%To upload current data to the OSM server click on the \toolbtntwo{osm_upload}{Upload OSM data} button. If there is no such button, OSM toolbar in your QGIS installation is disabled. You can enable it again in \mainmenuopt{Settings} > \mainmenuopt{Toolbars} > \dropmenuopt{OpenStreetMap}. After clicking the \button{upload} button a new dialog will appear.
-Pour charger les données courantes vers le serveur OSM, cliquez sur le bouton \toolbtntwo{osm_upload}{Charger des données OSM}. Si vous ne voyez pas ce bouton, la barre d'outils OSM est peut-être désactivée dans QGIS. Vous pouvez l'activer ou la réactiver dans \mainmenuopt{Vue} > \mainmenuopt{Barres d'outils} > \dropmenuopt{OpenStreetMap}. Après avoir cliqué sur le bouton, une fenêtre de dialogue apparaît.
+%To upload current data to the OSM server click on the \toolbtntwo{osm_upload}{Upload OSM data} button. If there is no such button, OSM toolbar in your \qg installation is disabled. You can enable it again in \mainmenuopt{Settings} > \mainmenuopt{Toolbars} > \dropmenuopt{OpenStreetMap}. After clicking the \button{upload} button a new dialog will appear.
+Pour charger les données courantes vers le serveur OSM, cliquez sur le bouton\\ \toolbtntwo{osm_upload}{Charger des données OSM}. Si vous ne voyez pas ce bouton, la barre d'outils OSM est peut-être désactivée dans \qg. Vous pouvez l'activer ou la réactiver dans \mainmenuopt{Vue} >\\ \mainmenuopt{Barres d'outils} > \dropmenuopt{OpenStreetMap}. Après avoir cliqué sur le bouton, une fenêtre de dialogue apparaît.
 
 \begin{figure}[ht]
-   \begin{center}
+\centering
    %\caption{OSM upload dialog \nixcaption}\label{fig:osmupload}\smallskip
-   \caption{Fenêtre de dialogue OSM \nixcaption}\label{fig:osmupload}\smallskip
-   \includegraphics[clip=true, width=8cm]{osm_uploaddialog}
-\end{center}
+   \includegraphics[clip=true, width=6cm]{osm_uploaddialog}
+   \caption{Fenêtre de dialogue OSM \nixcaption}\label{fig:osmupload}
 \end{figure}
 
 %At the top of the dialog you can check, if you are uploading the correct data. There is a short name of a current database. In the table you find information on how many changes will be uploaded. Statistics are displayed separately for each feature type.
 En haut de la fenêtre, vous pouvez vérifier si vous avez sélectionné les bonnes données. Le nom des données courantes est rappelé. Dans le tableau, les informations sur tous les changements à envoyer sont listées. Les statistiques sont disponibles pour chaque type d'entité séparément.
 
 %In the 'Comment on your changes' box you can write brief information on meaning of your upload operation. Just write in brief what data changes you've done or let the box empty.
-Dans la zone 'Descriptif de votre changement', vous pouvez décrire brièvement les changements effectués. Décrivez juste brièvement les changements sur les données ou laissez la zone vide.
+Dans la zone \og Descriptif de votre changement\fg, vous pouvez décrire brièvement les changements effectués. Décrivez juste brièvement les changements sur les données ou laissez la zone vide.
 %Fill 'OSM account' arrays so that the server could authenticate you. If you don't have an account on the OSM server, it's the best time to create one at \url{http://www.openstreetmap.org}. Finally use \button{Upload} to start an upload operation.
-Remplissez les informations sur votre 'Compte OSM' pour que le serveur puisse vous authentifier. Si vous n'avez pas de compte sur le serveur OSM, c'est le bon moment d'aller en créer un ici : \url{http://www.openstreetmap.org}. Enfin, utilisez le bouton \button{Chargement} pour lancer l'opération.
+Remplissez les informations sur votre \og Compte OSM\fg pour que le serveur puisse vous authentifier. Si vous n'avez pas de compte sur le serveur OSM, c'est le bon moment d'aller en créer un ici : \url{http://www.openstreetmap.org}. Enfin, utilisez le bouton \button{Chargement} pour lancer l'opération.
 
 
-%\subsubsection{Saving OSM data}  
-\subsubsection{Sauvegarder des données OSM}  
+%\subsection{Saving OSM data}  
+\subsection{Sauvegarder des données OSM}  
 
 %To save data from a current map extent to an XML file click on the \toolbtntwo{osm_save}{Save OSM to file} button. If there is no such button, the OSM toolbar in your QuantumGIS installation is probably disabled. You can enable it again in \mainmenuopt{Settings} > \mainmenuopt{Toolbars} > \dropmenuopt{OpenStreetMap}. After clicking on the button a new dialog appears.
-Pour sauvegarder les données de la zone de la carte visible vers un fichier XML, cliquez sur le bouton \toolbtntwo{osm_save}{Sauvegarder dans un fichier OSM}. Si vous ne voyez pas ce bouton, la barre d'outils OSM est peut-être désactivée dans QGIS. Vous pouvez l'activer ou la réactiver dans \mainmenuopt{Vue} > \mainmenuopt{Barres d'outils} > \dropmenuopt{OpenStreetMap}. Après avoir cliqué sur le bouton, une fenêtre de dialogue apparaît.
+Pour sauvegarder les données de la zone de la carte visible vers un fichier XML, cliquez sur le bouton \toolbtntwo{osm_save}{Sauvegarder dans un fichier OSM}. Si vous ne voyez pas ce bouton, la barre d'outils OSM est peut-être désactivée dans \qg. Vous pouvez l'activer ou la réactiver dans \mainmenuopt{Vue} > \mainmenuopt{Barres d'outils} > \dropmenuopt{OpenStreetMap}. Après avoir cliqué sur le bouton, une fenêtre de dialogue apparaît.
 
 \begin{figure}[ht]
-   \begin{center}
+\centering
    %\caption{OSM saving dialog \nixcaption}\label{fig:osmsave}\smallskip
-   \caption{Fenêtre de sauvegarde de données OSM \nixcaption}\label{fig:osmsave}\smallskip
    \includegraphics[clip=true, width=8cm]{osm_savedialog}
-\end{center}
+   \caption{Fenêtre de sauvegarde de données OSM \nixcaption}\label{fig:osmsave}
 \end{figure}
 
 %Select features you want to save into XML file and the file itself. Use the \button{Ok} button to start the operation. The process will create an XML file, in which OSM data from your current map extent are represented. The OSM version of the output file is 0.6. Elements of OSM data (<node>, <way>, <relation>) do not contain information on their changesets and uids. These informations are not compulsory yet, see DTD for OSM XML version 0.6. In the output file OSM elements are not ordered.
@@ -400,32 +394,32 @@ Sélectionnez les entités que vous voulez sauvegarder dans un fichier XML ainsi
 %Notice that not only data from the current extent are saved. Into the output file the whole polygons and lines are saved even if only a small part of them is visible in the current extent. For each saved line/polygon all its member nodes are saved too.
 Notez que seules les données de la zone géographique courante sont sauvées. Dans le fichier de sortie, même si seule une partie d'un polygone ou d'une ligne sont dans la zone, le polygone ou la ligne dans son entier sont sauvegardés. Pour chaque ligne ou polygone sauvé, tous ses noeuds membres sont également sauvegardés.
 
-%\subsubsection{Import OSM data}  
-\subsubsection{Importer des données OSM} 
+%\subsection{Import OSM data}  
+\subsection{Importer des données OSM} 
 
-%To import OSM data from an opened non-OSM vector layer follow this instructions: Choose current OSM data by clicking on one of their layers. Click on the \toolbtntwo{osm_import}{Import data from a layer} button. If there is no such button, someone has probably disable the OpenStreetMap toolbar in your QGIS installation. You can enable it again in \mainmenuopt{Settings} > \mainmenuopt{Toolbars} > \dropmenuopt{OpenStreetMap}. 
-Pour importer des données OSM depuis une couche vecteur qui n'est pas au format OSM, suivez ces instructions : choisissez les données OSM courantes en cliquant sur l'une de ses couches. Cliquez sur le bouton \toolbtntwo{osm_import}{Importer des données depuis une couche}. Si vous ne voyez pas ce bouton, la barre d'outils OSM est peut-être désactivée dans QGIS. Vous pouvez l'activer ou la réactiver dans \mainmenuopt{Vue} > \mainmenuopt{Barres d'outils} > \dropmenuopt{OpenStreetMap}.
+%To import OSM data from an opened non-OSM vector layer follow this instructions: Choose current OSM data by clicking on one of their layers. Click on the \toolbtntwo{osm_import}{Import data from a layer} button. If there is no such button, someone has probably disable the OpenStreetMap toolbar in your \qg installation. You can enable it again in \mainmenuopt{Settings} > \mainmenuopt{Toolbars} > \dropmenuopt{OpenStreetMap}. 
+Pour importer des données OSM depuis une couche vecteur qui n'est pas au format OSM, suivez ces instructions : choisissez les données OSM courantes en cliquant sur l'une de ses couches. Cliquez sur le bouton \toolbtntwo{osm_import}{Importer des données depuis une couche}. Si vous ne voyez pas ce bouton, la barre d'outils OSM est peut-être désactivée dans \qg. Vous pouvez l'activer ou la réactiver dans \mainmenuopt{Vue} > \mainmenuopt{Barres d'outils} > \dropmenuopt{OpenStreetMap}.
 
 %After clicking on the button following message may show up:
 Après avoir cliqué sur le bouton, le message suivant s'affiche :
 
 \begin{figure}[ht]
-   \begin{center}
+\centering
    %\caption{OSM import message dialog \nixcaption}\label{fig:osmimportmessage}\smallskip
-   \caption{Fenêtre d'erreur d'importation OSM \nixcaption}\label{fig:osmimportmessage}\smallskip
+   
    \includegraphics[clip=true, width=8cm]{osm_importdialog}
-\end{center}
+   \caption{Fenêtre d'erreur d'importation OSM \nixcaption}\label{fig:osmimportmessage}
 \end{figure}
 
 %In such case there is no vector layer currently loaded. The import must be done from a loaded layer - please load a vector layer from which you want to  import data. After a layer is opened, your second try should give you a  better result (don't forget to mark the current OSM layer again):
-Dans ce cas il n'y a pas de couche vecteur actuellement chargée. L'importation doit se faire depuis une couche vecteur présente dans QGIS : chargez donc la couche vecteur dont vous voulez importer les données. Une fois la couche ouverte dans QGIS, réessayez et le résultat devrait être meilleur (n'oubliez pas de sélectionner la couche OSM cible courante) :
+Dans ce cas il n'y a pas de couche vecteur actuellement chargée. L'importation doit se faire depuis une couche vecteur présente dans \qg : chargez donc la couche vecteur dont vous voulez importer les données. Une fois la couche ouverte dans \qg, réessayez et le résultat devrait être meilleur (n'oubliez pas de sélectionner la couche OSM cible courante) :
 
 \begin{figure}[ht]
-   \begin{center}
+\centering
    %\caption{Import data to OSM dialog \nixcaption}\label{fig:osmimporttoosm}\smallskip
-   \caption{Fenêtre d'importation de données vers OSM \nixcaption}\label{fig:osmimporttoosm}\smallskip
-   \includegraphics[clip=true, width=8cm]{osm_importtoosmdialog}
-\end{center}
+  
+   \includegraphics[clip=true, width=5cm]{osm_importtoosmdialog}
+   \caption{Fenêtre d'importation de données vers OSM \nixcaption}\label{fig:osmimporttoosm}
 \end{figure}
 
 %Use the submit dialog to start the process of OSM data importing. Reject it if you are not sure you want to import something.

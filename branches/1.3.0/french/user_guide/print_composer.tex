@@ -1,5 +1,6 @@
-% \section{Print Composer}\label{label_printcomposer}
-\section{Composeur de carte}\label{label_printcomposer}
+%  !TeX  root  =  user_guide.tex
+% % \section{Print Composer}\label{label_printcomposer}
+\chapter{Composeur de carte}\label{label_printcomposer}
 
 % when the revision of a section has been finalized, 
 % comment out the following line:
@@ -17,21 +18,21 @@
 %table~\ref{tab:printcomposer_tools}:
 Le composeur de carte fournit des fonctionnalités croissantes de mise en page et d'impression. Il vous permet d'ajouter des éléments tels qu'un cadre de carte QGIS, une légende, une échelle graphique, des images et des étiquettes. Vous pouvez modifier la taille, grouper , aligner et positionner chaque élément et ajuster leurs propriétés pour créer votre mise en page. Le résultat peut être imprimé ou exporté dans plusieurs formats d'images, mais aussi en Postscript, PDF et SVG.\footnote{L'export en SVG est géré, mais il ne fonctionne pas correctement avec certaines versions de QT4. Vous devriez essayer et vérifier indivuellement sur votre système} Voici une liste des outils (tableau~\ref{tab:printcomposer_tools}) :
 
-\begin{table}[h]\index{Composeur de carte!outils}
-\centering
-\caption{Outils du Composeur de carte}\label{tab:printcomposer_tools}\medskip
- \begin{tabular}{|l|p{6.9cm}|l|p{6.9cm}|}
+\begin{table}[p]\index{Composeur de carte!outils}
+\centering\small
+\renewcommand{\arraystretch}{2}
+ \begin{tabular}{|m{1cm}|m{5.4cm}|m{1cm}|m{5.4cm}|}
  \hline \textbf{Icône} & \textbf{Objectif} & \textbf{Icône} &
  \textbf{Objectif} \\
 \hline \includegraphics[width=0.7cm]{mActionFolder} & Charger depuis un modèle &
  \includegraphics[width=0.7cm]{mActionFileSaveAs} & Enregistrer en tant que modèle \\
 \hline \includegraphics[width=0.7cm]{mActionExportMapServer}  & Exporter dans un format d'image & 
  \includegraphics[width=0.7cm]{mActionSaveAsPDF} & Exporter en PDF \\
-\hline \includegraphics[width=0.7cm]{mActionSaveAsSVG} & Exporter la composition en SVG \\
+\hline \includegraphics[width=0.7cm]{mActionSaveAsSVG} & Exporter la composition en SVG& \multicolumn{2}{c|}{}\\
 \hline \includegraphics[width=0.7cm]{mActionFilePrint} & Imprimer ou exporter en Postscript &
  \includegraphics[width=0.7cm]{mActionZoomFullExtent} & Zoom à l'étendue maximale\\
-\hline \includegraphics[width=0.7cm]{mActionZoomIn} & Zoom in &
- \includegraphics[width=0.7cm]{mActionZoomOut} & Zoom out \\
+\hline \includegraphics[width=0.7cm]{mActionZoomIn} & Zoom + &
+ \includegraphics[width=0.7cm]{mActionZoomOut} & Zoom - \\
 \hline \includegraphics[width=0.7cm]{mActionDraw} & Rafraichie la vue &
  \includegraphics[width=0.7cm]{mActionAddMap} & Ajouter une nouvelle carte à partir du cadre de carte de QGIS \\
 \hline \includegraphics[width=0.7cm]{mActionSaveMapAsImage} & Ajouter une image au composeur de carte &
@@ -54,6 +55,7 @@ Le composeur de carte fournit des fonctionnalités croissantes de mise en page e
  \includegraphics[width=0.7cm]{mActionAlignBottom} & Aligner les objets sélectionnés  vers le bas \\
 \hline
 \end{tabular}
+\caption{Outils du Composeur de carte}\label{tab:printcomposer_tools}
 \end{table}
 
 % To access the print composer, click on the
@@ -61,8 +63,8 @@ Le composeur de carte fournit des fonctionnalités croissantes de mise en page e
 % \mainmenuopt{File} > \dropmenuopttwo{mActionFilePrint}{Print Composer}.
 Pour accéder au composeur de carte, cliquez sur le bouton \toolbtntwo{mActionFilePrint}{Imprimer} dans la barre d'outils ou choisissez \mainmenuopt{Fichier} > \dropmenuopttwo{mActionFilePrint}{Composeur de carte}.
 
-% \subsection{Using Print Composer}\label{label_useprintcomposer} 
-\subsection{Utiliser le Composeur d'Impression}\label{label_useprintcomposer} 
+% \section{Using Print Composer}\label{label_useprintcomposer} 
+\section{Utiliser le Composeur d'Impression}\label{label_useprintcomposer} 
 
 
 % Before you start to work with the print composer, you need to load some 
@@ -75,9 +77,10 @@ adapter leurs propriétés pour qu'elles vous conviennent. Après que tout soit 
 \begin{figure}[ht]
    \begin{center}
 %    \caption{Print Composer\nixcaption}
-    \caption{Composeur de carte\nixcaption}
+    
 \label{fig:print_composer_blank}\smallskip
-   \includegraphics[clip=true, width=\textwidth]{print_composer_blank}
+   \includegraphics[clip=true, width=10cm]{print_composer_blank}
+   \caption{Composeur de carte\nixcaption}
 \end{center}
 \end{figure}
 
@@ -88,14 +91,14 @@ adapter leurs propriétés pour qu'elles vous conviennent. Après que tout soit 
 Ouvrir le composeur de carte vous affiche un cadre vide auquel vous pouvez ajouter un cadre de la carte actuelle de QGIS, une légende, une échelle
 graphique, des images et du texte. La figure \ref{fig:print_composer_blank} montre la vue initiale du composeur de carte avant qu'un élément ne soit ajouté. Le composeur de carte affiche deux onglets :
 
-\begin{itemize}
+\begin{itemize}[label=--]
 %\item The \tab{General} tab allows you to set paper size, orientation, the
 %print quality for the output file in dpi and to activate snapping to a grid
 %of a defined resolution. Please note, the \checkbox{Snap to grid} feature
 %only works, if you define a grid resolution > 0. Furthermore you can also
 %activate the \checkbox{Print as raster} checkbox. This means all elements
 %will be rastered before printing or saving as Postscript of PDF.
-\item l'onglet \tab{Général} vous permet de définir la taille du papier, l'orientation et la qualité d'impression pour le fichier de sortie (en dpi/ppp) et d'activer l'accrochage sur une grille d'une résolution prédéfinie. La fonction \checkbox{Accrochage à la grille} marche uniquement si vous avez défini une résolution supérieure à 0. Vous pouvez activer la case \checkbox{Imprimer en tant que raster} qui permet de rastériser tous les éléments avant l'impression ou l'export.
+\item l'onglet \tab{Général} vous permet de définir la taille du papier, l'orientation et la qualité d'impression pour le fichier de sortie (en dpi/ppp) et d'activer l'accrochage sur une grille d'une résolution prédéfinie. La fonction \checkbox{Accrochage à la grille} marche uniquement si vous avez défini une résolution supérieure à 0. Vous pouvez activer la case\\ \checkbox{Imprimer en tant que raster} qui permet de rastériser tous les éléments avant l'impression ou l'export.
 %\item The \tab{Item} tab displays the properties for the selected map
 %element. Click the \toolbtntwo{mActionSelectPan}{Select/Move item} 
 %icon to select an element (e.g. legend, scalebar or label) on the canvas. 
@@ -110,15 +113,15 @@ graphique, des images et du texte. La figure \ref{fig:print_composer_blank} mont
 Vous pouvez ajouter de multiples éléments au composeur. Il est également possible d'avoir plus d'une vue de carte, légende ou échelle graphique dans le
 cadre du composeur de carte. Chaque élément possède ses propres propriétés et dans le cas de la carte, sa propre étendue.
 
-% \subsubsection{Adding a current QGIS map canvas to the Print Composer}
-\subsubsection{Ajouter une carte en cours dans QGIS au Composeur d'Impression}
+% \subsection{Adding a current QGIS map canvas to the Print Composer}
+\subsection{Ajouter une carte en cours dans QGIS au Composeur d'Impression}
 
 %To add the QGIS map canvas, click on the \toolbtntwo{mActionAddMap}{Add new map 
 %from QGIS map canvas} button in the print composer toolbar and drag a 
 %rectangle on the composer canvas with the left mouse button to add the map. 
 %You will see an empty box with a \textit{"Map will be printed here"} message.
-Pour ajouter le cadre de carte de QGIS, cliquez sur le bouton \toolbtntwo{mActionAddMap}{Ajouter une nouvelle carte à partir du
-cadre de carte de QGIS} dans la barre d'outils du composeur de carte et dessinez un rectangle dans le cadre du composeur avec le bouton gauche de la souris pour ajouter la carte. Vous verrez une boîte vide avec un message \textit{"La carte sera imprimée ici"}. Pour afficher la carte actuelle, choisissez
+Pour ajouter le cadre de carte de QGIS, cliquez sur le bouton\\ \toolbtntwo{mActionAddMap}{Ajouter une nouvelle carte à partir du
+cadre de carte de QGIS} dans la barre d'outils du composeur de carte et dessinez un rectangle dans le cadre du composeur avec le bouton gauche de la souris pour ajouter la carte. Vous verrez une boîte vide avec un message \og\textit{ La carte sera imprimée ici}\fg. Pour afficher la carte actuelle, choisissez
 \selectstring{Preview}{Cache} dans l'onglet \tab{Item} de la carte.
 %To display the current map, you can choose between three different modes in
 %the map \tab{Item} tab:
@@ -135,23 +138,25 @@ Pour ajouter la carte courante, vous devez choisir entre 3 différentes modes da
 %up to a maximum resolution.
 %\end{itemize}
 
-\begin{itemize}
-\item \selectstring{Preview}{Rectangle} est le paramètre par défaut. Il n'affiche qu'une boîte vide avec le message \textit{"La carte sera imprimée ici"}. 
-\item \selectstring{Preview}{Cache} affiche la carte dans sa résolution d'écran actuelle. Si vous zoomez sur la fenêtre de composition, la carte ne sera pas actualisée, mais l'image sera mise à l'échelle.
-\item \selectstring{Preview}{Rendu} signifie que si vous faites un zoom dans la fenêtre de composition la carte sera actualisée, mais pour des raisons de performances, seulement jusqu'à une résolution maximum prédéfinie par QGIS.
+\begin{itemize}[label=--]
+\item \selectstring{Aperçu}{Rectangle} est le paramètre par défaut. Il n'affiche qu'une boîte vide avec le message \og\textit{La carte sera imprimée ici}\fg. 
+\item \selectstring{Aperçu}{Cache} affiche la carte dans sa résolution d'écran actuelle. Si vous zoomez sur la fenêtre de composition, la carte ne sera pas actualisée, mais l'image sera mise à l'échelle.
+\item \selectstring{Aperçu}{Rendu} signifie que si vous faites un zoom dans la fenêtre de composition la carte sera actualisée, mais pour des raisons de performances, seulement jusqu'à une résolution maximum prédéfinie par QGIS.
 \end{itemize}
 
 \begin{figure}[ht]
 \centering
 % \caption{Print Composer map item tab content
 % \nixcaption}\label{fig:print_composer_map_item}
-\caption{L'onglet Item de la carte dans le composeur de carte
-\nixcaption}\label{fig:print_composer_map_item}
-   \subfigure[Width, height and extend dialog]
+
+   \subfloat[Width, height and extend dialog]
 {\label{subfig:print_composer_map_item1}\includegraphics[clip=true,
-width=0.4\textwidth]{print_composer_map_item1}}\goodgap
-% \subfigure[Properties dialog]
-   \subfigure[Boîte de dialogue des propriétés]{\label{subfig:print_composer_map_item2}\includegraphics[clip=true,width=0.4\textwidth]{print_composer_map_item2}}
+width=0.4\textwidth]{print_composer_map_item1}}
+% \subfloat[Properties dialog]
+\hspace{0.5cm}
+   \subfloat[Boîte de dialogue des propriétés]{\label{subfig:print_composer_map_item2}\includegraphics[clip=true,width=0.4\textwidth]{print_composer_map_item2}}
+   \caption{L'onglet Item de la carte dans le composeur de carte
+\nixcaption}\label{fig:print_composer_map_item}
 \end{figure}
 
 %You can resize the map later by clicking on the
@@ -171,7 +176,7 @@ width=0.4\textwidth]{print_composer_map_item1}}\goodgap
 %element in the print composer and clicking the \button{Update Preview} button
 %in the map \tab{Item} tab (see Figure~\ref{fig:print_composer_map_item}). 
 
-Vous pouvez redimensionner la carte plus tard en cliquant sur le bouton \toolbtntwo{mActionSelectPan}{Sélectioner/Déplacer l'objet}, en sélectionnant
+Vous pouvez redimensionner la carte plus tard en cliquant sur le bouton\\ \toolbtntwo{mActionSelectPan}{Sélectionner/Déplacer l'objet}, en sélectionnant
 l'élément, et en déplaçant un des curseurs bleus dans le coin de la carte. Avec la carte sélectionnée, vous pouvez maintenant adapter plus de propriétés dans l'onglet \tab{Item} de la carte. Redimensionnez la carte en spécifiant la largeur et la hauteur ou l'échelle. Définissez l'étendue de la carte en utilisant les valeurs min/max pour X et Y, ou en cliquant le bouton \button{Fixer sur l'emprise courante}. Faites une mise à jour de l'aperçu de la carte et sélectionnez, soit pour voir un aperçu du cache ou un rectangle vide. Définissez les couleurs et les épaisseurs de bordure pour les cadres des éléments, mettez une couleur d'arrière-plan. Vous pouvez aussi choisir d'afficher ou pas un cadre d'élément avec la case \checkbox{cadre} (see Figure~\ref{fig:print_composer_map_item}). Si vous changez la vue sur la carte principale de QGIS en zoomant, en vous déplaçant ou en changeant des propriétés d'affichage, vous pouvez mettre à jour la vue du composeur en cliquant sur le bouton \button{Mise à jour de l'aperçu} dans l'onglet \tab{Item} (voir figure~\ref{fig:print_composer_map_item}). 
 
 % To move layers within the map element select the map element, click 
@@ -184,8 +189,8 @@ Pour déplacer une couche dans l'élément de la carte, sélectionnez-le puis cl
 %position and again to unlock the element.
 Après avoir trouvé le bon emplacement, vous pouvez figer la position de cet élément au sien du composeur. Sélectionnez l'élément, faites un clic droit et choisissez \toolbtntwo{mIconLock}{verrouiller}.
 
-%\subsubsection{Navigation tools}
-\subsubsection{Outils de navigation}
+%\subsection{Navigation tools}
+\subsection{Outils de navigation}
 
 %For map navigation the print composer provides 4 general tools:
 Pour naviguer sur la carte, le composeur propose 4 outils généralistes /
@@ -197,15 +202,15 @@ Pour naviguer sur la carte, le composeur propose 4 outils généralistes /
 %\item \toolbtntwo{mActionDraw}{Refresh the view}, if you find the view in an
 %inconsistent state.
 %\end{itemize}
-\begin{itemize}
-\item \toolbtntwo{mActionZoomOut}{Zoom +},
-\item \toolbtntwo{mActionZoomOut}{Zoom -},
-\item \toolbtntwo{mActionZoomFullExtent}{Zoomer sur l'emprise maximale} et
+\begin{itemize}[label=--]
+\item \toolbtntwo{mActionZoomOut}{Zoom +}
+\item \toolbtntwo{mActionZoomOut}{Zoom -}
+\item \toolbtntwo{mActionZoomFullExtent}{Zoomer sur l'emprise maximale}
 \item \toolbtntwo{mActionDraw}{RActualiser l'aperçu}
 \end{itemize}
 
-% \subsubsection{Adding other elements to the Print Composer}
-\subsubsection{Ajouter d'autres éléments au Composeur d'Impression}
+% \subsection{Adding other elements to the Print Composer}
+\subsection{Ajouter d'autres éléments au Composeur d'Impression}
 
 %Besides adding a current QGIS map canvas to the Print Composer, it is also possible 
 %to add, position, move and customize legend, scalebar, images and label elements.
@@ -219,21 +224,23 @@ Au-delà de l'ajout d'un cadre de la carte actuelle de QGIS au composeur de cart
 %\toolbtntwo{mActionSaveMapAsImage}{Add image} icon, place the element with
 %the left mouse button on the print composer canvas and position and customize
 %their appearance in the \tab{Item} tab.
-Pour ajouter une étiquette ou une image, cliquez sur l'icône \toolbtntwo{mActionLabel}{Ajouter une étiquette} ou \toolbtntwo{mActionSaveMapAsImage}{Ajouter une image} et placez l'élément avec le bouton gauche de la souris sur le cadre du composeur de carte, modifiez leur apparence avec l'onglet \tab{Item}.
+Pour ajouter une étiquette ou une image, cliquez sur l'icône\\ \toolbtntwo{mActionLabel}{Ajouter une étiquette} ou \toolbtntwo{mActionSaveMapAsImage}{Ajouter une image} et placez l'élément avec le bouton gauche de la souris sur le cadre du composeur de carte, modifiez leur apparence avec l'onglet \tab{Item}.
 
-\begin{figure}[ht]
+\begin{figure}[p]
 \centering
 % \caption{Customize print composer label and images
-\caption{Personnaliser les étiquettes et les images du composeur de carte
-\nixcaption}\label{fig:print_composer_tab2}
-%    \subfigure[label item tab]
-   \subfigure[onglet item des étiquettes]
+
+%    \subfloat[label item tab]
+   \subfloat[onglet item des étiquettes]
 {\label{subfig:print_composer_label_item}\includegraphics[clip=true,
-width=0.4\textwidth]{print_composer_label_item}}\goodgap
-%    \subfigure[image item tab]
-   \subfigure[onglet item des images]
+width=0.4\textwidth]{print_composer_label_item}}
+%    \subfloat[image item tab]
+\hspace{0.5cm}
+   \subfloat[onglet item des images]
 {\label{subfig:print_composer_image_item}\includegraphics[clip=true,
 width=0.4\textwidth]{print_composer_image_item}}
+\caption{Personnaliser les étiquettes et les images du composeur de carte
+\nixcaption}\label{fig:print_composer_tab2}
 \end{figure}
 
 % \minisec{Legend and scalebar}
@@ -247,25 +254,27 @@ width=0.4\textwidth]{print_composer_image_item}}
 %\toolbtntwo{mActionScaleBar}{Add new scalebar} icon, place the element with the left 
 %mouse button on the print composer canvas and position and customize their appearance in the \tab{Item} tab.
 
-Pour ajouter une légende ou une échelle graphique, cliquez sur l'icône \toolbtntwo{mActionAddLegend}{ajouter une nouvelle légende} ou \toolbtntwo{mActionScaleBar}{Ajouter une nouvelle échelle graphique}, placez l'élément avec le bouton gauche de la souris sur le cadre du composeur de carte et modifiez leur apparence avec l'onglet \tab{Item}.
+Pour ajouter une légende ou une échelle graphique, cliquez sur l'icône\\ \toolbtntwo{mActionAddLegend}{ajouter une nouvelle légende} ou \toolbtntwo{mActionScaleBar}{Ajouter une nouvelle échelle graphique}, placez l'élément avec le bouton gauche de la souris sur le cadre du composeur de carte et modifiez leur apparence avec l'onglet \tab{Item}.
 
 \begin{figure}[ht]
 \centering
 % \caption{Customize print composer legend and scalebar
-\caption{Personnaliser la légende et l'échelle graphique du composeur de carte
-\nixcaption}\label{fig:print_composer_tab1}
-%    \subfigure[legend item tab]
-    \subfigure[onglet item de la légende]
+
+%    \subfloat[legend item tab]
+    \subfloat[onglet item de la légende]
 {\label{subfig:print_composer_legend_item}\includegraphics[clip=true,
-width=0.4\textwidth]{print_composer_legend_item}}\goodgap
-%    \subfigure[scalebar item tab]
-   \subfigure[onglet item de l'échelle graphique]
+width=0.4\textwidth]{print_composer_legend_item}}
+%    \subfloat[scalebar item tab]
+\hspace{0.5cm}
+      \subfloat[onglet item de l'échelle graphique]
 {\label{subfig:print_composer_scalebar_item}\includegraphics[clip=true,
 width=0.4\textwidth]{print_composer_scalebar_item}}
+\caption{Personnaliser la légende et l'échelle graphique du composeur de carte
+\nixcaption}\label{fig:print_composer_tab1}
 \end{figure}
 
-%\subsubsection{Raise, lower and align elements}
-\subsubsection{Monter, descendre et aligner des éléments}
+%\subsection{Raise, lower and align elements}
+\subsection{Monter, descendre et aligner des éléments}
 
 %Raise or lower functionalities for elements are inside the
 %\toolbtntwo{mActionRaiseItems}{Raise selected items} pulldown menu. Choose an
@@ -279,10 +288,10 @@ Les fonctionnalités pour relever ou descendre des éléments sont présentes da
 %table~\ref{tab:printcomposer_tools}). To use an alignment functionality , you
 %first select some elements and then click on the matching alignment icon. All
 %selected will then be aligned within to their common bounding box.
-Il y a plusieurs fonctionnalités d'alignements disponibles dans le menu déroulant \toolbtntwo{mActionAlignLeft}{Aligner les objets sélectionnés} (voir table~\ref{tab:printcomposer_tools}). Pour utiliser une fonction, vous devez d'abord sélectionner plusieurs éléments et ensuite cliquer sur l'icône d'alignement désiré. Toute la sélection sera alignée dans le cadre de leurs limites respectives
+Il y a plusieurs fonctionnalités d'alignements disponibles dans le menu déroulant\\ \toolbtntwo{mActionAlignLeft}{Aligner les objets sélectionnés} (voir table~\ref{tab:printcomposer_tools}). Pour utiliser une fonction, vous devez d'abord sélectionner plusieurs éléments et ensuite cliquer sur l'icône d'alignement désiré. Toute la sélection sera alignée dans le cadre de leurs limites respectives
 
-% \subsubsection{Creating Output}
-\subsubsection{Création de carte}
+% \subsection{Creating Output}
+\subsection{Création de carte}
 
 % Figure \ref{fig:print_composer_complete} shows the print composer with an
 % example print layout including each type of map element described in the
@@ -291,14 +300,14 @@ La figure \ref{fig:print_composer_complete} montre le composeur de carte avec
 un exemple de mise en page incluant chaque type d'élément de la carte décrit
 dans la section au-dessus.
 
-\begin{figure}[h]
+\begin{figure}[ht]
    \begin{center}
 %    \caption{Print Composer with map view, legend, scalebar, and text added
-\caption{Composeur de carte avec une vue de la carte, de la légende, de
-l'échelle graphique et du texte ajouté
-\nixcaption}
-   \label{fig:print_composer_complete}\smallskip
+\smallskip
    \includegraphics[clip=true, width=\textwidth]{print_composer_complete}
+   \caption{Composeur de carte avec une vue de la carte, de la légende, de
+l'échelle graphique et du texte ajouté \nixcaption}
+   \label{fig:print_composer_complete}
 \end{center}
 \end{figure}
 
@@ -306,7 +315,7 @@ l'échelle graphique et du texte ajouté
 % possible to define the resolution (print quality) and paper size:
 Le composeur de carte vous permet de choisir plusieurs formats de sortie et il est possible de définir la résolution (qualité d'impression) et la taille du papier :
 
-\begin{itemize}
+\begin{itemize}[label=--]
 % \item The \toolbtntwo{mActionFilePrint}{Print} icon allows to print the
 % layout to a connected printer or as PDF or Postscript file depending on
 % installed printer drivers.
@@ -325,8 +334,8 @@ Le composeur de carte vous permet de choisir plusieurs formats de sortie et il e
 \item L'icône \toolbtntwo{mActionSaveAsSVG}{Exporter au format SVG} sauve le cadre du composeur de carte en SVG (Scalable Vector Graphic). \textbf{Note :} Actuellement la sortie SVG est très basique. Ce n'est pas un problème de QGIS mais un problème de la bibliothèque Qt sous-jacente. Cela sera
 probablement corrigé dans une prochaine version. \end{itemize}
 
-%\subsubsection{Saving and loading a print composer layout}
-\subsubsection{Enregistrer et charger une mise en page d'impression}
+%\subsection{Saving and loading a print composer layout}
+\subsection{Enregistrer et charger une mise en page d'impression}
 
 %With the \toolbtntwo{mActionFileSaveAs}{Save as template} and
 %\toolbtntwo{mActionFolder}{Load from template} icons you can save the current

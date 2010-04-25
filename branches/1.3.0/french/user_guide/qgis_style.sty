@@ -2,67 +2,116 @@
 % % !TEX encoding = utf8
 % !TEX TS-program = pdflatex
 
+%%%%%%%%%%%%%%%%
+%%% choix de l'encodage %%%
+%%%%%%%%%%%%%%%%
 \usepackage[utf8]{inputenc} 
 \usepackage[T1]{fontenc} 
+
 %%%%%%%%%%%%%%%%
 %%% choix de la police %%%
 %%%%%%%%%%%%%%%%
 \usepackage{helvet}
 \renewcommand{\sfdefault}{phv}  % switch \sf to Helvetica T1
 \renewcommand*{\familydefault}{\sfdefault} 
+\usepackage{numprint}%pour l'écriture des nombres, respecte les conventions typographiques des grands nombres
 
 %%%%%%%%%%%%%%%%
 %%%   lien hypertext     %%%
 %%%%%%%%%%%%%%%%
-\usepackage[bookmarks=true, pdftitle={Guide utilisateur de QGIS}, pdfauthor={Projet QGIS}, pdfsubject={Guide utilisateur de QGIS}, breaklinks=true, colorlinks=true, linkcolor=blue,urlcolor=red]{hyperref}%,dvips
+\usepackage[bookmarks=true, pdftitle={Guide utilisateur de QGIS}, pdfauthor={Projet QGIS}, pdfsubject={Guide utilisateur de QGIS}, breaklinks=true, colorlinks=true, linkcolor=blue,urlcolor=red]{hyperref}
 %%%%%%%%%%%%%%%%
 %%%   images               %%%
 %%%%%%%%%%%%%%%%
-\usepackage{subfig}
-
+\usepackage{subfig} %pour les figures avec des sous figures
 \usepackage{graphicx}
-\usepackage{tikz}
-\usetikzlibrary{shadows} 
-\graphicspath{{./images/}{./operating_system_icons/}{./getting_started_screenies/}{./features_at_a_glance_screenies/}{./working_with_vector_screenies/}}
+\usepackage{tikz}% pour fabriquer les icônes
+\usetikzlibrary{shadows} %pour les ombres des icônes
+
+% l'ensemble des répertoires où sont stockés les images. Tu ajoutes un répertoire en l'encadrant entre {} et en mettant au début ./ et à la fin/ c'est impératif sinon erreur de compil {./nouveau_fichier/}
+\graphicspath{
+{./images/}
+{./operating_system_icons/}
+{./getting_started_screenies/}
+{./features_at_a_glance_screenies/}
+{./working_with_vector_screenies/}
+{./grass_integration_screenies/}
+{./plugins_add_wfs_layer_images/}
+{./plugins_coordinate_capture_images/}
+{./plugins_decorations_images/}
+{./plugins_delimited_text_images/}
+{./plugins_diagram_overlay_images/}
+{./plugins_spit_images/}
+{./plugins_dxf2shape_converter_images/}
+{./plugins_evis_images/}
+{./plugins_ftools_images/}
+{./plugins_geoprocessing_images/}
+{./plugins_georeferencer_images/}
+{./plugins_gps_images/}
+{./working_with_raster_screenies/}
+{./working_with_ogc_screenies/}
+{./working_with_projections_screenies/}
+{./plugins_grass_module_images/}
+{./grass_integration_screenies/}
+{./print_composer_screenies/}
+{./plugins_screenies/}
+{./plugins_interpolation_images/}
+{./plugins_mapserver_export_images/}
+{./plugins_ogr_converter_images/}
+{./plugins_openstreetmap_images/}
+{./plugins_oracle_raster_images/}
+{./plugins_raster_terrain_images/}
+{./plugins_quick_print_images/}
+{./plugins_table_manager_images/}
+{./plugins_raster_algebra_images/}
+}
+%déclaration des types d'images permet de ne pas préciser l'extension, ce qui permet de passer de l'.eps à .png sans avoir à tout modifier, tu as juste à changer le type d'image ci-dessous
 \DeclareGraphicsExtensions{.png,.jpg,.pdf}
 %%%%%%%%%%%%%%%%
 %%%   mise en page      %%%
 %%%%%%%%%%%%%%%%
-\usepackage{enumitem}
 
-\usepackage{xspace}
+\usepackage{enumitem}% meilleur gestion des listes
+
+\usepackage{xspace}%gestion des espaces dans les commandes
+
+%%gestion des entêtes et pied de page sous koma-script
 \usepackage{scrpage2}
 \clearscrheadings
 \automark[subsection]{section}
 \ihead[]{}
 \chead[]{}
 \ohead{\headmark}
-\ifoot[]{Guide utilisateur de \qg \CURRENT}
+\ifoot[]{\vspace{-10pt}Guide utilisateur de \qg \CURRENT}
 \cfoot[]{}
-\ofoot[\pagemark]{\pagemark}
+\ofoot[\pagemark]{\vspace{-10pt}\pagemark}
 \setheadsepline{1pt}
 \setfootsepline{1pt}
 \setheadwidth[0pt]{text}
 \setfootwidth[0pt]{text}
-\setkomafont{captionlabel}{\sffamily\bfseries} %étiquette des figures en gras et sans serif
+%fin gestion des entêtes et pied de page
+
+\setkomafont{captionlabel}{\sffamily\bfseries} %étiquette des figures en gras et sans serif le "Figure 1 :"
+%%destion de la table des matière pour éviter que les numéros débordent sur le titre de section
+\KOMAoptions{toc=flat,listof=flat}
 %%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%
 %%%   bibliographie      %%%
 %%%%%%%%%%%%%%%%
+
+\usepackage{csquotes}
 \usepackage[style=authoryear]{biblatex}
-\bibliography{cited_lit}
+\bibliography{cited_lit,cited_weblinks}
 
 %%%%%%%%%%%%%%%%
-%%%   astuce      %%%
+%%%   Tip      %%%
 %%%%%%%%%%%%%%%%
 \usepackage{float}
 
 \floatstyle{ruled}
-\newfloat{Astuce}{ht}{toa}
-\floatname{Astuce}{Astuce QGIS}
+\newfloat{Tip}{ht}{toa}
+\floatname{Tip}{Astuce QGIS} %pour changer l'intitulé il suffit de changer ce qui est dans les deuxièmes {} pour l'anglais tu mets \floatname{Tip}{Tip QGIS}, pour l'espagnol \floatname{Tip}{Truco QGIS}....
 
-%une commande qui fait rien pour \qgistip dont je ne connais pas l'utilité
-\newcommand{\qgistip}[1]{#1}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%   pour les symboles mathématiques      %%%
@@ -75,13 +124,14 @@
 \usepackage{array}
 \usepackage{longtable}
 \usepackage{colortbl}
-\newcolumntype{r}{>{\columncolor{gray!20}}l}
+\newcolumntype{r}{>{\columncolor{gray!20}}l}%un nouveau type de colonne à fond gris, s'utilise comme c ou l 
 
 %%%%%%%%%%%%%%%%%%
 %%%    pour le français       %%%
 %%%%%%%%%%%%%%%%%%
+%il faut commenter ces 2 lignes pour la version anglaise et pour les autres langues changer le frenchb par la langue appropriée
 \usepackage[frenchb]{babel} 
-\frenchbsetup{StandardLists=true} %car j'utilise enumitem pour gérer les listes
+\frenchbsetup{StandardLists=true} %car j'utilise enumitem pour gérer les listes, empêche frenchb de redéfinir les listes
 
 
 %%%%%%%%%%%%%%%%%%%
@@ -98,7 +148,9 @@
 \newcommand{\qg}{QGIS\xspace}
 \newcommand{\QG}{Quantum GIS\xspace}
 \newcommand{\pg}{PostGIS\xspace}
+\newcommand{\psq}{PostgreSQL\xspace}
 \newcommand{\ppg}{PostgreSQL/PostGIS\xspace}
+\newcommand{\map}{MapInfo\xspace}
 \newcommand{\tux}{GNU/Linux\xspace}
 \newcommand{\mac}{Mac OS X\xspace}
 \newcommand{\mswin}{MS Windows\xspace}
@@ -123,7 +175,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%% % 
 \newcommand{\filename}[1]{\texttt{#1}}
 
-% % usertext
+% % usertextj'en suis au annexes 
 % generic style for text that the user should type in from the keyboard
 % % Note: for user input into a labelled text field in the GUI, see \inputtext
 % usage: \usertext{qgis ---help}
@@ -165,6 +217,13 @@
 \end{tikzpicture}
 }
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% 				guiheading							%%%
+%%% style for section heading that appear in dialog boxes	%%%
+%%% 	such as Vector Layer Properties > metadata		%%%
+%%%%%%%%%%%%%%%%%%%%%%%%% %%%%%%%
+\newcommand{\guiheading}[1]{\textsf{#1}}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% 				keystroke				%%%
 %%% 	 			touche clavier			%%%
@@ -172,7 +231,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%% %
 \newcommand{\keystroke}[1]{%
 \begin{tikzpicture}[line width=1pt,rounded corners=3pt,baseline=-3pt] 
-\draw (0,0) node[fill=gray!50, inner sep=3pt]{#1};
+\draw (0,0) node[fill=gray!50, inner ysep=4pt, inner xsep=7pt]{#1};
 \end{tikzpicture}
 }
 
@@ -198,24 +257,54 @@
 \end{tikzpicture}
 }
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% 				selecttext			%%%
-%%% 	 sélectionner un texte dans liste		%%%
-%%% 	usage:  \selectsting{Erdas Imagine}	%%%
-%%%%%%%%%%%%%%%%%%%%%%%%% %
-\newcommand{\selectstring}[1]{%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% 				selecttext							%%%
+%%% 	 sélectionner un texte dans liste					%%%
+%%% 	usage: \selectstring{Outline style}{---Solid Line}	%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\selectstring}[2]{%
 \begin{tikzpicture}[line width=1pt,baseline=-3pt] 
-\draw (0,0) node[rectangle,fill=gray!30,drop  shadow]{\guilabel#1\hspace{.5cm}
+\draw (0,0) node[rectangle,fill=gray!20,inner ysep=2pt,inner xsep=3pt]{\guilabel#1\hspace{.5cm}
+\begin{tikzpicture}[line width=0.5pt,baseline=-3pt,rounded corners=2pt] 
+\draw (0,0) node[draw=gray,rectangle,top  color=gray!60,bottom  color=white,drop  shadow]{#2
 \begin{tikzpicture}[line width=1pt,baseline=4pt] 
-\draw[draw=gray!70] (0,0) -- (0,0.5);
+\draw[draw=gray] (0,0) -- (0,0.5);
 \end{tikzpicture}
-\begin{tikzpicture}[scale=0.3]
-\draw[draw=black,line width=2pt,line join=round,line cap=round] (0,0.3) -- (0.5,0.6) -- (1,0.3);
-\draw[draw=black,line width=2pt,line join=round,line cap=round] (0,-0.3) -- (0.5,-0.6) -- (1,-0.3);
-\end{tikzpicture}};
+\begin{tikzpicture}[scale=0.15,baseline=1pt]
+\fill (0,2)--(2,2)--(1,0)--cycle;
+\end{tikzpicture}
+};
+\end{tikzpicture}
+};
 \end{tikzpicture}
 }
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% 				input text:									%%%
+%%% 	a labelled field in a dialog box where the user types in text	%%%
+%%% 	usage: \inputtext{Display Name}{lakes.shp}				%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\inputtext}[2]{%
+\begin{tikzpicture}[line width=1pt,baseline=-3pt] 
+\draw (0,0) node[rectangle,fill=gray!20,inner ysep=2pt,inner xsep=3pt]{\guilabel#1\hspace{.5cm}
+\begin{tikzpicture}[line width=0.5pt,baseline=-3pt,rounded corners=2pt] 
+\draw (0,0) node[draw=gray,rectangle,fill=white,drop  shadow]{#2};
+\end{tikzpicture}
+};
+\end{tikzpicture}
+}
+
+% selectcolor: a selection field for colors
+% usage: \selectcolor{Outline color}{yellow}
+\newcommand{\selectcolor}[2]{%
+\begin{tikzpicture}[line width=1pt,baseline=-3pt] 
+\draw (0,0) node[rectangle,fill=gray!20,inner ysep=2pt,inner xsep=3pt,baseline=3pt]{\guilabel#1\hspace{.5cm}
+\begin{tikzpicture}[line width=0.5pt,rounded corners=2pt] 
+\draw[draw=gray,rectangle,fill=#2,drop  shadow] (0,0) rectangle (3,0.5);
+\end{tikzpicture}
+};
+\end{tikzpicture}
+}
 %%%%%%%%%%%%%%%%%%%%%%%%%%	%%%%%%%%
 %%% 				\selectnumber					%%%
 %%% 	 sélectionner un chiffre							%%%
@@ -224,7 +313,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%% %	%%%%%%%%
 \newcommand{\selectnumber}[2]{%
 \begin{tikzpicture}[line width=1pt,baseline=-3pt] 
-\draw (0,0) node[rectangle,fill=gray!30,drop  shadow]{\guilabel#1
+\draw (0,0) node[rectangle,fill=gray!20,drop  shadow]{\guilabel#1
 \begin{tikzpicture}[line width=1pt,baseline=-3pt] 
 \draw (0,0) node[fill=white]  {#2};
 \end{tikzpicture}
@@ -255,6 +344,28 @@
 \draw (0,0) node[draw=black,rectangle,top  color=gray!60,bottom  color=white,drop  shadow]{#1};
 \end{tikzpicture}
 }
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% 				clicklistitem				%%%
+%%% 	 clickable list item in a dialog box		%%%
+%%% the actual text in the list item will 		%%%
+%%% 		depend on the application	 		%%%
+%%% 	usage: \clicklistitem{Canadian Land}	%%%
+%%%%%%%%%%%%%%%%%%%%%%%%% %
+\newcommand{\clicklistitem}[1]{%
+\begin{tikzpicture}[line width=0.5pt,baseline=-3pt,rounded corners=2pt] 
+\draw (0,0) node[draw=black,rectangle,top  color=gray!60,bottom  color=white,drop  shadow]{#1};
+\end{tikzpicture}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% 				browsebutton					%%%
+%%% 	 a button with 3 dots, used to browse for files	%%%
+%%% 		usage: \browsebutton					%%%
+%%%%%%%%%%%%%%%%%%%%%%%%% %%%%%
+\newcommand{\browsebutton}{%
+\begin{tikzpicture}[line width=0.5pt,baseline=-3pt,rounded corners=2pt] 
+\draw (0,0) node[draw=black,rectangle,top  color=gray!60,bottom  color=white,drop  shadow,inner ysep=7pt]{\dots};
+\end{tikzpicture}
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% 				radiobuttonoff				%%%
@@ -264,7 +375,7 @@
 \newcommand{\radiobuttonoff}[1]{%
 \begin{tikzpicture}[line width=0.5pt,baseline=-3pt] 
 \draw (0,0) node[fill=gray!20]{
-\begin{tikzpicture}[baseline=-3pt] 
+\begin{tikzpicture}[baseline=-3pt,inner ysep=1pt,inner xsep=3pt] 
 \draw[fill=gray!20,line width=1pt,draw=gray!70,drop  shadow] (0,0) circle (6pt);
 \draw (0.5,0) node[anchor=west]{\guilabel#1};
 \end{tikzpicture}};
@@ -279,7 +390,7 @@
 \newcommand{\radiobuttonon}[1]{%
 \begin{tikzpicture}[line width=0.5pt,baseline=-3pt] 
 \draw (0,0) node[fill=gray!20]{
-\begin{tikzpicture}[baseline=-3pt] 
+\begin{tikzpicture}[baseline=-3pt,inner ysep=1pt,inner xsep=3pt] 
 \fill[black] (0,0) circle (3pt);
 \draw[line width=1pt,gray!70] (0,0) circle (6pt);
 \draw (0.5,0) node[anchor=west]{\guilabel#1};
@@ -287,7 +398,20 @@
 \end{tikzpicture}
 }
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% 				slider						%%%
+%%% 	 these appear in several dialog boxes		%%%
+%%% 	usage: \slider{Transparency}				%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\slider}[1]{
+\begin{tikzpicture}[line width=0.5pt,baseline=-3pt] 
+\draw (0,0) node[fill=gray!20,anchor=west]{#1 10\% %
+\begin{tikzpicture}[baseline=-3pt,inner ysep=1pt,inner xsep=3pt] 
+\draw[gray!50] (0,0) rectangle (3,0.1);
+\draw [draw=gray,fill=gray!50,drop  shadow,rounded corners=0.5pt] (0.5,0.25) -- (0.5,-0.05)--(0.6,-0.15)--(0.7,-0.05)--(0.7,0.25)--cycle;
+\end{tikzpicture}};
+\end{tikzpicture}
+}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% 				dropmenuopt				%%%
 %%% 	 sous menu sans icône avec 2ème choix	%%%
@@ -378,9 +502,12 @@
 % toolboxtwo
 % usage: \toolboxtwo{nviz.1.eps}{nviz - Open 3D-View in NVIZ}
 \newcommand{\toolboxtwo}[2]{%
-\begin{tikzpicture}[line width=1pt,baseline=-3pt] 
-\draw (0,0) node[draw,inner sep=3pt,rounded corners=3pt]{\includegraphics[width=5mm]{#1}};
-\draw (3,0)node[draw=black,rectangle,fill=yellow!10]{\guilabel{#2}};
+\begin{tikzpicture}[line width=1pt,baseline=-3pt,inner ysep=4pt,inner xsep=3pt] 
+\draw (0,0) node[rectangle,fill=gray!20,baseline=3pt]{
+\begin{tikzpicture}[baseline=5pt] 
+\includegraphics[width=5mm]{#1}
+\end{tikzpicture}
+  \hspace{0.5cm}\guilabel#2};
 \end{tikzpicture}
 }
 
