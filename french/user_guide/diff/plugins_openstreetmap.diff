@@ -1,0 +1,287 @@
+--- 1.3.0_user_guide/plugins_openstreetmap.tex	2010-08-22 18:52:41.552755043 +0200
++++ english/english_us/user_guide/plugins_openstreetmap.tex	2010-06-28 21:24:39.636364409 +0200
+@@ -1,6 +1,6 @@
+-% vim: set textwidth=78 autoindent:
++%  !TeX  root  =  user_guide.tex
+ 
+-\subsection{OpenStreetMap Plugin}
++\section{OpenStreetMap Plugin}\label{plugins_osm}
+ 
+ % when the revision of a section has been finalized, 
+ % comment out the following line:
+@@ -20,7 +20,7 @@
+ purpose was to combine their functionalities to get the best
+ possible result.
+ 
+-The following subsection gives a brief introduction to principles of the OSM 
++The following section gives a brief introduction to principles of the OSM 
+ project. If you are not interested in information on OSM just skip the next 
+ section. Parts of the following paragraphs are copied from the 
+ OpenStreetMap web site at \url{http://www.openstreetmap.org}.
+@@ -36,10 +36,9 @@
+ under a Creative Commons Attribution ShareAlike 2.0 licence.
+ 
+ \begin{figure}[ht]
+-   \begin{center}
+-   \caption{OpenStreetMap data in the web \nixcaption}\label{fig:osmweb}\smallskip
+-   \includegraphics[clip=true, width=\textwidth]{osmweb}
+-\end{center}
++   \centering
++   \includegraphics[clip=true, width=10cm]{osmweb}
++   \caption{OpenStreetMap data in the web \nixcaption}\label{fig:osmweb}
+ \end{figure}
+ 
+ OpenStreetMap was inspired by sites such as Wikipedia - the map display 
+@@ -51,7 +50,7 @@
+ server. The three supported types of data are: \textbf{Node}, \textbf{Way} 
+ and \textbf{Relation}. 
+ 
+-\begin{itemize}
++\begin{itemize}[label=--]
+ \item \textbf{A node} is a latitude/longitude pair of coordinates. It is 
+ used as building a block for other features and as a feature itself (Points 
+ Of Interest), if they are tagged as required. 
+@@ -70,13 +69,13 @@
+ 
+ \minisec{QGIS - OSM Connection}\label{qgis-osm-connection}
+ 
+-The first part of this subsection describes how OSM data primitives 
++The first part of this section describes how OSM data primitives 
+ are displayed in QGIS vector layers. As written above, OSM data consist of 
+ Nodes, Ways and Relations. In QGIS they are displayed in three diffrent 
+ layer types: Point layer, Line layer and Polygon layer. It's not possible 
+ to remove any of these layers and work with the other ones.
+ 
+-\begin{itemize}
++\begin{itemize}[label=--]
+ \item A \textbf{Point layer} displays all features of type Node that stands 
+ alone. That means that only Nodes that are not included in any Way belongs 
+ to the Point layer.
+@@ -120,13 +119,13 @@
+ \textbf{Note:} To create a connection between the OSM plugin and standard 
+ editing tools, changes in QuantumGIS core code would be necessary.
+ 
+-\subsubsection{Installation}
++\subsection{Installation}
+ 
+ The OpenStreetMap plugin is a core plugin inside QGIS. If you have python 
+ support enabled, the 'OpenStreetMap' plugin can be selected in the Plugin 
+ Manager as described in section \ref{sec:load_core_plugin}). 
+ 
+-\subsubsection{Basic user interface}
++\subsection{Basic user interface}
+ 
+ The first time the OSM plugin is started (and after the first data are 
+ loaded), several new OSM plugin icons appear in the QGIS toolbar menu 
+@@ -134,10 +133,9 @@
+ \ref{fig:osmwidget}:
+ 
+ \begin{figure}[ht]
+-   \begin{center}
+-   \caption{OSM plugin user interface \nixcaption}\label{fig:osmwidget}\smallskip
+-   \includegraphics[clip=true, width=\textwidth]{osm_widgets}
+-\end{center}
++   \centering
++   \includegraphics[clip=true, width=10cm]{osm_widgets}
++   \caption{OSM plugin user interface \nixcaption}\label{fig:osmwidget}
+ \end{figure}
+ 
+ \minisec{OSM Features widget}
+@@ -180,7 +178,7 @@
+ found in appropriate sections of this plugin section according to their 
+ functionality (editing, identification, etc.).
+ 
+-\subsubsection{Loading OSM data}
++\subsection{Loading OSM data}
+ 
+ The first action that should be done after starting the OSM Plugin is 
+ opening data from an OSM file. OSM data can be import as shapefile or 
+@@ -193,10 +191,9 @@
+ \mainmenuopt{Settings} > \mainmenuopt{Toolbars} > \dropmenuopt{OpenStreetMap}.
+ 
+ \begin{figure}[ht]
+-   \begin{center}
+-   \caption{Load OSM data dialog \nixcaption}\label{fig:osmload}\smallskip
+-   \includegraphics[clip=true, width=12cm]{osmloaddialog}
+-\end{center}
++   \centering
++   \includegraphics[clip=true, width=10cm]{osmloaddialog}
++   \caption{Load OSM data dialog \nixcaption}\label{fig:osmload}
+ \end{figure}
+ 
+ Purpose of its elements is explained below.
+@@ -227,7 +224,7 @@
+ file is loaded, the plugin must first parse the database. This may take few 
+ seconds or minutes - it depends on the amount of loaded data.
+ 
+-\subsubsection{Viewing OSM data}
++\subsection{Viewing OSM data}
+ 
+ After OSM data are loaded, you can identify map features using the
+ appropriate tool. Use the \toolbtntwo{osm_identify}{Identify feature} 
+@@ -253,7 +250,7 @@
+ remembers all of them. Then (still in the pause mode) you can change 
+ identified features cyclical with right-clicking.
+ 
+-\subsubsection{Editing basic OSM data}
++\subsection{Editing basic OSM data}
+ 
+ In the title of this section 'basic data' means non-relation OSM features -
+ nodes and ways. If you prefer reading information on relation editing, just
+@@ -272,10 +269,9 @@
+ on the OSM Feature widget. Don't forget to identify feature first.
+ 
+ \begin{figure}[ht]
+-   \begin{center}
+-   \caption{Changing an OSM feature tag \nixcaption}\label{fig:osmchfeattag}\smallskip
++   \centering
+    \includegraphics[clip=true, width=12cm]{osm_changefeaturetag}
+-\end{center}
++   \caption{Changing an OSM feature tag \nixcaption}\label{fig:osmchfeattag}
+ \end{figure}
+ 
+ If you want to change a tag value, just double-click in the appropriate row of
+@@ -288,7 +284,7 @@
+ an existing tag pair. For comfortable usage, there are some combo boxes of all
+ existing tag keys and their typical values.
+ 
+-\minisec{Point creation,}
++\minisec{Point creation}
+ 
+ For point creation there is a \toolbtntwo{osm_createPoint}{Create point} 
+ button on the OSM Feature widget. To create some points just click on the 
+@@ -300,10 +296,9 @@
+ following message:
+ 
+ \begin{figure}[ht]
+-   \begin{center}
+-   \caption{OSM point creation message \nixcaption}\label{fig:osmpoicreat}\smallskip
++   \centering
+    \includegraphics[clip=true, width=8cm]{osm_pointcreation}
+-\end{center}
++   \caption{OSM point creation message \nixcaption}\label{fig:osmpoicreat}
+ \end{figure}
+ 
+ The mechanism of helping a user to hit the line or polygon is called snapping
+@@ -356,7 +351,7 @@
+ 
+ Snapping is also supported in this operation, this means: 
+ 
+-\begin{itemize}
++\begin{itemize}[label=--]
+ \item When moving a standalone (not part of any line/polygon) point, 
+ snapping to all map segments and vertices is performed.
+ \item When moving a point that is a member of some lines/polygons, 
+@@ -389,7 +384,7 @@
+ only one vertex. And because there cannot exist a line with only one vertex, 
+ the feature type is automatically changed to Point.
+ 
+-\subsubsection{Editing relations}\label{editing_osm_relation}
++\subsection{Editing relations}\label{editing_osm_relation}
+ 
+ Thanks to existency of OSM relations we can join OSM features into groups and
+ give them common properties - in such way we can model any possible map
+@@ -447,7 +442,7 @@
+ given relations. You can change relation tags, members or even its type. 
+ After submiting the dialog your changes will be commited.
+ 
+-\subsubsection{Downloading OSM data}  
++\subsection{Downloading OSM data}  
+ 
+ To download data from OpenStreetMap server click on the 
+ \toolbtntwo{osm_download}{Download OSM data} button. If there is no 
+@@ -457,10 +452,9 @@
+ button a dialog occurs and provides following functionalities:
+ 
+ \begin{figure}[ht]
+-   \begin{center}
+-   \caption{OSM download dialog \nixcaption}\label{fig:osmdownload}\smallskip
++   \centering
+    \includegraphics[clip=true, width=8cm]{osm_downloaddialog}
+-\end{center}
++   \caption{OSM download dialog \nixcaption}\label{fig:osmdownload}
+ \end{figure}
+ 
+ \begin{description}
+@@ -500,7 +494,7 @@
+ dialog tells you why. When action finishes succesfully both the progress dialog
+ and download dialog will close themselves.
+ 
+-\subsubsection{Uploading OSM data}  
++\subsection{Uploading OSM data}  
+ 
+ Note that the upload is always done on current OSM data. Before opening the 
+ OSM Upload dialog, please be sure that you really have the right active 
+@@ -514,10 +508,9 @@
+ new dialog will appear.
+ 
+ \begin{figure}[ht]
+-   \begin{center}
+-   \caption{OSM upload dialog \nixcaption}\label{fig:osmupload}\smallskip
++   \centering
+    \includegraphics[clip=true, width=8cm]{osm_uploaddialog}
+-\end{center}
++   \caption{OSM upload dialog \nixcaption}\label{fig:osmupload}
+ \end{figure}
+ 
+ At the top of the dialog you can check, if you are uploading the correct data. 
+@@ -533,7 +526,7 @@
+ one at \url{http://www.openstreetmap.org}. Finally use \button{Upload} to 
+ start an upload operation.
+ 
+-\subsubsection{Saving OSM data}  
++\subsection{Saving OSM data}  
+ 
+ To save data from a current map extent to an XML file click on the
+ \toolbtntwo{osm_save}{Save OSM to file} button. If there is no such button, 
+@@ -542,10 +535,9 @@
+ \dropmenuopt{OpenStreetMap}. After clicking on the button a new dialog appears.
+ 
+ \begin{figure}[ht]
+-   \begin{center}
+-   \caption{OSM saving dialog \nixcaption}\label{fig:osmsave}\smallskip
++   \centering
+    \includegraphics[clip=true, width=8cm]{osm_savedialog}
+-\end{center}
++   \caption{OSM saving dialog \nixcaption}\label{fig:osmsave}
+ \end{figure}
+ 
+ Select features you want to save into XML file and the file itself. Use 
+@@ -561,7 +553,7 @@
+ is visible in the current extent. For each saved line/polygon all its member 
+ nodes are saved too.
+ 
+-\subsubsection{Import OSM data}  
++\subsection{Import OSM data}  
+ 
+ To import OSM data from an opened non-OSM vector layer follow this 
+ instructions: Choose current OSM data by clicking on one of their layers. 
+@@ -573,10 +565,9 @@
+ After clicking on the button following message may show up:
+ 
+ \begin{figure}[ht]
+-   \begin{center}
+-   \caption{OSM import message dialog \nixcaption}\label{fig:osmimportmessage}\smallskip
++   \centering
+    \includegraphics[clip=true, width=8cm]{osm_importdialog}
+-\end{center}
++   \caption{OSM import message dialog \nixcaption}\label{fig:osmimportmessage}
+ \end{figure}
+ 
+ In such case there is no vector layer currently loaded. The import must be d
+@@ -585,12 +576,12 @@
+ better result (don't forget to mark the current OSM layer again):
+ 
+ \begin{figure}[ht]
+-   \begin{center}
+-   \caption{Import data to OSM dialog \nixcaption}\label{fig:osmimporttoosm}\smallskip
++   \centering
+    \includegraphics[clip=true, width=8cm]{osm_importtoosmdialog}
+-\end{center}
++   \caption{Import data to OSM dialog \nixcaption}\label{fig:osmimporttoosm}
+ \end{figure}
+ 
+ Use the submit dialog to start the process of OSM data importing.
+ Reject it if you are not sure you want to import something.
+ 
++\FloatBarrier
