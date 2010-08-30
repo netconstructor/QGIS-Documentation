@@ -1,138 +1,145 @@
-%  !TeX  root  =  user_guide.tex
-\pagestyle{scrheadings}
-\chapter{Introduction To GIS}\label{label_intro}
+% vim: set textwidth=78 autoindent:
+
+\section{Einführung in GIS}\label{label_intro}
 
 % when the revision of a section has been finalized, 
 % comment out the following line:
 %\updatedisclaimer
 
-A Geographical Information System (GIS) (\cite{mitchel05}\footnote{This chapter is by Tyler
-Mitchell (\url{http://www.oreillynet.com/pub/wlg/7053}) and
-used under the Creative Commons License. Tyler is the author of 
-\textit{Web Mapping Illustrated}, published by O'Reilly, 2005.})
-is a collection of software that allows you to create, visualize, query and
-analyze geospatial data. Geospatial data refers to information about the
-geographic location of an entity. This often involves the use of a
-geographic coordinate, like a latitude or longitude value. Spatial data is
-another commonly used term, as are: geographic data, GIS data, map data,
-location data, coordinate data and spatial geometry data.
+Ein Geographisches Informationssystem (GIS)\cite{mitchel05}\footnote{Dieses
+Kapitel ist von Tyler Mitchell (\url{http://www.oreillynet.com/pub/wlg/7053})
+und wurde unter der Creative Commons License veröffentlicht. Tyler ist der
+Autor des Buches \textit{Web Mapping Illustrated}, veröffentlicht von
+O'Reilly, 2005.} besteht aus einer Auswahl verschiedener Software, die einem
+ermöglicht, geografische Daten zu erstellen, zu visualisieren, abzufragen und
+zu analysieren. Geografische Daten beziehen sich dabei auf Informationen über
+die geografische Lage von Objekten. Dies bedingt meist eine geografische
+Koordinate oder die Zuweisung eines Längen und Breitengrades. Neben der
+Bezeichnung Geografische Daten ist Räumliche Daten ein ebenfalls häufig
+benutzter Begriff, genau wie GIS-Daten, Kartendaten, Location-Daten,
+Koordinatendaten und räumliche Geometriedaten.
 
-Applications using geospatial data perform a variety of functions. Map
-production is the most easily understood function of geospatial
-applications. Mapping programs take geospatial data and render it in a form
-that is viewable, usually on a computer screen or printed page.
-Applications can present static maps (a simple image) or dynamic maps that
-are customised by the person viewing the map through a desktop program or a
-web page.
+Applikationen, die mit räumlichen Daten arbeiten, leisten eine Vielzahl
+unterschiedlicher Funktionen. Kartenerstellung ist dabei die am einfachsten
+zu begreifende GIS-Applikation. Mit Hilfe von Programmen werden dabei aus
+räumlichen Daten Karten erstellt, die digital auf PCs oder analog auf Papier
+gedruckt werden. Die Daten können dabei statisch (einfaches Bild) oder
+dynamisch (durch den Benutzer veränderbar) bereitgestellt werden.
 
-Many people mistakenly assume that geospatial applications just produce
-maps, but geospatial data analysis is another primary function of
-geospatial applications. Some typical types of analysis include computing:
-
-\begin{enumerate}
-\item distances between geographic locations
-\item the amount of area (e.g., square meters) within a certain geographic
-region
-\item what geographic features overlap other features
-\item the amount of overlap between features
-\item the number of locations within a certain distance of another
-\item and so on...
-\end{enumerate}
-
-These may seem simplistic, but can be applied in all sorts of ways across
-many disciplines. The results of analysis may be shown on a map, but are
-often tabulated into a report to support management decisions.
-
-The recent phenomena of location-based services promises to introduce all
-sorts of other features, but many will be based on a combination of maps
-and analysis. For example, you have a cell phone that tracks your
-geographic location. If you have the right software, your phone can tell
-you what kind of restaurants are within walking distance. While this is a
-novel application of geospatial technology, it is essentially doing
-geospatial data analysis and listing the results for you.
-
-\section{Why is all this so new?}\label{label_whynew}
-
-Well, it's not. There are many new hardware devices that are enabling
-mobile geospatial services. Many open source geospatial applications are
-also available, but the existence of geospatially focused hardware and
-software is nothing new. Global positioning system (GPS) receivers are
-becoming commonplace, but have been used in various industries for more
-than a decade. Likewise, desktop mapping and analysis tools have also been
-a major commercial market, primarily focused on industries such as natural
-resource management.
-
-What is new is how the latest hardware and software is being applied and
-who is applying it. Traditional users of mapping and analysis tools were
-highly trained GIS Analysts or digital mapping technicians trained to use
-CAD-like tools. Now, the processing capabilities of home PCs and open
-source software (OSS) packages have enabled an army of hobbyists, professionals,
-web developers, etc. to interact with geospatial data. The learning curve
-has come down. The costs have come down. The amount of geospatial
-technology saturation has increased.
-
-How is geospatial data stored? In a nutshell, there are two types of
-geospatial data in widespread use today. This is in addition to
-traditional tabular data that is also widely used by geospatial
-applications.
-
-\subsection{Raster Data}\label{label_rasterdata}
-
-One type of geospatial data is called raster data or simply "a raster". The
-most easily recognised form of raster data is digital satellite imagery or
-air photos. Elevation shading or digital elevation models are also
-typically represented as raster data. Any type of map feature can be
-represented as raster data, but there are limitations.
-
-A raster is a regular grid made up of cells, or in the case of imagery,
-pixels. They have a fixed number of rows and columns. Each cell has a
-numeric value and has a certain geographic size (e.g. 30x30 meters in
-size).
-
-Multiple overlapping rasters are used to represent images using more than
-one colour value (i.e. one raster for each set of red, green and blue
-values is combined to create a colour image). Satellite imagery also
-represents data in multiple "bands". Each band is essentially a separate,
-spatially overlapping raster, where each band holds values of certain
-wavelengths of light. As you can imagine, a large raster takes up more file
-space. A raster with smaller cells can provide more detail, but takes up
-more file space. The trick is finding the right balance between cell size
-for storage purposes and cell size for analytical or mapping purposes.
-
-\subsection{Vector Data}\label{label_vectordata}
-
-Vector data is also used in geospatial applications. If you stayed awake
-during trigonometry and coordinate geometry classes, you will already be
-familiar with some of the qualities of vector data. In its simplest sense,
-vectors are a way of describing a location by using a set of coordinates.
-Each coordinate refers to a geographic location using a system of x and y
-values.
-
-This can be thought of in reference to a Cartesian plane - you know, the
-diagrams from school that showed an x and y-axis. You might have used them
-to chart declining retirement savings or increasing compound mortgage
-interest, but the concepts are essential to geospatial data analysis and
-mapping.
-
-There are various ways of representing these geographic coordinates
-depending on your purpose. This is a whole area of study for another day -
-map projections.
-
-Vector data takes on three forms, each progressively more complex and
-building on the former.  
+Viele Menschen nehmen irrtümlicherweise an, dass GIS-Applikationen nur zur
+Kartenerstellung benutzt werden. Räumliche Datenanalyse ist jedoch eine
+weitere wichtige Funktion von Geographischen Informationssystemen. Einige
+typische Analysen sind:
 
 \begin{enumerate}
-\item Points - A single coordinate (x y) represents a discrete geographic
-location
-\item Lines - Multiple coordinates (x1 y1, x2 y2, x3 y4, ... xn yn) strung
-together in a certain order, like drawing a line from Point (x1 y1) to
-Point (x2 y2) and so on. These parts between each point are considered line
-segments. They have a length and the line can be said to have a direction
-based on the order of the points. Technically, a line is a single pair of
-coordinates connected together, whereas a line string is multiple lines
-connected together.  
-\item Polygons - When lines are strung together by more
-than two points, with the last point being at the same location as the
-first, we call this a polygon. A triangle, circle, rectangle, etc. are all
-polygons. The key feature of polygons is that there is a fixed area within them.  
+\item Messen von Distanzen zwischen geografischen Punkten
+\item Berechnung von Flächengrößen (z.B.: Quadratmeter) innerhalb einer
+Region
+\item Bestimmung der Überlappung unterschiedlicher räumlicher Objekte
+\item Bestimmung der überlappten Flächen innerhalb einer Region
+\item Die Anzahl von Ortschaften entlang einer definierten Distanz
+\item und so weiter...
 \end{enumerate}
+
+Dies mag einfach erscheinen, wird jedoch täglich für viele verschiedene
+Fragestellungen angewendet und benötigt. Die Ergebnisse derartiger Analysen
+können auf Karten visualisiert oder in Form von Tabellen als
+Entscheidungshilfe dienen.
+
+Das aktuelle Phänomen von ortsbasierten Diensten 'location-based services'
+verspricht dabei die räumliche Integration unterschiedlichster Informationen.
+Oft werden diese aus einer Kombination von Karten und darauf basierenden
+Analysen erstellt. Stellen Sie sich vor, Sie besitzen ein
+mobiles Telefon, dass ihre genaue geografische Position ermittelt. Wenn Sie
+die entsprechende Software nutzen, kann Ihnen das Telefon sagen, welche
+Restaurants sich in der Nähe befinden. Während dies eine neuartige
+GIS-Technlogie ist, ist das Analysieren von Geodaten und das Bereitstellen
+daraus gewonnener Informationen als eine Basis dafür zu verstehen.
+
+\subsection{Warum ist das alles so neu?}\label{label_whynew}
+
+Nun ja, ist es nicht. Es gibt heute viele Geräte auf dem Markt, die mobile
+räumliche Dienste anbieten, darunter auch viele Freie (Open Source)
+GIS-Applikationen. Die Existenz solcher Geräte ist nicht neu. GPS-Geräte
+sind z.B. heute für uns noch recht neu, werden aber von Unternehmen bereits
+seit mehr als 10 Jahren eingesetzt. Datenanalysen oder die digitale Erfassung
+der Umwelt mit dem PC auf Basis von Luftbildern war auch bereits früher ein
+kommerzieller Markt, der sich aber hauptsächlich auf Industrien aus dem
+Umweltsektor konzentriert hat.
+
+Neu an all dem ist, wie die neueste Hard- und Software angewendet wird und
+von wem. Traditionell waren Anwender von GIS-Applikationen hochspezialisierte
+Forscher oder Techniker, die in der Anwendung von CAD-ähnlichen Anwendungen
+geschult waren. Mittlerweile bietet die Leistungsfähigkeit moderner Heim-PCs
+zusammen mit Freier (Open Source) Software einer Armada von Hobbyanwendern,
+Internetentwicklern usw. die Möglichkeit, geografische Daten selber zu nutzen
+und zu erstellen. Die Lernkurve ist dabei immer flacher geworden, während die
+Anzahl der Anwendungsmöglichkeiten stetig gestiegen ist.
+
+Wie werden Geodaten gespeichert? Kurz gesagt gibt es zwei Datenmodelle, die
+heutzutage benutzt werden, ergänzend zu traditionell in tabellarischer Form
+abgelegten Informationen, die weiterhin eine wichtige Rolle bei der
+räumlichen Analyse spielen.
+
+\subsubsection{Rasterdaten}\label{label_rasterdata}
+
+Das eine Datenmodell wird als Rasterdaten, oder einfach als 'Raster'
+bezeichnet. Ein typisches Beispiel hierfür sind Satelliten- und Luftbilder,
+genauso wie Höhenmodelle. Abgesehen von ein paar Ausnahmen können fast alle
+Daten als Raster dargestellt und gespeichert werden.
+
+Ein Raster ist ein gleichmäßiges Gitter, das aus Zellen besteht, oder im
+Falle eines Bildes aus Pixeln. Ein Raster hat eine definierte Anzahl von
+Zeilen und Spalten. Jede Zelle hat einen numerischen Wert und eine bestimmt
+geografische Größe (z.B.: 30x30 Meter).
+
+Sich mehrfach überlagernde Raster werden benutzt, um Bilder mit mehr als
+einem Farbwert zu repräsentieren. Ein Beispiel hierfür sind die Rot-, Grün-
+und Blaukanäle eines Satellitenbildes. Jeder Kanal eines Satellitenbildes ist
+ein einzelnes, sich mit den anderen Kanälen räumlich überlappendes Raster,
+das jeweils eine bestimmte Wellenlänge des Lichts darstellt. Wie man sich gut
+vorstellen kann, benötigt ein großes Raster mehr Speicherplatz als ein
+kleines, und je kleiner die Zellen eines Rasters sind, desto mehr Details
+können zwar dargestellt werden, aber desto mehr Speicherplatz wird benötigt.
+Die Kunst besteht darin, die Balance zwischen der maximalen Detailschärfe für
+die Analyse und einem möglichst geringen Speichervolumen zu finden.
+
+\subsubsection{Vektordaten}\label{label_vectordata}
+
+Vektordaten sind das andere Datenmodell und werden ebenso in
+GIS-Applikationen genutzt. Falls Sie in der Schule bei den Themen
+Trigonometrie und Koordinatensysteme wach geblieben sind, sind Sie sicher
+vertraut mit den Qualitäten und Besonderheiten von Vektoren. Einfach gesagt
+beschreiben Vektoren einen Ort durch eine Anzahl von Koordinaten. Jede
+Koordinate bezieht sich auf einen bestimmtem geografischen Punkt mit Hilfe
+von X- und Y-Werten.
+
+Besser vorstellen kann man sich dies anhand einer kartesischen Ebene. Diese
+Diagramme aus der Schule mit einer x- und einer y-Achse. Vielleicht haben Sie
+es benutzt, um die sinkenden Renten oder steigenden Hypotheken darzustellen.
+Das Konzept ist ähnlich zur räumlichen Datenanalyse und Kartenerstellung.
+
+Es gibt verschiedene Wege, um geografische Koordinaten darzustellen, abhängig
+von den Absichten und Zielen. Das Thema Kartenprojektionen ist dabei jedoch
+sehr komplex und wird an dieser Stelle daher nicht weiter erklärt.
+
+Es gibt drei Arten von Vektordaten, die progressiv aufeinander aufbauen und
+dadurch immer komplexere Formen annehmen.
+
+\begin{enumerate}
+\item \textbf{Punkte} - Eine einzelne Koordinate (X Y) repräsentiert ein
+diskretes geografisches Objekt.
+\item \textbf{Linien} - Multiple Koordinaten (x1 y1, x2 y2, x3 y4, ... xn
+yn), die in einer bestimmten Anordnung miteinander verbunden sind. Etwa wie
+eine Linie von Punkt (x1 y1) nach Punkt (x2 y2) und so weiter. Die Strecken
+zwischen den einzelnen Punkten sind Liniensegmente. Sie haben eine Länge und
+eine Richtung entsprechend der Anordnung der Punkte. Technisch gesehen ist
+eine Linie ein Paar von Koordinaten, die miteinander verbunden sind, wobei
+eine Linienkette aus mehreren Linien zusammengesetzt ist.
+\item \textbf{Polygone} - Wenn Linien aus mehr als zwei Punkten bestehen und
+der letzte Punkte der Linie identisch mit dem ersten ist, wird das als
+Polygon bezeichnet. Dreiecke, Kreise, Rechtecke usw. sind Polygone. Die
+Schlüsseleigenschaft eines Polygons besteht darin, dass eine definierte
+Fläche dargestellt wird.
+\end{enumerate}
+
