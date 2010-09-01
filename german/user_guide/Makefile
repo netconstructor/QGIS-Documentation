@@ -74,7 +74,7 @@ all: $(INCLUDES) $(APPENDIX)
 	gs -sDEVICE=tiffg3 -sPapersize=a4 -dNOPAUSE -q -sOutputFile=$*.tif $*.pdf -c quit
 
 clean:
-	rm -f *.log *.lof *.toa *.lot *.toc *.aux *.out *.bbl *.blg *.ps WARNINGS
+	rm -f *.log *.lox *.lof *.toa *.lot *.toc *.aux *.out *.bbl *.blg *.ps WARNINGS
 
 cleanall: 
-	rm -f *.log *.lof *.toa *.lot *.toc *.aux *.out *.bbl *.blg *.ps *.dvi *.pdf WARNINGS
+	rm -f *.log *.lox *.lof *.toa *.lot *.toc *.aux *.out *.bbl *.blg *.ps *.dvi *.pdf WARNINGS

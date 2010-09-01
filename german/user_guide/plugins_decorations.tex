@@ -1,84 +1,110 @@
-%  !TeX  root  =  user_guide.tex 
+% vim: set textwidth=78 autoindent:
 
-\section{Decorations Plugins}
+\section{Dekorationen Plugins}
 
-% when the revision of a section has been finalized, 
+% when the revision of a chapter has been finalized, 
 % comment out the following line:
 % \updatedisclaimer
 
-The Decorations Plugins includes the Copyright Label Plugin, the North 
-Arrow Plugin and the Scale Bar Plugin. They are used to ``decorate'' the 
-map by adding cartographic elements. 
+Die Dekorationen Plugins bestehen aus dem Urheberrechtshinweis, dem Nordpfeil
+und dem Maßstab Plugin. Sie werden als katographische Elemente im Kartenfenster
+verwendet. 
 
-\subsection{Copyright Label Plugin}
+\subsection{Urheberrechtshinweis Plugin}\index{Plugins!Copyright}
 
-The title of this plugin is a bit misleading - you can add any random text to the map.
+Der Name dieses Plugins ist ein wenig irreführend, denn Sie können damit
+nicht nur das Copyright Zeichen, sondern auch jeden anderen beliebigen Text
+zu einer Karte hinzufügen.
 
 \begin{figure}[ht]
-   \centering
-   \includegraphics[clip=true, width=7cm]{copyright}   
-   \caption{Copyright Label Plugin \nixcaption}\label{fig:copyright}
+   \begin{center}
+   \caption{Copyright Label Plugin \nixcaption}\label{fig:copyright}\smallskip
+   \includegraphics[clip=true, width=6cm]{copyright}
+\end{center}  
 \end{figure}
 
 \begin{enumerate}
-\item Make sure the plugin is loaded
-\item Click on \mainmenuopt{Plugins} > \dropmenuopt{Decorations} > \dropmenuopttwo{copyright_label}{Copyright Label} or use the \toolbtntwo{copyright_label}{Copyright Label} button from the Toolbar.
-\item Enter the text you want to place on the map. You can use HTML as
-  shown in the example
-\item Choose the placement of the label from the \selectstring{Placement}{Bottom Right} drop-down box
-\item Make sure the \checkbox{Enable Copyright Label} checkbox is checked
-\item Click \button{OK} 
+\item Vergewissern Sie sich, dass das Urheberrechtshinweis Plugin geladen ist.
+\item Klicken Sie auf \mainmenuopt{Plugins} > \dropmenuopt{Dekorationen} >
+\dropmenuopttwo{copyright_label}{Urheberrechtshinweis} oder klicken Sie auf
+das \toolbtntwo{copyright_label}{Urheberrechtshinweis} Icon der
+Werkzeugleiste.
+\item Geben Sie den Text ein, den Sie der Karte hinzufügen möchten. Wie
+im gezeigten Beispiel können Sie hierbei auch HTML Text verwenden.
+\item Wählen Sie aus dem Drop-Down Menü \selectstring{Platzierung}{Unten
+rechts} aus, wo der Urheberrechtshinweis im Kartenfenster zu sehen sein soll.
+\item Vergewissern Sie sich, dass das Kontrollkästchen
+\checkbox{Urheberrechtshinweis aktivieren} ausgewählt ist.
+\item Klicken Sie auf \button{OK} 
 \end{enumerate}
 
-In the example above (default) places a copyright symbol followed by the date in the 
-lower right hand corner of the map canvas.
+In obigem Beispiel ist wird ein Copyright Symbol, gefolgt von dem Namen QGIS
+und der Jahreszahl 2009 in der unteren rechten Ecke des Kartenfensters angezeigt.
 
-\subsection{North Arrow Plugin}
+\subsection{Nordpfeil Plugin}\index{Plugins!Nordpfeil}
 
-The North Arrow plugin places a simple north arrow on the map canvas. At
-present there is only one style available. You can adjust the angle of the
-arrow or let QGIS set the direction automatically. If you choose to let
-QGIS determine the direction, it makes its best guess as to how the arrow
-should be oriented. For placement of the arrow you have four options, 
-corresponding to the four corners of the map canvas.
+Das Nordpfeil Plugin platziert im Kartenfenster einen Nordpfeil. Bislang
+steht hierfür lediglich eine Pfeilform zur
+Verfügung. Sie können die Richtung des Nordpfeiles entweder selbst
+anpassen oder dies automatisch von QGIS bewerkstelligen lassen. Wenn Sie es
+QGIS überlassen die Richtung zu bestimmen, entscheidet das Programm, in
+welche Richtung der Nordpfeil idealerweise zeigen sollte.
 
 \begin{figure}[ht]
-   \centering
-   \includegraphics[clip=true, width=8cm]{north_arrow_dialog}   
-   \caption{North Arrow Plugin \nixcaption}\label{fig:north_arrow}
+   \begin{center}
+   \caption{Nordpfeil Plugin \nixcaption}\label{fig:north_arrow}\smallskip
+   \includegraphics[clip=true, width=6cm]{north_arrow_dialog}
+\end{center}  
 \end{figure}
 
-\subsection{Scale Bar Plugin}
-The Scale Bar plugin adds a simple scale bar to the map canvas. You
-control the style and placement, as well as the labeling of the bar. 
+\subsection{Maßstab Plugin}\index{Plugins!Maßstab}
 
-QGIS only supports displaying the scale in the same units as your map frame. So
-if the units of your layers are in meters, you can't create a scale bar in
-feet. Likewise if you are using decimal degrees, you can't create a scale
-bar to display distance in meters.
+Das Maßstab Plugin fügt dem Kartenausschnitt einen Maßstabsbalken hinzu.
+Dabei können Sie sowohl das Aussehen, die Platzierung, als auch die
+Beschriftung festlegen.
 
-To add a scale bar:
+QGIS unterstützt hierbei jedoch lediglich die Darstellung des Balkens in
+denjenigen Einheiten, die auch in Ihren entsprechenden Karten verwendet
+werden. Dies bedeutet, dass Sie einer Karte deren Layer der Einheit Meter
+entsprechen, keinen Maßstabsbalken in den Einheiten Fuss oder Zoll hinzufügen
+können. Die Einheit des Maßstabsbalkens entspricht also immer derjenigen der
+Karte. Gleiches gilt, wenn Sie Dezimalzahlen (Latitude/Longitude) verwenden, auch
+hier können Sie keinen Maßstabsbalken verwenden, der die Distanzen in der
+Einheit Meter darstellt.
+
+Das Hinzufügen eines Maßstabsbalkens geht folgendermaßen:
+
 
 \begin{enumerate}
-\item Click on \mainmenuopt{Plugins} > \dropmenuopt{Decorations} > \dropmenuopttwo{scale_bar}{Scale Bar} or use the \toolbtntwo{scale_bar}{Scale Bar} button from the Toolbar.
-\item Choose the placement from the \selectstring{Placement}{Bottom Left} drop-down list
-\item Choose the style from the \selectstring{Scale bar style}{Tick Down} list
-\item Select the color for the bar \selectcolor{Color of bar}{black} or use the default black color
-\item Set the size of the bar and its label \selectnumber{Size of bar}{30 degrees}
-\item Make sure the \checkbox{Enable scale bar} checkbox is checked
-\item Optionally choose to automatically snap to a round number when the
-  canvas is resized \checkbox{Automatically snap to round number on resize}
-\item Click \button{OK} 
+\item Klicken Sie auf \mainmenuopt{Plugins} > \dropmenuopt{Dekorationen} >
+\dropmenuopttwo{scale_bar}{Maßstab} oder drücken Sie auf das Icon
+\toolbtntwo{scale_bar}{Maßstab} in der Werkzeugleiste.
+\item Wählen Sie aus dem Drop-Down Menü \selectstring{Platzierung}{Oben
+links} aus, wo der Maßstabsbalken im Kartenfenster zu sehen sein soll.
+\item Wählen Sie aus dem Drop-Down Menü \selectstring{Maßstabstil}{Strich
+unten} aus, welchen Stil der Maßstabsbalken haben soll.
+\item Wählen Sie die \selectcolor{Farbe des Maßstab}{black} aus.
+\item Definieren Sie die \selectnumber{Größe des Maßstab}{30Grad}
+\item Vergewissern Sie sich, dass das Kontrollkästchen \checkbox{Maßstab
+aktivieren} aktiv ist. 
+\item Optional können Sie noch auswählen, dass die Maßstabszahl immer als auf
+eine Ganze Zahl gerundet werden soll mit dem Kontrollkästchen
+\checkbox{Automatisch auf runde Zahlen einstellen}
+\item Klicken Sie auf \button{OK} 
 \end{enumerate} 
 
 \begin{figure}[ht]
-   \centering
-   \includegraphics[clip=true, width=8cm]{scale_bar_dialog}   
-   \caption{Scale Bar Plugin \nixcaption}\label{fig:scale_bar}
+   \begin{center}
+   \caption{Maßstab Plugin \nixcaption}\label{fig:scale_bar}\smallskip
+   \includegraphics[clip=true, width=6cm]{scale_bar_dialog}
+\end{center}  
 \end{figure}
 
-\begin{Tip}\caption{\textsc{Plugins Settings Saved to Project}}\index{plugins settings}
-When you save a .qgs project, any changes you have made to NorthArrow, ScaleBar and Copyright plugins will be saved in the project and restored nexttime you load the project.
+\begin{Tip}\caption{\textsc{Plugin Einstellungen als Projekt
+speichern}}\index{Plugins!Einstellungen speichern}
+\qgistip{Wenn Sie ein .qgs Projekt erstellen, werden alle Einstellungen
+bezüglich des Nordpfeil, Maßstab und Copyright Plugins mitgespeichert und
+beim nächsten Laden des Projektes wieder dargestellt.}
 \end{Tip}
 
-\FloatBarrier
+

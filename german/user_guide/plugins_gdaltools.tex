@@ -1,14 +1,14 @@
 %  !TeX  root  =  user_guide.tex 
 
-\section{GDAL Tools Plugin}\label{label_plugingdaltools}
+\chapter{GDAL Tools Plugin}\label{label_plugingdaltools}
 
-% when the revision of a section has been finalized, 
+% when the revision of a chapter has been finalized, 
 % comment out the following line:
 % \updatedisclaimer
 
-\subsection{What is GDALTools?}\label{whatsgdal}
+\section{What is GDALTools?}\label{whatsgdal}
 The GDAL Tools plugin offers a GUI to the collection of tools in the Geospatial Data Abstraction Library, \url{http://gdal.osgeo.org}. These are raster management tools to query, re-project, warp, merge a wide variety of raster formats. Also included are tools to create a contour (vector) layer, or a shaded relief from a raster DEM, and to make a vrt (Virtual Raster Tile in XML format) from a collection of one or more raster files. These tools are available when the plugin is installed and activated.
-\subsection{The GDAL Library}\label{gdal_lib}
+\section{The GDAL Library}\label{gdal_lib}
 The GDAL library consists of a set of command line programs, each with a large list of options. Users comfortable with running commands from a terminal may prefer the command line, with access to the full set of options. The GDALTools plugin offers an easy interface to the tools, exposing only the most popular options. 
 
 {\setlength{\extrarowheight}{15pt}
@@ -24,11 +24,11 @@ The utility will create the output vector datasource if it does not already exis
 \hline Sieve & The gdal\_sieve.py script removes raster polygons smaller than a provided threshold size (in pixels) and replaces replaces them with the pixel value of the largest neighbour polygon. The result can be written back to the existing raster band, or copied into a new file.\\
 \hline Proximity & The gdal\_proximity.py script generates a raster proximity map indicating the distance from the center of each pixel to the center of the nearest pixel identified as a target pixel. Target pixels are those in the source raster for which the raster pixel value is in the set of target pixel values.\\
 \hline Near Black & This utility will scan an image and try to set all pixels that are nearly black (or nearly white) around the collar to exactly black (or white). This is often used to "fix up" lossy compressed airphotos so that color pixels can be treated as transparent when mosaicing.\\
-\hline Warp & The gdalwarp utility is an image mosaicing, reprojection and warping utility. The program can reproject to any supported projection, and can also apply GCPs stored with the image if the image is "raw" with control information. \\
+\hline Warp & The gdalwarp utility is an image mosaicing, reprojection and warping utility. The program can reproject to any supported projection, and can also apply GCPs stored with the image if the image is 'raw' with control information. \\
 \hline Grid & This program creates regular grid (raster) from the scattered data read from the OGR datasource. Input data will be interpolated to fill grid nodes with values, you can choose from various interpolation methods.\\
 \hline Translate & The gdal\_translate utility can be used to convert raster data between different formats, potentially performing some operations like subsettings, resampling, and rescaling pixels in the process.\\
 \hline Information & The gdalinfo program lists various information about a GDAL supported raster dataset. \\
-\hline Assign Projection &  The gdalwarp utility is an image mosaicing, reprojection and warping utility. The program can reproject to any supported projection, and can also apply GCPs stored with the image if the image is "raw" with control information.
+\hline Assign Projection &  The gdalwarp utility is an image mosaicing, reprojection and warping utility. The program can reproject to any supported projection, and can also apply GCPs stored with the image if the image is 'raw' with control information.
 -s\_srs srs def:
 source spatial reference set. The coordinate systems that can be passed are anything supported by the OGRSpatialReference.SetFromUserInput() call, which includes EPSG PCS and GCSes (ie. EPSG:4296), PROJ.4 declarations (as above), or the name of a .prf file containing well known text. 
 -t\_srs srs\_def:
@@ -48,16 +48,16 @@ The extents of the output file. If not specified the aggregate extents of all in
    \includegraphics[clip=true, width=12cm]{plugins_gdaltools_images/raster_menu}
 \end{figure}
 
-\subsection{Examples}\label{gdal_examples}
+\section{Examples}\label{gdal_examples}
 Below are some examples of use of the tools.
-\subsubsection{Getting information about a raster}
+\subsection{Getting information about a raster}
 \begin{figure}[ht]
    \centering
    \caption{\label{gdalinfo}The \emph{Information} dialog window \nixcaption}
    \includegraphics[clip=true, width=12cm]{plugins_gdaltools_images/gdalinfo}
 \end{figure}
 
-\subsubsection{Creating contour lines}
+\subsection{Creating contour lines}
 This example will create contour lines from an SRTM elevation tile.
 \begin{figure}[ht]
    \centering
@@ -71,7 +71,7 @@ and the result:
    \includegraphics[clip=true, width=12cm]{plugins_gdaltools_images/qgis_contours}
 \end{figure}
 
-\subsubsection{Using GDALwarp to reproject a raster}
+\subsection{Using GDALwarp to reproject a raster}
 Here's the dialog window for reprojecting a landcover image, originally in the Albers Equal Area projection for Alaska (from the QGIS sample dataset) into Lon/Lat WGS84 (EPSG:4326).
 \begin{figure}[ht]
    \centering
