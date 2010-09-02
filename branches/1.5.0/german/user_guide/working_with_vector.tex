@@ -1,6 +1,7 @@
 % vim:autoindent:set textwidth=78:
 
-\section{Arbeiten mit Vektordaten}\label{label_workingvector}
+\section{Arbeiten mit Vektordaten}
+\label{label_workingvector}
 \index{Vektorlayer|(}
 
 % when the revision of a section has been finalized,
@@ -40,7 +41,7 @@ ESRI Shape ist das Standard Vektorformat in QGIS und wird durch die OGR Simple
 Feature Library \url{http://www.gdal.org/ogr}\index{OGR} bereitgestellt.
 Ein Shape besteht aus mindestens drei Dateien:\index{Shapedateien!Format}
 
-\begin{itemize}
+\begin{itemize}[label=--]
 \item .shp Datei (enthält die Geometrien)
 \item .dbf Datei (enthält die Attribute im dBase-Format)
 \item .shx Datei (enthält den räumlichen Index)
@@ -115,10 +116,9 @@ nachdem die Beispieldatei \filename{alaska.shp} geladen wurde.
 \end{figure}
 
 \begin{Tip}\caption{\textsc{Farben von Vektorlayern}}
-\qgistip{Wenn Sie einen neuen Vektorlayer in QGIS laden, werden Farben
+Wenn Sie einen neuen Vektorlayer in QGIS laden, werden Farben
 zufällig zugewiesen. Wenn Sie mehrere neue Vektorlayer laden, werden jeweils
 unterschiedliche Farben zugewiesen.
-}
 \end{Tip}
 
 Nach dem Laden können Sie mit den Navigationstools aus der Werkzeugleiste
@@ -131,11 +131,11 @@ für weitere Informationen zum Editieren der Eigenschaften von Vektorlayern.
 
 \begin{Tip}\caption{\textsc{Layer und Projekte von externen Datenträgern laden
 unter OS X}}
-\qgistip{Unter OS X werden externe Datenträger unter Datei -> Öffne Projekt
+Unter OS X werden externe Datenträger unter Datei -> Öffne Projekt
 nicht gemeinsam mit den internen Festplatten angezeigt. Dies soll zukünftig
 behoben werden. Solange können Sie '/Volumes' in das Eingabefenster
 'Dateiname' eintragen und return drücken. Danach können Sie auch zu den
-externen Datenträgern bzw. Rechnern in einem Netzwerk browsen.}
+externen Datenträgern bzw. Rechnern in einem Netzwerk browsen.
 \end{Tip}
  
 \subsubsection{Darstellungsgeschwindigkeit optimieren}
@@ -147,7 +147,7 @@ haben in QGIS die Endung \filename{.qix}.
 
 Benutzen Sie folgende Schritte zum Erstellen eines räumlichen Index:
 
-\begin{itemize}
+\begin{itemize}[label=--]
 \item Laden Sie ein Shape
 \item Öffnen Sie den \dialog{Eigenschaften}-Dialog des Vektorlayers, indem
 Sie auf den Namen des Layers in der Legende doppelklicken oder mit der
@@ -178,7 +178,7 @@ möglichen Quelltypen \radiobuttonon{Verzeichnis}, wählen Sie als
 Coverage Dateien aus, in der sich beispielweise folgende Dateien befinden
 können:  
 
-\begin{itemize}
+\begin{itemize}[label=--]
 \item .lab - Attributlayer laden (Flächenattribute oder Punktdaten)
 \item .cnt - Polygon-Centroid-Layer laden
 \item .arc - Linienlayer laden
@@ -210,7 +210,7 @@ wurden.
 Um PostGIS benutzen zu können, brauchen Sie folgende
 Schritte:\index{PostgreSQL!Layer laden}
 
-\begin{itemize}
+\begin{itemize}[label=--]
 \item Verknüpfen Sie QGIS mit einer PostgreSQL Datenbank (falls dies noch
 nicht geschehen ist)\index{PostgreSQL!Verbindung}
 \item Stellen Sie eine Verbindung zur Datenbank her
@@ -268,7 +268,7 @@ werden, wenn die SSL-Verbindung abgeschaltet wird. \\
 
 Optional können noch die folgenden Kontrollkästchen aktiviert werden:
 
-\begin{itemize}
+\begin{itemize}[label=--]
 \item \checkbox{Passwort speichern}
 \item \checkbox{Nur in geometry\_columns nachschauen}
 \item \checkbox{Nur im 'public' Schema nachschauen}
@@ -279,12 +279,12 @@ indem Sie auf den Knopf \button{Teste Verbindung}
 drücken\index{PostgreSQL!Verbindung!Testen}. 
 
 \begin{Tip}\caption{\textsc{QGIS Benutzereinstellungen und Sicherheit}}
-\index{Einstellungen}\index{Sicherheit} \qgistip{Ihre Einstellungen für QGIS werden
+\index{Einstellungen}\index{Sicherheit} 
+Ihre Einstellungen für QGIS werden
 abhängig von Ihrem Betriebssystem gespeichert. Unter \nix ist dies in Ihrem
 Homeverzeichnis unter .qt/qgisrc. Unter \win ist es in der Registry. Abhängig
 von Ihrer Arbeitsumgebung kann das Speichern von Passworten in den
 QGIS-Einstellungen ein Sicherheitsrisiko darstellen.
-}
 \end{Tip}
 
 \minisec{Laden eines Layers aus der PostGIS Datenbank}\index{PostgreSQL!Layer
@@ -297,7 +297,7 @@ PostgreSQL/PostGIS lesen Sie Abschnitt \ref{sec:loading_postgis_data}.
 
 Um eine Ebene aus PostGIS zu laden, führen Sie folgende Schritte durch:
 
-\begin{itemize}
+\begin{itemize}[label=--]
 \item Wenn der \dialog{PostGIS Tabelle(n) hinzufügen}-Dialog noch nicht
 geöffnet ist, klicken Sie auf den Knopf
 \toolbtntwo{mActionAddLayer}{PostGIS-Layer hinzufügen} in der Werkzeugleiste
@@ -312,13 +312,13 @@ Query-Builder finden Sie in Abschnitt~\ref{sec:query_builder}.
 \end{itemize}
 
 \begin{Tip}\caption{\textsc{PostGIS-Layer}}
-\qgistip{Normalwerweise ist ein PostGIS-Layer über einen Eintrag in der
+Normalwerweise ist ein PostGIS-Layer über einen Eintrag in der
 geometry\_columns Tabelle definiert. Seit Version 0.9.0 ist QGIS in der Lage,
 Layer zu laden, die keinen Eintrag in der geometry\_columns Tabelle
 besitzen. Dies bezieht sich auf Tabellen und Views. Um einen 'spatial view' zu
 definieren, brauchen Sie ein kraftvolles System, um die Daten zu
 visualisieren. Beziehen Sie sich auf das PostgreSQL Handbuch, um weitere
-Informationen über die Erstellung von Views zu erhalten.}
+Informationen über die Erstellung von Views zu erhalten.
 \end{Tip}
 
 \subsubsection{Einige Details zu PostGIS-Layern}\label{sec:postgis_details}
@@ -376,9 +376,9 @@ Informationen zu räumlichen Referenzsystemen finden Sie in Abschnitt
 
 \begin{Tip}
 \caption{\textsc{PostGIS-Layer exportieren}\index{PostGIS!Exportieren}}
-\qgistip{Entsprechend dem Importtool \usertext{shp2pgsql} gibt es auch ein
+Entsprechend dem Importtool \usertext{shp2pgsql} gibt es auch ein
 Exporttool, um Daten von PostGIS ins Shape-Format zu exportieren:
-\usertext{pgsql2shp}. Dieses Tool ist in der PostGIS-Installation enthalten.}
+\usertext{pgsql2shp}. Dieses Tool ist in der PostGIS-Installation enthalten.
 \end{Tip}
 
 \minisec{SPIT Plugin}
@@ -402,12 +402,12 @@ werden für jedes Shape angezeigt.
 
 \begin{Tip}\caption{\textsc{Shapes mit für PostgreSQL reservierten
 Ausdrücken importieren}}\index{PostGIS!SPIT!reservierte Ausdrücke}
-\qgistip{Wenn Sie ein Shape in der Liste zu importierender Daten haben,
+Wenn Sie ein Shape in der Liste zu importierender Daten haben,
 welches Felder mit für PostgreSQL reservierten Ausdrücken enthält, erscheint
 ein Popup mit dem jeweiligen Status der Felder. Sie können die Namen der Felder
 \index{PostGIS!SPIT!Spaltennamen editieren} dann vor dem Import editieren und
 anpassen. Der Versuch die Datei ohne Änderung zu importieren, wird sehr
-wahrscheinlich fehlschlagen.}
+wahrscheinlich fehlschlagen.
 \end{Tip}
 
 \minisec{ogr2ogr}
@@ -526,7 +526,7 @@ PostGIS Funktion \nixcaption}
 
 \minisec{Beispielanwendung}
 
-\begin{itemize}
+\begin{itemize}[label=--]
 \item Importiere den Layer nach PostGIS (\ref{sec:loading_postgis_data}) z.B.
 mit dem 'PostGIS Manager' oder dem 'SPIT' Plugin.
 \item Öffnen Sie das PostGIS Kommandozeilenfenster und geben Sie folgendes
@@ -676,7 +676,7 @@ festzulegen.
 
 \minisec{Vorhandene Typen von Symbolebenen}
 
-\begin{itemize}
+\begin{itemize}[label=--]
 \item \textbf{SimpleMarker}: Darstellung mit einem defnierten Symbol.
 \item \textbf{SimpleLine}: Darstellen einer Linie (mit festgelegter Breite, 
 Farbe und Linienart).
@@ -693,7 +693,7 @@ Farbanstiege werden verwendet, um eine Spannweite von Farben zu definieren, die
 für die Darstellung verwendet werden sollen. Die Symbolfarbe wird entsprechend des 
 definierten Farbanstiegs angewendet. Es gibt drei Typen: 
 
-\begin{itemize}
+\begin{itemize}[label=--]
 \item \textbf{Gradient}: Linearer Gradient von einer zu anderen Farben.
 \item \textbf{Random}: Zufällig erstellte Farben aus einem festgelegten Farbraum.
 \item \textbf{Colorbrewer}: Erstellen von Farbbereichen aus einem Farbschema und einer definierten Anzahl von Farbklassen.
@@ -763,7 +763,7 @@ mit einem, definierten Symbol darzustellen. Dabei reflektiert der Farbwert des
 Symbols den Wert eines Objektattributs. Im Reiter \tab{Darstellung} kann 
 ausgewählt werden:
 
-\begin{itemize}
+\begin{itemize}[label=--]
 \item Das Attribut (über die Auswahl Spalte)
 \item Das Symbol (über die Auswahl Symbol)
 \item Die Farbe (über die Auswahl Farbanstieg)
@@ -790,7 +790,7 @@ Klassifikation von Objektattributen innerhalb definierter Klassen.
 Analog zur kategorisierten Darstellung ermöglicht der Reiter \tab{Darstellung} 
 folgende Einstellungen:
 
-\begin{itemize}
+\begin{itemize}[label=--]
 \item Das Attribut (über die Auswahl Spalte)
 \item Das Symbol (über die Auswahl Symbol)
 \item Die Farbe (über die Auswahl Farbanstieg)
@@ -826,18 +826,18 @@ Polygon).
 
 \begin{description}
 \item Optionen für den Symbollayertyp bei Punktlayern
-\begin{itemize}
+\begin{itemize}[label=--]
 \item \textbf{SimpleMarker}: Randfarbe, Füllfarbe, Größe, Winkel, X-,Y-Versatz
 \item \textbf{SvgMarker}: Größe, Winkel, X-,Y-Versatz, SVG Bild
 \end{itemize}
 \item Optionen für den Symbollayertyp bei Linienlayern
-\begin{itemize}
+\begin{itemize}[label=--]
 \item \textbf{LineDecoration}: Farbe
 \item \textbf{MarkerLine}: Marker, Markerintervall, Makerrotation, Linienversatz
 \item \textbf{SimpleLine}: Farbe, Stiftbreite, Stiftstil, Versatz, Verbindungsstil und Endstil; 
 \end{itemize}
 \item Optionen für den Symbollayertyp bei Polygonlayern
-\begin{itemize}
+\begin{itemize}[label=--]
 \item \textbf{SimpleFill}: Farbe, Füllstil, Randfarbe, Randstil, Randbreite.
 \end{itemize}
 \end{description}
@@ -968,7 +968,7 @@ oder Wertebereiche zu definieren, die während des Editierens einer bestimmten
 Attributspalte erlaubt sind. Auf Grundlage der Einträge werden
 unterschiedliche Eingabefenster während des Editierens erstellt:
 
-\begin{itemize}
+\begin{itemize}[label=--]
 \item Eingabezeile: Eingabefeld für einfachen Text oder numerische Attribute.
 Dies ist der Standard.
 \item Klassifikation: Auswahlliste mit den Attributwerten, die im Reiter
@@ -1127,7 +1127,7 @@ suchen und die URL dann kopieren. Das Format, das wir brauchen ist:
 \url{http://google.com/search?q=qgis}, wobei \usertext{qgis} das
 Schlüsselwort ist, nach dem wir suchen wollen. Nun kann es weiter gehen:
 
-\begin{itemize}
+\begin{itemize}[label=--]
 \item Laden Sie den Layer \filename{lakes.shp}
 \item Öffnen Sie die \dialog{Layereigenschaften} Dialog, indem Sie doppelt
 auf den Layernamen \filename{lakes} in der Legende klicken oder wählen Sie
@@ -1267,9 +1267,8 @@ editieren, sollten Sie die Daten sichern.
 ist anders und wird in Kapitel~\ref{grass_digitising} beschrieben.
 
 \begin{Tip}[h]\caption{\textsc{Zeitgleiches Editieren}}
-\qgistip{Diese QGIS Version kontrolliert nicht, ob zwei Personen gleichzeitig
+Diese QGIS Version kontrolliert nicht, ob zwei Personen gleichzeitig
 an einem Vektorlayer arbeiten. Die zuletzt schreibende Person gewinnt.
-}
 \end{Tip}
 
 \subsubsection{Einstellen der Fangtoleranz und des Suchradius}
@@ -1461,36 +1460,32 @@ Werkzeugleiste Digitalisierung können folgende Funktionen ausgeführt werden:
 \end{table}
 
 \begin{Tip}[h]\caption{\textsc{Daten-Integrität}}
-\qgistip{Bitte beachten Sie, Daten vor und während des Editierens regelmäßig
+Bitte beachten Sie, Daten vor und während des Editierens regelmäßig
 zu sichern, um bei Fehlern keine unnötigen Verluste zu erleiden. Auch wenn
 QGIS mittlerweile sehr stabil ist, was die Daten-Integrität betrifft, sollten
 Sie sich nicht darauf verlassen
-}
 \end{Tip}
 
 \begin{Tip}[ht]\caption{\textsc{Regelmäßiges Sichern der Daten}}
-\qgistip{Bitte schließen Sie die Option
+Bitte schließen Sie die Option
 \toolbtntwo{mActionToggleEditing}{Bearbeitungsmodus ändern} regelmäßig.
 Dadurch werden alle bis dahin gemachten Änderungen gespeichert und es ist
 sichergestellt, dass die Änderungen auch akzeptiert werden.
-}
 \end{Tip}
 
 \begin{Tip}[h]\caption{\textsc{Zoomen zum letzten Editierstand}}
-\qgistip{Vor dem Editieren eines Vektorlayers sollten Sie in den Bereich
+Vor dem Editieren eines Vektorlayers sollten Sie in den Bereich
 zoomen, den Sie verändern möchten. Dadurch wird die zeitaufwendige
 Darstellung sämtlicher Knotenpunkte des Vektorlayers im Kartenfenster
 verhindert.
-}
 \end{Tip}
 
 \begin{Tip}[h]\caption{\textsc{Stützpunktsymbol ändern}}
-\qgistip{QGIS ermöglicht es, das Symbol für die Stützpunkte zu verändern. Sie
+QGIS ermöglicht es, das Symbol für die Stützpunkte zu verändern. Sie
 können wählen zwischen einem Kreuz und einem halbtransparenten Kreis. Zum
 Ändern gehen Sie in das Menü \mainmenuopt{Einstellungen} >
 \dropmenuopttwo{mActionOptions}{Optionen} und wählen im Reiter
 \tab{Digitalisierung} das entsprechende Symbol. 
-}
 \end{Tip}
 
 Vor jedem Editieren eines Vektorlayers muss dieser in der Legende ausgewählt
@@ -1539,13 +1534,12 @@ Attributwerte bei der Erstellung neuer Objekte unterdrücken} aktiviert werden.
 \end{figure}
 
 \begin{Tip}[h]\caption{\textsc{Datentyp der Attribute}}
-\qgistip{QGIS kontrolliert beim Editieren von Shapes, ob die eingetragenen
+QGIS kontrolliert beim Editieren von Shapes, ob die eingetragenen
 Werte dem Datentyp der Attributspalte entspricht (z.B.: Zahl oder Text).
 Ansonsten ist es nicht möglich, im Dialog \dialog{Attributwert eingeben}
 eine Zahl in eine Textspalte einzutragen, oder umgekehrt. Falls es dennoch
 notwendig sein sollte, können Sie es nachträglich im Fenster der
 \dialog{Attributtabelle} ändern.
-}
 \end{Tip}
 
 \minisec{Objekte verschieben}
@@ -1578,7 +1572,7 @@ Beginnen Sie, indem Sie das Werkzeug
 selektieren. Rote Boxen erscheinen an jedem Stützpunkt des Objektes. Nun sind
 folgende Funktionen vorhanden:
 
-\begin{itemize}
+\begin{itemize}[label=--]
 \item \textbf{Einen Stützpunkte auswählen}: Das Auswählen ist einfach.
 Klicken Sie einfach auf einen Stützpunkt und die Farbe der Box wechselt nach
 Blau. Sie können mehrere Stützpunkte auswählen, indem Sie die Tasten
@@ -1623,11 +1617,10 @@ kopieren und übergeben von Objekten funktioniert mit den gerade ausgewählten
 Objekten und können nach Bedarf kombiniert verwendet werden.
 
 \begin{Tip}[h]\caption{\textsc{Unterstützung zum Löschen von Objekten}}
-\qgistip{Wenn Sie Shapes editieren wird das Löschen von Objekten nur
+Wenn Sie Shapes editieren wird das Löschen von Objekten nur
 unterstützt, wenn QGIS zu einer GDAL Version 1.3.2 oder höher verlinkt ist.
 Alle OS X, Windows und GNU/Linux Binärpakete auf der QGIS Downloadseite
 wurden mit GDAL Version 1.3.2 oder höher erstellt.
-}
 \end{Tip}
 
 
@@ -1843,13 +1836,12 @@ erlaubt es, Objekte die eine gemeinsame Grenzlinie und die gleichen Attribute
 tragen zu verschmelzen.
 
 \begin{Tip}[h]\caption{\textsc{Deckungsgleichheit eingefügter Objekte}}
-\qgistip{Wenn der Quell- und Ziellayer die gleiche Projektion nutzen, hat das
+Wenn der Quell- und Ziellayer die gleiche Projektion nutzen, hat das
 übergebene Objekt die identische Geometrie wie in dem Quelllayer. Wenn der
 Quell- und Ziellayer eine unterschiedliche Projektion nutzen, kann das
 übergebene Objekt eine andere Geometrie wie in dem Quelllayer besitzen. Der
 Grund liegt in auftretenden Rundungsabweichungen bei der Konvertierung
 zwischen Projektionen.
-}
 \end{Tip}
 
 \minisec{Punktsymbole drehen}
@@ -2004,7 +1996,7 @@ durchsucht werden, aktivieren Sie das Kontrollkästchen \checkbox{Nur
 ausgewählte Datensätze durchsuchen}. Die anderen Knöpfe im unteren linken
 Bereich der Attributtabelle bieten folgende Funktionen: 
 
-\begin{itemize}
+\begin{itemize}[label=--]
 \item \toolbtntwo{mActionOpenTable}{Auswahl löschen}
 \item \toolbtntwo{mActionSelectedToTop}{Ausgewählte Objekte nach oben}
 \item \toolbtntwo{mActionInvertSelection}{Auswahl umkehren}
@@ -2022,12 +2014,11 @@ GDAL Version >= 1.6.
 \end{itemize}
 
 \begin{Tip}[ht]\caption{\textsc{Attributdaten manipulieren}}
-\qgistip{Momentan wird nur für PostGIS-Layer das Hinzufügen und Löschen von
+Momentan wird nur für PostGIS-Layer das Hinzufügen und Löschen von
 Attributspalten unterstützt. In zukünftigen Version wird diese Funktion auch
 für andere Daten unterstützt, da diese erst kürzlich in GDAL/OGR > 1.6.0
 implementiert wurde. Ohne jegliche Garantie kann als Notlösung solange das
 externe Python Plugin 'Table Manager' verwendet werden.
-}
 \end{Tip}
 
 \subsection{Abfrageeditor}\label{sec:query_builder}
@@ -2082,12 +2073,12 @@ Auswahl zu verändern.
 
 \begin{Tip}\caption{\textsc{Ändern der
 Layer-Definition}}\index{Abfrageeditor!Layer-Definition ändern}
-\qgistip{Sie können die Definition der Ebene ändern nachdem sie geladen ist,
+Sie können die Definition der Ebene ändern nachdem sie geladen ist,
 indem sie die SQL-Abfrage anders starten. Dazu öffnen Sie den Dialog
 \dialog{Layereigenschaften} durch Doppelklicken auf den Layernamen in der
 Legende. Im Reiter \tab{Allgemein} befindet sich der Knopf \button{Erweiterte
 Suche}. Weitere Informationen können Sie im Kapitel \ref{sec:vectorprops}
-finden.}
+finden.
 \end{Tip}
 
 \minisec{Aufruf des Abfrageeditors für
