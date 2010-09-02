@@ -1,6 +1,6 @@
 % vim:autoindent:set textwidth=78:
 
-\section{Arbeiten mit Vektordaten}
+\chapter{Arbeiten mit Vektordaten}
 \label{label_workingvector}
 \index{Vektorlayer|(}
 
@@ -31,7 +31,7 @@ und bezieht sich u.a. auf Abfrage, Selektion, Beschriftung und Attributfunktione
 Das Arbeiten mit GRASS GIS Vektorlayern bildet an manchen Stellen eine Ausnahme
 und wird daher in Kapitel \ref{sec:grass} explizit beschrieben.
 
-\subsection{ESRI Shapes}
+\section{ESRI Shapes}
 \index{Vektorlayer!ESRI Shapedateien}
 \index{Shapedateien}
 \index{ESRI!Shapedateien}
@@ -71,7 +71,7 @@ vollständigen Projektionsparameter anthalten sind. Wenn Sie dann ein Shape in
 laden, und QGIS findet eine \filename{.qpj} Datei, dann wird diese anstelle 
 der \filename{.prj} Datei benutzt.
 
-\subsubsection{Shape Layer laden}\label{sec:load_shapefile}
+\subsection{Shape Layer laden}\label{sec:load_shapefile}
 
 \begin{figure}[ht]
    \begin{center}
@@ -138,7 +138,7 @@ behoben werden. Solange können Sie '/Volumes' in das Eingabefenster
 externen Datenträgern bzw. Rechnern in einem Netzwerk browsen.
 \end{Tip}
  
-\subsubsection{Darstellungsgeschwindigkeit optimieren}
+\subsection{Darstellungsgeschwindigkeit optimieren}
 
 Um die Darstellungsgeschwindigkeit zu optimieren, kann ein räumlicher Index
 erstellt werden. Ein\index{Räumlicher Index!Shapedateien} räumlicher Index
@@ -156,7 +156,7 @@ rechten Maustaste \dropmenuopt{Eigenschaften} auswählen.
 im Bereich \button{Räumlichen Index erstellen}
 \end{itemize}
 
-\subsubsection{MapInfo Layer laden}
+\subsection{MapInfo Layer laden}
 \index{Vektorlayer!MapInfo}
 
 Um eine MapInfo Datei zu laden, klicken Sie auf das Icon
@@ -166,7 +166,7 @@ möglichen Quelltypen \radiobuttonon{Datei} und klicken Sie auf den Knopf
 \button{Durchsuchen}. Definieren Sie unter \selectstring{Dateien des
 Typs}{MapInfo (*.mif *.tab *.MIF *.TAB)} und wählen die gewünschte Datei aus.
 
-\subsubsection{ArcInfo Binary Coverage laden}
+\subsection{ArcInfo Binary Coverage laden}
 \index{Vektorlayer!ArcInfo Coverage}
 
 Um ein ArcInfo Coverage zu laden, klicken Sie auf das Icon
@@ -196,7 +196,7 @@ raw TIGER Format des U.S. Census Bureau oder auch GRASS Vektorlayer. Letztere
 werden normalerweise aber über das GRASS Plugin geladen (siehe
 Kapitel~\ref{sec:grass}).
 
-\subsection{PostGIS Layer laden}
+\section{PostGIS Layer laden}
 \index{Vektorlayer!PostGIS}
 \index{PostGIS!Layer}
 \label{label_postgis} 
@@ -220,7 +220,7 @@ definieren, welche Objekte des Layers angezeigt werden sollen.
 \item Laden Sie den Layer
 \end{itemize}
 
-\subsubsection{Erstellen einer PostGIS Anbindung}\index{PostgreSQL!Verbindung}\label{sec:postgis_stored}
+\subsection{Erstellen einer PostGIS Anbindung}\index{PostgreSQL!Verbindung}\label{sec:postgis_stored}
 
 Beim ersten Einbinden einer PostGIS-Datenbank muss eine Anbindung erstellt
 und gespeichert werden.
@@ -321,7 +321,7 @@ visualisieren. Beziehen Sie sich auf das PostgreSQL Handbuch, um weitere
 Informationen über die Erstellung von Views zu erhalten.
 \end{Tip}
 
-\subsubsection{Einige Details zu PostGIS-Layern}\label{sec:postgis_details}
+\subsection{Einige Details zu PostGIS-Layern}\label{sec:postgis_details}
 \index{PostgreSQL!Layerdetails}
 
 Dieser Abschnitt enthält einige Details, wie QGIS auf PostgreSQL zugreift.
@@ -354,7 +354,7 @@ In diesem Fall ist eine Lösung, den View anzupassen,
 damit er eine entsprechende Spalte vom Typ int4 enthält, entweder mit einem
 Primärschlüssel oder eindeutiger Zuordnung und bevorzugt natürlich mit Index.
 
-\subsubsection{Layer nach PostgreSQL/PostGIS importieren}\label{sec:loading_postgis_data}
+\subsection{Layer nach PostgreSQL/PostGIS importieren}\label{sec:loading_postgis_data}
 \index{PostGIS!SPIT!Daten importieren}
 
 \minisec{shp2pgsql}
@@ -446,7 +446,7 @@ keinen räumlichen Index. In diesem Fall müssen Sie ihn nachträglich manuell
 erstellen mit dem SQL-Kommando \usertext{CREATE INDEX}. Die Schritte werden
 im folgenden Kapitel~\ref{label_improve} näher beschrieben.
 
-\subsubsection{Geschwindigkeit optimieren} \label{label_improve}
+\subsection{Geschwindigkeit optimieren} \label{label_improve}
 
 Der Datentransfer von einer PostgreSQL/PostGIS Datenbank kann langsam sein,
 besonders über ein Netzwerk. Die Geschwindigkeit kann optimiert werden, indem
@@ -489,7 +489,7 @@ gis_data=# \q
 gsherman@madison:~/current$
 \end{verbatim}
 
-\subsubsection{Vektorlayer, die den Längengrad 180$^\circ$ überschreiten}
+\subsection{Vektorlayer, die den Längengrad 180$^\circ$ überschreiten}
 \index{Vektorlayer!Datumsgrenze überschreiten}
 
 Viele GIS Applikationen stellen einen Vektorlayer, der über den Längengrad
@@ -538,7 +538,7 @@ die verändert wurden. Danach können Sie den PostGIS Layer in QGIS als eine
 zusammenhängende Karte laden (siehe Abbildung \ref{fig:vector_wrapping}).
 \end{itemize}
 
-\subsection{SpatiaLite Layer laden}
+\section{SpatiaLite Layer laden}
 \index{SpatiaLite!Layereigenschaften}
 \index{Vektorlayer!SpatiaLite}
 \index{SpatiaLite!Layer}
@@ -559,7 +559,7 @@ klicken Sie auf den Knopf \button{Neu} und verwenden dann den Dateibrowser,
 um eine entsprechende SpatiaLite Datenbank auszuwählen. Dabei handelt es sich
 um eine Datei mit der Endung \filename{.sqlite}.
 
-\subsection{Vektorlayereigenschaften}\label{sec:vectorprops}
+\section{Vektorlayereigenschaften}\label{sec:vectorprops}
 \index{Vektorlayer!Layereigenschaften}
 
 \begin{figure}[H]
@@ -583,7 +583,7 @@ OGR-unterstützte Formate den \dialog{Query Builder} Dialog über den Knopf
 Layereigenschaften zu öffnen, doppelklicken Sie auf den Namen des Layers in
 der Legende oder wählen mit der rechten Maustaste \dialog{Eigenschaften} aus.
 
-\subsubsection{Darstellung}\label{sec:symbology}
+\subsection{Darstellung}\label{sec:symbology}
 \index{Vektorlayer!Darstellung}
 
 QGIS bietet eine Vielzahl von Funktionen, um die Darstellung von
@@ -647,11 +647,11 @@ den Knopf \button{Standardstil wiederherstellen}.
 
 Innerhalb des Reiters \tab{Darstellung} kann auch die Transparenz für den
 Layer festgelegt werden. Dazu verschieben Sie den Regler
-\slider{Transparenz}{0}{20mm} wie in Abbildung~\ref{fig:vector_symbology} zu
+\slider{Transparenz} wie in Abbildung~\ref{fig:vector_symbology} zu
 sehen. Dies ist sehr nützlich, wenn Sie mehrere Vektorebenen miteinander
 überlagern möchten.
 
-\subsubsection{Neue Darstellung - Symbology-NG}
+\subsection{Neue Darstellung - Symbology-NG}
 
 In QGIS \CURRENT ist parallel zur oben beschriebenen Darstellung eine 
 neue Darstellung integriert worden. Diese bietet eine Vielzahl von 
@@ -722,7 +722,7 @@ kategorisierten Darstellung handelt. Die kategorisierte und abgestufte Darstellu
 wird erreicht, indem ein Symbol mit einem Farbanstieg definiert wird - die 
 Farben der Symbole werden dann passend gesetzt. 
 
-\subsubsection{Mit der neuen Darstellung arbeiten}
+\subsection{Mit der neuen Darstellung arbeiten}
 
 Als erstes muss die neue Darstellung aktiviert werden, indem Sie auf den 
 Knopf \button{neue Darstellung} im Reiter \tab{Darstellung} des Dialogs 
@@ -850,7 +850,7 @@ Polygon).
    \subfloat[Füllstil für Polygone] {\label{subfig:symprops3}\includegraphics[clip=true, width=0.3\textwidth]{symbolproperties3}}
 \end{figure}
 
-\subsubsection{Stilmanager zum managen von Symbolen und Farbanstiegen}\label{subsec:stylemanager}
+\subsection{Stilmanager zum managen von Symbolen und Farbanstiegen}\label{subsec:stylemanager}
 
 Der Stilmanager ist eine kleine Applikation, in der alle vohandenen Symbole 
 und Farbanstiege aufgelistet werden. Es ermöglicht außerdem, Symbole hinzuzufügen 
@@ -864,7 +864,7 @@ und/oder zu entfernen. Starten Sie den Stilmanager, indem Sie auf
 \end{center}
 \end{figure}
 
-\subsubsection{Beschriftungen}
+\subsection{Beschriftungen}
 
 Im Reiter \tab{Beschriftungen} können Sie Objekte beschriften und die
 Anordnung, den Schriftstil, die Ausrichtung, Pufferung und Position der
@@ -940,7 +940,7 @@ notwendigen Parameter anhand von Inhalten aus Attributspalten definieren.
 Beachten Sie, dass es im unteren Bereich auch ein kleines
 \classname{Vorschau}-Feld gibt, in dem alle Änderungen angezeigt werden.
 
-\subsubsection{Attribute}\index{Attribute}\label{label_attributes}
+\subsection{Attribute}\index{Attribute}\label{label_attributes}
 
 Innerhalb des Reiters \tab{Attribute} kann die Eingabe von Attributwerten für
 den Layer beinflusst werden. Aktuell können nur PostGIS-Layer editiert
@@ -993,7 +993,7 @@ unterstützen. Dies ist aktuell nur für Postgres als Datenprovider der Fall.
 Benutzer kann es also nicht verändern.
 \end{itemize}
 
-\subsubsection{Allgemein}\label{vectorgeneraltab}
+\subsection{Allgemein}\label{vectorgeneraltab}
 
 Der Reiter \tab{Allgemein} im Dialog \dialog{Layereigenschaften} ermöglicht
 es, den Anzeigenamen in der Legende zu verändern, einen räumlichen Index für
@@ -1008,14 +1008,14 @@ OGR-Layern anwenden zu können, müssen Sie die Attributtabelle des
 entsprechenden Layers öffnen und dann auf den Knopf \button{Erweitert...}
 drücken.
 
-\subsubsection{Metadaten}
+\subsection{Metadaten}
 
 Der Reiter \tab{Metadaten} enthält allgemeine Informationen zu dem Layer
 inklusive Angaben zu Datentyp, Datenquelle, Anzahl Objekte, Ausdehnung und
 Editiermöglichkeiten. Sie finden auch Informationen zur räumlichen Ausdehnung
 und zum Koordinatenbezugssystem.
 
-\subsubsection{Aktionen auf Basis von Attributen}\index{Aktionen}\label{label_actions}
+\subsection{Aktionen auf Basis von Attributen}\index{Aktionen}\label{label_actions}
 
 QGIS bietet die Möglichkeit, Aktionen auf Basis von Attributen einer Ebene
 durchzuführen. Dies kann für eine Vielzahl von Aktionen genutzt werden, z.B.
@@ -1197,7 +1197,7 @@ Karte klicken. Man kann auch zu bestimmten Attributen webbasierte
 Information ablegen (z.B. in einer HTML-Datei) und diese dann
 über eine Aktion anzeigen lassen, etwa so wie in dem Google Beispiel.
 
-\subsubsection{Diagram Overlay}\label{sec:diagram}
+\subsection{Diagram Overlay}\label{sec:diagram}
 \index{Vektorlayer!Diagram Overlay}
 
 Der Reiter \tab{Diagram Overlay} ermöglicht es, ein Diagramm als Grafik über
@@ -1256,7 +1256,7 @@ Abbildung~\ref{fig:climatediagram} gibt einen ersten Eindruck.
 \end{center}
 \end{figure}
 
-\subsection{Editierfunktionen}\index{Editierfunktionen}
+\section{Editierfunktionen}\index{Editierfunktionen}
 
 QGIS bietet einfache Editierfunktionen für Vektordaten. Bevor Sie
 weiterlesen sollten Sie sich bewusst sein, dass derzeit nicht alle
@@ -1271,7 +1271,7 @@ Diese QGIS Version kontrolliert nicht, ob zwei Personen gleichzeitig
 an einem Vektorlayer arbeiten. Die zuletzt schreibende Person gewinnt.
 \end{Tip}
 
-\subsubsection{Einstellen der Fangtoleranz und des Suchradius}
+\subsection{Einstellen der Fangtoleranz und des Suchradius}
 
 bevor wir damit beginnen können, Vektorgeometrien zu editieren, ist es sehr
 wichtig die Fangtoleranz und den Suchradius für Stützpunkte (Vertices)
@@ -1342,7 +1342,7 @@ Reiter \tab{Digitalisierung} des Menüs \mainmenuopt{Einstellungen} >
 \dropmenuopttwo{mActionOptions}{Optionen}. Derselbe Ort, an dem auch die
 Fangtoleranz und der Fangmodus definiert werden.  
 
-\subsubsection{Zoomen und Karte verschieben}
+\subsection{Zoomen und Karte verschieben}
 
 Bevor Sie einen Layer editieren, sollten Sie in den Bereich hineinzoomen, den
 Sie bearbeiten wollen. Dadurch vermeiden Sie lange Wartezeiten, bis alle
@@ -1385,7 +1385,7 @@ Mausrad tun können.
 All diese Funktionen ermöglichen es Ihnen, in einem Layer zu zoomen oder
 diesen zu verschieben, ohne das Sie das Digitalisieren unterbrechen müssen.
 
-\subsubsection{Topologisches Editieren}
+\subsection{Topologisches Editieren}
 
 Abgesehen von der Einstellung des Layer-basierten Fangmodus können im Reiter
 \tab{Allgemein} im Menü \mainmenuopt{Einstellungen} >
@@ -1412,7 +1412,7 @@ erstellt werden und QGIS schneidet dann die Überlagerungen weg, so dass die
 Flächen exakt aneinander liegen. Der Vorteil ist, dass nicht alle Stützpunkte
 einer gemeinsamen Grenzlinie digitalisiert werden müssen.
 
-\subsubsection{Einen vorhandenen Layer editieren}
+\subsection{Einen vorhandenen Layer editieren}
 \index{Vektorlayer!Editierfunktionen}
 \index{Editierfunktionen!existierender Layer}
 \label{sec:edit_existing_layer}
@@ -1679,7 +1679,7 @@ Spaltennamen und -typen der Attributtabelle erstellen. Wenn auch die
 Attributdaten korrekt übernommen werden sollen, dann stellen Sie sicher, dass
 auch die Spaltennamen und -typen beider layer zueinander passen.
 
-\subsubsection{Erweiterte Digitalisierung}
+\subsection{Erweiterte Digitalisierung}
 \index{Vektorlayer!Erweiterte Digitalisierung}
 \index{Erweiterte Digtalisierung!einen existierenden Layer}
 \label{sec:advanced_edit}
@@ -1892,7 +1892,7 @@ Wenn die Änderungen nicht gespeichert werden können (z.B.: weil die
 Festplatte voll ist) bleiben diese 'im-memory' Status erhalten. Sie können somit
 Veränderungen vornehmen und das Speichern erneut versuchen.
 
-\subsubsection{Neuen Vektorlayer erstellen}\label{sec:create
+\subsection{Neuen Vektorlayer erstellen}\label{sec:create
 shape}\index{Editierfunktionen!Neuen Vektorlayer erstellen}
 
 Um einen neuen Vektorlayer zu erstellen, wählen Sie in der Menüleiste
@@ -1929,7 +1929,7 @@ festgelegt werden. Wenn dies getan ist, bestätigen Sie mit
 in die Kartenlegende eingefügt und Sie können den Layer entsprechend dem
 Kapitel \ref{sec:edit_existing_layer} editieren.
 
-\subsubsection{Die Attributtabelle}\label{sec:attribute table}\index{Editieren!Attributtabelle}
+\subsection{Die Attributtabelle}\label{sec:attribute table}\index{Editieren!Attributtabelle}
 
 Die Attributtabelle zeigt alle Objekte eines ausgewählten Layers. Jede Zeile
 in der Attributtabelle representiert dabei ein Objekt des Layers mit seinen
@@ -2021,7 +2021,7 @@ implementiert wurde. Ohne jegliche Garantie kann als Notlösung solange das
 externe Python Plugin 'Table Manager' verwendet werden.
 \end{Tip}
 
-\subsection{Abfrageeditor}\label{sec:query_builder}
+\section{Abfrageeditor}\label{sec:query_builder}
 \index{Abfrageeditor}
 
 Über den \button{Erweiterte Suche \dots} Knopf wird der Abfrageeditor
@@ -2100,7 +2100,7 @@ Abfrageeditor zu öffnen, und einen geladene OGR- oder GRASS-Layer abzufragen,
 gestartet und ermöglicht Abfragen wie im obigen Abschnitt
 \ref{sec:query_builder} für PostGIS beschrieben.
 
-\subsection{Feldrechner}\label{sec:field_calculator}
+\section{Feldrechner}\label{sec:field_calculator}
 \index{PostgreSQL!Feldrechner}
 \index{PostGIS!Feldrechner}
 \index{OGR!Feldrechner}
