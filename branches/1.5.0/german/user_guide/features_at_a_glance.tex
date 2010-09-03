@@ -1,4 +1,5 @@
 % vim:autoindent:set textwidth=78:
+% !TeX  root = user_guide.tex
 
 \chapter{Übersicht der Funktionalitäten}\label{feature_glance}
 
@@ -42,7 +43,7 @@ Optionen zur Verfügung. Eine Liste erhalten Sie, indem Sie \usertext{qgis
 \small
 \begin{verbatim}
 qgis --help
-Quantum GIS - 1.4.0-Enceladus 'Enceladus' (exported)
+Quantum GIS - 1.5.0-Tethys 'Tethys' (exported)
 Quantum GIS (QGIS) is a viewer for spatial data sets, including
 raster and vector data.
 Usage: qgis [options] [FILES]
@@ -128,34 +129,11 @@ abweichen in Abhängigkeit vom Betriebssystem und dem Window Manager.
 
 Die QGIS Benutzeroberfläche ist in sechs Bereiche unterteilt:
 
-\begin{tabbing}
-1. Menüleiste \hspace{3cm}\= 4. Kartenfenster \\
-2. Werkzeugleiste \hspace{3cm}\> 5. Kartenübersicht  \\
-3. Legende \hspace{3cm}\> 6. Statusleiste   
-\end{tabbing}
-
-\subsection{Tastenkürzel}\label{shortcuts}
-\index{Tastenkürzel}
-
-QGIS bietet Standard Tastenkürzel für zahlreiche Funktionen. Sie können im 
-Kapitel \ref{label_menubar} nachgelesen werden. Zusätzlich ist es aber auch 
-möglich, eigene Tastenkürzel zu definieren und bestehende zu ändern. Öffnen 
-Sie dazu das Menü \mainmenuopt{Einstellungen} > \dropmenuopt{Tastenkürzel 
-festlegen}. 
-
-\begin{figure}[ht]
-   \begin{center}
-   \caption{Tastenkürzel festlegen \nixcaption}
-         \label{fig:shortcuts}
-   \includegraphics[clip=true, width=8cm]{shortcuts}
-\end{center}
-\end{figure}
-
-Die Konfiguration ist sehr einfach. Wählen Sie einfach eine Aktion aus und 
-drücken dann auf \button{Ändern}, \button{Keins setzen} oder 
-\button{Voreinstellung}. Wenn Sie ihre Einstellung gefunden haben, kann diese 
-als XML-Datei abgespeichert und somit auch für eine andere QGIS Installation 
-genutzt werden.
+\begin{tabular}{p{5cm} p{5cm}}
+1. Menüleiste \hspace{3cm} & 4. Kartenfenster \\
+2. Werkzeugleiste \hspace{3cm} & 5. Kartenübersicht  \\
+3. Legende \hspace{3cm} & 6. Statusleiste \\
+\end{tabular}
 
 \subsection{Menüleiste}\label{label_menubar}
 \index{Menüleiste}
@@ -333,16 +311,19 @@ oder Polygon) editiert werden soll. \\
         \>
         \> \> \dropmenucheck{Attribute} \\
 \dropmenuopttwo{mActionIdentify}{Objekte abfragen}
-	\> \keystroke{I}
+	\> \keystroke{Ctrl-Alt-I}
 	\> \> \dropmenucheck{Attribute} \\
 \dropmenuopttwo{mActionMeasure}{Linie messen}
-	\> \keystroke{M}
+	\> \keystroke{Ctrl-Alt-M}
 	\> \> \dropmenucheck{Attributes} \\
 \dropmenuopttwo{mActionMeasureArea}{Fläche messen}
-	\> \keystroke{J}
-	\> \> \dropmenucheck{Attributes} \\
+	\> \keystroke{Ctrl-Alt-J}
+	\> \> \dropmenucheck{Attribute} \\
+\dropmenuopttwo{mActionMeasureAngle}{Winkel messen}
+        \> \keystroke{Ctrl-Alt-J}
+	\> \> \dropmenucheck{Attribute} \\
 \dropmenuopttwo{mActionOpenTable}{Volle Ausdehnung}
-	\> \keystroke{F}
+	\> \keystroke{Ctrl-Alt-F}
 	\> \> \dropmenucheck{Kartennavigation} \\
 \dropmenuopttwo{mActionZoomToLayer}{Auf den Layer zoomen}
 	\>
@@ -356,7 +337,7 @@ oder Polygon) editiert werden soll. \\
 \dropmenuopttwo{mActionZoomNext}{Zoom vor}
 	\>
 	\> \> \dropmenucheck{Kartennavigation} \\
-\dropmenuopt{Auf tatsächliche Größe zoomen}
+\mainmenuopt{Auf tatsächliche Größe zoomen}
 	\>
 	\> \>  \\
 \dropmenuopttwo{mActionMapTips}{Kartenhinweise}
@@ -367,50 +348,61 @@ oder Polygon) editiert werden soll. \\
 	\> Kapitel \ref{sec:bookmarks} 
 \> \dropmenucheck{Attribute} \\
 \dropmenuopttwo{mActionShowBookmarks}{Lesezeichen anzeigen}
-	\> \keystroke{B}
+	\> \keystroke{Ctrl-Alt-B}
 	\> Kapitel \ref{sec:bookmarks} 
 	\> \dropmenucheck{Attribute} \\
 \dropmenuopttwo{mActionDraw}{Erneuern}
 	\> \keystroke{Ctrl+R}
 	\> \> \dropmenucheck{Kartennavigation} \\
+\mainmenuopt{Kachelmaßstabsauswahl}
+        \>
+        \> Kapitel \ref{sec:tilesets} 
+	\> \dropmenucheck{Kachelmaßstab} \\
+\mainmenuopt{Laufende GPS Verfolgung}
+        \>
+        \> Kapitel \ref{sec:gpstracking}
+        \> \dropmenucheck{GPS-Information} \\
 \end{tabbing}
 
 \item \mainmenuopt{Layer}
 \begin{tabbing}
 \hspace{7cm}\=\hspace{2.5cm}\=\hspace{3cm}\= \kill
-\dropmenuopttwo{mActionNewVectorLayer}{Neuer Vektorlayer}
-	\> \keystroke{Ctrl-Shift-N}
-	\> Kapitel \ref{sec:create shape}
+\dropmenuopt{Neu}
+	\>
+        \> Kapitel \ref{sec:create_shape}
 	\> \dropmenucheck{Layer koordinieren} \\
 \dropmenuopttwo{mActionAddNonDbLayer}{Vektorlayer hinzufügen}       
 	\> \keystroke{Ctrl-Shift-V}
 	\> Kapitel \ref{label_workingvector}
-	\> \dropmenucheck{Datei} \\
+	\> \dropmenucheck{Layer koordinieren} \\
 \dropmenuopttwo{mActionAddRasterLayer}{Rasterlayer hinzufügen}       
 	\> \keystroke{Ctrl-Shift-R}
 	\> Kapitel \ref{label_raster}
-	\> \dropmenucheck{Datei} \\
+	\> \dropmenucheck{Layer koordinieren} \\
 \dropmenuopttwo{mActionAddLayer}{PostGIS-Layer hinzufügen}      
 	\> \keystroke{Ctrl-Shift-D}
 	\> Kapitel \ref{label_postgis}
-	\> \dropmenucheck{Datei} \\
+	\> \dropmenucheck{Layer koordinieren} \\
 \dropmenuopttwo{mActionAddSpatiaLiteLayer}{SpatiaLite Layer hinzufügen}
         \> \keystroke{Ctrl-Shift-L}
         \> Kapitel \ref{label_spatialite}
-        \> \dropmenucheck{Datei} \\
+        \> \dropmenucheck{Layer koordinieren} \\
 \dropmenuopttwo{mActionAddWmsLayer}{WMS-Layer hinzufügen}          
 	\> \keystroke{Ctrl-Shift-W}
 	\> Kapitel \ref{sec:ogc-wms}
-	\> \dropmenucheck{Datei} \\
+	\> \dropmenucheck{Layer koordinieren} \\
 \dropmenuopttwo{mActionOpenTable}{Attributtabelle öffnen}
 	\> \>
 	\> \dropmenucheck{Attribute} \\
+\dropmenuopttwo{mActionFileSave}{Änderungen speichern}
+        \> \>
+        \> \dropmenucheck{Digitalisieren} \\
 \dropmenuopttwo{mActionToggleEditing}{Bearbeitungsstatus umschalten}
 	\> \>
 	\> \dropmenucheck{Digitalisierung} \\
-\dropmenuopt{Als Shape-Datei speichern}
+\dropmenuopt{Speichern als}
 	\\
-\dropmenuopt{Auswahl als Shape-Datei speichern}
+\dropmenuopt{Auswahl als Vektordatei speichern}
 	\\
 \dropmenuopttwo{mActionRemoveLayer}{Layer löschen}
 	\> \keystroke{Ctrl+D}
@@ -418,6 +410,8 @@ oder Polygon) editiert werden soll. \\
 	\> \dropmenucheck{Layer koordinieren} \\
 \dropmenuopt{Eigenschaften}
 	\\
+\dropmenuopt{Abfrage}
+        \\
 \dropmenuopttwo{mActionInOverview}{Zur Übersicht hinzufügen}
 	\> \keystroke{Ctrl-Shift-O}
 	\>          	
@@ -435,9 +429,13 @@ oder Polygon) editiert werden soll. \\
 	\>          	
 	\> \dropmenucheck{Layer koordinieren} \\
 \dropmenuopttwo{mActionShowAllLayers}{Alle Layer anzeigen}
-	\> \keystroke{Ctrl-Shift-S}
+	\> \keystroke{Ctrl-Shift-U}
 	\>          	
 	\> \dropmenucheck{Layer koordinieren} \\
+\dropmenuopttwo{labeling}{Beschriftung}
+        \>
+        \>
+        \>
 \end{tabbing}
 
 \item \mainmenuopt{Einstellungen}
@@ -452,11 +450,11 @@ oder Polygon) editiert werden soll. \\
 	\>          	
 	\\
 \dropmenuopt{Auf Vollbildmodus schalten}  
-	\>
+	\> \keystroke{Ctrl-F}
 	\>          	
 	\\
 \dropmenuopttwo{mActionProjectProperties}{Projekteinstellungen}  
-	\> \keystroke{P}
+	\> \keystroke{Ctrl-Alt-P}
 	\> Kapitel \ref{sec:projects}
 	\\
 \dropmenuopttwo{mActionCustomProjection}{Benutzerkoordinatenbezugssystem}   
@@ -484,7 +482,7 @@ Plugins geladen sind.)
 	\> Kapitel \ref{sec:managing_plugins}
 	\dropmenucheck{Plugins} 
 	\\
-\dropmenuopt{Python Konsole}
+\mainmenuopt{Python Konsole}
 	\> \>
 	\\
 \end{tabbing}          	
@@ -516,6 +514,10 @@ Standardeinstellung des KDE Window Managers. In GNOME fehlt das Menü
 \dropmenucheck{Datei} \\
 \dropmenuopttwo{mActionOptions}{Optionen} \hspace{7cm}\>
 \dropmenucheck{Bearbeiten}\\
+\dropmenuopttwo{mActionOptions}{Tastenkürzel festlegen} \hspace{3cm}\>
+\dropmenucheck{Bearbeiten}\\
+\mainmenuopt{Stilmanager} \hspace{3cm}\>
+\dropmenucheck{Bearbeiten}\\
 \dropmenuopttwo{mActionCustomProjection}{Benutzerkoordinatenbezugssystem}\hspace{7cm}\>
 \dropmenucheck{Bearbeiten} \\
 \dropmenuopt{Bedienfelder} \hspace{7cm}\>
@@ -523,7 +525,11 @@ Standardeinstellung des KDE Window Managers. In GNOME fehlt das Menü
 \dropmenuopt{Werkzeugkästen}   \hspace{7cm}\>
 \dropmenucheck{Ansicht} \\
 \dropmenuopt{Auf Vollbildmodus umschalten} \hspace{7cm}\>
-\dropmenucheck{Ansicht}
+\dropmenucheck{Ansicht}\\
+\mainmenuopt{Kachelmaßstabsauswahl} \hspace{3cm}\>
+\dropmenucheck{Ansicht}\\
+\mainmenuopt{Laufende GPS-Verfolgung} \hspace{3cm}\>
+\dropmenucheck{Ansicht}\\
 \end{tabbing}
 
 %See Appendix \ref{app_menu} for complete descriptions of the menu items.
@@ -597,8 +603,9 @@ für weitere Informationen zum Editieren von GRASS Vektorlayern.
 \item \dropmenuopt{Entfernen}
 \item \dropmenuopt{Attributtabelle öffnen}
 \item \dropmenuopt{Bearbeitungsstatus umschalten} (nicht für GRASS layer)
-\item \dropmenuopt{Als Shapefile abspeichern}
-\item \dropmenuopt{Auswahl als Shapefile abspeichern}
+\item \dropmenuopt{Speichern als}
+\item \dropmenuopt{Auswahl speichern als}
+\item \dropmenuopt{Abfrage}
 \item \dropmenuopt{Eigenschaften}
 \item \dropmenuopt{Umbenennen}
 \item \dropmenuopt{Gruppe hinzufügen}
@@ -711,6 +718,29 @@ das Kamera-Icon \toolbtntwo{mIconProjectionDisabled}{KBS Status} in der
 unteren rechten Ecke der Statusleiste klicken. Dann wird die Maßeinheit
 entsprechend der KBS eingestellt, z.B.: '+units=m'.
 \end{Tip}
+
+\subsection{Tastenkürzel}\label{shortcuts}
+\index{Tastenkürzel}
+
+QGIS bietet Standard Tastenkürzel für zahlreiche Funktionen. Sie können im
+Kapitel \ref{label_menubar} nachgelesen werden. Zusätzlich ist es aber auch
+möglich, eigene Tastenkürzel zu definieren und bestehende zu ändern. Öffnen
+Sie dazu das Menü \mainmenuopt{Einstellungen} > \dropmenuopt{Tastenkürzel
+festlegen}.
+
+\begin{figure}[ht]
+   \begin{center}
+   \caption{Tastenkürzel festlegen \nixcaption}
+         \label{fig:shortcuts}
+   \includegraphics[clip=true, width=8cm]{shortcuts}
+\end{center}
+\end{figure}
+
+Die Konfiguration ist sehr einfach. Wählen Sie einfach eine Aktion aus und
+drücken dann auf \button{Ändern}, \button{Keins setzen} oder
+\button{Voreinstellung}. Wenn Sie ihre Einstellung gefunden haben, kann diese
+als XML-Datei abgespeichert und somit auch für eine andere QGIS Installation
+genutzt werden.
 
 \section{Layeranzeige kontrollieren}\label{subsec:redraw_events}\index{Layeranzeige}
 
@@ -829,9 +859,10 @@ Beide Messwerkzeuge verwenden auch die eingestellte Fangtoleranz der Digitalisie
 Dies ist zum Beispiel dann sinnvoll, wenn Sie entlang von Linien oder Polygongrenzen 
 geladener Vektorlayer messen wollen.   
 
-\subsection{Strecken und Flächen messen}
+\subsection{Strecken, Flächen und Winkel messen}
 \index{Messen!Strecken}
 \index{Messen!Flächen}
+\index{Messen!Winkel}
 
 \includegraphics[width=0.7cm]{mActionMeasure} 
 QGIS kann reale Distanzen zwischen Punkten auf Basis eines vorgegebenen
@@ -844,9 +875,14 @@ auch die Gesamtlänges aller Längensegmente. Um das Messen von Strecken zu beende
 klicken Sie auf die rechte Maustaste. \\
 \includegraphics[width=0.7cm]{mActionMeasureArea} Auch Flächengrößen können
 gemessen werden. Das Popup zeigt dabei die akkumulierte Flächengröße.
-In the measure window the accumulated area-size appears  \\
+Im Dialogfenster wird die akkumulierte Fläche angezeigt. \\
+\includegraphics[width=0.7cm]{mActionMeasureAngle} Auch Winkel können
+gemessen werden. Der Mauszeiger wird zum Kreuz. Drücken Sie die linke 
+Maustaste und zeichnen Sie das erste Segement des Winkels, klicken nochmals 
+auf die linke Maustaste und messen sie den Winkel, der im Dialogfenster 
+angezeigt wird. \\
 
-Zusätzlich snapped das Messwerkzeug auf den gerade ausgewählten Layer, wenn
+Zusätzlich schnappen die Messwerkzeuge auf den gerade ausgewählten Layer, wenn
 für den entsprechenden Layer ein Fangmodus eingestellt wurde. (Siehe
 Kapitel~\ref{snapping_tolerance}). Wenn Sie also exakt entlang einer Linie
 oder Polygonumrandung messen möchten, setzen Sie erst eine Fangtolleranz,
@@ -854,7 +890,7 @@ selektieren dann den Layer und benutzen dann das Messwerkzeug.
 
 % measure-tools side by side
 \begin{figure}[ht]
-\caption{Messwerkzeuge in Aktion \nixcaption}  \label{fig:measure}
+\caption{Messwerkzeuge in Aktion \nixcaption}\label{fig:measure}
 \centering
 \subfloat[Strecken messen] {\label{subfig:measure_line}
 \includegraphics[clip=true, width=0.3\textwidth]{measure_line}}\hspace{0.33cm}
@@ -900,7 +936,7 @@ Projektdateien aus älteren QGIS-Version funktionieren meist leider nicht. Um
 darauf hingewiesen zu werden, können Sie im Reiter \tab{Allgemein} im Menü
 \mainmenuopt{Einstellungen} > \dropmenuopt{Optionen} das Kontrollkästchen
 
-\checkbox{Bei Bedarf nachfragen, ob geänderte Projekte gespeichert werden sollen}
+\checkbox{Bei Bedarf nachfragen, ob geänderte Projekte gespeichert werden sollen} \\
 \checkbox{Warnung ausgeben, wenn QGIS-Projekt einer früheren Version geöffnet
 wird} auswählen.
 
@@ -963,16 +999,23 @@ werden sollen}
 \item \checkbox{Warnung ausgeben, wenn QGIS-Projekt einer früheren Version
 geöffnet wird}
 \item Ändere Auswahl- und Hintergrundfarbe
-\item Ändere das Icon-Thema (Wähle zwischen default, classic, gis und nkids)
+\item Ändere das Icon-Thema (Wähle zwischen default, classic, gis und newgis)
 \item \checkbox{Layernamen in der Legende grossschreiben}
 \item \checkbox{Klassifikationsattributnamen in der Legende anzeigen}
+\item \checkbox{Rastericons für Legende erzeugen}
 \item \checkbox{Splashscreen beim Start nicht anzeigen}
 \item \checkbox{Abfrageergebnisse in einem Dockfenster (QGIS Neustart
 erforderlich)}
 \item \checkbox{Attributtabelle gedockt öffnen}
 \item \checkbox{PostGIS Layer per Doppelklick hinzufügen und zur Auswahl den
 erweiterten Modus verwenden}
+\item \checkbox{Neuen layer zur gewählten Gruppe hinzufügen}
+\item Attributtabellenverhalten (wähle zwischen Alle Objekte anzeigen, alle gewählten Objekte anzeigen, alle Objekte des aktuellen Kartenausschnitts anzeigen).
 \end{itemize}
+
+Zusätzlich können Sie festlegen, ob die Pfade für SVG Dateien absolut oder relativ 
+im Reiter \tab{Allgemein} des Menüs \mainmenuopt{Einstellungen} > 
+\dropmenuopt{mActionOptions}{Projekteinstellungen} gespeichert werden sollen.
 
 \minisec{Darstellung \& SVG}
 
@@ -995,11 +1038,14 @@ zeichnen}
 \begin{itemize}[label=--]
 \item Modus für die Abfrage von Layern einstellen (Aktuelle Layer, von oben
 nach unten beim ersten halten, von oben nach unten)
+\item \checkbox{Objektformular öffnen, wenn ein einzelnes Objekt abgefragt wird}
 \item Suchradius für die Objektidentifikation und zur Maptippanzeige
 einstellen
 \item Definiere Ellipsoid für Abstandsberechnung
 \item Definiere Gummibandfarbe für das Messwerkzeug
-\item Bevorzugte Maßeinheiten (Meter, Fuss)
+\item Definiere bevorzugte Maßeinheiten \radiobuttonon{Meter}, \radiobuttonoff{Fuß}
+\item Definiere bevorzugtes Winkelmaß \radiobuttonon{Grad}, \radiobuttonoff{Bodenmaß} 
+oder \radiobuttonoff{Gon}
 \item Definiere Mausradaktion (Zoom, Zoomen und mittig zentrieren, Zur
 Mausposition zoomen, Nichts)
 \item Definiere Zoomfaktor für das Mausrad
@@ -1021,7 +1067,7 @@ Stützpunkt und Segment)
 \item Definiere voreingestellte Fangtoleranz in Karteneinheit oder Pixel. 
 \item Definiere Suchradius für Knickpunktbearbeitung in Karteneinheit oder Pixel.
 \item \checkbox{Markierungen nur für gewähltes Objekt anzeigen}
-\item Definiere Markierstil von Knickpunkten (Wähle zwischen Kreuz,
+\item Definiere Markierstil von Knickpunkten (Wähle zwischen Kreuz (Standard),
 halbtransparenter Kreis und Keine)
 \item Definieren Markergröße
 \item \checkbox{Eingabe der Attributwerte bei der Einstellung neuer Objekte
@@ -1031,9 +1077,9 @@ unterdrücken}
 \minisec{KBS (Koordinatenbezugssystem)}
 
 \begin{itemize}[label=--]
-\item \checkbox{KBS (Koordinatenbezugssystem) abfragen}
-\item \checkbox{Projektweite KBS-Voreinstellung}
-\item \checkbox{Untenstehende globale Voreinstellung wird geutzt}
+\item \radiobuttonon{KBS (Koordinatenbezugssystem) abfragen}
+\item \radiobuttonon{Projektweite KBS-Voreinstellung}
+\item \radiobuttonon{Untenstehende globale Voreinstellung wird geutzt}
 \item Globale Voreinstellung wählen
 \end{itemize}
 
@@ -1110,6 +1156,53 @@ machen, bevor sie aktiv werden.
 \end{verbatim}
 \end{itemize}
 
+\section{Beschriftungs-Tools}\label{sec:annotations}
+\index{Beschriftungstext}
+\index{Text beschriftung|\see{Beschriftungstext}}
+
+Das \includegraphics[width=0.7cm,clip=true]{mActionTextAnnotation} 
+Beschriftungstext Werkzeug in der Attribut-Werkzeugleiste bietet die 
+Möglichkeit, formatierten Text in einer Sprechblase im QGIS Kartenfenster 
+zu platzieren. Aktivieren Sie dazu einfach das Beschriftungstext Icon und 
+klicken Sie in das Kartenfenster.
+
+\begin{figure}[ht]
+   \centering
+   \includegraphics[clip=true, width=12cm]{annotation}
+   \caption{Dialog für den Beschriftungstext \nixcaption}
+   \label{fig:annotation}
+\end{figure}
+
+Ein Doppelklick auf das Element öffnet den Dialog mit verschiedenen Optionen. 
+Im Texteditor können Sie den formatierten Text eingeben und einige Einstellungen 
+vornehmen. Z.B. kann das Objekt an einer bestimmten Stelle positioniert werden, 
+was dann durch ein Marker-Symbol angezeigt wird. Oder das es unabhängig von dem 
+Objekt im Kartenfenster angezeigt wird. Der Text kann im Kartenfenster verschoben 
+werden (entweder die Markierung oder die Sprechblase.
+
+Das \includegraphics[width=0.7cm,clip=true]{mActionAnnotation} Beschriftung 
+verschieben Tool ermöglicht es, den Beschriftungstext im Kartenfenster mit 
+der Maus zu verschieben.
+
+\minisec{Beschriftungsformular}\index{Beschriftung}
+\index{Beschriftungsformular|\see{Beschriftung}}
+
+Zusätzlich können Sie auch eigene Beschriftungsformular erstellen. Das 
+\includegraphics[width=0.7cm,clip=true]{mActionFormAnnotation} Beschriftungsformular 
+Tool ist nützlich, um Attribute eines Vektorlayers in einem maßgeschneiderten 
+QT-Designer Beschriftungsformular anzuzeigen (siehe 
+Abbildung~\ref{fig:custom-annotations}). Es ist ähnlich wie die Designer-Formulare 
+für das Identifizierungs-Werkzeug, wird aber als Beschriftungstext angezeigt. 
+Siehe auch den QGIS-Blog Eintrag unter der URL \url{http://blog.qgis.org/node/143} 
+für weitere Informationen.
+
+\begin{figure}[ht]
+   \centering
+   \includegraphics[clip=true, width=10cm]{custom_annotation}
+   \caption{Angepasstes QT-Designer Beschriftungsformular \nixcaption}
+   \label{fig:custom-annotations}
+\end{figure}
+
 \section{Räumliche Lesezeichen}\label{sec:bookmarks}
 \index{Lesezeichen}
 \index{Räumliche Lesezeichen}
@@ -1151,4 +1244,99 @@ auswählen.
 Um ein Lesezeichen aus dem Dialogfenster \dialog{Räumliches Lesezeichen} zu
 löschen, klicken Sie auf das gewünschte Lesezeichen, dann auf den Knopf
 \button{Löschen} und bestätigen Sie es mit \button{Ja} oder \button{Nein}.
+
+\section{Laufende GPS-Verfolgung}\label{sec:gpstracking}
+
+Um die laufende GPS-Verfolgung in QGIS zu aktivieren, müssen Sie es 
+unter \mainmenuopt{Ansicht} > \dropmenuopt{Laufende GPS-Verfolgung} 
+auswählen. Dadurch wird ein Dialog unterhalb der Kartenlegende geöffnet.
+
+Der Dialog kann 4 Fenster zeigen, in denen Einstellungen vorgenommen werden 
+können, siehe Abbildung \ref{fig:gpstrack_live} und \ref{fig:gpstrack_options}.
+
+\begin{description}
+ \item[(a)] \includegraphics[width=0.5cm,clip=true]{mActionToggleEditing}
+GPS Positionskoordinaten und manuelles eintragen von Stützpunkten und Objekten
+ \item[(b)] \includegraphics[width=0.5cm,clip=true]{gpstrack_barchart}
+GPS Signalstärke der Satellitenverbindung
+ \item[(c)] \includegraphics[width=0.5cm,clip=true]{gpstrack_polarchart}
+GPS Polar-Bildschirm zeigt die Anzahl und Position der Satelliten an
+ \item[(d)] \includegraphics[width=0.5cm,clip=true]{mActionOptions}
+GPS Option-Bildschirm (siehe Abbildung \ref{fig:gpstrack_options}).
+\end{description}
+
+Mit einem angeschlossenen GPS-Empfänger (muss auch von Ihrem Betriebssystem 
+unterstützt werden) reicht ein einfacher Klick auf den Knopf \button{Verbinden}. 
+Ein zweiter Klick trennt die Verbindung zu dem GPS-Empfänger wieder.
+
+[ WICHTIG ]: Wenn Sie Ihre Position im Kartenfenster aufnehmen möchten, müssen 
+Sie erst einen neuen Vektorlayer erstellen und ihn in den Editier-Modus bringen, 
+um die GPS-Positionen aufnehmen zu können.
+
+\begin{figure}[ht]
+\centering
+   \subfloat[Positionskoordinaten] {\label{subfig:gpstrack_main}\includegraphics[clip=true, width=0.3\textwidth]{gpstrack_main}}
+     \hspace{0.33cm}
+   \subfloat[GPS Signalstärke]{\label{subfig:gpstrack_stren}\includegraphics[clip=true, width=0.3\textwidth]{gpstrack_stren}}
+     \hspace{0.33cm}
+   \subfloat[GPS Polar-Bildschirm]{\label{subfig:gpstrack_polar}\includegraphics[clip=true, width=0.3\textwidth]{gpstrack_polar}} \\
+\caption{Laufende GPS-Verfolgung \nixcaption} \label{fig:gpstrack_live}
+\end{figure}
+
+\subsection{Positionskoordinaten}
+\includegraphics[width=0.5cm,clip=true]{mActionToggleEditing} Wenn der GPS-Empfänger 
+das Signal eines oder mehrerer Satelliten empfängt, wird Ihre Positionen als 
+Längengrad, Breitengrad und Höheninformation angezeigt, wie in 
+Abbildung~\ref{subfig:gpstrack_main} zu sehen.
+
+\subsection{GPS Signalstärke}
+\includegraphics[width=0.5cm,clip=true]{gpstrack_barchart} In diesem Fenster 
+können Sie die Signalstärke der Satelliten sehen (siehe 
+Abbildung~\ref{subfig:gpstrack_stren}).
+
+\subsection{GPS Polar-Bildschirm}
+\includegraphics[width=0.5cm,clip=true]{gpstrack_polarchart} Wenn Sie wissen 
+wollen, wo sich die Satelliten befinden, mit denen Sie gerade verbunden sind, 
+wechseln Sie zum GPS Polar-Bildschirm, siehe Abbildung~\ref{subfig:gpstrack_polar}.
+Sie können auch die IDs der Satelliten sehen, von denen Sie die Signale empfangen.
+
+\subsection{GPS Optionen}
+\includegraphics[width=0.5cm,clip=true]{mActionOptions} Wenn es Probleme bei der 
+Verbindung zum GPS-Gerät geben sollte, können Sie von 
+\radiobuttonon{Automatisch feststellen} nach \radiobuttonon{Pfad / Port unten 
+benutzen} wechseln und manuell einstellen. Ein klick auf den Knopf 
+\button{Verbinden} stellt die Verbindung zum GPS-Gerät her.
+
+Mit dem Schieberegler \slider{GPS-Cursorgröße} können Sie die Größe 
+des Positions-Cursor festlegen. Indem Sie das kontrollkästchen 
+\checkbox{Stützpunkte automatisch hinzufügen} anklicken, werden de GPS-Stützpunkte 
+automatisch in dem sich im Editiermodus befindlichen Vektorlayers gespeichert.
+
+Im Bereich Karte nach GPS zentrieren können Sie auswählen, auf welche Weise das 
+Kartenfenster aktualisiert wird. Sie Möglichkeiten sind:
+
+\radiobuttonoff{Immer} \\
+\radiobuttonon{Beim Verlassen der Ausdehnung} \\
+\radiobuttonoff{Nie}
+
+Außerdem kann noch die Farbe und Linienbreite der aufgezeichneten GPS-Route 
+festgelegt werden.
+
+Wenn Sie ein Objekt manuell setzen wollen, gehen Sie zum Fenster 
+\includegraphics[width=0.5cm,clip=true]{mActionToggleEditing} 
+''Positionskoordinaten'' und klicken auf den Knopf \button{Objekt hinzufügen}. 
+Auch wenn Sie das Kontrollkästchen \checkbox{Stützpunkte automatisch 
+hinzufügen} nicht aktiviert haben und einzelne Stützpunkte manuell 
+einfügen wollen können Sie dies über den Knopf \button{Stützpunkt hinzufügen} 
+machen.
+
+\begin{figure}[ht]
+   \centering
+   \includegraphics[clip=true, width=5cm]{gpstrack_options}
+   \caption{GPS Positionskoordinaten Fenster \nixcaption}
+   \label{fig:gpstrack_options}
+\end{figure}
+
+\FloatBarrier
+
 
