@@ -1,4 +1,5 @@
 % vim: set textwidth=78 autoindent:
+% !TeX root = user_guide.tex
 
 \chapter{GRASS GIS Integration}\label{sec:grass}\index{GRASS GIS}
 
@@ -411,10 +412,11 @@ Verfügung stehenden Funktionalitäten.
 \end{center}  
 \end{figure}
 
+{renewcommand{\arraystretch}{2}
 \begin{table}[h]\index{GRASS GIS!Digitalisierwerkzeuge}
 \centering
 \caption{GRASS Digitalisierwerkzeuge}\label{tab:grass_tools}\medskip
- \begin{tabular}{|l|l|p{5in}|}
+ \begin{tabular}{|m{1cm}|m{4cm}|m{8.5cm}|}
  \hline \textbf{Icon} & \textbf{Werkzeug} & \textbf{Zweck} \\
 \hline \includegraphics[width=0.7cm]{grass_new_point} & Neuer Punkt&
 Digitalisiert neuen Punkt \\
@@ -449,7 +451,7 @@ dass ein Objekt mehrere Feature repräsentieren kann, siehe oben)\\
 die Bearbeitung (und aktualisiert die Topolgie anschließend).\\
 \hline
 \end{tabular}
-\end{table}
+\end{table}}
 
 \minisec{Kategorie Reiter}\index{GRASS GIS!Digitalisierwerkzeuge!Kategorie}
 
@@ -585,7 +587,7 @@ Ergebniskarten der Raster- und Vektoranalysen in der ausgewählten
 \begin{figure}[h]
 \centering
 \caption{Moduldarstellung in der GRASS-Werkzeugkiste \nixcaption}\label{fig:grass_modules}
-   \subfloat[Modulbaum] {\label{subfig:grass_module_tree}\includegraphics[clip=true, width=0.4\textwidth]{grass_toolbox_moduletree}}\hspace{0.33cm}
+   \subfloat[Modulbaum] {\label{subfig:grass_module_tree}\includegraphics[clip=true, width=0.4\textwidth]{grass_toolbox_moduletree}}\hspace{0.5cm}
    \subfloat[Modulliste] {\label{subfig:grass_module_list}\includegraphics[clip=true, width=0.4\textwidth]{grass_toolbox_modulelist}}
 \end{figure}
 
@@ -609,10 +611,12 @@ sehen Sie als Beispiel den Moduldialog von \filename{v.buffer}.
 \begin{figure}[h]
 \centering
 \caption{Moduldialog der GRASS-Werkzeugkiste \nixcaption}\label{fig:grass_module_dialog}
-   \subfloat[Optionen eines Moduls] {\label{subfig:grass_module_option}\includegraphics[clip=true, width=0.3\textwidth]{grass_module_option}}\hspace{0.33cm}
-   \subfloat[Ergebnisfenster eines Moduls ] {\label{subfig:grass_module_output}\includegraphics[clip=true, width=0.3\textwidth]{grass_module_output}}\hspace{0.33cm}
+   \subfloat[Optionen eines Moduls] {\label{subfig:grass_module_option}\includegraphics[clip=true, width=0.3\textwidth]{grass_module_option}}\hspace{1cm}
+   \subfloat[Ergebnisfenster eines Moduls ] {\label{subfig:grass_module_output}\includegraphics[clip=true, width=0.3\textwidth]{grass_module_output}}\hspace{1cm}
    \subfloat[Handbuch zu einem Modul] {\label{subfig:grass_module_manual}\includegraphics[clip=true, width=0.3\textwidth]{grass_module_manual}}
 \end{figure}
+
+\FloatBarrier
 
 \minisec{Optionen}
 
@@ -622,6 +626,13 @@ Bitte beachten Sie, dass diese Eingabefelder extra so einfach wie möglich
 gehalten wurden, um die Struktur klar zu halten. Falls Sie alle vom Modul
 unterstützten Parameter benötigen, nutzen Sie die GRASS-Eingabeshell, in der
 Sie das Modul ebenfalls aufrufen können.
+
+Eine neue Funktion seit der QGIS Version \CURRENT ist der Knopf 
+\button{show advanced options >>} unterhalb der vereinfachten Moduldialoge 
+im Reiter \tab{Optionen}. Momentan ist diese Funktion nur für das Modul 
+v.in.ascii umgesetzt. Es ist aber zukünftig für weitere Module vorgesehen und 
+wird so die kompletten Funktionen der GRASS Module grafisch bereitstellen, 
+ohne die GRASS Shell und somit die Kommandozeile benutzen zu müssen. 
 
 \minisec{Ergebnis}
 
@@ -699,7 +710,7 @@ dann auf \button{Schließen}.
 width=0.4\textwidth]{grass_toolbox_rcontour}}\hspace{0.33cm}
    \subfloat[r.contour Ergebnis]
 {\label{subfig:grass_toolbox_rcontour2}\includegraphics[clip=true,
-width=0.4\textwidth]{grass_toolbox_rcontour2}}\hspace{0.33cm}
+width=0.4\textwidth]{grass_toolbox_rcontour2}}
 \end{figure}
 
 Da die aktuelle GRASS Region ziemlich groß ist, kann es eine Weile dauern,
@@ -953,4 +964,6 @@ Der XML-Auswerter liest diese Definition und erstellt einen neuen Reiter im
 Werkzeugkiste, wenn Sie das Modul auswählen. Ein detailierte Beschreibung,
 um neue Module in die GRASS Werkzeugkiste zu integrieren finden Sie unter: \\
 \url{http://wiki.qgis.org/qgiswiki/Adding\_New\_Tools\_to\_the\_GRASS\_Toolbox}.
+
+\FloatBarrier
 
