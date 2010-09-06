@@ -858,10 +858,11 @@ Darstellung für den Layer 'rivers' des QGIS Beispieldatensatzes.
 
 \minisec{Punkt-Verschiebung}
 
-Für Punktlayer gibt es eine weitere Darstellung, mit der es möglich ist, sämtliche 
-Punkte eines Layers auch dann darzustellen, wenn sie sich an derselben Stelle 
-befinden. Die Punkte werden dabei um ein zentrumssymbol herum auf einem Versatzkreis 
-angeordnet und dargestellt.  
+Für Punktlayer gibt es eine Darstellungsart, mit der es möglich ist, sämtliche 
+Punkte eines Layers auch dann darzustellen, wenn sie sich teilweise an derselben Stelle 
+befinden. Dies kann zum Beispiel bei Zeitrihen der Fall sein. Die Punkte werden dabei 
+um ein Zentrumssymbol herum auf einem Versatzkreis angeordnet und dargestellt, 
+siehe Abbildung~\ref{fig:poidissymNG}.  
 
 \begin{figure}[ht]
    \centering
@@ -924,7 +925,7 @@ und/oder zu entfernen. Starten Sie den Stilmanager, indem Sie auf
 \end{center}
 \end{figure}
 
-\subsection{Beschriftungen}
+\subsection{Beschriftungen}\index{Beschriftung}
 
 Im Reiter \tab{Beschriftungen} können Sie Objekte beschriften und die
 Anordnung, den Schriftstil, die Ausrichtung, Pufferung und Position der
@@ -999,6 +1000,90 @@ notwendigen Parameter anhand von Inhalten aus Attributspalten definieren.
 
 Beachten Sie, dass es im unteren Bereich auch ein kleines
 \classname{Vorschau}-Feld gibt, in dem alle Änderungen angezeigt werden.
+
+\subsection{Neue Beschriftung}\index{Beschriftung!Neu}
+
+Das neue \toolbtntwo{labeling}{Beschriftung} bietet eine verbesserte Beschriftung
+für Vektorlayer (Punkte, Linien und Polygone) und benötigt nur wenige Parameter.
+Dieses Plugin funktioniert auch bei On-The-Fly transformierten Layern und wird
+in naher Zukunft die Standard-Beschriftung in QGIS ablösen.
+
+Um die neue Beschriftung zu nutzen, sind folgende Schritte notwendig:
+
+\begin{enumerate}
+  \item Starten Sie QGIS und laden Sie eine Vektor Punkt-, Linien- oder Polygonlayer.
+  \item Aktivieren Sie den Layer in der Legende und klicken Sie dann auf das Icon 
+  \toolbtntwo{labeling}{Beschriftung} in der Werkzeugleiste.
+\end{enumerate}
+
+\minisec{Punktlayer beschriften}
+
+Als erstes müssen Sie das Kontrollkästchen \checkbox{Diesen Layer beschriften}
+aktivieren und eine Attributspalte angeben, deren Inhalt für die Beschriftung
+verwendet werden soll. Danach können Sie die Platzierung, den Textstil, die
+Priorität der Beschriftung und die Maßstabsabhängige Darstellung festlegen. Über
+weitere Kontrollkästchen können Sie noch angeben, ob alle Teile eine mehrteiligen
+beschriftet werden sollen, ob Objekte ein Hindernis für die Beschriftung sein
+sollen oder nicht (siehe Abbildung \ref{fig:pointlabel}).
+
+\begin{figure}[ht]
+\begin{center}
+   \caption{Beschriftung von Vektor Punktlayern \nixcaption}\label{fig:pointlabel}\smallskip
+   \includegraphics[clip=true, width=12cm]{label_points}
+\end{center}
+\end{figure}
+
+\minisec{Linienlayer beschriften}
+
+Als erstes müssen Sie das Kontrollkästchen \checkbox{Diesen Layer beschriften}
+aktivieren und eine Attributspalte angeben, deren Inhalt für die Beschriftung
+verwendet werden soll. Danach können Sie die Platzierung, den Textstil, die
+Priorität der Beschriftung und die Maßstabsabhängige Darstellung festlegen. Über
+weitere Kontrollkästchen können Sie noch angeben, ob alle Teile eine mehrteiligen
+beschriftet werden sollen, ob sich anschließende Linien verbunden werden sollen,
+um doppelte Beschriftung zu vermeide und ob Objekte ein Hindernis für die
+Beschriftung sein sollen oder nicht (siehe Abbildung \ref{fig:linelabel}).
+
+\begin{figure}[ht]
+\begin{center}
+   \caption{Beschriftung von Vektor Linienlayern \nixcaption}\label{fig:linelabel}\smallskip
+   \includegraphics[clip=true, width=12cm]{label_line}
+\end{center}
+\end{figure}
+
+\minisec{Polygonlayer beschriften}
+
+Als erstes müssen Sie das Kontrollkästchen \checkbox{Diesen Layer beschriften}
+aktivieren und eine Attributspalte angeben, deren Inhalt für die Beschriftung
+verwendet werden soll. Danach können Sie die Platzierung, den Textstil, die
+Priorität der Beschriftung und die Maßstabsabhängige Darstellung festlegen. Über
+weitere Kontrollkästchen können Sie noch angeben, ob alle Teile eine mehrteiligen
+beschriftet werden sollen, ob Objekte ein Hindernis für die Beschriftung sein
+sollen oder nicht (siehe Abbildung \ref{fig:arealabel}).
+
+\begin{figure}[ht]
+\begin{center}
+   \caption{Beschriftung von Vektor Polygonlayern \nixcaption}\label{fig:arealabel}\smallskip
+   \includegraphics[clip=true, width=12cm]{label_area}
+\end{center}
+\end{figure}
+
+\minisec{Beschriftungseinstellungen ändern}
+
+Außerdem können Sie auf den Knopf \button{Beschriftungseinstellungen} drücken und
+eine Suchmethode für die optimale Beschriftung auswählen, Zur Verfügung steht Kette,
+Popmusik Tabu, Popmusik Kette, Popmusic Tabu Kette und FALP.
+
+\begin{figure}[ht]
+\begin{center}
+   \caption{Ändern der Beschriftungseinstellungen \nixcaption}\label{fig:labelengine}\smallskip
+   \includegraphics[clip=true, width=7cm]{label_engine}
+\end{center}
+\end{figure}
+
+Dazu können Sie noch auswählen, ob alle Beschriftungskandidaten angezeigt werden
+sollten (zur Fehlerbeseitigung) oder ob alle Beschriftungen dargestellt werden
+sollen, also inklusive der kollidierenden.
 
 \subsection{Attribute}\index{Attribute}\label{label_attributes}
 
@@ -1215,9 +1300,7 @@ dem Knopf \usertext{Attribut einfügen}.
 Damit ist die Aktion fertig für den Einsatz. Der gesamte Befehl der Aktion
 sollte folgendermaßen aussehen:
 
-\begin{center}
 \usertext{firefox \url{http://google.com/search?q=\%NAMES}}
-\end{center}
 
 Wir können die Aktion nun benutzen. Schließen Sie den \dialog{Eigenschaften}
 Dialog und zoomen Sie in eine Bereich ihrer Wahl mit ein paar Seen. Stellen Sie
@@ -1227,7 +1310,8 @@ sichtbar sein:
 
 \begin{figure}[H]
    \begin{center}
-   \caption{Auswählen eines Objektes mit einer Aktion \nixcaption}\label{fig:identify_action}\smallskip
+   \caption{Auswählen eines Objektes mit einer Aktion \nixcaption}
+   \label{fig:identify_action}\smallskip
    \includegraphics[clip=true, width=6cm]{action_identifyaction} 
 \end{center}  
 \end{figure}
@@ -1244,10 +1328,6 @@ vorhanden, nach der man im Internet suchen könnte.
 Sie können auch mehrere Aktionen für einen Layer definieren. Sie alle werden
 dann bei der Abfrage von Objekten im Dialog \dialog{Abfrageergebnisse}
 angezeigt und können ausgewählt und benutzt werden. 
-%%FIXME - no longer valid?
-%%Sie können auch eine
-%%Aktion starten, in dem Sie in der Attributtabelle in eine Zeile gehen und mit
-der rechten Maustaste eine Aktion für genau diesen einen Eintrag ausführen.
 
 Sie sehen, man kann sich eine Vielzahl interessanter Aktionen ausdenken. Wenn
 Sie z.B. einen Punktlayer mit einzelnen Punkten haben, an denen Photos
@@ -1269,14 +1349,15 @@ festlegegt werden können (siehe Abbildung~\ref{fig:diagramtab}).
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{Vektor Layereigenschaften mit Diagram Overlay Reiter \nixcaption}\label{fig:diagramtab}\smallskip
+   \caption{Vektor Layereigenschaften mit Diagram Overlay Reiter \nixcaption}
+   \label{fig:diagramtab}\smallskip
    \includegraphics[clip=true, width=13cm]{diagram_tab}
 \end{center}
 \end{figure}
 
 Die aktuelle Implementierung des Moduls ermöglicht es, Tortendiagramme, 
 Balkendiagramme und proportionale SVG-Symbole auf Basis von Attributspalten 
-zu erstellen und die Größe der Diagramme entsprechend einer Klassifikation 
+zu erstellen, und die Größe der Diagramme entsprechend einer Klassifikation 
 linear zu skalieren. Als Beispiel sollen auf dem Hintergrund des Layers 
 \filename{alaska.shp} Balkendiagramme mit Klimawerten gezeichnet werden. 
 Die Werte dafür entnehmen wir der
@@ -1491,8 +1572,8 @@ Werkzeugleiste Digitalisierung können folgende Funktionen ausgeführt werden:
 
 \begin{table}[h]\index{Vektorlayer!Grundlegende Editierwerkzeuge}
 \centering
-\caption{Funktionen der Werkzeugleiste Digitalisierung}\label{tab:vector_editing}\medskip
-\small
+\caption{Funktionen der Werkzeugleiste Digitalisierung}
+\label{tab:vector_editing}
 \begin{tabular}{|l|p{6.9cm}|l|p{6.9cm}|}
 \hline \textbf{Icon} & \textbf{Funktion} & \textbf{Icon} & \textbf{Funktion} \\
 \hline \includegraphics[width=0.7cm]{mActionToggleEditing}
@@ -1515,6 +1596,9 @@ Werkzeugleiste Digitalisierung können folgende Funktionen ausgeführt werden:
    & Objekte kopieren
    & \includegraphics[width=0.7cm]{mActionEditPaste} 
    & Objekte einfügen \\
+\hline \includegraphics[width=0.7cm]{mActionFileSave}
+   & Änderungen speichern
+   & & \\
 \hline
 \end{tabular}
 \end{table}
@@ -1527,10 +1611,9 @@ Sie sich nicht darauf verlassen
 \end{Tip}
 
 \begin{Tip}[ht]\caption{\textsc{Regelmäßiges Sichern der Daten}}
-Bitte schließen Sie die Option
-\toolbtntwo{mActionToggleEditing}{Bearbeitungsmodus ändern} regelmäßig.
-Dadurch werden alle bis dahin gemachten Änderungen gespeichert und es ist
-sichergestellt, dass die Änderungen auch akzeptiert werden.
+Bitte speichern Sie ihre Arbeit regelmäßig mit dem Knopf
+\toolbtntwo{mActionFileSave}{Änderungen Speichern}. Dadurch wird 
+sichergestellt, dass die aktuellen Änderungen auch akzeptiert werden.
 \end{Tip}
 
 \begin{Tip}[h]\caption{\textsc{Zoomen zum letzten Editierstand}}
@@ -1617,7 +1700,8 @@ kann man mehrere Stützpunkte gemeinsam selektieren, um sie dann zusammen zu
 verschieben, zu löschen oder hinzuzufügen. Das Knotenwerkzeug funktioniert
 auch mit angeschalteter OTF-Projektion und unterstützt die Funktionen für
 topologisches Editieren. Anders als die anderen Editierfunktionen, bleibt die
-Auswahl für die Veränderungen des Objektes bestehen.
+Auswahl für die Veränderungen des Objektes bestehen. Wenn das Knotenwerkzeug kein 
+Objekt findet, wird eine Warnung angezeigt.
 
 Sie sollten den Suchradius beim Digitalisieren über die Menüleiste unter
 \mainmenuopt{Einstellungen} > \dropmenuopttwo{mActionOptions}{Optionen} >
@@ -1739,6 +1823,23 @@ Spaltennamen und -typen der Attributtabelle erstellen. Wenn auch die
 Attributdaten korrekt übernommen werden sollen, dann stellen Sie sicher, dass
 auch die Spaltennamen und -typen beider layer zueinander passen.
 
+\minisec{Änderungen speichern}
+\index{editing!saving changes}
+
+Solange sich ein Vektorlayer im Editiermodus befindet, werden alle Änderungen 
+erstmal im Arbeitsspeicher des Rechners abgelegt. Dadurch werden sie nicht 
+direkt auf den Datenträger bzw. in dem Layer gespeichert. Wenn Sie Änderungen 
+an einem Layer speichern wollen, ohne den Editiermodus zu verlassen, klicken Sie 
+auf den Knopf \toolbtntwo{mActionFileSave}{Änderungen speichern}. Ansonsten werden 
+Sie auch gefragt, ob Sie Veränderungen speichern wollen, wenn Sie das Digitalisieren 
+mit dem Knopf \toolbtntwo{mActionToggleEditing}{Bearbeitungsstatus 
+ändern} beenden. 
+
+Wenn die Änderungen nicht gespeichert werden können (z.B. weil die Festplatte voll 
+ist oder Attribute Werte aufweisen, die außerhalb der Wertespanne liegen), bleiben 
+die Änderungen erstmal im Arbeitsspeicher. Dies erlmöglicht es, Änderungen vorzunehmen und 
+dann nochmals die Daten zu speichern.
+
 \subsection{Erweiterte Digitalisierung}
 \index{Vektorlayer!Erweiterte Digitalisierung}
 \index{Erweiterte Digtalisierung!einen existierenden Layer}
@@ -1824,7 +1925,8 @@ auswählen. Dadurch werden diese von einem roten Gummiband umrandet und ein
 Schieber erscheint. Wenn Sie die Stellung des Schiebers verändern, können Sie
 sehen, wie das Objekt vereinfacht wird. Durch einen Klick auf \button{OK} 
 wird die neue Geometrie abgespeichert. Wenn ein Objekt nicht vereinfacht
-werden kann, erscheint ein Fenster mit einer entsprechenden Meldung.
+werden kann (z.B. bei MultiPolygonen), erscheint ein Fenster mit einer 
+entsprechenden Meldung.
 
 \minisec{Ring hinzufügen}
 \index{Vektorlayer!hinzufügen!Ring}
@@ -1952,30 +2054,37 @@ Wenn die Änderungen nicht gespeichert werden können (z.B.: weil die
 Festplatte voll ist) bleiben diese 'im-memory' Status erhalten. Sie können somit
 Veränderungen vornehmen und das Speichern erneut versuchen.
 
-\subsection{Neuen Vektorlayer erstellen}\label{sec:create
+\subsection{Neuen Shape- oder SpatiaLite-Layer erstellen}\label{sec:create
 shape}\index{Editierfunktionen!Neuen Vektorlayer erstellen}
 
-Um einen neuen Vektorlayer zu erstellen, wählen Sie in der Menüleiste
-\toolbtntwo{mActionNewVectorLayer}{Neuer Vektorlayer} aus dem Menü
-\mainmenuopt{Layer}. Dadurch startet der Dialog \dialog{Neuer Vektorlayer}
-(vgl. Abb. \ref{fig:newvectorlayer}). Wählen Sie hier den Typ des neuen
-Layers(Punkt, Linie oder Polygon).
-
-\begin{figure}[ht]
-   \begin{center}
-   \caption{Einen neuen Vektorlayer erstellen \nixcaption}\label{fig:newvectorlayer}\smallskip
-   \includegraphics[clip=true, width=8cm]{editNewVector}
-\end{center} 
-\end{figure}
-
 QGIS kann derzeit noch keine 2,5D Objekte erstellen (z.B. Objekte mit X,Y,Z
-Koordinaten). Im Moment können nur Shapes erstellt werden. In zukünftigen
-Versionen werden auch andere durch OGR oder PostgreSQL unterstützte
-Datenformate erstellt werden können.
+Koordinaten). 
+
+QGIS kann derzeit neue Shape- und SpatiaLite-Layer erstellen. Das Erstellen 
+von 2,5D Objekten (z.B. Objekte mit X,Y,Z Koordinaten) ist im Moment noch nicht 
+möglich. In zukünftigen Versionen werden auch andere durch OGR oder PostgreSQL 
+unterstützte Datenformate erstellt werden können.
 
 Das Erstellen eines GRASS Vektorlayers ist mit dem GRASS-Plugin möglich.
 Weitere Information dazu finden Sie im Abschnitt
 \ref{sec:creating_new_grass_vectors}.
+
+\minisec{Eine neue Shapedatei erstellen}
+\label{sec:create shape}
+\index{Editierfunktionen!Neuen Shape Layer erstellen}
+
+Um einen neuen Shapelayer zu erstellen, wählen Sie \button{Neu} > 
+\toolbtntwo{mActionNewVectorLayer}{Neuer Shapedatei Layer} aus dem Menü
+\mainmenuopt{Layer}. Dadurch startet der Dialog \dialog{Neuer Vektorlayer}
+(vgl. Abb. \ref{fig:newvectorlayer}). Wählen Sie hier den Typ des neuen
+Layers (Punkt, Linie oder Polygon).
+
+\begin{figure}[ht]
+   \begin{center}
+   \caption{Eine neue Shapedatei erstellen \nixcaption}\label{fig:newvectorlayer}\smallskip
+   \includegraphics[clip=true, width=8cm]{editNewVector}
+\end{center} 
+\end{figure}
 
 Um die Erstellung eines neuen Vektorlayers abzuschließen, ergänzen Sie die
 gewünschten Attributfelder, indem Sie auf den Knopf \button{Hinzufügen}
@@ -1989,7 +2098,44 @@ festgelegt werden. Wenn dies getan ist, bestätigen Sie mit
 in die Kartenlegende eingefügt und Sie können den Layer entsprechend dem
 Kapitel \ref{sec:edit_existing_layer} editieren.
 
-\subsection{Die Attributtabelle}\label{sec:attribute table}\index{Editieren!Attributtabelle}
+\minisec{Einen neuen SpatiaLite Layer erstellen}
+\label{sec:create spatialite}
+\index{Editierfunktionen!Neuen SpatiaLite Layer erstellen}
+
+Um einen neuen SpatiaLite Layer zu erstellen, wählen Sie \button{Neu} >
+\toolbtntwo{mActionNewVectorLayer}{Neuer SpatiaLite Layer} aus dem Menü
+\mainmenuopt{Layer}. Dadurch startet der Dialog \dialog{Neuer SpatiaLite Layer}
+(vgl. Abb. \ref{fig:newspatialitelayer}).
+
+\begin{figure}[ht]
+   \centering
+   \includegraphics[clip=true, width=8cm]{editNewSpatialite}
+   \caption{Dialog zum Erstellen eines neuen SpatiaLite Layers \nixcaption}
+   \label{fig:newspatialitelayer}
+\end{figure}
+
+Der erste Schritt besteht darin, eine bereits bestehende SpatiaLite Datenbank 
+auszuwählen oder eine neue SpatiaLite Datenbank zu erstellen. Dies können Sie 
+mit dem \browsebutton Knopf rechts vom Feld 'Datenbank' machen. Danach tragen 
+Sie den Namen für den zu erstellenden SpatiaLite Layer, den Layertyp und die 
+EPSG-SRID Nummer (für die Projektion) ein. Wenn erwünscht, können Sie noch 
+das Kontrollkästchen \checkbox{automatisch inkrementierenden Primärschlüssel 
+erzeugen} auswählen.   
+ 
+Um die Attributtabelle des neuen SpatiaLite Layers festzulegen, geben Sie 
+für die gewünschten Spalten die Namen und den Datentyp an und klicken dann 
+jeweils auf den Knopf \button{Der Attributliste hinzufügen}. Wenn alles 
+korrekt eingegeben ist, drücken Sie auf \button{OK}. QGIS zeigt den neuen 
+Layer dann automatisch in der Legende an und Sie können mit dem Editieren 
+beginnen, wie in Kapitel \ref{sec:edit_existing_layer} beschrieben. 
+
+Wenn Sie mehr als einen neuen SpatiaLite Layers erstellen wollen, können Sie 
+auch auf den Knopf \button{Anwenden} statt auf \button{OK} drücken. Dadurch bleibt 
+der Dialog geöffnet.
+
+\subsection{Die Attributtabelle}
+\label{sec:attribute table}
+\index{Editieren!Attributtabelle}
 
 Die Attributtabelle zeigt alle Objekte eines ausgewählten Layers. Jede Zeile
 in der Attributtabelle representiert dabei ein Objekt des Layers mit seinen
@@ -2005,10 +2151,8 @@ indem Sie mit der rechten Maustaste auf den Namen des Layers in der
 Kartenlegende klicken und dann 'Attributtabelle öffnen' aus dem Menü
 auswählen. Die dritte und einfachste Variante besteht darin, direkt auf das Icon
 \toolbtntwo{mActionOpenTable}{Attributtabelle öffnen} in der Werkzeugleiste
-zu klicken. 
-
-In der Attributtabelle werden sämtliche Attribute aller Objekte des
-ausgewählten Vektorlayers angezeigt (siehe Abbildung~\ref{fig:attributetable}).
+zu klicken. Die Anzahl der Objekte wird im Kopf der Attributtabelle angezeigt, 
+siehe Abbildung~\ref{fig:attributetable}. 
 
 \begin{figure}[ht]
    \begin{center}

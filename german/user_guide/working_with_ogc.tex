@@ -1,4 +1,5 @@
 % vim: set textwidth=78 autoindent:
+% !TeX root = user_guide.tex
 
 \chapter{Arbeiten mit OGC-Daten}\label{work_ogc}
 
@@ -91,7 +92,7 @@ Verbindung benötig werden, ein (vgl. Tabelle \ref{tab:wms_connection_parms}):
 \begin{table}[h]\index{WMS!Klient!Verbindungsparameter}
 \centering
 \caption{WMS Verbindungs-Parameter}\label{tab:wms_connection_parms}\medskip
- \begin{tabular}{|l|p{5in}|}
+ \begin{tabular}{|l|p{11cm}|}
 \hline Name & Ein Name für diese Verbindung. Dieser Name wird in der
 Auswahlbox der vorhandenen WMS-Server erscheinen. \\
 \hline URL \index{WMS!URL} & Die URL des Servers, der die Daten vorhält.
@@ -164,6 +165,18 @@ können.
 \index{WMS!Bildauflösung}
 \end{Tip}
 
+\minisec{Optionen}
+
+Der Bereich Optionen im Anfangsdialog bietet ein Textfeld, wo der Name eines 
+WMS Layers eingetragen werden kann. Dieser Name wird in der Legende angezeigt, 
+nachdem die Layer geladen wurden.
+
+Wenn die OnlineRessource-URL des GetCapabilities-document anders lautet als die 
+URL, die in den Verbindunsgparametern vorgegebenen ist, fragt QGIS welche URL 
+verwendet werden soll. Entsprechend ihrer Angabe wird QGIS dies dann automatisch 
+speichern. Über die Kontrollkästchen \checkbox{GetMap-URL ignorieren} und 
+\checkbox{GetFeatureInfo-URL ignorieren} können Sie es selbst festlegen bzw. ändern.  
+
 \minisec{Layer}\label{ogc-wms-layers}
 
 Der Abschnitt der \guiheading{Layer} listet alle verfügbaren Layer des
@@ -233,7 +246,7 @@ hinzufügen, können unvorhersehbare Ereignisse auftreten.
 \index{WMS!Suche}
 \index{OGC!Suche}
 
-Ab QGIS Version~\CURRENT ist es möglich, auf Basis von Schlüsselworten nach
+In QGIS ist es möglich, auf Basis von Schlüsselworten nach
 WMS Servern im Internet zu suchen. In Abbildung~\ref{fig:searchtab} sehen Sie
 den neuen Reiter \tab{Serversuche} im \dialog{WMS-Layer hinzufügen} Dialog.
 
@@ -260,6 +273,19 @@ zu verbinden, wählen Sie diesen aus der Server Liste aus und klicken dann auf
 den Knopf \button{Verbinden}.
 
 Diese Suchfunktion ist ein Frontend zur API von \url{http://geopole.org}.
+
+\subsection{Tilesets}\label{sec:tilesets}
+\index{WMS!tileset}
+\index{WMS!WMS-C}
+
+Wenn Sie WMS-C (Cached WMS) Dienste, wie \url{http://labs.metacarta.com/wms-c/Basic.py} 
+nutzen, können Sie im Reiter \tab{Tilesets} durch die 'Tiles' browsen, die durch den 
+Server bereitgestellt werden. Sie sehen dort auch zusätzliche Informationen, wie 
+Größe, Format oder das unterstützte KBS (Koordinatenbezugsystem).
+
+In Kombination mit dieser Funktion können Sie im Menü \mainmenuopt{Ansicht} auch 
+die \dropmenuopt{Kachelmaßstabsauswahl} öffnen und darüber die vorhanden Maßstäbe 
+mittels eines Schiebereglers auswählen und anzeigen. 
 
 \subsection{Das Abfragewerkzeug}\label{sec:ogc-wms-identify}
 \index{WMS!Abfragen}
@@ -389,8 +415,9 @@ Sie auf der Webseite \url{http://inteproxy.wald.intevation.org}.
 In QGIS verhält sich ein WFS-Layer weitestgehend wie ein anderer Vektorlayer.
 Sie können Objekte abfragen, auswählen und sich die Attributtabelle
 anschauen. Das WFS-Plugin unterstützt zur Zeit noch kein Editieren von
-WFS-Layern. Um das WFS Plugin zu starten öffnen Sie das Menü
-\mainmenuopt{Plugins} > \dropmenuopttwo{mActionShowPluginManager}{Plugins
+WFS-Layern. Dies wird sich aber in einer der kommenden QGIS Versionen sicher 
+ändern. Um das WFS Plugin zu starten öffnen Sie das Menü \mainmenuopt{Plugins} > 
+\dropmenuopttwo{mActionShowPluginManager}{Plugins
 verwalten}, aktivieren Sie das Kontrollkästchen \checkbox{WFS-Plugin} und
 drücken Sie dann auf \button{OK}.
 
@@ -439,6 +466,14 @@ Sie als Option definiert haben.
   \end{center}
 \end{figure}
 
+Wenn Sie das Kontrollkästchen \checkbox{Nur Objekte, die den aktuellen Ausschnitt 
+schneiden, laden} nicht aktivieren, werden alle Objekte des Layers geladen. Wenn 
+Sie nur einen kleinen Ausschnitt anzeigen wollen, zoomen Sie in den Bereich, 
+aktivieren Sie das Kontrollkästchen und stellen eine erneute Anfrage an den 
+WFS-Server. Dadurch wird ein BBOX-Parameter mit der aktuellen Ausdehung des 
+Kartenfensters hinzugefügt. Dies ist sehr angenehm, wenn Sie nur wenige Objekte 
+aus einer sehr großen Karte anzeigen lassen möchten. 
+
 Sie werden sehen, dass der Fortschritt des Herunterladens in der unteren,
 linken Ecke des QGIS-Hauptfensters angezeigt wird. Wenn der Layer geladen und
 angezeigt wird, können Sie die Objekte auswählen und sich die dazugehörigen
@@ -474,4 +509,6 @@ verwenden.
 \index{WFS!einfache Authentifizierung!}
 \index{WFS!abgesicherte WFS server!}
 \end{Tip}
+
+\FloatBarrier
 
