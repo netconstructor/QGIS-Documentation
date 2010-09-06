@@ -1,4 +1,5 @@
 % vim:autoindent:set textwidth=78:
+% !TeX root = user_guide.tex
 
 \chapter{Arbeiten mit Vektordaten}
 \label{label_workingvector}
@@ -69,7 +70,7 @@ Datei, mit den unvollständigen Projektionsparameters, wie sie z.B. von ESRI
 Software gelesen und erstellt wird, und eine \filename{.qpj} Datei, in der die 
 vollständigen Projektionsparameter anthalten sind. Wenn Sie dann ein Shape in 
 laden, und QGIS findet eine \filename{.qpj} Datei, dann wird diese anstelle 
-der \filename{.prj} Datei benutzt.
+der \filename{.prj} Datei benutzt. \index{Shapedateien!Spezifikationen}
 
 \subsection{Shape Layer laden}\label{sec:load_shapefile}
 
@@ -246,10 +247,6 @@ auflösbarer Name für den HOST sein, genau wie beim Benutzen von telnet oder ping
 \hline Datenbank \index{PostgreSQL!Datenbank} & Name der Datenbank  \\
 \hline Port \index{PostgreSQL!Port}& Port Nummer der Datenbank auf dem
 Server. Standard ist 5432.\\
-\hline Benutzername \index{PostgreSQL!Benutzername}& Benutzername, um sich bei
-der Datenbank anzumelden \\
-\hline Passwort \index{PostgreSQL!Passwort}& Passwort, um sich als
-\filename{Benutzer} mit der Datenbank zu verbinden\\
 \hline SSL Modus \index{PostgreSQL!SSL Modus}& Wie die SSL-Verbindung mit dem
 Server festgelegt wird. Die Optionen sind:
 \begin {itemize}
@@ -262,6 +259,10 @@ klappt, versuche eine Nicht-SSL-Verbindung;
 \end {itemize}
 Bemerkung: Die Geschwindigkeit der Verbindung kann oftmals enorm gesteigert
 werden, wenn die SSL-Verbindung abgeschaltet wird. \\
+\hline Benutzername \index{PostgreSQL!Benutzername}& Benutzername, um sich bei
+der Datenbank anzumelden \\
+\hline Passwort \index{PostgreSQL!Passwort}& Passwort, um sich als
+\filename{Benutzer} mit der Datenbank zu verbinden\\
 \hline
 \end{tabular}
 \end{table}
@@ -269,13 +270,15 @@ werden, wenn die SSL-Verbindung abgeschaltet wird. \\
 Optional können noch die folgenden Kontrollkästchen aktiviert werden:
 
 \begin{itemize}[label=--]
+\item \checkbox{Benutzernamen speichern}
 \item \checkbox{Passwort speichern}
 \item \checkbox{Nur in geometry\_columns nachschauen}
 \item \checkbox{Nur im 'public' Schema nachschauen}
+\item \checkbox{Gechätzte Tabellenmetadaten nutzen}
 \end{itemize}
 
 Wenn alle Parameter eingetragen sind, kann die Verbindung getestet werden,
-indem Sie auf den Knopf \button{Teste Verbindung}
+indem Sie auf den Knopf \button{Verbindung testen} 
 drücken\index{PostgreSQL!Verbindung!Testen}. 
 
 \begin{Tip}\caption{\textsc{QGIS Benutzereinstellungen und Sicherheit}}
@@ -603,6 +606,30 @@ eines Layers anhand einer definierten Attributspalte
 zugewiesen.\index{Vektorlayer!Darstellung!Eindeutiger Wert}
 \end{description}
 
+Um die Darstellung für einen Layer zu ändern, klicken Sie einfach doppelt auf 
+den seinen Legendeneintrag, so dass der Dialog \dialog{Layereigenschaften} 
+angezeigt wird. \index{Vektorlayer!Darstellung!Verändern}
+
+\begin{figure}[ht]
+\centering
+\caption{Darstellungsoptionen \nixcaption}
+   \subfloat[Einfaches Symbol]{
+   \label{subfig:single_symbol}
+   \includegraphics[clip=true, width=0.4\textwidth]{vectorClassifySingle}}
+   \hspace{1cm}
+   \subfloat[Abgestuftes Symbol]
+   {\label{subfig:graduated_symbol}
+   \includegraphics[clip=true, width=0.4\textwidth]{vectorClassifyGraduated}}
+   \hspace{1cm}
+   \subfloat[Fortlaufende Farbe]{
+   \label{subfig:cont_color}
+   \includegraphics[clip=true, width=0.4\textwidth]{vectorClassifyContinous}}
+   \hspace{1cm}
+   \subfloat[Eindeutiger Wert]{
+   \label{subfig:unique_val}
+   \includegraphics[clip=true, width=0.4\textwidth]{vectorClassifyUnique}}
+\end{figure}
+
 \minisec{Stiloption} \label{sec:style_options}
 \index{Vektorlayer!Stiloptionen}
 
@@ -660,7 +687,11 @@ QGIS Versionen die aktuelle Standarddarstellung ablösen.
 
 Um derzeit in die neue Darstellung zu wechseln, ist es notwendig, auf den 
 Knopf \button{Neue Darstellung} im Reiter \tab{Darstellung} des 
-\dialog{Layereigenschaften} Dialogs zu drücken.
+\dialog{Layereigenschaften} Dialogs zu drücken. Sie können die neue 
+Darstellung auch als Standard setzen im Reiter \tab{Darstellung \& SVG} 
+des Menüs \mainmenuopt{Einstellungen} > \dropmenuopt{Optionen}. Aktivieren Sie 
+dazu das Kontrollkästchen \checkbox{Darstellung der nächsten Generation 
+verwenden}.
 
 \minisec{Die neue Darstellung verstehen}
 
@@ -696,7 +727,8 @@ definierten Farbanstiegs angewendet. Es gibt drei Typen:
 \begin{itemize}[label=--]
 \item \textbf{Gradient}: Linearer Gradient von einer zu anderen Farben.
 \item \textbf{Random}: Zufällig erstellte Farben aus einem festgelegten Farbraum.
-\item \textbf{Colorbrewer}: Erstellen von Farbbereichen aus einem Farbschema und einer definierten Anzahl von Farbklassen.
+\item \textbf{Colorbrewer}: Erstellen von Farbbereichen aus einem Farbschema und 
+einer definierten Anzahl von Farbklassen.
 \end{itemize}
 
 Sie können neue Farbanstiege im Stilmanager definieren (siehe Kapitel 
@@ -807,6 +839,34 @@ für den Vektorlayer rivers des QGIS-Beispieldatensatzes.
    \caption{Neue Optionen für die Darstellung abgestufter Symbole \nixcaption}\label{fig:gradsymNG}\smallskip
    \includegraphics[clip=true, width=10cm]{graduatesymbol_ng_line}
 \end{center}
+\end{figure}
+
+\minisec{Regelbasierende Darstellung}
+
+Die regelbasierende Darstellung wird verwendet, um die Objekte eines Layers nach 
+selbst festgelegten Regeln darstellen zu können, die dann die Zugehörigkeit zu 
+einer bestimmten Klasse zeigt.
+
+Das Beispiel in Abbildung~\ref{fig:rulesymNG} zeigt den Dialog der regelbasierenden 
+Darstellung für den Layer 'rivers' des QGIS Beispieldatensatzes.
+
+\begin{figure}[ht]
+   \centering
+   \includegraphics[clip=true, width=10cm]{rulesymbol_ng_line}
+   \caption{Dialog für regelbasierende Darstellung \nixcaption}\label{fig:rulesymNG}
+\end{figure}
+
+\minisec{Punkt-Verschiebung}
+
+Für Punktlayer gibt es eine weitere Darstellung, mit der es möglich ist, sämtliche 
+Punkte eines Layers auch dann darzustellen, wenn sie sich an derselben Stelle 
+befinden. Die Punkte werden dabei um ein zentrumssymbol herum auf einem Versatzkreis 
+angeordnet und dargestellt.  
+
+\begin{figure}[ht]
+   \centering
+   \includegraphics[clip=true, width=10cm]{poi_displacement}
+   \caption{Dialog für Punkt-Verschiebung \nixcaption}\label{fig:poidissymNG}
 \end{figure}
 
 \minisec{Symboleigenschaften}
