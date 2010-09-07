@@ -33,67 +33,121 @@ am häufigsten benutzten Optionen zur Verfügung.
 Virtuelle(n) Raster(Katalog) erzeugen & Dieses Werkzeug erstellt ein VRT (Virtuellen Datensatz), 
 das ein Mosaik der Eingaberaster darstellt. \\
 \hline Kontur & Dieses Werkzeug erstellt einen Vektorlayer mit den Konturlinien eines 
-Höhemnmodells (DGM).\\
-\hline Rastern &  Dieses Werkzeug This program burns vector geometries (points, lines and polygons) into the raster band(s) of a raster image. Vectors are read from OGR supported vector formats. Note that the vector data must in the same coordinate system as the raster data; on the fly reprojection is not provided.\\
-\hline Polygonisieren & This utility creates vector polygons for all connected regions of pixels in the raster sharing a common pixel value. Each polygon is created with an attribute indicating the pixel value of that polygon. A raster mask may also be provided to determine which pixels are eligible for processing.
-The utility will create the output vector datasource if it does not already exist, defaulting to GML format.\\
-\hline Verschmelzen &  This utility will automatically mosaic a set of images. All the images must be in the same coordinate system and have a matching number of bands, but they may be overlapping, and at different resolutions. In areas of overlap, the last image will be copied over earlier ones. \\
-\hline Sieben & The gdal\_sieve.py script removes raster polygons smaller than a provided threshold size (in pixels) and replaces replaces them with the pixel value of the largest neighbour polygon. The result can be written back to the existing raster band, or copied into a new file.\\
-\hline Nachbarschaft & The gdal\_proximity.py script generates a raster proximity map indicating the distance from the center of each pixel to the center of the nearest pixel identified as a target pixel. Target pixels are those in the source raster for which the raster pixel value is in the set of target pixel values.\\
-\hline Fast schwarz & This utility will scan an image and try to set all pixels that are nearly black (or nearly white) around the collar to exactly black (or white). This is often used to "fix up" lossy compressed airphotos so that color pixels can be treated as transparent when mosaicing.\\
-\hline Entzerren & The gdalwarp utility is an image mosaicing, reprojection and warping utility. The program can reproject to any supported projection, and can also apply GCPs stored with the image if the image is 'raw' with control information. \\
-\hline Gitter & This program creates regular grid (raster) from the scattered data read from the OGR datasource. Input data will be interpolated to fill grid nodes with values, you can choose from various interpolation methods.\\
-\hline Konvertieren & The gdal\_translate utility can be used to convert raster data between different formats, potentially performing some operations like subsettings, resampling, and rescaling pixels in the process.\\
-\hline Information & The gdalinfo program lists various information about a GDAL supported raster dataset. \\
-\hline Projektion zuweisen &  The gdalwarp utility is an image mosaicing, reprojection and warping utility. The program can reproject to any supported projection, and can also apply GCPs stored with the image if the image is 'raw' with control information.
--s\_srs srs def:
-source spatial reference set. The coordinate systems that can be passed are anything supported by the OGRSpatialReference.SetFromUserInput() call, which includes EPSG PCS and GCSes (ie. EPSG:4296), PROJ.4 declarations (as above), or the name of a .prf file containing well known text. 
--t\_srs srs\_def:
-target spatial reference set. The coordinate systems that can be passed are anything supported by the OGRSpatialReference.SetFromUserInput() call, which includes EPSG PCS and GCSes (ie. EPSG:4296), PROJ.4 declarations (as above), or the name of a .prf file containing well known text. \\
-\hline Übersicht erzeugen &  The gdaladdo utility can be used to build or rebuild overview images for most supported file formats with one over several downsampling algorithms.\\
-\hline Clipper & This utility will automatically mosaic a set of images. All the images must be in the same coordinate system and have a matching number of bands, but they may be overlapping, and at different resolutions. In areas of overlap, the last image will be copied over earlier ones. 
--ul\_lr ulx uly lrx lry:
-The extents of the output file. If not specified the aggregate extents of all input files will be used. \\
-\hline RGB nach PCT &  This utility will compute an optimal pseudo-color table for a given RGB image using a median cut algorithm on a downsampled RGB histogram. Then it converts the image into a pseudo-colored image using the color table. This conversion utilizes Floyd-Steinberg dithering (error diffusion) to maximize output image visual quality. \\
-\hline PCT nach RGB &  This utility will convert a pseudocolor band on the input file into an output RGB file of the desired format.\\
+Höhenmodells (DGM).\\
+\hline Rastern &  Dieses Werkzeug rasterisiert Vektorgeometrien (Punkte, Linien und Polygone) 
+in einen Rasterlayer (auch mit mehreren Kanälen). Die Vektorgeometrien werden aus von GDAL 
+unterstützten Formaten gelesen. Die Vektor- und Rasterlayer müssen in derselben Projektion 
+vorliegen. On-the-fly Projektion wird nicht unterstützt. \\
+\hline Polygonisieren & Dieses Werkzeug erstellt Vektorpolygone für alle Flächen eines 
+Rasterlayers, in denen die Pixelwerte gleich sind. Jedes Polygon erhält ein Attribut, das den 
+Pixelwert widergibt. Zusätzlich kann eine Maske verwendet werden, um bestimmte Pixelbereiche 
+auszuschließen. \\
+\hline Verschmelzen & Dieses Werkzeug mosaikiert einen Satz von Bilddaten. Alle Layer müssen 
+in derselben Projektion vorliegen und die gleiche Anzahl von Kanälen aufweisen. Sie können aber 
+überlappen und eine unterschiedliche Auflösung aufweisen. Bei Überlappung wird der letzte 
+Layer über die anderen gelegt. \\
+\hline Sieben & Das gdal\_sieve.py Werkzeug löscht Rasterflächen, die kleiner als eine 
+festgelegte Pixelanzahl sind und ersetzt diese Fläche durch Pixelwerte der größten 
+Nachbarfläche. Das Eingangsraster kann dabei überschrieben werden, oder das Ergebnis wird 
+in einen neuen Rasterlayer abgespeichert.\\
+\hline Nachbarschaft & Das gdal\_proximity.py Werkzeug erstellt einen Raster-Abstandslayer, 
+in dem der Abstand vom Zentrum jedes Pixels zum Zentrum eines Nachbarpixels gespeichert wird, 
+das als Zielpixel festgelegt ist. Zielpixel sind jene Pixel im Ausganslayer, bei denen der 
+Pixelwert des Nachbarpixels sich in der angegebenen Liste der Zielpixelwerte befindet. \\
+\hline Fast schwarz & Dieses Werkzeug scanned einen Rasterlayer und versucht alle Pixel, die 
+fast schwarz oder fast weiss entlang von Rändern sind in exakt scharze bzw. weisse Pixel 
+umzuwandeln. Dies wird oft verwendet, um verlusthaft komprimierte Luftbilder zu 'reparieren', 
+so dass Farbpixel bei der Mosaikierung als transparent behandelt werden können. \\
+\hline Entzerren & Das gdalwarp Werkzeug kann mosaikieren, umprojizieren und konvertieren. Es 
+kann in alle unterstützten Projektion projizieren und kann dabei sogar mit dem Bild 
+bereitgestellte GCPs (Ground Control Points) nutzen, wenn der Rasterlayer noch im 'Rohzustand' 
+ist. \\
+\hline Gitter & Dieses Werkzeug erstellt ein regelmäßiges Gitter als Raster aus den 
+verstreuten Daten, die aus einer OGR-Vektordatenquelle gelesen werden. Die Eingabedaten 
+werden dabei interpoliert, um die Gitterknoten mit Werten zu füllen. Dabei kann zwischen 
+verschiedenen Interpolationsmethoden gewählt werden. \\
+\hline Konvertieren & Das gdal\_translate Werkzeug kann Rasterlayer zwischen verschiedenen 
+Formaten konvertieren. Dabei können zusätzlich Prozesse wie Ausschnitte bilden, Resampling 
+oder auch Reskalierung angewendet werden. \\
+\hline Information & Das gdalinfo Werkzeug listet Informationen über einen Rasterlayer, dessen 
+Format von GDAL gelesen werden kann. \\
+\hline Projektion zuweisen & Das gdalwarp Werkzeug kann mosaikieren, umprojizieren und 
+konvertieren. Es kann in alle unterstützten Projektion projizieren und kann dabei sogar mit 
+dem Bild bereitgestellte GCPs (Ground Control Points) nutzen, wenn der Rasterlayer noch im 
+'Rohzustand' ist. 
+-s\_srs srs\_def: Ausgangsprojektion. Das Koordinatensystem kann jede sein, die durch den
+OGRSpatialReference.SetFromUserInput() Aufruf unterstützt wird und EPSG PCS und GCSs 
+(z.B. EPSG:4296), PROJ.4 Anweisungen oder den Namen einer .prf Datei mit WKT (Well Known Text) 
+Angaben enthält.  
+-t\_srs srs\_def: Zielprojektion. Das Koordinatensystem kann jede sein, die durch den
+OGRSpatialReference.SetFromUserInput() Aufruf unterstützt wird und EPSG PCS und GCSs
+(z.B. EPSG:4296), PROJ.4 Anweisungen oder den Namen einer .prf Datei mit WKT (Well Known Text)
+Angaben enthält. \\
+\hline Übersicht erzeugen &  Das gdaladdo Werkzeug wird benutzt, um Übersichten zu erstellen 
+oder zu aktualisieren. Dabei werden 'one over several downsampling' Methoden angewendet. \\
+\hline Clipper & Dieses Werkzeug mosaikiert automatisch einen Satz von Rasterlayern. Alle 
+Layer müssen dieselbe Projektion aufweisen und dieselbe Anzahl Kanäle. Sie können aber
+überlappen und eine unterschiedliche Auflösung aufweisen. Bei Überlappung wird der letzte
+Layer über die anderen gelegt.
+-ul\_lr ulx uly lrx lry: Die Ausdehnung der Ausgabedatei. Wenn nicht angegeben, wird die 
+Gesamtausdehnung aller Eingabedateien verwendet. \\
+\hline RGB nach PCT &  Dieses Werkzeug errechnet eine optimale Pseudo-Farbtabelle für einen 
+RGB-Rasterlayer mittels eines 'median cut' Algorithmus, der auf einem downgesampleten 
+RGB-Histogramm basiert. Darauf basierend wird das Bild in ein Pseudo-Farb-Raster konvertiert. 
+Dazu wird Floyd-Steinberg dithering (error diffusion), um die Qualität der Ausgabe zu 
+maximieren. \\
+\hline PCT nach RGB &  Dieses Werkzeug konvertiert die Pseudo-Farbtabelle eines Kanals in 
+einen RGB-Rasterlayer eines festgelegten Formats.\\
 \hline
 \end{longtable}
 
 \begin{figure}[ht]
    \centering
-   \caption{\label{gdaltools_menu}The \emph{GDALTools} menu list \nixcaption}
+   \caption{\label{gdaltools_menu}Die Menüliste der GDAL Werkzeuge \nixcaption}
    \includegraphics[clip=true, width=12cm]{plugins_gdaltools_images/raster_menu}
 \end{figure}
 
-\subsection{Examples}\label{gdal_examples}
-Below are some examples of use of the tools.
-\subsection{Getting information about a raster}
+\subsection{Beispiele}\label{gdal_examples}
+
+An dieser Stelle sollen ein paar Beispiele gezeigt werden, wie man die GDAL Werkzeuge 
+verwenden kann.
+
+\minisec{Informationen über einen Rasterlayer abfragen}
+
 \begin{figure}[ht]
    \centering
-   \caption{\label{gdalinfo}The \emph{Information} dialog window \nixcaption}
+   \caption{\label{gdalinfo}Info Dialog \nixcaption}
    \includegraphics[clip=true, width=12cm]{plugins_gdaltools_images/gdalinfo}
 \end{figure}
 
-\minisec{Creating contour lines}
-This example will create contour lines from an SRTM elevation tile.
+\minisec{Konturlinien erzeugen}
+
+Dieses Beispiel erzeugt Konturlinien auf Basis von SRTM-Höhendaten.
+
 \begin{figure}[ht]
    \centering
-   \caption{\label{gdal_contour} The \emph{Contours} dialog window \nixcaption}
+   \caption{\label{gdal_contour} Kontur Dialog \nixcaption}
    \includegraphics[clip=true, width=12cm]{plugins_gdaltools_images/gdal_contour}
 \end{figure}
-and the result:
+
+mit folgendem Ergebnis:
+
 \begin{figure}[ht]
    \centering
-   \caption{\label{gdal_contour} The resulting contours layer \nixcaption}
+   \caption{\label{res_gdal_contour} Berechnete Konturlinien mit gdal\_contour \nixcaption}
    \includegraphics[clip=true, width=12cm]{plugins_gdaltools_images/qgis_contours}
 \end{figure}
 
-\minisec{Using GDALwarp to reproject a raster}
-Here's the dialog window for reprojecting a landcover image, originally in the Albers Equal Area projection for Alaska (from the QGIS sample dataset) into Lon/Lat WGS84 (EPSG:4326).
+\minisec{Mit gdalwarp einen Rasterlayer umprojizieren}
+
+Dieser Dialog zeigt das Umprojizieren der Landnutzungskarte aus dem QGIS-Beispieldatensatzes. 
+Sie wird von Albers Equal Area projection nach Lon/Lat WGS84 (EPSG:4326) umprojiziert. 
+
 \begin{figure}[ht]
    \centering
-   \caption{\label{gdalwarp} The \emph{GDAL warp} dialog window \nixcaption}
+   \caption{\label{gdalwarp} Entzerren Dialog (gdalwarp) \nixcaption}
    \includegraphics[clip=true, width=12cm]{plugins_gdaltools_images/gdalwarp}
 \end{figure}
 
 \FloatBarrier
+
