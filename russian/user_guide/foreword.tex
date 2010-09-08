@@ -1,194 +1,231 @@
-%  !TeX  root  =  user_guide.tex  
+%  !TeX  root  =  user_guide.tex
 \mainmatter
 \pagestyle{scrheadings}
-\addchap{Foreword}\label{label_forward}
-\pagenumbering{arabic}
-\setcounter{page}{1}
+\addchap{Предисловие}\label{label_forward}
 
-% when the revision of a section has been finalized, 
+
+% when the revision of a section has been finalized,
 % comment out the following line:
 % \updatedisclaimer
 
-Welcome to the wonderful world of Geographical Information Systems (GIS)!
-Quantum GIS (QGIS) is an Open Source Geographic Information System. The project
-was born in May of 2002 and was established as a project on SourceForge in June
-of the same year. We've worked hard to make GIS software (which is traditionally
-expensive proprietary software) a viable prospect for anyone with basic access
-to a Personal Computer. QGIS currently runs on most Unix platforms, Windows, and
-OS X. QGIS is developed using the Qt toolkit (\url{http://qt.nokia.com})
-and C++. This means that QGIS feels snappy to use and has a pleasing, 
-easy-to-use graphical user interface (GUI). 
+Добро пожаловать в удивительный мир Географических Информационных Систем
+(ГИС)! Quantum GIS (QGIS) является Географической Информационной
+Системой с открытым исходным кодом. Проект был запущен в мае 2002 года,
+а в июне того же года"--- создан проект на площадке SourceForge. Мы
+много работали, чтобы сделать программное обеспечение ГИС (которое
+традиционно является дорогим проприетарным программным обеспечением)
+доступным любому, кто имеет доступ к персональному компьютеру.
+В настоящее время QGIS работает на большинстве платформ Unix, Windows, и
+OS X. QGIS разработан с использованием инструментария Qt
+(\url{http://qt.nokia.com}) и C++. Это означает, что QGIS легок в
+использовании, имеет приятный и простой графический интерфейс (GUI).
 
-QGIS aims to be an easy-to-use GIS, providing common functions and features.
-The initial goal was to provide a GIS data viewer. QGIS has reached the point
-in its evolution where it is being used by many for their daily GIS data viewing
-needs. QGIS supports a number of raster and vector data formats, with new
-format support easily added using the plugin architecture (see Appendix
-\ref{appdx_data_formats} for a full list of currently supported data formats).
+QGIS стремится быть легкой в использовании ГИС, предоставляя общую
+функциональность. Первоначальная цель заключалась в обеспечении
+просмотра ГИС данных. QGIS достиг той стадии в своем развитии, когда
+многие используют ее в своих ежедневных задачах просмотра ГИС данных.
+QGIS поддерживает множество растровых и векторных форматов данных, а
+поддержка новых форматов реализуется с помощью модулей (полный список
+поддерживаемых форматов данных см. в Приложении~\ref{appdx_data_formats}).
 
-QGIS is released under the GNU General Public License (GPL). Developing QGIS 
-under this license means that you can inspect and modify the source code,
-and guarantees that you, our happy user, will always have access to a GIS
-program that is free of cost and can be freely modified. You should have
-received a full copy of the license with your copy of QGIS, and you also can
-find it in Appendix \ref{gpl_appendix}.  
+QGIS выпускается на условиях лицензии GNU General Public License (GPL).
+Разработка QGIS под этой лицензией означает, что вы можете просмотреть и
+изменить исходный код, и гарантирует, что вы, наш счастливый
+пользователь, всегда будете иметь доступ к программному обуспечению ГИС,
+которое является бесплатным и может быть свободно изменено. Вы должны
+были получить полную копию лицензии с вашей копией QGIS, но также вы
+можете найти ее в Приложении~\ref{gpl_appendix}.
 
-\begin{Tip}\caption{\textsc{Up-to-date Documentation}}\index{documentation}
-The latest version of this document can always be found at 
-\url{http://download.osgeo.org/qgis/doc/manual/}, or in the documentation
-area of the QGIS website at \url{http://qgis.osgeo.org/documentation/}
+\begin{Tip}\caption{\textsc{Актуальная версия документации}}\index{documentation}
+Актуальную версию данного документа всегда можно найти на странице
+\url{http://download.osgeo.org/qgis/doc/manual/}, или в разделе
+документации на веб-сайте QGIS \url{http://qgis.osgeo.org/documentation/}
 \end{Tip}
 
-\addsec{Features}\label{label_majfeat}
+\addsec{Возможности}\label{label_majfeat}
 
-\qg offers many common GIS functionalities provided by core features and
-plugins. As a short summary they are presented in six categories to gain a
-first insight.
+\qg предоставляет большое количество распространенных ГИС функций,
+обеспечиваемых встроенными инструментами и модулями. Чтобы получить
+первое представление, они могут быть представлены шестью категориями в
+виде краткого резюме.
 
-\minisec{View data}
+\minisec{Просмотр данных}
 
-You can view and overlay vector and raster data in different formats and
-projections without conversion to an internal or common format. Supported
-formats include:
-
-\begin{itemize}[label=--]
-\item spatially-enabled PostgreSQL tables using PostGIS, vector 
-formats
-%\footnote{OGR-supported database formats such as Oracle or 
-%mySQL are not yet supported in QGIS.}
- supported by the installed OGR library, including ESRI shapefiles, MapInfo, 
-SDTS and GML (see Appendix \ref{appdx_ogr} for the complete list) .
-\item Raster and imagery formats supported by the installed GDAL (Geospatial
-Data Abstraction Library) library, such as GeoTiff, Erdas Img., ArcInfo Ascii 
-Grid, JPEG, PNG (see Appendix \ref{appdx_gdal} for the complete list).
-\item SpatiaLite databases (see Section \ref{label_spatialite}) 
-\item GRASS raster and vector data from GRASS databases (location/mapset),
-see Section \ref{sec:grass}, 
-\item Online spatial data served as OGC-compliant Web Map Service (WMS) or
-Web Feature Service (WFS), see Section \ref{working_with_ogc},
-\item OpenStreetMap data (see Section \ref{plugins_osm}).
-\end{itemize}
-
-\minisec{Explore data and compose maps} 
-
-You can compose maps and interactively explore spatial data with a friendly
-GUI. The many helpful tools available in the GUI include:
+Можно просматривать и комбинировать векторные и растровые данные в
+различных форматах и проекциях без преобразования во внутренний или
+общий формат. Поддерживаются следующие форматы:
 
 \begin{itemize}[label=--]
-\item on the fly projection
-\item map composers
-\item overview panel
-\item spatial bookmarks
-\item identify/select features
-\item edit/view/search attributes
-\item feature labeling
-\item change vector and raster symbology
-\item add a graticule layer - now via fTools plugin
-\item decorate your map with a north arrow scale bar and copyright label
-\item save and restore projects
+\item пространственные таблицы PostgreSQL используя PostGIS, векторные
+форматы
+%\footnote{форматы баз данных поддерживаемые библиотекой OGR, такие как Oracle или
+%mySQL, пока еще не поддерживаются в QGIS.}
+поддерживаемые установленной библиотекой OGR, включая shape-файлы ESRI,
+MapInfo, SDTS (Spatial Data Transfer Standard) и GML (Geography Markup
+Language) (см. Приложение~\ref{appdx_ogr} для получения полного списка).
+\item Форматы растров и изображений поддерживаемых установленной
+библиотекой GDAL (Geospatial Data Abstraction Library), такие как
+GeoTiff, Erdas Img., ArcInfo Ascii Grid, JPEG, PNG (см. Приложение~\ref{appdx_gdal}
+для получения полного списка).
+\item базы данных SpatiaLite (см. Раздел~\ref{label_spatialite})
+\item растровые и векторные форматы баз данных GRASS (область/набор данных),
+см. Раздел~\ref{sec:grass}.
+\item Пространственные данные публикуемые в сети Интернет с помощью
+OGC-совместимых (Open Geospatial Consortium) сервисов Web Map Service
+(WMS) или Web Feature Service (WFS), см. Раздел~\ref{working_with_ogc},
+\item данные OpenStreetMap (OSM) (см. Раздел~\ref{plugins_osm}).
 \end{itemize}
 
-\minisec{Create, edit, manage and export data}
+\minisec{Изучение данных и компоновка карт}
 
-You can create, edit, manage and export vector maps in several formats. Raster data
-have to be imported into GRASS to be able to edit and export them into other
-formats. QGIS offers the following: 
+С помощью удобного графического интерфейса можно компоновать карты и
+интерактивно изучать пространственные данные. Графический интерфейс
+включает в себя множество полезных инструментов:
 
 \begin{itemize}[label=--]
-\item digitizing tools for OGR supported formats and GRASS vector layer
-\item create and edit shapefiles and GRASS vector layers
-\item geocode images with the Georeferencer plugin
-\item GPS tools to import and export GPX format, and convert other GPS
-formats to GPX or down/upload directly to a GPS unit (on Linux, usb: has been added
-to list of GPS devices)
-\item visualize and edit OpenStreetMap data
-\item create PostGIS layers from shapefiles with the SPIT plugin 
-\item improved handling of PostGIS tables
-\item manage vector attribute tables with the new attribute table (see Section 
-\ref{sec:attribute table}) or Table Manager plugin
-\item save screenshots as georeferenced images
+\item перепроецирование налету
+\item компоновщик карт
+\item панель обзора
+\item пространственные закладки
+\item определение/выборка объектов
+\item редактирование/просмотр/поиск атрибутов
+\item подписывание объектов
+\item изменение символики векторных и растровых слоев
+\item добавление слоя координатной сетки"--- теперь средствами плагина
+fTools
+\item декорирование карты с помощью стрелки на север, линейки масштаба
+и знака авторского права
+\item сохранение и возобновление проектов
 \end{itemize}
 
-\minisec{Analyse data} 
+\minisec{Создание, редактирование, управление и экспорт данных}
 
-You can perform spatial data analysis on PostgreSQL/PostGIS and other OGR
-supported formats using the fTools Python plugin. QGIS currently offers
-vector analysis, sampling, geoprocessing, geometry and database management
-tools. You can also use the integrated GRASS tools, which 
-include the complete GRASS functionality of more than 300 modules (See
-Section \ref{sec:grass}).
+Можно создавать, редактировать, управлять и экспортировать векторные
+данные в нескольких форматах. Чтобы иметь возможность редактировать и
+экпортировать растровые данные в другие форматы, они должны быть
+импортированы в GRASS. QGIS предоставляет следующие возможности:
 
-\minisec{Publish maps on the Internet}
+\begin{itemize}[label=--]
+\item инструменты цифрования для форматов поддерживаемых библиотекой OGR
+и векторных слоев GRASS
+\item создание и редактирование shape-файлов и векторных слоев GRASS
+\item геокодирование изображений с помощью модуля пространственной
+привязки
+\item инструменты GPS для импорта и экспорта данных в формате GPX,
+преобразования прочих форматов GPS в формат GPX или скачивание/загрузка
+непосредственно в прибор GPS (в Linux, usb: был добавлен в список
+устройств GPS)
+\item визуализация и редактирование данных OpenStreetMap
+\item создание из shape-файлов слоев PostGIS с помощью плагина SPIT
+\item улучшенная обработка таблиц PostGIS
+\item управление атрибутами векторных данных с помощью новой таблицы
+атрибутов (см. Раздел~\ref{sec:attribute table}) или модуля Table Manager
+\item сохранение снимков экрана как изображениий с пространственной
+привязкой
+\end{itemize}
 
-QGIS can be used to export data to a mapfile and to publish them on the
-Internet using a webserver with UMN MapServer installed. QGIS can also
-be used as a WMS or WFS client, and as WMS server. 
+\minisec{Анализ данных}
 
-\minisec{Extend QGIS functionality through plugins} 
+Вы можете анализировать пространственные данные PostgreSQL/PostGIS и
+других форматов поддерживаемых OGR используя модуль fTools написанный на
+языке Python. В настоящее время QGIS предоставляет возможность
+использовать инструменты векторного анализа, выборки, геопроцессинга,
+управления геометрией и базами данных. Также можно использовать
+интегрированные инструменты GRASS, которые включают в себя
+функциональность более, чем 300 модулей GRASS (см. Раздел~\ref{sec:grass}).
 
-QGIS can be adapted to your special needs with the extensible
-plugin architecture. QGIS provides libraries that can be used to create
-plugins.  You can even create new applications with C++ or Python!
+\minisec{Публикация карт в сети Интернет}
 
-\minisec{Core Plugins}
+QGIS может использоваться для экспорта данных в map-файл и публикации
+его в сети Интернет используя установленный веб-сервер UMN MapServer.
+QGIS также может использоваться как WMS или WFS клиент, а также как WMS
+сервер.
+
+\minisec{Расширение функциональности QGIS с помощью плагинов}
+
+QGIS может быть адаптирован к особым потребностям с помощью расширяемой
+архитектуры модулей. QGIS предоставляет библиотеки, которые могут быть
+использованы для создания модулей. Можно даже создавать новые приложения
+используя языки программирования C++ или Python!
+
+\minisec{Основные модули}
 
 \begin{enumerate}
-\item Add Delimited Text Layer (Loads and displays delimited text files
-containing x,y coordinates)
-\item Coordinate Capture (Capture mouse coordinates in different CRS)
-\item Decorations (Copyright Label, North Arrow and Scale bar)
-\item Diagram Overlay (Placing diagrams on vector layer)
-\item Dxf2Shp Converter (Convert DXF to Shape)
-\item GPS Tools (Loading and importing GPS data)
-\item GRASS (GRASS GIS integration)
-\item Georeferencer GDAL (Adding projection information to raster using GDAL)
-\item Interpolation plugin (interpolate based on vertices of a vector layer)
-\item Mapserver Export (Export QGIS project file to a MapServer map file)
-\item OGR Layer Converter (Translate vector layer between formats)
-\item OpenStreetMap plugin (Viewer and editor for openstreetmap data)
-\item Oracle Spatial GeoRaster support
-\item Python Plugin Installer (Download and install QGIS python plugins)
-\item Quick Print (Print a map with minimal effort)
-\item Raster terrain analysis (Raster based terrain analysis)
-\item SPIT (Import Shapefile to PostgreSQL/PostGIS)
-\item WFS Plugin (Add WFS layers to QGIS canvas)
-\item eVIS (Event Visualization Tool)
-\item fTools (Tools for vector data analysis and management)
-\item Python Console (Access QGIS environment)
-\item GDAL Tools
+\item Добавить слой из текста с разделителями (Загружает и выводит
+текстовые файлы, содержащие координаты x, y)
+\item Захват координат (Захватывает координаты мыши в различных CRS
+(Coordinate Reference System))
+\item Оформление (Знак авторского права, стрелка на север, масштабная
+линейка)
+\item Наложение диаграмм (Наложение диаграмм на векторные слои)
+\item Преобразователь Dxf2Shp (Преобразование файлов DXF в shape-файлы)
+\item Инструменты GPS (Загрузка и импорт данных GPS)
+\item GRASS (Поддержка ГИС GRASS)
+\item Привязка растров GDAL (Добавляет в растровый файл информацию о
+проекции используя GDAL)
+\item Модуль интерполяции (Интерполяция данных по вершинам в векторном
+слое)
+\item Экспорт в Mapserver (Экспорт проекта QGIS в map-файл MapServer)
+\item Преобразователь слоев OGR (Преобразует векторные слои в форматы,
+поддерживаемые библиотекой OGR)
+\item Модуль OpenStreetMap (Просмотр и редактирование данных
+OpenStreetMap)
+\item Доступ к данным Oracle Spatial GeoRaster
+\item Установщик модулей Python (Загрузка и установка модулей QGIS)
+\item Быстрая печать (Печать карты с минимумом параметров)
+\item Морфометрический анализ (Морфометрический анализ растровых слоев)
+\item SPIT (Инструмент импорта shape-файлов в PostgreSQL/PostGIS)
+\item Модуль WFS (Добавляет возможность загрузки слоев WFS)
+\item eVIS (Инструмент визуализации событий-показ изображений, связанных
+с векторными объектами)
+\item fTools (Инструменты для управления и анализа векторных данных)
+\item Консоль Python (Доступ к среде разработки QGIS)
+\item Инструменты GDAL
 \end{enumerate}
 
-\minisec{External Python Plugins}
+\minisec{Внешние модули Python}
 
-QGIS offers a growing number of external python plugins that are provided by
-the community. These plugins reside in the official PyQGIS repository, and
-can be easily installed using the Python Plugin Installer (See Section
-\ref{sec:plugins}).
+QGIS предлагает все большее число внешних плагинов Python, которые
+предоставлены сообществом. Эти плагины находятся в официальном
+репозитории PyQGIS, и могут быть легко установлены с помощью Установщика
+модулей Python (см. Раздел~\ref{sec:plugins}).
 
-\subsubsection{What's new in version \CURRENT} 
+\subsubsection{Что нового в версии \CURRENT}
 
-These are the most relevant additions and improvements for QGIS users:
+Наиболее важные добавления и улучшения для пользователей QGIS:
 \begin{itemize}[label=--]
 %  \item TODO(anne): rearrange the list on ManualTasks wikipage!
- \item Added context help to dialogs
- \item Measure angle tool
- \item GPS tracker widget
- \item Several new external plugins "Spatial Query, GDAL Tools, Google Earth \dots"
- \item Add attribute table to the map composer
- \item Vector layer saving in editing mode 
- \item Moved new labeling plugin to core and show labels from new labeling in map composer (though not scaled correctly)
- \item Added "Drag and drop support" for composer legend model
- \item Extended georeferencer plugin with new user interface
- \item BBOX option for WFS 
- \item Join attributes tool now supports both dbf and csv files % table join rulez!
- \item Show feature count in attribute table title
- \item Python console runnable also outside QGIS
- \item New text annotation tool
- \item New WMS scale slider
- \item Projection search improvements (show/hide deprecated projections)
- \item Add GDAL compatible CRSes (without +towgs84 parameters) for Polish epsg: 2172-2180, 3120, 3328-3335 and 4179 as epsg+40000
- \item Change map unit in project dialog automatically when user selects a new CRS
- \item New Oracle raster connection dialog 
- \item Add New Spatialite Layer/Database and allow creation of multiple spatialite layers
+ \item Добавлено контекстное меню справки в диалоги
+ \item Инструмент измерения углов
+ \item Виджет GPS-слежение
+ \item Несколько новых внешних модулей: <<Пространственные запросы>>,
+ <<Инструменты GDAL>>, <<Google Earth>>\dots
+ \item Добавление таблицы атрибутов к компоновке карты
+ \item Сохранение векторного слоя в режиме редактирования
+ \item Перемещение нового модуля подписей в ядро и показ подписей
+ генерируемых новым модулем в компоновке карты (однако, без корректного
+ масштабирования)
+ \item Добавлена поддержка <<Drag and drop>> для создания легенды в
+ компоновке карты
+ \item Расширенный модуль привязки растров с новым интерфейсом
+ \item Добавлена возможность ограничить запрос объектов текущим охватом
+ в модуле добавления слоя WFS
+ \item Инструмент связывания атрибутов теперь поддерживает файлы dbf
+ и csv % table join rulez!
+ \item Показ количества объектов в заголовке атрибутивной таблицы
+ \item Консоль Python может запускаться вне QGIS
+ \item Новый инструмент текстовой аннотации
+ \item Новый ползунок масштаба WMS
+ \item Улучшения в поиске систем координат (показать/скрыть устаревшие
+ системы координат)
+ \item Добавлены GDAL-совместимые системы координат (без параметров
+ +towgs84) для польской epsg: 2172-2180, 3120, 3328-3335 и 4179 как
+ epsg+40000
+ \item Автоматическое изменение единиц измерения в диалоговом окне
+ выбора системы координат, когда пользователь выбирает новую систему
+ координат
+ \item Новое окно соединения с Oracle Spatial GeoRaster
+ \item Новое окно добавления слоя/базы данных Spatialite и возможность
+ создания нескольких слоев Spatialite
 
 \end{itemize}
