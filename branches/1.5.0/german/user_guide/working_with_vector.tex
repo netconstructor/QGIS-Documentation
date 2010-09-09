@@ -85,7 +85,7 @@ der \filename{.prj} Datei benutzt. \index{Shapedateien!Spezifikationen}
 starten Sie QGIS und klicken auf das Icon
 \toolbtntwo{mActionAddNonDbLayer}{Vektorlayer hinzufügen} in der
 Werkzeugleiste\index{Shapedateien!Öffnen} oder mit der Taste 
-\keystroke{Ctrl-Shift-V}. Mit demselben Tool können Sie auch alle anderen 
+\keystroke{Strg-Shift-V}. Mit demselben Tool können Sie auch alle anderen 
 durch OGR unterstützten Formate laden.
 
 Wählen Sie aus den möglichen Quelltypen \radiobuttonon{Datei} und klicken Sie
@@ -162,8 +162,8 @@ im Bereich \button{Räumlichen Index erstellen}
 
 Um eine MapInfo Datei zu laden, klicken Sie auf das Icon
 \toolbtntwo{mActionAddNonDbLayer}{Vektorlayer hinzufügen} in der
-Werkzeugleiste oder drücken Sie die Taste \keystroke{V}. Wählen Sie aus den
-möglichen Quelltypen \radiobuttonon{Datei} und klicken Sie auf den Knopf
+Werkzeugleiste oder drücken Sie die Taste \keystroke{Strg-Shift-V}. Wählen Sie 
+aus den möglichen Quelltypen \radiobuttonon{Datei} und klicken Sie auf den Knopf
 \button{Durchsuchen}. Definieren Sie unter \selectstring{Dateien des
 Typs}{MapInfo (*.mif *.tab *.MIF *.TAB)} und wählen die gewünschte Datei aus.
 
@@ -172,8 +172,8 @@ Typs}{MapInfo (*.mif *.tab *.MIF *.TAB)} und wählen die gewünschte Datei aus.
 
 Um ein ArcInfo Coverage zu laden, klicken Sie auf das Icon
 \toolbtntwo{mActionAddNonDbLayer}{Vektorlayer hinzufügen} in der
-Werkzeugleiste oder drücken Sie die Taste \keystroke{V}. Wählen Sie aus den
-möglichen Quelltypen \radiobuttonon{Verzeichnis}, wählen Sie als
+Werkzeugleiste oder drücken Sie die Taste \keystroke{Strg-Shift-V}. Wählen Sie 
+aus den möglichen Quelltypen \radiobuttonon{Verzeichnis}, wählen Sie als
 \selectstring{Typ}{ArcInfo Binary Coverage} und klicken Sie auf den Knopf
 \button{Durchsuchen}. Wählen Sie nun den Ordner mit den ArcInfo Binary
 Coverage Dateien aus, in der sich beispielweise folgende Dateien befinden
@@ -308,7 +308,7 @@ geöffnet ist, klicken Sie auf den Knopf
 \button{Verbinden}
 \item Suchen Sie einen Layer, den Sie laden möchten
 \item Wählen Sie den Layer durch doppelklicken aus. Sie können mehrere Ebenen
-auswählen, indem Sie die \keystroke{Shift}-Taste beim Auswählen gedrückt
+auswählen, indem Sie die \keystroke{Umschalt}-Taste beim Auswählen gedrückt
 halten. Weitere Informationen, z.B. zum Umgang mit dem PostgreSQL
 Query-Builder finden Sie in Abschnitt~\ref{sec:query_builder}.
 \item Klicken Sie auf den Knopf \button{Hinzufügen}, um den Layer zu laden.
@@ -511,8 +511,8 @@ Kartenfensters (Chatham Inseln) rechts neben Neuseeland angezeigt werden.
 \end{figure}
 
 Eine Möglichkeit, dies zu umgehen, bietet PostGIS und die Funktion
-\textbf{ST\textunderscore Shift\textunderscore
-Longitude}.\footnote{\url{http://postgis.refractions.net/documentation/manual-1.4/ST_Shift_Longitude.html}}
+\textbf{ST\textunderscore Umschalt\textunderscore
+Longitude}.\footnote{\url{http://postgis.refractions.net/documentation/manual-1.4/ST_Umschalt_Longitude.html}}
 Die Funktion liest alle Objekte der Karte ein und wenn der Längengrad < \degrees{0}
 ist, werden \degrees{360} hinzugezählt. Das Ergebnis ist eine \degrees{0} -
 \degrees{360} Karte, die als Mittelpunkt den Längengrad \degrees{180}
@@ -535,7 +535,7 @@ mit dem 'PostGIS Manager' oder dem 'SPIT' Plugin.
 \item Öffnen Sie das PostGIS Kommandozeilenfenster und geben Sie folgendes
 Kommando ein. In diesem Beispiel steht der Name 'TABELLE' für den
 tatsächlichen Namen der PostGIS Tabelle.\\ 
-\texttt{gis\_data=\# update TABELLE set the\_geom=ST\_shift\_longitude(the\_geom);} 
+\texttt{gis\_data=\# update TABELLE set the\_geom=ST\_Umschalt\_longitude(the\_geom);} 
 \item Wenn alles geklappt hat, sehen Sie eine Bestätigung mit den Objekten,
 die verändert wurden. Danach können Sie den PostGIS Layer in QGIS als eine
 zusammenhängende Karte laden (siehe Abbildung \ref{fig:vector_wrapping}).
@@ -1720,7 +1720,7 @@ folgende Funktionen vorhanden:
 \item \textbf{Einen Stützpunkte auswählen}: Das Auswählen ist einfach.
 Klicken Sie einfach auf einen Stützpunkt und die Farbe der Box wechselt nach
 Blau. Sie können mehrere Stützpunkte auswählen, indem Sie die Tasten
-\keystroke{Shift} gedrückt halten. Mit der Taste \keystroke{Ctrl} kann die
+\keystroke{Umschalt} gedrückt halten. Mit der Taste \keystroke{Strg} kann die
 Auswahl umgekehrt werden (selektierte Stützpunkte werden deselektiert, nicht
 ausgwählte Stützpunkte werden ausgewählt). Es ist auch möglich, mehrere
 Stützpunkte auszuwählen, indem Sie ein Rechteck mit der Maus aufziehen. Alle
@@ -2028,7 +2028,7 @@ Drehwinkel wird dann angezeigt (siehe Abbildung~\ref{fig:rotatepoint}). Wenn Sie
 die linke Maustaste wieder loslassen, wird der neue Wert in der Attributtabelle 
 aktualisiert.
 
-\textbf{Bemerkung}: Wenn Sie zusätzlich die \keystroke{Ctrl}-Taste gedrückt 
+\textbf{Bemerkung}: Wenn Sie zusätzlich die \keystroke{Strg}-Taste gedrückt 
 halten, findet die Drehung in 15 Grad Schritten statt.
 
 \minisec{Fangtoleranz einstellen}
@@ -2054,8 +2054,9 @@ Wenn die Änderungen nicht gespeichert werden können (z.B.: weil die
 Festplatte voll ist) bleiben diese 'im-memory' Status erhalten. Sie können somit
 Veränderungen vornehmen und das Speichern erneut versuchen.
 
-\subsection{Neuen Shape- oder SpatiaLite-Layer erstellen}\label{sec:create
-shape}\index{Editierfunktionen!Neuen Vektorlayer erstellen}
+\subsection{Neuen Shape- oder SpatiaLite-Layer erstellen}
+\label{sec:create_shape}
+\index{Editierfunktionen!Neuen Vektorlayer erstellen}
 
 QGIS kann derzeit noch keine 2,5D Objekte erstellen (z.B. Objekte mit X,Y,Z
 Koordinaten). 
@@ -2176,7 +2177,7 @@ der Zeile klicken. Die Auswahl einer Zeile ändert nicht die aktuelle Position
 des Mauspfeils. \textbf{Mehrere Zeilen} können ausgewählt werden, indem die
 \keystroke{Strg} Taste während der Auswahl gedrückt wird. Eine
 \textbf{kontinuierliche Auswahl} ist möglich, indem Sie bei der Selektion die
-\keystroke{Shift} Taste gedrückt halten, während Sie die Zeilennummern
+\keystroke{Umschalt} Taste gedrückt halten, während Sie die Zeilennummern
 auswählen. Alle Zeilen zwischen der aktuell ausgewählten Zeile und der
 Mauspfeilposition werden dadurch selektiert.
 

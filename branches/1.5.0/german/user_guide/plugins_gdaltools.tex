@@ -15,8 +15,8 @@ verschiedenen Werkzeuge der Geospatial Data Abstraction Library (GDAL),
 Management Tools, z.B. für die Abfrage, Umprojizierung, Transformierung oder Verschneidung 
 von Rasterlayern in unterschiedlichen Formaten. Außerdem stehen Werkzeuge zur Verfügung, 
 um Konturen als Vektorlinien zu extrahieren, eine Schummerungskarte aus Höhendaten zu 
-erzeugen oder ein VRT (Virtual Raster Tile in XML format) aus einer oder mehrerer 
-Rasterkarten zu erzeugen. Diese Werkzeuge können benutzt werden, wenn installiert und 
+erzeugen oder ein VRT (Virtual Raster Tile in XML format) aus einer oder mehreren 
+Rasterkarte(n) zu erzeugen. Diese Werkzeuge können benutzt werden, wenn installiert und 
 aktiviert wurde. 
 
 \subsection{Die GDAL Bibliothek}\label{gdal_lib}
@@ -30,7 +30,7 @@ am häufigsten benutzten Optionen zur Verfügung.
 \begin{longtable}{|p{3cm}|p{13cm}|}
 \caption{Liste der GDAL Werkzeuge}\label{tab:gdaltools} \\
 \hline
-Virtuelle(n) Raster(Katalog) erzeugen & Dieses Werkzeug erstellt ein VRT (Virtuellen Datensatz), 
+Virtuelle(n) Raster(Katalog) erzeugen & Dieses Werkzeug erstellt ein VRT (Virtueller Datensatz), 
 das ein Mosaik der Eingaberaster darstellt. \\
 \hline Kontur & Dieses Werkzeug erstellt einen Vektorlayer mit den Konturlinien eines 
 Höhenmodells (DGM).\\
@@ -55,11 +55,11 @@ in dem der Abstand vom Zentrum jedes Pixels zum Zentrum eines Nachbarpixels gesp
 das als Zielpixel festgelegt ist. Zielpixel sind jene Pixel im Ausganslayer, bei denen der 
 Pixelwert des Nachbarpixels sich in der angegebenen Liste der Zielpixelwerte befindet. \\
 \hline Fast schwarz & Dieses Werkzeug scanned einen Rasterlayer und versucht alle Pixel, die 
-fast schwarz oder fast weiss entlang von Rändern sind in exakt scharze bzw. weisse Pixel 
+fast schwarz oder fast weiss entlang von Rändern sind in exakt schwarze bzw. weisse Pixel 
 umzuwandeln. Dies wird oft verwendet, um verlusthaft komprimierte Luftbilder zu 'reparieren', 
 so dass Farbpixel bei der Mosaikierung als transparent behandelt werden können. \\
 \hline Entzerren & Das gdalwarp Werkzeug kann mosaikieren, umprojizieren und konvertieren. Es 
-kann in alle unterstützten Projektion projizieren und kann dabei sogar mit dem Bild 
+kann in alle unterstützten Projektionen projizieren und kann dabei sogar mit dem Bild 
 bereitgestellte GCPs (Ground Control Points) nutzen, wenn der Rasterlayer noch im 'Rohzustand' 
 ist. \\
 \hline Gitter & Dieses Werkzeug erstellt ein regelmäßiges Gitter als Raster aus den 
@@ -75,11 +75,11 @@ Format von GDAL gelesen werden kann. \\
 konvertieren. Es kann in alle unterstützten Projektion projizieren und kann dabei sogar mit 
 dem Bild bereitgestellte GCPs (Ground Control Points) nutzen, wenn der Rasterlayer noch im 
 'Rohzustand' ist. 
--s\_srs srs\_def: Ausgangsprojektion. Das Koordinatensystem kann jede sein, die durch den
+\textit{-s\_srs srs\_def}: Ausgangsprojektion. Das Koordinatensystem kann jede sein, die durch den
 OGRSpatialReference.SetFromUserInput() Aufruf unterstützt wird und EPSG PCS und GCSs 
 (z.B. EPSG:4296), PROJ.4 Anweisungen oder den Namen einer .prf Datei mit WKT (Well Known Text) 
 Angaben enthält.  
--t\_srs srs\_def: Zielprojektion. Das Koordinatensystem kann jede sein, die durch den
+\textit{-t\_srs srs\_def}: Zielprojektion. Das Koordinatensystem kann jede sein, die durch den
 OGRSpatialReference.SetFromUserInput() Aufruf unterstützt wird und EPSG PCS und GCSs
 (z.B. EPSG:4296), PROJ.4 Anweisungen oder den Namen einer .prf Datei mit WKT (Well Known Text)
 Angaben enthält. \\
@@ -89,12 +89,12 @@ oder zu aktualisieren. Dabei werden 'one over several downsampling' Methoden ang
 Layer müssen dieselbe Projektion aufweisen und dieselbe Anzahl Kanäle. Sie können aber
 überlappen und eine unterschiedliche Auflösung aufweisen. Bei Überlappung wird der letzte
 Layer über die anderen gelegt.
--ul\_lr ulx uly lrx lry: Die Ausdehnung der Ausgabedatei. Wenn nicht angegeben, wird die 
+\textit{-ul\_lr ulx uly lrx lry}: Die Ausdehnung der Ausgabedatei. Wenn nicht angegeben, wird die 
 Gesamtausdehnung aller Eingabedateien verwendet. \\
 \hline RGB nach PCT &  Dieses Werkzeug errechnet eine optimale Pseudo-Farbtabelle für einen 
 RGB-Rasterlayer mittels eines 'median cut' Algorithmus, der auf einem downgesampleten 
 RGB-Histogramm basiert. Darauf basierend wird das Bild in ein Pseudo-Farb-Raster konvertiert. 
-Dazu wird Floyd-Steinberg dithering (error diffusion), um die Qualität der Ausgabe zu 
+Dazu wird Floyd-Steinberg dithering (error diffusion) verwendet, um die Qualität der Ausgabe zu 
 maximieren. \\
 \hline PCT nach RGB &  Dieses Werkzeug konvertiert die Pseudo-Farbtabelle eines Kanals in 
 einen RGB-Rasterlayer eines festgelegten Formats.\\
@@ -114,10 +114,12 @@ verwenden kann.
 
 \minisec{Informationen über einen Rasterlayer abfragen}
 
+Dieses Beispiel zeigt die Abfrage eines Rasterlayers.
+
 \begin{figure}[ht]
    \centering
    \caption{\label{gdalinfo}Info Dialog \nixcaption}
-   \includegraphics[clip=true, width=12cm]{plugins_gdaltools_images/gdalinfo}
+   \includegraphics[clip=true, width=8cm]{plugins_gdaltools_images/gdalinfo}
 \end{figure}
 
 \minisec{Konturlinien erzeugen}
@@ -127,7 +129,7 @@ Dieses Beispiel erzeugt Konturlinien auf Basis von SRTM-Höhendaten.
 \begin{figure}[ht]
    \centering
    \caption{\label{gdal_contour} Kontur Dialog \nixcaption}
-   \includegraphics[clip=true, width=12cm]{plugins_gdaltools_images/gdal_contour}
+   \includegraphics[clip=true, width=9cm]{plugins_gdaltools_images/gdal_contour}
 \end{figure}
 
 mit folgendem Ergebnis:
@@ -135,7 +137,7 @@ mit folgendem Ergebnis:
 \begin{figure}[ht]
    \centering
    \caption{\label{res_gdal_contour} Berechnete Konturlinien mit gdal\_contour \nixcaption}
-   \includegraphics[clip=true, width=12cm]{plugins_gdaltools_images/qgis_contours}
+   \includegraphics[clip=true, width=9cm]{plugins_gdaltools_images/qgis_contours}
 \end{figure}
 
 \minisec{Mit gdalwarp einen Rasterlayer umprojizieren}
@@ -146,7 +148,7 @@ Sie wird von Albers Equal Area projection nach Lon/Lat WGS84 (EPSG:4326) umproji
 \begin{figure}[ht]
    \centering
    \caption{\label{gdalwarp} Entzerren Dialog (gdalwarp) \nixcaption}
-   \includegraphics[clip=true, width=12cm]{plugins_gdaltools_images/gdalwarp}
+   \includegraphics[clip=true, width=10cm]{plugins_gdaltools_images/gdalwarp}
 \end{figure}
 
 \FloatBarrier
