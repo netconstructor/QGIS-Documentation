@@ -13,9 +13,7 @@
 %This allows new features/functions to be easily added to the application.
 %Many of the features in \qg are actually implemented as \textbf{core} or \textbf{external} plugins.\index{plugins!types} 
 
-\qg repose sur un système d'extensions.
-Ce dernier permet d'ajouter facilement de nouvelles fonctions au logiciel. 
-De nombreuses nouvelles fonctions de \qg sont implémentées comme des extensions \textbf{principales} ou \textbf{complémentaires}. \index{plugins!types} 
+\qg repose sur un système d'extensions. Ce dernier permet d'ajouter facilement de nouvelles fonctions au logiciel.  De nombreuses nouvelles fonctions de \qg sont implémentées comme des extensions \textbf{principales} ou \textbf{complémentaires}. \index{plugins!types} 
 
 \begin{itemize}[label=--]
 %\item \textbf{Core Plugins} are maintained by the \qg Development Team and are automatically part of every \qg distribution.
@@ -25,13 +23,8 @@ De nombreuses nouvelles fonctions de \qg sont implémentées comme des extension
 %They are stored in external repositories and maintained by the individual authors.
 %They can be added to \qg using the \filename{Plugin Installer}.
 %More information about external plugins are provided in Section \ref{sec:external_plugins}.
-\item Les \textbf{extensions principales} sont maintenues par l'équipe de développement de \qg et sont intégrées automatiquement à chaque nouvelle distribution de \qg.
-Elles sont écrites en C++ ou en Python.
-On trouvera plus d'informations sur les extensions principales dans la Section \ref{sec:core_plugins}.
-\item Les \textbf{extensions complémentaires} sont actuellement toutes écrites en Python.
-Elles sont stockées dans des dépôts externes et maintenues par leurs auteurs.
-Elles peuvent être ajoutées à \qg en utilisant le \filename{Gestionnaire d'extensions}.
-On trouvera plus d'informations sur les extensions complémentaires dans la Section \ref{sec:external_plugins}.
+\item Les \textbf{extensions principales} sont maintenues par l'équipe de développement de \qg et sont intégrées automatiquement à chaque nouvelle distribution de \qg. Elles sont écrites en C++ ou en Python. On trouvera plus d'informations sur les extensions principales dans la Section \ref{sec:core_plugins}.
+\item Les \textbf{extensions complémentaires} sont actuellement toutes écrites en Python. Elles sont stockées dans des dépôts externes et maintenues par leurs auteurs. Elles peuvent être ajoutées à \qg en utilisant le \filename{Gestionnaire d'extensions}. On trouvera plus d'informations sur les extensions complémentaires dans la Section \ref{sec:external_plugins}.
 \end{itemize}
 
 %\section{Managing Plugins}\label{sec:managing_plugins}
@@ -39,16 +32,19 @@ On trouvera plus d'informations sur les extensions complémentaires dans la Sect
 \section{Gérer les extensions}\label{sec:managing_plugins}
 \index{plugins!managing} 
 
-%Managing plugins in general means loading or unloading them using the \filename{Plugin Manager}.
-%External plugins first need to be installed using the \filename{Plugin Installer}.
-De manière générale, gérer les extensions consiste à les afficher ou pas à l'aide du\\ \filename{Gestionnaire d'extension}.
-Les extensions complémentaires doivent d'abord être installées à l'aide du \filename{Gestionnaire d'extension}.
+%Managing plugins in general means loading or unloading them using
+%the \filename{Plugin Manager}. External plugins can be installed and
+%directly activated or uninstalled using the \filename{Python Plugin
+%Installer}. To deactivate and reactivate external plugins, the
+%\filename{Plugin Manager} is used again.
+De manière générale, gérer les extensions consiste à les afficher ou pas à l'aide du \filename{Gestionnaire d'extension}.
+Les extensions complémentaires doivent d'abord être installées à l'aide de \filename{Installateur d'extensions python} pour pouvoir être activées ou désactivées dans le \filename{Gestionnaire d'extension}.
 
 %\subsection{Loading a \qg Core Plugin}\label{sec:load_core_plugin} 
 \subsection{Installer une extension principale}\label{sec:load_core_plugin} 
 
 %Loading a \qg Core Plugin is done from the main menu \mainmenuopt{Plugins} > \dropmenuopttwo{mActionShowPluginManager}{Manage Plugins...}.\index{plugins!manager}
-On installe une extension principale à l'aide du menu\\ \mainmenuopt{Extensions} > \dropmenuopttwo{mActionShowPluginManager}{Gestionnaire d'extension\dots}.\index{plugins!manager}
+On active une extension principale à l'aide du menu\\ \mainmenuopt{Extensions} > \dropmenuopttwo{mActionShowPluginManager}{Gestionnaire d'extension\dots}.\index{plugins!manager}
 
 \begin{figure}[ht]
    \begin{center}
@@ -67,8 +63,7 @@ Le gestionnaire d'extension liste toutes les extensions disponibles et leur stat
 %To enable a particular plugin, click on the checkbox to the left of the plugin name, and click \button{OK}. 
 %When you exit the application, a list of loaded plugins is retained, and the next time 
 %you run \qg these plugins are automatically loaded.
-Pour installer une extension, cocher la case à gauche du nom puis cliquez sur \button{OK}.
-Les extensions installées sont mémorisées lorsque vous quittez l'application et seront restaurées à la prochaine ouverture de \qg.
+Pour installer une extension, cocher la case à gauche du nom puis cliquez sur \button{OK}. Les extensions installées sont mémorisées lorsque vous quittez l'application et seront restaurées à la prochaine ouverture de \qg.
 
 %\begin{Tip}\caption{\textsc{Crashing Plugins}}\index{crashes}
 %\qgistip{If you find that \qg crashes on startup, a plugin may be at fault.
@@ -81,28 +76,22 @@ Les extensions installées sont mémorisées lorsque vous quittez l'application 
 %determine which plugin is causing the problem.}
 %\end{Tip} 
 \begin{Tip}\caption{\textsc{Extensions et plantages}}\index{crashes}
-Si votre installation de \qg plante au démarrage, une extension est peut-être en cause.
-Vous pouvez éviter le chargement des extensions en éditant votre fichier de configuration (voir \ref{subsec:gui_options} pour localiser ce fichier).
-Localisez la configuration de l'extension et changez toutes les valeurs à \og false\fg pour empêcher leur chargement.
-\nix {Par exemple, pour éviter le chargement de l'extension \og Ajouter une couche texte délimité\fg, sa référence dans \$HOME/.config/QuantumGIS/qgis.conf doit ressembler à \usertext{Add Delimited Text Layer=false}.}
-Faites de même pour chaque extension dans la section [Extension].
-Vous pouvez ensuite démarrer \qg et ajouter les extensions une à la fois depuis le \filename{Gestionnaire d'extension} pour déterminer celle qui est la source du problème.
+Si votre installation de \qg plante au démarrage, une extension est peut-être en cause. Vous pouvez éviter le chargement des extensions en éditant votre fichier de configuration (voir \ref{subsec:gui_options} pour localiser ce fichier). Localisez la configuration de l'extension et changez toutes les valeurs à \og false\fg pour empêcher leur chargement. \nix {Par exemple, pour éviter le chargement de l'extension \og Ajouter une couche texte délimité\fg, sa référence dans \$HOME/.config/QuantumGIS/qgis.conf doit ressembler à \usertext{Add Delimited Text Layer=false}.} Faites de même pour chaque extension dans la section [Extension]. Vous pouvez ensuite démarrer \qg et ajouter les extensions une à la fois depuis le \filename{Gestionnaire d'extension} pour déterminer celle qui est la source du problème.
 \end{Tip}
 
 
 %\subsection{Loading an external \qg Plugin}\label{sec:load_external_plugin} 
-\subsection{Installer une extension complémentaire de \qg}\label{sec:load_external_plugin} 
+\subsection{Installer une extension externe de \qg}\label{sec:load_external_plugin} 
 
 %There are two steps required to integrate external plugins into \qg: 
-Deux étapes sont nécessaires pour installer une extension complémentaire dans \qg :
+Une seule étape est nécessaire pour installer une extension externe dans \qg :
 
 \begin{enumerate}
-%\item Download an external plugin from a repository using the \filename{Plugin Installer} (Section \ref{sec:python_plugin_installer}).
-%The new external plugin will be added to the list of available plugins in the \filename{Plugin Manager}.
-%\item Load the plugin using the \filename{Plugin Manager}.
-\item Télechargez une extension complémentaire depuis un dépôt à l'aide de l'\filename{Installeur d'extension python} (Section \ref{sec:python_plugin_installer}).
-La nouvelle extension complémentaire sera ajoutée à la liste des extensions disponibles depuis le \filename{Gestionnaire d'extension}.
-\item Installez l'extension à l'aide du \filename{Gestionnaire d'extension}.
+%\item Download an external plugin from a repository using the
+%\filename{Python Plugin Installer} (Section \ref{sec:python_plugin_installer}).
+%The new external plugin will be added to the list of available plugins in
+%the \filename{Plugin Manager} and is automatically loaded.
+\item Télechargez une extension externe depuis un dépôt à l'aide de l'\filename{Installeur d'extension python} (Section \ref{sec:python_plugin_installer}). La nouvelle extension complémentaire sera ajoutée à la liste des extensions disponibles dans le \filename{Gestionnaire d'extension} et automatiquement chargée dans \qg.
 \end{enumerate}
 
 %\subsection{Using the \qg Python Plugin Installer}\index{plugins!installing}\label{sec:python_plugin_installer}
@@ -140,7 +129,7 @@ La fenêtre de l'\filename{Installeur\\ d'extension python} apparaîtra (figure 
 \minisec{Onglet Extensions}
 
 %To install a plugin, select it from the list and click the \button{Install plugin} button. The plugin is installed in its own directory. 
-Pour installer une extension, sélectionnez-la dans la liste et cliquez sur le bouton\\ \button{Installer l'extension}. L'extension est installée dans un répertoire qui lui est dédié, cet emplacement diffère selon les sytème d'exploitation :
+Pour installer une extension, sélectionnez-la dans la liste et cliquez sur le bouton\\ \button{Installer l'extension}. L'extension est installée dans un répertoire qui lui est dédié, cet emplacement diffère selon les systèmes d'exploitation :
 
 \begin{itemize}[label=--]
 %\item \nix{Linux and other unices}:\\
@@ -167,13 +156,23 @@ C:\textbackslash Documents and Settings\textbackslash\$USERNAME\textbackslash
 .qgis\textbackslash python\textbackslash plugins
 \end{itemize}
 
-%If the installation is successful, a confirmation message will appear telling you to go to \mainmenuopt{Plugins} > \dropmenuopttwo{mActionShowPluginManager}{Manage Plugins...} to load the newly installed plugin.
-Si l'installation réussit, un message de confirmation apparaît vous invitant à aller charger l'extension dans \mainmenuopt{Extensions} > \dropmenuopttwo{mActionShowPluginManager}{Gestionnaire d'extension...}.
+%If the installation is successful, a confirmation message will appear.
+Si l'installation est réussie, un message de confirmation apparaît.
 
-%If the installation fails, the reason for the failure will be displayed in a warning dialog. Most often, errors are the result of 
-%connection problems and/or missing Python modules. In the former case you will likely need to wait before trying the install again, in the latter case, you should install the missing modules relevant to your operating system prior to using the plugin. \nix{For Linux, most required modules should be available via a package manager}. \win{For install instructions in Windows visit the module home page}. If you are using a proxy, you may need to configure it under \mainmenuopt{Edit} > \dropmenuopttwo{mActionOptions}{Options} (Gnome, OSX) 
-%or \mainmenuopt{Settings} > \dropmenuopttwo{mActionOptions}{Options} (KDE, Windows) on the \tab{Proxy} tab.
-Si l'installation ne fonctionne pas, la raison est indiquée dans une fenêtre d'alerte. Les problèmes les plus fréquents sont dus à des erreurs de connexion et à des modules Python manquants. Dans le premier cas, il vous faudra probablement attendre quelques minutes ou heures puis retenter l'installation ; dans le second cas, il sera nécessaire d'installer les modules manquants pour votre système d'exploitation avant d'utiliser les extensions. \nix{Pour Linux, la plupart des modules requis devraient être disponibles dans un gestionnaire de paquets}. \win{Pour des installations d'instruction dans Windows, visitez la page web du module}. Si vous utilisez un proxy, vous pourrez avoir besoin de le configurer dans le menu \mainmenuopt{Édition} > \dropmenuopttwo{mActionOptions}{Options} (Gnome, OSX) ou dans \mainmenuopt{Préférences} > \dropmenuopttwo{mActionOptions}{Options} (KDE, Windows) dans l'onglet \tab{Proxy}.
+
+%If the installation fails, the reason for the failure will be displayed
+%in a warning dialog. Most often, errors are the result of connection problems
+%and/or missing Python modules. In the former case you will likely need to
+%wait before trying the install again, in the latter case, you should install
+%the missing modules relevant to your operating system prior to using the
+%plugin. \nix{For Linux, most required modules should be available via a
+%package manager}. \win{For install instructions in Windows visit the module
+%home page}. If you are using a proxy, you may need to configure it under
+%\mainmenuopt{Edit} \arrow \dropmenuopttwo{mActionOptions}{Options} (Gnome, OSX)
+%or \mainmenuopt{Settings} \arrow \dropmenuopttwo{mActionOptions}{Options} (KDE, Windows)
+%on the \tab{Proxy} tab.
+
+Si l'installation ne fonctionne pas, la raison est alors indiquée dans une fenêtre d'alerte. Les problèmes les plus fréquents sont dus à des erreurs de connexion et à des modules Python manquants. Dans le premier cas, il vous faudra probablement attendre quelques instants puis retenter l'installation (dans le cas où il s'agit d'un problème dû au serveur); dans le second cas, il sera nécessaire d'installer les modules manquants pour votre système d'exploitation avant d'utiliser les extensions. \nix{Pour Linux, la plupart des modules requis devraient être disponibles dans le gestionnaire de paquets de votre distribution}. \win{Pour les instructions d'installation pour Windows, visitez la page web du module}. Si vous utilisez un proxy, vous pourriez avoir besoin de le configurer dans le menu \mainmenuopt{Édition} > \dropmenuopttwo{mActionOptions}{Options} (Gnome, OSX) ou dans \mainmenuopt{Préférences} > \dropmenuopttwo{mActionOptions}{Options} (KDE, Windows) dans l'onglet \tab{Proxy}.
 
 %The \button{Uninstall plugin} button is enabled only if the selected plugin is installed and is not a core plugin. Note that if you have installed an update to a core plugin, you can uninstall this update with the \button{Uninstall plugin} and revert to the version shipped with Quantum GIS. This default version however, cannot be uninstalled.
 Le bouton \button{Désinstaller l'extension} est actif seulement si l'extension sélectionnée est installée et n'est pas une extension principale. Notez que si vous avez installé une mise à jour d'une extension principale, vous pouvez désinstaller cette mise à jour avec le bouton\\ \button{Désinstaller l'extension} et revenir à la version d'origine fournie à l'installation de Quantum GIS. Cette dernière ne peut pas être désinstallée.
@@ -191,9 +190,12 @@ Le second onglet, \tab{Dépôts}, contient une liste de dépôts d'extensions di
 %The \tab{Options} tab is where you can configure the settings of the \filename{Plugin Installer}. The \checkbox{Check for updates on startup} checkbox tells \qg to automatically look for plugin updates and news. By default, if this feature is enabled all repositories listed and enabled in the \tab{Repositories} tab are checked for updates each time the program is started. The frequency of update checking can be adjusted using the dropdown menu, and may be adjusted from once a day right up to once a month. If a new plugin or update is available for one of the installed plugins, a notification will appear in the Status Bar. If the checkbox is disabled, looking for updates and news is performed only when the \filename{Plugin Installer} is manually launched from the menu.
 L'onglet \tab{Options} vous permet de configurer les paramètres de l'\filename{Installateur d'extensions}. La case \checkbox{Chercher des mises à jour au démarrage} configure \qg pour rechercher automatiquement les mises à jour et les actualités relatives aux extensions. Si la case est cochée, tous les dépôts listés et activés dans l'onglet \tab{Dépôts} sont vérifiés à chaque démarrage du programme. La fréquence de cette vérification peut être ajustée dans le menu déroulant allant d'une fois par jour à tous les mois. Si une nouvelle extension ou une mise à jour est disponible pour une des extensions installées, une notification cliquable apparaît dans la barre de statut. Si la case est décochée, la recherche de mises à jour et d'actualités s'effectue uniquement lorsque l'Installateur d'Extension est lancé manuellement depuis le menu.
 
-
-%Some internet connections will cause problems when attempting to automatically check for updates. In these cases, a \textit{Looking for new plugins...} indicator will remain visible in the Status Bar during your entire \qg session, and may cause a program crash when exiting. In this case please disable the checkbox.
-Certaines connexions Internet peuvent poser des problèmes lors des vérifications automatiques. Dans ce cas, un indicateur \textit{Recherche de nouvelles extensions...} reste visible dans la barre de statut durant toute la session \qg et peut faire planter le programme à la fermeture. Dans ce cas, décochez la case.
+%Although the plugin installer update can handle ports different from 80, some internet
+%connections will cause problems when attempting to automatically check for updates.
+%In these cases, a \textit{Looking for new plugins...} indicator will
+%remain visible in the Status Bar during your entire QGIS session, and may cause a
+%program crash when exiting. In this case please disable the checkbox.
+Bien que l'installateur d'extensions puisse prendre en charge des ports autres que le 80, certaines connexions Internet peuvent poser des problèmes lors des vérifications automatiques. Dans ce cas, un indicateur \textit{Recherche de nouvelles extensions...} reste visible dans la barre de statut durant toute la session \qg et peut faire planter le programme à la fermeture. Dans ce cas, décochez la case.
 
 %In addition, you may specify the type of plugins that are displayed by the \filename{Plugin Installer}. Under \textit{Allowed plugins}, you can specify whether you would like to:
 De plus, vous pouvez spécifier le type d'extension qui sont affichées dans l'\filename{Installateur d'extensions}. Sous \textit{Extensions autorisées},vous pouvez spécifier si vous souhaitez :
@@ -226,7 +228,7 @@ Les extensions expérimentales sont généralement inadaptées à une utilisatio
 %Data Provider plugins are registered automatically by \qg at startup.
 %They are not managed by the Plugin Manager but used behind the scenes when a data type is added as a layer in \qg.
 Les Fournisseurs de données sont des extensions "spéciales" donnant accès à un dépôt de données.
-Par défaut, \qg supporte les couches PostGIS et les bases de données fichiers couvertes par la bibliothèque GDAL/OGR(Appendix \ref{appdx_ogr}).
+Par défaut, \qg supporte les couches PostGIS et les bases de données couvertes par la bibliothèque GDAL/OGR(Appendix \ref{appdx_ogr}).
 L'utilisation d'extensions pour fournir des données permet d'élargir les sources de données utilisables par \qg.
 
 Les extensions fournissant des données sont automatiquement enregistrées par \qg au démarrage.
