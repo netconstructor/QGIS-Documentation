@@ -47,12 +47,12 @@ INCLUDES = conventions.tex \
 	working_with_ogc.tex \
 	working_with_projections.tex \
 	working_with_raster.tex \
-	working_with_vector.tex
+	working_with_vector.tex 
 
 TARGET = user_guide.pdf
-IMAGES    =
+IMAGES    = 
 
-all: $(INCLUDES) $(APPENDIX)
+all: $(INCLUDES) $(APPENDIX) 
 	$(MAKE) $(TARGET)
 
 %.eps:	%.jpg
@@ -65,16 +65,23 @@ all: $(INCLUDES) $(APPENDIX)
 	$(LATEX) $*.tex && $(LATEX) $*.tex
 
 %.ps:	%.dvi
-	dvips -R0 -o $*.ps $*.dvi
+	dvips -R0 -o $*.ps $*.dvi 
 
 %.pdf:	%.tex $(INCLUDES) $(APPENDIX)
 	$(PDFLATEX) $*.tex $*.pdf && makeindex -cl -o user_guide.ind user_guide.idx && $(PDFLATEX) $*.tex $*.pdf && $(PDFLATEX) $*.tex $*.pdf
+
+# To add bibliography you need manually run at the moment
+# pdflatex user_guide.tex
+# bibtex user_guide
+# makeindex -cl -o user_guide.ind user_guide.idx
+# pdflatex user_guide.tex
+# pdflatex user_guide.tex
 
 %.tif:	%.pdf
 	gs -sDEVICE=tiffg3 -sPapersize=a4 -dNOPAUSE -q -sOutputFile=$*.tif $*.pdf -c quit
 
 clean:
-	rm -f *.log *.lof *.toa *.lot *.toc *.aux *.out *.bbl *.blg *.ps WARNINGS
+	rm -f *.log *.lox *.lof *.toa *.lot *.toc *.aux *.out *.bbl *.blg *.ps WARNINGS
 
-cleanall:
+cleanall: 
 	rm -f *.log *.ilg *.idx *.ind *.lox *.lof *.toa *.lot *.toc *.aux *.out *.bbl *.blg *.ps *.dvi *.pdf WARNINGS

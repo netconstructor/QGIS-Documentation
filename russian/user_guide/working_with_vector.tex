@@ -1316,299 +1316,327 @@ Figure~\ref{fig:climatediagram} gives an impression.
    \caption{Diagram from temperature data overlayed on a map \nixcaption}\label{fig:climatediagram}
 \end{figure}
 
-\section{Editing}\index{editing}
+\section{Редактирование}\index{editing}
 
-\qg supports various capabilities for editing OGR, PostGIS and Spatialite
-vector layers. \textbf{Note} - the procedure for editing GRASS layers is
-different - see Section \ref{grass_digitising} for details.
+\qg предоставляет разнообразные возможности для редактирования векторных
+данных OGR, PostGIS и Spatialite. \textbf{Примечание} "--- процедура
+редактирования данных GRASS имеет свои отличия "--- подробнее см.
+Раздел~\ref{grass_digitising}.
 
-\begin{Tip}\caption{\textsc{Concurrent Edits}}
-This version of \qg does not track if somebody else is editing a
-feature at the same time as you. The last person to save their edits wins.
+\begin{Tip}\caption{\textsc{Параллельное редактирование}}
+Данная версия \qg не различает между собой нескольких пользователей,
+одновременно редактирующих одни и те же данные. Сохраняются изменения
+того пользователя, который сохранил их последним.
 \end{Tip}
 
-\subsection{Setting the Snapping Tolerance and Search Radius}\label{snapping_tolerance}
+\subsection{Настройка Порога Прилипания и Радиуса Поиска}\label{snapping_tolerance}
 
-Before we can edit vertices, we must set the snapping
-tolerance and search radius to a value that allows us an optimal editing of
-the vector layer geometries.
+Перед началом редактирования узлов, необходимо установить величину порога
+прилипания и радиуса поиска, что позволит оптимизировать редактирование
+геометрии векторных слоев.
 
-\minisec{Snapping tolerance}
+\minisec{Порог прилипания}
 
-Snapping tolerance is the distance \qg uses to \usertext{search} for the
-closest vertex and/or segment you are trying to
-connect when you set a new vertex or move an existing vertex. If you aren't
-within the snap tolerance, \qg will leave the vertex where you release the
-mouse button, instead of snapping it to an existing vertex and/or segment.
-The snapping tolerance setting affects all tools which work with tolerance.
+Порог прилипания "--- это расстояние, используемое \qg для \usertext{поиска}
+ближайшего узла и/или сегмента, к которому надо присоединиться при создании
+нового узла или передвижении уже существующего. Если превысить порог
+прилипания \qg при нажатии кнопки мыши, то узел будет создан  в стороне,
+вместо того, чтобы быть привязанным к уже существующему узлу и/или сегменту.
+Величина порога прилипания оказывает влияние на функционирование всех
+инструментов программы, связанных с величинами допуска.
 
 \begin{enumerate}
-\item A general, project wide snapping tolerance can be defined choosing
-\mainmenuopt{Settings} > \dropmenuopttwo{mActionOptions}{Options}.
-(On Mac: go to  \mainmenuopt{\qg} > Preferences, on Linux: \mainmenuopt{Edit} > \dropmenuopttwo{mActionOptions}{Options}.)
-In the \tab{Digitizing} tab you can select between to vertex, to segment or
-to vertex and segment as default snap mode. You can also define a default
-snapping tolerance and a search radius for vertex edits. The tolerance an be
-set either in map units or in pixels. The advantage of choosing pixels, is
-that the snapping tolerance doesn't have to be changed after zoom operations.
-In our small digitizing project (working with the Alaska dataset), we define
-the snapping units in feet. Your results may vary, but something on the order
-of 300ft should be fine at a scale of 1:10 000 should be a reasonable
-setting.
-\item A layer based snapping tolerance can be defined by choosing
-\mainmenuopt{Settings} (or \mainmenuopt{File}) > \dropmenuopttwo{mActionOptions}{Project
-Properties\dots}. In the \tab{General} tab, section \classname{Digitize} you
-can click on \button{Snapping options\dots} to enable and adjust snapping
-mode and tolerance on a layer basis (see Figure~\ref{fig:snappingoptions}).
+\item Общая для всего проекта величина порога прилипания устанавливается в
+\mainmenuopt{Установки} \arrow \dropmenuopttwo{mActionOptions}{Параметры}.
+(В Mac: \mainmenuopt{\qg} \arrow Настройки, для Linux: \mainmenuopt{Редактирование}
+\arrow \dropmenuopttwo{mActionOptions}{Параметры}.)
+В закладке \tab{Оцифровка} можно установить режим прилипания по умолчанию: к
+вершинам, к сегментам или к вершинам и сегментам. Также можно определить
+значения по умолчанию для единиц измерения порога прилипания и радиуса поиска.
+Эти величины  могут быть установлены как в единицах карты, так и в пикселах.
+Преимущество использования пикселов в качестве единиц заключается в том, что
+при зуммировании порог прилипания не будет изменяться.
+В нашем небольшом проекте оцифровки (по рабочему набору данных Alaska), мы
+установили в качестве единицы порога прилипания фут. Ваши результаты могут
+отличаться, но величины близкие к 300 футов (~10 метров) дают приемлемые
+результаты при работе в масштабе 1:10 000.
+\item Величина порога прилипания для отдельного слоя устанавливается в
+\mainmenuopt{Установки} (или \mainmenuopt{File}) \arrow
+\dropmenuopttwo{mActionOptions}{Свойства проекта\dots}. В закладке \tab{Общие},
+секция \classname{Оцифровка} нажмите на \button{Параметры прилипания\dots} для
+включения и настройки режима и порога прилипания для каждого слоя(см.
+Рисунок~\ref{fig:snappingoptions}).
 \end{enumerate}
-Note that this layer based snapping overrides the global snapping option set in the Digitizing tab. So if you need to edit one layer, and snap its vertices to another layer, then enable snapping only on the \usertext{snap to} layer, then decrease the global snapping tolerance to a smaller value.  Furthermore, snapping will never occur to a layer which is not checked in the snapping options dialog, regardless of the global snapping tolerance. So be sure to mark the checkbox for those layers that you need to snap to.
+Обратите внимание, что величина порога прилипания для отдельного слоя
+доминирует над общим порогом прилипания, установленным в закладке «Оцифровка».
+Таким образом, если надо отредактировать один слой и прилепить его вершины
+к другому слою, необходимо активировать прилипание \usertext{прилипание к}
+для слоя, затем снизить общий порог прилипания для проекта до меньшего
+значения. Кроме того, прилипание невозможно для слоя, не активизированного
+в диалоговом окне параметров прилипания, независимо от параметров
+общего прилипания. Поэтому необходимо убедиться, что у слоя, к которому
+необходимо использовать прилипание, стоит флажок.
 
 \begin{figure}[ht]
    \centering
    \includegraphics[clip=true, width=12cm]{editProjectSnapping}
-   \caption{Edit snapping options on a layer basis \nixcaption}\label{fig:snappingoptions}
+   \caption{Установка параметров прилипания для отдельного слоя \nixcaption}\label{fig:snappingoptions}
 \end{figure}
 
-\minisec{Search radius}
+\minisec{Радиус поиска}
 
-Search radius is the distance \qg uses to \usertext{search} for the closest
-vertex you are trying to move when you click on the
-map. If you aren't within the search radius, \qg won't find and select
-any vertex for editing and it will pop up an annoying warning to that effect.
-Snap tolerance and search radius are set in map units or pixels, so you may find you
-need to experiment to get them set right. If you specify too big of a
-tolerance, \qg may snap to the wrong vertex, especially if you are dealing
-with a large number of vertices in close proximity. Set search radius too
-small and it won't find anything to move.
+Радиус поиска "--- это расстояние \qg , используемое для \usertext{поиска}
+ближайшей вершины, которую вы пытаетесь переместить, щелкая кнопкой мыши
+по карте. За пределом радиуса поиска \qg не сможет найти и выделить
+какую-либо вершину для последующего редактирования, о чем сообщит
+всплывающее окно предупреждения. Порог прилипания и радиус поиска
+устанавливаются в единицах карты или пикселях, для того, чтобы установить
+приемлемые значения, лучше всего с ними поэкспериментировать. Если установлен
+слишком большой порог, \qg может прилепиться к неверной вершине, особенно,
+если работа идет с большим количеством близко расположенных вершин. Однако
+слишком маленький порог не позволит обнаружить какой-либо объект.
 
-The search radius for vertex edits in layer units can be defined in the
-\tab{Digitizing} tab under \mainmenuopt{Settings} >
-\dropmenuopttwo{mActionOptions}{Options}. The same place where you define the
-general, project wide snapping tolerance.
+Радиус поиска для редактирования вершин в единицах слоя устанавливается
+на закладке \tab{Оцифровка}, расположенной в \mainmenuopt{Установки} \arrow
+\dropmenuopttwo{mActionOptions}{Параметры}. Там же устанавливается общий
+для всего проекта порог прилипания.
 
-\subsection{Zooming and Panning}
+\subsection{Зуммирование и прокрутка карты}
 
-Before editing a layer, you should zoom in to your area of interest. This
-avoids waiting while all the vertex markers are rendered across the entire
-layer.
+Перед редактированием слоя, следует увеличить район исследований на карте.
+Это убережет от ожидания прорисовки всех вершин слоя.
 
-Apart from using the \toolbtntwo{mActionPan}{pan} and
-\toolbtntwo{mActionZoomIn}{zoom-in}/\toolbtntwo{mActionZoomOut}{zoom-out}
-icons on the toolbar with the mouse, navigating can also be done with the
-mouse wheel, spacebar and the arrow keys.
+Помимо использования \toolbtntwo{mActionPan}{Прокрутка карты} и
+\toolbtntwo{mActionZoomIn}{Увеличить}/\toolbtntwo{mActionZoomOut}{Уменьшить}
+кнопок на панели инструментов, навигация также может осуществляться с
+помощью колесика мыши, клавиши «Пробел» и стрелок.
 
-\minisec{Zooming and panning with the mouse wheel}
+\minisec{Зуммирование и прокрутка карты с помощью колесика мыши}
 
-While digitizing you can press the mouse wheel to pan inside of the main
-window and you can roll the mouse wheel to zoom in and out on the map. For
-zooming place the mouse cursor inside the map area and roll it forward (away
-from you)
-to zoom in and backwards (towards you) to zoom out. The mouse cursor position
-will
-be the center of the zoomed area of interest. You can customize the behavior
-of the mouse wheel zoom using the \tab{Map tools} tab under the
-\mainmenuopt{Settings} >\dropmenuopt{Options} menu.
+Нажатие и удержание колесика мыши во время редактирования позволяет перемещать
+карту в пределах основного окна,а прокручивание колесика мыши приводит к
+масштабированию карты. Для увеличения необходимо расположить курсор мыши внутри
+площади карты и крутить колесико вперед (от себя), для уменьшения "--- назад
+(к себе). Положение курсора мыши является центром области зуммирования. Можно
+настроить режим зуммирования колесиком мыши, используя  закладку
+\tab{Инструменты} в меню \mainmenuopt{Установки} \arrow \dropmenuopt{Параметры}.
 
-\minisec{Panning with the arrow keys}
+\minisec{Прокрутка карты с помощью стрелок}
 
-Panning the Map during digitizing is possible with the arrow keys. Place
-the mouse cursor inside the map area and click on the right arrow key to
-pan east, left arrow key to pan west, up arrow key to pan north and down
-arrow key to pan south.
+Прокрутка карты во время редактирования возможна с помощью стрелок. Расположите
+курсор мыши внутри площади карты и нажмите на правую стрелку для перемещения на
+восток, на левую стрелку для перемещения на запад, стрелку вверх для перемещения на
+север и стрелку вниз для перемещения на юг.
 
-You can also use the spacebar to temporarily cause mouse movements to pan
-then map. The PgUp and PgDown keys on your keyboard will cause the map
-display to zoom in or out without interrupting your digitising session.
+Также возможно использовать клавишу «Пробел» для временного замещения мыши при
+прокрутке карты. Нажатие стрелок клавиатуры «Вверх» и «Вниз» приведет к
+увеличению и уменьшению карты, не прерывая процесса оцифровки.
 
-\subsubsection{Topological editing}
+\subsubsection{Топологическое редактирование}
 
-Besides layer based snapping options the \tab{General} tab in menu
-\mainmenuopt{Settings} -> \dropmenuopttwo{mActionOptions}{Project Properties\dots}
-also provides some topological functionalities.
-In the Digitizing option group you can \checkbox{Enable topological editing} and/or activate
-\checkbox{Avoid intersections of new polygons}.
+Кроме установки параметров прилипания для отдельного слоя, в закладке \tab{Общее}
+из меню
+\mainmenuopt{Установки} \arrow \dropmenuopttwo{mActionOptions}{Свойства проекта\dots}
+можно установить топологическое редактирование. В группе опций по Оцифровке
+можно активировать \checkbox{Включить топологическое редактирование} и/или
+также активировать \checkbox{Предотвращать пересечение новых полигонов}.
 
-\minisec{Enable topological editing}
+\minisec{Включение топологического редактирования}
 
-The option \checkbox{Enable topological editing} is for editing and maintaining
-common boundaries in polygon mosaics. \qg "detects" a shared boundary in
-a polygon mosaic and you only have to move the vertex once and \qg will take
-care about updating the other boundary.
+Опция \checkbox{Включить топологическое редактирование} предназначена для
+редактирования и управления общими границами в мозаике полигонов. \qg
+«определяет» общие границы в мозаике полигонов. При изменении положения
+вершины одного полигона, \qg позаботится о том, чтобы положение вершины
+соседнего полигона изменилось в соответствии.
 
-\minisec{Avoid intersections of new polygons}
+\minisec{Предотвращение пересечения новых полигонов}
 
-The second topological option called \checkbox{Avoid intersections of new polygons}
-avoids overlaps in polygon mosaics. It is for quicker digitizing of adjacent polygons.
-If you already have one polygon, it is possible with this option to digitise the second
-one such that both intersect and \qg then cuts the second polygon to the common boundary.
-The advantage is that users don't have to digitize all vertices of the common boundary.
+Следующая топологическая опция называется \checkbox{Предотвращение пересечения
+новых полигонов} позволяет избежать пересечений в мозаике полигонов, что
+ускоряет редактрование смежных полигонов. Если один полигон уже существует,
+с помощью этой функции можно оцифровать новый с пересечением первого, и
+\qg обрежет второй полигон по общей границе. Основное преимущество заключается
+в том, что пользователи не должны цифровать все вершины по границе смежных
+полигонов.
 
-\subsection{Digitizing an existing layer}
+\subsection{Редактирование существующего слоя}
 \index{vector layers!digitizing}
 \index{digitizing!an existing layer}
 \label{sec:edit_existing_layer}
 
-By default, \qg loads layers read-only: This is a safeguard
-to avoid accidentally editing a layer if there is a slip of the mouse.
-However, you can choose to edit any layer as long as the data provider
-supports it, and the underlying data source is writable (i.e. its files are
-not read-only). Layer editing is most versatile when used on
-PostgreSQL/PostGIS data sources.
+По умолчанию, \qg подгружает слои, делая их доступными только для чтения:
+это защита от непреднамеренного редактирования слоя, что случается, например,
+при выскальзывании мыши. Однако можно установить редактирование любого слоя,
+при условии, если на это имеется соответствующее разрешение и основной
+источник данных имеет возможность записи (т.е. эти файлы доступны не только
+для чтения). Редактирование слоев наиболее универсально, если используются
+источники данных, основанных на PostgreSQL/PostGIS.
 
-In general, editing vector layers is divided into a digitizing and an advanced
-digitizing toolbar, described in Section \ref{sec:advanced_edit}. You can
-select and unselect both under \mainmenuopt{Settings} > \dropmenuopt{Toolbars}.
-Using the basic digitizing tools you can perform the following functions:
+Все возможности редактирования векторных слоев разделены между панелями
+инструментов оцифровки и дополнительным функциям оцифровки, описанных в
+Разделе \ref{sec:advanced_edit}. Их можно активировать и деактивировать
+на вкладке \mainmenuopt{Вид} \arrow \dropmenuopt{Панели инструментов}.
+Используя основные инструменты для оцифровки, можно выполнять следующие
+функции:
 
 \begin{table}[ht]\index{vector layers!basic editing tools}
 \centering
 \begin{tabular}{|l|p{5.5cm}|l|p{5.5cm}|}
-\hline \textbf{Icon} & \textbf{Purpose} & \textbf{Icon} & \textbf{Purpose} \\
+\hline \textbf{Иконка} & \textbf{Назначение} & \textbf{Иконка} & \textbf{Назначение} \\
 \hline \includegraphics[width=0.7cm]{mActionToggleEditing}
-   & Toggle editing
+   & Режим редактирования
    & \includegraphics[width=0.7cm]{mActionCapturePoint}
-   & Adding Features: Capture Point \\
+   & Создать точку \\
 \hline \includegraphics[width=0.7cm]{mActionCaptureLine}
-   & Adding Features: Capture Line
+   & Создать линию
    & \includegraphics[width=0.7cm]{mActionCapturePolygon}
-   & Adding Features: Capture Polygon \\
+   & Создать полигон \\
 \hline \includegraphics[width=0.7cm]{mActionMoveFeature}
-   & Move Feature
+   & Переместить объект
    & \includegraphics[width=0.7cm]{mActionNodeTool}
-   & Node Tool \\
+   & Редактирование узлов \\
 \hline \includegraphics[width=0.7cm]{mActionDeleteSelected}
-   & Delete Selected
+   & Удалить выделенное
    & \includegraphics[width=0.7cm]{mActionEditCut}
-   & Cut Features \\
+   & Вырезать объекты \\
 \hline \includegraphics[width=0.7cm]{mActionEditCopy}
-   & Copy Features
+   & Копировать объекты
    & \includegraphics[width=0.7cm]{mActionEditPaste}
-   & Paste Features \\
+   & Вставить объекты \\
 \hline \includegraphics[width=0.7cm]{mActionFileSave}
-   & Save edits and continue
+   & Сохранить изменения
    &  &  \\
 \hline
 \end{tabular}
-\caption{Vector layer basic editing toolbar}\label{tab:vector_editing}\medskip
+\caption{Основные инструменты редактирования векторного слоя}\label{tab:vector_editing}\medskip
 \end{table}
 
-All editing sessions start by choosing the
-\dropmenuopttwo{mActionToggleEditing}{Toggle editing} option.
-This can be found in the context menu after right clicking on the legend
-entry for that layer.\index{Allow Editing}
+Любое редактирование начинается с выбора функции
+\dropmenuopttwo{mActionToggleEditing}{Режим редактирования}.
+Эта опция доступна из контекстного меню после щелчка правой кнопки мыши
+по легенде слоя.\index{Allow Editing}
 
-Alternately, you can use the \index{Toggle Editing}
-\toolbtntwo{mActionToggleEditing}{Toggle editing} button from the digitizing
-toolbar to start or stop the editing mode.\index{editing!icons} Once the
-layer is in edit mode, markers will appear at the vertices, and additional
-tool buttons on the editing toolbar will become available.
+Также, чтобы начать или закончить редактирование, можно использовать
+кнопку \index{Toggle Editing}
+\toolbtntwo{mActionToggleEditing}{Режим редактирования} на панели инструментов
+по оцифровке.\index{editing!icons} После того, как слой стал редактируемым,
+над каждой вершиной появяться специальные маркеры и станут доступны кнопки
+с дополнительными функциями из панели инструментов.
 
-\begin{Tip}\caption{\textsc{Save Regularly}}
-Remember to toggle \toolbtntwo{mActionToggleEditing}{Toggle editing}
-off regularly. This allows you to save your recent changes, and also confirms
-that your data source can accept all your changes.
-\end{Tip}
+\begin{Совет}\caption{\textsc{Регулярное сохранение}}
+Не забывайте переключать \toolbtntwo{mActionToggleEditing}{Режим редактирования}
+регулярно. Это позволит как сохранить последние изменения, так и удостовериться,
+что источники данных могут принять все сделанные изменения.
+\end{Совет}
 
-\minisec{Adding Features}
+\minisec{Добавление объектов}
 \index{vector layers!adding!feature}
 \index{vector layers!move!feature}
 
-You can use the \toolbtntwo{mActionCapturePoint}{Capture point},
-\toolbtntwo{mActionCaptureLine}{Capture line} or
-\toolbtntwo{mActionCapturePolygon}{Capture polygon} icons on the toolbar to
-put the \qg cursor into digitizing mode.
+Можно использовать кнопки на панели инструментов:
+\toolbtntwo{mActionCapturePoint}{Создать точку},
+\toolbtntwo{mActionCaptureLine}{Создать линию} или
+\toolbtntwo{mActionCapturePolygon}{Создать полигон}, чтобы переключить \qg
+курсор в режим редактирования.
 
-For each feature, you first digitize the geometry, then enter its attributes.
-To digitize the geometry, left-click on the map area to create the first
-point of your new feature.
+Для каждого объекта сначала идет оцифровка формы, а затем добавляются атрибуты.
+Чтобы начать оцифровку и создать первую точку нового объекта, надо нажать
+левой кнопкой мыши по области карты.
 
-For lines and polygons, keep on left-clicking for each additional
-point you wish to capture.  When you have finished adding points,
-right-click anywhere on the map area to confirm you have finished entering
-the geometry of that feature.
+Для продолжения линий и полигонов надо продолжать нажимать на левую кнопку
+мыши для создания каждого дополнительного узла. Чтобы закончить
+редактирование объекта, просто щелкните правой кнопки мыши в любом
+месте карты. Это подтверждение того, что редактирование данного объекта
+окончено.
 
-The attribute window will appear, allowing you to enter the information for
-the new feature. Figure \ref{fig:vector_digitising} shows setting attributes
-for a fictitious new river in Alaska. In the \tab{Digitising} tab under the
-\mainmenuopt{Settings} >\dropmenuopt{Options} menu, you can also activate the
-\\
-\checkbox{Suppress attributes pop-up windows after each created feature}.
+В процессе редактирования будет появляться окно атрибутов, позволяя тем
+самым вводить информацию для нового объекта.
+Рисунок~\ref{fig:vector_digitising} показывает ввод атрибутов для вымышленной реки
+Аляски. В закладке \tab{Оцифровка} из меню \mainmenuopt{Установки} \arrow
+\dropmenuopt{Параметры} можно также активировать функцию \\
+\checkbox{Не показывать всплывающее окно ввода атрибутов для каждого создаваемого объекта}.
 
 \begin{figure}[ht]
    \centering
    \includegraphics[clip=true, width=8cm]{editDigitizing}
-   \caption{Enter Attribute Values Dialog after digitizing a new vector feature \nixcaption}\label{fig:vector_digitising}
+   \caption{Диалог ввода атрибутивных значений после оцифровки нового объекта \nixcaption}\label{fig:vector_digitising}
  \end{figure}
 
-With the \toolbtntwo{mActionMoveFeature}{Move Feature} icon on the toolbar
-you can move existing features.
+С помощью опции \toolbtntwo{mActionMoveFeature}{Переместить объект} на
+панели инструментов можно двигать созданные объекты.
 
-\begin{Tip}\caption{\textsc{Attribute Value Types}}
-At least for shapefile editing the attribue types are validated during the
-entry. Because of this, it is not possible to enter a number into the text-column in
-the dialog \dialog{Enter Attribute Values} or vica versa. If you need to do so,
-you should edit the attributes in a second step within the \dialog{Attribute
-table} dialog.
+\begin{Tip}\caption{\textsc{Типы значений атрибутов}}
+По крайне мере, при редактировании shape-файла типы атрибутов проверяются
+во время ввода. Поэтому невозможно ввести числовое значение в текстовое поле
+диалога  \dialog{Атрибуты} или наоборот. Если это сделать все же необходимо,
+то следует отредактировать атрибуты на следующем шаге в диалоге
+\dialog{Таблица атрибутов}.
 \end{Tip}
 
-\minisec{Node Tool}
+\minisec{Редактирование узлов}
 \index{vector layers!node!tool}
 
-For both PostgreSQL/PostGIS and shapefile-based layers, the
-\toolbtntwo{mActionNodeTool}{Node Tool} provides manipulation capabilites
-of feature vertices similar to CAD programs. It is possible to simply select
-multiple vertices at once and to move, add or delete them alltogether. The node
-tool also works with 'on the fly' projection turned on and supports
-the topological editing feature. This tool is, unlike other tools in Quantum GIS,
-persistent, so when some operation is done, selection stays active for this
-feature and tool. If the node tool couldn't find any features, a warning will be
-displayed.
+Как для слоев данных PostgreSQL/PostGIS, так и для слоев, состоящих из
+shape-файлов, \toolbtntwo{mActionNodeTool}{Редактирование узлов} предоставляет
+возможности изменения узлов объектов, аналогичные имеющимся в программах CAD.
+Можно выделить сразу множество вершин и перемещать, добавлять или удалять
+их все вместе. Инструмент редактирования узлов работает с включенной функцией
+перепроецирования «на лету», а также поддерживает топологическое редактирование
+объектов. Этот инструмент, в отличие от остальных инструментов Quantum GIS,
+довольно «настойчивый», так, когда некоторая операция выполнена, инструмент
+продолжает оставаться активным, а объект выделенным. Если инструмент
+редактирования узлов не может обнаружить объекты, на дисплей выдается
+предупреждение.
 
-Important is to set the property \mainmenuopt{Settings} >
-\dropmenuopttwo{mActionOptions}{Options} >
-\tab{Digitizing}>\selectnumber{Search Radius}{10} to a number greater than
-zero. Otherwise \qg will not be able to tell which vertex is being edited.
-
-\begin{Tip}\caption{\textsc{Vertex Markers}}
-The current version of \qg supports three kinds of vertex-markers -
-Semi transparent circle, Cross and None. To change the marker style, choose
-\dropmenuopttwo{mActionOptions}{Options} from the \mainmenuopt{Settings} menu
-and click on the \tab{Digitizing} tab and select the appropriate entry.
+Важно правильно установить \mainmenuopt{Установки} \arrow
+\dropmenuopttwo{mActionOptions}{Параметры} \arrow
+\tab{Оцифровка} \arrow \selectnumber{Радиус поиска}{10} значение более нуля.
+В противном случае \qg не распознает редактируемую вершину.
+\begin{Tip}\caption{\textsc{Маркировка Вершин}}
+Данная версия \qg поддерживает три типа маркировки вершин "--- полупрозрачный
+круг, крест и «без маркера». Чтобы изменить стиль маркировки, выберите
+\dropmenuopttwo{mActionOptions}{Параметры} из меню \mainmenuopt{Установки}
+и в закладке \tab{Оцифровка} выберите подходящий тип.
 \end{Tip}
 
-\minisec{Basic operations}\index{vector layers!Node Tool}
+\minisec{Основные операции}\index{vector layers!Node Tool}
 
-Start by activating the \toolbtntwo{mActionNodeTool}{Node Tool} and selecting
-some features by clicking on it. Red boxes appear at each vertex of this feature.
-This is basic select of the feature. Functionalities are:
+Включите инструмент \toolbtntwo{mActionNodeTool}{Node Tool} и выделите объект
+простым нажатием по нему. На месте каждой вершины этого объекта появится
+красные рамки. Это основной инструмент выделения объектов.
+Его функциональные возможности следующие:
 
 \begin{itemize}[label=--]
-\item \textbf{Selecting vertex}: Selecting is easy just click on vertex and
-color of this vertex will change to blue. When selecting more vertices
-\keystroke{Shift} key can be used to select more vertices. Or also the
-\keystroke{Ctrl} key can be used to invert selection of vertices (if selected then
-it will be unselected and when not selected vertex will be selected). Also more
-vertices can be selected at once when clicking somewhere outside feature and opening a rectangle where all vertices inside will be selected. Or just click on an edge and
-both adjacent vertices should be selected.
-\item \textbf{Adding vertex}: Adding vertex is simple, too. Just double click near
-some edge and a new vertex will appear on the edge near to the cursor. Note that
-vertex will appear on edge not on cursor position, there it has to be moved if
-necessary.
-\item \textbf{Deleting vertex}: After selecting vertices for deletion, click the
-\keystroke{Delete} key and vertices will be deleted. Note that according to
-standard Quantum GIS behavior, it will leave a necessary number of vertices for
-the feature type you are working on. To delete a complete feature, another tool
-has to be used.
-\item \textbf{Moving vertex}: Select all vertices you want to move. All selected
-vertices are moving in the same direction as the cursor. If snapping is enabled,
-the whole selection can jump to the nearest vertex or line.
+\item \textbf{Выделение вершин}: Выделение узла происходит простым нажатием
+по нему кнопкой мыши, при этом цвет рамки изменится на синий. Чтобы выделить
+несколько узлов одновременно, надо удерживать клавишу
+\keystroke{Shift}.
+\keystroke{Ctrl} используется для инвертирования выделения узлов (выделенные
+узлы становятся невыделенными и наоборот). Также несколько узлов одновременно
+можно выделить, если нажать кнопкой мыши где-нибудь в стороне от объекта и
+очертить прямоугольную область вокруг интересующего множества вершин. Или
+просто нажать на отрезок линии и оба смежных узла будут выделены.
+\item \textbf{Добавление узлов}: Добавить узлы также просто. Двойной щелчок
+мыши рядом с отрезком линии добавит новую вершину рядом с положением курсора.
+Обратите внимание, что вершина появится на ребре объекта, а не точно в
+месте курсора,но при необходимости ее можно переместить.
+\item \textbf{Удаление узлов}: После выделения вершин для их удаления надо
+нажать клавишу \keystroke{Delete}, вершины будут удалены. Обратите внимание,
+что согласно стандарту Quantum GIS, необходимое количество узлов для каждого
+типа объекта все же останется. Чтобы полностью удалить объект, надо использовать
+другой инструмент.
+\item \textbf{Перемещение узлов}: Выделите все вершины, которые собираетесь
+перемещать. Все выделенные вершины будут перенесены в направлении курсора.
+Если активна функция прилипания, все вершины могут перескочить на
+ближайшие узлы или линии.
 \end{itemize}
 
-The \button{Release} button stores all changes and a new entry appears in the undo
-dialog. Remember that all operations support topological editing when turned on. On
-the fly projection is also supported.
+При отпускании кнопки мыши, все изменения будут сохранены и появятся в
+диалоге отмены. Запомните, что все операции поддерживают топологическое
+редактирование, когда оно включено. Перепроецирование «на лету» также
+поддерживается.
 
-\minisec{Cutting, Copying and Pasting Features}
+\minisec{Вырезать, Копировать и Вставить Объекты}
 \index{vector layers!cut!feature}
 \index{vector layers!copy!feature}
 \index{vector layers!paste!feature}
@@ -1616,98 +1644,104 @@ the fly projection is also supported.
 \index{editing!copying features}
 \index{editing!pasting features}
 
-Selected features can be cut, copied and pasted between layers in the
-same \qg project, as long as destination layers are set to
-\toolbtntwo{mActionToggleEditing}{Toggle editing} beforehand.
+Выделенные объекты можно удалять, копировать и вставлять из слоя в слой
+одного проекта \qg  при условии, что для них включен
+\toolbtntwo{mActionToggleEditing}{Режим редактирования}.
 
-Features can also be pasted to external applications as text:  That is,
-the features are represented in CSV format with the geometry data appearing
-in the OGC Well-Known Text (WKT) format.
+Объекты также можно вставить во внешние приложения в виде текста: объекты
+отражаются в формате  CSV, где их геометрия передается форматом
+OGC Well-Known Text (WKT).
 
-However in this version of \qg, text features from outside \qg cannot
-be pasted to a layer within \qg. When would the copy and paste function
-come in handy? Well, it turns out that you can edit more than one layer
-at a time and copy/paste features between layers. Why would we want to do
-this?  Say we need to do some work on a new layer but only need one or
-two lakes, not the 5,000 on our \filename{big\_lakes} layer. We can create
-a new layer and use copy/paste to plop the needed lakes into it.
+Однако в настоящей версии  \qg, текстовые объекты из внешних приложений
+\qg не могут быть добавлены в слой \qg. Когда же может пригодиться функция
+копирования и вставки? Оказывается, возможно редактирование нескольких
+слоев одновременно и копирование/вставка объектов между ними. Для чего это
+может понадобится? Предположим, необходимо поработать со слоем озер, в
+котором интересует только одно или два озера, а не все 5 000, например,
+как в нашем слое \filename{big\_lakes}. Тогда можно создать новый слой и,
+используя операции копирование/вставка, переместить в него нужные озера.
 
-As an example we are copying some lakes to a new layer:
+Рассмотрим пример копирования части озер в новый слой:
 
 \begin{enumerate}
-\item Load the layer you want to copy from (source layer)
-\item Load or create the layer you want to copy to (target layer)
-\item Start editing for target layer
-\item Make the source layer active by clicking on it in the legend
-\item Use the \toolbtntwo{mActionSelect}{Select} tool to select the feature(s) on the source layer
-\item Click on the \toolbtntwo{mActionEditCopy}{Copy Features} tool
-\item Make the destination layer active by clicking on it in the legend
-\item Click on the \toolbtntwo{mActionEditPaste}{Paste Features} tool
-\item Stop editing and save the changes
+\item Загрузить слой, из которого вы собираетесь копировать (исходный слой)
+\item Загрузить или создать слой, в который вы будете копировать (целевой слой)
+\item Начать редактирование целевого слоя
+\item Активировать исходный слой щелчком мыши по нему в легенде
+\item Используя инструмент \toolbtntwo{mActionSelect}{Выбрать объекты},
+выделить объект (-ы) в исходном слое
+\item Выбрать инструмент  \toolbtntwo{mActionEditCopy}{Копировать объекты}
+\item Сделать активным целевой слой, щелкнув по нему в легенде кнопкой мыши
+\item Нажать \toolbtntwo{mActionEditPaste}{Вставить выделенные объекты}
+\item Завершить редактирование и сохранить изменения
 \end{enumerate}
 
-What happens if the source and target layers have
-different schemas (field names and types are not the same)? \qg populates
-what matches and ignores the rest. If you don't care about the attributes
-being copied to the target layer, it doesn't matter how you design the
-fields and data types. If you want to make sure everything - feature and its
-attributes - gets copied, make sure the schemas match.
+Что случится, если исходный и целевой слой имеют разную структуру (названия
+полей и их типы отличаются)? \qg заполнит совпадающие поля и проигнорирует
+остальные. Если результат копирования атрибутов в целевой слой не имеет
+значения, то становится неважно, в каком виде они там будут представлены.
+Если в целевом слое необходимо сохранить все с точностью "--- объекты и
+их атрибуты, необходимо убедиться, что структуры исходного и целевого слоя
+совпадают.
 
-\begin{Tip}\caption{\textsc{Congruency of Pasted Features}}
-If your source and destination layers use the
-same projection, then the pasted features will have
-geometry identical to the source layer.
-However if the destination layer is a different projection
-then \qg cannot guarantee the geometry is identical.
-This is simply because there are small rounding-off errors
-involved when converting between projections.
+\begin{Tip}\caption{\textsc{Соответствие вставляемых объектов}}
+Если исходный и целевой слой находятся в одинаковой проекции, тогда
+геометрия вставленных объектов будет идентична исходному слою. Однако если
+целевой слой находится в отличной проекции, тогда \qg не гарантирует
+идентичность геометрии. Это происходит по причине незначительных ошибок
+округления, неизбежных при переходе от одной проекции к другой.
 \end{Tip}
 
-\minisec{Deleting Selected Features}
+\minisec{Удаление выделенных объектов}
 \index{vector layers!deleting!feature}
 
-If we want to delete an entire polygon, we can do that by first selecting
-the polygon using the regular \toolbtntwo{mActionSelect}{Select Features} tool. You can select
-multiple features for deletion. Once you have the selection set, use the
-\toolbtntwo{mActionDeleteSelected}{Delete Selected} tool to delete the features.
+Если надо удалить весь полигон, вначале его необходимо выделить, используя
+обычный инструмент \toolbtntwo{mActionSelect}{Выбрать объекты}. Также можно
+выделить несколько объектов для удаления. После выбора соответствующих
+объектов используйте инструмент
+\toolbtntwo{mActionDeleteSelected}{Удалить выделенное}, объекты будут удалены.
 
-The \toolbtntwo{mActionEditCut}{Cut Features} tool on the digitizing toolbar can
-also be used to delete features. This effectively deletes the feature but
-also places it on a ``spatial clipboard". So we cut the feature to delete.
-We could then use the \toolbtntwo{mActionEditPaste}{paste tool} to put it back, giving us a one-level undo
-capability. Cut, copy, and paste work on the currently selected features,
-meaning we can operate on more than one at a time.
+Инструмент \toolbtntwo{mActionEditCut}{Вырезать выделенные объекты} на панели
+инструментов по оцифровке также может использоваться для удаления объектов.
+Это действительно удаляет объекты, но также помещает их в «пространственный
+буфер». Таким образом, вырезание объектов приводит к их удалению. Затем можно
+использовать инструмент \toolbtntwo{mActionEditPaste}{Вставить выделенные объекты},
+чтобы вернуть их обратно. Это дает возможность отменить выполненное удаление
+объекта. Операции вырезания, копирования и вставки работают только на
+выделенных объектах, это означает, что можно работать с несколькими объектами
+одновременно.
 
-\begin{Tip}\caption{\textsc{Feature Deletion Support}}
-When editing ESRI shapefiles, the deletion
-of features only works if \qg is linked to a GDAL version 1.3.2 or greater.
-The OS X and Windows versions of \qg available from the download site are built
-using GDAL 1.3.2 or higher.
+\begin{Tip}\caption{\textsc{Поддержка удаления объектов}}
+Когда редактируется shap-файл ESRI, удаление объектов из него возможно, если
+\qg использует версию GDAL 1.3.2 или выше. Версии \qg для операционных
+систем OS X и Windows, доступные для скачивания на официальном сайте,
+построены с использованием версии GDAL 1.3.2 или выше.
 \end{Tip}
 
-\minisec{Saving Edited Layers}
+\minisec{Сохранение отредактированных слоев}
 \index{editing!saving changes}
 
-When a layer is in editing mode, any changes remain in the memory of \qg.
-Therefore they are not committed/saved immediately to the data source or disk.
-If you want to save edits to the current layer but want to continue editing
-without leaving the editing mode, you can click the
-\toolbtntwo{mActionFileSave}{Save Edits} button. When you turn editing mode
-off with the \toolbtntwo{mActionToggleEditing}{Toggle editing} (or quit
-\qg for that matter), you are also asked if you want to save your changes
-or discard them.
+Когда слой находится в режиме редактирования, любые изменения сохраняются
+только в памяти \qg. Поэтому они не сохраняются непосредственно на диск.
+Если необходимо сохранить изменения в текущем слое и при этом продолжать
+его редактирование, нужно просто нажать на кнопку
+\toolbtntwo{mActionFileSave}{Сохранить изменения}. Если выключить режим
+редактирования \toolbtntwo{mActionToggleEditing}{Режим редактирования}
+(или просто выйти из \qg ), то появится запрос, хотите вы сохранить
+изменения или пнет.
 
-If the changes cannot be saved (e.g. disk full, or the attributes have
-values that are out of range), the \qg in-memory state is preserved.  This
-allows you to adjust your edits and try again.
+Если изменения не могут быть сохранены (напр., диск полон или атрибуты
+имеют неверное значение), \qg сохранит их в своей памяти. Это позволит
+откорректировать изменения и попробовать еще раз.
 
-\begin{Tip}\caption{\textsc{Data Integrity}}
-It is always a good idea to back up your data source before you
-start editing. While the authors of \qg have made every effort to preserve the
-integrity of your data, we offer no warranty in this regard.
+\begin{Tip}\caption{\textsc{Целостность данных}}
+Создание резервной копии данных перед началом редактирования "--- это
+всегда хорошая идея. Несмотря на то, что авторы \qg сделали все возможное
+для сохранения ваших данных, они по-прежнему не дают никаких гарантий в
+этом отношении.
 \end{Tip}
 
-\subsection{Advanced digitizing}
+\subsection{Дополнительные функции оцифровки}
 \index{vector layers!advanced digitizing}
 \index{advanced digitizing!an existing layer}
 \label{sec:advanced_edit}
@@ -1716,242 +1750,250 @@ integrity of your data, we offer no warranty in this regard.
 \centering
 \small
 \begin{tabular}{|l|p{6.9cm}|l|p{6.9cm}|}
-\hline \textbf{Icon} & \textbf{Purpose} & \textbf{Icon} & \textbf{Purpose} \\
+\hline \textbf{Пиктограмма} & \textbf{Назначение} & \textbf{Пиктограмма} & \textbf{Назначение} \\
 \hline \includegraphics[width=0.7cm]{mActionUndo}
-   & Undo
+   & Отменить
    & \includegraphics[width=0.7cm]{mActionRedo}
-   & Redo \\
+   & Вернуть \\
 \hline \includegraphics[width=0.7cm]{mActionSimplify}
-   & Simplify Feature
+   & Упростить объект
    & \includegraphics[width=0.7cm]{mActionAddRing}
-   & Add Ring \\
+   & Добавить кольцо \\
 \hline \includegraphics[width=0.7cm]{mActionAddIsland}
-   & Add Part
+   & Добавить часть
    & \includegraphics[width=0.7cm]{mActionDeleteRing}
-   & Delete Ring \\
+   & Удалить кольцо \\
 \hline \includegraphics[width=0.7cm]{mActionDeletePart}
-   & Delete Part
+   & Удалить часть
    & \includegraphics[width=0.7cm]{mActionReshape}
-   & Reshape Features \\
+   & Корректировать объекты \\
 \hline \includegraphics[width=0.7cm]{mActionSplitFeatures}
-   & Split Features
+   & Разбить объекты
    & \includegraphics[width=0.7cm]{mActionMergeFeatures}
-   & Merge Selected Features \\
+   & Объединить выбранные объекты \\
 \hline \includegraphics[width=0.7cm]{mActionRotatePointSymbols}
-   & Rotate Point Symbols
+   & Повернуть значки
    &
    & \\
 \hline
 \end{tabular}
-\caption{Vector layer advanced editing toolbar}\label{tab:advanced_editing}
+\caption{Дополнительные возможности редактирования векторного слоя}\label{tab:advanced_editing}
 \end{table}
 
-\minisec{Undo and Redo}
+\minisec{Отменить и Вернуть}
 \index{vector layers!undo}
 \index{vector layers!redo}
 
-The \toolbtntwo{mActionUndo}{Undo} and \toolbtntwo{mActionRedo}{Redo} tools
-allow the user to undo or redo the last or a certain step within the vector editing
-operations. Basic view of Undo/Redo operations is a widget, where all operations
-are shown (see Figure~\ref{fig:vector_redoundo}). This widget is not displayed by
-default. Widget can be displayed by right clicking on toolbar and activating the
-Undo/Redo check box. Undo/Redo is however active, even if the widget is not
-displayed.
+Инструменты \toolbtntwo{mActionUndo}{Отменить} и
+\toolbtntwo{mActionRedo}{Вернуть} позволяют отменить либо вернуть
+последний или какой-то конкретный шаг при редактировании векторных данных.
+Основной вид операций Отменить/Вернуть представляет из себя виджет, где
+показаны все действия (см. Рисунок~\ref{fig:vector_redoundo}). Этот виджет
+по умолчанию не показывается, чтобы он появился, надо нажать правой кнопкой
+мыши по панели инструментов и кликнуть по флажку Отменить/Вернуть. Однако
+функция Отменить/Вернуть активна, даже если виджет не выведен на экран.
 
-When Undo is hit, the state of all features and attributes are reverted to the
-state before the reverted operation happened. Changes which are done elsewhere
-(for example from some plugin), can show unspecific behavior for some operations
-which appears in this box. The operations can be reverted or they stay the same.
+При нажатии кнопки Отменить состояние всех объектов и их атрибутов
+возвращается на шаг назад. Изменения, произведенные в каком-либо другом
+месте (например, в одном из модулей), могут иметь неспецифические названия
+для своих операций, которые появляются в этой закладке. Операции можно
+отменить или оставить их изменения.
 
-An action can be triggered by clicking on Undo or Redo buttons or by clicking
-directly on the item to which you want to return to. Another possibility to
-trigger an undo operation is to click on the \button{undo/redo} buttons in
-the advanced digitizing tool bar.
+Действия можно отменить простым нажатием на кнопки Отменить или Вернуть,
+либо выбрать непосредствено на пункт из списка, который хотите отменить.
+Другая возможность отменить операцию "--- нажать на кнопку
+\button{Отменить/Вернуть} на панели инструментов дополнительных возможностей
+редактирования.
 
 \begin{figure}[ht]
    \centering
    \includegraphics[clip=true, width=12cm]{redo_undo}
-   \caption{Redo and Undo digitizing steps \nixcaption}\label{fig:vector_redoundo}
+   \caption{Отмена и Возврат операций редактирования \nixcaption}\label{fig:vector_redoundo}
 \end{figure}
 
-\minisec{Simplify Feature}
+\minisec{Упростить объект}
 \index{vector layers!simplify}
 
-The \toolbtntwo{mActionSimplify}{Simplify Feature} tool allows to reduce the
-number of vertices of a feature, as long as the geometry doesn't change. You
-need to select a feature, it will be highlighted by a red rubber band and a
-slider appears. Moving the slider, the red rubber band is changing its shape
-to show how the feature is being simplified. Clicking \button{OK} the new,
-simplified geometry will be stored. If a feature cannot be simplified (e.g.
-MultiPolygons), a message shows up.
+Инструмент \toolbtntwo{mActionSimplify}{Упростить объект} позволяет уменьшить
+количество вершин объекта, при том, что геометрия объекта не изменяется.
+Необходимо выделить объект, после чего он будет подсвечен красным и появится
+ползунок. Двигая ползунок, красная опоясывающая линия менят свою форму,
+показывая тем самым, как объект будет упрощен.Если нажать кнопку \button{OK}
+новая упрощенная геометрия будет сохранена. Если объект не может быть
+упрощен (напр., мультиполигоны), появится всплывающее окно предупреждения.
 
-\minisec{Add Ring}
+\minisec{Добавить кольцо}
 \index{vector layers!add!ring}
 
-You can create ring polygons using the \toolbtntwo{mActionAddRing}{Add Ring}
-icon in the toolbar. This means inside an existing area it is
-possible to digitize further polygons, that will occur as a 'hole', so only
-the area in between the boundaries of the outer and inner polygons remain as
-a ring polygon.
+Можно создать кольцевой полигон, используя функцию
+\toolbtntwo{mActionAddRing}{Добавить кольцо} на панели инструментов. Внутри
+существующего полигона можно оцифровать последующий полигон, который
+превратиться в <<отверстие>>, таким образом, только оставшаяся область
+между границами внешнего и внутреннего полигона и будет кольцевым полигоном.
 
-\minisec{Add Part}
+\minisec{Добавить часть}
 \index{vector layers!add!part}
 
-You can \toolbtntwo{mActionAddIsland}{add part} polygons to a selected multipolygon.
-The new part polygon has to be digitized outside the selected multipolygon.
+Можно использовать \toolbtntwo{mActionAddIsland}{Добавить часть} полигоны
+для выделения мультиполигональных объектов. Новая полигональная часть
+должна быть создана за границами мультиполигона.
 
-\minisec{Delete Ring}
+
+\minisec{Удалить кольцо}
 \index{vector layers!delete!ring}
 
-The \toolbtntwo{mActionDeleteRing}{Delete Ring} tool allows to delete ring
-polygons inside an existing area. This tool only works with polygon layers.
-It doesn't change anything when it is used on the outer ring of the polygon.
-This tool can be used on polygon and mutli-polygon features. Before
-you select the vertices of a ring, adjust the vertex edit tolerance.
+Инструмент \toolbtntwo{mActionDeleteRing}{Удалить кольцо} позволяет удалять
+кольцевые полигоны внутри существующей площади. Этот инструмент работает
+только с полигональными слоями. Никакик изменений не произойдет, если
+инструмент применяется за пределами кольца полигона. Инструмент может
+применяться как для полигональных объектов, так и мультиполигональных.
+Перед тем, как выделить вершины кольца, настройте порог прилипания для вершин.
 
-\minisec{Delete Part}
+
+\minisec{Удалить часть}
 \index{vector layers!delete!part}
 
-The \toolbtntwo{mActionDeletePart}{Delete Part} tool allows to delete parts
-from multifeatures (e.g. to delete polygons from a multipolygon feature). It
-won't delete the last part of the feature, this last part will stay untouched.
-This tool works with all multi-part geometries point, line and polygon. Before
-you select the vertices of a part, adjust the vertex edit tolerance.
+Инструмент \toolbtntwo{mActionDeletePart}{Удалить часть} позволяет удалять
+части мультиполигональных объектов (напр., удалить полигон
+мультиполигонального объекта). Инструмент не сможет удалить последнюю часть
+объекта. Она останется нетронутой. Инструмент работает со всеми типами
+геометрии: точками, линиями, полигонами. Перед тем, как выделить вершины
+части, необходимо настроить порог прилипания для вершин.
 
-\minisec{Reshape Features}
+\minisec{Корректировать объекты}
 \index{vector layers!reshape!feature}
 
-You can reshape line and polygon features using the
-\toolbtntwo{mActionReshape}{Reshape Features} icon on the toolbar. It
-replaces the line or polygon part from the first to the last intersection
-with the original line. With polygons this can sometime lead to unintended
-results. It is mainly useful to replace smaller parts of a polygon, not major
-overhauls and the reshapeline is not allowed to cross several polygon rings
-as this would generate an invalide polygon.
+Можно корректировать форму линий и полигонов, используя инструмент
+\toolbtntwo{mActionReshape}{Корректировать объекты}, расположенный на
+панели инструментов. Он удаляет часть линии или полигона между первым и
+последним пересечением с исходной линией. При работе с полигонами это
+может иногда привести к непредусмотренным результатам. Этот инструмент
+наиболее пригоден для корректировки небольших частей полигонов. Редактирование
+нескольких  полигональных объектов одновременно невозможно, так как при этом
+будут создаваться полигоны с ошибочной геометрией.
 
-\textbf{Note}: The reshape tool may alter the starting position of a polygon
-ring or a closed line. So the point that is represented 'twice' will not be
-the same any more. This may not be a problem for most applications, but it is
-something to consider.
+\textbf{Примечание}: Инструмент корректировки объектов может изменять начало
+кольца полигона или замкнутой линии. Так, точка, представленная тут «дважды»
+больше не будет таковой. Это не должно быть проблемой при использовании
+большинства приложений, но, тем не менее, это необходимо иметь ввиду.
 
-\minisec{Split Features}
+\minisec{Разбивка объектов}
 \index{vector layers!split!feature}
 
-You can split features using the \toolbtntwo{mActionSplitFeatures}{Split
-Features} icon on the toolbar. Just draw a line across the feature you
-want to split.
+Можно разбить объекты, используя инструмент
+\toolbtntwo{mActionSplitFeatures}{Разбить объекты} на панели
+инструментов. Чтобы разбить объект, просто нарисуйте линию через него.
 
-\minisec{Merge selected features}
+\minisec{Объединить выделенные объекты}
 \index{vector layers!merge!features}
 
-The \toolbtntwo{mActionMergeFeatures}{Merge Selected Features} tool allows to
-merge features that have common boundaries and the same attributes.
+Инструмент \toolbtntwo{mActionMergeFeatures}{объединить выделенные объекты}
+позволяет объединять объекты, которые имеют общие границы или атрибуты.
 
-\minisec{Rotate Point Symbols}
+\minisec{Повернуть значки}
 \index{vector layers!rotate!symbol}
 
-The \toolbtntwo{mActionRotatePointSymbols}{Rotate Point Symbols} tool
-allows to change the rotation of point symbols in the map canvas, if
-you have defined a rotation column from the attribute table of the point
-layer in the \tab{Symbology} tab of the \dialog{Layer Properties}.
-Otherwise the tool is inactive.
+Инструмент \toolbtntwo{mActionRotatePointSymbols}{Повернуть значки} позволяет
+изменить поворот точечного символа на карте, если задано вращение по столбцу
+атрибутивной таблицы точечного слоя в закладке \tab{Символика} из меню
+свойств слоя "--- \dialog{Свойства}. В другом случае инструмент будет не
+активен.
 
 \begin{figure}[ht]
    \centering
    \includegraphics[clip=true, width=6cm]{rotatepointsymbol}
-   \caption{Rotate Point Symbols \nixcaption}\label{fig:rotatepoint}
+   \caption{Поворот точечного символа \nixcaption}\label{fig:rotatepoint}
 \end{figure}
 
-To change the rotation, select a point feature in the map canvas and rotate
-it holding the left mouse button pressed. A red arrow with the rotation value
-will be visualized (see Figure~\ref{fig:rotatepoint}). When you release the
-left mouse button again, the value will be updated in the attribute table.
+Чтобы повернуть объект, выделите точечный объект на карте и вращайте его,
+удерживая нажатой левую кнопку мыши. При этом будет отображаться красная
+стрелка с величиной угла поворота (см. Рисунок~\ref{fig:rotatepoint}).
+Когда вы отпустите левую кнопку мыши,в таблице атрибутов обновится значение.
 
-\textbf{Note}: If you hold the \keystroke{Ctrl} key pressed, the rotation will be done
-in 15 degree steps.
+\textbf{Примечание}: Если удерживать кнопку \keystroke{Ctrl} нажатой, поворот
+будет осуществляться с шагом 15 градусов.
 
-\subsection{Creating a new Shapefile and Spatialite layer}\label{sec:create shape}\index{editing!creating a new shape layer}
+\subsection{Создание новых shape-слоев и слоев Spatialite}\label{sec:create shape}\index{editing!creating a new
+shape layer}
 
-\qg allows to create new Shapefile layers and new Spatialite layers.
-Creation of a new GRASS layer is supported within the GRASS-plugin. Please refer
-to section \ref{sec:creating_new_grass_vectors} for more information on
-creating GRASS vector layers.
+\qg позволяет создавать новые shape-слои и слои Spatialite. Создание новых
+слоев GRASS осуществляется с помощью модуля GRASS. Для более подробной
+информации по созданию слоев GRASS см. Раздел~\ref{sec:creating_new_grass_vectors}.
 
-\minisec{Creating a new Shapefile layer}\label{sec:create shape}\index{editing!creating a new shapefile layer}
+\minisec{Создание нового  shape-слоя}\label{sec:create shape}\index{editing!creating a new shapefile layer}
 
-To create a new Shape layer for editing, choose \button{new} >
-\toolbtntwo{mActionNewVectorLayer}{New Shapefile Layer} from the
-\mainmenuopt{Layer} menu. The \dialog{New Vector Layer} dialog will be
-displayed as shown in Figure \ref{fig:newvectorlayer}. Choose the type of
-layer (point, line or polygon).
+Чтобы создать новый редактируемый shape-файл, выберите \button{Создать} \arrow
+\toolbtntwo{mActionNewVectorLayer}{Создать новый shape-файл} из меню
+\mainmenuopt{Слой}. Появится диалог \dialog{Новый векторный слой}, как показано
+на Рисунке~\ref{fig:newvectorlayer}. Выберите тип слоя (точка, линия или полигон).
 
 \begin{figure}[ht]
    \centering
    \includegraphics[clip=true, width=8cm]{editNewVector}
-   \caption{Creating a new Shapefile layer Dialog \nixcaption}\label{fig:newvectorlayer}
+   \caption{Диалог создания нового shape-файла \nixcaption}\label{fig:newvectorlayer}
 \end{figure}
 
-Note that \qg does not yet support creation of 2.5D
-features (i.e. features with X,Y,Z coordinates) or measure features. At this
-time, only shapefiles can be created. In a future version of \qg, creation of
-any OGR or PostgreSQL layer type will be supported.
+Обратите внимание, что \qg пока еще не поддерживает создание объектов в
+размерности 2.5D (т.\,е. объектов с координатами X, Y, Z) или measure features.
+В настоящее время можно создавать только shape-файлы. В будущих
+версиях \qg будет поддерживаться создание любых слоев типов OGR или PostgreSQL.
 
-To complete the creation of the new Shapefile layer, add the desired attributes by
-clicking on the \button{Add} button and specifying a name and type for the
-attribute. Only \selectstring{Type}{real}, \selectstring{Type}{integer}, and
-\selectstring{Type}{string} attributes are supported. Additionally and
-according to the attribute type you can also define the width and precision
-of the new attribute column. Once you are happy with the attributes, click
-\button{OK} and provide a name for the shapefile. \qg will automatically add
-a \filename{.shp} extension to the name you specify. Once
-the layer has been created, it will be added to the map and you can edit it in
-the same way as described in Section \ref{sec:edit_existing_layer} above.
+В завершении создания shape-файла следует добавить желаемые атрибуты. Для
+этого надо нажать на кнопку  \button{Добавить} и задать имя и тип атрибутов.
+Поддерживаются только следующие типы атрибутов:  \selectstring{Тип}{Текст},
+\selectstring{Тип}{Целое число}, и \selectstring{Тип}{Десятичное число}.
+Дополнительно, в соответствии с выбранным типом атрибута, можно определить
+размер и точность для нового поля атрибутов. Как только все необходимые
+параметры заданы, нажмите кнопку \button{OK} и задайте имя для выходного
+shape-файла. \qg автоматически добавит к имени файла расширение \filename{.shp}.
+После того, как shape-файл создан, он будет добавлен в карту и доступен для
+обычного редактирования, как описано в разделе~\ref{sec:edit_existing_layer} выше.
 
-\minisec{Creating a new SpatiaLite layer}\label{sec:create spatialite}\index{editing!creating a new spatialite layer}
+\minisec{Создание нового слоя SpatiaLite}\label{sec:create spatialite}\index{editing!creating a new spatialite layer}
 
-To create a new SpatiaLite layer for editing, choose \button{new} >
-\toolbtntwo{mActionNewVectorLayer}{New SpatiaLite Layer} from the
-\mainmenuopt{Layer} menu. The \dialog{New SpatiaLite Layer} dialog will be
-displayed as shown in Figure \ref{fig:newspatialitelayer}.
+Чтобы создать новый редактируемый слой SpatiaLite, выберите \button{Создать}
+\arrow \toolbtntwo{mActionNewVectorLayer}{Создать слой SpatiaLite} из меню
+\mainmenuopt{Слой}. Появится диалог \dialog{Создать слой SpatiaLite}, как
+показано на рисунке~\ref{fig:newspatialitelayer}.
 
 \begin{figure}[ht]
    \centering
    \includegraphics[clip=true, width=8cm]{editNewSpatialite}
-   \caption{Creating a New Spatialite layer Dialog \nixcaption}\label{fig:newspatialitelayer}
+   \caption{Диалоговое окно Создать слой SpatiaLite \nixcaption}\label{fig:newspatialitelayer}
 \end{figure}
 
-First step is to select an existing Spatialite database or to create a new
-Spatialite database. This can be done with the browse \button{...} button
-to the right of the database field. Then add a name for the new layer and
-define the layer type and the EPSG SRID. If desired you can select to
-\checkbox{create an autoincrementing primary key}.
+Первый шаг "--- выбрать существующую базу данных Spatialite или создать
+новую. Загрузить существующую базу данных можно нажав на кнопку \button{...}
+справа от поля имени для базы данных. Затем следует задать имя новому слою и
+определить тип слоя и EPSG SRID. По желанию можно выбрать
+\checkbox{создать первичный ключ с автоматическим приращением}.
 
-To define an attribute table for the new Spatialite layer, add the names
-of the attribute columns you want to create with the according column type
-and click on the \button{Add to attribute list} button. Once you are happy
-with the attributes, click \button{OK}. \qg will automatically add the new
-layer to the legend and you can edit it in the same way as described in
-Section \ref{sec:edit_existing_layer} above.
+Чтобы задать таблицу атрибутов для нового слоя Spatialite, добавьте имена
+и определите соответствующие типы данных для новых столбцов таблицы, затем
+нажмите кнопку \button{Добавить}. В завершении нажмите кнопку \button{OK}.
+\qg автоматически добавит новый слой в легенду, и он будет доступен для
+обычного редактирования, как описано в разделе~\ref{sec:edit_existing_layer} выше.
 
-The spatialite creation dialog allows to create multiple layers without
-closing the dialog when you click \button{Apply}.
+В диалоговом окне по созданию spatialite слоя можно создать несколько слоев,
+нажимая на кнопку \button{Apply}, при этом нет необходимости закрывать
+диалоговое окно.
 
-\subsection{Working with the Attribute Table}
+\subsection{Работа с таблицей атрибутов}
 \label{sec:attribute table}
 \index{editing!working with the attribute table}
 
-The attribute table displays features of a selected layer. Each row in the table
-represents one map feature with its attributes shown in several columns. The
-features in the table can be searched, selected, moved or even edited.
+Таблица атрибутов представляет объекты выделенного слоя. Каждая строка таблицы
+соответствует одному объекту на карте и отражает его атрибуты в столбцах.
+Объекты в таблице можно искать, выделять, перемещать и редактировать.
 
-To open the attribute table for a vector layer, make the layer active by clicking
-on it in the map legend area. Then use \mainmenuopt{Layer} from the main menu
-and and choose \dropmenuopttwo{mActionOpenTable}{Open Attribute Table}
-from the menu. It is also possible to rightlick on the layer and
-choose \dropmenuopttwo{mActionOpenTable}{Open Attribute Table} from the
-dropdown menu. This will open a new window which displays the attributes for
-every feature in the layer (figure \ref{fig:attributetable}). The number of features
-are shown in the attribute table title.
+Чтобы открыть таблицу атрибутов векторного слоя, необходимо сделать его активным,
+нажав по нему кнопкой мыши в легенде карты. Затем в закладке \mainmenuopt{Слой}
+главного меню выбрать \dropmenuopttwo{mActionOpenTable}{Открыть таблицу атрибутов}.
+Также можно открыть таблицу атрибутов, щелкнув по слою в легенде правой
+кнопкой мыши, выбрать \dropmenuopttwo{mActionOpenTable}{Открыть таблицу атрибутов}
+из выпадающего меню. Откроется новое окно, в котором будут представлены атрибуты
+для аждого объекта слоя. (cм. Рисунок~\ref{fig:attributetable}). Количество
+объектов указано в заголовке атрибутивной таблицы.
 
 \begin{figure}[ht]
    \centering
@@ -1959,54 +2001,65 @@ are shown in the attribute table title.
    \caption{Attribute Table for Alaska layer \nixcaption}\label{fig:attributetable}
 \end{figure}
 
-\minisec{Selecting features in an attribute table}
+\minisec{Выделение объектов по таблице атрибутов}
 
-\textbf{A selected row} in the attribute table represents all attributes of a
-selected feature in the layer. The attribute table reflects any changes
-in the layer selection in the main window and vice versa. A changed selection
-in the attribute table also causes a change in the selected feature set in the
-main window and different layer feature selection means different rows are to be
-selected.
+\textbf{Выделенная строка} в таблице атрибутов представляет все атрибуты
+выделенного объекта слоя. Таблица атрибутов отражает все изменения в
+выделении объекта слоя через главное окно карты или наоборот. Смена
+выделения в таблице атрибутов приводит к изменению выделения в главном
+окне карты, также выделение другого объекта слоя приводит к выделению
+соответствующей ему строки таблицы.
 
-Rows can be selected by clicking on the row number on the left side of the
-row. Selecting a row doesn't change the current cursor position. \textbf{Multiple
-rows} can be marked by holding the \keystroke{Ctrl} key. A \textbf{continuous
-selection} can be made by holding the \keystroke{Shift} key and clicking on several
-row headers on the left side of the rows. All rows between the current cursor
-position and the clicked row are selected.
+Строки можно выделить, если нажать кнопкой мыши на номер строки, расположеный
+с левой стороны от нее. Выделение строки не меняет текущего положения курсора.
+\textbf{Несколько строк} можно выделить, удерживая клавишу \keystroke{Ctrl}.
+\textbf{Сквозное выделение} может также применяться, для этого необходимо
+удерживать клавишу \keystroke{Shift} и выбрать несколько строк, также
+нажимая на их номера-заголовки, расположенных слева. Все строки между
+текущим положением курсора и выбранными строками будут выделены.
 
-Each column can be sorted by clicking on its column header. A small arrow
-indicates the sort order (downward pointing means descending values from the top
-row down, upward pointing means ascending values from the top rown down).
+Каждый столбец может быть отсортирован. Для этого надо нажать кнопкой мыши
+по его заголовку. Небольшая стрелка отражает порядок сортировки (направленная
+вниз стрелка означает убывание величины от верхних строк к нижним,
+направленная вверх стрелка означает увеличение величины от верхних строк
+к нижним ).
 
-For a \textbf{simple search by attributes} on only one column the \button{Look for}
-field can be used. Select the field (column) from which the search should be
-performed from the dropdown menu and hit the \button{Search} button. The number of
-matching rows will appear in the status bar. For more complex searches use
-the Advanced search \button{...}, which will lauch the Search Query Builder
-described in Section \ref{sec:select_by_query}.
+Для \textbf{простого поиска по атрибутам} только по одному столбцу можно
+использовать поле \button{Искать?}. Выберите поле (столбец), по которому
+хотите произвести поиск, из выпадающего меню и нажмите кнопку \button{Поиск}.
+Количество сопоставленных записей появится в окне результатов. Для более
+сложного поиска используйте Расширенный поиск \button{...}, который будет
+описан в разделе~\ref{sec:select_by_query}.
 
-To show selected records only, use the checkbox \checkbox{Show selected records only}. To search selected records only, use the checkbox \checkbox{Search selected records only}. The other buttons at the bottom left of the attribute table window provide following functionality:
+Чтобы отобразить только выбранные строки, нажмите кнопкой мыши в окошке
+\checkbox{Показать только выбранные записи}. Остальные кнопки, расположенные
+слева снизу атрибутивной таблицы, обладают следующими функциональными
+возможностями:
 
 \begin{itemize}[label=--]
-\item \toolbtntwo{mActionOpenTable}{Remove selection}
-\item \toolbtntwo{mActionSelectedToTop}{Move selected to top}
-\item \toolbtntwo{mActionInvertSelection}{Invert selection}
-\item \toolbtntwo{mActionCopySelected}{Copy selected rows to clipboard} also with \keystroke{Ctrl-C}
-\item \toolbtntwo{mActionZoomToSelected}{Zoom map to selected rows} also with \keystroke{Ctrl-J}
-\item \toolbtntwo{mActionToggleEditing}{toggle editing mode} to edit single values
-of attribute table and to enable functionalities described below.
-\item \toolbtntwo{mActionDeleteSelected}{Delete Selected Features}
-\item \toolbtntwo{mActionNewAttribute}{New Column} for PostGIS layers and for OGR layers with GDAL version >= 1.6.
-\item \toolbtntwo{mActionDeleteAttribute}{Delete Column} only for PostGIS layers yet.
-\item \toolbtntwo{mActionCalculateField}{Open field calcultor}
+\item \toolbtntwo{mActionOpenTable}{Снять выделение}
+\item \toolbtntwo{mActionSelectedToTop}{Переместить выделенные в начало}
+\item \toolbtntwo{mActionInvertSelection}{Обратить выделение}
+\item \toolbtntwo{mActionCopySelected}{Копировать выбранные строки в буфер обмена}
+также с \keystroke{Ctrl-C}
+\item \toolbtntwo{mActionZoomToSelected}{Увеличить карту до выбранных строк}
+также с \keystroke{Ctrl-J}
+\item \toolbtntwo{mActionToggleEditing}{Режим редактирования} для
+редактирования отдельных значений таблицы атрибутов и активации функций,
+описанных ниже.
+\item \toolbtntwo{mActionDeleteSelected}{Удалить выделенные объекты}
+\item \toolbtntwo{mActionNewAttribute}{Добавить поле} для слоев PostGIS
+и OGR с версией GDAL >= 1.6.
+\item \toolbtntwo{mActionDeleteAttribute}{Удалить поле} пока только для
+слоев PostGIS.
+\item \toolbtntwo{mActionCalculateField}{Открыть калькулятор полей}
 \end{itemize}
 
-\begin{Tip}\caption{\textsc{Manipulating Attribute data}}
-Currently only PostGIS layers are supported for adding or dropping
-attribute columns within this dialog. In future versions of \qg, other
-datasources will be supported, because this feature was recently implemented
-in GDAL/OGR > 1.6.0
+\begin{Tip}\caption{\textsc{Управление атрибутивными данными}}
+В настоящее время только для слоев PostGIS поддерживается добавление или
+перетаскивание столбцов атрибутов с помощью этого диалогового окна. В
+будущих версиях \qg другие источники данных также будут поддерживаться,
+так как это нововведение было недавно добавлено в GDAL/OGR > 1.6.0
 \end{Tip}
 
 \section{Query Builder}\label{sec:query_builder}
