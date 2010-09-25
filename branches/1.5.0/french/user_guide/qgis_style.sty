@@ -2,11 +2,29 @@
 % % !TEX encoding = utf8
 % !TEX TS-program = pdflatex
 
+%%% Start with roman page numbers and change in section foreword
+\pagenumbering{roman}
 
 %%% encoding, utf8 should work for any localization
 \usepackage[utf8]{inputenc} 
 \usepackage[T1]{fontenc} 
 
+%%% build index
+%%% see http://web.image.ufl.edu/help/latex/latex_indexes.shtml
+\usepackage{makeidx}
+\makeindex
+
+%%% add disclaimer about the revision status of a section
+%%% usage:
+%%% when the revision of a section has been finalized,
+%%% comment out the following line:
+%%% \updatedisclaimer
+\newcommand{\updatedisclaimer}{\textcolor{red}{DISCLAIMER: This section of 
+the user guide has not yet been updated for consistency with Quantum GIS v\CURRENT. 
+Read at your own risk!}}
+
+%%% syllable division for better line breaks within commands
+\sloppy
 
 %%% font settings
 \usepackage{helvet}
@@ -14,7 +32,12 @@
 \renewcommand*{\familydefault}{\sfdefault} 
 \usepackage{numprint}
 
-% hypertext links   
+%%% spacing and paragraph style
+\renewcommand{\baselinestretch}{1.1}
+\parskip1.5ex
+\parindent 0pt
+
+%%% hypertext links   
 \usepackage[bookmarks=true, pdftitle={QGIS User Guide}, pdfauthor={QGIS Project}, pdfsubject={QGIS User Guide}, breaklinks=true, colorlinks=true, linkcolor=blue, urlcolor=red]{hyperref}
 
 %%%   images              
@@ -81,7 +104,7 @@
 \ihead[]{}
 \chead[]{}
 \ohead{\headmark}
-\ifoot[]{\vspace{-10pt} \qg \CURRENT User Guide} % Change the string to localize it
+\ifoot[]{\vspace{-10pt} \qg \CURRENT Manuel Utilisateur} % Change the string to localize it
 \cfoot[]{}
 \ofoot[\pagemark]{\vspace{-10pt}\pagemark}
 \setheadsepline{1pt}
@@ -92,17 +115,18 @@
 \setkomafont{captionlabel}{\sffamily\bfseries} 
 %\KOMAoptions{toc=flat,listof=flat}
 
-%%%   bibliography     
-\usepackage{csquotes}
+%%% Bibliography     
+%\usepackage{csquotes}
 %\usepackage[style=authoryear]{biblatex}
-\bibliography{cited_lit,cited_weblinks}
+\bibliographystyle{acm}
+\renewcommand*{\bibname}{Bibliographie et références internet} % Change the string to localize it
 
 
 %%%   Tip     
 \usepackage{float}
 \floatstyle{ruled}
 \newfloat{Tip}{ht}{toa}
-\floatname{Tip}{QGIS Tip} % Change the second string to localize it
+\floatname{Tip}{Astuce QGIS} % Change the second string to localize it
 
 
 % math
@@ -119,9 +143,9 @@
 
 %%% Localization, if you're not making the en_US' manual then you have to change this part to get a better visual product
 
-%\usepackage[frenchb]{babel} 
+\usepackage[frenchb]{babel} 
 % used to get better list in french
-%\frenchbsetup{StandardLists=true}
+\frenchbsetup{StandardLists=true}
 
 
 %%% Macros QGIS Versions  
@@ -396,7 +420,7 @@
 %% arrow
 \newcommand{\arrow}{%
 \begin{tikzpicture}[line width=1.5pt,,baseline=0pt] 
-\draw[->] (0,0.3) |- (1,0);
+\draw[->] (0,0.3) |- (0.5,0);
 \end{tikzpicture}
 }
 
