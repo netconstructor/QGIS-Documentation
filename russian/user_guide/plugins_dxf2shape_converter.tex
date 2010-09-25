@@ -1,37 +1,48 @@
-%  !TeX  root  =  user_guide.tex 
+%  !TeX  root  =  user_guide.tex
 
-\section{Dxf2Shp Converter Plugin}
+\section{Модуль Преобразователь Dxf2Shp}
 
-% when the revision of a section has been finalized, 
-% comment out the following line:
+% когда переработка раздела будет завершена,
+% раскоментируйте следующую строку:
 %\updatedisclaimer
 
-The dxf2shape converter plugin can be used to convert vector data from DXF to Shapefile 
-format. It requires the following parameters to be specified before running:
+Модуль Преобразователь dxf2shape может быть использован для преобразования
+векторных данных из формата DXF в формат shape-файлов. Перед его
+использованием должны быть определены следующие параметры:
 
 \begin{itemize}
-\item \textbf{Input DXF file}: Enter path to the DXF file to be converted
-\item \textbf{Output Shp file}: Enter desired name of the Shapefile to be created
-\item \textbf{Output file type}: Specify the geometry type of the output Shapefile. 
-Currently supported types are polyline, polygon, and point.
-\item \textbf{Export text labels}: When this checkbox is enabled, an additional Shapefile point layer will be created, and the associated dbf table will contain information about the "TEXT" fields found in the dxf file, and the text strings themselves.
+\item \textbf{Входной DXF-файл}: Введите путь до файла в формате DXF,
+который необходимо преобразовать
+\item \textbf{Выходной Shp-файл}: Введите любое желаемое имя файла для
+создаваемого shape-файла
+\item \textbf{Тип выходного файла}: Определите тип геометрии данных
+выходного shape-файла. В настоящее время поддерживаются такие типы как
+полилиния, полигон и точка.
+\item \textbf{Экспорт текстовых меток}: При выборе данного пункта
+дополнительно будет создан shape-файл слоя точек, ассоциированный с
+таблицей dbf, которая содержит информацию о полях <<TEXT>>, найденных в
+файле dxf и соответствующие текстовые строки.
 \end{itemize}
 
 \begin{figure}[ht]
    \centering
-   \includegraphics[clip=true, width=12cm]{dxf2shape_dialog}   
-   \caption{Dxf2Shape Converter Plugin \nixcaption}\label{fig:dxf2shape_dialog}
+   \includegraphics[clip=true, width=12cm]{dxf2shape_dialog}
+   \caption{Модуль Преобразователь Dxf2Shape \nixcaption}\label{fig:dxf2shape_dialog}
 \end{figure}
 
-\minisec{Using the Plugin}
+\minisec{Использование модуля}
 
 \begin{enumerate}
-  \item Start QGIS, load the Dxf2Shape plugin in the Plugin Manager (see Section 
-  \ref{sec:load_core_plugin}) and click on the \toolbtntwo{dxf2shp_converter}{Dxf2Shape Converter} 
-  icon which appears in the QGIS toolbar menu. The Dxf2Shape plugin dialog appears as shown in Figure \ref{fig:dxf2shape_dialog}.
-  \item Enter input DXF file, a name for the output Shapefile and the Shapefile type.
-  \item Enable the \checkbox{Export text labels} checkbox if you want to create an extra point layer with labels.
-  \item Click \button{Ok}. 
+  \item Запустите QGIS, загрузите модуль Dxf2Shape в Менеджере модулей
+  (см. Раздел~\ref{sec:load_core_plugin}) и нажмите кнопку
+  \toolbtntwo{dxf2shp_converter}{Dxf2Shape Converter} расположенную на
+  панели инструментов QGIS. Диалоговое окно модуль Dxf2Shape показано на
+  Рисунке~\ref{fig:dxf2shape_dialog}.
+  \item Введите имя входного DXF файла, укажите имя выходного shape-файла
+  и его тип.
+  \item Выберите пункт \checkbox{Экспорт текстовых меток} если вам
+  требуется создать дополнительный слой содержащий надписи.
+  \item Нажмите кнопку \button{Ok}.
 \end{enumerate}
 
 \FloatBarrier
