@@ -39,7 +39,7 @@ La sintassi d'uso di QGIS è:
 \small
 \begin{verbatim}
 qgis --help
-Quantum GIS - 1.3.0-Mimas 'Mimas' (exported)
+Quantum GIS - 1.4.0-Enceladus 'Enceladus' (exported)
 Quantum GIS (QGIS) is a viewer for spatial data sets, including
 raster and vector data.
 Usage: qgis [options] [FILES]
@@ -134,6 +134,27 @@ L'interfaccia di QGIS è divisa in sei aree:
 Le sei componenti dell'interfaccia di QGIS saranno descritte con maggior dettaglio
 nelle sezioni seguenti.
 
+\subsubsection{Scorciatoie da tastiera}\label{shortcuts}
+\index{Keyboard shortcuts}
+
+QGIS provides default keyboard shortcuts for many features. You find them in
+Section \ref{label_menubar} below. Additionally the menu option \mainmenuopt{Settings} >
+\dropmenuopt{Configure Shortcuts} allows to change the default keyboard
+shortcuts and to add new keyboard shortcuts to QGIS features.  
+
+\begin{figure}[ht]
+   \begin{center}
+   \caption{Define shortcut options \nixcaption (KDE)}
+         \label{fig:shortcuts}
+   \includegraphics[clip=true, width=8cm]{shortcuts}
+\end{center}
+\end{figure}
+
+Configuration is very simple. Just select a feature from the list and click
+on \button{Change}, \button{Set none} or \button{Set default}. Once you have
+found your configuration, you can save it as XML file and load it to another
+QGIS installation. 
+
 \subsubsection{Barra menu}\label{label_menubar}
 \index{barra menu}
 
@@ -180,10 +201,17 @@ Per ulteriori informazioni su strumenti e barre degli strumenti, si veda la Sezi
 \dropmenuopttwo{mActionSaveMapAsImage}{Salva come immagine}
 	\>
 	\> vedi Sezione \ref{sec:output} \\
-\dropmenuopttwo{mActionFilePrint}{Compositore stampe}
-	\> \keystroke{Ctrl+P}
+\dropmenuopttwo{mActionNewComposer}{Nuovo sistema di stampa}
+        \> \keystroke{Ctrl+P}
+        \> vedi Sezione \ref{label_printcomposer}
+        \> \dropmenucheck{File} \\
+\dropmenuopttwo{mActionComposerManager}{Gestore di stampe}
+	\> 
 	\> vedi Sezione \ref{label_printcomposer}
 	\> \dropmenucheck{File} \\
+\dropmenuopt{Print Composers}
+	\>
+	\> see Section \ref{label_printcomposer} \\
 \dropmenuopttwo{mActionFileExit}{Esci} 
 	\> \keystroke{Ctrl+Q} \\
 \end{tabbing}
@@ -211,42 +239,75 @@ Per ulteriori informazioni su strumenti e barre degli strumenti, si veda la Sezi
 	\> \keystroke{Ctrl+V}
 	\> vedi Sezione \ref{sec:edit_existing_layer} 
 	\> \dropmenucheck{Digitalizza} \\
-\dropmenuopttwo{mActionCapturePoint}{Inserisci punto}
-	\> \keystroke{.}
-	\> vedi Sezione \ref{sec:edit_existing_layer} 
-	\> \dropmenucheck{Digitalizza} \\
-\dropmenuopttwo{mActionCaptureLine}{Inserisci linea}
-	\> \keystroke{/}
-	\> vedi Sezione \ref{sec:edit_existing_layer} 
-	\> \dropmenucheck{Digitalizza} \\
-\dropmenuopttwo{mActionCapturePolygon}{Inserisci poligono}
-	\> \keystroke{Ctrl+/}
-	\> vedi Sezione \ref{sec:edit_existing_layer} 
-	\> \dropmenucheck{Digitalizza} \\
-E altre voci del menu Modifica
-	\>
-	\> vedi Sezione \ref{sec:edit_existing_layer} 
-	\> \dropmenucheck{Digitalizza} \\
-%\dropmenuopt{Move Feature}
-%	\> \> \dropmenucheck{Edit} \\
-%\dropmenuopt{Split Features}
-%	\> \> \dropmenucheck{Edit} \\
-%\dropmenuopt{Delete Selected}
-%	\> \> \dropmenucheck{Edit} \\
-%\dropmenuopt{Add Vertex}
-%	\> \> \dropmenucheck{Edit} \\
-%\dropmenuopt{Move Vertex}
-%	\> \> \dropmenucheck{Edit} \\
-%\dropmenuopt{Delete Vertex}
-%	\> \> \dropmenucheck{Edit} \\
-%\dropmenuopt{Add Ring}\footnote{New since v0.9} 
-%	\>
-%	\> \dropmenucheck{Edit} \\
-%\dropmenuopt{Add Island} \footnotemark[\value{footnote}] 
-%	\>
-%	\> \dropmenucheck{Edit} \\
+\dropmenuopttwo{mActionEditPaste}{Sposta geometrie}
+        \> 
+        \> vedi Sezione \ref{sec:edit_existing_layer}
+        \> \dropmenucheck{Digitalizza} \\
+\dropmenuopttwo{mActionDeleteSelected}{Elimina la selezione}
+        \> 
+        \> vedi Sezione \ref{sec:edit_existing_layer}
+        \> \dropmenucheck{Digitalizza} \\
+\dropmenuopttwo{mActionSimplify}{Simplify Feature}
+        \>
+        \> vedi Sezione \ref{sec:advanced_edit}
+        \> \dropmenucheck{Advanced Digitizing} \\
+\dropmenuopttwo{mActionAddRing}{Aggiungi un buco}
+        \>
+        \> vedi Sezione \ref{sec:advanced_edit}
+        \> \dropmenucheck{Advanced Digitizing} \\
+\dropmenuopttwo{mActionAddIsland}{Aggiungi una parte}
+        \>
+        \> vedi Sezione \ref{sec:advanced_edit}
+        \> \dropmenucheck{Advanced Digitizing} \\
+\dropmenuopttwo{mActionDeleteRing}{Elimina buco}
+        \>
+        \> vedi Sezione \ref{sec:advanced_edit}
+        \> \dropmenucheck{Advanced Digitizing} \\
+\dropmenuopttwo{mActionDeletePart}{Elimina parte}
+        \>
+        \> vedi Sezione \ref{sec:advanced_edit}
+        \> \dropmenucheck{Advanced Digitizing} \\
+\dropmenuopttwo{mActionReshape}{Modifica la forma}
+        \>
+        \> vedi Sezione \ref{sec:advanced_edit}
+        \> \dropmenucheck{Advanced Digitizing} \\
+\dropmenuopttwo{mActionSplitFeatures}{Spezza elemento}
+        \>
+        \> vedi Sezione \ref{sec:advanced_edit}
+        \> \dropmenucheck{Advanced Digitizing} \\
+\dropmenuopttwo{mActionMergeFeatures}{Unisci le geometrie selezionate}
+        \>
+        \> vedi Sezione \ref{sec:advanced_edit}
+        \> \dropmenucheck{Advanced Digitizing} \\
+\dropmenuopttwo{mActionNodeTool}{Node Tool}
+        \>
+        \> vedi Sezione \ref{sec:edit_existing_layer}
+        \> \dropmenucheck{Digitalizza} \\
+\dropmenuopttwo{mActionRotatePointSymbols}{Ruota i simboli per i punti}
+        \>
+        \> vedi Sezione \ref{sec:advanced_edit}
+        \> \dropmenucheck{Advanced Digitizing} \\
 \end{tabbing}
 
+After activating \toolbtntwo{mActionToggleEditing}{toogle editing} mode
+for a layer, you will find a capture feature icon in the \mainmenuopt{Edit}
+menu depending on the layer type (point, line or polygon). \\
+
+\begin{tabbing}
+\hspace{4.5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
+\dropmenuopttwo{mActionCapturePoint}{Capture Point}
+        \>
+        \> see Section \ref{sec:edit_existing_layer}
+        \> \dropmenucheck{Digitizing} \\
+\dropmenuopttwo{mActionCaptureLine}{Capture Line}
+        \>
+        \> see Section \ref{sec:edit_existing_layer}
+        \> \dropmenucheck{Digitizing} \\
+\dropmenuopttwo{mActionCapturePolygon}{Capture Polygon}
+        \>
+        \> see Section \ref{sec:edit_existing_layer}
+        \> \dropmenucheck{Digitizing} \\
+\end{tabbing}
 
 \item \mainmenuopt{Visualizza}
 \begin{tabbing}
@@ -310,32 +371,32 @@ E altre voci del menu Modifica
 \begin{tabbing}
 \hspace{5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
 \dropmenuopttwo{mActionNewVectorLayer}{Nuovo layer vettoriale}
-	\> \keystroke{N}
+	\> \keystroke{Ctrl+Shift+N}
 	\>          	
 	vedi Sezione \ref{sec:create shape}
 	\> \dropmenucheck{Gestisci layer} \\
 \dropmenuopttwo{mActionAddNonDbLayer}{Aggiungi layer vettoriale}       
-	\> \keystroke{V}
+	\> \keystroke{Ctrl+Shift+V}
 	\>          	
 	vedi Sezione \ref{label_workingvector}
 	\> \dropmenucheck{File} \\
 \dropmenuopttwo{mActionAddRasterLayer}{Aggiungi layer raster}       
-	\> \keystroke{R}
+	\> \keystroke{Ctrl+Shift+R}
 	\>          	
 	vedi Sezione \ref{label_raster}
 	\> \dropmenucheck{File} \\
 \dropmenuopttwo{mActionAddLayer}{Aggiungi layer PostGIS}      
-	\> \keystroke{D}
+	\> \keystroke{Ctrl+Shift+D}
 	\>          	
 	vedi Sezione \ref{label_postgis}
         \> \dropmenucheck{File} \\
 \dropmenuopttwo{mActionAddSpatiaLiteLayer}{Aggiungi layer SpatiaLite}
-        \> \keystroke{L}
+        \> \keystroke{Ctrl+Shift+L}
         \>
         vedi Sezione \ref{label_spatialite}
 	\> \dropmenucheck{File} \\
 \dropmenuopttwo{mActionAddWmsLayer}{Aggiungi layer WMS}          
-	\> \keystroke{W}
+	\> \keystroke{Ctrl+Shift+W}
 	\>          	
 	vedi Sezione \ref{sec:ogc-wms}
 	\> \dropmenucheck{File} \\
@@ -356,30 +417,30 @@ E altre voci del menu Modifica
 \dropmenuopt{Proprietà}
 	\\
 \dropmenuopttwo{mActionInOverview}{Aggiungi alla panoramica}
-	\> \keystroke{O}
+	\> \keystroke{Ctrl+Shift+O}
 	\>          	
 	\> \dropmenucheck{Gestisci layer} \\
 \dropmenuopttwo{mActionAddAllToOverview}{Aggiungi tutto alla panoramica}
-	\> \keystroke{+}
+	\>
 	\>          	
 	\\
 \dropmenuopttwo{mActionRemoveAllFromOverview}{Rimuovi tutto dalla panoramica}
-	\> \hspace{1cm}\keystroke{-}
+	\>
 	\>          	
 	\\
 \dropmenuopttwo{mActionHideAllLayers}{Nascondi tutti i layer}
-	\> \keystroke{H}
+	\> \keystroke{Ctrl+Shift+H}
 	\>          	
 	\> \dropmenucheck{Gestisci layer} \\
 \dropmenuopttwo{mActionShowAllLayers}{Mostra tutti i layer}
-	\> \keystroke{S}
+	\> \keystroke{Ctrl+Shift+S}
 	\>          	
 	\> \dropmenucheck{Gestisci layer} \\
 \end{tabbing}
 
 \item \mainmenuopt{Impostazioni}
 \begin{tabbing}
-\hspace{4.5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
+\hspace{5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
 \dropmenuopt{Pannelli}  
 	\>           
 	\>          	
@@ -397,15 +458,18 @@ E altre voci del menu Modifica
 	\> vedi Sezione \ref{sec:projects}
 	\\
 \dropmenuopttwo{mActionCustomProjection}{CRS personalizzato}   
-\> \> vedi Sezione \ref{sec:customprojections}
+	\> \> vedi Sezione \ref{sec:customprojections}
 	\\
+\dropmenuopt{Gestore di stili}
+        \>
+        \>
+        \\
 \dropmenuopttwo{mActionOptions}{Configura scorciatoie}
         \>
         \>
         \\
 \dropmenuopttwo{mActionOptions}{Opzioni}             
-\> \>          	
-vedi Sezione \ref{subsec:gui_options}
+	\> \> vedi Sezione \ref{subsec:gui_options}
 	\\
 \end{tabbing}
 
@@ -422,7 +486,7 @@ vedi Sezione \ref{subsec:gui_options}
 
 \item \mainmenuopt{Aiuto}
 \begin{tabbing}
-\hspace{4.5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
+\hspace{5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
 \dropmenuopttwo{mActionHelpContents}{Aiuto contenuti}
 	\> \keystroke{F1}
 	\>           	
@@ -527,7 +591,7 @@ non è abilitata. Si veda la sezione \ref{grass_digitising} per informazioni su 
 \item \dropmenuopt{Aggiungi gruppo}
 \item \dropmenuopt{Espandi tutto}
 \item \dropmenuopt{Comprimi tutto}
-\item \dropmenuopt{Mostra gruppi}
+%%\item \dropmenuopt{Mostra gruppi}
 \end{itemize}
 
 \item \textbf{Menu relativo ai gruppi di layer attivabile con il tasto destro del mouse} 
@@ -746,13 +810,12 @@ vengono letti. Il valore di prova suggerito per iniziare è 500.
 Vi sono 3 opzioni per modificare la qualità della resa a video. Dal menu
 \mainmenuopt{Impostazioni} > \dropmenuopt{Opzioni} cliccare sulla scheda
 \tab{Disegno} e selezionare o deselezionare le seguenti caselle di controllo.
+
 \begin{itemize}
 \item \checkbox{Rendi le linee meno dettagliate in favore di migliori
 prestazioni nel disegno}
 \item \checkbox{Risolvi problemi con poligoni riempiti non correttamente}
-%%\item \checkbox{Ridisegna la mappa mentre viene spostato il divisore legenda/mappa}
 \end{itemize}
-
 
 \subsection{Misurazioni}\label{sec:measure}\index{misura}
 
@@ -762,7 +825,10 @@ geografiche (es. latitudine/longitudine), il risultato della misura di linee o
 di aree saranno errati. Per misurare è quindi necessario impostare
 correttamente il sistema di coordinate della mappa (si veda la Sezione \ref{label_projections}).
 
-\subsubsection{Misurare lunghezze e aree}\index{misura!lunghezza}\index{misura!area}
+\subsubsection{Misurare lunghezze e aree}
+\index{misura!lunghezza}
+\index{misura!area}
+
 \includegraphics[width=0.7cm]{mActionMeasure} 
 QGIS è in grado di fornire la misura di distanza reale tra due punti in
 funzione di un definito ellissoide. Ciò può essere configurato dall'opzione di
@@ -773,7 +839,7 @@ appropriato. Qui sarà possibile inolre definire  a rubberband color e l'unità 
 La misura di ogni segmento verrà mostrata nella finestra dello strumento insieme alla misura totale. Per terminare la funzione misura cliccare con il
 tasto destro del mouse. \\
 \includegraphics[width=0.7cm]{mActionMeasureArea} Questo strumento consente la
-misura di aree, la finestra mostrerà unicamente l'area totale misurata.
+misura di aree, la finestra mostrerà unicamente l'area totale misurata. \\
 In aggiunta, lo strumento di misura farà lo snap sul layer selezionato al momento, nel caso il layer abbia definita la sua tollezanza di snap. 
 (Vedi Sezione~\ref{snapping_tolerance}). 
 Se dunque si vuole misurare esattamente lungo una linea o un poligono, è necessario prima definire la sua tolleranza di snap, poi selezionae il layer. 
@@ -822,12 +888,18 @@ delle precedenti versioni di QGIS, di conseguenza file di progetto salvati con
 precedenti versioni di QGIS potrebbero non funzionare più correttamente. Si
 può essere avvertiti preventivamente di ciò selezionando dalla scheda
 \tab{Generale} nel menu \mainmenuopt{Impostazioni} > \dropmenuopt{Opzioni} 
-la casella di controllo \checkbox{Avvisa quando un file di progetto viene
-salvato con una vecchia versione di QGIS}.
+la casella di controllo 
 
+\checkbox{Promt to save project changes when required} \\
+\checkbox{Avvisa quando un file di progetto viene salvato con una vecchia versione di 
+QGIS}.
 
 \minisec{Proprietà progetto}
-Nella finestra delle proprietà del progetto (sotto \nix{\mainmenuopt{File} > \dropmenuopt{Proprietà progetto}} o \win{\mainmenuopt{Impostazioni} > \dropmenuopt{Proprietà progetto} } possono essere impostate opzioni specifiche del progetto. Queste includono:
+Nella finestra delle proprietà del progetto (sotto \nix{\mainmenuopt{File} >
+\dropmenuopt{Proprietà progetto}} o \win{\mainmenuopt{Impostazioni} >
+\dropmenuopt{Proprietà progetto} } possono essere impostate opzioni specifiche del progetto. Queste
+includono:
+
 \begin{itemize}
  \item Nella tabella \tab{Generale} il titolo del progetto, unità, e l'opzione per salvare i percorsi relativi ai layer. Qui possono essere impostate anche opzioni per l'editing topologico e per lo snapping.
 \item La tabella \tab{CRS} Sistema di proiezione delle coordinate permette di scegliere il sistema di proiezione delle coordinate e di abilitare la riproiezione al volo dei layer vettoriali quando vengono visualizzati layer con differenti CRS.
