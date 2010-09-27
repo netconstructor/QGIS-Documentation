@@ -422,6 +422,70 @@ gis_data=# \q
 gsherman@madison:~/current$
 \end{verbatim}
 
+\subsubsection{Layer vettoriali che attraversano 180$^\circ$ di longitudine}
+\index{vector layers!crossing}
+
+Many GIS packages don't wrap vector maps, with a geographic reference system
+(lat/lon), crossing the \degrees{180} longitude line. As result, if
+we open such map in QGIS, we will see two far, distinct locations, that
+should show near each other. In Figure \ref{fig:vector_not_wrapping} the tiny
+point on the far left of the map canvas (Chatham Islands), should be within
+the grid, right of New Zealand main islands.
+
+\begin{figure}[ht]
+   \begin{center}
+   \caption{Map in lat/lon crossing the \degrees{180} longitude line
+   \nixcaption}
+   \label{fig:vector_not_wrapping}\smallskip
+   \includegraphics[clip=true, width=\textwidth]{vectorNotWrapping}
+\end{center}
+\end{figure}
+
+A workaround is to transform the longitude values using PostGIS and the
+\textbf{ST\textunderscore Shift\textunderscore Longitude}
+\footnote{\url{http://postgis.refractions.net/documentation/manual-1.4/ST_Shift_Longitude.html}}
+function. This function reads every point/vertex in every component of every
+feature in a geometry, and if the longitude coordinate is < \degrees{0} adds
+\degrees{360} to it. The result would be a \degrees{0} - \degrees{360} version of
+the data to be plotted in a \degrees{180} centric map.
+
+\begin{figure}[ht]
+   \begin{center}
+   \caption{Map crossing \degrees{180} longitude applying the ST\textunderscore Shift\textunderscore Longitude function \nixcaption}
+\label{fig:vector_wrapping}\smallskip
+   \includegraphics[clip=true, width=9cm]{vectorWrapping}
+\end{center}
+\end{figure}
+
+\minisec{Utilizzo}
+
+\begin{itemize}
+\item Import data to PostGIS (\ref{sec:loading_postgis_data}) using for
+example the PostGIS Manager plugin or the SPIT plugin
+\item Use the PostGIS command line interface to issue the following command
+(this is an example where "TABLE" is the actual name of your PostGIS table) \\ 
+\texttt{gis\_data=\# update TABLE set the\_geom=ST\_shift\_longitude(the\_geom);} 
+\item If everything went right you should receive a confirmation about the
+number of features that were updated, then you'll be able to load the map and
+see the difference (Figure \ref{fig:vector_wrapping})
+\end{itemize}
+
+\subsection{Layer SpatiaLite} 
+\index{SpatiaLite layers!properties dialog}
+\index{vector layers!SpatlaLIte|see{SpatiaLite}}
+\index{SpatiaLite!layers}
+\label{label_spatialite} 
+
+\includegraphics[width=0.7cm]{mActionAddSpatiaLiteLayer}
+The first time you load data from a Spatialite database, begin by clicking on the 
+\toolbtntwo{mActionAddSpatiaLiteLayer}{Add SpatiaLite Layer} toolbar button or by selecting the 
+\dropmenuopttwo{mActionAddSpatiaLiteLayer}{Add SpatiaLite Layer...} 
+option from the \mainmenuopt{Layer} menu or by typing \keystroke{L}. 
+This will bring up a window, which will allow you to either connect to a Spatialite database already known to QGIS, which 
+you can choose from the dropdown menu or to define a new connection to a new database. To define a new connection, 
+click on \button{New} and use the file browser to point to your SpatiaLite database, 
+which is a file with a \filename{.sqlite } extension.
+
 \subsection{Proprietà dei layer vettoriali}\label{sec:vectorprops}
 \index{layer vettoriali!finestra delle proprietà}
 
@@ -528,14 +592,201 @@ vettoriale. Ciò può essere fatto settando l'apposita barra
 Ciò può essere molto utile per la visualizzazione di più layer vettoriali
 sovrapposti.
 
-\subsubsection{Scheda Metadata}
+\subsubsection{New Generation Symbology}
 
-La scheda \tab{Metadata} contiene informazioni relative al layer quali il formato, la posizione, il
-numero ed il tipo di geometrie e le possibilità di modifica. Nella sezione
-\guiheading{Sistema di riferimento spaziale del layer} è visualizzata la proiezione associata al
-dato, mentre quella \guiheading{Informazioni campo attributi} fornisce il nome
-e il formato dei campi della tabella associata. Questo è un metodo veloce per
-ottenere informazioni sul layer.
+In QGIS \CURRENT a new symbology was integrated in parallel with the symbology 
+described above. This new generation symbology provides a variety of improvements and 
+new features and will replace the current symbology in one of the upcoming releases. 
+To switch to the new symbolgy you currently have to click on the \button{new symbology} button in the \tab{General} tab of the \dialog{Layer Properties} dialog.  
+
+\minisec{Understanding the new generation symbology}
+
+There are three types of symbols: marker symbols (for points), line symbols and 
+fill symbols (for polygons). Symbols can consist of one or more symbol layers. It 
+is possible to define the color of a symbol and this color is then defined for all 
+symbol layers. Some layers may have the color locked - for those the color can not 
+be altered. This is useful when you define the color of a multilayer symbol. 
+Similarly, it is possible to define the width for line symbols, as well as size and 
+angle for marker symbols.
+
+\minisec{Available symbol layer types} 
+
+\begin{itemize}
+\item \textbf{Simple marker}: Rendering with one of hardcoded markers.
+\item \textbf{Simple line}: Usual rendering of a line (with specified 
+width, color and pen style) 
+\item \textbf{Simple fill}: Usual rendering of a polygon (with defined 
+fill color, fill pattern and outline) 
+\item \textbf{SVG marker}: Rendering with a SVG picture 
+\item \textbf{Marker line}: A line rendered by repeating a marker symbol 
+\end{itemize}
+
+\minisec{Color ramps}
+
+Color ramps are used to define a range of colors that can be used during 
+the creation of renderers. The symbol's color will be set from the color ramp. 
+There are two types of color ramps:
+ 
+\begin{itemize}
+\item \textbf{Gradient}: Linear gradient from one color to some other.
+\item \textbf{random}: Randomly generated colors from a specified area of 
+color space 
+\end{itemize}
+
+\minisec{Styles}
+
+A style groups a set of various symbols and color ramps. You can define your 
+prefered or frequently used symbols, and can use it  without having to recreate 
+it everytime. Style items (symbols and color ramps) have always a name by which 
+they can be queried from the style. There is one default style in QGIS (modifiable) 
+and the user can add further styles.
+
+\minisec{Renderers}
+
+The renderer is responsible for drawing a feature together with the correct 
+symbol. There are three types of renderers: single symbol, categorized (called 
+unique color in the old symbology), and graduated. There is no continuous color 
+renderer, because it is in fact only a special case of the graduated renderer. 
+The categorized and graduated renderer can be created by specifying a symbol 
+and a color ramp - they will set the colors for symbols appropriately. 
+
+\subsubsection{Working with the New Generation Symbology}
+
+First you have to enable the new generation symbology clicking on the 
+\button{new symbology} button in the \tab{General} tab of the 
+\dialog{Layer Properties} dialog. The new dialog allows to choose one of the 
+three renderers: single symbol, categorized and graduated. Depending on the 
+chosen renderer, the symbology tab provides different settings and options, that 
+will be described in the following sections.
+
+\minisec{Single Symbol Renderer}
+
+The Single Symbol Renderer is used to render all features of the layer using a 
+single user-defined symbol. The properties, that can be adjusted in the 
+Symbology tab, depend partially on the type of the layer, but all types share 
+the following structure. In the top left part of the tab, there is a preview of 
+the current symbol to be rendered. In the bottom part of the tab, there is a 
+list of symbols already defined for the current style, prepared to be used via 
+selecting them from the list. The current symbol can be modified using the 
+\button{Properties} button, which opens a \dialog{Symbol Properties} dialog, or 
+the \button{Set Color} button, which opens an ordinary \dialog{Color} dialog.
+After having done any needed changes, the symbol can be added to the list of 
+current style symbols (using the \button{Add to style} button) and then easily 
+be used in the future.
+ 
+\begin{figure}[h]
+\centering
+\caption{New Single Symbolizing options \nixcaption}
+   \subfigure[Single symbol point properties] {\label{subfig:singleNG1}\includegraphics[clip=true, width=0.3\textwidth]{singlesymbol_ng_point}}\goodgap
+   \subfigure[Single symbol line properties] {\label{subfig:singleNG2}\includegraphics[clip=true, width=0.3\textwidth]{singlesymbol_ng_line}}\goodgap
+   \subfigure[Single symbol area properties] {\label{subfig:singleNG3}\includegraphics[clip=true, width=0.3\textwidth]{singlesymbol_ng_area}}
+\end{figure}
+
+\minisec{Categorized Renderer}
+
+The Categorized Renderer is used to render all features from a layer, using a 
+single user-defined symbol, which color reflects the value of a selected 
+feature's attribute. The Symbology tab allows you to select:
+
+\begin{itemize}
+\item The attribute (using the Column listbox)
+\item The symbol (using the Symbol Properties dialog)
+\item The colors (using the Color Ramp listbox)  
+\end{itemize}
+
+For convenience, the list in the bottom part of the tab lists the values of 
+all currently selected attributes together, including the symbols that will 
+be rendered.
+
+The example in figure \ref{fig:catsymNG} shows the category rendering dialog 
+used for the rivers layer of the qgis sample dataset.
+
+\begin{figure}[ht]
+   \begin{center}
+   \caption{New Categorized Symbolizing options \nixcaption}\label{fig:catsymNG}\smallskip
+   \includegraphics[clip=true, width=10cm]{categorysymbol_ng_line}
+\end{center}
+\end{figure}
+
+\minisec{Graduated rendering}
+
+The Graduated Renderer is used to render all the features from a layer, using 
+a single user-defined symbol, whose color reflects the classification of a selected 
+feature's attribute to a class.
+
+Analogue to the categorized rendered, the symbology tab allows you to select:
+
+\begin{itemize}
+\item The attribute (using the Column listbox)
+\item The symbol (using the Symbol Properties button)
+\item The colors (using the Color Ramp list)
+\end{itemize}
+
+Additionally, you can specify the number of classes and also the mode how to 
+classify features inside the classes (using the Mode list). The listbox in the 
+bottom part of the symbology tab lists the classes together with their ranges, 
+labels and symbols that will be rendered.
+
+The example in figure \ref{fig:gradsymNG} shows the category rendering dialog 
+for the rivers layer of the qgis sample dataset.
+
+\begin{figure}[ht]
+   \begin{center}
+   \caption{New Graduated Symbolizing options \nixcaption}\label{fig:gradsymNG}\smallskip
+   \includegraphics[clip=true, width=10cm]{graduatesymbol_ng_line}
+\end{center}
+\end{figure}
+
+\minisec{Symbol Properties}
+
+The symbol properties dialog allows the user to specify different properties of 
+the symbol to be rendered. In the top left part of the dialog, you find a preview 
+of the current symbol as it will be displayed in the map canvas. Below the preview 
+is the list of symbol layers. To start the symbol properties dialog, click the 
+\dropmenuopttwo{mActionOptions}{Properties} button in the \tab{General} tab of the
+\dialog{Layer Properties} dialog. 
+
+The control panels allow adding or removing layers, changing the position of layers, 
+or locking layers for color changes. In the right part of the dialog, there are 
+shown the settings applicable to the single symbol layer selected in the symbol 
+layer list. The most important is the 'Symbol Layer Type' combo box, which allows 
+you to choose the layer type. The available options are \filename{SimpleLine}, 
+\filename{SvgMarker} and \filename{SimpleFill}. 
+
+Depending on the chosen value, these settings are available in the right part 
+of the dialog:
+
+\begin{itemize}
+\item \textbf{SimpleLine}: Color, Pen width, Pen style, Offset, Join style and Cap style; 
+\item \textbf{SvgMarker}: Size, Angle, Offset X, Offset Y and SVG Image
+\item \textbf{SimpleFill}: Color, Border color, Fill style. 
+\end{itemize}
+
+Example: A picture showing a line symbol composed from three simple lines with different pen widths. 
+Example: Symbol properties for a point layer
+Example: Symbol properties filling pattern for a polygon layer
+
+\begin{figure}[h]
+\centering
+\caption{Defining symbol properties \nixcaption}
+   \subfigure[Line composed from three simple lines] {\label{subfig:symprops1}\includegraphics[clip=true, width=0.3\textwidth]{symbolproperties1}}\goodgap
+   \subfigure[Symbol properties for point layer] {\label{subfig:symprops2}\includegraphics[clip=true, width=0.3\textwidth]{symbolproperties2}}\goodgap
+   \subfigure[Filling pattern for a polygon] {\label{subfig:symprops3}\includegraphics[clip=true, width=0.3\textwidth]{symbolproperties3}}
+\end{figure}
+
+\subsubsection{Style Manager to manage symbols and color ramps}
+
+The Style Manger is a small helper application, that lists symbols and color 
+ramps available in a style. It also allows you to add and/or remove items. To 
+launch the Style Manager, click on \mainmenuopt{Settings} > \dropmenuopt{Style 
+Manager} in the mai menu.
+
+\begin{figure}[ht]
+   \begin{center}
+   \caption{Style Manager to manage symbols and color ramps \nixcaption}\label{fig:stylemanager}\smallskip
+   \includegraphics[clip=true, width=7cm]{stylemanager}
+\end{center}
+\end{figure}
 
 \subsubsection{Scheda Etichette}
 
@@ -623,6 +874,77 @@ del layer.
 
 Si noti che la scheda \tab{Etichette} fornisce una \classname{Anteprima}
 nella quale viene mostrata l'etichetta predefinita.
+
+\subsubsection{Attributes Tab}\index{Attributes}\label{label_attributes}
+
+Within the \tab{Attributes} tab the attributes of the selected dataset can be
+manipulated. The buttons \toolbtntwo{mActionNewAttribute}{New Column} and
+\toolbtntwo{mActionDeleteAttribute}{Delete Column} can be
+used, when the dataset is \toolbtntwo{mActionToggleEditing}{editing mode}.
+At the moment only columns from PostGIS layers can be removed and added. The
+OGR library supports to add new columns, but not to remove them, if you have
+a GDAL version >= 1.6 installed.
+
+\minisec{edit widget}
+
+\begin{figure}[H]
+   \begin{center}
+   \caption{Dialog to select an edit widget for an attribute column
+\nixcaption}\label{fig:editwidget}\smallskip
+   \includegraphics[clip=true, width=14cm]{editwidgetsdialog}
+\end{center}
+\end{figure}
+
+Within the \tab{Attributes} tab you also find an \texttt{edit widget} column.
+This column can be used to define values or a range of values that are
+allowed
+to be added to the specific attribute table column. If you click on the
+\button{edit widget} button, a dialog opens, where you can define different
+widgets. These widgets are:
+
+\begin{itemize}
+\item Line edit: an edit field which allows to enter simple text (or restrict
+to
+numbers for numeric attributes).
+\item Classification: Displays a combo box with the values used for
+classification, if you have chosen 'unique value' as legend type in the
+symbology tab of the properties dialog.
+\item Range: Allows to set numeric values from a specific range. The edit
+widget can be either a slider or a spin box.
+\item Unique value: The user can select one of the values already used in the
+attribute table. If editable is activated, a line edit is shown with
+autocompletion support, otherwise a combo box is used.
+\item File name: Simplifies the selection by adding a file chooser dialog.
+\item Value map: a combo box with predefined items. The value is stored in
+the attribute, the description is shown in the comboo box. You can define
+values manually or load them from a layer or a csv file.
+\item Enumeration: Opens a combo box with values that can be used within the
+columns type. This is currently only supported by the postgres provider.
+\item Immutable: The immutable attribute column is read-only. The user is not
+able to modify the content.
+\end{itemize}
+
+\subsubsection{General Tab}\label{vectorgeneraltab}
+
+The \tab{General} tab is essentially like that of the raster dialog. It
+allows you to change the display name, set scale dependent rendering options,
+create a spatial index of the vector file (only for OGR supported formats and
+PostGIS) and view or change the projection of the specific vetor layer.
+
+The \button{Query Builder} button allows you to create a subset of the
+features in the layer - but this button currently only is available when you
+open the attribute table and select the \button{...} button next to Advanced
+search.
+
+\subsubsection{Metadata Tab}\index{Metadata}
+
+The \tab{Metadata} tab contains general information about the layer,
+including specifics about the type and location, number of features, feature
+type, and the editing capabilities. The \guiheading{Extents} section,
+providing
+layer extent information, and the \guiheading{Layer Spatial Reference System}
+section, providing information about the CRS of the layer. This is a quick
+way to get information about the layer, but is not yet editable.
 
 \subsubsection{Scheda Azioni}\index{azioni}\label{label_actions}
 
@@ -867,6 +1189,12 @@ copia di backup dei dati che si intendono modificare.
 
 \textbf{Nota} - la procedura per la modifica di layer GRASS è differente, si
 veda la Sezione \ref{grass_digitising} per dettagli.
+
+\begin{Tip}[ht]\caption{\textsc{Concurrent Edits}}
+\qgistip{This version of QGIS does not track if somebody else is editing a
+feature at the same time as you. The last person to save their edits wins.
+}
+\end{Tip}
 
 \subsubsection{Settare la tolleranza dello snapping e il raggio di ricerca
 degli elementi}
