@@ -69,24 +69,24 @@ Ascii Grid, JPEG, PNG (vedere l'Appendice \ref{appdx_gdal} per la lista completa
 \item Database SpatiaLite (vedere Sezione \ref{label_spatialite}),
 \item formati raster GRASS e dati vettoriali da database GRASS (location/mapset), 
 \item dati spaziali forniti da servizi di mappa online conformi agli standard
-OGC quali Web Map Service (WMS) o Web Feature Service (WFS).
-%%\item OSM
+OGC quali Web Map Service (WMS) o Web Feature Service (WFS)
+\item dati OpenStreetMap.
 \end{itemize}
 
-\minisec{Esplorazione dati e creazione di mappa} 
+\minisec{Esplorazione dei dati e creazione delle mappe} 
 
 Possono essere composte mappe ed esplorati interattivamente dati spaziali
 tramite un interfaccia grafica amichevole. Tra i molti strumenti utili disponibili
 nell'interfaccia grafica ci sono:
 \begin{itemize}
-\item proiezione al volo
+\item riproiezione al volo
 \item compositore di mappa
 \item pannello vista panoramica 
 \item segnalibri geospaziali 
 \item identifica/seleziona elementi
 \item modifica/vedi/cerca attributi
-\item etichetta elementi
-\item cambio simbologia raster/vettoriale
+\item etichettatura elementi
+\item cambio della simbologia sia raster che vettoriale
 \item aggiunta reticolo su un nuovo layer tramite il plugin fTools
 \item decorazione della mappa con freccia del nord, barra di scala ed etichetta di copyright
 \item salva e ricarica progetti
@@ -105,12 +105,13 @@ le seguenti funzioni:
 \item strumenti GPS per l'importazione ed esportazione del formato GPX e conversione di altri formati GPS
 al formato GPX o down/upload dei dati direttamente da unità GPS (su Linux, usb: è stato aggiunto 
 alla lista dei dispositivi GPS)
-%%\item OSM!
+\item OSM!
 \item creazione di layer PostGIS da shapefile con il plugin SPIT
 \item migliorata la gestione di tabelle PostGIS
 \item gestione di tabelle degli attributi di dati vettoriali con il nuovo plugin Tabella attributi (vedi Sezione 
 \ref{sec:attribute table}) o il plugin Gestione Tabelle
 \item salvare schermate come immagini georeferenziate
+\item visualizzare e modificare dati OpenStreetMap
 \end{itemize}
 
 \minisec{Analisi di dati} 
@@ -136,32 +137,38 @@ estensibile per mezzo di plugin. QGIS fornisce le librerie che possono
 essere usate per creare i plugin. Possono addirittura essere creati
 nuovi programmi in C++ o Python.
 
-\begin{itemize}
-\item \textbf{Plugin inclusi nel software}
-\\ \\ Aggiunta layer WFS
-\\ Aggiunta layer a partire da testo delimitato
-\\ Cattura coordinate
-\\ Decorazioni (etichetta Diritti d'autore, Freccia nord e Barra di scala)
-\\ Diagramma sovrapposto
-\\ Convertitore Dxf2Shp
-\\ fTools
-\\ Georeferenziatore
-\\ Strumenti GPS
-\\ Integrazione con GRASS
-% \\ Generatore di reticolo
-\\ Plugin per interpolazione
-\\ Conversione tra layer supportati da OGR
-\\ Stampa rapida
-\\ Interfaccia di importazione di shapefile verso PostgreSQL/PostGIS (SPIT)
-\\ Esportazione verso Mapserver (Mapserver Export)
-\\ Console Python
-\\ Installatore plugin Python (Plugin Installer )
-\\ \item \textbf{Plugins Python}
-\\ \\ QGIS offre un numero crescente di plugin esterni in Python forniti
+\begin{enumerate}
+\item Aggiunta Layer a testo delimitato (Caricamento e visualizzazione di files di testo delimitato contenenti coordinate x,y)
+\item Cattura delle Coordinate (Cattura delle coordinate del Mouse in differenti Sistemi di Riferimento)
+\item Decorazioni (etichetta Diritti d’autore, Freccia nord e Barra di scala)
+\item Diagramma sovrapposto (Piazzamento di diagrammi sopra layers vettoriali)
+\item Convertitore Dxf2Shp (Converte dal formato vettoriale DXF al formato vettoriale Shape)
+\item Strumenti GPS (Caricamento e importazione dati GPS)
+\item GRASS (Integrazione GIS con GRASS)
+\item Georeferenziatore GDAL (Aggiunge le informazioni sulla proiezione al raster mediante GDAL)
+\item Plugin per l'interpolazione (interpolazione basata sui vertici di un layer vettoriale)
+\item Etichettamento (Etichettamento rapido su layers vettoriale)
+\itemEsportazione verso MapServer (Esporta un progetto QGIS in un file map di Mapserver)
+\item Convertitore di Layer OGR (Trasforma layer vettoriali tra vari formati)
+\item Plugin OpenStreetMap (Visualizzatore e Editor per dati OpenStreetMap)
+\item Supporto per i GeoRaster Oracle
+\item Installatore plugin Python (Plugin Installer)
+\item Stampa rapida (Stampa una mappa con pochi comandi)
+\item Analisi della morfologia terrestre basata su raster
+\item SPIT (Importazione Shapefile verso PostgreSQL/PostGIS)
+\item Plugin WFS (Aggiunge dei layers WFS nella vista di QGIS)
+\item eVIS (Strumento per la visualizzazione di eventi)
+\item fTools (Strumenti per l'analisi e la gestione di dati vettoriali)
+\item Console Python (Accesso all'ambiente di gestione QGIS)
+\item Installatore dei plugin in python
+\end{enumerate}
+
+\minisec{Plugins addizionali in python}
+
+QGIS offre un numero crescente di plugin esterni in Python forniti
 dalla comunità. Questi plugin sono ospitati sul repository ufficiale
 PyQGIS e si possono installare facilmente usando il Gestore di
 Plugin Python (si veda la Sezione \ref{sec:plugins}).
-\end{itemize}
 
 \minisec{Novità nella versione ~\CURRENT} 
 
