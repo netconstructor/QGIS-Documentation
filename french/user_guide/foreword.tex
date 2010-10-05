@@ -3,9 +3,9 @@
 \pagestyle{scrheadings}
 \addchap{Avant-propos}\label{label_forward}
 
-Bienvenue dans le monde merveilleux des Systèmes d'Informations géographiques (SIG) ! Quantum GIS est un SIG libre qui a débuté en mai 2002 et s'est établi en tant que projet en juin 2002 sur SourceForge. Nous avons travaillé dur pour faire de ce logiciel SIG (qui sont traditionnellement des logiciels propriétaires assez coûteux) un choix viable pour toute personne ayant un ordinateur. \qg est utilisable sur la majorité des Unix, Mac OS X et Windows. \qg utilise la bibliothèque logicielle Qt 4 (\url{http://www.nokia.com}) et le langage C++, ce qui ce traduit par une interface graphique simple et réactive.
+Bienvenue dans le monde merveilleux des Systèmes d'Informations Géographiques (SIG) ! Quantum GIS est un SIG libre qui a débuté en mai 2002 et s'est établi en tant que projet en juin 2002 sur SourceForge. Nous avons travaillé dur pour faire de ce logiciel SIG (qui sont traditionnellement des logiciels propriétaires assez coûteux) un choix viable pour toute personne ayant un ordinateur. \qg est utilisable sur la majorité des Unix, Mac OS X et Windows. \qg utilise la bibliothèque logicielle Qt 4 (\url{http://www.nokia.com}) et le langage C++, ce qui ce traduit par une interface graphique simple et réactive.
 
-\qg se veut simple à utiliser, fournissant des fonctionnalités courantes. Le but initial était de fournir un visualisateur de données SIG, \qg a depuis atteint un stade dans son évolution où beaucoup y recourent pour leurs besoins journaliers. \qg supporte un grand nombre de formats raster et vecteur, avec un support de nouveaux formats facilités par l'architecture des modules d'extension (lisez l'Annexe \ref{appdx_data_formats} pour une liste complète des formats actuellement supportés)
+\qg se veut simple à utiliser, fournissant des fonctionnalités courantes. Le but initial était de fournir un visualisateur de données SIG. \qg a depuis atteint un stade dans son évolution où beaucoup y recourent pour leurs besoins quotidiens. \qg supporte un grand nombre de formats raster et vecteur, avec un support de nouveaux formats facilités par l'architecture des modules d'extension (lisez l'Annexe \ref{appdx_data_formats} pour une liste complète des formats actuellement supportés)
 
 \qg est distribué sous la licence GPL. Ceci vous permet de pouvoir regarder et modifier le code source, tout en vous garantissant un accès à un programme SIG sans coût et librement modifiable. Vous devez avoir reçu une copie complète de la licence avec votre exemplaire de \qg, vous la trouverez également dans l'Annexe \ref{gpl_appendix}.
 
@@ -19,13 +19,13 @@ La dernière version de ce document est disponible sur \url{http://download.osge
 
 \minisec{Visualiser des données}
 
-Vous pouvez afficher et superposer des couches de données rasters et vecteurs dans différents formats et projections sans avoir à faire de conversion dans un format commun. Les formats supportés incluent :
+Vous pouvez afficher et superposer des couches de données rasters et vecteurs dans différents formats et projections \footnote{\qg ne proposant actuellement de projection à la volée que pour les données de type vecteur, les données de type raster doivent être dans la même projection pour pouvoir être associées entre elles.} sans avoir à faire de conversion dans un format commun. Les formats supportés incluent :
 
 \begin{itemize}[label=--]
 \item les tables spatiales de \ppg, les formats vecteurs supportés par la bibliothèque OGR installée, ce qui inclut les fichiers de forme ESRI (shapefiles), MapInfo, STDS et GML (voir l'Annexe \ref{appdx_ogr} pour la liste complète) .
 \item les formats raster supportés par la bibliothèque GDAL (Geospatial Data Abstraction Library) tels que GeoTiff, Erads Img., ArcInfo Ascii Grid, JPEG, PNG (voir l'Annexe \ref{appdx_gdal} pour la liste complète).
 
-\item les formats raster et vecteur provenant des bases données GRASS. 
+\item les formats raster et vecteur provenant des bases de données GRASS. 
 \item les données spatiales provenant des services réseaux compatibles OGC comme le Web Map Service (WMS) ou le Web Feature Service (WFS) (voir la  section \ref{working_with_ogc}),
 \item les données OpenStreetMap (voir la section \ref{plugins_osm}).
 
@@ -36,27 +36,27 @@ Vous pouvez afficher et superposer des couches de données rasters et vecteurs d
 Vous pouvez créer des cartes et les parcourir de manière interactive avec une interface abordable. Les outils disponibles dans l'interface sont :
 
 \begin{itemize}[label=--]
-\item projection à la volée
-\item composeurs de carte
+\item projection à la volée (adapte les unités de mesure et reprojette automatiquement les données vectorielles)
+\item composition de carte
 \item panneau de navigation
-\item marque-page spatial
-\item identifier et sélectionner des entités
-\item voir, éditer et rechercher des attributs
+\item signet géospatial
+\item identification et sélection des entités
+\item affichage, édition et recherche des attributs
 \item étiquetage des entités
-\item changer la symbologie des données raster et vecteur
-\item ajouter une couche de graticule via fTools
+\item personnalisation de la symbologie des données raster et vecteur
+\item ajout d'une couche de graticule lors de la composition
 \item ajout d'une barre d'échelle, d'une flèche indiquant le nord et d'une étiquette de droits d'auteur
 \item sauvegarde et chargement de projets
 \end{itemize}
 
 \minisec{Créer, éditer, gérer et exporter des données}
 
-Vous pouvez créer, éditer, gérer et exporter des données vectorielles dans plusieurs formats. Les données raster doivent être importées dans GRASS pour pouvoir être éditées et exporter dans d'autres formats. \qg permet ce qui suit :  
+Vous pouvez créer, éditer, gérer et exporter des données vectorielles dans plusieurs formats. \qg permet ce qui suit :
 
 \begin{itemize}[label=--]
 \item outils de numérisation pour les formats d'OGR et les couches vecteurs de GRASS
 \item créer et éditer des fichiers de forme (shapefiles) et les couches vecteur de GRASS
-\item géocodifier des images avec l'extension de géoréférencement
+\item géoréférencer des images avec l'extension de géoréférencement
 \item outils d'import/export du format GPX pour les données GPS, avec la conversion des autres formats GPS vers le GPX ou l'envoi/réception directement vers une unité GPS
 \item créer des couches \pg à partir de fichiers shapefiles avec l'extension SPIT
 \item gérer les attributs de tables des couches vecteur grâce à l'extension de gestion des tables ou celle de tables attributaires (voir la section \ref{sec:attribute table})
@@ -102,9 +102,10 @@ Vous pouvez opérer des analyses spatiales sur des données \ppg et autres forma
 \item Outils graphiques pour GDAL
 \end{enumerate}
 
-\minisec{External Python Plugins}
+%\minisec{External Python Plugins}
+\minisec{Extensions Python externes}
 
-\qg offre un nombre croissant d'extensions complémentaires en Python fourni par la communauté. Ces extensions sont entreposées dans le répertoire Py\qg et peuvent être facilement installées en utilisant l'extension d'installation Python (voir la section \ref{sec:plugins}).
+\qg offre un nombre croissant d'extensions complémentaires en Python fournies par la communauté. Ces extensions sont entreposées dans le répertoire UTILISATEUR\footnote{L'emplacement change selon le système d'exploitation, ainsi sous \nix{} il s'agit du répertoire HOME tandis que sous \win{} il s'agit du répertoire utilisateur se situant dans Document And Settings}/.qgis/python/plugins et peuvent être facilement installées en utilisant l'extension d'installation Python (voir la section \ref{sec:plugins}). 
 
 \subsubsection{Quoi de neuf dans la version ~\CURRENT} 
 
@@ -113,7 +114,7 @@ Voici les ajouts et améliorations les plus notables :
 %  \item TODO(anne): rearrange the list on ManualTasks wikipage!
  \item Ajout d'une aide contextuelle dans les dialogues
  \item Outil de mesure d'angle
- \item Outil de suivi GPS
+ \item Outil de suivi GPS 
  \item Plusieurs nouvelles extensions de qualité 'Spatial Query, GDAL Tools, Google Earth \dots"
  \item Ajout d'une table d'attributs sur la composition de carte
  \item Enregistrer une couche vectorielle pendant l'édition
@@ -130,5 +131,5 @@ Voici les ajouts et améliorations les plus notables :
  \item Ajout de SCR compatibles avec GDAL (sans les paramètres +towgs84) pour les codes epsg polonais : 2172-2180, 3120, 3328-3335 et 4179 comme epsg+40000
  \item Changement automatique des unités de la carte dans la fenêtre de projet lors de la sélection d'un SCR
  \item Nouveau dialogue de connexion aux raster d'Oracle
- \item Ajout du support Spatialite et de la création de multiples couches Spatialites via \qg
+ \item Ajout du support SpatiaLite et de la création de multiples couches SpatiaLites via \qg
 \end{itemize}
