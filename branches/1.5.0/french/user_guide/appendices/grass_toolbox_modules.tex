@@ -1,773 +1,916 @@
-\chapter{GRASS Toolbox modules}\label{appdx_grass_toolbox_modules}
+% \section{GRASS Toolbox modules}\label{appdx_grass_toolbox_modules}
+\section{Modules de la boîte à outils de GRASS }\label{appdx_grass_toolbox_modules}
 
-% when the revision of a section has been finalized, 
-% comment out the following line:
-% \updatedisclaimer
+% The GRASS Shell inside the GRASS Toolbox provides access to almost all (more than 300) GRASS modules in command line modus. To offer a more user friendly working environment, about 200 of the available GRASS modules and functionalities are also provided by graphical dialogs.
+La console GRASS dans la boîte à outils GRASS permet d'accéder à quasiment tous (plus de 300) les modules de GRASS au moyen de la ligne de commande. Pour offrir un environnement de travail plus ergonomique, à peu près 200 des modules et fonctionnalités de GRASS disponibles sont aussi disponibles par des boîtes de dialogue graphique.
 
-The GRASS Shell inside the GRASS Toolbox provides access to almost all (more 
-than 300) GRASS modules in command line modus. To offer a more user
-friendly working environment, about 200 of the available GRASS modules and 
-functionalities are also provided by graphical dialogs.
+% \subsection{GRASS Toolbox data import and export modules}\index{GRASS!toolbox!modules}
+\subsection{Modules d'import et d'export de la boîte à outils GRASS}\index{GRASS!toolbox!modules}
 
-\section{GRASS Toolbox data import and export modules}\index{GRASS!toolbox!modules}
+% This Section lists all graphical dialogs in the GRASS Toolbox to import and export data into a currently selected GRASS location and mapset.
+Cette section liste toutes les boîtes de dialogue de la boîte à outils de GRASS pour importer et exporter des données dans une location et jeu de données préalablement sélectionnés dans GRASS.
+%\vspace{-1cm}
 
-This Section lists all graphical dialogs in the GRASS Toolbox to import and
-export data into a currently selected GRASS location and mapset.
-
-{\renewcommand{\arraystretch}{0.7}
-\begin{table}[H]
-\centering
+\begin{center}
  \begin{tabular}{|p{2.5cm}|p{11.5cm}|}
-  \hline \multicolumn{2}{|c|}{\textbf{Raster and Image data import modules in the GRASS
-  Toolbox}} \\ 
-  \hline \textbf{Module name} & \textbf{Purpose} \\
-  \hline r.in.arc & Convert an ESRI ARC/INFO ascii raster file (GRID) into a
-  (binary) raster map layer\\
-  \hline r.in.ascii & Convert an ASCII raster text file into a (binary)
-  raster map layer \\
-  \hline r.in.aster & Georeferencing, rectification, and import of
-  Terra-ASTER imagery and relative DEM's using gdalwarp \\
-  \hline r.in.bin & Import binary raster \\
-  \hline r.in.gdal &  Import GDAL supported raster file into a GRASS binary
-  raster map layer \\
-  \hline r.in.gdal.loc &  Import GDAL supported raster file into a GRASS
-  binary raster map layer and create a fitted location \\
-  \hline r.in.gdal.qgis & Import loaded raster into a GRASS binary raster map
-  layer \\
-  \hline r.in.gdal.qgis.loc &  Import loaded raster file into a GRASS binary
-  raster map layer and create a fitted location \\
-  \hline r.in.gridatb & Imports GRIDATB.FOR map file (TOPMODEL) into GRASS
-  raster map \\
-  \hline r.in.mat  & Import a binary MAT-File(v4) to a GRASS raster  \\
-  \hline r.in.poly  &  Create raster maps from ascii polygon/line data files
-  in the current directory \\
-  \hline r.in.srtm  & Import SRTM HGT files into GRASS \\
-  \hline i.in.spotvgt & Import of SPOT VGT NDVI file into a raster map \\
-  \hline r.in.wms & Download and import data from WMS server \\
-  \hline r.external & Link GDAL supported raster to binary raster \\
-  \hline r.external.qgis & Link GDAL supported raster to binary raster map layer \\
-  \hline r.external & Link all GDAL supported rasters in a directory to binary rasters  \\
+% \hline \multicolumn{2}{|c|}{\textbf{Raster and Image data import modules in the GRASS
+%  Toolbox}} \\ 
+  \hline \multicolumn{2}{|c|}{\textbf{Modules d'import de données raster dans la boîte à outils de GRASS}} \\ 
+  \hline \textbf{Nom de Module} & \textbf{Objectif} \\
+% \hline r.in.arc & Convert an ESRI ARC/INFO ascii raster file (GRID) into a
+%  (binary) raster map layer\\
+   \hline r.in.arc & Convertit un fichier raster ascii ARC/INFO d'ESRI (GRID) en une couche raster (binaire) \\
+% \hline r.in.ascii & Convert an ASCII raster text file into a (binary)
+%  raster map layer \\
+  \hline r.in.ascii & Convertit un fichier raster texte ASCII en une couche raster (binaire)\\
+% \hline r.in.aster & Georeferencing, rectification, and import of
+%  Terra-ASTER imagery and relative DEM's using gdalwarp \\
+  \hline r.in.aster & Georeferencement, rectification, et import d'image Terra-ASTER et des MNT relatif en utilisant gdalwarp \\
+%  \hline r.in.bin & Import binary raster \\
+   \hline r.in.bin & Importer un raster binaire \\
+% \hline r.in.gdal &  Import GDAL supported raster file into a GRASS binary
+%  raster map layer \\
+   \hline r.in.gdal &  Importer un fichier raster géré par GDAL dans une couche raster binaire de GRASS\\
+% \hline r.in.gdal.loc &  Import GDAL supported raster file into a GRASS binary raster map layer and create a fitted location \\
+  \hline r.in.gdal.loc &  Importer un fichier raster géré par GDAL dans une couche raster binaire de GRASS et créer une région lui correspondant\\
+%  \hline r.in.gdal.qgis & Import loaded raster into a GRASS binary raster map layer \\
+  \hline r.in.gdal.qgis & Importer un raster déjà chargé dans QGIS dans GRASS \\
+%  \hline r.in.gdal.qgis.loc &  Import loaded raster file into a GRASS binary raster map layer and create a fitted location \\
+  \hline r.in.gdal.qgis.loc & Importer un raster déjà chargé dans QGIS dans GRASS et créer une localisation correspondante \\
+% \hline r.in.gridatb & Imports GRIDATB.FOR map file (TOPMODEL) into GRASS raster map \\
+  \hline r.in.gridatb & Importer un fichier GRIDATB.FOR (TOPMODEL)dans une couche raster de GRASS\\
+% \hline r.in.mat  & Import a binary MAT-File(v4) to a GRASS raster  \\
+  \hline r.in.mat  & Importer un fichier binaire MAT-File(v4) dans une couche raster GRASS \\
+% \hline r.in.poly  & Create raster maps from ascii polygon/line data files in the current directory \\
+  \hline r.in.poly  & Crée des couches raster à partir de fichiers ascii de données polygonales/linéairesdans le répertoire sélectionné \\
+% \hline r.in.srtm  & Import SRTM HGT files into GRASS \\
+  \hline r.in.srtm  & Importer des fichiers SRTM HGT dans GRASS \\
+% \hline i.in.spotvgt & Import of SPOT VGT NDVI file into a raster map \\
+  \hline i.in.spotvgt & Importer de fichier NDVI VGT de SPOT dans une couche raster \\
+%  \hline r.in.wms & Download and import data from WMS server \\
+  \hline r.in.wms & Télécharger et importer des données WMS \\  
+%  \hline r.external & Link GDAL supported raster to binary raster \\
+  \hline r.external & Lier un raster supporté par GDAL\\  
+%  \hline r.external.qgis & Link GDAL supported raster to binary raster map layer \\
+  \hline r.external.qgis & Lier un raster supporté par GDAL déjà chargé dans QGIS \\  
+%  \hline r.external & Link all GDAL supported rasters in a directory to binary rasters  \\
+  \hline r.external & Lier tous les rasters d'un répertoire \\  
   \hline
 \end{tabular}
-\caption{GRASS Toolbox: Raster and Image data import modules}
-\end{table}}
+\end{center}
 
-{\renewcommand{\arraystretch}{0.7}
 \begin{table}[htb]
 \centering
  \begin{tabular}{|p{2.5cm}|p{11.5cm}|}
-  \hline \multicolumn{2}{|c|}{\textbf{Vector data import modules in the GRASS
-Toolbox}} \\
-  \hline \textbf{Module name} & \textbf{Purpose} \\
-  \hline v.in.db & Import vector points from database containing coordinates \\
-  \hline v.in.dxf & Import DXF vector layer \\
-  \hline v.in.e00 & Import ESRI E00 file in a vector map \\
-  \hline v.in.garmin & Import vector from gps using gpstrans \\
-  \hline v.in.gpsbabel & Import vector from gps using gpsbabel \\
-  \hline v.in.geonames & Import geonames.org country files \\
-  \hline v.in.gns & Import USNGS Geonet Names Server (GNS) country file  \\
-  \hline v.in.mapgen & Import MapGen or MatLab vectors in GRASS \\
-  \hline v.in.ogr & Import OGR/PostGIS vector layers \\
-  \hline v.in.ogr.qgis & Import loaded vector layers into GRASS binary
-  vector map \\
-  \hline v.in.ogr.loc & Import OGR/PostGIS vector layers and create a fitted
-  location \\
-  \hline v.in.ogr.qgis.loc & Import loaded vector layers into GRASS binary
-  vector map and create a fitted location \\
-  \hline v.in.ogr.all & Import all the OGR/PostGIS vector layers in a given
-  data source \\
-  \hline v.in.ogr.all.loc & Import all the OGR/PostGIS vector layers in a
-  given data source and create a fitted location \\
+% \hline \multicolumn{2}{|c|}{\textbf{Raster and Image data export modules in the GRASS Toolbox}} \\
+  \hline \multicolumn{2}{|c|}{\textbf{Modules d'export de données raster dans la boîte à outils de GRASS}} \\ 
+  \hline \textbf{Nom de Module} & \textbf{Objectif} \\
+% \hline r.out.gdal & Export raster to various formats (GDAL library) \\  
+  \hline r.out.gdal & Exporte un raster dans différents formats (GDAL library) \\
+% \hline r.out.gdal.gtiff & Export raster layer to Geo TIFF \\
+  \hline r.out.gdal.gtiff & Exporte une couche raster en GeoTIFF \\
+% \hline r.out.ascii & Export raster to ASCII text file \\
+  \hline r.out.ascii & Exporte un raster dans un fichier texte ASCII \\
+% \hline r.out.arc & Converts a raster map layer into an ESRI ARCGRID file \\
+  \hline r.out.arc & Convertit une couche raster dans un fichier ARCGRID d'ESRI \\
+% \hline r.out.xyz & Export raster to text file as x,y,z values based on cell centers \\
+  \hline r.out.xyz & Exporte un raster dans un fichier texte(X,Y,Z) en se basant sur le centre des cellules \\
+% \hline r.gridatb & Exports GRASS raster map to GRIDATB.FOR map file (TOPMODEL) \\
+  \hline r.gridatb & Exporte une couche raster GRASS en fichier GRIDATB.FOR (TOPMODEL) \\
+% \hline r.out.mat & Exports a GRASS raster to a binary MAT-File \\
+  \hline r.out.mat & Exporte un raster GRASS en un fichier binaire MAT-File \\
+% \hline r.out.bin & Exports a GRASS raster to a binary array \\
+  \hline r.out.bin & Exporte un raster GRASS en tableau binaire \\
+%  \hline r.out.mpeg & Export raster series to MPEG movie \\
+  \hline r.out.mpeg & Exporte une série de raster dans une vidéo MPEG \\
+% \hline r.out.png & Export GRASS raster as non-georeferenced PNG image format \\
+  \hline r.out.png & Exporte un raster GRASS dans une image non géoréférencé au format PNG \\
+% \hline r.out.ppm & Converts a GRASS raster map to a PPM image file at the pixel resolution of the CURRENTLY DEFINED REGION \\
+  \hline r.out.ppm & Convertit une couche raster GRASS dans un fichier image PPM à la résolution du pixel de CURRENTLY DEFINED REGION \\
+% \hline r.out.ppm3 & Converts 3 GRASS raster layers (R,G,B) to a PPM image file at the pixel resolution of the CURRENTLY DEFINED REGION \\
+  \hline r.out.ppm3 & Convertit 3 couches raster GRASS (R,G,B) dans un fichier image PPM à la résolution du pixel CURRENTLY DEFINED REGION \\
+% \hline r.out.pov & Converts a raster map layer into a height-field file for POVRAY\\
+  \hline r.out.pov & Convertit une couche raster dans un fichier avec un champ poids pour POVRAY\\
+% \hline r.out.tiff & Exports a GRASS raster map to a 8/24bit TIFF image file at the pixel resolution of the currently defined region\\
+  \hline r.out.tiff & Exporte une couche raster GRASS dans une image TIFF de 8/24bit à la résolution du pixel de la région sélectionnée\\
+% \hline r.out.vrml &  Export a raster map to the Virtual Reality Modeling Language (VRML)\\
+  \hline r.out.vrml & Exporte une couche raster dans le format Virtual Reality Modeling Language (VRML)\\
+% \hline r.out.vtk & Export raster layer to VTK-ASCII \\
+  \hline r.out.vtk & Exporte un raster dans un fichier VTK-ASCII \\
 \hline
 \end{tabular}
-\caption{GRASS Toolbox: Vector data import modules}
-\end{table}}
+%\caption{GRASS Toolbox: Raster and Image data export modules}
+\caption{Boîte à outils GRASS : Modules d'exportation de raster et d'images}
+\end{table}
 
-{\renewcommand{\arraystretch}{0.7}
 \begin{table}[H]
 \centering
  \begin{tabular}{|p{2.5cm}|p{11.5cm}|}
-  \hline \multicolumn{2}{|c|}{\textbf{Database import modules in the GRASS
-Toolbox}} \\
-  \hline \textbf{Module name} & \textbf{Purpose} \\
-  \hline db.in.ogr & Import attribute tables in various formats \\
+%  \hline \multicolumn{2}{|c|}{\textbf{Vector data import modules in the GRASS Toolbox}} \\
+  \hline \multicolumn{2}{|c|}{\textbf{Modules d'import de données vectorielles dans la boîte à outils de GRASS}} \\ 
+  \hline \textbf{Nom du module} & \textbf{Objectif} \\
+% \hline v.in.dxf & Import DXF vector layer \\
+  \hline v.in.dxf & Importer une couche vecteur DXF \\
+% \hline v.in.e00 & Import ESRI E00 file in a vector map \\
+  \hline v.in.e00 & Importer un fichier ESRI E00 dans une couche vecteur \\
+% \hline v.in.garmin & Import vector from gps using gpstrans \\
+  \hline v.in.garmin & Importer un vecteur à partir d'un GPS en utilisant gpstrans \\
+% \hline v.in.gpsbabel & Import vector from gps using gpsbabel \\
+  \hline v.in.gpsbabel & Importer un vecteur à partir d'un GPS en utilisant gpsbabel \\
+% \hline v.in.mapgen & Import MapGen or MatLab vectors in GRASS \\
+  \hline v.in.mapgen & Importer des vecteurs MapGen ou MatLab dans GRASS \\
+% \hline v.in.ogr & Import OGR/PostGIS vector layers \\
+  \hline v.in.ogr & Importer des couches vectorieles OGR/PostGIS \\
+  \hline v.in.ogr.qgis & Import loaded vector layers into GRASS binary
+  vector map \\
+% \hline v.in.ogr.loc & Import OGR/PostGIS vector layers and create a fitted location\\
+  \hline v.in.ogr.loc & Importer des couches vectorielles OGR/PostGIS et créer une région leurs correspondants\\
+  \hline v.in.ogr.qgis.loc & Import loaded vector layers into GRASS binary
+  vector map and create a fitted location \\
+% \hline v.in.ogr.all & Import all the OGR/PostGIS vector layers in a given data source \\
+  \hline v.in.ogr.all & Importe toutes les couches vectorielles OGR/PostGIS dans une source de données définit \\
+% \hline v.in.ogr.all.loc & Import all the OGR/PostGIS vector layers in a given data source and create a fitted location \\
+  \hline v.in.ogr.all.loc & Importe toutes les couches vectorielles OGR/PostGIS dans une source de données définit et créer une région leurs correspondant\\
 \hline
 \end{tabular}
-\caption{GRASS Toolbox: Database import modules}
-\end{table}}
+%\caption{GRASS Toolbox: Vector data import modules}
+\caption{Boîte à outils GRASS : Module d'importation de données vectorielles}
+\end{table}
 
-{\renewcommand{\arraystretch}{0.7}
 \begin{table}[H]
 \centering
  \begin{tabular}{|p{4cm}|p{10cm}|}
-  \hline \multicolumn{2}{|c|}{\textbf{Raster and Image data export modules in
-the GRASS
-  Toolbox}} \\
-  \hline \textbf{Module name} & \textbf{Purpose} \\
-  \hline r.out.gdal & Export raster to various formats (GDAL library) \\
-  \hline r.out.gdal.gtiff & Export raster layer to Geo TIFF \\
-  \hline r.out.ascii & Export raster to ASCII text file \\
-  \hline r.out.arc & Converts a raster map layer into an ESRI ARCGRID file \\
-  \hline r.out.xyz & Export raster to text file as x,y,z values based on cell centers \\
-  \hline r.gridatb & Exports GRASS raster map to GRIDATB.FOR map file
-  (TOPMODEL) \\
-  \hline r.out.mat & Exports a GRASS raster to a binary MAT-File \\
-  \hline r.out.bin & Exports a GRASS raster to a binary array \\
-  \hline r.out.mpeg & Export raster series to MPEG movie \\
-  \hline r.out.png & Export GRASS raster as non-georeferenced PNG image
-  format \\
-  \hline r.out.ppm & Converts a GRASS raster map to a PPM image file at the
-  pixel resolution of the CURRENTLY DEFINED REGION \\
-  \hline r.out.ppm3 & Converts 3 GRASS raster layers (R,G,B) to a PPM image
-  file at the pixel resolution of the CURRENTLY DEFINED REGION \\
-  \hline r.out.pov & Converts a raster map layer into a height-field file for
-  POVRAY\\
-  \hline r.out.tiff & Exports a GRASS raster map to a 8/24bit TIFF image file
-  at the pixel resolution of the currently defined region\\
-  \hline r.out.vrml &  Export a raster map to the Virtual Reality Modeling
-  Language (VRML)\\
-  \hline r.out.vtk & Export raster layer to VTK-ASCII \\
+%  \hline \multicolumn{2}{|c|}{\textbf{Vector data export modules in the GRASS Toolbox}} \\
+  \hline \multicolumn{2}{|c|}{\textbf{Modules d'import de données vectorielles dans la boîte à outils de GRASS}} \\ 
+  \hline \textbf{Nom du module} & \textbf{Objectif} \\
+% \hline v.out.ogr & Export vector layer to various formats (OGR library) \\
+  \hline v.out.ogr & Exporte une couche vecteur dans différents formats (bibliothèque OGR) \\
+% \hline v.out.ogr.gml & Export vector layer to GML \\
+  \hline v.out.ogr.gml & Exporte une couche vectorielle en GML \\
+% \hline v.out.ogr.postgis & Export vector layer to various formats (OGR library) \\
+  \hline v.out.ogr.postgis & Exporte une couche vectorielle en différents formats (bibliothèque OGR) \\
+% \hline v.out.ogr.mapinfo & Mapinfo export of vector layer \\
+  \hline v.out.ogr.mapinfo & Export au format Mapinfo d'une couche vectorielle\\
+% \hline v.out.ascii & Convert a GRASS binary vector map to a GRASS ASCII vector map  \\
+  \hline v.out.ascii & Convertit une couche vecteur binaire de GRASS en une couche vectorielle ASCII de GRASS\\
+% \hline v.out.dxf & converts a GRASS vector map to DXF  \\
+  \hline v.out.dxf & Convertit un vecteur de GRASS en DXF \\
+%  \hline v.out.pov & Export vector layer to POV-Ray \\
+   \hline v.out.pov & Exporte une couche vectorielle en  \\
+%  \hline v.out.svg & Export vector layer to SVG \\
+   \hline v.out.svg & Exporte une couche vectorielle en  \\
+%  \hline v.out.vtk & Export vector layer to VTK-ASCII \\
+   \hline v.out.vtk & Exporte une couche vectorielle en VTK-ASCII \\
 \hline
 \end{tabular}
-\caption{GRASS Toolbox: Raster and Image data export modules}
-\end{table}}
+%\caption{GRASS Toolbox: Vector data export modules}
+\caption{Boîte à outils GRASS : Module d'exportation de données vectorielles}
+\end{table}
 
-
-{\renewcommand{\arraystretch}{0.7}
 \begin{table}[H]
 \centering
  \begin{tabular}{|p{4cm}|p{10cm}|}
-  \hline \multicolumn{2}{|c|}{\textbf{Vector data export modules in the GRASS
-Toolbox}} \\
-  \hline \textbf{Module name} & \textbf{Purpose} \\
-  \hline v.out.ogr & Export vector layer to various formats (OGR library) \\
-  \hline v.out.ogr.gml & Export vector layer to GML \\
-  \hline v.out.ogr.pg & Export vector layer to PostGIS database table \\
-  \hline v.out.ogr.mapinfo & Mapinfo export of vector layer \\
-  \hline v.out.ascii & Convert a GRASS binary vector map to a GRASS ASCII
-  vector map  \\
-  \hline v.out.dxf & converts a GRASS vector map to DXF  \\
-  \hline v.out.pov & Export vector layer to POV-Ray \\
-  \hline v.out.svg & Export vector layer to SVG \\
-  \hline v.out.vtk & Export vector layer to VTK-ASCII \\
+%  \hline \multicolumn{2}{|c|}{\textbf{Vector table export modules in the GRASS Toolbox}} \\
+  \hline \multicolumn{2}{|c|}{\textbf{Modules d'export de données attributaires dans la boîte à outils de GRASS}} \\
+  \hline \textbf{Nom du module} & \textbf{Objectif} \\
+%  \hline db.out.ogr & Export attribute table to various formats  \\
+  \hline db.out.ogr & Exporte la table d'attributs dans différents formats  \\
 \hline
 \end{tabular}
-\caption{GRASS Toolbox: Vector data export modules}
-\end{table}}
+%\caption{GRASS Toolbox: Vector data table}
+\caption{oîte à outils GRASS : Données attributaires d'un vecteur}
+\end{table}
 
-{\renewcommand{\arraystretch}{0.7}
+%\subsection{GRASS Toolbox data type conversion modules}
+\subsection{Modules de conversion de données de la boîte à outils GRASS}
+
+%This Section lists all graphical dialogs in the GRASS Toolbox to convert
+%raster to vector or vector to raster data in a currently selected GRASS location 
+%and mapset.
+Cette section liste les interfaces graphiques de la boîte à outils GRASS permettant de convertir les données.
+
 \begin{table}[H]
 \centering
  \begin{tabular}{|p{4cm}|p{10cm}|}
-  \hline \multicolumn{2}{|c|}{\textbf{Vector table export modules in the
-GRASS Toolbox}} \\
-  \hline \textbf{Module name} & \textbf{Purpose} \\
-  \hline db.out.ogr & Export attribute table to various formats  \\
+% \hline \multicolumn{2}{|c|}{\textbf{Data type conversion modules in the GRASS Toolbox}} \\
+  \hline \multicolumn{2}{|c|}{\textbf{Modules de conversion de types de données dans la boîte à outils de GRASS}} \\
+    \hline \textbf{Nom du module} & \textbf{Objectif} \\
+% \hline r.to.vect.point & Convert a raster to vector points \\
+  \hline r.to.vect.point & Convertit un raster en points vectoriels \\
+% \hline r.to.vect.line & Convert a raster to vector lines \\
+  \hline r.to.vect.line & Convertit un raster en lignes vectorielles \\
+% \hline r.to.vect.area & Convert a raster to vector areas \\
+  \hline r.to.vect.area & Convertit un raster en polygones vectoriels \\
+% \hline v.to.rast.constant & Convert a vector to raster using constant \\
+  \hline v.to.rast.constant & Convertit un vecteur en raster en utilisant une constante \\
+% \hline v.to.rast.attr & Convert a vector to raster using attribute values \\
+  \hline v.to.rast.attr & Convertit un vecteur en raster en utilisant des valeurs attributaires\\
 \hline
 \end{tabular}
-\caption{GRASS Toolbox: Vector data table}
-\end{table}}
+%\caption{GRASS Toolbox: Data type conversion modules}
+\caption{Boîte à outils GRASS : modules de conversion detype de données}
+\end{table}
 
+% \subsection{GRASS Toolbox region and projection configuration modules}
+\subsection{Modules de configuration de la projections et de la région de la boîte à outils de GRASS }
 
-\section{GRASS Toolbox data type conversion modules}
+% This Section lists all graphical dialogs in the GRASS Toolbox to manage and change the current mapset region and to configure your projection.
+Cette section liste tous les boîtes de dialogue dans la boîte à outils de GRASS pour gérer et modifier la région du jeu de données sélectionné et de configurer la projection.
 
-This Section lists all graphical dialogs in the GRASS Toolbox to convert
-raster to vector or vector to raster data in a currently selected GRASS location 
-and mapset.
-
-{\renewcommand{\arraystretch}{0.7}
 \begin{table}[H]
 \centering
  \begin{tabular}{|p{4cm}|p{10cm}|}
-  \hline \multicolumn{2}{|c|}{\textbf{Data type conversion modules in the GRASS Toolbox}} \\
-  \hline \textbf{Module name} & \textbf{Purpose} \\
-  \hline r.to.vect.point & Convert a raster to vector points \\
-  \hline r.to.vect.line & Convert a raster to vector lines \\
-  \hline r.to.vect.area & Convert a raster to vector areas \\
-  \hline v.to.rast.constant & Convert a vector to raster using constant \\
-  \hline v.to.rast.attr & Convert a vector to raster using attribute values \\
-\hline
-\end{tabular}
- \caption{GRASS Toolbox: Data type conversion modules}
-\end{table}}
-
-
-\section{GRASS Toolbox region and projection configuration modules}
-
-This Section lists all graphical dialogs in the GRASS Toolbox to manage and
-change the current mapset region and to configure your projection.
-
-{\renewcommand{\arraystretch}{0.7}
-\begin{table}[H]
-\centering
- \begin{tabular}{|p{4cm}|p{10cm}|}
-  \hline \multicolumn{2}{|c|}{\textbf{Region and projection configuration
-  modules in the GRASS Toolbox}} \\
-  \hline \textbf{Module name} & \textbf{Purpose} \\
-  \hline g.region.save & Save the current region as a named region \\
-  \hline g.region.zoom & Shrink the current region until it meets non-NULL
-   data from a given raster map \\
-  \hline g.region.multiple.raster & Set the region to match multiple raster
-  maps \\
-  \hline g.region.multiple.vector & Set the region to match multiple vector
-  maps \\
-  \hline g.proj.print & Print projection information of the current location\\
-  \hline g.proj.geo & Print projection information from a georeferenced file
-  (raster, vector or image)\\
-  \hline g.proj.ascii.new & Print projection information from a
-  georeferenced ASCII file containing a WKT projection description\\
-  \hline g.proj.proj & Print projection information from a PROJ.4 projection
-  description file\\
-  \hline g.proj.ascii.new & Print projection information from a georeferenced
-  ASCII file containing a WKT projection description and create a new
-  location based on it\\
-  \hline g.proj.geo.new & Print projection information from a georeferenced
-  file (raster, vector or image) and create a new location based on it\\
-  \hline g.proj.proj.new & Print projection information from a PROJ.4
-  projection description file and create a new location based on it \\
-  \hline m.cogo & A simple utility for converting bearing and distance
-  measurements to coordinates and vice versa. It assumes a cartesian
-  coordinate system \\
+% \hline \multicolumn{2}{|c|}{\textbf{Region and projection configuration
+%  modules in the GRASS Toolbox}} \\
+  \hline \multicolumn{2}{|c|}{\textbf{Boîte à outils de GRASS : modules de configuration de la projection et de la région}} \\
+  \hline \textbf{Nom du module} & \textbf{Objectif} \\
+% \hline g.region.save & Save the current region as a named region \\
+\hline g.region.save & Sauve la région actuelle dans la région nommée \\
+% \hline g.region.zoom & Shrink the current region until it meets non-NULL data from a given raster map \\
+  \hline g.region.zoom & Réduction de la région courante jusqu'à ce qu'il renvoie des données non-NULL à partir d'une carte raster \\
+% \hline g.region.multiple.raster & Set the region to match multiple raster maps \\
+  \hline g.region.multiple.raster & Défini la région pour correspondre à de multiples couches raster \\
+% \hline g.region.multiple.vector & Set the region to match multiple vector maps \\
+  \hline g.region.multiple.vector & Définit la région pour correspondre à de multiples couches vecteur \\
+% \hline g.proj.print & Print projection information of the current location\\
+  \hline g.proj.print & Affiche des informations de la projection de la localisation actuelle \\
+% \hline g.proj.geo & Print projection information from a georeferenced file (raster, vector or image)\\
+  \hline g.proj.geo & Affiche des informations de la projection à partir d'un fichier géoréférencé (raster, vecteur ou image)\\
+% \hline g.proj.ascii.new & Print projection information from a georeferenced ASCII file containing a WKT projection description\\
+  \hline g.proj.ascii.new & Affiche des informations de la projection à partir d'un fichier ASCII géoréférencé contenant une description WKT de la projection\\
+% \hline g.proj.proj & Print projection information from a PROJ.4 projection description file\\
+  \hline g.proj.proj & Affiche des informations de la projection à partir d'un fichier de description de la projection PROJ.4 \\
+% \hline g.proj.ascii.new & Print projection information from a georeferenced ASCII file containing a WKT projection description and create a new location based on it\\
+  \hline g.proj.ascii.new & Affiche des informations de la projection à partir d'un fichier ASCII géoréférencé contenant une description WKT de la projection et Création d'une nouvelle location basée sur celui-ci \\
+% \hline g.proj.geo.new & Print projection information from a georeferenced file (raster, vector or image) and create a new location based on it\\
+  \hline g.proj.geo.new &  Affiche des informations de la projection à partir d'un fichier géoréférencé (raster, vecteur ou image) et Création d'une nouvelle location basé sur celui-ci \\
+% \hline g.proj.proj.new & Print projection information from a PROJ.4 projection description file and create a new location based on it \\
+  \hline g.proj.proj.new & Affiche des informations de la projection à partir d'un fichier de description de la projection PROJ.4 et Création d'une nouvelle location basée sur celui-ci \\
 \hline
 \end{tabular}
 \caption{GRASS Toolbox: Region and projection configuration modules}
-\end{table}}
+\end{table}
 
+%\subsection{GRASS Toolbox raster data modules}
+\subsection{Modules de données raster de la boîte à outils de GRASS}
 
-\section{GRASS Toolbox raster data modules}
-
-This Section lists all graphical dialogs in the GRASS Toolbox to work with
-and analyse raster data in a currently selected GRASS location and mapset.
-
-{\renewcommand{\arraystretch}{0.7}
+% This Section lists all graphical dialogs in the GRASS Toolbox to work with and analyse raster data in a currently selected GRASS location and mapset.
+Cette section liste toutes les boîtes de dialogue dans la boîte à outils de GRASS pour utiliser et analyser des données raster dans un jeu de données et une région de GRASS sélectionnés.
 \begin{table}[H]
 \centering
  \begin{tabular}{|p{4cm}|p{10cm}|}
-  \hline \multicolumn{2}{|c|}{\textbf{Develop raster map modules in the GRASS
-  Toolbox}} \\
-  \hline \textbf{Module name} & \textbf{Purpose} \\
-  \hline r.compress & Compresses and decompresses raster maps \\
-  \hline r.region.region & Sets the boundary definitions to current or
-  default region \\
-  \hline r.region.raster & Sets the boundary definitions from existent raster
-  map\\
-  \hline r.region.vector & Sets the boundary definitions from existent vector map \\
-  \hline r.region.edge & Sets the boundary definitions by edge (n-s-e-w) \\
-  \hline r.region.alignTo & Sets region to align to a raster map\\
-  \hline r.null.val & Transform cells with value in null cells\\
-  \hline r.null.to & Transform null cells in value cells\\
-  \hline r.quant & This routine produces the quantization file for a
-  floating-point map \\
-  \hline r.resamp.stats & Resamples raster map layers using aggregation \\
-  \hline r.resamp.interp & Resamples raster map layers using interpolation \\
-  \hline r.resample & GRASS raster map layer data resampling capability.
-  Before you must set new resolution\\
-  \hline r.resamp.rst & Reinterpolates and computes topographic analysis
-  using regularized spline with tension and smoothing \\
-  \hline r.support & Allows creation and/or modification of raster map layer
-  support files\\
-  \hline r.support.stats & Update raster map statistics \\
-  \hline r.proj & Re-project a raster map from one location to the current
-  location \\
+% \hline \multicolumn{2}{|c|}{\textbf{Develop raster map modules in the GRASS
+%  Toolbox}} \\
+  \hline \multicolumn{2}{|c|}{\textbf{Boîte à outils de GRASS : Modules de traitement des couches raster}} \\
+  \hline \textbf{Nom du module} & \textbf{Objectif} \\
+% \hline r.compress & Compresses and decompresses raster maps \\
+  \hline r.compress & Compresse et décompresse des couches raster \\
+% \hline r.region.region & Sets the boundary definitions to current or default region \\
+  \hline r.region.region & Définit la définition des frontières à la région par défaut ou celle actuelle \\
+% \hline r.region.raster & Sets the boundary definitions from existent raster map\\
+  \hline r.region.raster & Définit la définition des frontières à partir d'une couche raster existante \\
+% \hline r.region.vector & Sets the boundary definitions from existent vector map \\
+  \hline r.region.vector & Définit la définition des frontières à partir d'une couche vecteur existante \\
+% \hline r.region.edge & Sets the boundary definitions by edge (n-s-e-w) \\
+  \hline r.region.edge & Définit la définition des frontières par le bord (n-s-e-o) \\
+% \hline r.region.alignTo & Sets region to align to a raster map\\
+  \hline r.region.alignTo & Définit la région sur laquelle aligner la couche raster \\
+% \hline r.null.val & Transform cells with value in null cells\\
+  \hline r.null.val & Transforme les cellules avec des valeurs en cellules nulles\\
+% \hline r.null.to & Transform null cells in value cells\\
+  \hline r.null.to & Transforme les cellules nulles en cellules avec une valeur\\
+% \hline r.quant & This routine produces the quantization file for a floating-point map \\
+  \hline r.quant & Cette routine produit le fichier de quantification pour une carte en virgule flottante \\
+% \hline r.resamp.stats & Resamples raster map layers using aggregation \\
+  \hline r.resamp.stats & Reéchantillonne des couches raster en utilisant l'aggrégation \\
+% \hline r.resamp.interp & Resamples raster map layers using interpolation \\
+  \hline r.resamp.interp & Reéchantillonne des couches raster en utilisant l'interpolation \\
+% \hline r.resample & GRASS raster map layer data resampling capability. Before you must set new resolution\\
+  \hline r.resample & Fonctionnalité de reéchantillonage de données raster de GRASS. Vous devez auparavant définir une nouvelle résolution \\
+% \hline r.resamp.rst & Reinterpolates and computes topographic analysis using regularized spline with tension and smoothing \\
+  \hline r.resamp.rst & Reinterpole et calcul l'analyse topographique en utilisant des courbes régularisées avec une tension et un lissage \\
+% \hline r.support & Allows creation and/or modification of raster map layer support files\\
+  \hline r.support & Permet la création et/ou la modification des fichiers support de la couche raster\\
+% \hline r.support.stats & Update raster map statistics \\
+  \hline r.support.stats & Met à jour les statistiques du raster \\
+% \hline r.proj & Re-project a raster map from one location to the current location \\
+  \hline r.proj & Reprojette une couche raster d'une location à la localition actuelle \\
 \hline
 \end{tabular}
-\caption{GRASS Toolbox: Develop raster map modules}
-\end{table}}
+%\caption{GRASS Toolbox: Develop raster map modules}
+\caption{Boîte à outils GRASS : Modules de traitement des couches raster}
+\end{table}
 
-{\renewcommand{\arraystretch}{0.7}
 \begin{table}[H]
 \centering
  \begin{tabular}{|p{4cm}|p{10cm}|}
-  \hline \multicolumn{2}{|c|}{\textbf{Raster color management modules in the
-  GRASS Toolbox}} \\
-  \hline \textbf{Module name} & \textbf{Purpose} \\
-  \hline r.colors.table & Set raster color table from setted tables \\
-  \hline r.colors.rules & Set raster color table from setted rules \\
-  \hline r.colors.rast & Set raster color table from existing raster \\
-  \hline r.colors.stddev & Set color rules based on standard deviation frommap's mean value \\
-  \hline r.blend & Blend color components for two raster maps by given ratio \\
-  \hline r.composite & Blend red, green, raster layers to obtain one color
-  raster \\
-  \hline r.his & Generates red, green and blue raster map layers combining
-  hue, intensity, and saturation (his) values from user-specified input
-  raster map layers \\
+% \hline \multicolumn{2}{|c|}{\textbf{Raster color management modules in the GRASS Toolbox}} \\
+  \hline \multicolumn{2}{|c|}{\textbf{Modules de gestion de la couleur des raster dans la boîte à outils de GRASS}} \\
+  \hline \textbf{Nom du module} & \textbf{Objectif} \\
+% \hline r.colors.table & Set raster color table from setted tables \\
+  \hline r.colors.table & Définit une table de couleur à partir de tables établies \\
+% \hline r.colors.rules & Set raster color table from setted rules \\
+  \hline r.colors.rules & Définit une table de couleur à partir de règles établies \\
+% \hline r.colors.rast & Set raster color table from existing raster \\
+  \hline r.colors.rast & Définit une table de couleur à partir d'un raster existant \\
+%  \hline r.colors.stddev & Set color rules based on standard deviation frommap's mean value \\
+  \hline r.colors.stddev & éfinit une table de couleur à partir de la déviation standart de la valeur moyenne de la carte \\
+% \hline r.blend & Blend color components for two raster maps by given ratio \\
+  \hline r.blend & Mélange les composants de couleurs de deux rasters en fonction d'un ratio \\
+% \hline r.composite & Blend red, green, raster layers to obtain one color raster \\
+  \hline r.composite & Mélange le rouge, le vert et le bleu de couches raster pour obtenir un raster d'une couleur \\
+% \hline r.his & Generates red, green and blue raster map layers combining hue, intensity, and saturation (his) values from user-specified input raster map layers \\
+  \hline r.his & Génère des couches raster rouge, vert et bleu combinant les valeurs de la teinte, de l'intensité et de la saturation (HIS) à partir de couches raster définit par l'utilisateur en entrée \\
 \hline
 \end{tabular}
-\caption{GRASS Toolbox: Raster color management modules}
-\end{table}}
+%\caption{GRASS Toolbox: Raster color management modules}
+\caption{Boîte à outils GRASS : Modules de gestion de la couleur des raster}
+\end{table}
 
-{\renewcommand{\arraystretch}{0.7}
 \begin{table}[H]
 \centering
  \begin{tabular}{|p{4cm}|p{10cm}|}
-  \hline \multicolumn{2}{|c|}{\textbf{Spatial raster analysis modules in the
-  GRASS Toolbox}} \\
-  \hline \textbf{Module name} & \textbf{Purpose} \\
-  \hline r.buffer & Raster buffer \\
-  \hline r.mask & Create a MASK for limiting raster operation \\
-  \hline r.mapcalc & Raster map calculator \\
-  \hline r.mapcalculator & Simple map algebra \\
-  \hline r.neighbors & Raster neighbors analyses \\
-  \hline v.neighbors & Count of neighbouring points \\
-  \hline r.cross & Create a cross product of the category value from multiple
-  raster map layers \\
-  \hline r.series & Makes each output cell a function of the values assigned
-  to the corresponding cells in the output raster map layers\\
-  \hline r.patch & Create a new raster map by combining other raster maps \\
-  \hline r.statistics & Category or object oriented statistics \\
-  \hline r.sunmask.position & Calculate shadow maps from exact sun position \\
-  \hline r.sunmask.date.time & Calculate shadow maps from sun position determined by date/time\\
-  \hline r.cost & Outputs a raster map layer showing the cumulative cost of
-  moving between different geographic locations on an input raster map layer
-  whose cell category values represent cost\\
-  \hline r.drain & Traces a flow through an elevation model on a raster map
-  layer \\
-  \hline r.shaded.relief & Create shaded map \\
-  \hline r.slope.aspect.slope & Generate slope map from DEM (digital
-  elevation model) \\
-  \hline r.slope.aspect.aspect & Generate aspect map from DEM (digital
-  elevation model) \\
-  \hline r.param.scale & Extracts terrain parameters from a DEM \\
-  \hline r.texture & Generate images with textural features from a raster map
-  (first serie of indices)\\
-  \hline r.texture.bis & Generate images with textural features from a raster
-  map (second serie of indices)\\
-  \hline r.los & Line-of-sigth raster analysis \\
-  \hline r.grow.distance & Create raster of distance to features in input layer \\
-  \hline r.clump & Recategorizes into unique categories contiguous cells \\
-  \hline r.grow & Generates a raster map layer with contiguous areas grown by
-  one cell\\
-  \hline r.thin & Thin no-zero cells that denote line features \\
+  \hline \multicolumn{2}{|c|}{\textbf{Modules d'analyse spatiale de rasterx}} \\
+  \hline \textbf{Nom du module} & \textbf{Objectif} \\
+% \hline r.buffer & Raster buffer \\
+  \hline r.buffer & Buffer raster\\
+% \hline r.mask & Create a MASK for limiting raster operation \\
+  \hline r.mask & Créé un MASK pour limiter les opérations raster\\
+% \hline r.mapcalc & Raster map calculator \\
+  \hline r.mapcalc & Calculateur de couche raster \\
+% \hline r.mapcalculator & Simple map algebra \\
+  \hline r.mapcalculator & Algèbre cartographique simple \\
+% \hline r.neighbors & Raster neighbors analyses \\
+  \hline r.neighbors & Analyse raster des voisins\\
+% \hline v.neighbors & Count of neighbouring points \\
+  \hline v.neighbors & Compte les points voisins \\
+% \hline r.cross & Create a cross product of the category value from multiple raster map layers \\
+  \hline r.cross & Crée un produit croisé de la valeur de la catégorie à partir de plus couches raster \\
+% \hline r.series & Makes each output cell a function of the values assigned to the corresponding cells in the output raster map layers\\
+  \hline r.series & Fait de chaque cellule en sortie une fonction de la valeur attribuée aux cellules correspondantes à la sortie des couches raster\\
+% \hline r.patch & Create a new raster map by combining other raster maps \\
+  \hline r.patch & Crée une nouvelle couche raster en combinanet d'autres couches raster \\
+% \hline r.statistics & Category or object oriented statistics \\
+  \hline r.statistics & Statistiques orienté categories ou objet\\
+%  \hline r.sunmask.position & Calculate shadow maps from exact sun position \\
+  \hline r.sunmask.position & Calcule une carte d'ombrage selon la position exacte du soleil \\  
+%  \hline r.sunmask.date.time & Calculate shadow maps from sun position determined by date/time\\
+  \hline r.sunmask.date.time & Calcule une carte d'ombrage selon la position du soleil déterminée par la date et l'heure \\  
+% \hline r.cost & Outputs a raster map layer showing the cumulative cost of moving between different geographic locations on an input raster map layer whose cell category values represent cost\\
+  \hline r.cost & Renvoie une couche raster montrant le coût cumulatif du déplacement entre des endroits géographiques différents sur une couche raster en entrée dont les valeurs des catégories représentent le coût\\
+% \hline r.drain & Traces a flow through an elevation model on a raster map layer \\
+  \hline r.drain & Trace un flux à travers un modèle d'élévation sur une couche raster\\
+% \hline r.shaded.relief & Create shaded map \\
+  \hline r.shaded.relief & Création d'une carte d'ombrage \\
+% \hline r.slope.aspect.slope & Generate slope map from DEM (digital elevation model) \\
+  \hline r.slope.aspect.slope & Génère une carte de pente à partir d'un MNT (Modèle Numérique de Terrain) \\
+% \hline r.slope.aspect.aspect & Generate aspect map from DEM (digital elevation model) \\
+  \hline r.slope.aspect.aspect & Génère une carte d'aspect à partir d'un MNT (Modèle Numérique de Terrain) \\
+% \hline r.param.scale & Extracts terrain parameters from a DEM \\
+  \hline r.param.scale & Extrait les paramètres terrain à partir d'un MNT \\
+% \hline r.texture & Generate images with textural features from a raster map (first serie of indices)\\
+  \hline r.texture & Génère des images avec des objets de texture à partir d'une couche raster (première série d'indices)\\
+% \hline r.texture.bis & Generate images with textural features from a raster map (second serie of indices)\\
+  \hline r.texture.bis & Génère des images avec des objets de texture à partir d'une couche raster (seconde série d'indices)\\
+% \hline r.los & Line-of-sigth raster analysis \\
+  \hline r.los & Analyse raster de la ligne de vue\\
+%  \hline r.grow.distance & Create raster of distance to features in input layer \\
+  \hline r.grow.distance & Crée un raster de distance vers des entités \\
+% \hline r.clump & Recategorizes into unique categories contiguous cells \\
+  \hline r.clump & Recatégorise des cellules contig"ue en une catégorie unique \\
+% \hline r.grow & Generates a raster map layer with contiguous areas grown by one cell\\
+  \hline r.grow & Génère une couche raster avec des zones contig"ues augmentées par une cellule\\
+% \hline r.thin & Thin no-zero cells that denote line features \\
+  \hline r.thin & Cellules non null minces qui dénote un objet linéaire \\
 \hline
 \end{tabular}
-\caption{GRASS Toolbox: Spatial raster analysis modules}
-\end{table}}
+%\caption{GRASS Toolbox: Spatial raster analysis modules}
+\caption{Boîte à outils GRASS : Modules d'analyse spatiale raster}
+\end{table}
 
-{\renewcommand{\arraystretch}{0.7}
 \begin{table}[H]
 \centering
  \begin{tabular}{|p{4cm}|p{10cm}|}
-  \hline \multicolumn{2}{|c|}{\textbf{Hydrologic modelling modules in the GRASS
-  Toolbox}} \\
-  \hline \textbf{Module name} & \textbf{Purpose} \\
-  \hline r.watershed & Watershed Analysis \\
-  \hline r.carve & Takes vector stream data, transforms it to raster, and
-  subtracts depth from the output DEM \\
-  \hline r.fill.dir & Filters and generates a depressionless elevation map
-  and a flow direction map from a given elevation layer \\
-  \hline r.lake.xy & Fills lake from seed point at given level \\
-  \hline r.lake.seed & Fills lake from seed at given level \\
-  \hline r.topidx & Creates a 3D volume map based on 2D elevation and value
-  raster maps \\
-  \hline r.basins.fill & Generates a raster map layer showing watershed
-  subbasins \\
-  \hline r.water.outlet & Watershed basin creation program \\
+% \hline \multicolumn{2}{|c|}{\textbf{Surface management modules in the GRASS
+%  Toolbox}} \\
+  \hline \multicolumn{2}{|c|}{\textbf{Modules de gestion des surfaces}} \\
+  \hline \textbf{Nom du module} & \textbf{Objectif} \\
+% \hline r.circle & Create a map containing concentric circles \\
+  \hline r.circle & Création d'une carte contenant des cercles concentriques \\
+% \hline r.random & Creates a random vector point map contained in a raster \\
+  \hline r.random & Création d'une couche vecteur de point aléatoire dans un raster\\
+% \hline r.random.cells & Generates random cell values with spatial dependence \\
+  \hline r.random.cells & Génère des valeurs de cellule aléatoire avec une dépendance spatiale \\
+% \hline v.kernel & Gaussian kernel density \\
+  \hline v.kernel & Densité du noyau Gaussien \\
+% \hline r.contour & Produces a contours vector map with specified step from a raster map\\
+  \hline r.contour & Produit une couche vectoriel de contours avec des étapes définits à partir d'une couche raster\\
+% \hline r.contour2 & Produces a contours vector map of specified contours from a raster map \\
+  \hline r.contour2 & Produit un contour vectoriel à partir de contours définit par une couche raster\\
+% \hline r.surf.fractal & Creates a fractal surface of a given fractal dimension\\
+  \hline r.surf.fractal & Création d'une surface fractal avec une dimension fractale donnée\\
+% \hline r.surf.gauss & GRASS module to produce a raster map layer of gaussian deviates whose mean and standard deviation can be expressed by the user \\
+  \hline r.surf.gauss & Module GRASS pour produire une couche raster de déviation gaussienne dont la moyenne et la déviation standard peuvent \^etre exprimé par l'utilisateur\\
+% \hline r.surf.random & Produces a raster map layer of uniform random deviates whose range can be expressed by the user \\
+  \hline r.surf.random & Produit une couche raster de divation aléatoire uniforme dont le domaine peut \^etre exprimé par l'utilisateur\\
+%  \hline r.plane & Create a raster plane \\
+  \hline r.plane & Création d'un plan raster \\  
+% \hline r.bilinear & Bilinear interpolation utility for raster map layers \\
+  \hline r.bilinear & Commande d'interpolation bilinéaire pour les couches raster \\
+% \hline v.surf.bispline & Bicubic or bilinear spline interpolation with Tykhonov regularization\\
+  \hline v.surf.bispline & Interpolation spline bicubique ou bilinéaire avec régularisation de Tykhonov \\
+% \hline r.surf.idw & Surface interpolation utility for raster map layers\\
+  \hline r.surf.idw & Commande d'interpolation de surface pour des couches raster\\
+% \hline r.surf.idw2 & Surface generation program\\
+  \hline r.surf.idw2 & Programme de génération de surface\\
+% \hline r.surf.contour & Surface generation program from rasterized contours \\
+  \hline r.surf.contour & Programme de génération de surface à partir de contours rasterisés \\
+% \hline v.surf.idw & Interpolate attribute values (IDW) \\
+  \hline v.surf.idw & Interpole les valeurs attributaires (IDW) \\
+% \hline v.surf.rst & Interpolate attribute values (RST) \\
+  \hline v.surf.rst & Interpole les valeurs attributaires (RST) \\
+% \hline r.fillnulls & Fills no-data areas in raster maps using v.surf.rst splines interpolation \\
+  \hline r.fillnulls & Remplis les zones sans données dans une couche raster en utilisant l'interpolation de splines de v.surf.rst \\
 \hline
 \end{tabular}
-\caption{GRASS Toolbox: Hydrologic modelling modules}
-\end{table}}
+%\caption{GRASS Toolbox: Surface management modules}
+\caption{Boîte à outils GRASS : Modules de gestion des surfaces}
+\end{table}
 
-{\renewcommand{\arraystretch}{0.7}
+\begin{table}[ht]
+\centering
+ \begin{tabular}{|p{4cm}|p{10cm}|}
+% \hline \multicolumn{2}{|c|}{\textbf{Raster category and label modules in the GRASS Toolbox}} \\
+  \hline \multicolumn{2}{|c|}{\textbf{Boîte à outils GRASS : Modules pour changer les valeurs des catégories et des étiquettes des raster}} \\  
+  \hline \textbf{Nom du module} & \textbf{Objectif} \\
+% \hline r.reclass.area.greater & Reclasses a raster map greater than user specified area size (in hectares) \\
+  \hline r.reclass.area.greater & Reclasse une couche raster d'une zone supérieure à celle donnée par l'utilisateur (en hectares) \\
+% \hline r.reclass.area.lesser & Reclasses a raster map less than user specified area size (in hectares) \\
+  \hline r.reclass.area.lesser & Reclasse une couche raster d'une zone inférieure à celle donnée par l'utilisateur (en hectares) \\
+% \hline r.reclass & Reclass a raster using a reclassification rules file \\
+  \hline r.reclass & Reclasse un raster en utilisant un fichier de règles de reclassification \\
+% \hline r.recode & Recode raster maps\\
+  \hline r.recode & Recode des couches raster \\
+% \hline r.rescale & Rescales the range of category values in a raster map layer \\
+  \hline r.rescale & Reéchantillonne le domaine des valeurs des catégories d'une couche raster \\
+\hline
+\end{tabular}
+%\caption{GRASS Toolbox: Change raster category values and labels modules}
+\caption{Boîte à outils GRASS : Modules pour changer les valeurs des catégories et des étiquettes des raster}
+\end{table}
+
 \begin{table}[H]
 \centering
  \begin{tabular}{|p{4cm}|p{10cm}|}
-  \hline \multicolumn{2}{|c|}{\textbf{Raster category and label modules in the GRASS Toolbox}} \\
-  \hline \textbf{Module name} & \textbf{Purpose} \\
-  \hline r.reclass.area.greater & Reclasses a raster map greater than user
-  specified area size (in hectares) \\
-  \hline r.reclass.area.lesser & Reclasses a raster map less than user
-  specified area size (in hectares) \\
-  \hline r.reclass & Reclass a raster using a reclassification rules file \\
-  \hline r.recode & Recode raster maps\\
-  \hline r.rescale & Rescales the range of category values in a raster map
-  layer \\
+% \hline \multicolumn{2}{|c|}{\textbf{Hydrologic modelling modules in the GRASS
+%  Toolbox}} \\
+    \hline \multicolumn{2}{|c|}{\textbf{Boîte à outils GRASS : Modules de modélisation hydrologique}} \\
+  \hline \textbf{Nom du module} & \textbf{Objectif} \\
+% \hline r.carve & Takes vector stream data, transforms it to raster, and subtracts depth from the output DEM \\
+  \hline r.carve & Utilise des données vecteur de flux, les transforme en raster et extrait la profondeur à partir du MNT en sortie\\
+% \hline r.fill.dir & Filters and generates a depressionless elevation map and a flow direction map from a given elevation layer \\
+  \hline r.fill.dir & Filtre et génère une couche d'élévation sans dépression et un couche de direction de flux à partir d'une couche d'élévation donnée \\
+% \hline r.lake.xy & Fills lake from seed point at given level \\
+  \hline r.lake.xy & Remplit le lac à partir de données ponctuelles à un niveau défini \\
+% \hline r.lake.seed & Fills lake from seed at given level \\
+  \hline r.lake.seed & Remplit le lac à partir de données à un niveau défini \\
+% \hline r.topidx & Creates a 3D volume map based on 2D elevation and value raster maps \\
+  \hline r.topidx & Crée une carte en 3D basé sur des couches raster et des élévations 2D \\
+% \hline r.basins.fill & Generates a raster map layer showing watershed subbasins \\
+  \hline r.basins.fill & Génère une couche raster montrant les sous-bassins hydrographiques \\
+% \hline r.water.outlet & Watershed basin creation program \\
+  \hline r.water.outlet & Programme de création de bassin hydrographique \\
 \hline
 \end{tabular}
-\caption{GRASS Toolbox: Change raster category values and labels modules}
-\end{table}}
+%\caption{GRASS Toolbox: Hydrologic modelling modules}
+\caption{Boîte à outils GRASS : Modules de modélisation hydrologique}
+\end{table}
 
-{\renewcommand{\arraystretch}{0.7}
+\vspace{-1cm}
+
 \begin{table}[H]
 \centering
  \begin{tabular}{|p{4cm}|p{10cm}|}
-  \hline \multicolumn{2}{|c|}{\textbf{Surface management modules in the GRASS
-  Toolbox}} \\
-  \hline \textbf{Module name} & \textbf{Purpose} \\
-  \hline r.circle & Create a map containing concentric circles \\
-  \hline r.random & Creates a random vector point map contained in a raster \\
-  \hline r.random.cells & Generates random cell values with spatial
-  dependence \\
-  \hline v.kernel & Gaussian kernel density \\
-  \hline r.contour & Produces a contours vector map with specified step from
-  a raster map\\
-  \hline r.contour2 & Produces a contours vector map of specified contours
-  from a raster map \\
-  \hline r.surf.fractal & Creates a fractal surface of a given fractal
-  dimension\\
-  \hline r.surf.gauss & GRASS module to produce a raster map layer of
-  gaussian deviates whose mean and standard deviation can be expressed by the
-  user \\
-  \hline r.surf.random & Produces a raster map layer of uniform random
-  deviates whose range can be expressed by the user \\
-  \hline r.plane & Create a raster plane \\
-  \hline r.bilinear & Bilinear interpolation utility for raster map layers \\
-  \hline v.surf.bispline & Bicubic or bilinear spline interpolation with
-  Tykhonov regularization\\
-  \hline r.surf.idw & Surface interpolation utility for raster map layers\\
-  \hline r.surf.idw2 & Surface generation program\\
-  \hline r.surf.contour & Surface generation program from rasterized contours \\
-  \hline v.surf.idw & Interpolate attribute values (IDW) \\
-  \hline v.surf.rst & Interpolate attribute values (RST) \\
-  \hline r.fillnulls & Fills no-data areas in raster maps using v.surf.rst
-  splines interpolation \\
+% \hline \multicolumn{2}{|c|}{\textbf{Reports and statistic analysis modules in the GRASS Toolbox}} \\
+   \hline \multicolumn{2}{|c|}{\textbf{Boîte à outils GRASS : Modules d'analyses statistiques et de rapports}} \\
+  \hline \textbf{Nom du module} & \textbf{Objectif} \\
+% \hline r.category & Prints category values and labels associated with user-specified raster map layers \\
+  \hline r.category & Affiche les valeurs des categories et leus étiquettes avec une couche rster définit par l'utilisateur \\
+% \hline r.sum & Sums up the raster cell values \\
+  \hline r.sum & Réalise la somme des valeurs des cellules d'un raster \\
+% \hline r.report & Reports statistics for raster map layers \\
+  \hline r.report & Renvoi des statistiques pour des couches raster \\
+% \hline r.average & Finds the average of values in a cover map within areas assigned the same category value in a user-specified base map \\
+  \hline r.average & Trouve la moyenne des valeurs dans une couche de couverture dans des zones assignées de m\^eme valeur de catégorie dans une couche définit par l'utilisateur \\
+% \hline r.median & Finds the median of values in a cover map within areas assigned the same category value in a user-specified base map \\
+  \hline r.median & Trouve la mediane des valeurs dans une couche de couverture dans des zones assignées de m\^eme valeur de catégorie dans une couche définit par l'utilisateur \\
+% \hline r.mode & Finds the mode of values in a cover map within areas assigned the same category value in a user-specified base map.reproject raster image \\
+  \hline r.mode & Trouve le mode des valeurs dans une couche de couverture dans des zones assignées de m\^eme valeur de catégorie  dans une couche définit par l'utilisateur \\
+% \hline r.volume & Calculates the volume of data clumps, and produces a GRASS vector points map containing the calculated centroids of these clumps \\
+  \hline r.volume & Calcule le volume d'un amas de données, et produit une couche vecteur poncutel GRAS contenant le centro"ide calculé de ces amas \\
+% \hline r.surf.area & Surface area estimation for rasters \\
+  \hline r.surf.area & Estimation de la surface d'une pour des rasters \\
+% \hline r.univar & Calculates univariate statistics from the non-null cells of a raster map \\
+  \hline r.univar & Calcule des statistiques univariées à partir de cellules non nulles d'une couche raster\\
+% \hline r.covar & Outputs a covariance/correlation matrix for user-specified raster map layer(s)\\
+  \hline r.covar & Affiche une matrice de corrélation/covariance pour des couches raster définit par l'utilisateur\\
+% \hline r.regression.line & Calculates linear regression from two raster maps: y = a + b * x \\
+  \hline r.regression.line & Calcule la régression linéaire à partir de deux cartes raster : y = a + b * x \\
+% \hline r.coin & Tabulates the mutual occurrence (coincidence) of categories for two raster map layers\\
+  \hline r.coin & Tabule les occurences mutuelles (co"incidence) des catégories pour deux couches raster\\
 \hline
 \end{tabular}
-\caption{GRASS Toolbox: Surface management modules}
-\end{table}}
+%\caption{GRASS Toolbox: Reports and statistic analysis modules}
+\caption{Boîte à outils GRASS : Modules d'analyses statistiques et rapports}
+\end{table}
 
-{\renewcommand{\arraystretch}{0.7}
-\begin{table}[H]
-\centering
- \begin{tabular}{|p{4cm}|p{10cm}|}
-  \hline \multicolumn{2}{|c|}{\textbf{Reports and statistic analysis modules in the GRASS Toolbox}} \\
-  \hline \textbf{Module name} & \textbf{Purpose} \\
-  \hline r.category & Prints category values and labels associated with
-  user-specified raster map layers \\
-  \hline r.sum & Sums up the raster cell values \\
-  \hline r.report & Reports statistics for raster map layers \\
-  \hline r.average & Finds the average of values in a cover map within areas
-  assigned the same category value in a user-specified base map \\
-  \hline r.median & Finds the median of values in a cover map within areas
-  assigned the same category value in a user-specified base map \\
-  \hline r.mode & Finds the mode of values in a cover map within areas
-  assigned the same category value in a user-specified base map.reproject
-  raster image \\
-  \hline r.volume & Calculates the volume of data clumps, and produces a
-  GRASS vector points map containing the calculated centroids of these clumps \\
-  \hline r.surf.area & Surface area estimation for rasters \\
-  \hline r.univar & Calculates univariate statistics from the non-null cells
-  of a raster map \\
-  \hline r.covar & Outputs a covariance/correlation matrix for user-specified
-  raster map layer(s)\\
-  \hline r.regression.line & Calculates linear regression from two raster
-  maps: y = a + b * x \\
-  \hline r.coin & Tabulates the mutual occurrence (coincidence) of categories
-  for two raster map layers\\
-\hline
-\end{tabular}
-\caption{GRASS Toolbox: Reports and statistic analysis modules}
-\end{table}}
 
-\clearpage
+% \subsection{GRASS Toolbox vector data modules}
+\subsection{Modules de données vecteur de la boîte à outils de GRASS}
 
-\section{GRASS Toolbox vector data modules}
+% This Section lists all graphical dialogs in the GRASS Toolbox to work with and analyse vector data in a currently selected GRASS location and mapset.
+Cette section liste toutes les boîtes de dialogue dans la boîte à outils de GRASS pour utiliser et analyser des données vecteur dans un jeu de données et une région de GRASS sélectionnés.
 
-This Section lists all graphical dialogs in the GRASS Toolbox to work with
-and analyse vector data in a currently selected GRASS location and mapset.
 
-{\renewcommand{\arraystretch}{0.7}
 \begin{table}[H]
 \centering
  \begin{tabular}{|p{3cm}|p{11cm}|}
-  \hline \multicolumn{2}{|c|}{\textbf{Develop vector map modules in the GRASS
-  Toolbox}} \\
-  \hline \textbf{Module name} & \textbf{Purpose} \\
-  \hline v.build.all & Rebuild topology of all vectors in the mapset \\
-  \hline v.clean.break & Break lines at each intersection of vector map \\
-  \hline v.clean.snap & Cleaning topology: snap lines to vertex in threshold \\
-  \hline v.clean.rmdangles & Cleaning topology: remove dangles \\
-  \hline v.clean.chdangles & Cleaning topology: change the type of boundary
-  dangle to line \\
-  \hline v.clean.rmbridge & Remove bridges connecting area and island or 2
-  islands \\
-  \hline v.clean.chbridge & Change the type of bridges connecting area and
-  island or 2 islands \\
-  \hline v.clean.rmdupl & Remove duplicate lines (pay attention to
-  categories!) \\
-  \hline v.clean.rmdac & Remove duplicate area centroids \\
-  \hline v.clean.bpol & Break polygons. Boundaries are broken on each
-  point shared between 2 and more polygons where angles of segments are
-  different \\
-  \hline v.clean.prune & Remove vertices in threshold from lines and
-  boundaries \\
-  \hline v.clean.rmarea & Remove small areas (removes longest boundary with
-  adjacent area) \\
-  \hline v.clean.rmline & Remove all lines or boundaries of zero length \\
-  \hline v.clean.rmsa & Remove small angles between lines at nodes \\
-  \hline v.type.lb & Convert lines to boundaries \\
-  \hline v.type.bl & Convert boundaries to lines \\
-  \hline v.type.pc & Convert points to centroids \\
-  \hline v.type.cp & Convert centroids to points \\
-  \hline v.centroids & Add missing centroids to closed boundaries  \\
-  \hline v.build.polylines & Build polylines from lines \\
-  \hline v.segment & Creates points/segments from input vector lines and
-  positions \\
-  \hline v.to.points & Create points along input lines \\
-  \hline v.parallel & Create parallel line to input lines \\
-  \hline v.dissolve & Dissolves boundaries between adjacent areas \\
-  \hline v.drape & Convert 2D vector to 3D vector by sampling of elevation
-  raster\\
-  \hline v.transform & Performs an affine transformation on a vector map \\
-  \hline v.proj & Allows projection conversion of vector files \\
-  \hline v.support & Updates vector map metadata \\
-  \hline generalize & Vector based generalization \\
+% \hline \multicolumn{2}{|c|}{\textbf{Develop vector map modules in the GRASS
+%  Toolbox}} \\
+   \hline \multicolumn{2}{|c|}{\textbf{Boîte à outils GRASS : Modules de traitement des couches vecteurs}} \\
+  \hline \textbf{Nom du module} & \textbf{Objectif} \\
+% \hline v.build.all & Rebuild topology of all vectors in the mapset \\
+  \hline v.build.all & Reconstruit la top\^ologie de tous les vecteurs dans le jeu de données\\
+% \hline v.clean.break & Break lines at each intersection of vector map \\
+  \hline v.clean.break & Coupe les lignes à chaque intersection de la couche vecteur\\
+% \hline v.clean.snap & Cleaning topology: snap lines to vertex in threshold \\
+  \hline v.clean.snap & Nettoyage topologique : aimante les lignes vers les sommets en fonction d'un seuil\\
+% \hline v.clean.rmdangles & Cleaning topology: remove dangles \\
+  \hline v.clean.rmdangles & Nettoyage topologique : supprime les noeuds pendants ([NdT] noeuds isolés qui ne ferme pas proprement l'objet) \\
+% \hline v.clean.chdangles & Cleaning topology: change the type of boundary dangle to line \\
+  \hline v.clean.chdangles & Nettoyage topologique : change le type contour d'arc en ligne \\
+% \hline v.clean.rmbridge & Remove bridges connecting area and island or 2 islands \\
+  \hline v.clean.rmbridge & Supprime les ponts connectant une surface et une ou deux îles\\
+% \hline v.clean.chbridge & Change the type of bridges connecting area and island or 2 islands \\
+  \hline v.clean.chbridge & Change les ponts connectant les surfaces et une ou 2 îles \\
+% \hline v.clean.rmdupl & Remove duplicate lines (pay attention to categories!) \\
+  \hline v.clean.rmdupl & Enlève les lignes dupliquées  (faîtes attention aux catégories !) \\
+% \hline v.clean.rmdac & Remove duplicate area centroids \\
+  \hline v.clean.rmdac & Enlève les centro"ides dupliqués des surfaces\\
+% \hline v.clean.bpol & Break polygons. Boundaries are broken on each point shared between 2 and more polygons where angles of segments are different \\
+  \hline v.clean.bpol & Casse les polygones. Les contours sont cassés sur chaque point partagé entre deux ou plus polygones où les angles des segments sont différents\\
+% \hline v.clean.prune & Remove vertices in threshold from lines and boundaries \\
+  \hline v.clean.prune & Enlève les sommets dans un seuil des lignes et contours\\
+% \hline v.clean.rmarea & Remove small areas (removes longest boundary with adjacent area) \\
+  \hline v.clean.rmarea & Enlève les petites surfaces (supprime les contours les plus grand avec des zones adjacantes) \\
+% \hline v.clean.rmline & Remove all lines or boundaries of zero length \\
+  \hline v.clean.rmline & Enlève toutes les lignes ou contours de longueur nulle\\
+% \hline v.clean.rmsa & Remove small angles between lines at nodes \\
+  \hline v.clean.rmsa & Enlève les petits angles entre les lignes aux niveaux des noeuds\\
+% \hline v.type.lb & Convert lines to boundaries \\
+  \hline v.type.lb & Convertit des lignes en limites\\
+% \hline v.type.bl & Convert boundaries to lines \\
+  \hline v.type.bl & Convertit des limites en lignes\\
+% \hline v.type.pc & Convert points to centroids \\
+  \hline v.type.pc & Convertit des points en centroides \\
+% \hline v.type.cp & Convert centroids to points \\
+  \hline v.type.cp & Convertit des centroides en points \\
+% \hline v.centroids & Add missing centroids to closed boundaries  \\
+  \hline v.centroids & Ajoute les centroides manquants aux limites fermées\\
+% \hline v.build.polylines & Build polylines from lines \\
+  \hline v.build.polylines & Construit des polylignes à partir de lignes\\
+% \hline v.segment & Creates points/segments from input vector lines and positions \\
+  \hline v.segment & Crée des points/segments à partir de positions et de lignes vectorielles en entrée\\
+% \hline v.to.points & Create points along input lines \\
+  \hline v.to.points & Crée des points le longs d'une ligne en entrée\\
+% \hline v.parallel & Create parallel line to input lines \\
+  \hline v.parallel & Crée une ligne parallèle à des lignes en entrée\\
+% \hline v.dissolve & Dissolves boundaries between adjacent areas \\
+  \hline v.dissolve & Dissous des limites dans des zones adjacentes\\
+% \hline v.drape & Convert 2D vector to 3D vector by sampling of elevation raster\\
+  \hline v.drape & Convertie des vecteurs 2D en vecteur 3D par reéchantillonage de raster d'élélvation\\
+% \hline v.transform & Performs an affine transformation on a vector map \\
+  \hline v.transform & Réalise une transformation affine d'une couche vecteur\\
+% \hline v.proj & Allows projection conversion of vector files \\
+  \hline v.proj & Permet une conversion de la projection de fichier vecteur\\
+% \hline v.support & Updates vector map metadata \\
+  \hline v.support & Met à jour les méta-données des couches vecteurs\\
+% \hline generalize & Vector based generalization \\
+  \hline generalize & Généralisation vectorielle\\
 \hline
 \end{tabular}
-\caption{GRASS Toolbox: Develop vector map modules}
-\end{table}}
+%\caption{GRASS Toolbox: Develop vector map modules}
+\caption{Boîte à outils GRASS : Modules de traitement des couches vecteurs}
+\end{table}
 
-{\renewcommand{\arraystretch}{0.7}
 \begin{table}[H]
 \centering
  \begin{tabular}{|p{4cm}|p{10cm}|}
-  \hline \multicolumn{2}{|c|}{\textbf{Database connection modules in the GRASS
-  Toolbox}} \\
-  \hline \textbf{Module name} & \textbf{Purpose} \\
-  \hline v.db.connect & Connect a vector to database \\
-  \hline v.db.sconnect & Disconnect a vector from database \\
-  \hline v.db.what.connect & Set/Show database connection for a vector \\
+% \hline \multicolumn{2}{|c|}{\textbf{Database connection modules in the GRASS Toolbox}} \\
+  \hline \multicolumn{2}{|c|}{\textbf{Boîte à outils GRASS : Modules de connexion aux bases de données}} \\
+  \hline \textbf{Nom du module} & \textbf{Objectif} \\
+% \hline v.db.connect & Connect a vector to database \\
+  \hline v.db.connect & Connecte un vecteur à une base de données\\
+% \hline v.db.sconnect & Disconnect a vector from database \\
+  \hline v.db.sconnect & Déconnecte un vecteur d'une base de données\\
+% \hline v.db.what.connect & Set/Show database connection for a vector \\
+  \hline v.db.what.connect & Définit/affiche une connexion à une base de données pour un vecteur\\ vector \\
 \hline
 \end{tabular}
-\caption{GRASS Toolbox: Database connection modules}
-\end{table}}
+%\caption{GRASS Toolbox: Database connection modules}
+\caption{Boîte à outils GRASS : Modules de connexion aux bases de données}
+\end{table}
 
-{\renewcommand{\arraystretch}{0.7}
 \begin{table}[H]
 \centering
  \begin{tabular}{|p{4cm}|p{10cm}|}
-  \hline \multicolumn{2}{|c|}{\textbf{Spatial vector and network analysis modules in the GRASS
-  Toolbox}} \\
-  \hline \textbf{Module name} & \textbf{Purpose} \\
-  \hline v.extract.where & Select features by attributes \\
-  \hline v.extract.list & Extract selected features \\
-  \hline v.select.overlap & Select features overlapped by features in another
-  map\\
-  \hline v.buffer & Vector buffer \\
-  \hline v.distance & Find the nearest element in vector 'to' for elements in
-  vector 'from'. \\
-  \hline v.net & Network maintenance \\
-  \hline v.net.nodes & Create nodes on network \\
-  \hline v.net.alloc & Allocate network\\
-  \hline v.net.iso & Cut network by cost isolines \\
-  \hline v.net.salesman & Connect nodes by shortest route (traveling
-  salesman) \\
-  \hline v.net.steiner & Connect selected nodes by shortest tree (Steiner
-  tree) \\
-  \hline v.patch & Create a new vector map by combining other vector maps \\
-  \hline v.overlay.or & Vector union \\
-  \hline v.overlay.and & Vector intersection \\
-  \hline v.overlay.not & Vector subtraction \\
-  \hline v.overlay.xor & Vector non-intersection \\
+% \hline \multicolumn{2}{|c|}{\textbf{Change vector field modules in the GRASS Toolbox}} \\
+  \hline \multicolumn{2}{|c|}{\textbf{Modules de modification des champs vectoriels de la boîte à outils de GRASS}} \\
+  \hline \textbf{Nom du module} & \textbf{Objectif} \\
+% \hline v.category.add & Add elements to layer (ALL elements of the selected layer type!)\\
+  \hline v.category.add & Ajoute des éléments à la couche (tous les éléments du type de la couche sélectionnée !)\\
+% \hline v.category.del & Delete category values \\
+  \hline v.category.del & Supprime les valeurs des catégories\\
+% \hline v.category.sum & Add a value to the current category values \\
+  \hline v.category.sum & Ajoute une valeur aux valeurs des catégories en cours\\
+% \hline v.reclass.file & Reclass category values using a rules file \\
+  \hline v.reclass.file & Reclasse les valeurs des catégories en utilisant un fichier de règles\\
+% \hline v.reclass.attr & Reclass category values using a column attribute (integer positive) \\
+  \hline v.reclass.attr & Reclasse les valeurs des catégories en utilisant une colonne attributaire (entier positif)\\
 \hline
 \end{tabular}
-\caption{GRASS Toolbox: Spatial vector and network analysis modules}
-\end{table}}
+%\caption{GRASS Toolbox: Change vector field modules}
+\caption{Boîte à outils GRASS : Modules de modification des champs vectoriels}
+\end{table}
 
-{\renewcommand{\arraystretch}{0.7}
 \begin{table}[H]
 \centering
  \begin{tabular}{|p{4cm}|p{10cm}|}
-  \hline \multicolumn{2}{|c|}{\textbf{Change vector field modules in the GRASS
-  Toolbox}} \\
-  \hline \textbf{Module name} & \textbf{Purpose} \\
-  \hline v.category.add & Add elements to layer (ALL elements of the selected
-  layer type!)\\
-  \hline v.category.del & Delete category values \\
-  \hline v.category.sum & Add a value to the current category values \\
-  \hline v.reclass.file & Reclass category values using a rules file \\
-  \hline v.reclass.attr & Reclass category values using a column attribute
-  (integer positive) \\
+% \hline \multicolumn{2}{|c|}{\textbf{Working with vector points modules in the GRASS Toolbox}} \\
+\hline \multicolumn{2}{|c|}{\textbf{Travailler avec les modules des vecteurs ponctuels de la boîte à outils de GRASS}} \\
+  \hline \textbf{Nom du module} & \textbf{Objectif} \\
+% \hline v.in.region & Create new vector area map with current region extent \\
+  \hline v.in.region & Crée une nouvelle couche vecteur avec une étendue de la région actuelle\\
+% \hline v.mkgrid.region & Create grid in current region \\
+  \hline v.mkgrid.region & Crée une grille dans la région actuelle\\
+% \hline v.in.db & Import vector points from a database table containing coordinates \\
+  \hline v.in.db & Importer des points vectoriels d'une table d'une base de données contenant des coordonnées\\
+% \hline v.random & Randomly generate a 2D/3D GRASS vector point map \\
+  \hline v.random & Génère aléaoitement une couche de points vectorielle GRASS en 2D/3D\\
+%  \hline v.perturb & Random location of perturbation of vector points \\
+  \hline v.perturb & Placement aléatoire de points vectoriels de pertubation \\   
+% \hline v.kcv & Randomly partition points into test/train sets \\
+  \hline v.kcv & place des points aléatoires dans un jeu test\\
+% \hline v.outlier & Remove outliers from vector point data \\
+  \hline v.outlier & Supprime les valeurs atypiques des données ponctuelles vectorielles\\
+% \hline v.hull & Create a convex hull \\
+  \hline v.hull & Crée une enveloppe convexe\\
+% \hline v.delaunay.line & Delaunay triangulation (lines) \\
+  \hline v.delaunay.area & Triangulation de Delaunay (linéaire) \\
+% \hline v.delaunay.area & Delaunay triangulation (areas) \\
+  \hline v.delaunay.area & Triangulation de Delaunay (surface) \\
+% \hline v.voronoi.line & Voronoi diagram (lines) \\
+  \hline v.voronoi.area & Diagramme de Vorono"i (linéaire) \\
+% \hline v.voronoi.area & Voronoi diagram (areas) \\
+  \hline v.voronoi.area & Diagramme de Vorono"i (surface) \\
 \hline
 \end{tabular}
-\caption{GRASS Toolbox: Change vector field modules}
-\end{table}}
+%\caption{GRASS Toolbox: Working with vector points modules}
+\caption{Travailler avec les modules des vecteurs ponctuels}
+\end{table}
 
-{\renewcommand{\arraystretch}{0.7}
 \begin{table}[H]
 \centering
  \begin{tabular}{|p{4cm}|p{10cm}|}
-  \hline \multicolumn{2}{|c|}{\textbf{Working with vector points modules in the GRASS Toolbox}} \\
-  \hline \textbf{Module name} & \textbf{Purpose} \\
-  \hline v.in.region & Create new vector area map with current region extent \\
-  \hline v.mkgrid.region & Create grid in current region \\
-  \hline v.in.db & Import vector points from a database table containing
-  coordinates \\
-  \hline v.random & Randomly generate a 2D/3D GRASS vector point map \\
-  \hline v.perturb & Random location of perturbation of vector points \\ 
-  \hline v.kcv & Randomly partition points into test/train sets \\
-  \hline v.outlier & Romove outliers from vector point data \\
-  \hline v.hull & Create a convex hull \\
-  \hline v.delaunay.line & Delaunay triangulation (lines) \\
-  \hline v.delaunay.area & Delaunay triangulation (areas) \\
-  \hline v.voronoi.line & Voronoi diagram (lines) \\
-  \hline v.voronoi.area & Voronoi diagram (areas) \\
+% \hline \multicolumn{2}{|c|}{\textbf{Spatial vector and network analysis modules in the GRASS Toolbox}} \\
+  \hline \multicolumn{2}{|c|}{\textbf{Modules d'analyse spatiale de vecteur et de réseau de la boîte à outils de GRASS}} \\
+  \hline \textbf{Nom du module} & \textbf{Objectif} \\
+% \hline v.extract.where & Select features by attributes \\
+  \hline v.extract.where & Sélectionne les objets par attributs\\
+% \hline v.extract.list & Extract selected features \\
+  \hline v.extract.list & Extrait les objets sélectionnés\\
+% \hline v.select.overlap & Select features overlapped by features in another map\\
+  \hline v.select.overlap & Sélectione les objets superposés par des objets d'une autre couche\\
+% \hline v.buffer & Vector buffer \\
+  \hline v.buffer & Buffer de vecteur\\
+% \hline v.distance & Find the nearest element in vector 'to' for elements in vector 'from'. \\
+  \hline v.distance & Trouve l'élément le plus proche dans un vecteur 'to' pour des éléments dans un vecteur 'from'\\
+% \hline v.net.nodes & Create nodes on network \\
+  \hline v.net.nodes & Crée des noeuds sur un réseau\\
+% \hline v.net.alloc & Allocate network\\
+  \hline v.net.alloc & Alloue un réseau\\
+% \hline v.net.iso & Cut network by cost isolines \\
+  \hline v.net.iso & Coupe un réseau par des isolignes de cout\\
+% \hline v.net.salesman & Connect nodes by shortest route (traveling salesman) \\
+  \hline v.net.salesman & Connecte des noeuds par la route la plus courte (problème du voyageur de commerce) \\
+% \hline v.net.steiner & Connect selected nodes by shortest tree (Steiner tree) \\
+  \hline v.net.steiner & Connecte des noeuds sélectionnés par l'arbre le plus court (arbre Steiner) \\
+% \hline v.patch & Create a new vector map by combining other vector maps \\
+  \hline v.patch & Crée une nouvelle couche vecteur par combinaison de couches vecteurs\\
+% \hline v.overlay.or & Vector union \\
+  \hline v.overlay.or & Union de vecteur\\
+% \hline v.overlay.and & Vector intersection \\
+  \hline v.overlay.and & Intersection de vecteur\\
+% \hline v.overlay.not & Vector subtraction \\
+  \hline v.overlay.not & Soustraction de vecteur \\
+% \hline v.overlay.xor & Vector non-intersection \\
+  \hline v.overlay.xor & Non intersection de vecteur\\
 \hline
 \end{tabular}
-\caption{GRASS Toolbox: Working with vector points modules}
-\end{table}}
+%\caption{GRASS Toolbox: Spatial vector and network analysis modules}
+\caption{Boîte à outils GRASS : Modules d'analyse spatiale de vecteur et de réseau}
+\end{table}
 
-{\renewcommand{\arraystretch}{0.7}
+\vspace{-0.5cm}
+
 \begin{table}[H]
 \centering
  \begin{tabular}{|p{4cm}|p{10cm}|}
-  \hline \multicolumn{2}{|c|}{\textbf{Vector update by other maps modules in the GRASS
-  Toolbox}} \\
-  \hline \textbf{Module name} & \textbf{Purpose} \\
-  \hline v.rast.stats & Calculates univariate statistics from a GRASS raster
-  map based on vector objects\\
-  \hline v.what.vect & Uploads map for which to edit attribute table \\
-  \hline v.what.rast & Uploads raster values at positions of vector points to
-  the table \\
-  \hline v.sample & Sample a raster file at site locations \\
+% \hline \multicolumn{2}{|c|}{\textbf{Vector update by other maps modules in the GRASS Toolbox}} \\
+  \hline \multicolumn{2}{|c|}{\textbf{Mise à jour de vecteur à partir d'autres modules cartographiques de la boîte à outils de GRASS}} \\
+  \hline \textbf{Nom du module} & \textbf{Objectif} \\
+% \hline v.rast.stats & Calculates univariate statistics from a GRASS raster map based on vector objects\\
+  \hline v.rast.stats & Calcule des statistiques univariées d'une couche raster GRASS basée sur des objets vecteurs\\
+% \hline v.what.vect & Uploads map for which to edit attribute table \\
+  \hline v.what.vect & Télécharge des cartes pour éditer la table d'attributs\\
+  \hline v.what.rast & Télécharge des valeurs raster à la position des points vecteurs vers la table\\
+% \hline v.sample & Sample a raster file at site locations \\
+  \hline v.sample & échantillonne une fichier raster à l'endroit des sites\\
 \hline
 \end{tabular}
-\caption{GRASS Toolbox: Vector update by other maps modules}
-\end{table}}
+%\caption{GRASS Toolbox: Vector update by other maps modules}
+\caption{Boîte à outils GRASS : Mise à jour de vecteur à partir d'autres modules cartographiques}
+\end{table}
 
-{\renewcommand{\arraystretch}{0.7}
+\vspace{-0.5cm}
+
+\begin{table}[H]
+\centering
+ \begin{tabular}{|p{3cm}|p{11cm}|}
+% \hline \multicolumn{2}{|c|}{\textbf{Vector report and statistic modules in the GRASS Toolbox}} \\
+  \hline \multicolumn{2}{|c|}{\textbf{Modules de statistique et de rapport de vecteur de la boîte à outils de GRASS}} \\
+  \hline \textbf{Nom du module} & \textbf{Objectif} \\
+% \hline v.to.db & Put geometry variables in database \\
+  \hline v.to.db & Mais des variables de géométrie dans la base de données\\
+% \hline v.report & Reports geometry statistics for vectors \\
+  \hline v.report & Crée un rapport de statistisque des géométries pour les vecteurs\\
+% \hline v.univar & Calculates univariate statistics on selected table column for a GRASS vector map \\
+  \hline v.univar & Calcule des statistiques univariées sur la colonne de la table sélectionnée pour une couche vecteur de GRASS\\
+% \hline v.normal & Tests for normality for points\\
+  \hline v.normal & Teste la normalité des points\\
+\hline
+\end{tabular}
+%\caption{GRASS Toolbox: Vector report and statistic modules}
+\caption{Boîte à outils GRASS : modules de statistique et de rapport de vecteur}
+\end{table}
+
+%\subsection{GRASS Toolbox imagery data modules}
+\subsection{Modules de données d'imagerie de la boîte à outils de GRASS}
+
+% This Section lists all graphical dialogs in the GRASS Toolbox to work with and analyse imagery data in a currently selected GRASS location and mapset.
+Cette section liste toutes les boîtes de dialogue dans la boîte à outils de GRASS pour utiliser et analyser les données d'images dans une région et un jeu de données GRASS sélectionnés.
+
 \begin{table}[H]
 \centering
  \begin{tabular}{|p{4cm}|p{10cm}|}
-  \hline \multicolumn{2}{|c|}{\textbf{Vector report and statistic modules in the GRASS
-  Toolbox}} \\
-  \hline \textbf{Module name} & \textbf{Purpose} \\
-  \hline v.to.db & Put geometry variables in database \\
-  \hline v.report & Reports geometry statistics for vectors \\
-  \hline v.univar & Calculates univariate statistics on selected table column
-  for a GRASS vector map \\
-  \hline v.normal & Tests for normality for points\\
+% \hline \multicolumn{2}{|c|}{\textbf{Imagery analysis modules in the GRASS Toolbox}} \\
+  \hline \multicolumn{2}{|c|}{\textbf{Module d'analyse d'image de la boîte à outils de GRASS}} \\
+  \hline \textbf{Nom du module} & \textbf{Objectif} \\
+% \hline i.image.mosaik & Mosaic up to 4 images \\
+  \hline i.image.mosaik & Mosaique jusqu'à 4 images\\
+% \hline i.rgb.his & Red Green Blue (RGB) to Hue Intensity Saturation (HIS) raster map color transformation function \\
+  \hline i.rgb.his & Fonction de transformation de la carte de couleur du raster de Rouge Vert Bleu (RVB) en Nuance Intensité Saturation (HIS)\\
+% \hline i.his.rgb & Hue Intensity Saturation (HIS) to Red Green Blue (RGB) raster map color transform function \\
+  \hline i.his.rgb & Fonction de transformation de la carte de couleur du raster de Nuance Intensité Saturation (HIS) en Rouge Vert Bleu (RVB) \\
+% \hline i.landsat.rgb & Auto-balancing of colors for LANDSAT images \\
+  \hline i.landsat.rgb & Balance automatique des couleurs des images LANDSAT \\
+% \hline i.fusion.brovey & Brovey transform to merge multispectral and high-res pancromatic channels \\
+  \hline i.fusion.brovey & Transformation de Brovey pour fusionner des cannaux panchromatique multispectrale et de haute résolution\\
+% \hline i.zc & Zero-crossing edge detection raster function for image processing \\
+  \hline i.zc & Fonction raster de détection de bord vide ([NdT] Zero-crossing edge detection) dans le traitement des images \\
+% \hline r.mfilter &  Raster file matrix filter\\
+  \hline r.mfilter &  Filtre de matrice de fichier raster \\
+% \hline i.tasscap4 & Tasseled Cap (Kauth Thomas) transformation for LANDSAT-TM 4 data \\
+  \hline i.tasscap4 & Transformation de Tasseled Cap (Kauth Thomas) pour les données LANDSAT-TM 4 \\
+% \hline i.tasscap5 & Tasseled Cap (Kauth Thomas) transformation for LANDSAT-TM 5 data \\
+  \hline i.tasscap4 & Transformation de Tasseled Cap (Kauth Thomas) pour les données LANDSAT-TM 5 \\
+% \hline i.tasscap7 & Tasseled Cap (Kauth Thomas) transformation for LANDSAT-TM 7 data \\
+  \hline i.tasscap4 & Transformation de Tasseled Cap (Kauth Thomas) pour les données LANDSAT-TM 7 \\
+% \hline i.fft & Fast fourier transform (FFT) for image processing \\
+  \hline i.fft & Transformation rapide de Fourier (FFT) pour le traitement des images \\
+% \hline i.ifft & Inverse fast fourier transform for image processing \\
+  \hline i.ifft & Transformation inverse rapide de Fourier pour le traitement des images \\
+% \hline r.describe & Prints terse list of category values found in a raster map layer \\
+  \hline r.describe & Affiche une liste tierce de valeurs de catégorie trouvé dans une couche raster\\
+% \hline r.bitpattern & Compares bit patterns with a raster map \\
+  \hline r.bitpattern & Compare des motifs d'octets avec une couche raster\\
+% \hline r.kappa & Calculate error matrix and kappa parameter for accuracy assessment of classification result \\
+  \hline r.kappa & Calcule une matrice d'erreur et de paramètre kappa pour l'évaluation de la précision des résultats d'une classification \\
+% \hline i.oif & Calculates optimal index factor table for landsat tm bands \\
+  \hline i.oif & Calcule une table de facteur d'index optimal pour les bandes tm landsat \\
 \hline
 \end{tabular}
-\caption{GRASS Toolbox: Vector report and statistic modules}
-\end{table}}
+%\caption{GRASS Toolbox: Imagery analysis modules}
+\caption{Boîte à outils GRASS : modules analyse d'image}
+\end{table}
 
-\section{GRASS Toolbox imagery data modules}
+%\subsection{GRASS Toolbox database modules}
+\subsection{Modules de base de données de la boîte à outils de GRASS}
 
-This Section lists all graphical dialogs in the GRASS Toolbox to work with
-and analyse imagery data in a currently selected GRASS location and mapset.
+% This Section lists all graphical dialogs in the GRASS Toolbox to manage, connect and work with internal and external databases. Working with spatial external databases is enabled via OGR and not covered by these modules.
+Cette section liste toutes les boîtes de dialogue dans la boîte à outils de GRASS pour gérer, se connecter et travailler avec les bases de données externes et internes. Travailler avec des bases de données spatiales externes est possible via OGR n'est pas couvert par ces modules.
 
-{\renewcommand{\arraystretch}{0.7}
 \begin{table}[H]
 \centering
  \begin{tabular}{|p{4cm}|p{10cm}|}
-  \hline \multicolumn{2}{|c|}{\textbf{Imagery analysis modules in the GRASS
-  Toolbox}} \\
-  \hline \textbf{Module name} & \textbf{Purpose} \\
-  \hline i.image.mosaic & Mosaic up to 4 images \\
-  \hline i.rgb.his & Red Green Blue (RGB) to Hue Intensity Saturation (HIS)
-  raster map color transformation function \\
-  \hline i.his.rgb & Hue Intensity Saturation (HIS) to Red Green Blue (RGB)
-  raster map color transform function \\
-  \hline i.landsat.rgb & Auto-balancing of colors for LANDSAT images \\
-  \hline i.fusion.brovey & Brovey transform to merge multispectral and
-  high-res pancromatic channels \\
-  \hline i.zc & Zero-crossing edge detection raster function for image
-  processing \\
-  \hline r.mfilter &  Raster file matrix filter\\
-  \hline i.tasscap4 & Tasseled Cap (Kauth Thomas) transformation for
-  LANDSAT-TM 4 data \\
-  \hline i.tasscap5 & Tasseled Cap (Kauth Thomas) transformation for
-  LANDSAT-TM 5 data \\
-  \hline i.tasscap7 & Tasseled Cap (Kauth Thomas) transformation for
-  LANDSAT-TM 7 data \\
-  \hline i.fft & Fast fourier transform (FFT) for image processing \\
-  \hline i.ifft & Inverse fast fourier transform for image processing \\
-  \hline r.describe & Prints terse list of category values found in a raster
-  map layer \\
-  \hline r.bitpattern & Compares bit patterns with a raster map \\
-  \hline r.kappa & Calculate error matrix and kappa parameter for accuracy
-  assessment of classification result \\
-  \hline i.oif & Calculates optimal index factor table for landsat tm bands \\
+% \hline \multicolumn{2}{|c|}{\textbf{Database management and analysis modules in the GRASS Toolbox}} \\
+\hline \multicolumn{2}{|c|}{\textbf{Modules de gestion de base de données et d'analyse de la boîte à outils de GRASS}} \\
+  \hline \textbf{Nom du module} & \textbf{Objectif} \\
+% \hline db.connect & Sets general DB connection mapset \\
+  \hline db.connect & Définit la connexion à la BdD générale du jeu de données \\
+% \hline db.connect.schema & Sets general DB connection mapset with a schema \\
+  \hline db.connect.schema & Définit la connexion à la BdD générale avec un schéma du jeu de données\\
+%  \hline db.connect-login.pg & Set Postgresql DB connection \\
+  \hline db.connect-login.pg & Définit une connexion Postgresql \\    
+% \hline v.db.reconnect.all & Reconnect vector to a new database \\
+  \hline v.db.reconnect.all & Reconnecte un vecteur avec une nouvelle base de données\\
+% \hline db.login & Set user/password for driver/database \\
+  \hline db.login & Définit un utilisateur/mot de passe pour un pilote/base de données\\
+% \hline v.db.addtable & Create and add a new table to a vector \\
+  \hline v.db.addtable & Crée et ajoute une nouvelle table à un vecteur\\
+%  \hline v.db.droptable & Remove existing attribute table of a vector \\
+  \hline v.db.droptable & Supprime une table attributaire existante \\
+% \hline v.db.addcol & Adds one or more columns to the attribute table connected to a given vector map \\
+  \hline v.db.addcol & Ajoute une ou plusieurs colonnes à une table attributaire connectée à une couche vecteur donnée\\
+% \hline v.db.dropcol & Drops a column from the attribute table connected to a given vector map\\
+  \hline v.db.dropcol & Supprime une colonne de la table attributaire connectée à une couche vecteur donnée\\
+% \hline v.db.renamecol & Renames a column in a attribute table connected to a given vector map\\
+  \hline v.db.renamecol & Renomme une colonne dans une table attributaire connectée à une couche vecteur donnée\\
+% \hline v.db.update\_const & Allows to assign a new constant value to a column \\
+  \hline v.db.update\_const & Permet d'assigner une nouvelle valeur d'une constante à une colonne\\
+% \hline v.db.update\_query & Allows to assign a new constant value to a column only if the result of a query is TRUE \\
+  \hline v.db.update\_query & Permet d'assigner une nouvelle valeur d'une constante à une colonne seulement si le résultat de la requ\^ete est TRUE\\
+% \hline v.db.update\_op & Allows to assign a new value, result of operation on column(s), to a column in the attribute table connected to a given map\\
+  \hline v.db.update\_op & Permet d'assigner une nouvelle valeur, résultat d'une opération sur une ou plusieurs colonne(s), à une colonne dans la table attributaire connectée à une couche donnée\\
+% \hline v.db.update\_op\_query & Allows to assign a new value to a column, result of operation on column(s), only if the result of a query is TRUE \\
+  \hline v.db.update\_op\_query & Permet d'assigner une nouvelle valeur à une colonne, résultat d'une opération sur ou plusieurs colonne(s), seulement si le résutlat de la requ\^ete est TRUE \\
+% \hline db.execute & Execute any SQL statement \\
+  \hline db.execute & éxecute une requ\^ete SQL\\
+% \hline db.select & Prints results of selection from database based on SQL \\
+  \hline db.select & Affiche les résultats d'une sélection d'une base de données basé sur une requ\^ete SQL\\
+% \hline v.db.select & Prints vector map attributes \\
+  \hline v.db.select & Affiche les attributs d'une couche vecteur\\
+% \hline v.db.select.where & Prints vector map attributes with SQL \\
+  \hline v.db.select.where & Affiche les attributs d'une couche vecteur avec une requ\^ete SQL\\
+% \hline v.db.join & Allows to join a table to a vector map table \\
+  \hline v.db.join & Permet de réaliser une jointure de table avec une table d'une couche vecteur\\
+% \hline v.db.univar & Calculates univariate statistics on selected table column for a GRASS vector map \\
+  \hline v.db.univar & Calcule des statistiques univariées sur une colonne d'une table sélectionnée pour une couche vecteur de GRASS\\
 \hline
 \end{tabular}
-\caption{GRASS Toolbox: Imagery analysis modules}
-\end{table}}
+%\caption{GRASS Toolbox: Database modules}
+\caption{Boîte à outils GRASS : Modules base de données}
+\end{table}
 
-\clearpage
+\newpage
 
-\section{GRASS Toolbox database modules}
+%\subsection{GRASS Toolbox 3D modules}
+\subsection{Modules 3D de la boîte à outils de GRASS}
 
-This Section lists all graphical dialogs in the GRASS Toolbox to manage, 
-connect and work with internal and external databases. Working with spatial 
-external databases is enabled via OGR and not covered by these modules.
+% This Section lists all graphical dialogs in the GRASS Toolbox to work with 3D data. GRASS provides more modules, but they are currently only available using the GRASS Shell.
+Cette section liste toutes les boîtes de dialogues de la boîte à outils de GRASS pour travailler avec les données 3D. GRASS fournit plus de modules, mais ils sont actuellement seulement disponibles en utilisant la console de GRASS.
 
-{\renewcommand{\arraystretch}{0.7}
 \begin{table}[H]
 \centering
  \begin{tabular}{|p{4cm}|p{10cm}|}
-  \hline \multicolumn{2}{|c|}{\textbf{Database management and analysis modules in the GRASS
-  Toolbox}} \\
-  \hline \textbf{Module name} & \textbf{Purpose} \\
-  \hline db.connect & Sets general DB connection mapset \\
-  \hline db.connect.schema & Sets general DB connection mapset with a schema \\
-  \hline db.connect-login.pg & Set Postgresql DB connection \\
-  \hline v.db.reconnect.all & Reconnect vector to a new database \\
-  \hline db.login & Set user/password for driver/database \\
-  \hline v.db.addtable & Create and add a new table to a vector \\
-  \hline v.db.droptable & Remove existing attribute table of a vector \\
-  \hline v.db.addcol & Adds one or more columns to the attribute table
-  connected to a given vector map \\
-  \hline v.db.dropcol & Drops a column from the attribute table connected to
-  a given vector map\\
-  \hline v.db.renamecol & Renames a column in a attribute table connected to
-  a given vector map\\
-  \hline v.db.update\_const & Allows to assign a new constant value to a
-  column \\
-  \hline v.db.update\_query & Allows to assign a new constant value to a
-  column only if the result of a query is TRUE \\
-  \hline v.db.update\_op & Allows to assign a new value, result of operation
-  on column(s), to a column in the attribute table connected to a given map\\
-  \hline v.db.update\_op\_query & Allows to assign a new value to a column,
-  result of operation on column(s), only if the result of a query is TRUE \\
-  \hline db.execute & Execute any SQL statement \\
-  \hline db.select & Prints results of selection from database based on SQL \\
-  \hline v.db.select & Prints vector map attributes \\
-  \hline v.db.select.where & Prints vector map attributes with SQL \\
-  \hline v.db.join & Allows to join a table to a vector map table \\
-  \hline v.db.univar & Calculates univariate statistics on selected table
-  column for a GRASS vector map \\
+% \hline \multicolumn{2}{|c|}{\textbf{3D visualization and analysis modules in the GRASS Toolbox}} \\
+  \hline \multicolumn{2}{|c|}{\textbf{Modules de visualisation 3D et d'analyses de la boîte à outils de GRASS}} \\
+% \hline \textbf{Nom de Module} & \textbf{Objectif} \\
+  \hline \textbf{Nom du module} & \textbf{Objectif} \\
+% \hline nviz & Open 3D-View in nviz\\
+  \hline nviz & Vue 3D dans nviz\\
 \hline
 \end{tabular}
-\caption{GRASS Toolbox: Database modules}
-\end{table}}
+%\caption{GRASS Toolbox: 3D Visualization}
+\caption{Boîte à outils GRASS : visualisation 3D}
+\end{table}
 
-\clearpage
+% \subsection{GRASS Toolbox help modules}
+\subsection{Modules d'aide de la boîte à outils de GRASS}
 
-\section{GRASS Toolbox 3D modules}
+% The GRASS GIS Reference Manual offers a complete overview of the available GRASS modules, not limited to the modules and their often reduced functionalities implemented in the GRASS Toolbox.
+Le manuel de référence du SIG GRASS offre un aper\c{c}u complet des modules de GRASS disponibles, non limité aux modules et leurs fonctionnalités souvent limités implémenté dans la boîte à outils de GRASS.
 
-This Section lists all graphical dialogs in the GRASS Toolbox to work with 3D 
-data. GRASS provides more modules, but they are currently only available using 
-the GRASS Shell.
-
-{\renewcommand{\arraystretch}{0.7}
 \begin{table}[H]
 \centering
  \begin{tabular}{|p{4cm}|p{10cm}|}
-  \hline \multicolumn{2}{|c|}{\textbf{3D visualization and analysis modules in the GRASS
-  Toolbox}} \\
-  \hline \textbf{Module name} & \textbf{Purpose} \\
-  \hline nviz & Open 3D-View in nviz\\
+% \hline \multicolumn{2}{|c|}{\textbf{Reference Manual modules in the GRASS Toolbox}} \\
+  \hline \multicolumn{2}{|c|}{\textbf{Modules de manuel de référence de la boîte à outils de GRASS}} \\
+  \hline \textbf{Nom du module} & \textbf{Objectif} \\
+% \hline g.manual & Display the HTML manual pages of GRASS \\
+  \hline g.manual & Affiche la page HTML du manuel de GRASS \\
 \hline
 \end{tabular}
-\caption{GRASS Toolbox: 3D Visualization}
-\end{table}}
-
-\section{GRASS Toolbox help modules}
-
-The GRASS GIS Reference Manual offers a complete overview of the available 
-GRASS modules, not limited to the modules and their often reduced functionalities 
-implemented in the GRASS Toolbox. 
-
-{\renewcommand{\arraystretch}{0.7}
-\begin{table}[H]
-\centering
- \begin{tabular}{|p{4cm}|p{10cm}|}
-  \hline \multicolumn{2}{|c|}{\textbf{Reference Manual modules in the GRASS
-  Toolbox}} \\
-  \hline \textbf{Module name} & \textbf{Purpose} \\
-  \hline g.manual & Display the HTML manual pages of GRASS \\
-\hline
-\end{tabular}
-\caption{GRASS Toolbox: Reference Manual}
-\end{table}}
-
+%\caption{GRASS Toolbox: Reference Manual}
+\caption{Boîte à outils GRASS : manuel de référence}
+\end{table}

@@ -48,6 +48,26 @@ Le format de fichier vecteur standard utilisé par \qg est le Shapefile ESRI. Il
 %Ideally it comes with another file with a \filename{.prj} suffix, that contains the projection information for the shapefile. There can be more files belonging to a shapefile dataset. To have a closer look at this we recommend the technical specification for the shapefile format, that can be found at \url{http://www.esri.com/library/whitepapers/pdfs/shapefile.pdf}.\index{shapefile!specification}.
 Dans l'idéal y est associé un autre fichier ayant l'extension \filename{.prj} qui contient les informations sur le système de coordonnées utilisé pour le shapefile, cependant ce n'est pas obligatoire. Il peut y avoir encore d'autres fichiers associés aux données shapefile. Si vous souhaitez avoir plus de détails nous vous recommandons de vous reporter aux spécifications techniques du format shapefile, qui se trouve notamment sur \url{http://www.esri.com/library/whitepapers/pdfs/shapefile.pdf}.\index{shapefile!spécifications}
 
+%\minisec{Problem loading a shape .prj file}
+\minisec{Problème lors du chargement d'un fichier .prj d'un shapefile}
+
+%If you load a shapefile with \filename{.prj} file and \qg is not
+%able to read the coordinate reference system from that file, you have to define the
+%proper projection manually within the \tab{General} tab of the \dialog{Layer
+%Properties} dialog. This is due to the fact, that \filename{.prj} files often
+%do not provide the complete projection parameters, as used in \qg and listed in
+%the \dialog{CRS} dialog.
+
+Si vous chargez un shapefile avec un fichier \filename{.prj} et \qg ne peut en déterminer le système de cordonnées employé, vous devrez définir manuellement le système via l'onglet \tab{Général} des \dialog{Propriétés de la couche}. Cela est dû au fait que souvent les fichiers \filename{.prj} ne contienntnent pas la totalité des paramètres tel qu'utilisés dans \qg et listé dans la fenêtre des \dialog{SCR}.
+
+%For that reason, if you create a new shapefile with \qg, two different projection
+%files are created. A \filename{.prj} file with limited projection parameters,
+%compatible with ESRI software, and a \filename{.qpj} file, providing the complete
+%parameters of the used CRS. Whenever \qg finds a \filename{.qpj} file, it will be
+%used instead of the \filename{.prj}.
+Pour cette raison, si vous créer un nouveau shapfile avec \qg, deux fichiers de projections seront crées. Un fichier \filename{.prj} avec des paramètres limités qui sera compatible avec un logiciel ESRI, et un fichier \filename{.qpj} contenant l'ensemble des paramètres du SCR utilisé. \qg utilisera par défaut ce dernier fichier si présent.
+
+
 %\subsection{Loading a Shapefile}\label{sec:load_shapefile}
 \subsection{Charger un Shapefile}\label{sec:load_shapefile}
 
@@ -126,8 +146,15 @@ Pour charger une couche MapInfo, cliquez sur \toolbtntwo{mActionAddNonDbLayer}{A
 %\index{vector layers!ArcInfo Coverage}
 \subsection{Charger une couverture ArcInfo binaire}
 \index{couches vecteur!couverture ArcInfo binaire}
-Pour charger une couverture binaire ArcInfo, il faut cliquer sur le bouton\\ \toolbtntwo{mActionAddNonDbLayer}{Ajouter une couche vecteur} ou taper \keystroke{V} pour ouvrir le dialogue correspondant. Sélectionner le \radiobuttonon{Directory} et \selectstring {Type}{Arc/Ingo Binary Coverage}. Naviguez jusqu'au dossier contenant vos fichiers puis choisissez-les.
-\par
+
+%\includegraphics[width=0.7cm]{mActionAddNonDbLayer} To load an ArcInfo binary coverage, click on the
+%\toolbtntwo{mActionAddNonDbLayer}{Add Vector Layer} toolbar button or type
+%\keystroke{Ctrl-Shift-V} to open the \dialog{Add Vector Layer} dialog. Select
+%\radiobuttonon{Directory}. Change to \selectstring {Type}{Arc/Info Binary Coverage}.
+%Navigate to the directory that contains the coverage files and select it.
+
+\includegraphics[width=0.7cm]{mActionAddNonDbLayer} Pour charger une couverture binaire ArcInfo, il faut cliquer sur le bouton\\ \toolbtntwo{mActionAddNonDbLayer}{Ajouter une couche vecteur} ou taper \keystroke{Ctrl-Shift-V} pour ouvrir le dialogue correspondant. Sélectionner le \radiobuttonon{Répertoire} puis définir \selectstring {Type}{Arc/Ingo Binary Coverage}. Naviguez jusqu'au dossier contenant vos fichiers puis choisissez-les.
+
 De manière similaire vous pouvez directement charger les fichiers vecteurs UK National Transfer Format ainsi que le format TIGER brut de l'US Census Bureau.
 
 %\section{PostGIS Layers}
@@ -160,9 +187,9 @@ Pour charger une couche PostGIS, vous devez :\index{PostgreSQL!charger des couch
 %\subsection{Creating a stored Connection}\index{PostgreSQL!connection}\label{sec:postgis_stored}
 \subsection{Créer une connexion enregistrée} \index{PostgreSQL!connexion} \label{sec:postgis_stored}
 
-\includegraphics[width=0.7cm]{mActionAddLayer}
-%The first time you use a \pg data source, you must create a connection to the \psq database that contains the data. Begin by clicking on the \toolbtntwo{mActionAddLayer}{Add a \pg Layer} toolbar button, selecting the \dropmenuopttwo{mActionAddLayer}{Add a \pg Layer...} option from the \mainmenuopt{Layer} menu or typing \keystroke{D}.
-La première fois que utilisez une source de données PostGIS, vous devez créer une connexion à une base de données \psq qui contient les données. Commencez par cliquer sur le bouton \toolbtntwo{mActionAddLayer}{Ajouter une couche \pg} de la barre d'outils ou sélectionner l'option \dropmenuopttwo{mActionAddLayer}{Ajouter une couche PostGIS\dots} dans le menu \mainmenuopt{Couche} ou taper \keystroke{D}. Vous pouvez aussi ouvrir le dialogue \dialog{Ajouter une couche vecteur} et sélectionnez \radiobuttonon{Base de données}.
+%\includegraphics[width=0.7cm]{mActionAddLayer} The first time you use a \pg data source, you must create a connection to the \psq database that contains the data. Begin by clicking on the \toolbtntwo{mActionAddLayer}{Add a \pg Layer} toolbar button, selecting the \dropmenuopttwo{mActionAddLayer}{Add a \pg Layer...} option from the \mainmenuopt{Layer} menu or typing \keystroke{D}.
+\includegraphics[width=0.7cm]{mActionAddLayer} La première fois que utilisez une source de données PostGIS, vous devez créer une connexion à une base de données \psq qui contient les données. Commencez par cliquer sur le bouton \toolbtntwo{mActionAddLayer}{Ajouter une couche \pg} de la barre d'outils ou sélectionner l'option \dropmenuopttwo{mActionAddLayer}{Ajouter une couche PostGIS\dots} dans le menu \mainmenuopt{Couche} ou taper \keystroke{Ctrl-Shift-D}. Vous pouvez aussi ouvrir le dialogue \dialog{Ajouter une couche vecteur} et sélectionnez \radiobuttonon{Base de données}.
+
 %The \dialog{Add \pg Table(s)} dialog will be displayed. To access the connection manager\index{PostgreSQL!connection manager}, click on the \button{New} button to display the \dialog{Create a New \pg Connection} dialog. The parameters required for a connection are shown in table \ref{tab:postgis_connection_parms}.
 La fenêtre \dialog{Ajouter une ou plusieurs tables PostGIS} apparaît. Pour accéder au gestionnaire de connexion\index{PostgreSQL!gestionnaire de connexion}, cliquez sur le bouton \button{Nouveau} pour faire apparaitre la fenêtre\\ \dialog{Créer une nouvelle connexion PostGIS}. Les paramètres requis pour la connexion sont présentés dans le tableau \ref{tab:postgis_connection_parms}.
 
@@ -210,6 +237,8 @@ Vous pouvez également activer les options suivantes :
 \item \checkbox{Uniquement regarder la table geometry\_columns}
 %\item \checkbox{Only look in the 'public' schema}
 \item \checkbox{Uniquement regarder dans le schéma 'public'}
+%\item \checkbox{Use estimated table metadata}
+\item \checkbox{Utiliser la table des métadonnées estimées}
 \end{itemize}
 
 %Once all parameters and options are set, you can test the connection by clicking on the \button{Test Connect} button\index{PostgreSQL!connection!testing}.
@@ -218,7 +247,7 @@ Une fois que tous les paramètres et les options sont définis, vous pouvez test
 %\begin{Tip}\caption{\textsc{\qg User Settings and Security}}\index{settings}\index{security}
 \begin{Tip}\caption{\textsc{Paramètres utilisateur de \qg et Sécurité}}\index{paramètres}\index{sécurité}
 %\qgistip{Your customized settings for \qg are stored based on the operating system. \nix, the settings are stored in your home directory in \filename{.qt/qgisrc}. \win, the settings are stored in the registry. Depending on your computing environment, storing passwords in your \qg settings may be a security risk.}
-Vos paramètres personnalisés pour \qg sont stockés différemment selon le système d'exploitation. \nix, les paramètres sont stockés dans votre répertoire home dans \filename{.qt/qgisrc}. \win, les paramètres sont stockés dans la base de registre. Selon votre environnement informatique, stocker vos mots de passe dans vos paramètres \qg peut présenter des risques vis-à-vis de la sécurité.
+Vos paramètres personnalisés pour \qg sont stockés différemment selon le système d'exploitation. \nix, les paramètres sont stockés dans votre répertoire home dans \filename{.\qg/}. \win, les paramètres sont stockés dans la base de registre. Selon votre environnement informatique, stocker vos mots de passe dans vos paramètres \qg peut présenter des risques vis-à-vis de la sécurité.
 \end{Tip}
 
 %\subsection{Loading a \pg Layer}\index{PostgreSQL!loading layers}
@@ -257,7 +286,15 @@ Normalement, une couche \pg est définie par une entrée dans la table geometry\
 %This section contains some details on how \qg accesses \psq layers. Most of the time \qg should simply provide you with a list of database tables that can be loaded, and load them on request. However, if you have trouble loading a \psq table into \qg, the information below may help you understand any \qg messages and give you direction on changing the \psq table or view definition to allow \qg to load it.
 Cette section contient quelques détails sur la manière dont \qg accède aux couches PostgreSQL. La plupart du temps, \qg devrait simplement fournir une liste de tables de base de données qui peuvent être chargées et les charge à la demande. Cependant, si vous avez des problèmes pour charger une table \psq dans \qg, les informations données ci-dessous peuvent vous aider à comprendre les messages de \qg et vous donnez une indication sur comment changer la table ou la vue \psq pour qu'elle se charge dans \qg.
 
-%\qg requires that \psq layers contain a column that can be used as a unique key for the layer. For tables this usually means that the table needs a primary key, or a column with a unique constraint on it. \qg additionally requires that this column be of type int4 (an integer of size 4 bytes). If a table lacks these items, the oid column will be used instead. Performance will be improved if the column is indexed (note that primary keys are automatically indexed in PostgreSQL).
+%\qg requires that PostgreSQL layers contain a column that can be
+%used as a unique key for the layer. For tables this usually means
+%that the table needs a primary key, or a column with a unique
+%constraint on it. In \qg, this column needs to be of
+%type int4 (an integer of size 4 bytes). Alternatively the ctid column can be
+%used as primary key. If a table lacks these items,
+%the oid column will be used instead. Performance will be improved if the
+%column is indexed (note that primary keys are automatically indexed in
+%PostgreSQL).
 \qg demande que les couches \psq aient un champ qui peut être utilisé comme clé unique pour la couche. Pour les tables, cela signifie qu'elles doivent avoir une clé primaire ou un champ ayant une contrainte d'unicité. De plus, \qg impose que cette colonne soit de type int4 (un entier de 4 bites). Alternativement la colonne ctid peut être utilisée comme clé primaire. Si une table ne respecte pas ces conditions, le champ oid sera utilisé à la place. Les performances seront améliorées si le champ est indexé (notez que les clés primaires sont automatiquement indexées dans PostgreSQL).
 
 %If the \psq layer is a view, the same requirements exists, but views don't have primary keys or columns with unique constraints on them. In this case \qg will try to find a column in the view that is derived from a table column that is suitable. If one cannot be found, \qg will not load the layer. If this occurs, the solution is to alter the view so that it does include a suitable column (a type of int4 and either a primary key or with a unique constraint, preferably indexed).
@@ -422,14 +459,6 @@ La fenêtre \dialog{Propriétés de la couche} pour une couche vecteur fournit d
 \end{center}
 \end{figure}
 
-%\subsection{General Tab}\label{vectorgeneraltab}
-\subsection{Onglet Général}\label{vectorgeneraltab}
-%The \tab{General} tab is essentially like that of the raster dialog. It allows you to change the display name, set scale dependent rendering options, create a spatial index of the vector file (only for OGR supported formats and PostGIS) and view or change the projection of the specific vetor layer.
-L'onglet \tab{Général} des couches vecteur est très proche de celui des couches raster. Il vous permet de changer le nom affiché, définir des rendus différents selon l'échelle, créer un index spatial du fichier vecteur (uniquement pour les formats gérés par OGR et \pg) et visualiser ou changer la projection de la couche.
-
-%The \button{Query Builder} button allows you to create a subset of the features in the layer - but this button currently only is available when you open the attribute table and select the \button{Advanced ...} button.
-Le bouton \button{Constructeur de requête} vous permet de créer un sous-ensemble d'entité au sein de la couche - mais ce bouton de fonctionne actuellement que lorsque vous ouvrez la table attributaire et cliquez sur le bouton \button{\dots} à côté de la recherche avancée.
-
 %\subsection{Symbology Tab}\label{sec:symbology}
 %\index{vector layers!symbology}
 \subsection{Onglet Convention des signes}\label{sec:symbology}
@@ -488,7 +517,7 @@ Les options de style suivantes s'appliquent quasiment à tous les types de rendu
 %\item[Fill color] - fill-color of your features.
 \item[Couleur de remplissage :] couleur de remplissage de vos entités
 %\item[Fill style] - Style for filling. Beside the given brushes you can select \selectstring{Fill style}{? texture} and click the \browsebutton button for selecting your own fill-style. Currently the fileformats \filename{*.jpeg, *.xpm, and *.png} are supported.
-\item[Style de remplissage :] Style pour le remplissage. En plus des pinceaux proposés, vous pouvez sélectionner \selectstring{Fill style ? texture} et cliquez sur le \browsebutton bouton pour sélectionner votre propre style de remplissage. Actuellement, les formats de fichier \filename{*.jpeg, *.xpm et *.png}
+\item[Style de remplissage :] Style pour le remplissage. En plus des pinceaux proposés, vous pouvez sélectionner \selectstring{Fill style ? texture} et cliquez sur le \browsebutton bouton pour sélectionner votre propre style de remplissage. Actuellement, les formats de fichier \filename{*.svg, *.jpeg, *.xpm et *.png} sont supportés.
 \end{description}
 
 %Once you have styled your layer you also could save your layer-style to a separate file (with \filename{*.qml}-ending). To do this, use the button \button{Save Style \ldots}. No need to say that \button{Load Style \ldots} loads your saved layer-style-file.
@@ -497,10 +526,24 @@ Une fois que vous avez défini le style de votre couche, vous pouvez le sauvegar
 %If you wish to always use a particular style whenever the layer is loaded, use the \button{Save As Default} button to make your style the default. Also, if you make changes to the style that you are not happy with, use the \button{Restore Default Styel} button to revert to your default style.
 Si vous voulez utiliser en permanence un style particulier chaque fois que la couche est chargée, utilisez le bouton \button{Sauvegarder comme défaut} pour en faire le style par défaut. Aussi, si le style ne vous plait pas et que vous le modifiez, utilisez le bouton \button{Restaurer le style par défaut} pour en faire votre style par défaut.
 
-%\minisec{Vector transparency} \label{sec:vect_transparency} \index{vector layers!transparency}
+%\minisec{Vector transparency} \label{sec:vect_transparency}
+%\index{vector layers!transparency}
 \minisec{Transparence d'une couche vecteur} \label{sec:vect_transparency} \index{couches vecteur!transparence}
-%\qg \CURRENT allows to set a transparency for every vector layer. This can be done with the slider \slider{Transparency}{0}{20mm} inside the \tab{symbology} tab (see fig. \ref{fig:vector_symbology}). This is very useful for overlaying several vector layers.
-\qg \CURRENT permet de définir une transparence pour chaque couche vecteur. Ceci peut-être fait avec le curseur \slider{Transparence} de l'onglet \tab{Convention des signes} (voir fig. \ref{fig:vector_symbology}). Ceci est très utile pour superposer plusieurs couches vecteur.
+
+\qg allows to set a transparency for every vector layer. This can be done with
+the slider \\
+\slider{Transparency} inside the \tab{symbology} tab (see
+fig. \ref{subfig:single_symbol}). This is very useful for overlaying several
+vector layers.
+\qg permet de définir une transparence pour chaque couche vecteur. Ceci peut-être fait avec le curseur \slider{Transparence} de l'onglet \tab{Convention des signes} (voir fig. \ref{fig:vector_symbology}). Ceci est très utile pour superposer plusieurs couches vecteur.
+
+%\subsection{General Tab}\label{vectorgeneraltab}
+\subsection{Onglet Général}\label{vectorgeneraltab}
+%The \tab{General} tab is essentially like that of the raster dialog. It allows you to change the display name, set scale dependent rendering options, create a spatial index of the vector file (only for OGR supported formats and PostGIS) and view or change the projection of the specific vetor layer.
+L'onglet \tab{Général} des couches vecteur est très proche de celui des couches raster. Il vous permet de changer le nom affiché, définir des rendus différents selon l'échelle, créer un index spatial du fichier vecteur (uniquement pour les formats gérés par OGR et \pg) et visualiser ou changer la projection de la couche.
+
+%The \button{Query Builder} button allows you to create a subset of the features in the layer - but this button currently only is available when you open the attribute table and select the \button{Advanced ...} button.
+Le bouton \button{Constructeur de requête} vous permet de créer un sous-ensemble d'entité au sein de la couche - mais ce bouton de fonctionne actuellement que lorsque vous ouvrez la table attributaire et cliquez sur le bouton \button{\dots} à côté de la recherche avancée.
 
 %\subsection{Metadata Tab}
 \subsection{Onglet Métadadonnées}
