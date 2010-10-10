@@ -10,8 +10,28 @@
 \usepackage[T1, T2A]{fontenc}
 \usepackage[english, russian]{babel}
 
+%%% Tip
+\usepackage{float}
+\floatstyle{ruled}
+\newfloat{Tip}{ht}{toa}
+\floatname{Tip}{Совет QGIS} % Change the second string to localize it
+
+%%% build index
+%%% see http://web.image.ufl.edu/help/latex/latex_indexes.shtml
 \usepackage{makeidx}
 \makeindex
+
+%%% add disclaimer about the revision status of a section
+%%% usage:
+%%% when the revision of a section has been finalized,
+%%% comment out the following line:
+%%% \updatedisclaimer
+\newcommand{\updatedisclaimer}{\textcolor{red}{DISCLAIMER: This section of
+the user guide has not yet been updated for consistency with Quantum GIS v\CURRENT.
+Read at your own risk!}}
+
+%%% syllable division for better line breaks within commands
+\sloppy
 
 %%% font settings
 \usepackage{helvet}
@@ -113,12 +133,6 @@
 %\usepackage[style=authoryear]{biblatex}
 \bibliographystyle{acm}
 \renewcommand*{\bibname}{Литература} % Change the string to localize it
-
-%%% Tip
-\usepackage{float}
-\floatstyle{ruled}
-\newfloat{Tip}{ht}{toa}
-\floatname{Tip}{Совет QGIS} % Change the second string to localize it
 
 % math
 \usepackage{amssymb}
