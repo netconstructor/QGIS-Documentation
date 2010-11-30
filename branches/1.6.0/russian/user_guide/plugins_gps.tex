@@ -1,119 +1,182 @@
 %  !TeX  root  =  user_guide.tex
 
-\section{GPS Plugin}\label{label_plugingps}
+\section{Модуль GPS}\label{label_plugingps}
 
 % when the revision of a section has been finalized,
 % comment out the following line:
 % \updatedisclaimer
 
-\subsection{What is GPS?}\label{whatsgps}
+\subsection{Что такое GPS?}\label{whatsgps}
 
-GPS, the Global Positioning System, is a satellite-based system that allows anyone with a GPS receiver to find their exact position anywhere in the world.
-It is used as an aid in navigation, for example in airplanes, in boats and by hikers.
-The GPS receiver uses the signals from the satellites to calculate its latitude, longitude and (sometimes) elevation.
-Most receivers also have the capability to store locations (known as \emph{waypoints}), sequences of locations that make up a planned \emph{route} and a tracklog or \emph{track} of the receivers movement over time.
-Waypoints, routes and tracks are the three basic feature types in GPS data.
-QGIS displays waypoints in point layers while routes and tracks are displayed in linestring layers.
+GPS~--- система глобального позиционирования~--- это спутниковая система,
+ позволяющая при наличии GPS-приёмника определить свое точное
+местоположение в любой точке планеты. Используется в качестве
+вспомогательного устройства в навигации, к примеру, в самолетах, на
+кораблях и просто путешественниками. GPS приемник использует сигналы со
+спутников для просчёта широты, долготы и (иногда) высоты. Большинство
+приёмников также могут хранить точки (также известные, как
+\emph{маршрутные точки}), последовательности точек, составляющих
+запланированный \emph{маршрут} и лог трека или просто \emph{трек}
+движения приемника на протяжении времени. Маршрутные точки, маршруты и
+треки являются тремя базовыми типами GPS данных. QGIS отображает
+маршрутные точки на точечных слоях, тогда как маршруты и треки
+показываются на линейных слоях.
 
-\subsection{Loading GPS data from a file}\label{label_loadgps}
+\subsection{Загрузка GPS данных из файла}\label{label_loadgps}
 
-There are dozens of different file formats for storing GPS data.
-The format that QGIS uses is called GPX (GPS eXchange format), which is a standard interchange format that can contain any number of waypoints, routes and tracks in the same file.
+Существуют десятки различных форматов файлов для хранения GPS данных.
+Формат, используемый в QGIS, называется GPX (формат обмена данными GPS),
+являющийся стандартным обменным форматом, который может содержать любое
+количество маршрутных точек, маршрутов и треков в одном файле.
 
-To load a GPX file you first need to load the plugin.
-\mainmenuopt{Plugins} \arrow \dropmenuopttwo{mActionShowPluginManager}{Plugin
-Manager...} \arrow \checkbox{GPS Tools}. When this plugin is loaded a button with a
-small handheld GPS device will show up in the toolbar. An example GPX file is
-available in the QGIS sample dataset:
-\filename{/qgis\_sample\_data/gps/national\_monuments.gpx}. See
-Section~\ref{label_sampledata} for more information about the sample data.
+Для того, чтобы загрузить GPX файл, сначала нужно загрузить модуль <<Инструменты GPS>>.
+\mainmenuopt{Модули} \arrow
+\dropmenuopttwo{mActionShowPluginManager}{Управление модулями} \arrow
+\checkbox{Инструменты GPS}.
+Когда модуль загружен, на панели инструментов появится иконка с
+изображением GPS-устройства. В пробном наборе QGIS есть
+пример GPX-файла: \\
+\filename{/qgis\_sample\_data/gps/national\_monuments.gpx}.
+См.~Раздел~\ref{label_sampledata} для более детальной информации
+о пробном наборе данных.
 
 \begin{enumerate}
-\item Click on the \toolbtntwo{gps_importer}{GPS Tools} icon and open the
-\tab{Load GPX file} tab (see figure \ref{fig:gpxloader}).
-\item \button{Browse} to the folder \filename{qgis\_sample\_data/gps/},
-select the GPX file \filename{national\_monuments.gpx} and click \button{Open}.
+\item Нажмите кнопку \toolbtntwo{gps_importer}{Инструменты GPS} и
+откройте закладку \tab{GPX-файлы} (см. Рисунок~\ref{fig:gpxloader}).
+\item Используйте кнопку \button{Обзор} для перехода в каталог
+\filename{qgis\_sample\_data/gps/}, выберите файл GPX
+\filename{national\_monuments.gpx} и нажмите кнопку \button{Открыть}.
 \end{enumerate}
 
 \begin{figure}[ht]
    \centering
    \includegraphics[clip=true, width=12cm]{loadgpx}
-   \caption{The \emph{GPS Tools} dialog window \nixcaption}\label{gpxloader}
+   \caption{Диалоговое окно \emph{Инструменты GPS} \wincaption}\label{gpxloader}
 \end{figure}
 
-Use the browse button \browsebutton to select the GPX file, then use the
-checkboxes to select the feature types you want to load from that GPX file.
-Each feature type will be loaded in a separate layer when you click \button{OK}.
-The file \filename{national\_monuments.gpx} only includes waypoints.
+Следует использовать кнопку \browsebutton для того, чтобы выбрать файл
+GPX, затем установить флаги для выбора типов объектов, которые нужно
+загрузить из этого файла. Каждый тип объектов будет загружен в
+отдельный слой, как только вы нажмете кнопку \button{OK}. Файл
+\filename{national\_monuments.gpx} включает лишь маршрутные точки.
 
-\subsection{GPSBabel}
+\subsection{Программа GPSBabel}
 
-Since QGIS uses GPX files you need a way to convert other GPS file formats to GPX.
-This can be done for many formats using the free program GPSBabel, which is available at \url{http://www.gpsbabel.org}.
-This program can also transfer GPS data between your computer and a GPS device.
-QGIS uses GPSBabel to do these things, so it is recommended that you install it.
-However, if you just want to load GPS data from GPX files you will not need it.
-Version 1.2.3 of GPSBabel is known to work with QGIS, but you should be able to use later versions without
-any problems.
+Так как QGIS работает с файлами GPX, нужен способ конвертирования других
+форматов GPS файлов в GPX. Это возможно благодаря свободно
+распространяемой программе GPSBabel, которая доступна на сайте
+\url{http://www.gpsbabel.org}. Эта программа может также передавать
+данные GPS между компьютером и устройством GPS. QGIS использует GPSBabel
+для подобного рода операций, поэтому рекомендуется установить последнюю
+версию этой программы на ваш компьютер. Тем не менее, если нужно только
+загрузить данные GPS из файлов GPX, эта программа не понадобится.
+GPSBabel версии 1.2.3 совместима с QGIS, но использование более поздних
+версий не должно вызвать каких-либо сложностей.
 
-\subsection{Importing GPS data}
+\subsection{Импортирование данных GPS}
 
-To import GPS data from a file that is not a GPX file, you use the tool \tab{Import other file} in the GPS Tools dialog.
-Here you select the file that you want to import (and the file type), which feature type you want to import from it, where you want to store the converted GPX file and what the name of the new layer should be.  Note that not all GPS
-data formats will support all three feature types, so for many formats
-you will only be able to choose between one or two types.
+Для того, чтобы импортировать данные GPS из файла, не являющегося файлом
+GPX, нужно перейти на вкладку \tab{Прочие файлы} в диалоговом окне
+\dialog{Инструменты GPS}. Здесь можно выбрать файл для импортирования
+(а также тип файла), какой тип объектов нужно импортировать, куда нужно
+сохранить cконвертированный файл GPX и какое имя надо присвоить новому
+слою. Заметьте, что не все форматы данных GPS будут поддерживать
+три типа объектов, поэтому для многих форматов можно выбрать только один
+или два типа.
 
-\subsection{Downloading GPS data from a device}
+\subsection{Загрузка данных GPS из устройства}
 
-QGIS can use GPSBabel to download data from a GPS device directly as new vector layers.
-For this we use the \tab{Download from GPS} tab of the GPS Tools dialog (see Figure \ref{figure_download}). Here, we
-select the type of GPS device, the port that it is connected to (or usb if your GPS supports this), the feature type that you want to download, the GPX file where the data should be stored, and the name of the new layer.
+QGIS может использовать GPSBabel для непосредственной загрузки данных из
+устройства GPS в качестве новых векторных слоев. Для этого предназначена
+закладка \tab{Загрузка с GPS} в диалоговом окне \dialog{Инструменты GPS}
+(см. Рисунок~\ref{figure_download}). Здесь выбирается тип устройства,
+порт, к которому оно подключено, тип объектов для загрузки, файл GPX, в
+который данные должны быть сохранены, а также название нового слоя.
 
 \begin{figure}[ht]
    \centering
    \includegraphics[clip=true, width=12cm]{download}
-   \caption{The download tool \nixcaption}\label{figure_download}
+   \caption{Инструмент загрузки \wincaption}\label{figure_download}
 \end{figure}
 
-The device type you select in the GPS device menu determines how GPSBabel tries to communicate with your GPS device.
-If none of the available types work with your GPS device you can create a new type (see section \ref{sec:Defining-new-device}).
+Тип устройства, выбираемый в меню устройства GPS, определяет, как
+GPSBabel попытается соединиться с устройством. Если ни один тип из
+имеющихся не подходит вашему устройству, можно создать новый тип
+(см. Раздел~\ref{sec:Defining-new-device}).
 
-The port may be a file name or some other name that your operating system uses as a reference to the physical port in your computer that the GPS device is connected to. It may also be simply usb, for usb enabled GPS units.
-\nix On Linux this is something like /dev/ttyS0 or /dev/ttyS1 and on \win Windows it's COM1 or COM2.
+Порт может быть названием файла или каким-то другим названием, которое
+операционная система использует в качестве ссылки на физический порт в
+компьютере, к которому подключено устройство GPS. Это может быть
+обычный USB (для поддерживающих его устройств).
+\nix В Linux таким может быть /dev/ttyS0 или /dev/ttyS1, а в
+\win Windows~--- COM1 или COM2.
 
-When you click \button{OK} the data will be downloaded from the device and appear as a layer in QGIS.
+После нажатия кнопки \button{OK}, данные загрузятся с устройства и
+появятся в QGIS в качестве слоя.
 
-\subsection{Uploading GPS data to a device}
+\subsection{Выгрузка данных GPS в устройство}
 
-You can also upload data directly from a vector layer in QGIS to a GPS device using the \tab{Upload to GPS} tab of the GPS Tools dialog. To do this you simply select the layer that you want to upload (which must be a GPX layer),
-your GPS device type, and the port (or usb) that it is connected to.
-Just as with the download tool you can specify new device types if your device isn't in the list.
+Кроме того, можно загрузить данные из векторного слоя в QGIS
+непосредственно в устройство GPS, используя закладку \tab{Выгрузка в GPS}
+диалогового окна \dialog{Инструменты GPS}. Чтобы сделать это, нужно просто
+выбрать слой для выгрузки (являющийся слоем GPX), тип устройства GPS и
+порт, к которому оно подключено. Так же, как и в инструменте загрузки
+из GPS, можно выбрать новые типы устройств, если ваше устройство
+отсутствует в списке.
 
-This tool is very useful in combination with the vector editing capabilities of QGIS. It allows you to load a map, create waypoints and routes, and then upload them and use them on your GPS device.
+Этот инструмент очень полезен при совместном использовании с
+инструментами редактирования векторных данных QGIS. Это дает возможность
+загрузить карту, создать маршрутные точки и маршруты, а затем выгрузить
+их в GPS навигатор.
 
-\subsection{Defining new device types}\label{sec:Defining-new-device}
+\subsection{Определение новых типов устройств}\label{sec:Defining-new-device}
 
-There are lots of different types of GPS devices.
-The QGIS developers can't test all of them, so if you have one that does not work with any of the device types listed in the \tab{Download from GPS} and \tab{Upload to GPS} tools you can define your own device type for it.
-You do this by using the GPS device editor, which you start by clicking the \button{Edit devices} button in the download or the upload tabs.
+Существует множество различных типов устройств GPS. Разработчики QGIS не
+могут протестировать их все, поэтому, если у вас одно из тех, что не
+работают ни с одним из типов устройств в списке в закладках
+\tab{Загрузка с GPS} и \tab{Выгрузка в GPS}, можно определить ваш
+собственный тип устройства. Сделать это можно, обратившись в редактору
+устройств GPS, который вызывается по нажатию кнопки \\
+\button{Редактировать устройства} в обеих закладках.
 
-To define a new device you simply click the \button{New device} button, enter a name, a download command and an upload command for your device, and click the \button{Update device} button.
-The name will be listed in the device menus in the upload and download windows, and can be any string.
-The download command is the command that is used to download data from the device to a GPX file.
-This will probably be a GPSBabel command, but you can use any other command line program that can create a GPX file.
-QGIS will replace the keywords \usertext{\%type}, \usertext{\%in}, and \usertext{\%out} when it runs the command.
+Для того, чтобы определить устройства, нужно просто нажать кнопку
+\button{Создать}, ввести название, команду загрузки и выгрузки для
+вашего устройства, а также нажать кнопку \button{Обновить}. Название
+появится в меню обеих закладок и может быть любой последовательностью
+символов. Командой загрузки является команда, используемая для загрузки
+данных из устройства в файл GPX. Скорее всего, это будет команда
+GPSBabel, но существует возможность использовать любую другую программу
+командной строки, которая может создавать файл GPX. QGIS заменит
+ключевые слова \usertext{\%type}, \usertext{\%in} и
+\usertext{\%out}, когда команда будет запущена на выполнение.
 
-\usertext{\%type} will be replaced by {}``\usertext{-w}'' if you are downloading waypoints, {}``\usertext{-r}'' if you are downloading routes and {}``\usertext{-t}'' if you are downloading tracks.
-These are command line options that tell GPSBabel which feature type to download.
+\usertext{\%type} будет заменено на {}``\usertext{-w}'' в случае,
+если загружаются маршрутные точки, {}``\usertext{-r}'', если
+загружаются маршруты и {}``\usertext{-t}'', если загружаются треки.
+Эти параметры говорят GPSBabel, какой тип объектов загружать.
 
-\usertext{\%in} will be replaced by the port name that you choose in the download window and \usertext{\%out} will be replaced by the name you choose for the GPX file that the downloaded data should be stored in.
-So if you create a device type with the download command {}``\usertext{gpsbabel \%type -i garmin -o gpx \%in \%out}'' (this is actually the download command for the predefined device type \selectstring{GPS device:}{Garmin serial})and then use it to download waypoints from port {}``\usertext{/dev/ttyS0}'' to the file {}``\usertext{output.gpx}'', QGIS will replace the keywords and run the command {}``\usertext{gpsbabel -w -i garmin -o gpx /dev/ttyS0 output.gpx}''.
+\usertext{\%in} будет заменено на название порта, выбранного в окне
+<<Загрузка с GPS>> и \usertext{\%out} заменится на название, выбранное
+для файла GPX, в котором будут сохраняться загруженные данные. Таким
+образом, если создается тип устройства с командой загрузки
+{}``\usertext{gpsbabel \%type -i garmin -o gpx \%in \%out}'' (это
+фактически команда загрузки для предопределённого типа устройств
+\selectstring{GPS-устройство:}{Garmin serial}), а затем используется
+для загрузки маршрутных точек через порт {}``\usertext{/dev/ttyS0}'' с
+сохранением в файл {}``\usertext{output.gpx}'', QGIS заменит ключевые
+слова и запустит команду \\
+{}``\usertext{gpsbabel -w -i garmin -o gpx /dev/ttyS0 output.gpx}''.
 
-The upload command is the command that is used to upload data to the device.
-The same keywords are used, but \usertext{\%in} is now replaced by the name of the GPX file for the layer that is being uploaded, and \usertext{\%out} is replaced by the port name.
+Команда выгрузки~--- это команда, применяемая для выгрузки данных в
+устройство. В ней используются те же ключевые слова, однако
+\usertext{\%in} уже заменяется на название файла GPX для выгруженного
+слоя, а \usertext{\%out}~--- на название порта.
 
-You can learn more about GPSBabel and it's available command line options at \url{http://www.gpsbabel.org}
+Более подробную информацию о программе GPSBabel и другие ее параметры
+запуска можно найти на сайте \url{http://www.gpsbabel.org}.
 
-Once you have created a new device type it will appear in the device lists for the download and upload tools.
+Как только новый тип устройства будет создан, он появится в списках
+устройств в обеих закладках окна \dialog{Инструменты GPS}~--- \tab{Загрузка с GPS}
+и \tab{Выгрузка в GPS}.
 
 \FloatBarrier

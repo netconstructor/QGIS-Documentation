@@ -6,17 +6,17 @@
 \pagenumbering{roman}
 
 %%% encoding, utf8 should work for any localization
-\usepackage[utf8]{inputenc} 
-\usepackage[T1]{fontenc} 
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 
 %%% prevent overlapping numbers in toc.tex lists
 \usepackage{tocloft}
 \addtolength{\cftsecnumwidth}{0.5em}
-\addtolength{\cftsubsecnumwidth}{0.7em}
+\addtolength{\cftsubsecnumwidth}{0.5em} %0.7
 \addtolength{\cftfignumwidth}{0.5em}
 \addtolength{\cfttabnumwidth}{0.5em}
 
-%%% Tip     
+%%% Tip
 %\usepackage{float}
 %\floatstyle{ruled}
 %\newfloat{Tip}{ht}{toa}
@@ -32,8 +32,8 @@
 %%% when the revision of a section has been finalized,
 %%% comment out the following line:
 %%% \updatedisclaimer
-\newcommand{\updatedisclaimer}{\textcolor{red}{DISCLAIMER: This section of 
-the user guide has not yet been updated for consistency with Quantum GIS v\CURRENT. 
+\newcommand{\updatedisclaimer}{\textcolor{red}{DISCLAIMER: This section of
+the user guide has not yet been updated for consistency with Quantum GIS v\CURRENT.
 Read at your own risk!}}
 
 %%% syllable division for better line breaks within commands
@@ -42,18 +42,24 @@ Read at your own risk!}}
 %%% font settings
 \usepackage{helvet}
 \renewcommand{\sfdefault}{phv}  % switch \sf to Helvetica T1
-\renewcommand*{\familydefault}{\sfdefault} 
+\renewcommand*{\familydefault}{\sfdefault}
 \usepackage{numprint}
+
+%%% russian fonts
+\renewcommand{\rmdefault}{cmr} % Шрифт с засечками
+\renewcommand{\sfdefault}{cmss} % Шрифт без засечек
+\renewcommand{\ttdefault}{cmtt} % Моноширинный шрифт
+\renewcommand*{\familydefault}{\sfdefault}
 
 %%% spacing and paragraph style
 \renewcommand{\baselinestretch}{1.1}
 \parskip1.5ex
 \parindent 0pt
 
-%%% hypertext links   
-\usepackage[bookmarks=true, pdftitle={QGIS User Guide}, pdfauthor={QGIS Project}, pdfsubject={QGIS User Guide}, breaklinks=true, colorlinks=true, linkcolor=blue, urlcolor=red]{hyperref}
+% hypertext links
+\usepackage[unicode, bookmarks=true, pdftitle={QGIS User Guide}, pdfauthor={QGIS Project}, pdfsubject={QGIS User Guide}, breaklinks=true, colorlinks=true, linkcolor=blue, urlcolor=red]{hyperref}
 
-%%%   images              
+%%%   images
 \usepackage{subfig}
 \usepackage{graphicx}
 \usepackage{tikz}
@@ -105,7 +111,7 @@ Read at your own risk!}}
 %deals with the float flood
 \usepackage{placeins}
 
-%%%   layout 
+%%%   layout
 \usepackage{enumitem}
 \usepackage{xspace}
 
@@ -116,7 +122,7 @@ Read at your own risk!}}
 \ihead[]{}
 \chead[]{}
 \ohead{\headmark}
-\ifoot[]{\vspace{-10pt} \qg \CURRENT User Guide} % Change the string to localize it
+\ifoot[]{\vspace{-10pt} Руководство пользователя \qg \CURRENT} % Change the string to localize it
 \cfoot[]{}
 \ofoot[\pagemark]{\vspace{-10pt}\pagemark}
 \setheadsepline{1pt}
@@ -124,16 +130,16 @@ Read at your own risk!}}
 \setheadwidth[0pt]{text}
 \setfootwidth[0pt]{text}
 
-\setkomafont{captionlabel}{\sffamily\bfseries} 
+\setkomafont{captionlabel}{\sffamily\bfseries}
 %\KOMAoptions{toc=flat,listof=flat}
 
-%%% Bibliography     
+%%% Bibliography
 %\usepackage{csquotes}
 %\usepackage[style=authoryear]{biblatex}
 \bibliographystyle{acm}
-\renewcommand*{\bibname}{Literature and Web References} % Change the string to localize it
+\renewcommand*{\bibname}{Литература} % Change the string to localize it
 
-%%% Tip     
+%%% Tip
 \usepackage{float}
 \floatstyle{ruled}
 \newfloat{Tip}{ht}{toa}
@@ -153,12 +159,12 @@ Read at your own risk!}}
 
 %%% Localization, if you're not making the en_US' manual then you have to change this part to get a better visual product
 
-%\usepackage[frenchb]{babel} 
+%\usepackage[frenchb]{babel}
 % used to get better list in french
 %\frenchbsetup{StandardLists=true}
 
 
-%%% Macros QGIS Versions  
+%%% Macros QGIS Versions
 
 \def\CURRENT{1.6.0\xspace}
 \def\OLD{1.5.0\xspace}
@@ -197,34 +203,34 @@ Read at your own risk!}}
 \newcommand{\classname}[1]{\textsf{\textbf{#1}}}
 
 
-% object	
+% object
 %%% 	usage:
 \newcommand{\object}[1]{\textsf{\textit{#1}}}
 
-% method	
+% method
 %%% 	usage:
 \newcommand{\method}[1]{\textsf{\textit{#1}}}
 
-% server	
+% server
 %%% 	usage:  \server{myhost.de}
 \newcommand{\server}[1]{\textit{#1}}
 
-% dialog	
-%%% 	usage:  \dialog{Layer Properties}	
+% dialog
+%%% 	usage:  \dialog{Layer Properties}
 \newcommand{\dialog}[1]{
-\begin{tikzpicture}[line width=0.5pt,baseline=-3pt] 
+\begin{tikzpicture}[line width=0.5pt,baseline=-3pt]
 \draw (0,0) node[draw=black,rectangle,fill=gray!50]{\textbf{#1}};
 \end{tikzpicture}
 }
 
-% guiheading			
-%%% style for section heading that appear in dialog boxes such as Vector Layer Properties > metadata	
+% guiheading
+%%% style for section heading that appear in dialog boxes such as Vector Layer Properties > metadata
 \newcommand{\guiheading}[1]{\textsf{#1}}
 
 % keystroke
-%%% 	usage:  \keystroke{Ctrl + P}		
+%%% 	usage:  \keystroke{Ctrl + P}
 \newcommand{\keystroke}[1]{%
-\begin{tikzpicture}[line width=1pt,rounded corners=3pt,baseline=-3pt] 
+\begin{tikzpicture}[line width=1pt,rounded corners=3pt,baseline=-3pt]
 \draw (0,0) node[fill=gray!50, inner ysep=4pt, inner xsep=7pt]{#1};
 \end{tikzpicture}
 }
@@ -232,15 +238,15 @@ Read at your own risk!}}
 % tab: for tabs in dialog boxes
 % usage: \tab{General}
 \newcommand{\tab}[1]{%
-\begin{tikzpicture}[line width=0.5pt,baseline=-3pt] 
+\begin{tikzpicture}[line width=0.5pt,baseline=-3pt]
 \draw (0,0) node[draw=black,rectangle,top  color=gray!60,bottom  color=white]{#1};
 \end{tikzpicture}
 }
 
 % checkbox
-% usage:  \checkbox{Render}		
+% usage:  \checkbox{Render}
 \newcommand{\checkbox}[1]{%
-\begin{tikzpicture}[line width=1pt,baseline=-3pt] 
+\begin{tikzpicture}[line width=1pt,baseline=-3pt]
 \draw (0,0) node[rectangle,fill=gray!30]{
 \begin{tikzpicture}[line width=1pt,baseline=0pt] \draw[fill=white,draw=gray!70,drop  shadow] (0,0) rectangle (0.3,0.3);
 \end{tikzpicture}
@@ -248,14 +254,14 @@ Read at your own risk!}}
 \end{tikzpicture}
 }
 
-% selecttext			
+% selecttext
 % usage: \selectstring{Outline style}{---Solid Line}
 \newcommand{\selectstring}[2]{%
-\begin{tikzpicture}[line width=1pt,baseline=-3pt] 
+\begin{tikzpicture}[line width=1pt,baseline=-3pt]
 \draw (0,0) node[rectangle,fill=gray!20,inner ysep=2pt,inner xsep=3pt]{\guilabel#1\hspace{.5cm}
-\begin{tikzpicture}[line width=0.5pt,baseline=-3pt,rounded corners=2pt] 
+\begin{tikzpicture}[line width=0.5pt,baseline=-3pt,rounded corners=2pt]
 \draw (0,0) node[draw=gray,rectangle,top  color=gray!60,bottom  color=white,drop  shadow]{#2
-\begin{tikzpicture}[line width=1pt,baseline=4pt] 
+\begin{tikzpicture}[line width=1pt,baseline=4pt]
 \draw[draw=gray] (0,0) -- (0,0.5);
 \end{tikzpicture}
 \begin{tikzpicture}[scale=0.15,baseline=1pt]
@@ -267,13 +273,13 @@ Read at your own risk!}}
 \end{tikzpicture}
 }
 
-% input text:					
+% input text:
 %%% 	a labelled field in a dialog box where the user types in text
 %%% 	usage: \inputtext{Display Name}{lakes.shp}
 \newcommand{\inputtext}[2]{%
-\begin{tikzpicture}[line width=1pt,baseline=-3pt] 
+\begin{tikzpicture}[line width=1pt,baseline=-3pt]
 \draw (0,0) node[rectangle,fill=gray!20,inner ysep=2pt,inner xsep=3pt]{\guilabel#1\hspace{.5cm}
-\begin{tikzpicture}[line width=0.5pt,baseline=-3pt,rounded corners=2pt] 
+\begin{tikzpicture}[line width=0.5pt,baseline=-3pt,rounded corners=2pt]
 \draw (0,0) node[draw=gray,rectangle,fill=white,drop  shadow]{#2};
 \end{tikzpicture}
 };
@@ -283,22 +289,22 @@ Read at your own risk!}}
 % selectcolor: a selection field for colors
 % usage: \selectcolor{Outline color}{yellow}
 \newcommand{\selectcolor}[2]{%
-\begin{tikzpicture}[line width=1pt,baseline=-3pt] 
+\begin{tikzpicture}[line width=1pt,baseline=-3pt]
 \draw (0,0) node[rectangle,fill=gray!20,inner ysep=2pt,inner xsep=3pt,baseline=3pt]{\guilabel#1\hspace{.5cm}
-\begin{tikzpicture}[line width=0.5pt,rounded corners=2pt] 
+\begin{tikzpicture}[line width=0.5pt,rounded corners=2pt]
 \draw[draw=gray,rectangle,fill=#2,drop  shadow] (0,0) rectangle (3,0.5);
 \end{tikzpicture}
 };
 \end{tikzpicture}
 }
 
-% \selectnumber			
+% \selectnumber
 %%%  selectnumber: a selection field with numerical values
-% usage: \selectnumber{Hue}{60}	
+% usage: \selectnumber{Hue}{60}
 \newcommand{\selectnumber}[2]{%
-\begin{tikzpicture}[line width=1pt,baseline=-3pt] 
+\begin{tikzpicture}[line width=1pt,baseline=-3pt]
 \draw (0,0) node[rectangle,fill=gray!20,drop  shadow]{\guilabel#1
-\begin{tikzpicture}[line width=1pt,baseline=-3pt] 
+\begin{tikzpicture}[line width=1pt,baseline=-3pt]
 \draw (0,0) node[fill=white]  {#2};
 \end{tikzpicture}
 \begin{tikzpicture}[scale=0.3]
@@ -308,48 +314,48 @@ Read at your own risk!}}
 \end{tikzpicture}
 }
 
-% mainmenuopt	
+% mainmenuopt
 %%% 	usage: \mainmenuopt{Layer}
 \newcommand{\mainmenuopt}[1]{%
-\begin{tikzpicture}[line width=0.5pt,baseline=-3pt] 
+\begin{tikzpicture}[line width=0.5pt,baseline=-3pt]
 \draw (0,0) node[draw=black,rectangle,top  color=gray!60,bottom  color=white,drop  shadow]{#1};
 \end{tikzpicture}
 }
 
 
-% button		
-%%% 	usage: \button{Save as Default}	
+% button
+%%% 	usage: \button{Save as Default}
 \newcommand{\button}[1]{%
-\begin{tikzpicture}[line width=0.5pt,baseline=-3pt,rounded corners=2pt] 
+\begin{tikzpicture}[line width=0.5pt,baseline=-3pt,rounded corners=2pt]
 \draw (0,0) node[draw=black,rectangle,top  color=gray!60,bottom  color=white,drop  shadow]{#1};
 \end{tikzpicture}
 }
 
 % clicklistitem
-%%% 	 clickable list item in a dialog box the actual text in the list item will 	 	
+%%% 	 clickable list item in a dialog box the actual text in the list item will
 %%% 	usage: \clicklistitem{Canadian Land}
 \newcommand{\clicklistitem}[1]{%
-\begin{tikzpicture}[line width=0.5pt,baseline=-3pt,rounded corners=2pt] 
+\begin{tikzpicture}[line width=0.5pt,baseline=-3pt,rounded corners=2pt]
 \draw (0,0) node[draw=black,rectangle,top  color=gray!60,bottom  color=white,drop  shadow]{#1};
 \end{tikzpicture}
 }
 
-% browsebutton	
+% browsebutton
 %%% 	 a button with 3 dots, used to browse for files
 %%% 		usage: \browsebutton
 \newcommand{\browsebutton}{%
-\begin{tikzpicture}[line width=0.5pt,baseline=-3pt,rounded corners=2pt] 
+\begin{tikzpicture}[line width=0.5pt,baseline=-3pt,rounded corners=2pt]
 \draw (0,0) node[draw=black,rectangle,top  color=gray!60,bottom  color=white,drop  shadow,inner ysep=7pt]{\dots};
 \end{tikzpicture}
 }
 
 % radiobuttonoff
 %%% 	 pour les boutons radio non sélectionnés
-%%% 	usage: \radiobuttonoff{EPSG ID}	
+%%% 	usage: \radiobuttonoff{EPSG ID}
 \newcommand{\radiobuttonoff}[1]{%
-\begin{tikzpicture}[line width=0.5pt,baseline=-3pt] 
+\begin{tikzpicture}[line width=0.5pt,baseline=-3pt]
 \draw (0,0) node[fill=gray!20]{
-\begin{tikzpicture}[baseline=-3pt,inner ysep=1pt,inner xsep=3pt] 
+\begin{tikzpicture}[baseline=-3pt,inner ysep=1pt,inner xsep=3pt]
 \draw[fill=gray!20,line width=1pt,draw=gray!70,drop  shadow] (0,0) circle (6pt);
 \draw (0.5,0) node[anchor=west]{\guilabel#1};
 \end{tikzpicture}};
@@ -357,12 +363,12 @@ Read at your own risk!}}
 }
 
 % radiobuttonoff
-%%% 	 pour les boutons radio sélectionnés	
+%%% 	 pour les boutons radio sélectionnés
 %%% 	usage: \radiobuttonon{Postgis SRID}
 \newcommand{\radiobuttonon}[1]{%
-\begin{tikzpicture}[line width=0.5pt,baseline=-3pt] 
+\begin{tikzpicture}[line width=0.5pt,baseline=-3pt]
 \draw (0,0) node[fill=gray!20]{
-\begin{tikzpicture}[baseline=-3pt,inner ysep=1pt,inner xsep=3pt] 
+\begin{tikzpicture}[baseline=-3pt,inner ysep=1pt,inner xsep=3pt]
 \fill[black] (0,0) circle (3pt);
 \draw[line width=1pt,gray!70] (0,0) circle (6pt);
 \draw (0.5,0) node[anchor=west]{\guilabel#1};
@@ -370,13 +376,13 @@ Read at your own risk!}}
 \end{tikzpicture}
 }
 
-% slider		
-%%% 	 these appear in several dialog boxes	
+% slider
+%%% 	 these appear in several dialog boxes
 %%% 	usage: \slider{Transparency}
 \newcommand{\slider}[1]{
-\begin{tikzpicture}[line width=0.5pt,baseline=-3pt] 
+\begin{tikzpicture}[line width=0.5pt,baseline=-3pt]
 \draw (0,0) node[fill=gray!20,anchor=west]{#1 10\% %
-\begin{tikzpicture}[baseline=-3pt,inner ysep=1pt,inner xsep=3pt] 
+\begin{tikzpicture}[baseline=-3pt,inner ysep=1pt,inner xsep=3pt]
 \draw[gray!50] (0,0) rectangle (3,0.1);
 \draw [draw=gray,fill=gray!50,drop  shadow,rounded corners=0.5pt] (0.5,0.25) -- (0.5,-0.05)--(0.6,-0.15)--(0.7,-0.05)--(0.7,0.25)--cycle;
 \end{tikzpicture}};
@@ -387,7 +393,7 @@ Read at your own risk!}}
 %%% 	 sous menu sans icône avec 2ème choix
 %%% 	usage: \dropmenuopt{Toolbar Visibility}
 \newcommand{\dropmenuopt}[1]{%
-\begin{tikzpicture}[line width=0.5pt,baseline=-3pt] 
+\begin{tikzpicture}[line width=0.5pt,baseline=-3pt]
 \draw (0,0) node[draw=black,rectangle,top  color=gray!60,bottom  color=white,drop  shadow]{\guilabel{#1}\hspace{1cm}$\blacktriangleright$};
 \end{tikzpicture}
 }
@@ -395,18 +401,18 @@ Read at your own risk!}}
 % dropmenuopttwo
 %%% 	usage: \dropmenuopt{Toolbar Visibility}
 % dropmenuopttwo: for dropdown menu items with icons
-% usage: \mainmenuopt{Layer} > 
+% usage: \mainmenuopt{Layer} >
 % \dropmenuopttwo{mActionAddRasterLayer}{Add a Raster Layer}
 \newcommand{\dropmenuopttwo}[2]{%
-\begin{tikzpicture}[line width=0.5pt,baseline=-3pt] 
+\begin{tikzpicture}[line width=0.5pt,baseline=-3pt]
 \draw (0,0) node[draw=black,rectangle,top  color=gray!60,bottom  color=white,drop  shadow]{\includegraphics[width=3mm]{#1} \guilabel{#2}};
 \end{tikzpicture}
 }
 
-% dropmenuoptthree		
+% dropmenuoptthree
 % usage: \dropmenuopttree{image}{Toolbar Visibility}
 \newcommand{\dropmenuoptthree}[2]{%
-\begin{tikzpicture}[line width=0.5pt,baseline=-3pt] 
+\begin{tikzpicture}[line width=0.5pt,baseline=-3pt]
 \draw (0,0) node[draw=black,rectangle,top  color=gray!60,bottom  color=white,drop  shadow]{\includegraphics[width=3mm]{#1} \guilabel{#2}\hspace{1cm}$\blacktriangleright$};
 \end{tikzpicture}
 }
@@ -416,9 +422,9 @@ Read at your own risk!}}
 % dropmenucheck: for dropdown menu checkboxes
 % usage: \mainmenuopt{View} > \dropmenucheck{Legend}
 \newcommand{\dropmenucheck}[1]{%
-\begin{tikzpicture}[line width=1pt,baseline=-3pt] 
+\begin{tikzpicture}[line width=1pt,baseline=-3pt]
 \draw (0,0) node[rectangle,fill=gray!30]{
-\begin{tikzpicture}[line width=1pt,baseline=2pt] 
+\begin{tikzpicture}[line width=1pt,baseline=2pt]
 \draw[fill=white,draw=gray!70,drop  shadow] (0,0) rectangle (0.4,0.4);
 \draw (0.2,0.2) node{\ding{51}};
 \end{tikzpicture}
@@ -429,7 +435,7 @@ Read at your own risk!}}
 
 %% arrow
 \newcommand{\arrow}{%
-\begin{tikzpicture}[line width=1.5pt,,baseline=0pt] 
+\begin{tikzpicture}[line width=1.5pt,,baseline=0pt]
 \draw[->] (0,0.3) |- (0.5,0);
 \end{tikzpicture}
 }
@@ -438,15 +444,15 @@ Read at your own risk!}}
 % toolbtntwo
 % usage: \toolbtntwo{image}{Add a Raster Layer}
 \newcommand{\toolbtntwo}[2]{%
-\begin{tikzpicture}[line width=1pt,baseline=-3pt] 
+\begin{tikzpicture}[line width=1pt,baseline=-3pt]
 \draw (0,0) node[draw,inner sep=3pt,rounded corners=3pt,drop  shadow,fill=white]{\includegraphics[width=5mm]{#1}};
 \draw (0.6,0)node[draw=black,rectangle,fill=yellow!10,anchor=west]{\guilabel{#2}};
 \end{tikzpicture}
 }
 
 %\toolbox
-%Used only for menu items (modules) in the GRASS toolbox. 
-%These icons may use 1 or more 
+%Used only for menu items (modules) in the GRASS toolbox.
+%These icons may use 1 or more
 %images, and so require different numbers of arguments.
 % \toolboxtwo takes two arguments: one image name and a text label, and so on.
 %The images have names like nviz.1.eps.
@@ -455,13 +461,13 @@ Read at your own risk!}}
 %starting format and the ending format of a conversion module. When
 %referring to these images in the latex source, it is necessary to
 %include the .eps extension, otherwise the \includegraphics macro looks
-%for nviz.1 and can't find it. 
+%for nviz.1 and can't find it.
 % toolboxtwo
 % usage: \toolboxtwo{nviz}{nviz - Open 3D-View in NVIZ}
 \newcommand{\toolboxtwo}[2]{%
-\begin{tikzpicture}[line width=1pt,baseline=-3pt,inner ysep=4pt,inner xsep=3pt] 
+\begin{tikzpicture}[line width=1pt,baseline=-3pt,inner ysep=4pt,inner xsep=3pt]
 \draw (0,0) node[rectangle,fill=gray!20,baseline=3pt]{
-\begin{tikzpicture}[baseline=5pt] 
+\begin{tikzpicture}[baseline=5pt]
 \includegraphics[width=5mm]{#1}
 \end{tikzpicture}
   \hspace{0.5cm}\guilabel#2};

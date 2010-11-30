@@ -1,51 +1,55 @@
 %  !TeX  root  =  user_guide.tex
 
-\section{Raster Terrain Modelling Plugin}
+\section{Морфометрический анализ}
 
-% when the revision of a section has been finalized, 
+% when the revision of a section has been finalized,
 % comment out the following line:
 %\updatedisclaimer
 
-The Raster Terrain Modelling plugin can be used to calculate the slope, aspect, ruggedness, and
-total curvature for digital elevation models (DEM). It is very simple to handle and provides an
-intiuitive graphical user interface for creating new raster layers (See Figure
-\ref{fig:raster_terrain_dialog}).
-The plugin requires the following parameters to be specified before running:
+Модуль морфометрического анализа  может быть использован для расчета
+угла уклона, экспозиции, индекса пересечённости и общей кривизны цифровых
+моделей рельефа (ЦМР). Модуль очень прост в использовании благодаря
+интуитивно понятному графическому интерфейсу
+(см. Рисунок~\ref{fig:raster_terrain_dialog}). Для расчета требуются
+следующие параметры, которые нужно указать перед началом работы:
 
 \begin{itemize}[label=--]
-\item \textbf{Analysis}: Can be one of slope, aspect, ruggedness, or total curvature
-\item \textbf{Input layer}: Specify the input raster from a list of loaded
-raster layers.
-\item \textbf{Output layer}: Specify a name and path for the output raster file.
-\item \textbf{Output format}: Specify a format type for the output raster file (Default is GeoTiff).
+\item \textbf{Анализ}: Может быть одним из следующих: уклоны,
+экспозиция, индекс пересечённости, общая кривизна.
+\item \textbf{Исходный слой}: Выбирается растр из списка загруженных растровых
+слоев.
+\item \textbf{Выходной слой}: Задается имя и путь выходного изображения.
+\item \textbf{Формат вывода}: Выбирается формат выходного растра (по
+умолчанию GeoTiff).
 \end{itemize}
 
-Slope: Calculates slope angle for each cell in degrees (based on first order derivative estimation).
+Уклон: Вычисляет угол наклона для каждой ячейки в градусах (алгоритм
+основан на вычислении первой производной).
 
-Aspect: Exposition (starting with 0 for north direction, in degrees counterclockwise).
+Экспозиция: Экспозиция (начиная с 0~градусов на север, против часовой стрелки).
 
-Ruggedness factor: A quantitative measurement of terrain heterogeneity.
+Индекс пересечённости: Количественная оценка неоднородности рельефа.
 
-Total curvature: A curvature measure that combines plan- and profile curvature.
+Общая кривизна: Суммарная кривизна, включающая плановую и профильную кривизну.
 
 \begin{figure}[ht]
    \centering
    \includegraphics[clip=true, width=9cm]{raster_terrain_dialog}
-   \caption{Raster Terrain Modelling Plugin \nixcaption}\label{fig:raster_terrain_dialog}
+   \caption{Модуль морфометрического анализа \nixcaption}\label{fig:raster_terrain_dialog}
 \end{figure}
 
-\minisec{Using the plugin}\label{raster_terrain_usage}
+\minisec{Использование модуля}\label{raster_terrain_usage}
 
 \begin{enumerate}
-  \item Start QGIS and load a DEM raster layer. 
-  \item Load the Raster Terrain Modelling plugin in the Plugin Manager (see Section 
-  \ref{sec:load_core_plugin}) and click on the \toolbtntwo{raster_terrain}{Raster Terrain
-Modelling} icon which appears in the QGIS toolbar menu. The Raster Terrain Modelling plugin dialog
-appears as shown in Figure \ref{fig:raster_terrain_dialog}.
-  \item Select an analysis method (e.g. \dropmenuopt{Slope}).
-  \item Specify an output file
-path, and an output file type.
-  \item Click \button{Ok}.
+  \item Запустите QGIS и загрузите растр цифровой модели рельефа.
+  \item Активируйте модуль <<Морфометрический анализ>> в <<Менеджере модулей>>
+  (см. Раздел~\ref{sec:load_core_plugin}) и нажмите на кнопку
+  \toolbtntwo{raster_terrain}{Морфометрический анализ}, которая появилась
+  на панели инструментов QGIS. Откроется окно модуля, изображенное на
+  Рисунке~\ref{fig:raster_terrain_dialog}.
+  \item Выберите метод анализа (например, \dropmenuopt{Уклоны}).
+  \item Укажите выходной файл и его формат.
+  \item Нажмите \button{Ok}.
 \end{enumerate}
 
 \FloatBarrier

@@ -1,114 +1,128 @@
 %  !TeX  root  =  user_guide.tex
 
-\chapter{QGIS Plugins}\label{sec:plugins}\index{plugins}
+\chapter{Модули QGIS}\label{sec:plugins}\index{модули}
 
 % when the revision of a section has been finalized,
 % comment out the following line:
 %\updatedisclaimer
 
-QGIS has been designed with a plugin architecture.
-This allows many new features/functions to be easily added to the application.
-Many of the features in QGIS are actually implemented as either \textbf{core}
-or \textbf{external} plugins.\index{plugins!types}
+Первоначально, QGIS был разработан на архитектуре с поддержкой различных
+модулей, которые позволяют легко добавлять множество новых возможностей
+или функций в приложение. Большинство функций в QGIS реализованы как
+\textbf{основные} или \textbf{внешние} модули.\index{модули!виды}
 
 \begin{itemize}[label=--]
-\item \textbf{Core Plugins} are maintained by the QGIS Development
-Team and are automatically part of every QGIS distribution.
-They are written in one of two languages: C++ or Python.
-More information about core plugins are provided in Section \ref{sec:core_plugins}.
-\item \textbf{External Plugins} are currently all written in Python.
-They are stored in external repositories and maintained by the individual authors.
-They can be added to QGIS using the \filename{Plugin Installer}.
-More information about external plugins are provided in Section \ref{sec:external_plugins}.
+\item \textbf{Основные модули} разрабатываются командой разработчиков
+QGIS и автоматически входят в каждый новый релиз программы. Написаны они
+либо на языках программирования C++ и Python. Более подробная информация
+об основных модулях приведена в Разделе~\ref{sec:core_plugins}.
+\item Все \textbf{Внешние модули} в настоящее время написаны на языке
+Python. Они находятся во внешних репозиториях и поддерживаются
+написавшими их авторами. Внешние модули могут быть добавлены с помощью
+функции \filename{Установка модулей QGIS}. Более подробная информация
+о внешних модулях приводится в Разделе~\ref{sec:external_plugins}.
 \end{itemize}
 
-\section{Managing Plugins}\label{sec:managing_plugins}
-\index{plugins!managing}
+\section{Управление модулями}\label{sec:managing_plugins}
+\index{модули!управление}
 
-Managing plugins in general means loading or unloading them using
-the \filename{Plugin Manager}. External plugins can be installed and
-directly activated or uninstalled using the \filename{Python Plugin
-Installer}. To deactivate and reactivate external plugins, the
-\filename{Plugin Manager} is used again.
+Управление модулями подразумевает их загрузку или выгрузку с помощью
+\filename{Менеджера модулей}. Внешние модули могут быть установлены,
+активированы или удалены с помошью \filename{Загрузки модулей}.
+Также \filename{Менеджер модулей} можно использовать для повторного
+отключения/подключения внешних модулей.
 
-\subsection{Loading a QGIS Core Plugin}\label{sec:load_core_plugin}
+\subsection{Загрузка основных модулей QGIS}\label{sec:load_core_plugin}
 
-Loading a QGIS Core Plugin is done from the main menu \mainmenuopt{Plugins}
-\arrow \dropmenuopttwo{mActionShowPluginManager}{Manage Plugins...}.\index{plugins!manager}
+Загрузка основных модулей QGIS осуществляется из главного меню
+\mainmenuopt{Модули} \arrow
+\dropmenuopttwo{mActionShowPluginManager}{Управление модулями\ldots}.\index{модули!менеджер}
 
 \begin{figure}[ht]
    \centering
    \includegraphics[clip=true, width=12cm]{pluginmanager}
-   \caption{Plugin Manager \nixcaption}\label{fig:pluginmanager}\smallskip
+   \caption{Менеджер модулей QGIS \wincaption}\label{fig:pluginmanager}\smallskip
 \end{figure}
 
-The \filename{Plugin Manager} lists all the available plugins and their
-status (loaded or unloaded), including all core plugins and all external
-plugins that have been installed and automatically activated using the
-\filename{Python Plugin Installer} (see Section \ref{sec:external_plugins}).
-Those plugins that are already loaded have a check mark to the left of
-their name. Figure \ref{fig:pluginmanager} shows the Plugin Manager dialog.
+\filename{Менеджер модулей} содержит список всех доступных модулей,
+включая основные и внешние, и их статус (загружен или нет).
+Активируются модули автоматически с помощью установки флажка на соответствующем
+модуле (см. Раздел~\ref{sec:external_plugins}).
+На Рисунке~\ref{fig:pluginmanager} показано диалоговое окно Менеджера
+модулей.
 
-To enable a particular plugin, click on the checkbox to the left of the
-plugin name, and click \button{OK}. When you exit the application, a list
-of loaded plugins is retained, and the next time you run QGIS these
-plugins are automatically loaded.
+Для включения модуля достаточно установить флажок слева от его названия
+и нажать кнопку \button{OK}. При выходе из приложения список
+загруженных модулей сохраняется и будет автоматически загружен при
+следующем запуске QGIS.
 
-\begin{Tip}\caption{\textsc{Crashing Plugins}}\index{crashes}
-If you find that QGIS crashes on startup, a plugin may be at fault.
-You can stop all plugins from loading by editing your stored settings file
-(see \ref{subsec:gui_options} for location). Locate the plugins settings and
-change all the plugin values to false to prevent them from loading.
-\nix {For example, to prevent the Delimited text plugin from loading, the
-entry in \$HOME/.config/QuantumGIS/qgis.conf on Linux should look like this:
+\begin{Tip}\caption{\textsc{Повреждённые модули}}\index{ошибки}
+Если QGIS перестает загружаться, то, возможно, виноват повреждённый
+модуль. Можно остановить загрузку модулей, отредактировав файл настройки
+(см. Раздел~\ref{subsec:gui_options}). Найдите файл настроек модулей и
+измените значение модулей на <<false>>, чтобы они не загружались при
+запуске QGIS.
+\nix {Например, чтобы прекратить загрузку модуля <<Текст с разделителями>>,
+нужно отредактировать файл \$HOME/.config/QuantumGIS/qgis.conf
+(в \nix) следующим образом:
 \usertext{Add Delimited Text Layer=false}.}
 \normalfont
-Do this for each plugin in the [Plugins] section. You can then start QGIS
-and add the plugins one at a time from the \filename{Plugin Manager} to
-determine which plugin is causing the problem.
+Данное действие нужно повторить для каждого модуля в секции [Plugins].
+После этого можно запускать QGIS, и через \filename{Менеджер модулей}
+добавлять модули по одному, чтобы узнать, который из них является
+причиной проблемы.
 \end{Tip}
 
-\subsection{Loading an external QGIS Plugin}\label{sec:load_external_plugin}
+\subsection{Загрузка внеших модулей QGIS}\label{sec:load_external_plugin}
 
-There is only one step required to integrate external plugins into QGIS:
+Для загрузки внешних модулей нужно выполнить всего один шаг:
 
 \begin{itemize}[label=--]
-\item Download an external plugin from a repository using the
-\filename{Python Plugin Installer} (Section \ref{sec:python_plugin_installer}).
-The new external plugin will be added to the list of available plugins in
-the \filename{Plugin Manager} and is automatically loaded.
+\item Скачать модуль с внешнего репозиторя с помощью
+\filename{Загрузки модулей} (Раздел \ref{sec:python_plugin_installer}).
+Новый модуль будет добавлен в список доступных в
+\filename{Менеджере модулей} и автоматически активирован.
 \end{itemize}
 
-\subsection{Using the QGIS Python Plugin Installer}\index{plugins!installing}\label{sec:python_plugin_installer}
-\index{plugins!Python Plugin Installer}\index{plugins!upgrading}
+\subsection{Использование менеджера модулей в QGIS}\index{модули!установка}\label{sec:python_plugin_installer}
+\index{модули!Plugin Installer}\index{модули!обновление}
 
 \begin{figure}[ht]
    \centering
    \includegraphics[clip=true, width=12cm]{plugininstaller}
-   \caption{Installing external python plugins \nixcaption}\label{fig:plugininstaller}\smallskip
+   \caption{Установка модулей QGIS \wincaption}\label{fig:plugininstaller}\smallskip
 \end{figure}
 
-In order to download and install an external Python plugin, click the
-menu \mainmenuopt{Plugins} \arrow \dropmenuopttwo{plugin_installer}{Fetch
-Python Plugins...}. The \filename{Plugin Installer} window will appear
-(figure \ref{fig:plugininstaller}) with the tab \tab{Plugins}, containing
-a list of all locally installed Python plugins, as well as plugins
-available in remote repositories. Each plugin can be either:
+Для загрузки и установки внешних модулей нужно выбрать меню
+\mainmenuopt{Модули} \arrow \dropmenuopttwo{plugin_installer}{Загрузить модули\ldots}.
+Появится окно \filename{Установка модулей QGIS}
+(рис.~\ref{fig:plugininstaller}) со вкладкой \tab{Модули}, в которой
+отображается список всех установленных модулей, а также список доступных
+для загрузки внешних модулей. Рядом с каждым модулем указан его статус:
 \begin{itemize}[label=--]
-\item \textbf{not installed} - this means the plugin is available in the repository, but is not installed yet. In order to install it, select the plugin from the list and click the \button{Install plugin} button.
-\item \textbf{new} - this means that the plugin is newly available in the repository.
-\item \textbf{installed} - this indicates that the plugin is already installed. If it is also available in any repository the \button{Reinstall plugin} button will be enabled. If the available version is older than the installed version, the \button{Downgrade plugin} button will appear instead.
-\item \textbf{upgradeable} - this means that the plugin is installed, but there is an updated version available. In this case, the \button{Upgrade plugin} button will be enabled.
-\item \textbf{invalid} - this means that the plugin is installed, but is unavailable or broken. The reason will be explained in the plugin description field.
+\item \textbf{не установлен}"--- модуль доступен в репозитории, но еще
+не загружен. Для установки нужно выбрать его и нажать кнопку
+\button{Установить модуль}.
+\item \textbf{новый}"--- новый модуль доступен в репозитории.
+\item \textbf{установлен}"--- модуль уже установлен. Также будет
+активна кнопка \button{Переустановить модуль}. Если доступна более
+старая версия установленного плагина, то появится кнопка
+\button{Понизить версию}.
+\item \textbf{обновляемый}"--- модуль установлен, доступно обновление.
+В этом случае будет активна кнопка \\
+\button{Обновить модуль}.
+\item \textbf{повреждён}"--- модуль установлен, но недоступен или
+поврежден. Причина указана в описании к модулю.
 \end{itemize}
 
-\minisec{Plugins tab}
+\minisec{Вкладка Модули}
 
-To install a plugin, select it from the list and click the \button{Install plugin}
-button. The plugin is then activated and installed in its own directory.
+Для установки модуля необходимо выбрать его из списка и нажать кнопку
+\button{Установить модуль}. Он будет активирован и установлен в
+соответствующую директорию.
 
 \begin{itemize}[label=--]
-\item \nix{Linux and other unices}:\\
+\item \nix{Linux и другие Unix-подобные системы}:\\
 ./share/qgis/python/plugins \\
 /home/\$USERNAME/.qgis/python/plugins
 \item \osx{Mac OS X}:\\
@@ -121,56 +135,90 @@ C:\textbackslash Documents and Settings\textbackslash\$USERNAME\textbackslash
 .qgis\textbackslash python\textbackslash plugins
 \end{itemize}
 
-If the installation is successful, a confirmation message will appear.
+Если установка модуля прошла успешно, то появится соответствующее
+сообщение.
 
-If the installation fails, the reason for the failure will be displayed
-in a warning dialog. Most often, errors are the result of connection problems
-and/or missing Python modules. In the former case you will likely need to
-wait before trying the install again, in the latter case, you should install
-the missing modules relevant to your operating system prior to using the
-plugin. \nix{For Linux, most required modules should be available via a
-package manager}. \win{For install instructions in Windows visit the module
-home page}. If you are using a proxy, you may need to configure it under
-\mainmenuopt{Edit} \arrow \dropmenuopttwo{mActionOptions}{Options} (Gnome, OSX)
-or \mainmenuopt{Settings} \arrow \dropmenuopttwo{mActionOptions}{Options} (KDE, Windows)
-on the \tab{Proxy} tab.
+Если при установке произошла ошибка, то ее причина будет указана в
+отдельном окне на экране. Чаще всего ошибки возникают из-за проблем с
+подключением нового модуля и/или отсутствием дополнительных модулей,
+необходимых для работы нового модуля. В первом случае нужно немного
+подождать перед повторным запуском установки. Во втором"--- установить
+недостающие модули.
+\nix{Для Linux, большинство модулей доступно через менеджер пакетов}.
+\win{Для Windows"--- посетить домашнюю страницу модулей}.
+Если используется прокси-сервер, нужно его настроить:
+\mainmenuopt{Правка} \arrow \dropmenuopttwo{mActionOptions}{Параметры} (Gnome, OS\,X)
+или \mainmenuopt{Настройки} \arrow \dropmenuopttwo{mActionOptions}{Параметры} (KDE, Windows)
+вкладка \tab{Прокси} или \tab{Сетевые соединения}.
 
-The \button{Uninstall plugin} button is enabled only if the selected plugin is installed and is not a core plugin. Note that if you have installed an update to a core plugin, you can uninstall this update with the \button{Uninstall plugin} and revert to the version shipped with Quantum GIS. This default version however, cannot be uninstalled.
+Кнопка \button{Удалить модуль} доступна для установленного модуля при
+условии, что он не является основным. Обратите внимание, что если
+включено обновление основных модулей, то можно удалить последнее
+обновление кнопкой  \button{Удалить модуль} и вернуться к предыдущей
+версии QGIS.
 
-\minisec{Repositories tab}
+\minisec{Репозитории}
 
-The second tab \tab{Repositories}, contains a list of plugin repositories available for the \filename{Plugin Installer}. By default, only the QGIS Official Repository is enabled. You can add several user-contributed repositories, including the central QGIS Contributed Repository and other external repositories by clicking the \button{Add 3rd party repositories} button. The added repositories contain a large number of useful plugins which are not maintained by the QGIS Development Team. As such, we cannot take any responsibility for them. You can also manage the repository list manually, that is add, remove, and edit the entries. Temporarily disabling a particular repository is possible by clicking the \button{Edit...} button.
+Вкладка \tab{Репозитории} содержит список источников для новых модулей.
+По умолчанию включен только официальный репозиторий QGIS. Также можно
+добавить и другие репозитории, воспользовавшись кнопкой
+\button{Добавить сторонние репозитории}. Сторонние источники данных
+содержат большое количество полезных модулей, но не поддерживаются
+командой разработчиков QGIS. Также можно вручную управлять списком
+репозиториев, добавляя, удаляя и редактируя записи. Временно отключить
+репозиторий можно, нажав на кнопку \button{Изменить\ldots} и сняв флажок
+в поле <<Активен>>.
 
-\minisec{Options tab}
+\minisec{Параметры}
 
-The \tab{Options} tab is where you can configure the settings of the \filename{Plugin Installer}. The \checkbox{Check for updates on startup} checkbox tells QGIS to automatically look for plugin updates and news. By default, if this feature is enabled all repositories listed and enabled in the \tab{Repositories} tab are checked for updates each time the program is started. The frequency of update checking can be adjusted using the dropdown menu, and may be adjusted from once a day right up to once a month. If a new plugin or update is available for one of the installed plugins, a notification will appear in the Status Bar. If the checkbox is disabled, looking for updates and news is performed only when the \filename{Plugin Installer} is manually launched from the menu.
+Вкладка \tab{Параметры} предназначена для настройки установки модулей.
+Если установлен флажок \\
+\checkbox{Проверять обновления при запуске}, то
+при каждом включении QGIS он будет автоматически проверять наличие
+новых и обновлённых модулей. По умолчанию, проверка будет происходить
+из всех активных источников данных, которые указаны во вкладке
+\tab{Репозитории}. Интервал проверки обновлений можно установить от
+одного дня до месяца. Если будет доступен новый модуль или обновление
+для установленного~--- появится соответствующее уведомление в строке
+состояния. Если флажок автоматического обновления отключен, то проверка
+будет происходить при каждом запуске \filename{Загрузки модулей} из
+меню.
 
-Although the plugin installer update can handle ports different from 80, some internet
-connections will cause problems when attempting to automatically check for updates.
-In these cases, a \textit{Looking for new plugins...} indicator will
-remain visible in the Status Bar during your entire QGIS session, and may cause a
-program crash when exiting. In this case please disable the checkbox.
+Если порт~80 закрыт, это может вызвать некоторые проблемы при
+проверке обновлений. В этом случае, показатель
+\textit{Поиск новых модулей\ldots} может отображаться в строке состояния
+в течение всего времени работы с QGIS и может привести к ошибке при
+попытке выхода из программы. Чтобы этого не произошло, небходимо
+отключить автоматическую проверку обновлений при запуске программы.
 
-In addition, you may specify the type of plugins that are displayed by the \filename{Plugin Installer}. Under \textit{Allowed plugins}, you can specify whether you would like to:
+Кроме того, можно указать тип модулей, которые будут отображатся в
+\filename{Менеджере модулей}. В поле \textit{Разрешенные модули} можно
+указать:
 
 \begin{itemize}[label=--]
-\item Only show plugins from the official repository,
-\item Show all plugins except those marked as experimental,
-\item or Show all plugins, even those marked as experimental.
+\item Показывать модули только из официального репозитория
+\item Показывать все модули, кроме помеченных как экспериментальные
+\item Показывать все модули, включая помеченные как экспериментальные.
 \end{itemize}
 
 \begin{Tip}
- \caption{\textsc{Using experimental plugins}}
-Experimental plugins are generally unsuitable for production use. These plugins are in the early stages of development, and should be considered 'incomplete' or 'proof of concept' tools. The QGIS development team does not recommend installing these plugins unless you intend to use them for
+ \caption{\textsc{Использование экспериментальных модулей}}
+Экспериментальные модули, как правило, непригодны для использования в
+работе. Эти модули находятся на ранних стадиях разработки и могут
+рассмотриваться как <<неполные>> или <<демонстрационные>>. Такие модули
+не рекомендуется использовать в работе за исключением тестирования.
 \end{Tip}
 
-\section{Data Providers}\index{data providers}
+\section{Провайдеры данных}\index{провайдеры данных}
 
-Data Providers are "special" plugins that provides access to a data store.
-By default, QGIS supports PostGIS layers and disk-based data stores supported by the GDAL/OGR library (Appendix \ref{appdx_ogr}).
-A Data Provider plugin extends the ability of QGIS to use other data sources.
+Провайдеры (поставщики) данных являются <<специальными>> модулями для
+предоставления доступа к базам данных. По умолчанию, QGIS поддерживает
+слои PostGIS и базы данных, основанных на библиотеках GDAL/OGR
+(Приложение~\ref{appdx_ogr}). Эти модули позволяют расширить тип
+поддерживаемых данных QGIS.
 
-Data Provider plugins are registered automatically by QGIS at startup.
-They are not managed by the Plugin Manager but used behind the scenes when a data type is added as a layer in QGIS.
+Модули провайдеров данных подключаются автоматически при каждом запуске
+QGIS. Они не управляются из меню <<Управление модулями>> и включаются
+тогда, когда слой добавлен в QGIS.
 
 \FloatBarrier

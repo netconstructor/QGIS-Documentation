@@ -1,143 +1,161 @@
 %  !TeX  root  =  user_guide.tex
 
-\section{MapServer Export Plugin}\label{sec:mapserver_export}
+\section{Модуль экспорта в файл проекта MapServer}\label{sec:mapserver_export}
 
 % when the revision of a section has been finalized,
 % comment out the following line:
-\updatedisclaimer
+%\updatedisclaimer
 
-You can use QGIS to ``compose'' your map by adding and arranging layers,
-symbolizing them, customizing the colors and then creating a map file
-for MapServer.
+Существует возможность использования QGIS для <<создания>> карты для MapServer
+путем добавления и распределения слоев, нанесения обозначений и определения цветов.
 
-\subsection{Creating the Project File}
+\subsection{Создание файла проекта}
 
-The MapServer Export Plugin operates on a saved QGIS project file and
-\textbf{not} on the current contents of the map canvas and legend. This
-has been a source of confusion for a number of users. As described below,
-before you start using the MapServer Export Plugin, you need to arrange
-the raster and vector layers you want to use in MapServer and save this
-status in a QGIS project file.
+Модуль экспорта в MapServer оперирует с сохраненным проектом QGIS, а
+\textbf{не} с текущим содержимым окна с картой и легендой слоев. У
+многих пользователей это вызвало значительное замешательство. Как
+описано ниже, перед тем, как использовать модуль экспорта, требуется
+предварительное распределение растровых и векторных слоев, которые нужно
+использовать в MapServer, и последующее сохранение в файле проекта QGIS.
 
 \begin{figure}[ht]
 \centering
   \includegraphics[clip=true, width=12cm]{mapserver_export_qgis}
-   \caption{Arrange raster and vector layers for QGIS project file \nixcaption}
+   \caption{Распределение растровых и векторых слоев для проекта QGIS \wincaption}
   \label{fig:mapserver_export_qgs}
 \end{figure}
 
-In this example, we demonstrate the four steps required to create a simple
-project file which can be used to create the MapServer map file.
-We use raster and vector files from the QGIS sample dataset \ref{label_sampledata}.
+В этом примере будут продемонстрированы четыре этапа, необходимых для
+создания простого проекта, из которого получится карта
+для MapServer. Будут использованы растровые и векторные файлы из
+пробного набора QGIS \ref{label_sampledata}.
 
 \begin{enumerate}
-\item Add the raster layer \filename{landcover.tif} clicking on the
-\toolbtntwo{mActionAddRasterLayer}{Add Raster Layer} icon.
-\item Add the vector Shapefiles \filename{lakes.shp, majrivers.shp} and
-\filename{airports.shp} from the QGIS sample dataset clicking on the
-\toolbtntwo{mActionAddNonDbLayer}{Add Vector Layer} icon.
-\item Change the colors and symbolize the data as you like (For example see
-Figure~\ref{fig:mapserver_export_qgis})
-\item Save a new project named \filename{mapserverproject.qgs} using
-\mainmenuopt{File} \arrow \dropmenuopttwo{mActionFileSave}{Save Project}.
+\item Добавьте растровый слой \filename{landcover.tif}, нажав на иконку
+\toolbtntwo{mActionAddRasterLayer}{Добавить растровый слой}.
+\item Добавьте векторные shape-файлы \filename{lakes.shp, majrivers.shp}
+и \filename{airports.shp} из пробного набора QGIS, нажав на иконку
+\toolbtntwo{mActionAddNonDbLayer}{Добавить векторный слой}.
+\item Измените цвета и вид представления данных по вашему усмотрению
+(к примеру, см. Рисунок~\ref{fig:mapserver_export_qgs})
+\item Сохраните новый проект под названием \filename{mapserverproject.qgs}
+следующим путем: \\
+\mainmenuopt{Файл} \arrow \dropmenuopttwo{mActionFileSave}{Сохранить проект}.
 \end{enumerate}
 
-\subsection{Creating the Map File}
+\subsection{Создание карты}
 
-The tool \filename{msexport} to export a QGIS project file to a MapServer map
-file is installed in your QGIS binary directory and can be used independently of QGIS.
-To use it from within QGIS, you need to enable the MapServer Export Plugin first using the Plugin Manager (see Section \ref{sec:load_core_plugin}).
+Инструмент \filename{msexport}, применяемый для экспорта проекта QGIS
+в файл карты MapServer, установлен в каталог бинарных файлов QGIS и
+может использоваться независимо от QGIS. Чтобы воспользоваться им из
+QGIS, нужно сначала активировать модуль экспорта в MapServer через
+<<Управление модулями>> (см. Раздел~\ref{sec:load_core_plugin}).
 
 \begin{figure}[ht]
 \centering
   \includegraphics[clip=true, width=9cm]{mapserver_export_dialog}
-  \caption{Export to MapServer Dialog \nixcaption}
+  \caption{Диалоговое окно модуля экспорта в MapServer \wincaption}
   \label{fig:mapserver_export_dialog}
 \end{figure}
 
 \begin{description}
-\item [Map file] \mbox{}\\
-Enter the name for the map file to be created. You can use the button at the
-right to browse for the directory where you want the map file created.
-\item [Qgis project file] \mbox{}\\
-Enter the full path to the QGIS project file (.qgs) you want to export. You can
-use the button at the right to browse for the QGIS project file.
-\item [Map Name] \mbox{}\\
-A name for the map. This name is prefixed to all images generated by the mapserver.
-\item [Map Width] \mbox{}\\
-Width of the output image in pixels.
-\item [Map Height] \mbox{}\\
-Height of the output image in pixels.
-\item [Map Units] \mbox{}\\
-Units of measure used for output
-\item [Image type] \mbox{}\\
-Format for the output image generated by MapServer
-\item [Web Template] \mbox{}\\
-Full path to the MapServer template file to be used with the map file
-\item [Web Header] \mbox{}\\
-Full path to the MapServer header file to be used with the map file
-\item [Web Footer] \mbox{}\\
-Full path to the MapServer footer file to be used with the map file
+\item [Файл карты] \mbox{}\\
+Введите название для создаваемого map-файла. Можно воспользоваться
+кнопкой справа для перехода в директорию, где требуется сохранить файл
+карты.
+\item [Файл проекта Qgis] \mbox{}\\
+Введите полный путь к экспортируемому файлу проекта QGIS (.qgs). Можно
+воспользоваться кнопкой слева для перехода к файлу проекта QGIS.
+\item [Имя карты] \mbox{}\\
+Название карты. Это название будет ставиться в начало названий всех
+изображений, созданных в mapserver.
+\item [Ширина карты] \mbox{}\\
+Ширина выходного изображения в пикселах.
+\item [Высота карты] \mbox{}\\
+Высота выходного изображения в пикселах.
+\item [Единицы карты] \mbox{}\\
+Единицы измерения, используемые для выходного изображения.
+\item [Формат изображения] \mbox{}\\
+Формат выходного изображения, созданного в MapServer.
+\item [Шаблон] \mbox{}\\
+Полный путь к файлу шаблона MapServer, применяемого к map-файлу.
+\item [Верхний колонтитул] \mbox{}\\
+Полный путь к файлу верхнего колонтитула MapServer, используемому с
+map-файлом.
+\item [Нижний колонтитул] \mbox{}\\
+Полный путь к файлу нижнего колонтитула MapServer, используемому с
+map-файлом.
 \end{description}
 
-Only the \filename{Map file} and \filename{QGIS project file} inputs are
-required to create a map file, however by omitting the other parameters,
-you may end up creating a non-functional map file, depending on your intended use.
-Although QGIS is good at creating a map file from your project file,
-it may require some tweaking to get the results you want.
-For this example, we will create a map file using the project file
-\filename{mapserverproject.qgs} we just created
-(see Figure~\ref{fig:mapserver_export_dialog}):
+Для создания map-файла необходимы лишь \filename{Файл карты} и
+\filename{Файл проекта QGIS}, тем не менее, опуская другие параметры,
+можно получить нефункциональный map-файл. Хотя QGIS отлично создает map-файлы из
+предоставленных проектов, вполне возможно, что понадобится некоторая
+настройка для получения нужных результатов. К примеру, мы создали
+map-файл, использовав файл проекта \filename{mapserverproject.qgs},
+который только что создали (см. Рисунок~\ref{fig:mapserver_export_dialog}):
 
 \begin{enumerate}
-  \item  Start the MapServer dialog (see
-Figure \ref{fig:mapserver_export_dialog}) by clicking the \toolbtntwo{mapserver_export}{MapServer Export} icon in the toolbar menu.
-  \item Enter the name (e.g., \filename{qgisproject.map}) for your new map file.
-  \item Browse and find the QGIS project file (e.g., \filename{mapserverproject.qgs})
-  you previously saved.
-  \item Enter a name (e.g., \filename{MyMap}) for the map.
-  \item Enter the width and height (e.g., \filename{600} for the width and \filename{400} for the height) for your output image.
-  \item For this example, the layers are in meters, so we change the units to meters.
-  \item Choose ``png'' for the image type.
-  \item Click \button{OK} to generate the new map file \filename{qgisproject.map}.
-  QGIS displays the success of your efforts.
+  \item После нажатия на иконку \toolbtntwo{mapserver_export}{Экспорт в MapServer}
+  на панели инструментов, запустится диалогое окно (см. Рисунок~\ref{fig:mapserver_export_dialog}).
+  \item Введите название (например, \filename{qgisproject.map}) для
+  нового map-файла.
+  \item Перейдите и найдите файл проекта QGIS
+  (например, \filename{mapserverproject.qgs}), который перед этим
+  сохранили.
+  \item Введите название (к примеру, \filename{MyMap}).
+  \item Введите ширину и высоту (к примеру, \filename{600} в качестве
+  ширины и \filename{400}~--- высоты) для результирующего изображения.
+  \item В данном примере слои измеряются в метрах, потому единицы
+  измерения выставляются в метрах.
+  \item Выберите <<png>> в качестве формата изображения.
+  \item Нажмите кнопку \button{OK} для того, чтобы создать новый
+  map-файл \filename{qgisproject.map}. QGIS выведет сообщение об
+  удачном завершении операции.
 \end{enumerate}
 
-You can view the map file in any text editor or visualizer. If you
-take a look, you'll notice that the export tool adds the metadata needed
-to enable our map file for WMS.
+Map-файл можно просмотреть в любом тектовом редакторе или просмотрщике.
+Если присмотреться, то можно заметить, что инструмент экспортирования
+добавляет метаданные, нужные для того, чтобы map-файл мог быть
+задействован в WMS (Web Map Service).
 
-\subsection{Testing the Map File}
+\subsection{Проверка map-файла}
 
-We can now test our work using the \filename{shp2img} tool to create an image
-from the map file. The \filename{shp2img} utility is part of MapServer and FWTools.
-To create an image from our map:
+Теперь можно протестировать результат проделанного, использовав
+инструмент \filename{shp2img} для создания изображения из map-файла.
+Утилита \filename{shp2img} является частью MapServer и набора
+инструментов FWTools. Для
+создания изображения из нашей карты необходимо:
 
 \begin{itemize}[label=--]
-\item Open a terminal window
-\item If you didn't save your map file in your home directory, change to
-  the folder where you saved it.
-\item Run \filename{shp2img -m qgisproject.map -o mapserver\_test.png} and
-  display the image
+\item Открыть окно консоли
+\item Если map-файл не был сохранен в домашнем каталоге, перейти в
+директорию, куда он был сохранен.
+\item Запустить \filename{shp2img -m qgisproject.map -o mapserver\_test.png}
+и открыть изображение.
 \end{itemize}
 
-This creates a PNG with all the layers included in the QGIS project file.
-In addition, the extent of the PNG will be the same as when we saved the
-project. As you can see in Figure~\ref{fig:mapserver_export_test}, all
-information except the airport symbols are included.
+Будет создан файл PNG, включающий все слои, содержащиеся в файле проекта
+QGIS. Кроме того, охват файла PNG останется таким же, как и когда
+проект был сохранен. Как можно увидеть на
+рисунке~\ref{fig:mapserver_export_test}, вся информация за исключением
+обозначений аэропортов включена.
 
 \begin{figure}[ht]
 \centering
   \includegraphics[clip=true, width=10cm]{mapserver_export_test}
-  \caption{Test PNG created by shp2img with all MapServer Export layers \nixcaption}
+  \caption{Тестовый файл PNG, созданный с помощью shp2img со всеми экспортированными слоями \wincaption}
   \label{fig:mapserver_export_test}
 \end{figure}
 
-If you plan to use the map file to serve WMS requests, you probably don't
-have to tweak anything. If you plan to use it with a mapping template or a
-custom interface, you may have a bit of manual work to do. To see how easy
-it is to go from QGIS to serving maps on the web, take a look at
-Christopher Schmidt's 5 minute flash video. He used an older version of QGIS (version 0.8), but the demo applies equally well to newer versions.
+Если планируется использовать map-файл для обработки запросов WMS,
+скорее всего, не нужно что-либо перенастраивать. Если же планируется
+использовать его в качестве карты-шаблона или специализированного
+интерфейса, возможно, понадобится проделать некоторую ручную работу.
+Чтобы увидеть, насколько быстр переход от QGIS к обработке карт в Сети,
+рекомендуем посмотреть 5-минутное онлайн-видео от Кристофера Шмидта. Он
+использовал более старую версию QGIS (0.8), но видео в равной
+степени отображает функции, присущие новым версиям.
 \footnote{\url{http://openlayers.org/presentations/mappingyourdata/}}
 
 \FloatBarrier
