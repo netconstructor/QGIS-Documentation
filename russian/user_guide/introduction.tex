@@ -1,138 +1,151 @@
 %  !TeX  root  =  user_guide.tex
 \pagestyle{scrheadings}
-\chapter{Introduction To GIS}\label{label_intro}
+\chapter{Введение в ГИС}\label{label_intro}
 
-% when the revision of a section has been finalized, 
+% when the revision of a section has been finalized,
 % comment out the following line:
 %\updatedisclaimer
 
-A Geographical Information System (GIS) (\cite{mitchel05}\footnote{This chapter is by Tyler
-Mitchell (\url{http://www.oreillynet.com/pub/wlg/7053}) and
-used under the Creative Commons License. Tyler is the author of 
-\textit{Web Mapping Illustrated}, published by O'Reilly, 2005.})
-is a collection of software that allows you to create, visualize, query and
-analyze geospatial data. Geospatial data refers to information about the
-geographic location of an entity. This often involves the use of a
-geographic coordinate, like a latitude or longitude value. Spatial data is
-another commonly used term, as are: geographic data, GIS data, map data,
-location data, coordinate data and spatial geometry data.
+Географическая информационная система (ГИС) (\cite{mitchel05}) представляет
+собой пакет программного обеспечения, предназначенный для
+создания, визуализации, поиска и анализа пространственных данных.
+\footnote{Эта глава написана Тайлером Митчеллом (Tyler Mitchell,
+\url{http://www.oreillynet.com/pub/wlg/7053}) и публикуется на условиях
+лицензии Creative Commons. Т.~Митчелл является автором книги
+\textit{Web Mapping Illustrated}, опубликованной издательством O'Reilly
+в 2005 году.}
+Пространственные данные относятся к информации о географическом положении
+объекта. Зачастую это предполагает использование географических координат,
+таких как широта и долгота. Наряду с термином <<пространственные данные>> часто
+используются другие термины, например: географические данные, ГИС-данные,
+картографические данные, данные о местоположении, данные о координатах
+и данные о пространственной геометрии.
 
-Applications using geospatial data perform a variety of functions. Map
-production is the most easily understood function of geospatial
-applications. Mapping programs take geospatial data and render it in a form
-that is viewable, usually on a computer screen or printed page.
-Applications can present static maps (a simple image) or dynamic maps that
-are customised by the person viewing the map through a desktop program or a
-web page.
+Круг задач приложений для работы с пространственными данными достаточно широк.
+Производство карт"--- наиболее простая для понимании функция
+геоинформационных приложений. Картографические программы выводят
+пространственные данные в пригодном для просмотра на экране или распечатки виде.
+Приложения могут представлять данные в виде статических (простое изображение) или
+динамических карт, которые предназначены для просмотра посредством
+настольного приложения или на веб-странице.
 
-Many people mistakenly assume that geospatial applications just produce
-maps, but geospatial data analysis is another primary function of
-geospatial applications. Some typical types of analysis include computing:
+Многие люди ошибочно полагают, что геоинформационные системы просто
+создают карты, но анализ пространственных данных"--- другая важнейшая
+задача геоинформационных систем. Примерами подобного анализа
+могут быть вычисления:
 
 \begin{enumerate}
-\item distances between geographic locations
-\item the amount of area (e.g., square meters) within a certain geographic
-region
-\item what geographic features overlap other features
-\item the amount of overlap between features
-\item the number of locations within a certain distance of another
-\item and so on...
+\item расстояний между географическими объектами;
+\item площадей (например, в квадратных метрах) определённой территории;
+\item количества пересечений одних географических объектов другими;
+\item площадей перекрытия объектов;
+\item количества объектов в пределах определённого расстояния от заданной точки
+\item и так далее\ldots
 \end{enumerate}
 
-These may seem simplistic, but can be applied in all sorts of ways across
-many disciplines. The results of analysis may be shown on a map, but are
-often tabulated into a report to support management decisions.
+Эти функции кажутся очень простыми, однако, они применяются в самых
+различных направлениях многих областей науки. Результаты анализа могут
+быть показаны на карте, но зачастую оформляются в виде отчётов для
+поддержки принятия управленческих решений.
 
-The recent phenomena of location-based services promises to introduce all
-sorts of other features, but many will be based on a combination of maps
-and analysis. For example, you have a cell phone that tracks your
-geographic location. If you have the right software, your phone can tell
-you what kind of restaurants are within walking distance. While this is a
-novel application of geospatial technology, it is essentially doing
-geospatial data analysis and listing the results for you.
+Последние события в сфере услуг на основе определения местоположения
+предвещают появление новых возможностей, основанных на комбинировании
+функций карт и анализа. Например, у вас есть телефон, который
+отслеживает своё местоположение. При наличии соответствующего
+программного обеспечения, телефон может подсказать вам, какие
+рестораны находятся в пределах пешей досягаемости. Подобные
+прикладные реализации геоинформационных технологий по существу выполняют
+анализ пространственных данных и вывод результатов в удобной для пользователя
+форме.
 
-\section{Why is all this so new?}\label{label_whynew}
+\section{В чём новизна?}\label{label_whynew}
 
-Well, it's not. There are many new hardware devices that are enabling
-mobile geospatial services. Many open source geospatial applications are
-also available, but the existence of geospatially focused hardware and
-software is nothing new. Global positioning system (GPS) receivers are
-becoming commonplace, but have been used in various industries for more
-than a decade. Likewise, desktop mapping and analysis tools have also been
-a major commercial market, primarily focused on industries such as natural
-resource management.
+Как таковой, новизны в этом нет. Существует множество новых устройств, которые
+поддерживают мобильные геоинформационные услуги. Также доступны многие
+геоинформационные приложения с открытым исходным кодом, но в
+существовании пространственно-ориентированных устройств и приложений нет
+ничего нового. Приёмники глобальной системы позиционирования (GPS)"--- обычное
+явление, они использовались в различных отраслях более десятка лет.
+Настольные картографические системы и инструменты анализа также были одним из
+основных коммерческих рынков, особенно в сфере управления природными ресурсами.
 
-What is new is how the latest hardware and software is being applied and
-who is applying it. Traditional users of mapping and analysis tools were
-highly trained GIS Analysts or digital mapping technicians trained to use
-CAD-like tools. Now, the processing capabilities of home PCs and open
-source software (OSS) packages have enabled an army of hobbyists, professionals,
-web developers, etc. to interact with geospatial data. The learning curve
-has come down. The costs have come down. The amount of geospatial
-technology saturation has increased.
+Новизна заключается в том, как и кем используется новейшее оборудование и
+программное обеспечение. Традиционными пользователями инструментов
+картирования и анализа были высококвалифицированные инженеры или
+специалисты в цифровой картографии, подготовленные к работе с
+САПР и подобными системами. Теперь же вычислительные возможности
+домашних компьютеров и программного обеспечения с открытым исходным
+кодом дают возможность работы с пространственными данными любителям, профессионалам,
+веб-разработчикам и так далее. Кривая обучаемости устремляется вниз. Цены
+устремляются вниз. Значимость геоинформационных технологий возрастает.
 
-How is geospatial data stored? In a nutshell, there are two types of
-geospatial data in widespread use today. This is in addition to
-traditional tabular data that is also widely used by geospatial
-applications.
+В каком виде хранятся пространственные данные? В дополнение к традиционным
+табличным данным (которые также широко используются в геоинформационных
+приложениях), существует два основных тип пространственных данных: растровые и
+векторные.
 
-\subsection{Raster Data}\label{label_rasterdata}
+\subsection{Растровые данные}\label{label_rasterdata}
 
-One type of geospatial data is called raster data or simply "a raster". The
-most easily recognised form of raster data is digital satellite imagery or
-air photos. Elevation shading or digital elevation models are also
-typically represented as raster data. Any type of map feature can be
-represented as raster data, but there are limitations.
+Первый тип геоинформационных данных"--- растровые данные, которые чаще называют
+просто <<растр>>. Наиболее распространёнными видами растровых данных являются
+цифровые спутниковые снимки или аэрофотоснимки. Карты свето-теневой
+отмывки или цифровые модели рельефа также представляются в виде растровых
+данных. В виде растровых данных могут быть представлены любые объекты карты,
+но в их применении существуют определённые ограничения.
 
-A raster is a regular grid made up of cells, or in the case of imagery,
-pixels. They have a fixed number of rows and columns. Each cell has a
-numeric value and has a certain geographic size (e.g. 30x30 meters in
-size).
+Растр представляет собой регулярную сетку ячеек, или, в случаях когда
+говорят об изображении, пикселей. Сетка имеет фиксированное количество
+строк и столбцов. Каждая ячейка имеет числовое значение и определённое
+пространственное разрешение (например, 30x30 метров).
 
-Multiple overlapping rasters are used to represent images using more than
-one colour value (i.e. one raster for each set of red, green and blue
-values is combined to create a colour image). Satellite imagery also
-represents data in multiple "bands". Each band is essentially a separate,
-spatially overlapping raster, where each band holds values of certain
-wavelengths of light. As you can imagine, a large raster takes up more file
-space. A raster with smaller cells can provide more detail, but takes up
-more file space. The trick is finding the right balance between cell size
-for storage purposes and cell size for analytical or mapping purposes.
+Несколько перекрывающихся растров используются для получения изображений
+с более чем одним значением цвета (то есть, набор растров по одному для каждого
+значения красного, зеленого и синего комбинируется для создания
+цветного изображения). Спутниковые изображения также представлены в виде данных,
+состоящих из нескольких <<каналов>>. Канал по существу являются отдельными растрами,
+покрывающими одну и ту же область, которые содержат значения определённой
+длины световой волны.
 
-\subsection{Vector Data}\label{label_vectordata}
+Очевидно, что большие растры имеют больший размер файла. Растр с меньшим
+размером ячейки передает более детальное изображение, но занимает больше места.
+Хитрость заключается в нахождении баланса между размером ячейки для целей
+хранения, и размером ячейки для исследовательских или картографических целей.
 
-Vector data is also used in geospatial applications. If you stayed awake
-during trigonometry and coordinate geometry classes, you will already be
-familiar with some of the qualities of vector data. In its simplest sense,
-vectors are a way of describing a location by using a set of coordinates.
-Each coordinate refers to a geographic location using a system of x and y
-values.
+\subsection{Векторные данные}\label{label_vectordata}
 
-This can be thought of in reference to a Cartesian plane - you know, the
-diagrams from school that showed an x and y-axis. You might have used them
-to chart declining retirement savings or increasing compound mortgage
-interest, but the concepts are essential to geospatial data analysis and
-mapping.
+В геоинформационных системах также используются векторные данные. Если
+вы не прогуливали занятия по геометрии и тригонометрии, то уже знакомы
+с некоторыми характеристиками векторных данных. В самом простом смысле,
+вектор"--- это способ описания местоположения с помощью набора координат.
+Каждая координата соотносится с географическим местоположением с помощью
+системы значений X и Y.
 
-There are various ways of representing these geographic coordinates
-depending on your purpose. This is a whole area of study for another day -
-map projections.
+Векторные данные можно рассматривать со ссылкой на декартову плоскость"---
+систему координат, образованную двумя осями"--- X и Y, которую можно встретить,
+например, в графике снижения пенсионных накоплений или расчета процентов по ипотеке.
+Система координат "--- одно из основных понятий в картографии и анализе пространственных
+данных.
 
-Vector data takes on three forms, each progressively more complex and
-building on the former.  
+В зависимости от целей, существуют различные способы представления
+географических координат. Это ещё одна большая область знаний"---
+картографические проекции.
+
+Векторные данные могут быть представлены в трех формах, каждая из которых
+более сложная и основана на предыдущей.
 
 \begin{enumerate}
-\item Points - A single coordinate (x y) represents a discrete geographic
-location
-\item Lines - Multiple coordinates (x1 y1, x2 y2, x3 y4, ... xn yn) strung
-together in a certain order, like drawing a line from Point (x1 y1) to
-Point (x2 y2) and so on. These parts between each point are considered line
-segments. They have a length and the line can be said to have a direction
-based on the order of the points. Technically, a line is a single pair of
-coordinates connected together, whereas a line string is multiple lines
-connected together.  
-\item Polygons - When lines are strung together by more
-than two points, with the last point being at the same location as the
-first, we call this a polygon. A triangle, circle, rectangle, etc. are all
-polygons. The key feature of polygons is that there is a fixed area within them.  
+\item Точки"--- одна пара координат (x y) определяет отдельное
+географическое местоположение
+\item Линии"--- множество пар координат (x$_1$ y$_1$, x$_2$ y$_2$,
+x$_3$ y$_3$ \ldots x$_n$ y$_n$), следующих в определенном порядке, задают
+линию, проведённую из точки (x$_1$ y$_1$) в точку (x$_2$ y$_2$) и так далее.
+Части линии между двумя соседними точками называются сегментом линии. Они
+имеют длину и направление, которое определяется порядком следования точек.
+Технически, линия представляет собой две пары координат соединённых вместе,
+в то время как ломаная линия образуется объединением сегментов.
+\item Полигоны"--- если линии образуются последовательностью из более
+чем двух точек, с последней точкой в том же положении, что и первая, то
+такая фигура называется полигоном. Треугольник, круг, прямоугольник и т.\,д."---
+всё это полигоны. Ключевая особенность любого полигона"--- это замкнутая область,
+находящаяся в пределах его границ.
 \end{enumerate}
