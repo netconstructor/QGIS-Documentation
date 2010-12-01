@@ -1,0 +1,236 @@
+*** /home/jrm/Documents/QGIS/english/user_guide_1.5/features_at_a_glance.tex	2010-10-04 22:44:16.016095980 +0200
+--- /home/jrm/Documents/QGIS/english/user_guide_1.6/features_at_a_glance.tex	2010-11-29 21:39:56.902084782 +0100
+***************
+*** 51,56 ****
+--- 51,59 ----
+          [--project projectfile]         load the given QGIS project
+          [--extent xmin,ymin,xmax,ymax]  set initial map extent
+          [--nologo]                      hide splash screen
++         [--noplugins]                   don't restore plugins on startup
++         [--optionspath path]            use the given QSettings path
++         [--configpath path]             use the given path for all user configuration
+          [--help]                        this text
+  
+    FILES:
+***************
+*** 103,108 ****
+--- 106,120 ----
+  \minisec{Command line option \usertext{---nologo}}
+  This command line argument hides the splash screen when you start QGIS.
+  
++ \minisec{Command line option \usertext{---noplugins}}
++ If you have trouble at startup with plugins, you can avoid loading them at startup. They will still be available in Plugins Manager afterwards.
++ 
++ \minisec{Command line option \usertext{---optionspath}}
++ You can have multiple configurations and decide which one to use when starting QGIS using this option. See \ref{subsec:gui_options} to check where does the operating system save the settings files. Presently there is no way to specify in which file where to write the settings, therefore you can create a copy of the original settings file and rename it.
++ 
++ \minisec{Command line option \usertext{---configpath}}
++ This option is similar to the one above, but furthermore overrides the default path (~/.qgis) for user configuration and forces QSettings to use this directory, too. This allows users to e.g. carry QGIS installation on a flash drive together with all plugins and settings
++ 
+  \section{QGIS GUI}\index{main window}
+  \label{label_qgismainwindow}
+  
+***************
+*** 269,275 ****
+          \> \dropmenucheck{Advanced Digitizing} \\
+  \end{tabbing}
+  
+! After activating \toolbtntwo{mActionToggleEditing}{toogle editing} mode
+  for a layer, you will find a capture feature icon in the \mainmenuopt{Edit}
+  menu depending on the layer type (point, line or polygon). \\
+  
+--- 281,287 ----
+          \> \dropmenucheck{Advanced Digitizing} \\
+  \end{tabbing}
+  
+! After activating \toolbtntwo{mActionToggleEditing}{Toggle editing} mode
+  for a layer, you will find a capture feature icon in the \mainmenuopt{Edit}
+  menu depending on the layer type (point, line or polygon). \\
+  
+***************
+*** 303,310 ****
+  	\> \keystroke{Ctrl+-}
+  	\> \> \dropmenucheck{Map Navigation} \\
+  \dropmenuopttwo{mActionSelect}{Select Features}
+! 	\>
+! 	\> \> \dropmenucheck{Attributes} \\
+  \dropmenuopttwo{mActionDeselectAll}{Deselect Features from all layers}
+          \>
+          \> \> \dropmenucheck{Attributes} \\
+--- 315,323 ----
+  	\> \keystroke{Ctrl+-}
+  	\> \> \dropmenucheck{Map Navigation} \\
+  \dropmenuopttwo{mActionSelect}{Select Features}
+! 	\> 
+! 	\> see Section \ref{sec:selection} 
+! 	\> \dropmenucheck{Attributes} \\
+  \dropmenuopttwo{mActionDeselectAll}{Deselect Features from all layers}
+          \>
+          \> \> \dropmenucheck{Attributes} \\
+***************
+*** 369,374 ****
+--- 382,391 ----
+  	\>
+  	\> see Section \ref{sec:create shape}
+  	\> \dropmenucheck{Manage Layers} \\
++ \mainmenuopt{Raster calculator}
++         \>
++         \> see Section \ref{sec:raster_calc}
++         \>  \\
+  \dropmenuopttwo{mActionAddNonDbLayer}{Add Vector Layer}
+  	\> \keystroke{Ctrl+Shift+V}
+  	\>
+***************
+*** 406,412 ****
+  \mainmenuopt{Save as...}
+  	\\
+  \mainmenuopt{Save selection as vector file...}
+! 	\\
+  \dropmenuopttwo{mActionRemoveLayer}{Remove Layer}
+  	\> \keystroke{Ctrl+D}
+  	\>
+--- 423,431 ----
+  \mainmenuopt{Save as...}
+  	\\
+  \mainmenuopt{Save selection as vector file...}
+! 	\> 
+! 	\> See \ref{sec:attribute table}
+! 	\> \\
+  \dropmenuopttwo{mActionRemoveLayer}{Remove Layer}
+  	\> \keystroke{Ctrl+D}
+  	\>
+***************
+*** 621,626 ****
+--- 640,654 ----
+  that QGIS only permits the drag if the two layers are able to share
+  symbology (same vector geometry type and same attributes).
+  
++ It is also possible to select more than one Layer or Group at the same time 
++ by holding down the \keystroke{CTRL}-Key while selecting the Layers with the 
++ left mouse button. You can than move all selected Layers to a new Group at 
++ the same time.
++ 
++ You are also able to delete more than one Layer or Group at once by selecting 
++ several Layers with the \keystroke{CTRL}-Key and pressing \keystroke{CTRL-D} afterwards.
++ This way all selected Layers or Groups will be removed from the Layerlist.
++ 
+  %% isn't included in Titan anymore, except for an "toggle overview"
+  %Each legend entry can show the following mini icons:
+  %
+***************
+*** 845,850 ****
+--- 873,881 ----
+  snapping settings from the digitizing module. This is useful, if you want to
+  measure along lines or areas in vector layers.
+  
++ To select a measure tool click on \includegraphics[width=0.7cm]{mActionMeasure} and 
++ select the tool you want to use.
++ 
+  \subsection{Measure length, areas and angles}
+  \index{measure:line length}
+  \index{measure:areas}
+***************
+*** 877,882 ****
+--- 908,928 ----
+     \caption{Measure tools in action \nixcaption} \label{fig:measure}
+  \end{figure}
+  
++ \subsection{Select and deselect features}\label{sec:selection}
++ 
++ The QGIS toolbar provides several tools to select features in the map canvas. 
++ To select one or several features just click on 
++ \includegraphics[width=0.7cm]{mActionSelect} and select the tools:
++ 
++ \begin{description}
++ \item \radiobuttonon{Select features}
++ \item \radiobuttonoff{Select features by rectangle}
++ \item \radiobuttonoff{Select features by polygon}
++ \item \radiobuttonoff{Select features by freehand}
++ \item \radiobuttonoff{Select features by radius}
++ \end{description} 
++ 
++ To deselect all selected features click on \includegraphics[width=0.7cm]{mActionDeselectAll}.
+  
+  \section{Projects}\label{sec:projects}\index{projects}
+  
+***************
+*** 1127,1133 ****
+  is the choice of having the item placed on a map position (displayed by
+  a marker symbol) or to have the item on a screen position (not related
+  to the map). The item can be moved by map position (drag the map marker)
+! or by moving only the balloon.
+  
+  The \includegraphics[width=0.7cm,clip=true]{mActionAnnotation} move annotation
+  tool allows to move the annotation on the map canvas.
+--- 1173,1180 ----
+  is the choice of having the item placed on a map position (displayed by
+  a marker symbol) or to have the item on a screen position (not related
+  to the map). The item can be moved by map position (drag the map marker)
+! or by moving only the balloon. The icons are part of gis theme, and are used
+! by default in the other themes too.
+  
+  The \includegraphics[width=0.7cm,clip=true]{mActionAnnotation} move annotation
+  tool allows to move the annotation on the map canvas.
+***************
+*** 1207,1213 ****
+  
+  With a plugged in GPS receiver (has to be supported by your operating system)
+  a simple click on \button{Connect} connects the GPS to QGIS. A second click
+! (now \button{Disconnect} disconnects the GPS-Reciever from you Computer.
+  
+  [ IMPORTANT ]: If you want to record your position to the canvas you have to
+  create a new vector layer first and switch it to editable status to be able
+--- 1254,1262 ----
+  
+  With a plugged in GPS receiver (has to be supported by your operating system)
+  a simple click on \button{Connect} connects the GPS to QGIS. A second click
+! (now \button{Disconnect} disconnects the GPS-Reciever from you Computer. For 
+! GNU/Linux gpsd support is integrated to support connection to most GPS 
+! receivers. Therefore you first have to configure gpsd properly to connect QGIS to it.
+  
+  [ IMPORTANT ]: If you want to record your position to the canvas you have to
+  create a new vector layer first and switch it to editable status to be able
+***************
+*** 1219,1228 ****
+       \hspace{0.33cm}
+     \subfloat[GPS signal strenght]{\label{subfig:gpstrack_stren}\includegraphics[clip=true, width=0.3\textwidth]{gpstrack_stren}}
+       \hspace{0.33cm}
+!    \subfloat[GPS polar window]{\label{subfig:gpstrack_polar}\includegraphics[clip=true, width=0.3\textwidth]{gpstrack_polar}} \\
+  \caption{Live GPS tracking \nixcaption} \label{fig:gpstrack_live}
+  \end{figure}
+  
+  \subsection{Position coordinates}
+  \includegraphics[width=0.5cm,clip=true]{mActionToggleEditing} If the GPS is
+  recieving signals from satellites you will see your position in latitude,
+--- 1268,1284 ----
+       \hspace{0.33cm}
+     \subfloat[GPS signal strenght]{\label{subfig:gpstrack_stren}\includegraphics[clip=true, width=0.3\textwidth]{gpstrack_stren}}
+       \hspace{0.33cm}
+!    \subfloat[GPS polar window]{\label{subfig:gpstrack_polar}\includegraphics[clip=true, width=0.3\textwidth]{gpstrack_polar}}
+  \caption{Live GPS tracking \nixcaption} \label{fig:gpstrack_live}
+  \end{figure}
+  
++ \begin{figure}[ht]
++    \centering
++    \includegraphics[clip=true, width=4cm]{gpstrack_options}
++    \caption{GPS tracking options window \nixcaption}
++    \label{fig:gpstrack_options}
++ \end{figure}
++ 
+  \subsection{Position coordinates}
+  \includegraphics[width=0.5cm,clip=true]{mActionToggleEditing} If the GPS is
+  recieving signals from satellites you will see your position in latitude,
+***************
+*** 1263,1273 ****
+  and want to record vertices manually you have to go back there and
+  click \button{Add vertex}
+  
+- \begin{figure}[ht]
+-    \centering
+-    \includegraphics[clip=true, width=5cm]{gpstrack_options}
+-    \caption{GPS tracking options window \nixcaption}
+-    \label{fig:gpstrack_options}
+- \end{figure}
+- 
+  \FloatBarrier
+--- 1319,1322 ----
