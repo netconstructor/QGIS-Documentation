@@ -1,0 +1,345 @@
+*** /home/jrm/Documents/QGIS/english/user_guide_1.5/working_with_vector.tex	2010-10-03 13:12:02.734041021 +0200
+--- /home/jrm/Documents/QGIS/english/user_guide_1.6/working_with_vector.tex	2010-11-29 21:39:56.900084766 +0100
+***************
+*** 680,686 ****
+  \dialog{Layer Properties} dialog. The new dialog allows to choose one of the
+  three renderers: single symbol, categorized and graduated. Depending on the
+  chosen renderer, the symbology tab provides different settings and options, that
+! will be described in the following sections.
+  
+  \minisec{Single Symbol Renderer}
+  
+--- 680,689 ----
+  \dialog{Layer Properties} dialog. The new dialog allows to choose one of the
+  three renderers: single symbol, categorized and graduated. Depending on the
+  chosen renderer, the symbology tab provides different settings and options, that
+! will be described in the following sections. The new generation symbology dialog 
+! also provides a \button{Style Manager} button which gives access to the Style 
+! Manager (see section \ref{subsec:stylemanager}). The Style Manager allows you to 
+! edit and remove existing symbols and add new ones. 
+  
+  \minisec{Single Symbol Renderer}
+  
+***************
+*** 697,702 ****
+--- 700,709 ----
+  current style symbols (using the \button{Add to style} button) and then easily
+  be used in the future.
+  
++ \textbf{Note}: To modify line width, besides modifying the symbol itself, you
++ can use data-defined Size Scale (available through \button{Advanced} next to 
++ \button{Add to Style}).
++ 
+  \begin{figure}[ht]
+  \centering
+     \subfloat[Single symbol point properties] {\label{subfig:singleNG1}\includegraphics[clip=true, width=0.3\textwidth]{singlesymbol_ng_point}}
+***************
+*** 719,724 ****
+--- 726,733 ----
+  \item The colors (using the Color Ramp listbox)
+  \end{itemize}
+  
++ The Advanced button in the lower right corner of the dialog allows to set
++ th fields containing rotation and size scale information.
+  For convenience, the list in the bottom part of the tab lists the values of
+  all currently selected attributes together, including the symbols that will
+  be rendered.
+***************
+*** 732,742 ****
+     \includegraphics[clip=true, width=10cm]{categorysymbol_ng_line}
+  \end{figure}
+  
+! \minisec{Graduated rendering}
+  
+  The Graduated Renderer is used to render all the features from a layer, using
+  a single user-defined symbol, whose color reflects the classification of a selected
+! feature's attribute to a class.
+  
+  Analogue to the categorized rendered, the symbology tab allows you to select:
+  
+--- 741,764 ----
+     \includegraphics[clip=true, width=10cm]{categorysymbol_ng_line}
+  \end{figure}
+  
+! You can create a custom color ramp choosing New color ramp... from the Color 
+! ramp dropdown menu. A dialog will prompt for the ramp type: Gradient, Random,
+! ColorBrewer, then each one has options for number of steps and/or multiple
+! stops in the color ramp. See \ref{fig:ccrg} for an example of custom color
+! ramp.
+! 
+! \begin{figure}[ht]
+!    \centering
+!    \caption{Example of custom gradient color ramp with multiple stops \nixcaption}\label{fig:ccrg}
+!    \includegraphics[clip=true, width=10cm]{customColorRampGradient.png}
+! \end{figure}
+! 
+! \minisec{Graduated Renderer}
+  
+  The Graduated Renderer is used to render all the features from a layer, using
+  a single user-defined symbol, whose color reflects the classification of a selected
+! feature's attribute to a class. Like Categorized Renderer, it allows to define
+! rotation and size scale from specified columns.
+  
+  Analogue to the categorized rendered, the symbology tab allows you to select:
+  
+***************
+*** 747,754 ****
+  \end{itemize}
+  
+  Additionally, you can specify the number of classes and also the mode how to
+! classify features inside the classes (using the Mode list). The listbox in the
+! bottom part of the symbology tab lists the classes together with their ranges,
+  labels and symbols that will be rendered.
+  
+  The example in figure \ref{fig:gradsymNG} shows the graduated rendering dialog
+--- 769,784 ----
+  \end{itemize}
+  
+  Additionally, you can specify the number of classes and also the mode how to
+! classify features inside the classes (using the Mode list). The available modes are:
+! \begin{itemize}
+!  \item Equal Interval
+!  \item Quantile
+!  \item Natural Breaks (Jenks)
+!  \item Standard Deviation
+!  \item Pretty Breaks
+! \end{itemize}
+! 
+! The listbox in the  bottom part of the symbology tab lists the classes together with their ranges,
+  labels and symbols that will be rendered.
+  
+  The example in figure \ref{fig:gradsymNG} shows the graduated rendering dialog
+***************
+*** 898,904 ****
+  labels off the marker and make them more readable. Of course if your marker
+  symbol or font is larger, more of an offset will be required.
+  
+! The last adjustment we'll make is to \tab{buffer} the labels. This just means
+  putting a backdrop around them to make them stand out better. To buffer the
+  lakes labels:
+  
+--- 928,934 ----
+  labels off the marker and make them more readable. Of course if your marker
+  symbol or font is larger, more of an offset will be required.
+  
+! The last adjustment we'll make is to \tab{Buffer} the labels. This just means
+  putting a backdrop around them to make them stand out better. To buffer the
+  lakes labels:
+  
+***************
+*** 1003,1009 ****
+  Within the \tab{Attributes} tab the attributes of the selected dataset can be
+  manipulated. The buttons \toolbtntwo{mActionNewAttribute}{New Column} and
+  \toolbtntwo{mActionDeleteAttribute}{Delete Column} can be
+! used, when the dataset is \toolbtntwo{mActionToggleEditing}{editing mode}.
+  At the moment only columns from PostGIS layers can be removed and added. The
+  OGR library supports to add new columns, but not to remove them, if you have
+  a GDAL version >= 1.6 installed.
+--- 1033,1039 ----
+  Within the \tab{Attributes} tab the attributes of the selected dataset can be
+  manipulated. The buttons \toolbtntwo{mActionNewAttribute}{New Column} and
+  \toolbtntwo{mActionDeleteAttribute}{Delete Column} can be
+! used, when the dataset is \toolbtntwo{mActionToggleEditing}{Editing mode}.
+  At the moment only columns from PostGIS layers can be removed and added. The
+  OGR library supports to add new columns, but not to remove them, if you have
+  a GDAL version >= 1.6 installed.
+***************
+*** 1039,1045 ****
+  \item File name: Simplifies the selection by adding a file chooser dialog.
+  \item Value map: a combo box with predefined items. The value is stored in
+  the attribute, the description is shown in the comboo box. You can define
+! values manually or load them from a layer or a csv file.
+  \item Enumeration: Opens a combo box with values that can be used within the
+  columns type. This is currently only supported by the postgres provider.
+  \item Immutable: The immutable attribute column is read-only. The user is not
+--- 1069,1075 ----
+  \item File name: Simplifies the selection by adding a file chooser dialog.
+  \item Value map: a combo box with predefined items. The value is stored in
+  the attribute, the description is shown in the comboo box. You can define
+! values manually or load them from a layer or a CSV file.
+  \item Enumeration: Opens a combo box with values that can be used within the
+  columns type. This is currently only supported by the postgres provider.
+  \item Immutable: The immutable attribute column is read-only. The user is not
+***************
+*** 1142,1150 ****
+  \minisec{Using Actions}\index{actions!using}\label{label_usingactions}
+  
+  Actions can be invoked from either the \dialog{Identify Results} dialog or an
+! \dialog{Attribute Table} dialog. (Recall that these dialogs can be opened by
+  clicking \toolbtntwo{mActionIdentify}{Identify Features} or
+! \toolbtntwo{mActionOpenTable}{Open Attribute Table}.) To invoke an action,
+  right click on the record and choose the action from the popup menu. Actions
+  are listed in the popup menu by the name you assigned when defining the
+  actions. Click on the action you wish to invoke.
+--- 1172,1180 ----
+  \minisec{Using Actions}\index{actions!using}\label{label_usingactions}
+  
+  Actions can be invoked from either the \dialog{Identify Results} dialog or an
+! \dialog{Attribute Table} dialog (recall that these dialogs can be opened by
+  clicking \toolbtntwo{mActionIdentify}{Identify Features} or
+! \toolbtntwo{mActionOpenTable}{Open Attribute Table}). To invoke an action,
+  right click on the record and choose the action from the popup menu. Actions
+  are listed in the popup menu by the name you assigned when defining the
+  actions. Click on the action you wish to invoke.
+***************
+*** 1245,1251 ****
+  \index{vector layers!diagram}
+  
+  The \tab{Diagram} tab allows you to add a grahic overlay to a vector layer.
+! To activate this feature, open the Plugin Manager and select the Diagram Overlay'
+  plugin. After this, there is a new tab in the vector \dialog{Layer
+  Properties} dialog where the settings for diagrams may be entered (see
+  figure~\ref{fig:diagramtab}).
+--- 1275,1281 ----
+  \index{vector layers!diagram}
+  
+  The \tab{Diagram} tab allows you to add a grahic overlay to a vector layer.
+! To activate this feature, open the Plugin Manager and select the 'Diagram Overlay'
+  plugin. After this, there is a new tab in the vector \dialog{Layer
+  Properties} dialog where the settings for diagrams may be entered (see
+  figure~\ref{fig:diagramtab}).
+***************
+*** 1277,1283 ****
+  \filename{T\_F\_JUL} and finally \filename{T\_F\_MEAN}.
+  \item For linear scaling of the diagram size we define \filename{T\_F\_JUL}
+  as classification attribute.
+! \item Now click on \button{find maximum value}, choose a size value and unit
+  and click \button{Apply} to display the diagram in the \qg main window.
+  \item You can now adapt the chart size, or change the attribute colors double
+  clicking on the color values in the attribute field.
+--- 1307,1313 ----
+  \filename{T\_F\_JUL} and finally \filename{T\_F\_MEAN}.
+  \item For linear scaling of the diagram size we define \filename{T\_F\_JUL}
+  as classification attribute.
+! \item Now click on \button{Find maximum value}, choose a size value and unit
+  and click \button{Apply} to display the diagram in the \qg main window.
+  \item You can now adapt the chart size, or change the attribute colors double
+  clicking on the color values in the attribute field.
+***************
+*** 1519,1525 ****
+  you can move existing features.
+  
+  \begin{Tip}\caption{\textsc{Attribute Value Types}}
+! At least for shapefile editing the attribue types are validated during the
+  entry. Because of this, it is not possible to enter a number into the text-column in
+  the dialog \dialog{Enter Attribute Values} or vica versa. If you need to do so,
+  you should edit the attributes in a second step within the \dialog{Attribute
+--- 1549,1555 ----
+  you can move existing features.
+  
+  \begin{Tip}\caption{\textsc{Attribute Value Types}}
+! At least for shapefile editing the attribute types are validated during the
+  entry. Because of this, it is not possible to enter a number into the text-column in
+  the dialog \dialog{Enter Attribute Values} or vica versa. If you need to do so,
+  you should edit the attributes in a second step within the \dialog{Attribute
+***************
+*** 1977,1982 ****
+--- 2007,2021 ----
+  \item \toolbtntwo{mActionCalculateField}{Open field calcultor}
+  \end{itemize}
+  
++ \minisec{Save selected features as new layer}
++ \index{editing!save selection as new layer}
++ 
++ The selected features can be saved as any OGR supported vector format and also
++ transformed into another Coordinate Reference System (CRS). Just open the right mouse
++ menu of the layer and click on \dropmenuopt{Save selection as} to define the
++ name of the output file, its format and CRS (see Section \ref{label_legend}). It is 
++ also possible to specify OGR creation options within the dialog.
++ 
+  \begin{Tip}\caption{\textsc{Manipulating Attribute data}}
+  Currently only PostGIS layers are supported for adding or dropping
+  attribute columns within this dialog. In future versions of \qg, other
+***************
+*** 1984,1994 ****
+  in GDAL/OGR > 1.6.0
+  \end{Tip}
+  
+  \section{Query Builder}\label{sec:query_builder}
+  \index{Query Builder}
+  
+  The \button{Advanced search\dots} button opens the Query Builder and allows you to
+! define a subset of a table using a SQL-like WHERE clause, display the result in the
+  main window and save it as a Shapefile. For example, if you have a
+  \filename{towns} layer
+  with a \usertext{population} field you could select only larger towns by entering
+--- 2023,2047 ----
+  in GDAL/OGR > 1.6.0
+  \end{Tip}
+  
++ \minisec{Working with non spatial attribute tables}
++ \index{editing!working with non spatial tables}
++ 
++ QGIS allows also to load non spatial tables. This includes currently tables supported 
++ by OGR, delimited text and the PostgreSQL provider. The tables can be used for field 
++ lookups or just generally browsed and edited using the table view. When you load the 
++ table you will see it in the legend field. It can be opened e.g. with the 
++ \dropmenuopttwo{mActionOpenTable}{Open Attribute Table} tool and is then editable 
++ like any other layer attribute table. 
++ 
++ As an example you can use columns of the non spatial table to define attribute values or 
++ a range of values that are allowed to be added to a specific vector layer during digitizing. 
++ Have a closer look at the edit widget in section~\ref{label_attributes} to find out more.
++ 
+  \section{Query Builder}\label{sec:query_builder}
+  \index{Query Builder}
+  
+  The \button{Advanced search\dots} button opens the Query Builder and allows you to
+! define a subset of a table using a SQL-like WHERE clause, display the result in theh
+  main window and save it as a Shapefile. For example, if you have a
+  \filename{towns} layer
+  with a \usertext{population} field you could select only larger towns by entering
+***************
+*** 2054,2059 ****
+--- 2106,2120 ----
+  that allows to define a subset of a table and display it as described in Section
+  \ref{sec:query_builder}.
+  
++ \minisec{Save selected features as new layer}
++ \index{Query Builder!save selection as new layer}
++ 
++ The selected features can be saved as any OGR supported vector format and also
++ transformed into another Coordinate Reference System (CRS). Just open the right mouse
++ menu of the layer and click on \dropmenuopt{Save selection as} to define the
++ name of the output file, its format and CRS (see Section \ref{label_legend}). It is 
++ also possible to specify OGR creation options within the dialog.
++ 
+  \section{Field Calculator}\label{sec:field_calculator}
+  \index{PostgreSQL!field calculator}
+  \index{PostGIS!field calculator}
+***************
+*** 2072,2078 ****
+  
+  You have to bring the vector layer in editing mode, before you can click on
+  the field calculator icon to open the dialog (see Figure
+! \ref{fig:field_calculator}). In the dialog you first have to select, whether
+  you want to update an existing field, only update selected features or
+  create a new attribute field, where the results of the calculation will be added.
+  
+--- 2133,2139 ----
+  
+  You have to bring the vector layer in editing mode, before you can click on
+  the field calculator icon to open the dialog (see Figure
+! \ref{fig:field_calculator}). In the dialog you first have to select whether
+  you want to update an existing field, only update selected features or
+  create a new attribute field, where the results of the calculation will be added.
+  
+***************
+*** 2106,2113 ****
+  The \textbf{Operators section} contains all usable operators. To add an operator
+  to the Field calculator expression box, click the appropriate button. Mathematical
+  calculations ( + , - , * \dots), trigonometric functions ( sin, cos, tan, \dots),
+! extract geometric information ( length and area ) are available and will be
+! extended in future versions.
+  
+  A short example illustrates how the field calculator works. We want to calculate
+  the length of the 'railroads' layer from the \filename{\qg\_example\_dataset}:
+--- 2167,2174 ----
+  The \textbf{Operators section} contains all usable operators. To add an operator
+  to the Field calculator expression box, click the appropriate button. Mathematical
+  calculations ( + , - , * \dots), trigonometric functions ( sin, cos, tan, \dots),
+! extract geometric information ( length and area ) are available, together with
+! concatenator (||) and row counter. Stay tuned for more operators to come!
+  
+  A short example illustrates how the field calculator works. We want to calculate
+  the length of the 'railroads' layer from the \filename{\qg\_example\_dataset}:
