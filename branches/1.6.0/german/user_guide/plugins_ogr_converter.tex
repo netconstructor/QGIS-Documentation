@@ -1,37 +1,47 @@
-%  !TeX  root  =  user_guide.tex
+% vim: set textwidth=78 autoindent:
+% !TeX root = user_guide.tex
 
-\section{OGR Converter Plugin}
+\section{OGR-Layer-Konverter Plugin}
+\index{Plugins!OGR-Layer-Konverter}
 
-% when the revision of a section has been finalized, 
+% when the revision of a chapter has been finalized, 
 % comment out the following line:
 %\updatedisclaimer
 
-The OGR Layer Converter plugin adds the ability to convert vector data from one OGR-supported 
-vector format to another.\footnotetext{Supported formats may vary according to the installed 
-GDAL/OGR package.}
-The plugin is very simple to run, and only requires a few parameters to be 
-specified before running:
+Das Plugin \toolbtntwo{ogr_converter}{OGR-Layer-Konverter} ermöglicht es,
+Vektorlayer von einem OGR-unterstützten Vektorformat in ein anderes durch OGR
+unterstütztes Vektorformat zu konvertieren. Es ist sehr einfach zu
+verwenden und bietet Funktionalitäten wie in Abbildung
+\ref{fig:ogrconverter_dialog} dargestellt. Die unterstützten Vektorformate
+können je nach GDAL Installation unterschiedlich sein.
 
 \begin{itemize}[label=--]
-\item \textbf{Source Format/Datset/Layer}: Enter OGR format and path to the vector file to be converted
-\item \textbf{Target Format/Datset/Layer}: Enter OGR format and path to the vector output file
+\item \textbf{Quelle Format/Datensatz/Layer}: Geben Sie das OGR-Format und
+den Datensatz der konvertiert werden soll an.
+\item \textbf{Ziel Format/Datensatz/Layer}: Geben Sie das OGR-Format und die
+Vektor Ausgabedatei an.
 \end{itemize}
 
 \begin{figure}[ht]
- \centering
-   \includegraphics[clip=true, width=7.5cm]{ogr_converter_dialog} 
-   \caption{OGR Layer Converter Plugin \nixcaption}\label{fig:ogr_converter_dialog}
+   \begin{center}
+   \caption{OGR-Layer-Konverter Plugin \nixcaption}
+   \label{fig:ogrconverter_dialog}\smallskip
+   \includegraphics[clip=true, width=7cm]{ogr_converter_dialog}
+\end{center}  
 \end{figure}
 
-\minisec{Using the Plugin}
+\minisec{Das Plugin anwenden}
 
 \begin{enumerate}
-  \item Start QGIS, load the OGR converter plugin in the Plugin Manager (see Section 
-  \ref{sec:load_core_plugin}) and click on the \toolbtntwo{ogr_converter}{OGR Layer Converter} 
-  icon which appears in the QGIS toolbar menu. The OGR Layer Converter plugin dialog appears as shown in Figure \ref{fig:ogr_converter_dialog}.
-  \item Select the OGR-supported format (e.g., \selectstring{ESRI Shapefile}{\ldots}) and the path to the vector input file (e.g., \filename{alaska.shp}) in the Source area.
-  \item Select the OGR-supported format (e.g., \selectstring{GML}{\ldots}) and define a path and the vector output filename (e.g., \filename{alaska.gml}) in the Target area.
-  \item Click \button{Ok}.
+\item Starten Sie QGIS, laden Sie das OGR-Konverter Plugin mit dem Plugin
+Manager (siehe Kapitel~\ref{sec:load_core_plugin}) und klicken Sie auf das
+Icon \toolbtntwo{ogr_converter}{OGR Layer Converter} in der Werkzeugleiste.
+\item Wählen Sie im Bereich Quelle als Vektorformat 
+\selectstring{ESRI Shapefile}{} und als Datensatz \filename{alaska.shp}.
+\item Wählen Sie im Bereich Ziel als Vektorformat \selectstring{GML}{} 
+und als Ausgabe \filename{alaska.gml}.
+\item Klicken Sie auf \button{Ok}.
 \end{enumerate}
 
 \FloatBarrier
+
