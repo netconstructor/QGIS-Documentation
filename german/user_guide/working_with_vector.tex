@@ -762,7 +762,11 @@ Knopf \button{neue Darstellung} im Reiter \tab{Darstellung} des Dialogs
 Darstellungsarten auszuwählen: Einzelsymbol, Kategorisiert und Abgestuft. In 
 Abhängigkeit von der ausgewählten Darstellungart bietet der Reiter 
 \tab{Darstellung} unterschiedliche Optionen und Einstellungsmöglichkeiten, die 
-im folgenden Abschnitt beschrieben werden.
+im folgenden Abschnitt beschrieben werden. %%FIXME 
+The new generation symbology dialog also provides a \button{Style Manager} 
+button which gives access to the Style Manager (see section 
+\ref{subsec:stylemanager}). The Style Manager allows you to edit and remove 
+existing symbols and add new ones. 
 
 \minisec{Einzelsymbol Darstellung}
 
@@ -776,9 +780,14 @@ vorhandener Symbole angezeigt, die direkt ausgewählt werden können. Das aktuelle
 Symbol kann bearbeitet werden, in dem man auf den Knopf \button{Eigenschaften} 
 drückt, woraufhin sich der Dialog \dialog{Symboleigenschaften} öffnet. Oder Sie 
 drücken auf den Knopf \button{Ändern} mit dem aktuellen Farbsymbol und können 
-dann in einem Szandard-Farbdialog eine neue Farbe definieren. Nachdem Sie alle 
+dann in einem Standard-Farbdialog eine neue Farbe definieren. Nachdem Sie alle 
 notwendigen Anpassungen gemacht wurden, können Sie das neue Symbol mit den Knopf 
 \button{Zum Stil hinzufügen} zu der Liste bereits vorhandener Symbole hinzufügen.  
+
+%%FIXME
+\textbf{Note}: To modify line width, besides modifying the symbol itself, you
+can use data-defined Size Scale (available through \button{Advanced} next to 
+\button{Add to Style}).
 
 \begin{figure}[h]
 \centering
@@ -801,6 +810,9 @@ ausgewählt werden:
 \item Die Farbe (über die Auswahl Farbanstieg)
 \end{itemize}
 
+%%FIXME
+The Advanced button in the lower right corner of the dialog allows to set
+th fields containing rotation and size scale information.
 Zur Veranschaulichung wird im unteren Teil des Reiters eine Liste mit allen 
 Attributen und der jeweils verwendeten Symbolfarbe angezeigt. Das Beispiel in 
 Abbildung \ref{fig:catsymNG} zeigt den Dialog Kategorisierte Darstellung für 
@@ -811,6 +823,19 @@ den Vektorlayer \filename{rivers} des QGIS-Beispieldatensatzes.
    \caption{Neue Optionen für die Darstellung von kategorisierter Symbole \nixcaption}\label{fig:catsymNG}\smallskip
    \includegraphics[clip=true, width=10cm]{categorysymbol_ng_line}
 \end{center}
+\end{figure}
+
+%%FIXME
+You can create a custom color ramp choosing New color ramp... from the Color 
+ramp dropdown menu. A dialog will prompt for the ramp type: Gradient, Random,
+ColorBrewer, then each one has options for number of steps and/or multiple
+stops in the color ramp. See \ref{fig:ccrg} for an example of custom color
+ramp.
+
+\begin{figure}[ht]
+   \centering
+   \caption{Example of custom gradient color ramp with multiple stops \nixcaption}\label{fig:ccrg}
+   \includegraphics[clip=true, width=10cm]{customColorRampGradient.png}
 \end{figure}
 
 \minisec{Abgestufte Darstellung}
@@ -830,9 +855,24 @@ folgende Einstellungen:
 
 Zusätzlich können Sie die Anzahl der Klassen und den Modus für die Klassifizierung 
 festlegen. Im unteren Teil des Reiters wird eine Liste der Klassen, mit deren 
-Darstellung, der Range und dem Label angezeigt. Das Beispiel in
-Abbildung \ref{fig:gradsymNG} zeigt den Dialog \dialog{Abgestufte Darstellung} 
-für den Vektorlayer rivers des QGIS-Beispieldatensatzes.
+Darstellung, der Range und dem Label angezeigt. %%FIXME 
+The available modes are:
+
+\begin{itemize}
+ \item Equal Interval
+ \item Quantile
+ \item Natural Breaks (Jenks)
+ \item Standard Deviation
+ \item Pretty Breaks
+\end{itemize}
+
+The listbox in the bottom part of the symbology tab lists the classes 
+together with their ranges, labels and symbols that will be rendered.
+
+Das Beispiel in Abbildung \ref{fig:gradsymNG} zeigt den Dialog 
+\dialog{Abgestufte Darstellung} für den Vektorlayer rivers des 
+QGIS-Beispieldatensatzes.
+
 
 \begin{figure}[ht]
    \begin{center}
@@ -2226,6 +2266,16 @@ GDAL Version >= 1.6.
 \item \toolbtntwo{mActionCalculateField}{Feldrechner öffnen}
 \end{itemize}
 
+%% FIXME
+\minisec{Save selected features as new layer}
+\index{editing!save selection as new layer}
+
+The selected features can be saved as any OGR supported vector format and also
+transformed into another Coordinate Reference System (CRS). Just open the right mouse
+menu of the layer and click on \dropmenuopt{Save selection as} to define the
+name of the output file, its format and CRS (see Section \ref{label_legend}). It is 
+also possible to specify OGR creation options within the dialog.
+
 \begin{Tip}[ht]\caption{\textsc{Attributdaten manipulieren}}
 Momentan wird nur für PostGIS-Layer das Hinzufügen und Löschen von
 Attributspalten unterstützt. In zukünftigen Version wird diese Funktion auch
@@ -2233,6 +2283,21 @@ für andere Daten unterstützt, da diese erst kürzlich in GDAL/OGR > 1.6.0
 implementiert wurde. Ohne jegliche Garantie kann als Notlösung solange das
 externe Python Plugin 'Table Manager' verwendet werden.
 \end{Tip}
+
+%%FIXME
+\minisec{Working with non spatial attribute tables}
+\index{editing!working with non spatial tables}
+
+QGIS allows also to load non spatial tables. This includes currently tables supported 
+by OGR, delimited text and the PostgreSQL provider. The tables can be used for field 
+lookups or just generally browsed and edited using the table view. When you load the 
+table you will see it in the legend field. It can be opened e.g. with the 
+\dropmenuopttwo{mActionOpenTable}{Open Attribute Table} tool and is then editable 
+like any other layer attribute table. 
+
+As an example you can use columns of the non spatial table to define attribute values or 
+a range of values that are allowed to be added to a specific vector layer during digitizing. 
+Have a closer look at the edit widget in section~\ref{label_attributes} to find out more.
 
 \section{Abfrageeditor}\label{sec:query_builder}
 \index{Abfrageeditor}
