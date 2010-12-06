@@ -1,78 +1,61 @@
 % vim: set textwidth=78 autoindent:
 
-\section{Creating PyQGIS Applications}
+\section{4. Δημιουργώντας PyQGIS εφαρμογές}
 
 % when the revision of a section has been finalized, 
 % comment out the following line:
 % \updatedisclaimer
 
-One of the goals of QGIS is to provide not only an application, but a set of
-libraries that can be used to create new applications. This goal has been
-realized with the refactoring of libraries that took place after the release
-of 0.8. Since the release of 0.9, development of standalone applications using
-either C++ or Python is possible. We recommend you use QGIS 1.0.0 or greater
-as the basis for your python applications because since this version we now
-provide a stable consistent API.
+Ένας απο τους στόχουν του QGIS είναι να παρέχει όχι μόνο μια εφαρμογή, αλλά και έναν αριθμό βιβλιοθηκών οι οποίες μπορούν να χρησιμοποιηθούν για να δημιουργήσετε νέες εφαρμογές. Ο στόχος αυτός συνηδοποιήθηκε με την ανακατασκευή βιβλιοθηκών που έγιναν μετά την έδοση του 0.8. Μετά την έκδοση του 0.9, η ανάπτυξη ανεξαρτήτων εφαρμογών χρησιμοποιώντας έιτε C++ είτε Python έγινε δυνατή. Προτείνουμε να χρησμοποιήσετε QGIS 1.0.0 ή και πιο καινούργιο σαν βάση για τις Python εφαρμογές σας γιατί μετά απο αυτή την έκδοση παρέχουμε ένα σταθερό και συνεχές API. 
 
-In this chapter we'll take a brief look at the process of creating a
-standalone Python application. The QGIS blog has several examples for creating
-PyQGIS\footnote{An application created using Python and the QGIS bindings}
-applications. We'll use one of them as a starting point to get a look at how
-to create an application.
+Σε αυτό το κεφάλαιο θα ρίξουμε μια συνοπτική ματιά στη διαδικασία της δημιουργίας μιας ανεξάρτητης εφαρμογής. Το blog του QGIS έχει μερικά παραδείγματα για την δημιουργία PyQGIS εφαργομών. Θα χρησιμοποιήσουμε μια απο αυτές για ως ένα σημείο εκκίνησης για να ρίξουμε μια ματιά στο πως να δημιουργήσουμε μία εφαρμογή. 
 
-The features we want in the application are:
+Τα χαρακτηριστικά που θέλουμε στην εφαρμογή είναι: 
 
 \begin{itemize}
 \item Load a vector layer
-\item Pan
-\item Zoom in and out
-\item Zoom to the full extent of the layer
-\item Set custom colors when the layer is loaded
+\item Να μετακινείται
+\item Να κάνει ζουμ προς τα μέσα και προς τα έξω
+\item Να κάνει ζουμ στην πλήρη εκταση του επιπέδου.
+\item Να τίθενται επιθυμητά χρώματα όταν το επίπεδο φορτώνεται.
 \end{itemize} 
 
-This is a pretty minimal feature set. Let's start by designing the GUI using
-Qt Designer. 
+Αυτό είναι ένα αρκετά μηδαμηνό σετ χαρακτηριστικών. Ας ξεκινήσουμε σχεδιάζοντας το Γραφικό Περιβάλλον Εργασίας (GUI) χρησιμοποιώντας το σχεδιαστη Qt 
 
-\subsection{Designing the GUI}
+\subsection{4.1 Σχεδιάζοντας το Γραφικό Περιβάλλον Εργασίας (GUI)}
 
-Since we are creating a minimalistic application, we'll take the same
-approach with the GUI. Using Qt Designer, we create a simple MainWindow with
-no menu or toolbars. This gives us a blank slate to work with. To create the
-MainWindow:
+Απο τη στιγμή που θα δημιουργήσουμε μια μηδαμινή εφαρμογή, θα πάρουμε την ίδια προσέγγιση με το Γραφικό Περιβάλλον Εργασίας. Χρησιμοποιώντας το σχεδιαστή Qt, δημιουργούμε ένα απλό MainWindow χωρίς μενού και εργαλειοθήκες. Αυτό μας δίνει μια κενή “πλάκα” για να ξεκινήσουμε. Για να δημιουργήσουμε το MainWindow:
 
 \begin{enumerate}
-\item Create a directory for developing the application and change to it
-\item Run Qt Designer
-\item The \qtdialog{New Form} dialog should appear. If it doesn't, choose
-\qtdropmenuopt{New Form...} from the \qtmainmenuopt{File} menu.
-\item Choose \qtdropmenuopt{Main Window} from 
-the \qtdropmenuopt{templates/forms} list
-\item Click \qtdropmenuopt{Create} 
-\item Resize the new window to something manageable
-\item Find the \qtdropmenuopt{Frame} widget in the list 
-(under \qtdropmenuopt{Containers}) and drag it to
-the main window you just created
-\item Click outside the frame to select the main window area 
-\item Click on the \qtdropmenuopt{Lay Out in a Grid} tool. When you do, the frame
-will expand to fill your entire main window
-\item Save the form as \usertext{mainwindow.ui} 
-\item \qtdropmenuopt{Exit} Qt Designer
+\item  Δημιουργήστε ένα κατάλογο για την ανάπτυξη της εφαρμογής και μπείτε σε αυτό τον κατάλογο
+\item  Τρέξτε το σχεδιαστή Qt
+\item Ο διάλογος \qtdialog{New Form} εμφανίζεται. Αν αυτό δεν συμβεί, διαλέξτε
+\qtdropmenuopt{New Form...} απο το μενού \qtmainmenuopt{File}.
+\item Διαλέξτε \qtdropmenuopt{Main Window} απο τη λίστα φορμών 
+ \qtdropmenuopt{templates/forms}
+\item Κάντε κλικ στο \qtdropmenuopt{Create} 
+\item 1. Ξανασχηματίστε το νέο παράθυρο σε κάτι πιο διαχειρίσιμο
+\item Βρείτε το \qtdropmenuopt{Frame} widget στη λίστα
+(κάτω απο τα \qtdropmenuopt{Containers}) και σύρτε το στο κυρίως παράθυρο που μόλις δημιουργήσατε.
+\item 1. Κάντε κλικ έξω απο το frame για να διαλέξετε την κύρια περιοχή του παραθύρου
+\item Κάντε κλικ στο \qtdropmenuopt{Lay Out in a Grid} . Όταν το κάνετε, το frame
+θα επεκταθει γιοα να γεμίσει ολόκληρο το κυρίως παράθυρο. 
+\item Σώστε την φόρμα ως  \usertext{mainwindow.ui} 
+\item \qtdropmenuopt Κλείστε το σχεδιαστή Qt.
 \end{enumerate} 
 
-Now compile the form using the PyQt interface compiler:
+Τώρα κάντε compile τη φόρμα χρησιμοποιώντας το περιβάλλον του PyQt compiler. 
 
 \begin{verbatim}
    pyuic4 -o mainwindow_ui.py mainwindow.ui
 \end{verbatim}
 
-This creates the Python source for the main window GUI. Next we need to create
-the application code to fill the blank slate with some tools we can use.
+Αυτό δημιουργεί  τον Python για το κύριο παράθυρο GUI. Έπειτα πρέπει να δημιουργήσουμε τον κώδικα εφαρμογής για να γεμίσουμε την κενή πινακίδα με μερικά εργαλεία που μπορούμε να χρησιμοποιήσουμε. 
 
-\subsection{Creating the MainWindow}
+\subsection{4.2 Δημιουργώντας το MainWindow.}
 
-Now we are ready to write the \classname{MainWindow} class that will do the real work.
-Since it takes up quite a few lines, we'll look at it in chunks, starting
-with the import section and environment setup:
+Τώρα είμαστε έτοιμοι να γράψουμε την κλάση \classname{MainWindow} που θα κάνει όλη τη δουλειά.
+Απο τη στιγμή που χρειάζονται μερικές γραμμές, θα το δούμε ξεκινώντας απο το μέρος της εισαγωγής και τη ρύθμιση του περιβάλλοντος.
 
 \begin{verbatim}
 1 # Loosely based on:
@@ -95,17 +78,11 @@ with the import section and environment setup:
 18 qgis_prefix = os.getenv("QGISHOME")
 \end{verbatim}
 
-Some of this should look familiar from our plugin, especially the PyQt4 and
-QGIS imports. Some specific things to note are the import of our GUI in line
-14 and the import of our CORE library on line 9.
+Μερικά απο αυτά θα έπρεπε να φαίνονται γνωστά απο το plugin μας, ειδικά τα εισαγμένα PyQt4 και QGIS. Μερικά συγκεκριμένα πράγματα που πρέπει να παρατηρήσουμε είναι η εισαγωγή του Γραφικού Περιβάλλοντονς Εργασίας (GUI) στη γραμμή 14 και η εισαγωγή της πηγαίας βιβλιοθήκης στη γραμμή 9.
 
-Our application needs to know where to find the QGIS installation. Because
-of this, we set the \usertext{QGISHOME} environment variable to point to the 
-install directory of QGIS 1.x In line 20 we store this value from
-the environment for later use.
+Η εφαρμογή μας χρειάζεται να γνωρίζει που να βρεί την εγκατάσταση του QGIS. Εξαιτίας αυτού θέτουμε τη μεταβλητη QGISHOME του περιβάλλοντος να επικεντρωθεί στον κατάλογο εγκατάστασης του QGIS 1.x στη γραμμή 20 αποθηκεύουμε αυτή την τιμή απο το περιβάλλον για μετέπειτα χρήση.
 
-Next we need to create our \classname{MainWindow} class which will contain
-all the logic of our application.
+Έπειτα πρέπει να δημιουργήσουμε την κλάση \classname{MainWindow} η οποία θα περιέχει όλη τη λογική της εφαρμογής μας. 
 \begin{verbatim}
 21 class MainWindow(QMainWindow, Ui_MainWindow):
 22 
@@ -174,38 +151,24 @@ all the logic of our application.
 77     self.toolZoomOut = QgsMapToolZoom(self.canvas, True) # true = out
 \end{verbatim}
 
-Lines 21 through 27 are the basic declaration and initialization of the 
-\classname{MainWindow} and the set up of the user interface using the 
-\method{setupUi} method. This is required for all applications.
+Οι γραμμές 21 μέχρι 27 είναι η βασική δήλωση και έναρξη του 
+\classname{MainWindow} και η ρύθμιση του περιβάλλοντος του χρήστη χρησιμοποιώντας τη μέθοδο
+\method{setupUi}. This is required for all applications.
 
-Next we set the title for the application so it says something more
-interesting than \usertext{MainWindow} (line 30). Once that is
-complete, we are ready to complete the user interface. When we created it in
-Designer, we left it very sparse---just a main window and a frame. You could
-have added a menu and the toolbar using Designer, however we'll do it with
-Python.
+Έπειτα θέτουμε τον τίτλο για την εφαρμογή μας έτσι ώστε να λέει κάτι πιο ενδιαφέρον απ'ότι
+ \usertext{MainWindow} (γραμμή 30). Μόλις αυτό ολοκληρωθεί, είμαστε έτοιμοι να ολοκληρώσουμε το περιβάλλον χρήστη (interface). Όταν το δημιουργήσαμε στο σχεδιαστή (designer) . Το αφήσαμε πολύ αραιό – απλά ένα παράθυρο και ένα frame. Θα μπορούσατε να είχατε προσθέσει και ένα μενού και την εργαλειοθήκη χρησιμοποιώντας τον σχεδιαστή (Designer), παρ’όλα αυτά θα χρησιμοποιήσουμε την Python. 
 
-In lines 33 through 38 we set up the map canvas, set the background color to a
-light blue, and enable antialiasing.  We also tell it not to use a
-\classname{QImage} for rendering (trust me on this one) and then set the
-canvas to visible by calling the \method{show} method.
+Στις γραμμές 33 έως 38 στήνουμε τον καμβά του χάρτη, θέτουμε τον το χρώμα του background σε ένα ελαφρύ μπλέ και ενεργοποιούμε τη λείανση. Του λέμε επίσης να μη χρησιμοποιήσει ένα
+\classname{QImage} για rendering (εμπειστευτείτε με σ’αυτό) και μετά θέστε τον κανβά να είναι ορατός καλώντας τη μέθοδο \method{show}.
 
-Next we set the layer to use a vertical box layout within the frame and add
-the map canvas to it in line 43.
+Έπειτα θέτουμε το επίπεδο πληροφορίας να χρησιμοποιήσει μια διάταξη κάθετης εργαλειοθήκης μέσα στο πλαίσιο και προσθέτουμε τον κανβά του χάρτη πάνω το στη γραμμή 43.
 
-Lines 48 to 63 set up the actions and connections for the tools in our
-toolbar. For each tool, we create a \classname{QAction} using the icon we
-defined in the QGIS classic theme.  Then we connect up the
-\usertext{activated} signal from the tool to the method in our class that will
-handle the action. This is similar to how we set things up in the plugin
-example.
+Οι γραμμές 48 ως 63 θέτουνε τις ενέργειες και τις συνδέσεις για τα εργαλεία της εργαλειοθήκης μας. Για κάθε εργαλείο, δημιουργούμε μία μέθοδο \classname{QAction} χρησιμοποιώντας το εικονίδιο που ορίσαμε στο κλασικό θέμα του QGIS. Μετά συνδέουμε το ενεργοποιημένο σήμα
+\usertext{ενεργοποιημένο} σήμα απο το εργαλείο στη μέθοδο μέσα στην κλαση μας η οποία θα χειριστεί την ενέργειά μας (action). Αυτό ειναι παρεμφερές με το πως στήνουμε τα πράγματα στο παράδειγμα του plugin. 
 
-Once we have the actions and connections, we need to add them to the toolbar.
-In lines 66 through 72 we create the toolbar and add each tool to it.
+Αφού έχουμε τις ενέργειες (actions) και τις συνδέσεις, χρειάζεται να τις προσθέσουμε στην εργαλειοθήκη. Στις γραμμές 66 μέχρι 72 δημιουργούμε την εργαλειοθήκη και προσθέτουμε σ’αυτή  κάθε εργαλείο.
 
-Lastly we create the three map tools for the application (lines 75 through
-77). We'll use the map tools in a moment when we define the methods to make
-our application functional. Let's look at the methods for the map tools.
+Στο τέλος δημιουργούμε τα τρία εργαλεία χάρτη για την εφαρμογή (γραμμές 75 ως 77). Θα χρησιμοποιήσουμε τα εργαλεία του χάρτη σε λίγο, όταν ορίσουμε τις μεθόδους για να φτιάξουμε την εφαρμογή μας λειτουργική. Ας ρίξουμε μια ματια στις μεθόδους για τα εργαλεία του χάρτη.
 
 \begin{verbatim}
 78   # Set the map tool to zoom in
@@ -225,19 +188,11 @@ our application functional. Let's look at the methods for the map tools.
 92     self.canvas.zoomFullExtent()
 \end{verbatim}
 
-For each map tool, we need a method that corresponds to the connection we made
-for each action. In lines 79 through 88 we set up a method for each of the
-  three tools that interact with the map. When a tool is activated by clicking
-  on it in the toolbar, the corresponding method is called that ``tells'' the
-  map canvas it is the active tool. The active tool governs what happens when
-  the mouse is clicked on the canvas.
+Για κάθε εργαλείο χάρτη, χρειάζόμαστε μία μέθοδο η οποία να ανταποκρίνεται στη σύνδεση που κάναμε για κάθε ενέργεια (action). Στις γραμμές 79 έως 88 θέσαμε μια μέθοδο για κάθε ένα απο τα δύο εργαλεία που θα αλληλεπιδρά με το χάρτη. Όταν ένα εργαλείο ενεργοποιείται κάνοντας κλικ πάνω του στην εργαλειοθήκη, η ανταποκρινόμενη μέθοδος καλείται η οποία «λέει» στον κανβά του χάρτη ότι είναι το ενεργό εργαλείο. Το ενεργό εργαλείο ορίζει το τι γίνεται όταν το ποντίκι κάνει κλικ πάνω στον κανβά. 
 
-The \usertext{zoom to full extent} tool isn't a map tool---it does its job
-without requiring a click on the map. When it is activated, we call the
-\method{zoomFullExtent} method of the map canvas (line 92).  This completes
-the implementation of all our tools except one---the \usertext{Add Layer}
-tool. %FIXME 
-Let's look at it next:
+Το εργαλείο για \usertext{πλήρες ζουμ} δεν είναι εργαλείο του χάρτη--- κάνει τη δουλειά του χωρίς να απαιτέι κάποιο κλικ πάνω στο χάρτη.  Όταν ενεργοποιείται, καλούμε τη μέθοδο
+\method{zoomFullExtent} στον κανβά του χάρτη (γραμμή 92).  Αυτό ολοκληρώνει την εφαρμογή όλων των εργαλείων μας εκτός απο ένα – το εργαλείο \usertext{Add Layer}. %FIXME 
+Ας το δούμε παρακάτω: 
 
 \begin{verbatim}
 93   # Add an OGR layer to the map
@@ -269,40 +224,22 @@ Let's look at it next:
 119    self.canvas.setLayerSet(layers)
 \end{verbatim}
 
-In the \method{addLayer} method we use a \classname{QFileDialog} to get the
-name of the shapefile to load. This is done in line 96.
-Notice that we specify a ``filter'' so the dialog will only show files of
-type \filename{.shp}.
+Στη μέθοδο \method{addLayer} χρησιμοποιύμε ένα \classname{QFileDialog} για να πάρουμε το όνομα του shapefile που θα φορτώσουμε. Αυτό γίνεται στη γραμμή 96.
+Παρατηρήστε ότι ορίζουμε ένα «φίλτρο» έτσι ώστε ο «διάλογος» να εμφανίζει μόνο αρχεία τύπου \filename{.shp}.
 
-Next in line 97 we create a \classname{QFileInfo} object from the shapefile
-path.  Now the layer is ready to be created in line 100. Using the
-\classname{QFileInfo} object to get the file name from the path we specify it 
-for the name of the layer when it is created.  To make sure that the layer is 
-valid and won't cause any problems when loading, we check it in line 102. If
-it's bad, we bail out and don't add it to the map canvas.
+Έπειτα στη γραμμή δημιουργούμε ένα αντικείμενο \classname{QFileInfo} απο τον κατάλογο του shapefile. Τώρα το επίπεδο πληροφορίας είναι έτοιμο να δημιουργηθεί στη γραμμή 100. Χρησιμοποιώντας το αντικείνο
+\classname{QFileInfo} για να πάρουμε το όνομα του αρχείου απο τον κατάλογο το ορίζουμε για το όνομα του layer όταν αυτό δημιουργείται. Για να σιγουρευτούμε ότι το επίπεδο πληροφορίας είναι έγκυρο και δεν θα δημιουργήσει κανένα πρόβλημα όταν το φορτώσουμε, το ελέγχουμε στην γραμμή 102. Αν δεν είναι σωστό το απορρίπτουμε και δεν το προσθέτουμε στον κανβά του χάρτη.
 
-Normally layers are added with a random color. Here we want to tweak the
-colors for the layer to make a more pleasing display. Plus we know we are
-going to add the \filename{world\_borders} layer to the map and this will make
-it look nice on our blue background. To change the color, we need to get the
-symbol used for rendering and use it to set a new fill color. This is done in
-lines 106 through 108. 
+Κανονικά τα επίπεδα πληροφορίας προστίθενται με ένα τυχαίο χρώμα. Εδώ θέλουμε να γυρίσουμε τα χρώματα για το layer για να κάνουμε μια πιο ευχάριστη εμφάνιση. Επίσης γνωρίζουμε ότι πρόκειται να προσθέσουμε το \filename{world\_borders} στο χάρτη και αυτό θα το κάνει να φαίνεται ωραίο στο μπλέ background μας. Για να αλλάξουμε το χρώμα, πρέπει να πάρουμε το χρώμα που χρησιμοποιείται για rendering και να το χρησιμοποιήσουμε για να θέσουμε ένα καινούργιο χρώμα γεμίσματος. Αυτό γίνεται στις γραμμές  106 ως 108.  
 
-All that's left is to actually add the layer to the registry and a few other
-housekeeping items (lines 111 through 119). This stuff is standard for adding
-a layer and the end result is the world borders on a light blue background.
-The only thing you may not want to do is set the extent to the layer, if you
-are going to be adding more than one layer in your application.
+Αυτό που έμεινε στην πραγματικότητα είναι να προσθέσουμε ουσιαστικά το layer στο μητρώο και μερικά άλλα αντικείμενα (γραμμές 11 ως 119). Αυτό το πράγμα είναι κανόνας για την προσθήκη ενός layer και το τελικο αποτέλεσμα είναι τα όρια του κόσμου σε ένα ελαφρύ μπλε background. Το μόνο πράγμα που ίσως θέλετε να κάνετε είναι να θέσετε την “επέκταση στο layer”, αν πρόκεται να προσθέσετε περισσότερα απο ένα layer στην εφαρμογή σας. 
 
-That's the heart of the application and completes the \classname{MainWindow} class. 
+Αυτή είναι η καρδιά της εφαρμογής και ολοκληρώνει την κλαση \classname{MainWindow}. 
 
-\subsection{Finishing Up}
+\subsection{4.3  Ολοκληρώνοντας }
 
-The remainder of the code shown below creates the \object{QgsApplication}
-object, sets the path to the QGIS install, sets up the \method{main} method
-and then starts the application. The only other thing to note is that we move
-the application window to the upper left of the display. We could get fancy
-and use the Qt API to center it on the screen.
+Το υπόλοιπο του κώδικα που παρουσιάζεται παρακάτω δημιουργεί ένα αντικείμενο \object{QgsApplication}, θέτει τη διαδρομή για την εγκατάσταση του QGIS, θέτει τη μέθοδο \method{main}
+και μετά ξεκινάει την εφαρμογή. Το επόμενο πράγμα που πρέπει να παρατηρήσουμε είναι οτι μετακινούμε το παράθυρο της εφαρμογής προς τα πάνω και αριστερά της έκθεσης. Θα μπορούσαμε να το κάνουμε πιο φανταχτερό και να χρησιμοποιήσουμε το API της Qt για να το κεντράρουμε στην οθόνη.
 
 \begin{verbatim}
 120 def main(argv):
@@ -331,12 +268,11 @@ and use the Qt API to center it on the screen.
 143   main(sys.argv)
 \end{verbatim}
 
-\subsection{Running the Application}
+\subsection{4.4  Τρέχοντας την εφαρμογή }
 
-Now we can run the application and see what happens. Of course if you are like 
-most developers, you've been testing it out as you went along. 
+Τώρα μπορούμε να τρέξουμε την εφαρμογή και να δούμε τι γίνεται. Φυσικά αν είστε σαν τους περισσότερους προγραματιστές, θα το δοκιμάζατε στην πορεία. 
 
-Before we can run the application, we need to set some environment variables. 
+Πριν τρέξουμε την εφαρμογή, χρειάζεται να θέσουμε κάποιες εφαρμογές περιβάλλοντος. 
 
 \nix{}\osx{}
 \begin{verbatim}
@@ -352,41 +288,34 @@ set PYTHONPATH=C:\qgis\python
 set QGISHOME=C:\qgis
 \end{verbatim}
 
-We assume
+Θεωρούμε: 
 \begin{itemize}
-\item\nix{}\osx{}QGIS is installed in 
-your home directory in 
+\item\nix{}\osx{}Το QGIS έχει εγκατασταθεί στον κατάλογο home στο 
 \filename{qgis}. 
-\item\win{}QGIS is installed in \filename{C:\textbackslash qgis}.
+\item\win{}To QGIS έχει εγκατασταθεί στο \filename{C:\textbackslash qgis}.
 \end{itemize}
 
-When the application starts up, it looks like this:
+Όταν η εφαρμογή αρχίζει μοιάζει κάπως έτσι: 
 
 \begin{figure}[ht]
 \begin{center}
-  \caption{Starting the new demo application \nixcaption} \label{fig:demo_app_startup}
+  \caption{Εικόνα 3: Ξεκινώνατς την καινούργια demo εφαρμογή \nixcaption} \label{fig:demo_app_startup}
   \includegraphics[clip=true, width=12cm]{python1_application}
 \end{center}
 \end{figure}
 
-To add the \filename{world\_borders} layer, click on the 
-\usertext{Add Layer} tool and navigate to the data directory.
-Select the shapefile and click \button{Open} to add it to the map. 
-Our custom fill color is applied and the result is shown in Figure \ref{fig:demo_app_done}.
+Για να προσθέσουμε το \filename{world\_borders} layer, κάνουμε κλικ στο εργαλείο
+\usertext{Add Layer} και ανατρέχουμε στον κατάλογο δεδομένων.
+Διαλέγουμε το shapefile και κάνουμε κλικ στο \button{Open} για να το προσθέσουμε στο χάρτη. 
+Το προσωπικό χρώμα προστίθεται και το αποτέλεσμα φαίνεται στην Εικόνα \ref{fig:demo_app_done}.
 
-Creating a PyQGIS application is really pretty simple.  In less than 150 lines
-of code we have an application that can load a shapefile and navigate the map.
-If you play around with the map, you'll notice that some of the built-in
-features of the canvas also work, including mouse wheel scrolling and panning
-by holding down the \keystroke{Space} bar and moving the mouse.
+Η δημιουργία μιας PyQGIS εφαρμογής είναι αρκετά απλή. Σε λιγότερο απο 150 γραμμές κώδικα έχουμε μία εφαρμογή που μπορεί να φορτώσει shapefile και να πλοηγηθεί στο χάρτη. Αν “παίξετε” λίγο με το χάρτη θα παρατηρήσετε ότι κάποια απο τα χαρακτηριστικά του κανβά επίσης δουλεύουν, συμπεριλαμβάνοντας και την πλοήγηση με τη ροδέλα του ποντικιού και τη μετακίνηση κρατώντας το \keystroke{Space} και κουνώντας το ποντίκι. 
 
-Some sophisticated applications have been created with PyQGIS and more are in 
-the works. This is pretty impressive, considering that this development has 
-taken place even before the official release of QGIS 1.0.
+SΚάποιες εξεζητημένες εφαρμογές έχουν δημιουργηθεί με PyQGIS και πολλές ακόμα δουλεύονται. Αυτό είναι αρκετά εντυπωσιακό, θεωρώντας ότι αυτή η ανάπτυξη ξεκίνησε ήδη πριν απο την επίσημη κυκλοφορία του QGIS 1.0.
 
 \begin{figure}[ht]
 \begin{center}
-  \caption{Adding a layer the demo application \nixcaption} \label{fig:demo_app_done}
+  \caption{Εικόνα 4: Προσθέτοντας ένα επίπεδο πληροφορίας στην demo εφαρμογή.\nixcaption} \label{fig:demo_app_done}
   \includegraphics[clip=true, width=12cm]{python2_application}
 \end{center}
 \end{figure}

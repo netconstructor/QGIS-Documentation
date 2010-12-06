@@ -8,55 +8,31 @@
 % comment out the following line:
 % \updatedisclaimer
 
-In this section we provide a beginner's tutorial for writing a simple QGIS
-C++ plugin. It is based on a workshop held by Dr. Marco Hugentobler. 
+Σε αυτή την ενότητα σας παραχωρείται ένα μάθημα (tutorial) αρχαρίων για το πως να γράψετε ένα απλό QGIS plugin σε C++.  Είναι βασισμένο σε ένα workshop δημιουργημένο απο τον Dr. Marco Hugentobler . 
 
-QGIS C++ plugins are dynamically linked libraries (.so or .dll). They are
-linked to QGIS at runtime when requested in the Plugin Manager, and extend the
-functionality of QGIS via access to the QGIS GUI. In general, they can be divided
-into core and external plugins.
+Τα QGIS plugins γραμμένα σε C++ είναι δυναμικά συνδεδεμένες βιβλιοθήκες (.so ή και .dll). Συνδέονται με το QGIS κατά τη διάρκεια εκτέλεσης (runtime) όταν ζητείται απο τον Διαχειριστή του plugin (Plugin manager), και επεκτείνουν τη λειτουργικότητα του QGIS  μέσω πρόσβασης στο Γραφικό Περιβάλλον Εργασίας (GUI) του QGIS. Γενικά μπορούν να χωριστούν σε εσωτερικά (core) και εξωτερικά pluggins. 
 
-Technically the QGIS Plugin Manager looks in the lib/qgis directory for all
-.so files and loads them when it is started. When it is closed they are
-unloaded again, except the ones enabled by the user (See User Manual). For newly loaded plugins,
-the \method{classFactory} method creates an instance of the plugin class and
-the \method{initGui} method of the plugin is called to show the GUI elements
-in the plugin menu and toolbar. The \method{unload()} function of the plugin
-is used to remove the allocated GUI elements and the plugin class itself is
-removed using the class destructor. To list the plugins, each plugin must
-have a few external 'C' functions for description and of course the
-\method{classFactory} method.
+Τεχνικά ο Διαχειριστής Plugin (Plugin Manager) του QGIS αναζητεί για .so αρχεία στο φάκελο ib/qgis και τα φορτώνει όταν ξεκινάει. Όταν κλείνει τα αφαιρεί πάλι, εκτός απο εκείνα που είναι εξουσιοδοτημένα απο το χρήστη. (βλ. Εγχειρίδιο Χρήστη – User Manual).  Για προσφάτως φορτωμένα plugin
+η \method{classFactory} μέθοδος, δημιουργεί ένα αντικείμενο της κλάσης του plugin ενώ η μέθοδος \method{initGui} καλείται για να δείξει τα στοιχεία του Γραφικού Περιβάλλοντος Εργασίας (GUI) στο μενού του pluggin και στην εργαλειοθήκη. Η λειτουργία \method{unload()} του plugin 
+χρησιμοποιείται για να αφαιρέσει τα μοιρασμένα στοιχεία του Γραφικού Περιβάλλοντος Εργασίας (GUI) και η ίδια η κλάση του plugin αφαιρείται χρησιμοποιώντας τον class destructor. Για να δημιουργηθεί μια λίστα των plugins, κάθε ένα απο αυτά πρέπει να έχει μερικές εξωτερικές “C” λειτουργίες για περιγραφή και φυσικά τη μέθοδο
+\method{classFactory}.
 
-\subsection{Why C++ and what about licensing}
+\subsection{1.1 Γιατί C++ και σχετικά με την άδεια χρήσης.}
 
-QGIS itself is written in C++, so it makes sense to write plugins in C++
-as well. It is an object-oriented programming (OOP) language that is prefered 
-by many developers for creating large-scale applications.
+ Το QGIS είναι γραμμένο σε C++, οπότε είναι λογικό και τα plugin να γράφονται επίσης σε C++. Είναι μία αντικειμενοστραφής γλώσσα προγραμματισμού (OPP) και προτιμάται απο πολλούς προγραμματιστές για τη δημιουργία μεγάλων εφαρμογών.
 
-QGIS C++ plugins take advantage of the functionalities provided by the libqgis*.so libraries. 
-As these libraries licensed under the GNU GPL, QGIS C++ plugins must also be licenced under 
-the GPL. This means that you may use your plugins for any purpose and you are not required to
-publish them. If you do publish them however, they must be published under
-the conditions of the GPL license. 
 
-\subsection{Programming a QGIS C++ Plugin in four steps}
 
-The C++ plugin example covered in this manual is a point converter plugin and intentionally kept simple. 
-The plugin searches the active vector layer in QGIS, converts all vertices of 
-the layer's features to point features (keeping the attributes), and finally
-writes the point features to a delimited text file. The new layer can then
-be loaded into QGIS using the delimited text plugin (see User Manual).
+\subsection{1.2 Προγραμματίζοντας ένα plugin σε QGIS και C++ σε τέσσερα βήματα}
 
-\minisec{Step 1: Make the plugin manager recognise the plugin}
+Το παράδειγμα του plugin του καλύπτεται σε αυτό το εγχειρίδιο είναι ένα plugin ενός σημειακού μετατροπέα και επιτειδευμένα είναι απλό. Το plugin, αναζητεί το ενεργό επίπεδο vector στο QGIS,   μετατρέπει όλες τις γωνίες του επιπέδου πληροφορίας (layer) σε σημεία (κρατώντας τις ιδιότητες της βάσης δεδομένων) και μετάφερει τα χαρακτηριστικά των σημείων σε ένα αρχείο κειμένου. Το καινούργιο επίπεδο πληροφορίας (layer) μπορεί μετά να ανοιχτεί στο QGIS χρησιμοποιώντας το plugin του οριοθετημένου κειμένου (dilimited text plugin) (βλ. Εγχηρίδιο χρήστη).
 
-As a first step we create the \filename{QgsPointConverter.h} and
-\filename{QgsPointConverter.cpp} files. We then add virtual methods inherited
-from QgisPlugin (but leave them empty for now), create the necessary external 'C'
-methods, and a .pro file (which is a Qt mechanism to easily create Makefiles).
-Then we compile the sources, move the compiled library into the plugin folder,
-and load it in the QGIS Plugin Manager.
+\minisec{Βήμα 1: Βάζοντας το διαχειριστή του plugin να αναγνωρίσει το plugin.}
 
-\textbf{a) Create new pointconverter.pro file and add}:
+Σαν πρώτο βήμα δημιουργούμε τα αρχεία \filename{QgsPointConverter.h} και
+\filename{QgsPointConverter.cpp}. Έπειτα προσθέτουμε εικονικές μεθόδους  που έχουν «κληρονομήσει» τις ιδιότητές τους απο το QgisPlugin (αλλά αφήστε κενά προς το παρόν), δημιουργούμε τις απαραίτητες εξωτερικές “C” μεθόδους, και ένα αρχείο a .pro (το οποίο είναι ένας Qt μηχανισμός για να δημιουργηθούν εύκολα τα Makefiles. Έπειτα συντάσουμε (compile) τους πηγαίους κώδικες (sources) μετακινούμε τη συνταγμένη βιβλιοθήκη στο φάκελο του plugin Και τη φορτώνουμε στον Διαχειριστη plugin (plugin Manager) του QGIS.
+
+\textbf{α) Δημιουργήστε καινούργια pointconverter.pro αρχεία και προσθέστε }:
 
 
 % 
@@ -86,7 +62,7 @@ DEST = pointconverterplugin.so
 DEFINES += GUI_EXPORT= CORE_EXPORT=
 \end{verbatim}
 
-\textbf{b) Create new qgspointconverterplugin.h file and add}:
+\textbf{β) Δημιουργήστε καινούργιο qgspointconverterplugin.h αρχείο και προσθέστε }:
 
 \begin{verbatim}
 #ifndef QGSPOINTCONVERTERPLUGIN_H
@@ -110,7 +86,7 @@ class QgsPointConverterPlugin: public QgisPlugin
 #endif
 \end{verbatim}
 
-\textbf{c) Create new qgspointconverterplugin.cpp file and add}:
+\textbf{γ)  Δημιουργήστε καινούργιο qgspointconverterplugin.cpp αρχείο και προσθέστε }:
 
 \begin{verbatim}
 #include "qgspointconverterplugin.h"
@@ -170,14 +146,12 @@ QGISEXTERN void unload(QgisPlugin* theQgsPointConverterPluginPointer)
 }
 \end{verbatim}
 
-\minisec{Step 2: Create an icon, a button and a menu for the plugin}
+\minisec{Βημα 2: Δημιουργήστε ένα εικονίδιο, ένα κουμπί και ένα μενού για το plugin.}
 
-This step includes adding a pointer to the QgisInterface object in the plugin
-class. Then we create a QAction and a callback function (slot), add it to the
-QGIS GUI using QgisInterface::addToolBarIcon() and QgisInterface::addPluginToMenu()
-and finally remove the QAction in the \method{unload()} method.
+Το βήμα αυτό συμπεριλαμβάνει την πρόσθεση ενός δείκτη στο αντικείμενο QgisInterface μέσα στην κλάση του plugin. Έπειτα δημιουργούμε ένα Qaction και μία λειτουργία callback, το προσθέτουμε στο Γραφικό Περιβάλλον Εργασίας χρησιμοποιώντας το QgisInterface::addToolBarIcon() και QgisInterface::addPluginToMenu()
+και τελικά αφαιρούμε το Qaction που βρίσκεται στη μέθοδο \method{unload()}.
 
-\textbf{d) Open qgspointconverterplugin.h again and extend existing content to}:
+\textbf{δ) Ανοίξτε το qgspointconverterplugin.h και επεκτείνετε το υπάρχον περιεχόμενο σε}:
 
 \begin{verbatim}
 #ifndef QGSPOINTCONVERTERPLUGIN_H
@@ -211,7 +185,7 @@ class QgsPointConverterPlugin: public QObject, public QgisPlugin
 #endif
 \end{verbatim}
 
-\textbf{e) Open qgspointconverterplugin.cpp again and extend existing content to}:
+\textbf{ε) Ανοίξτο το qgspointconverterplugin.cpp πάλι και επεκτείνετε το περιεχόμενο του σε:}:
 
 \begin{verbatim}
 #include "qgspointconverterplugin.h"
@@ -289,15 +263,11 @@ QGISEXTERN void unload(QgisPlugin* theQgsPointConverterPluginPointer)
 \end{verbatim}
 
 
-\minisec{Step 3: Read point features from the active layer and write to text file}
+\minisec{Βήμα 3ο: Ανάγνωση των σημείων απο το ενεργό επίπεδο πληροφορίας και η εγγραφή του σε  αρχείο κειμένου.}
 
-To read the point features from the active layer we need to query the current
-layer and the location for the new text file. Then we iterate through all
-features of the current layer, convert the geometries (vertices) to points,
-open a new file and use QTextStream to write the x- and y-coordinates
-into it.
+Για να διαβάσουμε τα χαρακτηριστικα των σημείων απο το ενεργό επίπεδο πληροφορίας πρέπει να υποβάλουμε ένα ερωτημα (query) στο ενεργό επίπεδο και στην τοποθεσία για το νέο αρχείο κειμένου. Έπειτα εναλλάσουμε ανάμεσα σε όλα τα τα χαρακτηριστικά του ενεργού επιπέδου, μετατρέπουμε τις γεωμετρίες (vertices) σε σημεία, ανοίγουμε ένα καινούργιο αρχείο και χρησιμοποιούμε το QtextStream για να εγγράψουμε τις χ και ψ συντεταγμένες μέσα του.
 
-\textbf{f) Open qgspointconverterplugin.h again and extend existing content to}
+\textbf{στ)  Aνοίξτε το qgspointconverterplugin.h πάλι και επεκτείνετε το υπάρχων περιεχόμενο σε:}
 
 \begin{verbatim}
 class QgsGeometry;
@@ -319,7 +289,7 @@ void convertMultiPolygon(QgsGeometry* geom, const QString& attributeString, \
 		  QTextStream& stream) const;
 \end{verbatim}
 
-\textbf{g) Open qgspointconverterplugin.cpp again and extend existing content to}:
+\textbf{ζ) Ανοίξτε το qgspointconverterplugin.cpp και επεκτείνετε το υπάρχων περιεχόμενο σε:}:
 
 \begin{verbatim}
 #include "qgsgeometry.h"
@@ -522,14 +492,9 @@ attributeString, QTextStream& stream) const
 
 \minisec{Step 4: Copy the feature attributes to the text file}
 
-At the end we extract the attributes from the active layer using 
-QgsVectorDataProvider::fieldNameMap(). For each feature we extract the field 
-values using QgsFeature::attributeMap() and add the contents (comma separated) 
-behind the x- and y-coordinates for each new point feature. For this step 
-there is no need for any furter change in \filename{qgspointconverterplugin.h} 
+Στο τέλος εξάγουμε τις ιδότητες απο το ενεργό επίπεδο πληροφορίας χρησιμοποιώντας το QgsVectorDataProvider::fieldNameMap() Για κάθε χραρακτηριστικό εξάγουμε τις τιμές του πεδίου χρησιμοποιώντας το QgsFeature::attributeMap() και προσθέτουμε το περιεχόμενο (χωρισμένο με κόμμα) πίσω απο τις χ και ψ συντεταγμένες πίσω απο κάθε νέο σημείο των χαρακτηριστικών (features). Σε αυτό το βήμα δεν χρειάζεται να γίνει καμία αλλαγή στο\filename{qgspointconverterplugin.h} 
 
-\textbf{h) Open qgspointconverterplugin.cpp again and extend existing content
-to}:
+\textbf{η) Ανοίγουμε το qgspointconverterplugin.cpp ξανά και επεκτείνουμε το υπάρχων περιεχόμενο σε:}:
 
 \begin{verbatim} 
 #include "qgspointconverterplugin.h"
@@ -828,19 +793,15 @@ QGISEXTERN void unload(QgisPlugin* theQgsPointConverterPluginPointer)
 
 \end{verbatim}
 
-\subsection{Further information}
+\subsection{1.3 Περαιτέρω πληροφορίες}
 
-As you can see, you need information from many different sources to write QGIS C++ 
-plugins. Plugin writers need to know C++, the QGIS plugin interface as 
-well as Qt4 classes and tools. At the beginning it is best to learn from 
-examples and copy the mechanism of existing plugins. 
+Όπως βλέπετε, χρειάζεστε πληροφορίες απο πολλές διαφορετικές πηγές για να γράψετε QGIS plugins σε C++.  Οι προγραμματιστές plugin πρέπει να γνωρίζουν C++, το περιβάλλον του QGIS plugin όπως επίσης και τις κλάσεις και τα εργαλεία του Qt4. Στην αρχή είναι καλύτερα να μαθαίνετε απο παραδείγματα και να αντιγράφετε τους μηχανισμούς των ήδη υπαρχόντων plugins.  
 
-There is a a collection of online documentation that may be usefull for
-QGIS C++ programers:
+Υπάρχει απο μία συλλογή απο βιβλιογραφία στο διαδίκτυο που μπορεί να είναι χρήσιμα για τους προγραμματιστές C++ του QGIS.
 
 \begin{itemize}
-\item QGIS Plugin Debugging: \url{http://www.qgis.org/wiki/How_to_debug_QGIS_Plugins}
-\item QGIS API Documentation: \url{http://svn.qgis.org/api_doc/html/}
-\item Qt documentation: \url{http://doc.trolltech.com/4.3/index.html}
+\item Debugin για τους προγραμματιστές των QGIS plugins: \url{http://www.qgis.org/wiki/How_to_debug_QGIS_Plugins}
+\item Βιβλιογραφία για τα API του QGIS: \url{http://svn.qgis.org/api_doc/html/}
+\item Βιβλιογραφία για Qt: \url{http://doc.trolltech.com/4.3/index.html}
 \end{itemize}
 
