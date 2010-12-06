@@ -83,7 +83,6 @@ Optionen:\index{Rasterlayer!Layereigenschaften}
 \item \dropmenuopt{Gruppe hinzufügen}
 \item \dropmenuopt{Alles ausklappen}
 \item \dropmenuopt{Alles zusammenfalten}
-\item \dropmenuopt{Zeige Dateigruppen}
 \end{itemize}
 
 Wählen Sie \dropmenuopt{Eigenschaften} aus dem Menü, um die
@@ -181,6 +180,9 @@ globalen Transparenz können Sie diese auch auf bestimmte Kanäle (Bänder)
 und auch Pixelwerte beschränken und Sie können auch Pixelwerte angeben, die
 als 'Ohne Wert', also \textit{NoData}-Wert visualisiert werden sollen.
 
+%%FIXME
+This can be done manually or with the 
+\toolbtntwo{mActionContextHelp}{Add values from display} icon.
 
 Als Beispiel wollen wir die Wasserflächen aus dem Rasterlayer
 \filename{landcover.img} auf eine Transparenz von 50\% setzen. Folgende
@@ -312,5 +314,39 @@ Um statistische Informationen klicken Sie auf \texttt{Erneuern}.
 Dieser Vorgang kann zeitaufwendig sein. Bitte seien Sie geduldig, während
 QGIS Daten sammelt!\index{Rasterlayer!Statistik}
 \end{Tip}
+
+%%FIXME
+\section{Raster Calculator}\label{sec:raster_calc}
+\index{Raster!raster calculator}
+\index{Raster calculator}
+
+The \dialog{Raster Calculator} in the \mainmenuopt{Layer} menu allows to 
+perform calculations on basis of existing raster pixel values. The results 
+are written to a new raster layer with a GDAL supported format. 
+
+\begin{figure}[ht]
+  \centering
+    \includegraphics[clip=true, width=11.5cm]{raster_calculator}
+    \caption{Raster Calculator \nixcaption}\label{fig:raster_calculator}
+\end{figure}
+
+The \textbf{Fields list} contains all loaded raster layers that can be used. 
+To add a raster to the raster calculator expression field, double
+click its name in the Fields list. You can then use the operators to construct 
+calculation expressions or you can just type it into the box.
+
+In the \textbf{Result layer} section you have to define an output layer. You can 
+then define the extent of the calculation area based on an input raster layer or 
+based on X,Y coordinates and on Columns and Rows to set the resolution of the 
+output layer. If the input layer has a different resolution, the values will be 
+resampled with nearest neighbor algorithm.  
+
+The \textbf{Operators section} contains all usable operators. To add an operator
+to the raster calculator expression box, click the appropriate button. Mathematical
+calculations ( + , - , * \dots) and trigonometric functions ( sin, cos, tan, \dots) 
+are available. Stay tuned for more operators to come!
+
+With the \checkbox{Result to project} checkbox the result layer will automatically 
+added to the legend area and can be visualized. 
 
 \FloatBarrier

@@ -30,7 +30,7 @@ Sie QGIS aus der Shell starten wollen, verwenden Sie
 /Pfad-zu-den-ausführbaren-Dateien/Contents/MacOS/Qgis}.
 \end{itemize}
 
-Um QGIS zu beenden, klicken im Menü \{\nix{}\win{Datei} \osx{QGIS}\} >
+Um QGIS zu beenden, klicken im Menü \{\nix{}\win{Datei} \osx{QGIS}\} \arrow
 Beenden, oder benutzen Sie das Tastenkürzel \keystroke{Strg+Q}.
 
 \subsection{Optionen der Kommandozeile}\index{Kommandozeilenoptionen}
@@ -53,7 +53,10 @@ Usage: qgis [options] [FILES]
         [--height height]       height of snapshot to emit
         [--project projectfile] load the given QGIS project
         [--extent xmin,ymin,xmax,ymax]  set initial map extent
-        [--nologo]      hide splash screen
+        [--noplugins]   	don't restore plugins on startup
+        [--optionspath path]    use the given QSettings path
+        [--configpath path]     use the given path for all user configuration
+        [--nologo]      	hide splash screen
         [--help]                this text
 
   FILES:
@@ -95,6 +98,15 @@ Sprachen finden Sie mit dem entsprechenden Länderkürzel unter
 Es ist auch möglich, beim Starten von QGIS ein Projekt zu laden. Fügen Sie
 dazu die Option \texttt{---project} mit dem Namen ihres Projektes hinzu und
 QGIS lädt alle darin enthaltenen Daten direkt beim Start.
+%% FIXME
+\minisec{Command line option \usertext{---noplugins}}
+If you have trouble at startup with plugins, you can avoid loading them at startup. They will still be available in Plugins Manager afterwards.
+
+\minisec{Command line option \usertext{---optionspath}}
+You can have multiple configurations and decide which one to use when starting QGIS using this option. See \ref{subsec:gui_options} to check where does the operating system save the settings files. Presently there is no way to specify in which file where to write the settings, therefore you can create a copy of the original settings file and rename it.
+
+\minisec{Command line option \usertext{---configpath}}
+This option is similar to the one above, but furthermore overrides the default path (~/.qgis) for user configuration and forces QSettings to use this directory, too. This allows users to e.g. carry QGIS installation on a flash drive together with all plugins and settings
 
 \minisec{Kommandozeilenoption \usertext{---extent}}
 Um QGIS in einem bestimmten Ausschnitt Ihrer Daten zu starten, kann diese
@@ -306,7 +318,8 @@ oder Polygon) editiert werden soll. \\
 	\> \> \dropmenucheck{Kartennavigation} \\
 \dropmenuopttwo{mActionSelect}{Wähle Objekte aus}
 	\>
-	\> \> \dropmenucheck{Kartennavigation} \\
+	\> Kapitel \ref{sec:selection}
+	\> \dropmenucheck{Attribute} \\
 \dropmenuopttwo{mActionDeselectAll}{Auswahlen aller Layer aufheben}
         \>
         \> \> \dropmenucheck{Attribute} \\
@@ -371,6 +384,10 @@ oder Polygon) editiert werden soll. \\
 	\>
         \> Kapitel \ref{sec:create_shape}
 	\> \dropmenucheck{Layer koordinieren} \\
+\mainmenuopt{Rasterrechner}
+	\>
+	\> Kapitel \ref{sec:raster_calc}
+	\> \\
 \dropmenuopttwo{mActionAddNonDbLayer}{Vektorlayer hinzufügen}       
 	\> \keystroke{Strg-Umschalt-V}
 	\> Kapitel \ref{label_workingvector}
@@ -403,7 +420,9 @@ oder Polygon) editiert werden soll. \\
 \dropmenuopt{Speichern als}
 	\\
 \dropmenuopt{Auswahl als Vektordatei speichern}
-	\\
+	\>
+	\> Kapitel \ref{sec:attribute table}
+	\>\\
 \dropmenuopttwo{mActionRemoveLayer}{Layer löschen}
 	\> \keystroke{Strg+D}
 	\>          	
@@ -635,6 +654,17 @@ können von einer Gruppe nun mit der Maus in eine andere verschoben werden.
 Dadurch wird die Darstellung der Symbole gruppiert. Bitte beachten Sie, dass
 dies nur möglich ist, wenn zwei Vektorlayer vom gleichen Typ (Punkt, Linie
 oder Polygon) sind und gleiche Attribute beinhalten.
+
+%%FIXME
+It is also possible to select more than one Layer or Group at the same time 
+by holding down the \keystroke{CTRL}-Key while selecting the Layers with the 
+left mouse button. You can than move all selected Layers to a new Group at 
+the same time.
+
+You are also able to delete more than one Layer or Group at once by selecting 
+several Layers with the \keystroke{CTRL}-Key and pressing \keystroke{CTRL-D} 
+afterwards. This way all selected Layers or Groups will be removed from the 
+layer list.
 
 \subsection{Kartenfenster}\label{label_mapview}
 \index{Kartenfenster}
@@ -886,9 +916,8 @@ Zusätzlich schnappen die Messwerkzeuge auf den gerade ausgewählten Layer, wenn
 für den entsprechenden Layer ein Fangmodus eingestellt wurde. (Siehe
 Kapitel~\ref{snapping_tolerance}). Wenn Sie also exakt entlang einer Linie
 oder Polygonumrandung messen möchten, setzen Sie erst eine Fangtolleranz,
-selektieren dann den Layer und benutzen dann das Messwerkzeug. 
+selektieren dann den Layer und benutzen dann das Messwerkzeug.
 
-% measure-tools side by side
 \begin{figure}[ht]
 \caption{Messwerkzeuge in Aktion \nixcaption}\label{fig:measure}
 \centering
@@ -899,6 +928,24 @@ selektieren dann den Layer und benutzen dann das Messwerkzeug.
 \subfloat[Winkel messen]{\label{subfig:measure_angle}
 \includegraphics[clip=true, width=0.3\textwidth]{measure_angle}}
 \end{figure}
+
+%% FIXME
+\subsection{Select and deselect features}\label{sec:selection}
+
+The QGIS toolbar provides several tools to select features in the map canvas. 
+To select one or several features just click on 
+\includegraphics[width=0.7cm]{mActionSelect} and select the tools:
+
+\begin{description}
+\item \radiobuttonon{Select features}
+\item \radiobuttonoff{Select features by rectangle}
+\item \radiobuttonoff{Select features by polygon}
+\item \radiobuttonoff{Select features by freehand}
+\item \radiobuttonoff{Select features by radius}
+\end{description} 
+
+To deselect all selected features click on 
+\includegraphics[width=0.7cm]{mActionDeselectAll}.
 
 \section{QGIS Projekte}\label{sec:projects}\index{Projektdatei}
 
@@ -1178,7 +1225,10 @@ Im Texteditor können Sie den formatierten Text eingeben und einige Einstellungen
 vornehmen. Z.B. kann das Objekt an einer bestimmten Stelle positioniert werden, 
 was dann durch ein Marker-Symbol angezeigt wird. Oder das es unabhängig von dem 
 Objekt im Kartenfenster angezeigt wird. Der Text kann im Kartenfenster verschoben 
-werden (entweder die Markierung oder die Sprechblase.
+werden, entweder die Markierung oder die Sprechblase. 
+
+\textbf{Bemerkung}: Die Icons sind aktuell Bestandteil des Thema 'GIS' und 
+werden auch in den anderen Themen verwendet.
 
 Das \includegraphics[width=0.7cm,clip=true]{mActionAnnotation} Beschriftung 
 verschieben Tool ermöglicht es, den Beschriftungstext im Kartenfenster mit 
@@ -1268,7 +1318,10 @@ GPS Option-Bildschirm (siehe Abbildung \ref{fig:gpstrack_options}).
 
 Mit einem angeschlossenen GPS-Empfänger (muss auch von Ihrem Betriebssystem 
 unterstützt werden) reicht ein einfacher Klick auf den Knopf \button{Verbinden}. 
-Ein zweiter Klick trennt die Verbindung zu dem GPS-Empfänger wieder.
+Ein zweiter Klick trennt die Verbindung zu dem GPS-Empfänger wieder. Für 
+GNU/Linux wurde gpsd Support integriert. Dadurch ist eine einfache Verbindung 
+zu den meisten GPS Geräten gewährleistet. Sie müssen gpsd im Vorfeld 
+konfigurieren, damit QGIS sich damit verbinden kann.
 
 [ WICHTIG ]: Wenn Sie Ihre Position im Kartenfenster aufnehmen möchten, müssen 
 Sie erst einen neuen Vektorlayer erstellen und ihn in den Editier-Modus bringen, 
@@ -1282,6 +1335,13 @@ um die GPS-Positionen aufnehmen zu können.
      \hspace{0.33cm}
    \subfloat[GPS Polar-Bildschirm]{\label{subfig:gpstrack_polar}\includegraphics[clip=true, width=0.3\textwidth]{gpstrack_polar}} \\
 \caption{Laufende GPS-Verfolgung \nixcaption} \label{fig:gpstrack_live}
+\end{figure}
+
+\begin{figure}[ht]
+   \centering
+   \includegraphics[clip=true, width=7cm]{gpstrack_options}
+   \caption{GPS Positionskoordinaten Fenster \nixcaption}
+   \label{fig:gpstrack_options}
 \end{figure}
 
 \subsection{Positionskoordinaten}
@@ -1331,12 +1391,7 @@ hinzufügen} nicht aktiviert haben und einzelne Stützpunkte manuell
 einfügen wollen können Sie dies über den Knopf \button{Stützpunkt hinzufügen} 
 machen.
 
-\begin{figure}[ht]
-   \centering
-   \includegraphics[clip=true, width=7cm]{gpstrack_options}
-   \caption{GPS Positionskoordinaten Fenster \nixcaption}
-   \label{fig:gpstrack_options}
-\end{figure}
+
 
 \FloatBarrier
 
