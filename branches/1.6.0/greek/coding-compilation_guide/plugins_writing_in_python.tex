@@ -1,66 +1,46 @@
 % vim: set textwidth=78 autoindent:
 
-\section{Writing a QGIS Plugin in Python}
+\section{3. Writing a QGIS Plugin in Python}
 
 % when the revision of a section has been finalized,
 % comment out the following line:
 % \updatedisclaimer
 
-In this section we provide a beginner's tutorial for writing a simple QGIS Python
-plugin. It is based on the workshop "Extending the Functionality of QGIS
-with Python Plugins" held at FOSS4G 2008 by Dr. Marco Hugentobler, Dr. Horst
-D\"uster and Tim Sutton. 
+Σ'αυτό το κεφάλαιο παρέχουμε ένα απλό μάθημα αρχαρίων για τη γραφή ενός QGIS plugin σε Python. Είναι βασισμένο στο workshop “Extending the Functionality of QGIS with Python Plugins” (Επεκτείνοντας τη λειτουργικότητα του QGIS με plugin γραμμένα σε Pyton) που έγινε στο FOSS4G 2008 απο τους  Dr. Marco Hugentobler, Dr. Horst
+D\"uster και Tim Sutton. 
 
-Apart from writing a QGIS Python plugin, it is also possible to use PyQGIS
-from a python command line console which is useful for debugging or writing 
-standalone applications in Python, with their own user interfaces
-based on the functionality of the QGIS core library.
+Πέρα απο τη γραφή ενός QGIS plugin σε Python, είναι επίσης δυνατό να χρησιμοποιήσουμε PyQGIS απο μία Python κονσόλα γραμμής εντολών η οποία είναι χρήσιμη για debugging ή γραφή ανεξαρτήτων  εφαρμογών σε Python, με το ίδιο τους το περιβάλλον βασισμένο στη λειτουργικότητα της βασικής βιβλιοθήκης του QGIS.
 
-\subsection{Why Python and what about licensing}
+\subsection{3.1 Γιατί Python και σχετικά με την άδεια}
 
-Python is a scripting language that was designed with the goal of being easy
-to program. It has a mechanism for automatically releasing memory that is no
-longer used (garbagge collector). A further advantage is that many programs
-that are written in C++ or Java offer the possibility to write extensions in
-Python, e.g. OpenOffice or Gimp. Therefore it is a good investment of time to
-learn the Python language.
+Η Python είναι μία γλώσσα η οποία σχεδιάστηκε με σκοπό να είναι εύκολη για προγραμματισμό. Διαθέτει ένα μηχανισμό για αυτόματη απελευθέρωση μνήμης που δεν χρησιμοποιείται πλέον (συλλέκτης σκουπιδιών – garbage collector). Ένα περαιτέρω πλεονέκτημα είναι οτι πολλά προγράμματα που είναι γραμμένα σε C++ ή Java προσφέρουν τη δυνατότητα γραφής προεκτάσεων (extension) σε Python, π.χ. Open Office ή GIMP. Οπότε είναι μια καλή επένδυση χρόνου η εκμάθηση της Python.
 
-PyQGIS plugins take advantage of the functionality of libqgis\_core.so and libqgis\_gui.so. 
-As both libqgis\_core.so and libqgis\_gui.so are licensed under GNU GPL, QGIS Python 
-plugins must also be licenced under the GPL. This means you may use your plugins 
-for any purpose, and you are not forced to publish them. If you do publish them however, 
-they must be published under the conditions of the GPL license. 
+Τα PyQGIS plugin εποφελούνται απο τη λειτουργικότητα των libqgis\_core.so και libqgis\_gui.so. Καθώς τα προαναφερθέντα έχουν εκδοθεί υπο την άδεια GNU GP, τα plugin του QGIS σε Python πρέπει επίσης να έχουν τη GPL άδεια. Αυτό σημαίνει ότι μπορείτε να χρησιμοποιείτε τα plugins σας για οποιοδήποτε σκοπό, ενω δεν είστε ταυτόχρονα υποχρεωμένοι να τα εκδόσετε. Αν όμως τα εκδόσετε εν τέλει, αυτό πρέπει να γίνει υπό τους όρους της GPL άδειας. 
 
-\subsection{What needs to be installed to get started}
+\subsection{3.2 Τι χρειάζεται να εγκατασταθεί για να ξεκινήσετε}
 
-You will need the following libraries and programs to create QGIS python plugins yourself:
+Θα χρειατείτε τις παρακάτω βιβλιοθήκες και προγράμματα για να δημιουργήσετε μόνοι σας plugins με Python στο QGIS:
 
 \begin{itemize}
 \item QGIS
 \item Python >= 2.5
 \item Qt
 \item PyQT
-\item PyQt development tools
+\item Εργαλεία ανάπτυξης PyQt
 \end{itemize}
 
-If you use Linux, there are binary packages for all major distributions. For
-Windows, the PyQt installer contains Qt, PyQt and the PyQt development tools.
+Αν χρησιμοποιείτε Linux, υπάρχουν τα δυαδικά πακέτα για όλες τις κύριες διανομές. Για τα Windows, το πρόγραμμα εγκατάστασης του PyQt εμπεριέχει Qt, PyQt και τα εργαλεία ανάπτυξης του PyQt. 
 
-\subsection{Programming a simple PyQGIS Plugin in four steps}\label{subsec:pyfoursteps}
+\subsection{3.3 Προγραμματίζοντας ένα απλό PyQGIS plugin σε τέσσερα βήματα.}\label{subsec:pyfoursteps}
 
-The example plugin demonstrated here is intentionally kept simple. It adds a button to the menu
-bar of QGIS. When the button is clicked, a file dialog appears where the user
-may load a shape file.
+Το παράδειγμα του plugin που παρουσιάζεται εδώ είναι εσκεμένα απλό. Προσθέτει ένα κουμπί στην μπάρα των μενού του QGIS. Όταν το κουμπί πατηθεί, ένας διάλογος εμφανίζεται όπου ο χρήστης μπορέι να φορτώσει ένα shape file.
 
-For each python plugin, a dedicated folder that contains the plugin files
-needs to be created. By default, QGIS looks for plugins in
-two locations: \$QGIS\_DIR/share/qgis/python/plugins and \$HOME/.qgis/python/plugins.
-Note that plugins installed in the latter location are only visible for one user.
+Για κάθε plugin σε Python, ένας αποκλειστικός φάκελος που περιέχει τα αρχεία του plugin πρέπει να δημιουργηθεί. Εξ ορισμου, το QGIS ψάχνει για plugin σε δύο τοποθεσίες: \$QGIS\_DIR/share/qgis/python/plugins και \$HOME/.qgis/python/plugins.
+Σημειώστε ότι τα plugins που εγκαθίστανται σε μετέπειτα είναι ορατά μόνο απο ένα χρήστη. 
 
-\minisec{Step 1: Make the plugin manager recognise the plugin}
+\minisec{Βήμα 1ο: Κάντε το διαχειριστή του plugin (Plugin Manager) να αναγνωρίζει το plugin}
 
-Each Python plugin is contained in its own directory. When QGIS starts up it
-will scan each OS specific subdirectory and initialize any plugins it finds. 
+Κάθε plugin της Python εμπεριέχεται μέσα σε ένα δικό του κατάλογο. Όταν το QGIS ξεκινάει θα ελέγξει κάθε συγκεκριμένο υποκατάλογο του λειτουργικου συστήματος (OS) και θα ξεκινήσει όποια plugin βρεί.  
 
 \begin{itemize}
 \item \nix{Linux and other unices}:\\
@@ -75,26 +55,19 @@ C:\textbackslash Documents and Settings\textbackslash\$USERNAME\textbackslash .q
 
 \end{itemize}
 
-Once that is done, the plugin will show up in the
+Αφού τελειώσει, το plugin θα εμφανιστεί στο Διαχειριστη Plugin (Plugin Manager)
 \dropmenuopttwo{mActionShowPluginManager}{Plugin Manager...}
 
-To provide the neccessary information for QGIS, the plugin needs to implement
-the methods \method{name()}, \method{description()}, \method{version()},
-\method{qgisMinimumVersion()} and \method{authorName()} which return descriptive strings.
-The \method{qgisMinimumVersion()} should return a simple form, for example ``1.0``. A plugin also needs a method
-\method{classFactory(QgisInterface)} which is called by the plugin manager to create
-an instance of the plugin. The argument of type QGisInterface is used by the
-plugin to access functions of the QGIS instance. We are going to work with
-this object in step 2.  
+Για να παρέχει τις απαραίτητες πληροφορίες για το QGIS, το plugin χρειάζεται να εφαρμόσει τις μεθόδους  \method{name()}, \method{description()}, \method{version()},
+\method{qgisMinimumVersion()} και \method{authorName()} οι οποίες επιστρέφουν περιγραφικούς χαρακτήρες.
+Η μέθοδος \method{qgisMinimumVersion()} θα έπρεπε να επιστρέφει μια απλή μορφή, για παράδειγμα “1.0”. θα έπρεπε να επιστρέφει μια απλή μορφή, για παράδειγμα “1.0” \method{classFactory(QgisInterface)} η οποία καλείται απο το Διαχειριστή plugin να δημιουργήσει ένα αντικείμενο (instance) του plugin. H παράμετρος του τύπου QgisInterface χρησιμοποιείται απο το plugin για να έχει πρόσβαση σε λειτουργίες της μεταβλητής του QGIS. Θα δουλέψουμε με αυτό το αντικείμενο στο δεύτερο βήμα. 
 
-Note that in contrast to other programing languages, indention is very
-important. The Python interpreter throws an error if it is not correct.
+Σημειώστε ότι σε αντίθεση με άλλες γλώσσες προγραμματισμού η δημιουργία «εσοχών» είναι πολύ σημαντική. Ο μεταφραστής του Python δείχνει λάθος αν δεν είναι σωστή. 
 
-For our plugin we create the plugin folder 'foss4g\_plugin' in
-\filename{\$HOME/.qgis/python/plugins}. Then we add two new textfiles into this
-folder, \filename{foss4gplugin.py} and \filename{\_\_init\_\_.py}.
+Για το plugin μας δημιουργούμε το φάκελο 'foss4g\_plugin' μέσα στο 
+\filename{\$HOME/.qgis/python/plugins}. Μετά προσθέτουμε δύο νέα αρχεία κειμένου σε αυτό το φάκελο,, \filename{foss4gplugin.py} και \filename{\_\_init\_\_.py}.
 
-The file \filename{foss4gplugin.py} contains the plugin class:
+Το αρχέιο \filename{foss4gplugin.py} εμπεριέχει την παρακάτω κλάση του plugin: 
 
 \begin{verbatim}
 # -*- coding: utf-8 -*-
@@ -118,11 +91,9 @@ def unload(self):
   print 'Unloading plugin'
 \end{verbatim}
 
-The file \filename{\_\_init\_\_.py} contains the methods \method{name()},
+Το αρχείο \filename{\_\_init\_\_.py} περιέχει τις μεθόδους \method{name()},
 \method{description()}, \method{version()}, \method{qgisMinimumVersion()}
-and \method{authorName()} and \method{classFactory}. As
-we are creating a new instance of the plugin class, we need to import the
-code of this class:
+και \method{authorName()} και \method{classFactory}. Καθώς δημιουργούμε ένα καινουργιο αντικείμενο της κλάσης του plugin χρειάζεται να εισάγουμε τον κώδικα της παρακατω κλάσης:
 
 \begin{verbatim}
 # -*- coding: utf-8 -*-
@@ -141,31 +112,22 @@ def classFactory(iface):
     return FOSS4GPlugin(iface)
 \end{verbatim}
 
-At this point the plugin already has the neccessary infrastructure to appear in
-the QGIS \dropmenuopttwo{mActionShowPluginManager}{Plugin Manager...} to be
-loaded or unloaded. 
+Σε αυτό το σημείο, το plugin έχει την απαραίτητη υποδομή να εμφανιστεί στον Διαχειριστή Plugin \dropmenuopttwo{mActionShowPluginManager}{Plugin Manager...} έτσι ώστε να φορτωθέι ή όχι. 
 
-\minisec{Step 2: Create an Icon for the plugin}
+\minisec{Βήμα 2ο: Δημιουργείστε ένα εικονίδιο για το plugin.}
 
-To make the icon graphic available for our program, we need a so-called
-resource file. In the resource file, the graphic is contained in hexadecimal
-notation. Fortunately, we don't need to worry about its representation because
-we use the pyrcc compiler, a tool that reads the file
-\filename{resources.qrc} and creates a resource file. 
+Για να κάνουμε το γραφικό εικονίδιο διαθέσιμο για το πρόγραμμα μας, χρειαζόμαστε το “υποτιθέμενο” πηγαίο αρχείο. Στο πηγαίο αρχείο, το γραφικό περιέχεται σε δεκαεξαδική μορφή (hexadecimal). Ευτυχώς δεν χρειάζεται να ανησυχούμε για την απεικόνιση του γιατί χρησιμοποιούμε τον συντάκτη (compiler) pyrcc, ένα εργαλείο που διαβάζει το αρχείο \filename{resources.qrc} και δημιουργεί ένα πηγαίο (resource) αρχείο.
 
-The file \filename{foss4g.png} and the \filename{resources.qrc} we use in
-this workshop can be downloaded from \url{http://karlinapp.ethz.ch/python\_foss4g}, you 
-can also use your own icon if you prefer, you just need to make sure it is named 
-\filename{foss4g.png}. Move these 2 files into the directory of the example plugin 
-\filename{\$HOME/.qgis/python/plugins/foss4g\_plugin} and enter: \filename{pyrcc4 -o
+Το αρχείο \filename{foss4g.png} και το \filename{resources.qrc} που χρησιμοποιούμε σε αυτό το workshop, μπορείτε να τα κατεβάσετε απο: \url{http://karlinapp.ethz.ch/python\_foss4g}, μπορείτε επίσης να χρησιμοποιήσετε το δικό σας εικονίδιο αν προτιμάτε, απλα πρέπει να σιγουρευτείτε ότι θα ονομάζεται
+\filename{foss4g.png}. Μετακινήστε αυτά τα δύο αρχεία μέσα στον κατάλογο του plugin στο παράδειγμα: 
+\filename{\$HOME/.qgis/python/plugins/foss4g\_plugin} και εισάγετε: \filename{pyrcc4 -o
 resources.py resources.qrc}.
 
-\minisec{Step 3: Add a button and a menu}
+\minisec{Βήμα 3ο: Προσθέστε ένα κουμπί και ένα μενού}
 
-In this section, we implement the content of the methods \method{initGui()} and
-\method{unload()}. We need an instance of the class \classname{QAction} that executes the
-\method{run()} method of the plugin. With the action object, we are then able to
-generate the menu entry and the button:
+Σε αυτό το κεφάλαιο, εφαρμόζουμε το περιεχόμενο των μεθόδων \method{initGui()} και
+\method{unload()}. Χρειαζόμαστε μία μεταβλητή της κλάσης\classname{QAction} που εκτελεί τη μέθοδο
+\method{run()} του plugin. Με το αντικείμενο action, μετά μπορούμε να αναπαράγουμε την καταχώρηση του μενού και το κουμπί: 
 
 \begin{verbatim}
 import resources
@@ -187,17 +149,11 @@ self.iface.getMainWindow())
     self.iface.removeToolBarIcon(self.action)
 \end{verbatim}
 
-\minisec{Step 4: Load a layer from a shape file}
+\minisec{Βήμα 4ο: Φορτώστε ένα επίπεδο απο ένα shape file.}
 
-In this step we implement the real functionality of the plugin in the
-\method{run()} method. The Qt4 method \method{QFileDialog::getOpenFileName}
-opens a file dialog and returns the path to the chosen file. If the user
-cancels the dialog, the path is a null object, which we test for. We then
-call the method \method{addVectorLayer} of the interface object which loads
-the layer. The method only needs three arguments: the file path, the name of
-the layer that will be shown in the legend and the data provider name. For
-shapefiles, this is 'ogr' because QGIS internally uses the OGR library to
-access shapefiles:
+Σε αυτό το βήμα εφαρμόζουμε την πραγματική λειτουργικότητα του plugin στη μέθοδο
+\method{run()}. Η Qt4 μέθοδος \method{QFileDialog::getOpenFileName}
+ανοίγει ένα πλαίσιο διαλόγου και επιστρέφει τη διαδρομή για το επιλεγμένο αρχείο. Αν ο χρήστης ακυρώσει το διάλογο, η διαδρομή είναι ένα κενό αντικείμενο, το οποίο ελέγχουμε. Μετά καλούμε τη μέθοδο \method{addVectorLayer} του αντικειμένου που φορτώνει το επίπεδο πληροφορίας. Η μέθοδος χρειάζεται μόνο τρία αντικέιμενα: τη διαδρομή του αρχείου, το όνομα του επιπέδου το οποίο θα φαίνεται στο υπόμνημα και το όνομα του παροχέα δεδομένων. Για τα shapefiles υπάρχει το “org” επειδή το QGIS εσωτερικά χρησιμοποιεί την OGR βιβλιοθήκη για να έχει προσβαση στα shapefiles: 
 
 \begin{verbatim}
     def run(self):
@@ -209,57 +165,37 @@ access shapefiles:
       vlayer = self.iface.addVectorLayer(fileName, "myLayer", "ogr")
 \end{verbatim}
 
-\minisec{Signal 'activated ()' in python plugins is deprecated}
+\minisec{Το σήμα’activated ()’ στα plugins της Python αποφεύγεται}
 
-When writing your python plugin, remember that the \texttt{activated ()}
-signal of the 'QAction class', used to signal the plugin it has been
-activated, is deprecated. This signal has disappeared from Qt4 and if Qt4 is
-not compiled with the Qt3 backward compatibility, it is simply non existent,
-so no plugin can be called at all.
+Όταν γράφετε το plugin σας σε python θυμηθείτε ότι το σήμα \texttt{activated ()}
+που χρησιμοποιείται για να δώσει σήμα στο plugin ότι έχει ενεργοποιηθεί, αποφεύγεται. Το σήμα έχει εξαφανισθεί απο το Qt4 και αν το Qt4 δεν έχει συνταχθεί (compiled) με το Qt3 και αντίστροφα, είναι απλά ανύπαρκτο, έτσι δεν μπορεί να καλεσθεί καθόλου plugin.
 
-Please replace \texttt{activated ()} with \texttt{triggered ()}.
+Αντικαταστήστε το \texttt{activated ()} με \texttt{triggered ()}.
 
-\subsection{Uploading the plugin to the repository}
+\subsection{3.4 Ανεβάζοντας το plugin στο αποθετήριο}
 
-If you have written a plugin you consider to be useful and you want to share with
-other users you are welcome to upload it to the QGIS User-Contributed Repository.
+Αν έχετε γράψει ένα plugin που θεωρείτε ότι έιναι χρήσιμο και θέλετε να το μοιραστείτε μαζί με άλλους χρήστες είστε ευπρόσδεκτοι να το ανεβάσετε στο συνησφερόμενο απο τους χρήστες αποθετήριο του QGIS.
 \begin{itemize}
-\item Prepare a plugin directory containing only the necessary files (ensure that there
-is no compiled .pyc files, Subversion .svn directories etc).
-\item Make a zip archive of it, including the directory. Be sure the zip file
-name is exactly the same as the directory inside (except the .zip extension of course), if not 
-the Plugin Installer will be unable to relate the available plugin with its 
-locally installed instance.
-\item Upload it to the repository: \url{http://pyqgis.org/admin/contributed} (you
-will need to register at first time). Please pay attention when filling the form.
-The Version Number field is especially important, and if filled out incorrectly it may confuse the Plugin Installer and cause false notifications of available updates.
+\item Ετοιμάστε έναν κατάλογο του plugin περιέχοντας μόνο τα απαραίτητα αρχεία (σιγουρευτείτε ότι δεν υπάρχουν συνταγμένα αρχεία .pyc , κατάλογοι .svn κλπ)
+\item Φτιάξτε ένα συμπιεσμένο αρχείο του, συμπεριλαμβάνοντας τον κατάλογο. Σιγουρευτείτε ότι το όνομα του συμπιεσμένου αρχείου είναι ακριβώς το ίδιο όπως του καταλόγου μέσα (εκτός απο την κατάληξη .zip φυσικά), αν το πρόγραμμα εγκατάστασης του plugin δεν θα μπορεί να συσχετίσει τα διαθέσιμα plugin με τις τοπικά εγκατεστημένες μεταβλητές του.
+\item Ανεβάστε το στο αποθετήριο: \url{http://pyqgis.org/admin/contributed} (θα χρειαστεί να εγγραφείτε την πρώτη φορά. Παρακαλούμε δώστε προσοχή όταν συμπληρώνετε τη φόρμα. Το πεδίο της Έκδοσης Αριθμού είναι ιδιαίτερα σημαντικό, και αν συμπληρωθεί λανθασμένα μπορεί να μπερδέψει το πρόγραμμα εγκατάστασης του plugin και να προκαλέσει λανθασμένες ειδοποιήσεις διθέσιμων ενημερώσεων. 
 \end{itemize}
 
-\subsection{Further information}
+\subsection{3.5Περαιτέρω πληροφορίες}
 
-As you can see, you need information from many different sources to a write PyQGIS
-plugin. Plugin authors need to know Python, the QGIS plugin interface, as well 
-as the Qt4 classes and tools. In the beginning, it is best to learn from
-examples and copy the mechanism of existing plugins. Using the QGIS plugin
-installer, which itself is a Python plugin, it is possible to download many 
-existing Python plugins and to study their behaviour. It is also possible to use 
-the on-line Python plugin generator to create a base plugin to work off of. This on-line 
-tool will help you to build a minimal plugin that you can use as a starting point in your 
-development. The result is a ready to install QGIS 1.0 plugin that implements an 
-empty dialog with Ok and Close buttons. It is available here: \url{http://www.pyqgis.org/builder/plugin_builder.py}
+Όπως βλέπετε χρειάζεστε πληροφορίες απο διάφορες πηγές για να γράψετε ένα PyQGIS plugin. Όσοι γράφουν plugin πρέπει να γνωρίζουν Python, το περιβάλλον (interface) του QGIS plugin, όπως επίσης και τις Qt4 κλάσεις και τα εργαλεία.  Στην αρχή το καλύτερο είναι να μαθαίνουμε απο παραδείγματα και να αντιγράφουμε τους μηχανισμούς υπαρχόντων plugin. Χρησιμοποιώντας το πρόγραμμα εγκατάστασης του QGIS plugin, το οποίο απο μόνο του είναι ένα plygin Python, είναι δυνατόν να κατεβάσουμε πολλά υπάρχοντα Python plugin και να μελετήσουμε τη συμπεριφορά τους. Είναι επίσης δυνατόν να χρησιμοποιήσουμε τον on-line Python plugin δημιουργο για να δημιοθργήσουμε μια βάση απο την οποία θα δουλέψουμε. Αυτό το on-line εργαλείο θα σας βοηθήσει να γράψετε ένα μηδαμινό plugin το οποίο μπορείτε να χρησιμοποιήσετε ως σημείο αναφοράς για την περαιτέρω εργασία σας στην ανάπτυξη. Το αποτέλεσμα είναι ένα έτοιμο προς χρηση QGIS 1.0 plugin
+ το οποίο εφαρμόζει έναν άδειο διάλογο με ΟΚ και Close κουμπιά. Είναι διαθέσιμο εδώ: \url{http://www.pyqgis.org/builder/plugin\_builder.py}
 
-There is a a collection of on-line documentation that may be useful for PyQGIS programmers:
+Υπάρχει μία συλλογή απο on-line βιβλιογραφία η οποία μπορεί να φανέι χρήσιμη για τους προγραμματιστές PyQGIS:
  
 \begin{itemize}
 \item QGIS wiki: \url{http://wiki.qgis.org/qgiswiki/PythonBindings}
-\item QGIS API documentation: \url{http://doc.qgis.org/index.html}
-\item Qt documentation: \url{http://doc.trolltech.com/4.3/index.html}
+\item QGIS βιβλιογραφία: \url{http://doc.qgis.org/index.html}
+\item Qt βιβλιογραφία: \url{http://doc.trolltech.com/4.3/index.html}
 \item PyQt: \url{http://www.riverbankcomputing.co.uk/pyqt/}
-\item Python tutorial: \url{http://docs.python.org/}
-\item A book about desktop GIS and QGIS. It contains a chapter about PyQGIS
-plugin programing: \url{http://www.pragprog.com/titles/gsdgis/desktop-gis} 
+\item Μαθήματα Python: \url{http://docs.python.org/}
+\item Ένα βιβλίο σχετικά με τα Desktop GIS και QGIS. Περιέχει ένα κεφάλαιο σχετικά με προγραμματισμό PyQGIS plugin: \url{http://www.pragprog.com/titles/gsdgis/desktop-gis} 
 \end{itemize}
 
-You can also write plugins for QGIS in C++. See Section \ref{cpp_plugin} for
-more information about that.
+Μπορείτε επίσης να γράψετε plugins για το QGIS σε C++. Ανατρέξατε το κεφάλαιο \ref{cpp_plugin} για περισσότερες πληροφορίες σχετικά με αυτό. 
 

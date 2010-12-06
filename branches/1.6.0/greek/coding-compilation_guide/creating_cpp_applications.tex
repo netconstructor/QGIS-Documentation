@@ -1,21 +1,15 @@
-\section{Creating C++ Applications}
+\section{2 Creating C++ Applications}
 
-Not everyone wants a full blown GIS desktop application. Sometimes you want
-to just have a widget inside your application that displays a map while the
-main goal of the application lies elsewhere. Perhaps a database frontend with
-a map display? This Section provides two simple code examples by Tim Sutton, 
-based on earlier work by Francis Bolduc. They are available in the qgis 
-subversion repository together with more interesting tutorials. Check out 
-the whole repository from: \filename{https://svn.osgeo.org/qgis/trunk/code\_examples/}
+Δεν θέλουν όλοι μία υπερ-ανεπτυγμένη GIS εφαρμογή. Μερικές φορές θέλεις απλά να να έχεις ένα απλό widget μέσα στην εφαρμογή σου το οποίο παρουσιάζει ένα χάρτη ενώ ο κύριος στόχος της εφαρμογής να είναι άλλος. Ίσως μία βάση δεδομένων παρουσιασμένος παράλληλα με ένα χάρτη;  Αυτή η ενότητα παρέχει δύο απλά παραδείγματα κώδικα απο τον Tim Sutton, βασισμένα σε προγενέστερη δουλειά του Francis Bolduc. Είναι διαθέσιμα στα αποθετήρια (subversion repositories) του QGIS μαζί με ενδιαφέροντα tutorials. Μπορείτε να ελέγξετε το αποθετήριο στον παρακάτω σύνδεσμο: \filename{https://svn.osgeo.org/qgis/trunk/code\_examples/}
 
-\subsection{Creating a simple mapping widget}\label{subsec:simple_widget}
+\subsection{2.1 Creating a simple mapping widget}\label{subsec:simple_widget}
 
 With this tutorial we will create a simple mapping widget. It won't do 
 anything much - just load a shape file and display it in a random colour. 
 This should give you an idea of the potential for using QGIS as an embedded
 mapping component.
 
-We start by adding the neccessary includes for our app:
+Θα αρχίσουμε με το να προσθέσουμε τα απαραίτητα συστατικά για την εφαρμογή μας:
 
 \begin{verbatim}
 //
@@ -35,24 +29,15 @@ We start by adding the neccessary includes for our app:
 #include <QWidget>
 \end{verbatim}
 
-We use QgsApplication instead of Qt's QApplication, to take advantage of 
-various static methods that can be used to locate library paths and so on.
+Χρησιμοποιούμε το QgsApplication για το QΑpplication του Qt, για να επωφεληθούμε απο τις ποικίλες στατικές μεθόδους που μπορούν να χρησιμοποιηθούν για να εντοπίσουμε τις βιβλιοθήκες και ούτω καθ' εξής. 
 
-The provider registry is a singleton that keeps track of vector data provider
-plugins. It does all the work for you of loading the plugins and so on. The
-single symbol renderer is the most basic symbology class. It renders points,
-lines or polygons in a single colour which is chosen at random by default
-(though you can set it yourself). Every vector layer must have a symbology
-associated with it.
+Το μητρώο του παροχέα είναι κάτι το μοναδικό που γνωρίζει απο plugin διανυσματικών δεδομένων. Κάνει όλη τη δουλειά για σας φορτώνοντας τα plugin και ούτω καθ' εξής. O renderer του μοναδικού συμβόλου είναι η πιο βασική κλάση συμβολισμού. Κάνει render σε σημεία, γραμμές (polylines) και πολύγωνα σε ένα μοναδικό χρώμα το οποίο επιλέγεται τυχαία εξ'ορισμού (παρ' όλο που μπορείς να το θέσεις μόνος σου). Κάθε επίπεδο διανυσματικής μορφής θα πρέπει να έχει μια συμβολογία με την οποία να σχετίζεται. 
 
-The map layer registry keeps track of all the layers you are using. The
-vector layer class inherits from maplayer and extends it to include
-specialist functionality for vector data.
+Το μητρώο των επιπέδων του χάρτη “γνωρίζει” όλα τα επίπεδα που χρησιμοποιείτε. Η κλάση του διανυσματικού επιπέδου “κληρονομεί” απο το επίπεδο χάρτη και το επεκτείνει έτσι ώστε να συμπεριλαμβάνει για τα διανυσματικά δεδομένα. 
 
-Finally, the mapcanvas is our main map area. Its the drawable
-widget that our map will be dispalyed on.
+Εν τέλει, ο κανβάς του χάρτη είναι η κύρια περιοχή του χάρτη μας. Είναι το σχειδιαζόμενο widget πάνω στο οποίο ο χάρτης μας θα εμφανίζεται.
 
-Now we can move on to initialising our application....
+Τώρα μπορούμε να προχωρήσουμε στην έναρξη της εφαρμογής μας...
 
 \begin{verbatim}
 int main(int argc, char ** argv)
@@ -67,31 +52,22 @@ int main(int argc, char ** argv)
 
 \end{verbatim}
 
-We now have a qgsapplication and we have defined several variables. Since this 
-tutorial was initially tested on Ubuntu Linux 8.10, we have specified the 
-location of the vector provider plugins as being inside our development install 
-directory. It would probaby make more sense in general to keep the QGIS libs in one of the
-standard library search paths on your system (e.g. /usr/lib) but this way
-will do for now.
+Τώρα έχουμε μία  qgsapplication και έχουμε ορίσει μερικές μεταβλητές. Απο τη στιγμή που αυτό το μάθημα αρχικά δοκιμάστηκε σε Ubuntu Linux 8.10, έχουμε ορίσει την θέση του διανυσματικού παροχέα plugin να βρίσκεται μέσα στο φάκελο ανάπτυξης εγκατάστασης. Προφανώς θα είχε περισσότερο νόημα να κρατήσουμε τα QGIS libs σε φάκελο με μια απο τις αρχικές βιβλιοθήκες στο σύστημά σας (π.χ. /usr/lib) αλλά αυτός ο τρόπος είναι επαρκής προς το παρόν. 
 
-The next two variables defined here point to the shapefile that is going to
-be used (though you will likely want to substitute your own data here).
+Οι επόμενες δύο μεταβλητές που ορίζονται εδώ εστιάζουν στο shape file το οποίο πρόκειται να χρησιμοποιηθεί (παρ' όλο που θα θέλατε να αντικατασήσετε με τα δικά σας δεδομένα εδώ). 
 
-The provider name is important - it tells qgis which data provider to use to
-load the file. Typically you will use 'ogr' or 'postgres'.
+Το όνομα του παροχέα είναι σημαντικό – λέει στο qgis ποιόν παροχέα δεδομένων να χρησιμοποιήσει για να φορτώσει το αρχείο. Τυπικά θα χρησιμοποιήσετε το 'org' ή postgres'
 
-Now we can go on to actually create our layer object.
+Τώρα μπορούμε να προχωρήσουμε στην ουσιαστική δημιουργία του αντικείμενου του επιπέδου.
 
 \begin{verbatim}
   // Instantiate Provider Registry
   QgsProviderRegistry::instance(myPluginsDir);
 \end{verbatim}
 
-First we get the provider registry initialised. Its a singleton class so we
-use the static instance call and pass it the provider lib search path. As it
-initialises it will scan this path for provider libs.
+Αρχικά βάζουμε τον παροχέα μητρώου να ξεκινήσει. Είναι μια μοναδική κλάση, οπότε καλούμε τη στατική μεταβλητή και την περνάμε στην αναζήτησης του φακέλου του παροχέα lib. Καθώς ξεκινάει θα ψάξει αυτό το φάκελο για παροχέα libs.
 
-Now we go on to create a layer...
+Τώρα προχωράμε στη δημιουργία του layer... 
 
 \begin{verbatim}
   QgsVectorLayer * mypLayer =
@@ -117,15 +93,9 @@ QgsSingleSymbolRenderer(mypLayer->geometryType());
 
 \end{verbatim}
 
-The code is fairly self explanatory here. We create a layer using the
-variables we defined earlier. Then we assign the layer a renderer. 
-When we create a renderer, we need to specify the geometry type, which 
-we do by asking the vector layer for its geometry type. Next we add 
-the layer to a layerset (which is used by the QgsMapCanvas to keep 
-track of which layers to render and in what order) and to the maplayer 
-registry. Finally we make sure the layer will be visible.
+TΟ κώδικας είναι αρκετά κατανοήσιμος εδώ. Δημιουργούμε ένα επίπεδο πληροφορίας χρησιμοποιώντας τις μεταβλητές που ορίσαμε νωρίτερα. Έπειτα αναθέτουμε στο επίπεδο ένα renderer. Όταν δημιουργούμε έναν renderer πρέπει να καθορίσουμε τον τύπο γεωμετρίας, το οποίο το κάνουμε ζητώντας απο το διανυσματικό επίπεδο πληροφορίας για τον τύπο γεωμετρίας. Έπειτα προσθέτουμε το επίπεδο πληροφορίας σε ένα σύνολο επιπέδων (layerset) (το οποίο χρησιμοποιείται απο το QgsMapCanvas για να γνωρίζει επίπεδα πληροφορίας να κάνει render και με ποιά σειρά) και στο μητρώο του επιπέδου πληροφορίας χάρτη (maplayer). Στο τέλος σιγουρευόμαστε ότι το επίπεδο θα είναι ορατό. 
 
-Now we create a map canvas on to which we can draw the layer.
+Τώρα θα δημιουργήσουμε έναν κανβά του χάρτη πάνω στο οποίο θα σχεδιάσουμε το επίπεδο πληροφορίας.
 
 \begin{verbatim}
   // Create the Map Canvas
@@ -141,10 +111,7 @@ Now we create a map canvas on to which we can draw the layer.
 
 \end{verbatim}
 
-Once again there is nothing particularly tricky here. We create the canvas
-and then we set its extents to those of our layer. Next we tweak the canvas a bit
-to draw antialiased vectors. Next we set the background colour, unfreeze the
-canvas, make it visible and then refresh it.
+Για άλλη μία φορά δεν υπαρει κάτι δύσκολο εδώ. Δημιουργούμε τον κανβα και μετά θέτουμε τις επεκτάσεις του επιπέδου πληροφορίας μας. Έπειτα “τσιμπάμε” λίγο τον κανβά έτσι ωστε να σχεδιάσουμε πιο λεία διανυσματικά αρχεία (vectors).  Έπειτα θέτουμε το χρώμα του backgroung, “ξεπαγώνουμε” τον κανβά, τον κάνουμε ορατό και το ανανεώνουμε.
 
 \begin{verbatim}
   // Start the Application Event Loop
@@ -153,8 +120,7 @@ canvas, make it visible and then refresh it.
 
 \end{verbatim}
 
-In the last step we simply start the Qt event loop and we are done. You
-can check out, compile and run this example using cmake like this:
+Στο τελευταίο βήμα απλά ξεκινάμε τον Qt βρόχο και είμαστε έτοιμοι. Μπορείτε να ελέγξετε, να συνθέσετε και να τρέξετε το παράδειγμα χρησιμοποιώντας το cmake όπως παρακάτω:
 
 \begin{verbatim}
 svn co
@@ -171,48 +137,33 @@ make
 ./timtut1
 \end{verbatim}
 
-When we compile and run it here is what the running app looks like:
+Όταν το συνθέτουμε και το τρέξουμε κάπως έτσι θα μοιάζει η εφαρμογή μας.:
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{Simple C++ Application \osxcaption}\label{fig:cpp1_application}\smallskip
+   \caption{Μια απλή C++ εφαρμογή \osxcaption}\label{fig:cpp1_application}\smallskip
    \includegraphics[clip=true]{cpp1_application}
 \end{center}
 \end{figure}
 
-\subsection{Working with QgsMapCanvas}
+\subsection{2.2 Δουλεύοντας με το QgsMapCanvas}
 
-In the previous Section (Section~\ref{subsec:simple_widget}) we showed you how to use 
-the QgsMapCanvas API to create a simple application that loads a shapefile and
-displays the points in it. But what good is a map that you can't interact
-with? 
+Στην προηγούμενη ενότητα (ενότητα 2.1) δείξαμε πως να χρησιμοποιήσετε το API του QgsMapCanvas για να δημιουργήσετε μια απλή εφαρμογή που φορτώνει ένα shapefile και δείχνει τα σημεία πάνω του. Αλλά πόσο καλός είναι ένας χάρτης με τον οποίο δεν μπορείς να επικοινωνήσεις; 
 
-In this second tutorial we will extend the previous tutorial by making it a
-QMainWindow application with a menu, toolbar and canvas area. We show you how
-to use QgsMapTool - the base class for all tools that are used to interact with
-the map canvas. The project will provide 4 toolbar icons for
+Σε αυτό το δεύτερο μάθημα θα επεκτείνουμε το προηγούμενο μάθημα κάνοντάς το μια QmainWindow εφαρμογή με μενού, εργαλειοθήκη και περιοχή κανβά.  Σας δείχνουμε πως να χρησιμοποιείτε το QgsMapTool - την κλάση βάση για όλα τα εργαλεία που χρησιμοποιούνται για να αλληλεπιδρούν με τον κανβά του χάρτη. Η εργασία θα παρέχει τέσσερα εικονίδια για την εργαλειοθήκη για να 
 
 \begin{itemize}
- \item loading a map layer (layer name is hard coded in the application
- \item zooming in
- \item zooming out
- \item panning
+ \item προστίθεται ένα επίπεδο χάρτη 
+ \item γίνεται ζουμ προς τα μέσα
+ \item γίνεται ζουμ προς τα έξω
+ \item να είναι δυνατή η μετακίνηση (panning)
 \end{itemize}
 
-In the working directory for the tutorial code you will find a number of files
-including c++ sources, icons and a simple data file under data. There is also
-the .ui file for the main window.
+Στον κατάλογο εργασίας για τον κώδικα του μαθήματος θα βρείτε έναν αριθμό απο αρχεία συμπεριλαμβάνοντας τον πηγαίο κώδικα C++ , εικονίδια και ένα απλό αρχείο με δεδομένα κάτω απο τα δεδομένα.  Υπάρχει επίσης και το .ui αρχείο για το κυρίως παράθυρο. 
 
-\textbf{Note:} You will need to edit the .pro file in the above svn directory to
-match your system.
+\textbf{Σημείωση:} θα χρειαστεί να προσαρμόσετε το .pro αρχείο στον κατάλογο svn παραπάνω, για να ταιριάξει με το σύστημά σας. 
 
-Since much of the code is the same as the previous tutorial, we will focus on
-the MapTool specifics - the rest of the implementation details can be
-investigated by checking out the project form SVN. A QgsMapTool is a class that
-interacts with the MapCanvas using the mouse pointer. QGIS has a number of
-QgsMapTools implemented, and you can subclass QgsMapTool to create your own. In
-mainwindow.cpp you will see we have included the headers for the QgsMapTools near the
-start of the file:
+Αφού αρκετός απο τον κώδικα είναι ίδιος με αυτόν του προηγούμενου μαθήματος, θα επικεντρωθούμε στις ιδιαιτερότητες του MapTool -  οι υπόλοιπες απο τις λεπτομέρειες εφαρμογής μπορούν να ερευνηθούν ελέγχοντας τη φόρμα της εργασίας SVN. To QgsMapTool είναι μία κλάση η οποία αλληλεπιδρά με το MapCanvas χρησιμοποιώντας το δείκτη του ποντικιού. Τo QGIS έχει έναν αριθμό απο QgsMapTools εφαρμοσμένα, και μπορείτε να υποδιαιρέσετε την κλάσση του QgsMapTool για να δημιουργήσετε τη δική σας. Στο mainwindow.cpp θα δείτε ότι έχουμε συμπεριλάβει τους αγωγούς για το QgsMapTools κοντά στην αρχή του αρχείου: 
 
 \begin{verbatim}
      //
@@ -231,9 +182,7 @@ start of the file:
      //#include "qgsmeasure.h"
 \end{verbatim}
 
-As you can see, I am only using two types of MapTool subclasses for this
-tutorial, but there are more available in the QGIS library. Hooking up our
-MapTools to the canvas is very easy using the normal Qt4 signal/slot mechanism:
+Όπως βλέπετε χρησιμοποιώ μόνο δύο τύπους των υποκλάσεων του MapTool για αυτό το μάθημα, αλλά υπάρχουν περισσότερες διαθέσιμες στη βιβλιοθήκη του QGIS. Συνεοντας τα MapTools στον κανβάς είναι πολύ εύκολο χρησιμοποιώντας τον κανονικό Qt4 signal/slot μηχανισμό: 
 
 \begin{verbatim}
      //create the action behaviours
@@ -243,8 +192,7 @@ MapTools to the canvas is very easy using the normal Qt4 signal/slot mechanism:
      connect(mActionAddLayer, SIGNAL(triggered()), this, SLOT(addLayer()));
 \end{verbatim}
 
-Next we make a small toolbar to hold our toolbuttons. Note that the mpAction*
-actions were created in designer.
+Μετά δημιουργούμε μια μικρή εργαλειοθήκη για να κρατάμε τα κουμπιά των εργαλείων. Σημειώστε ότι οι ενέργειες mpAction*  δημιουργήθηκαν σε σχεδιαστή 
 
 \begin{verbatim}
      //create a little toolbar
@@ -255,7 +203,7 @@ actions were created in designer.
      mpMapToolBar->addAction(mpActionPan);
 \end{verbatim}
 
-Now we create our three map tools:
+Τώρα δημιουργούμε τα τρία εργαλεία του χάρτη: 
 
 \begin{verbatim}
      //create the maptools
@@ -267,10 +215,7 @@ Now we create our three map tools:
      mpZoomOutTool->setAction(mpActionZoomOut);
 \end{verbatim}
 
-Again nothing here is very complicated - we are creating tool instances, each
-of which is associated with the same mapcanvas, and a different QAction. When
-the user selects one of the toolbar icons, the active MapTool for the canvas is
-set. For example when the pan icon is clicked, we do this:
+Για άλλη μία φορά τίποτα εδώ δεν είναι πολύ μπερδεμένο – δημιουργούμε αντικείμενα εργαλείων, κάθε ένα απο απο τα οποία συνεργάζεται με τον ίδιο κανβα χάρτη και με μία διαφορετική QAction. Όταν ο χρήστης επιλέγει ένα απο τα εικονίδια της εργαλειοθήκης, ορίζεται το ενεργό MapTool για τον κανβας.  Για παράδειγμα όταν ενεργοποιείται το εικονίδιο Pan, κάνουμε το εξής: 
 
 \begin{verbatim}
     void MainWindow::panMode()
@@ -281,19 +226,17 @@ set. For example when the pan icon is clicked, we do this:
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{QMainWindow application with a menu, toolbar and canvas area
+   \caption{Η εφαρμογή QmainWindow με ένα μενού, μία εργαλειοθήκη και εναν κανβά
 \osxcaption}\label{fig:cpp2_application}\smallskip
    \includegraphics[clip=true, width=12cm]{cpp2_application}
 \end{center}
 \end{figure}
 
-\minisec{Conclusion}
+\minisec{Συμπεράσματα}
 
-As you can see extending our previous example into something more functional
-using MapTools is really easy and only requires a few lines of code for each
-MapTool you want to provide.
+Όπως βλέπετε επεκτείνοντας το προηγούμενο παράδειγμα σε κάτι πιο λειτουργικό χρησιμοποιώντας το MapTool είναι πολύ εύκολο και απαιτεί μόνο μερικές γραμμές κώδικα για κάθε MapTool που θέλετε να παρέχετε.
 
-You can check out and build this tutorial using SVN and CMake using the following steps:
+Μπορείτε να ελέγξετε και να γραψετε αυτό το μάθημα χρησιμοποιώντας SVN και Cmake χρησιμοποιώντας τα ακόλουθα βήματα:
 
 \begin{verbatim}
 svn co https://svn.osgeo.org/qgis/trunk/code_examples/2_basic_main_window
