@@ -29,7 +29,7 @@ zugewiesen werden können.
  \includegraphics[width=0.7cm]{mActionOptions} & Transformationseinstellungen \\
  \hline \includegraphics[width=0.7cm]{mActionCapturePoint} & Punkt hinzufügen &
  \includegraphics[width=0.7cm]{mActionDeleteSelected} & Punkt löschen \\
- \hline \includegraphics[width=0.7cm]{mActionEditPaste} & GCP-Punkt verschieben &
+ \hline \includegraphics[width=0.7cm]{mActionMoveFeature} & GCP-Punkt verschieben &
  \includegraphics[width=0.7cm]{mActionPan} & Verschieben \\
  \hline \includegraphics[width=0.7cm]{mActionZoomIn} & Hineinzoomen &
  \includegraphics[width=0.7cm]{mActionZoomOut} & Herauszoomen \\
@@ -118,6 +118,9 @@ Y-Koordinaten ein.
 \item Sie klicken auf einen Punkt in der Rasterkarte und wählen den Knopf
 \button{aus Karte}, um die X- und Y-Koordinaten mit Hilfe einer
 georeferenzierten, in QGIS geladenen Karte hinzuzufügen.
+%%FIXME
+\item With the \includegraphics[width=0.7cm]{mActionMoveFeature} button, 
+you can move the GCPs in both windows, if they are at the wrong place. 
 \end{enumerate}
 \item Geben Sie weitere Bezugspunkte an. Sie sollten mindestens 4 Punkte festlegen, 
 und je mehr Punkte Sie gut verteilt angeben, desto besser wird normalerweise das 
@@ -143,7 +146,10 @@ bestehende Punkte zu löschen, um dadurch das Ergebnis zu verbessern. Die
 \filename{.points} Datei enthält Werte als mapX, mapY, pixelX und pixelY. Sie 
 können die Knöpfe \includegraphics[width=0.7cm]{mActionFileOpen} 'GCP Punkte 
 laden' und \includegraphics[width=0.7cm]{mActionFileSave} 'GCP Punkte speichern' 
-verwenden, um die Dateien zu verwalten.
+verwenden, um die Dateien zu verwalten. 
+%%FIXME 
+Within the GCP table you can click on a column header and therewith enable 
+e.g. numerical sorting. The GCP list is automatically updated.
 
 \minisec{Festlegen der Transformationseinstellungen}
 \label{georeferencer_transformation}
@@ -207,7 +213,7 @@ können Sie zwischen 5 Methoden auswählen.
 \item Lanczos
 \end{enumerate}
 
-\minisec{Festlegen der Ausgabedatei}
+\minisec{Festlegen der Transformationseinstellungen}
 
 Es gibt mehrere Optionen, die für die Ausgabe der Georeferenzierung festgelegt 
 werden müssen. 
@@ -222,10 +228,11 @@ angeben. Als Standard wird eine Datei mit dem Namen [filename]\_modified in
 demselben Ordner, indem sich auch die Ausgangsdatei befindet geschrieben.
 \item Als nächsten Schritt müssen Sie das \textbf{Ziel KBS} (Koordinatenbezugsystem) 
 für die Ergebnisdatei angeben (siehe auch Kapitel~\ref{label_projections}).
-\item Wenn Sie möchten, können Sie auch einen \textbf{Bericht der Transformation 
-als PDF} erstellen. Dort sind dann die Parameter der Transformation, ein Bild der 
-Residuen und eine Liste aller GCPs und ihrer RMS-Fehler angegeben.
-\item Desweiteren können Sie das Kontrollkästchen \checkbox{Zielauflösung} aktivieren 
+%%FIXME
+\item If you like, you can \textbf{generate a pdf map} and also \textbf{a 
+pdf report}. The report ncludes information about the used transformation 
+parameters. An image of the residuals and a list with all GCPs and their 
+RMS errors.\item Desweiteren können Sie das Kontrollkästchen \checkbox{Zielauflösung} aktivieren 
 und eine Pixelauflösung für das Ausgaberaster festlegen. Standard ist der Wert 1.
 \item Das Kontrollkästchen \checkbox{Falls nötig 0 für Transparenz verwenden} sollten 
 Sie aktivieren, wenn es Pixel in dem Ausgaberaster mit dem Wert 0 gibt, die transparent 
@@ -233,6 +240,22 @@ dargestellt werden sollen. In unserem Beispiel wären alle weissen Flächen transp
 \item Abschließend können Sie noch das Kontrollkästchen \checkbox{Wenn fertig in QGIS 
 laden} anwählen. Dadurch wird die Ausgabe automatisch in das Kartenfenster geladen, 
 nachdem die Georeferenzierung abgeschlossen ist.
+\end{itemize}
+
+%%FIXME
+\minisec{Show and adapt raster properties}
+
+Clicking on the \dialog{Raster properties} dialog in the \dropmenuopt{Settings} menu 
+opens the raster properties of the layer that you want to georeference.   
+
+\minisec{Configure the georeferencer}
+
+\begin{itemize}[label=--]
+\item You can define if you want to show GCP coordiniates and/or IDs.
+\item As residual units pixels and map units can be chosen.
+\item For the PDF report a left and right margin can be defined and you can 
+also set the paper size for the PDF map.
+\item Finally you can activate to \checkbox{show georeferencer window docked}. 
 \end{itemize}
 
 \minisec{Starten der Georeferenzierung}\label{georeferencer_running}
