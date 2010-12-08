@@ -461,30 +461,29 @@ InteProxy, расположенном по адресу
 \section{Сервер WMS}\label{sec:ogc-wmsserver}
 \index{WMS!server}
 
-QGIS mapserver is an open source WMS 1.3 implementation which, in addition,
-implements advanced cartographic features for thematic mapping. QGIS
-mapserver является написаным на С++ приложением FastCGI/CGI
+QGIS mapserver это свободная реализация сервера WMS, совместимого со стандартом
+WMS 1.3, которая кроме того имеет дополнительные возможности для тематического
+картографирования. QGIS mapserver является написаным на С++ приложением FastCGI/CGI
 (Common Gateway Interface), которое работает совместно с веб-сервером
 (например, Apache или Lighttpd).
 
-It uses QGIS as backend for the GIS logic and for map rendering. Furthermore the
-Qt library is used for graphics and for platform independent
-C++ programming. In contrast to other WMS software, the QGIS mapserver uses
-cartographic rules in SLD/SE as a configuration language, both for the server
-configuration and for the user-defined cartographic rules.
+Он использует QGIS для отрисовки карты и ГИС-логики. Графическая подсистема
+реализована при помощи библиотеки Qt, это же  позволило получить кроссплатформенность.
+В отличие от других WMS-решений, QGIS mapserver использует картографические
+правила в SLD/SE и как язык конфигурирования сервера, и для описания пользовательских
+картографических правил.
 
-Moreover, the QGIS mapserver project provides the “Publish to Web” plugin, a
-plugin for QGIS desktop which exports the current layers and symbology as a
-web project for QGIS mapserver (containing cartographic visualisation rules
-expressed in SLD).
+Кроме того, проект QGIS mapserver предоставляет расширение <<Publish to Web>>
+для QGIS, при помощи которого можно экспортировать текущие слои и символику
+в проект для QGIS mapserver (включая правила отображения в формате SLD).
 
-As QGIS desktop and QGIS mapserver use the same visualization libraries, the
-maps that are published on the web look the same as in desktop GIS. The
-Publish to Web plugin currently supports basic symbolization, with more complex
-cartographic visualisation rules introduced manually. As the configuration is
-performed with the SLD standard and its documented extensions, there is only
-one standardised language to learn, which greatly simplifies the complexity
-of creating maps for the Web.
+Так как QGIS и QGIS mapserver используют одни и те же библиотеки визуализации,
+карта, опубликованная в Интернет, выглядит точно так же, как и в настольной
+ГИС. Модуль <<Publish to Web>> поддерживает базовую символику, более сложные
+правила картографической визуализации задаются вручную. В качестве конфигурационных
+файлов используется стандарт SLD и его расширения, таким образом, необходимо
+знать только один стандартизированный язык, что значительно уменьшает сложность
+создания карт для Интернет.
 
 Дополнительную информацию можно найти по следующим адресам: \\
 \url{http://karlinapp.ethz.ch/qgis\_wms/} \\
