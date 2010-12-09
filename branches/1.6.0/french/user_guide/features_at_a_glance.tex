@@ -10,7 +10,7 @@ Dans le chapitre \ref{samplesession}, vous avez appris comment démarrer \qg. No
 \begin{itemize}[label=--]
 \item \nix{en présumant que \qg est installé dans le PATH (chemin par défaut), vous pouvez le démarrez en tapant : \usertext{qgis}  dans une ligne de commande ou en cliquant sur l'icône de raccourci sur le bureau dans le menu des applications.} 
 \item \win{démarrez \qg en utilisant le menu Démarrer, l'icône de raccourci présent sur le bureau ou encore, en cliquant sur un fichier de projet \qg}
-\item \osx{double-cliquez sur l'icône de votre répertoire Applications. Si vous avez besoin d'exécuter \qg dans une console, lancez avec \mbox{/chemin-vers-executable/Contents/MacOS/qgis}.}
+\item \osx{double-cliquez sur l'icône de votre répertoire Applications. Si vous avez besoin d'exécuter \qg dans une console, lancez avec \mbox{/chemin-vers-exécutable/Contents/MacOS/qgis}.}
 \end{itemize} 
 
 Pour arrêter \qg, cliquez sur le menu \{\nix{} \win{Fichier} \osx{Qgis} \} > Quitter, ou utilisez le raccourci clavier \keystroke{Ctrl+Q} (osx{\keystroke{cmd+Q}}).
@@ -34,6 +34,9 @@ Usage: QGIS [options] [FILES]
 		[--project projectfile]         load the given \qg project
 		[--extent xmin,ymin,xmax,ymax]  set initial map extent
 		[--nologo]                      hide splash screen
+		[--noplugins]                   don't restore plugins on startup
+		[--optionspath path]            use the given QSettings path
+		[--configpath path]             use the given path for all user configuration
 		[--help]                        this text
 
   FILES:
@@ -48,7 +51,7 @@ Usage: QGIS [options] [FILES]
 \normalsize
 
 \begin{Tip} \caption{\textsc{Exemple utilisant des options de ligne de commande}}
-Vous pouvez démarrer \qg en spécifiant un ou plusieurs fichiers de données. Par exemple, si vous êtes placé dans le répertoire qgis\_sample\_data vous pouvez démarrer \qg avec une couche vecteur et un fichier raster dès le démarrage avec la commande suivante : 
+Vous pouvez démarrer \qg en spécifiant un ou plusieurs fichiers de données. Par exemple, si vous êtes placé dans le répertoire qgis\_sample\_data vous pouvez démarrer \qg avec une couche vectorielle et un fichier raster dès le démarrage avec la commande suivante : 
 \usertext{qgis ./raster/landcover.img ./gml/lakes.gml}
 \end{Tip}
 
@@ -70,6 +73,15 @@ Pour démarrer avec une étendue cartographique spécifique, utilisez cette opti
 
 \minisec{Option \usertext{---nologo}}
 Cette commande dissimule l'écran de démarrage qui apparaît lors du lancement de \qg.
+
+\minisec{Option \usertext{---noplugins}}
+Si vous avez un problème de démarrage lié à une extension, cette option permet de lancer \qg sans les charger (elles seront toujours accessible dans le gestionnaire d'extension).
+
+\minisec{Option \usertext{---optionspath}}
+Vous pouvez avoir plusieurs configurations et décider laquelle utiliser en utilisant cette option au démarrage. Lisez la section \ref{subsec:gui_options} pour connaître l'emplacement où votre système d'exploitation entrepose les fichiers de préférences. Il n'y pas pour l'instant de possibilité de spécifier dans quel fichier écrire ces préférences, vous devrez donc faire une copie du fichier original.
+
+\minisec{Option \usertext{---configpath}}
+Cette option est similaire à la précédente, mais va plus loin en changeant le chemin par défaut de la configuration utilisateur et foblige QSettings à utiliser ce nouveau répertoire. Cela permet de transporter QGIS sur une clé USB avec tous les paramètres et extensions.
 
 \section{Interface de \qg} \index{fenêtre principale}
 \label{label_qgismainwindow}
@@ -175,6 +187,7 @@ Option du menu&Raccourci&Référence&Barre d'outils\\
 \multicolumn{4}{r}{Couche} \\
 \dropmenuopt{Nouveau}&&&\\
 \dropmenuopttwo{mActionAddNonDbLayer}{Ajouter une couche vecteur...}&\keystroke{Ctrl+Shift+V}&voir Section \ref{label_workingvector}&\dropmenucheck{Fichier} \\
+\mainmenuopt{Calculatrice raster}&&voir Section \ref{sec:raster_calc} \\
 \dropmenuopttwo{mActionAddRasterLayer}{Ajouter une couche raster...}&\keystroke{Ctrl+Shift+R}&voir Section \ref{label_raster}&\dropmenucheck{Fichier} \\
 \dropmenuopttwo{mActionAddLayer}{Ajouter une couche PostGIS...}&\keystroke{Ctrl+Shift+D}&voir Section \ref{label_postgis}&\dropmenucheck{Fichier} \\
 \dropmenuopttwo{mActionAddSpatiaLiteLayer}{Ajouter une couche Spatialite...}&\keystroke{Ctrl+Shift+L}&voir Section \ref{label_spatialite}&\dropmenucheck{Fichier} \\
@@ -283,7 +296,9 @@ Le contenu du menu contextuel affiché par un clic droit varie si la couche sél
 
 \end{itemize}
 
-%Si plusieurs sources de données vectorielles ont le même type de vecteur (points, lignes ou polygones) et les mêmes attributs, leurs représentations peuvent être groupées. Cela signifie que si la représentation d'une couche est modifiée, toutes les autres en bénéficieront automatiquement. Pour grouper la symbologie, faites un clic droit dans la zone de légende et sélectionnez \dropmenuopt{Montrer les groupes de fichiers}. Les groupes de fichiers relatifs aux couches apparaissent, il est maintenant possible de déplacer un fichier d'un groupe à un autre. Si vous le faites, les fichiers seront regroupés. Notez que \qg le permet seulement si les 2 couches sont susceptibles de partager le même type de symbologie.
+Si plusieurs sources de données vectorielles ont le même type de vecteurs (points, lignes ou polygones) et les mêmes attributs, leurs représentations peuvent être groupées. Cela signifie que si la représentation d'une couche est modifiée, toutes les autres en bénéficieront automatiquement. Pour grouper la symbologie, faites un clic droit dans la zone de légende et sélectionnez \dropmenuopt{Montrer les groupes de fichiers}. Les groupes de fichiers relatifs aux couches apparaissent, il est maintenant possible de déplacer un fichier d'un groupe à un autre. Si vous le faites, les fichiers seront regroupés. Notez que \qg le permet seulement si les 2 couches sont susceptibles de partager le même type de symbologie (même type géométrique et attributs).
+
+Il est également possible de sélectionner plus d'une couche ou groupe à la fois en tenant appuyée la touche \keystroke{CTRL}  pendant que vous sélectionnez les couches avec le bouton gauche de la souris. Vous pouvez alors déplacer toutes les couches sélectionnées dans un nouveau groupe en même temps ou alors les supprimer.
 
 \subsection{Vue de la carte} \label{label_mapview}
 \index{map!view} 
@@ -405,6 +420,8 @@ Pour influencer la qualité du rendu de la carte vous avez trois possibilités. 
 
 Les mesures fonctionnent uniquement au sein des systèmes de coordonnées projetées (exemple : UTM, Lambert 93). Si la couche active est définie par système géographique de coordonnées (latitude/longitude), les résultats d'une mesure de ligne ou d'aires seront incorrects. Pour y remédier, vous devez spécifier un système de coordonnées approprié (voir Section~\ref{label_projections}). Les deux outils de mesure peuvent utiliser les paramètres d'accrochage de l'outil de numérisation. C'est utile pour mesurer distances et aires dans les couches vectorielles.
 
+Pour sélectionner un outil de mesure, cliquez sur \includegraphics[width=0.7cm]{mActionMeasure} puis sur l'outil voulu.
+
 \subsection{Mesurer une longueur, une aire et un angle}
 \index{measure:line length}
 \index{measure:areas}
@@ -427,11 +444,33 @@ Vous pouvez aussi mesurer des angles en sélectionnant l'outil de mesure d'angle
   \caption{Outils de mesure \nixcaption} \label{fig:measure}
 \end{figure}
 
+%\subsection{Select and deselect features}\label{sec:selection}
+\subsection{Sélectionner et désélectionner des entités}\label{sec:selection}
+
+%The QGIS toolbar provides several tools to select features in the map canvas. 
+%To select one or several features just click on 
+%\includegraphics[width=0.7cm]{mActionSelect} and select the tools:
+la barre d'outils fournit plusieurs outils de sélection d'entités à partir du canevas de la carte. pour sléectionner une ou plusieurs entités, cliquez sur \includegraphics[width=0.7cm]{mActionSelect} et choisissez l'outil :
+
+\begin{description}
+%\item \radiobuttonon{Select features}
+\item \radiobuttonon{Sélection d'entités}
+%\item \radiobuttonoff{Select features by rectangle}
+\item \radiobuttonoff{Sélection d'entités avec un rectangle}
+%\item \radiobuttonoff{Select features by polygon}
+\item \radiobuttonoff{Sélection d'entités avec un polygone}
+%\item \radiobuttonoff{Select features by freehand}
+\item \radiobuttonoff{Sélection d'entités à main levée}
+%\item \radiobuttonoff{Select features by radius}
+\item \radiobuttonoff{Sélection d'entités selon un rayon}
+\end{description} 
+
+Pour désélectionner toutes les entités, cliquez sur \includegraphics[width=0.7cm]{mActionDeselectAll}.
+
 \section{Les projets} \label{sec:projects} \index{projets}
 
 L'état de votre session de \qg est considéré comme étant un projet. \qg ne peut travailler que sur un projet à la fois. Les propriétés sont considérées comme étant assignées à un projet ou comme étant par défaut pour les nouveaux projets (qui déclenchentvoir Section \ref{subsec:gui_options}). \qg peut enregistrer l'état de votre travail dans un fichier de projet en utilisant le menu \mainmenuopt{Fichier} > \dropmenuopttwo{mActionFileSave}{Sauvegarder le projet} ou \mainmenuopt{Fichier} > \dropmenuopttwo{mActionFileSaveAs}{Sauvegarder le projet sous...}. À la fermeture du projet (arrêt du logiciel ou ouverture, création d'un autre projet), le logiciel peut proposer l'enregistrement si l'état courant diffère de l'état enregistré. Pour activer cette option, rendez-vous dans l'onglet \tab{Général} du menu \mainmenuopt{Préférences} > \dropmenuopt{Options} et sélectionnez\\
 \checkbox{\small Demander à sauvegarder si des changements ont été apportés au projet \qg}.
-
 
 Pour charger un projet dans une session \qg, aller dans \mainmenuopt{Fichier} > \dropmenuopttwo{mActionFileOpen}{Ouvrir un Projet} ou \mainmenuopt{Fichier} > \dropmenuopt{Ouvrir un projet récent}. Si vous souhaitez revenir à une session vierge, aller sur \mainmenuopt{Fichier} > \dropmenuopttwo{mActionFileNew}{Nouveau Projet}.
 Chacune de ces options vous demandera si vous désirez enregistrer le projet dès lors que des changements auront été effectués depuis son ouverture ou sa dernière sauvegarde.
@@ -451,7 +490,7 @@ Le fichier de projet est enregistré au format XML, il est donc possible de l'é
 \minisec{Propriétés de projet}
 Dans la fenêtre de propriétés du projet vous pouvez mettre des options spécifiques à un projet. Cela inclut :
 \begin{itemize}[label=--]
- \item Dans l'onglet \tab{Général} le titre du projet, les unités, et la possibilité d'enregister des chemins relatifs vers les couches. L'édition topologique et les options d'accrochage peuvent être changées ici.
+ \item Dans l'onglet \tab{Général} le titre du projet, les unités, et la possibilité d'enregistrer des chemins relatifs vers les couches. L'édition topologique et les options d'accrochage peuvent être changées ici.
 \item L'onglet \tab{Système de Coordonnées de Référence (SCR)} permet de choisir le système de coordonnées pour ce projet et d'activer la projection à la volée des couches vectorielles utilisant un SCR différent.
 \item Avec le troisième onglet \tab{Identification des couches} vous pouvez activer (ou désactiver) les couches qui répondront à l'outil d'identification (voir le paragraphe sur les outils de la carte dans la section \ref{subsec:gui_options}).
 \end{itemize}
@@ -561,7 +600,7 @@ En outre, vous pouvez choisir de sauver l'emplacement relatif ou absolu des text
  \begin{itemize}[label=--,itemsep=2pt]
   \item \dropmenuopt{Proxy par défaut}: ce proxy est déterminé en se basant sur le proxy de l'application
   \item \dropmenuopt{Socks5Proxy}: proxy générique pour n'importe quel type de connexion. Supporte TCP, UDP, le lien à un port (pour les connexions entrantes) et l'authentication
-  \item \dropmenuopt{HttpProxy}: utilise la commande \og CONNECT \fg, supporte seulement les connexions TCP sortantes et l'authentification
+  \item \dropmenuopt{HttpProxy}: utilise la commande CONNECT, supporte seulement les connexions TCP sortantes et l'authentification
   \item \dropmenuopt{HttpCachingProxy}: utilise les commandes normales HTTP, c'est utile uniquement dans le contexte de requête HTTP
   \item \dropmenuopt{FtpCachingProxy}: utilise un proxy FTP, ce n'est utile que dans le cas de requête FTP
 \end{itemize}
@@ -610,14 +649,14 @@ L'outil d'annotation \includegraphics[width=0.7cm, clip=true]{mActionTextAnnotat
    \label{fig:annotation}
 \end{figure}
 
-Un double clic dans l'emprise d'une annotation (matérialisée par quatre carrés aux angles) provoque l'ouverture d'une fenêtre de dialogue avec diverses options. Il y a un éditeur de texte avec quelques options (choix de la police de caractères, de la taille, de la graisse, etc.), le choix de la couleur de fond du cadre, ainsi que de la couleur et de l'épaisseur du contour. Il est également possible de choisir le marqueur. Ce dernier est affiché lorsque \checkbox{Position fixe de la carte} est activé : l'annotation est associée à un endroit de la carte et en suit les déplacements. Si l'option est désactivée, la position de l'annotation est relative à l'interface graphique et n'est pas impactée par la navigation dans la carte. Le phylactère peut être déplacé indépendamment du marqueur. Le déplacement du marqueur affecte l'ensemble de l'annotation.
+Un double clic dans l'emprise d'une annotation (matérialisée par quatre carrés aux angles) provoque l'ouverture d'une fenêtre de dialogue avec diverses options. Il y a un éditeur de texte avec quelques options (choix de la police de caractères, de la taille, de la graisse, etc.), le choix de la couleur de fond du cadre, ainsi que de la couleur et de l'épaisseur du contour. Il est également possible de choisir le marqueur. Ce dernier est affiché lorsque \checkbox{Position fixe de la carte} est activé : l'annotation est associée à un endroit de la carte et en suit les déplacements. Si l'option est désactivée, la position de l'annotation est relative à l'interface graphique et n'est pas impactée par la navigation dans la carte. La bulle peut être déplacée indépendamment du marqueur. Le déplacement du marqueur affecte l'ensemble de l'annotation.
 
 L'outil \includegraphics[width=0.7cm,clip=true]{mActionAnnotation} Déplacer une annotation permet de déplacer l'annotation sur la carte.  
 
 \minisec{Formulaire d'annotation} \index{annotations}
 \index{form annotation|\see{annotations}}
 
-En outre, vous pouvez créer vos propres formulaires d'annotation. L'outil \includegraphics[width=0.7cm,clip=true]{mActionFormAnnotation} Formulaire d'annotation est utilisé pour afficher les attributs d'une entité dans un formulaire qt personnalisé (voir Figure \ref{fig:custom-annotations}). L'approche est similaire à la conception de formulaires pour l'outil d'identification mais affiche les informations sous la forme d'une annotation. Pour un complément d'information, reportez-vous au blog \url{http://blog.qgis.org/node/143}.
+En outre, vous pouvez créer vos propres formulaires d'annotation. L'outil \includegraphics[width=0.7cm,clip=true]{mActionFormAnnotation} Formulaire d'annotation est utilisé pour afficher les attributs d'une entité dans un formulaire qt personnalisé (voir Figure \ref{fig:custom-annotations}). L'approche est similaire à la conception de formulaires pour l'outil d'identification, mais affiche les informations sous la forme d'une annotation. Pour un complément d'information, reportez-vous au blog \url{http://blog.qgis.org/node/143}.
 
 \begin{figure}[ht]
    \centering
@@ -675,8 +714,8 @@ Graphe polaire montrant le numéro SV et la position des satellites.
 Écran des options GPD (voir Figure \ref{fig:gpstrack_options}).
 \end{description}
 
-Avec un récepteur GPS connecté (il doit être compatible avec votre système d'exploitation), un simple clic sur \button{Connexion} connecte le GPS à \qg. Un second clic (maintenant \button{Déconnexion}) déconnecte le récepteur de l'ordinateur.
- 
+Avec un récepteur GPS connecté (il doit être compatible avec votre système d'exploitation), un simple clic sur \button{Connexion} connecte le GPS à \qg. Un second clic (maintenant \button{Déconnexion}) déconnecte le récepteur de l'ordinateur. Sous GNU/Linux, le support gpsd est intégré afin de supporter la connexion de la majorité des récepteurs GPS. De ce fait, vous devez préalablement configurer gpsd pour y connecter \qg.
+
 [ IMPORTANT ]: Si vous désirez enregistrer votre position sur la carte, vous devez, au préalable, créer une nouvelle couche et la passer en mode édition.
 
 \begin{figure}[ht]
@@ -685,8 +724,15 @@ Avec un récepteur GPS connecté (il doit être compatible avec votre système d
      \hspace{0.33cm}
    \subfloat[Force du signal GPS]{\label{subfig:gpstrack_stren} \includegraphics[clip=true, width=0.3\textwidth]{gpstrack_stren}}
      \hspace{0.33cm}
-   \subfloat[Graphe polaire]{\label{subfig:gpstrack_polar} \includegraphics[clip=true, width=0.3\textwidth]{gpstrack_polar}} \\
+   \subfloat[Graphe polaire]{\label{subfig:gpstrack_polar} \includegraphics[clip=true, width=0.3\textwidth]{gpstrack_polar}}
 \caption{Suivi GPS en direct \nixcaption} \label{fig:gpstrack_live}
+\end{figure}
+
+\begin{figure}[ht]
+   \centering
+   \includegraphics[clip=true, width=5cm]{gpstrack_options}
+   \caption{Écran de configuration du suivi GPS \nixcaption}
+   \label{fig:gpstrack_options}
 \end{figure}
 
 \subsection{Coordonnées de la position}
@@ -710,12 +756,5 @@ Dans la section recentrer la carte GPS, vous pouvez définir le critère de rafr
 La section pister permet de sélectionner la couleur et la largeur de la ligne correspondant à votre parcours.
 
 Si vous voulez enregistrer une entité manuellement, vous devez retourner à l'écran \includegraphics[width=0.5cm,clip=true]{mActionToggleEditing} ''Coordonnées de la position'' et cliquer sur \button{Nouvelle entité}. De la même façon, lorsque vous souhaitez enregistrer manuellement des sommets sans avoir activé ''Ajout automatique de sommets"  vous devez cliquer sur \button{Nouveau sommet} dans ce même écran.
-
-\begin{figure}[ht]
-   \centering
-   \includegraphics[clip=true, width=5cm]{gpstrack_options}
-   \caption{Écran de configuration du suivi GPS \nixcaption}
-   \label{fig:gpstrack_options}
-\end{figure}
 
 \FloatBarrier

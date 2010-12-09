@@ -10,7 +10,7 @@
 Vous trouverez la liste des formats vectoriels supportés par OGR dans l'Annexe~\ref{appdx_ogr}.
 
 %\qg also supports PostGIS\index{PostGIS}\index{PostgreSQL!PostGIS} layers in a \psq database using the \psq data provider plugin. Support for additional data types (eg. delimited text) is provided by additional data provider plugins.\index{delimited text}
-\qg gère également les couches \pg \index{PostGIS}\index{PostgreSQL!PostGIS} des bases de données \psq grâce à l'extension \og fournisseur de données\fg \psq. La gestion d'autres types de données (par exemple les données texte délimitées) se fait grâce à d'autres extensions \og fournisseur de données\fg.\index{texte délimité}
+\qg gère également les couches \pg \index{PostGIS}\index{PostgreSQL!PostGIS} des bases de données \psq grâce à l'extension fournisseur de données \psq. La gestion d'autres types de données (par exemple les données texte délimitées) se fait grâce à d'autres extensions fournisseur de données.\index{texte délimité}
 
 %This section describes how to work with two common formats: ESRI shapefiles and \pg layers. Many of the features available in \qg work the same regardless of the vector data source.
 %This is by design and includes the identify, select, labeling and attributes functions.
@@ -109,7 +109,7 @@ Une fois chargée, vous pouvez zoomer sur le shapefile en utilisant les outils d
 Pour changer la symbologie d'une couche, ouvrez la fenêtre \dialog{Propriétés de la Couche} en double-cliquant sur le nom de la couche ou en faisant un clic droit sur son nom dans la légende et en choisissant \dropmenuopt{Propriétés} dans le menu qui apparait. Pour plus de détails sur les paramètres de la symbologie des couches vectorielles, référez-vous à la Section \ref{sec:symbology}.
 
 \begin{Tip}\caption{\textsc{Charger une couche et un projet depuis un lecteur externe sous \mac}}
-Sous \mac, les lecteurs portables qui sont montés à côté du disque dur primaire n'apparaissent pas dans Fichier -> Ouvrir un Projet comme attendu. Nous travaillons sur le support des fenêtres d'ouverture/enregistrement natives d'OS X pour résoudre ce problème. Pour y pallier, vous pouvez taper \og /Volumes\fg dans la boîte de nom Fichier et appuyer sur Entrée. Vous pouvez ensuite parcourir les lecteurs externes et les montages réseau.
+Sous \mac, les lecteurs portables qui sont montés à côté du disque dur primaire n'apparaissent pas dans Fichier -> Ouvrir un Projet comme attendu. Nous travaillons sur le support des fenêtres d'ouverture/enregistrement natives d'OS X pour résoudre ce problème. Pour y pallier, vous pouvez taper /Volumes dans la boîte de nom Fichier et appuyer sur Entrée. Vous pouvez ensuite parcourir les lecteurs externes et les montages réseau.
 \end{Tip}
 
 %\subsection{Improving Performance}
@@ -197,7 +197,7 @@ La fenêtre \dialog{Ajouter une ou plusieurs tables PostGIS} apparaît. Pour acc
 %\hline Name & A name for this connection. Can be the same as \textsl{Database}.\\
 \hline Nom & Un nom pour cette connexion. Il peut être identique à \textsl{Base de données}.\\
 %\hline Host \index{PostgreSQL!host} & Name of the database host. This must be a resolvable host name the same as would be used to open a telnet connection or ping the host. If the database is on the same computer as \qg, simply enter 'localhost' here.\\
-\hline Hôte \index{PostgreSQL!host} & Nom pour l'hôte de la base de données. Il doit s'agir d'un nom existant, car il sera utilisé pour ouvrir une connexion Telnet ou interroger l'hôte. Si la base de données est sur le même ordinateur que \qg, mettez simplement \og localhost\fg. \\
+\hline Hôte \index{PostgreSQL!host} & Nom pour l'hôte de la base de données. Il doit s'agir d'un nom existant, car il sera utilisé pour ouvrir une connexion Telnet ou interroger l'hôte. Si la base de données est sur le même ordinateur que \qg, mettez simplement localhost. \\
 %\hline Database \index{PostgreSQL!database} & Name of the database.\\
 \hline Base de données \index{PostgreSQL!database} & Nom de la base de données.\\
 %\hline Port \index{PostgreSQL!port}& Port number the \psq database server listens on. The default port is 5432.\\
@@ -396,27 +396,27 @@ gis_data=# \q
 gsherman@madison:~/current$
 \end{verbatim}
 
-\subsection{Couches vecteurs dépassants les 180\degres{} de longitude}
+\subsection{Couches vecteurs dépassants les \degrees{180} de longitude}
 \index{vector layers!crossing}
 
-Beaucoup de logiciels de SIG ne traitent pas les cartes vecteurs  ayant un système de référence géographique dépassant la ligne des 180\degres{} de longitude. Il en résulte que sous \qg on verra 2 emplacements distincts et éloignés qui devraient être proches l'un de l'autre. Sur la figure \ref{fig:vector_not_wrapping} le petit point tout à gauche sur le canevas cartographique (Chatham Island) devrait être dans la grille, à droite des îles principales de Nouvelle-Zélande.
+Beaucoup de logiciels de SIG ne traitent pas les cartes vecteurs  ayant un système de référence géographique dépassant la ligne des \degrees{180} de longitude. Il en résulte que sous \qg on verra 2 emplacements distincts et éloignés qui devraient être proches l'un de l'autre. Sur la figure \ref{fig:vector_not_wrapping} le petit point tout à gauche sur le canevas cartographique (Chatham Island) devrait être dans la grille, à droite des îles principales de Nouvelle-Zélande.
 
 \begin{figure}[ht]
    \begin{center}
    \includegraphics[clip=true, width=\textwidth]{vectorNotWrapping}
-   \caption{Carte en lat/lon dépassant les 180\degres{} de longitude \nixcaption}
+   \caption{Carte en lat/lon dépassant les \degrees{180} de longitude \nixcaption}
    \label{fig:vector_not_wrapping}
 \end{center}
 \end{figure}
 
 Une solution est de transformer les valeurs longitudinales en utilisant \pg et la fonction \textbf{ST\textunderscore Shift\textunderscore Longitude}
-\footnote{\url{http://postgis.refractions.net/documentation/manual-1.4/ST_Shift_Longitude.html}}. Cette fonction lit chaque point/sommet de chacune des entités dans une géométrie et si la coordonnée de longitude est inférieure à 0\degres{} elle lui ajoute 360\degres{}. Le résultat est une version de 0\degres{} -- 360\degres{} version des données sur une carte centré à 180\degres{}.
+\footnote{\url{http://postgis.refractions.net/documentation/manual-1.4/ST_Shift_Longitude.html}}. Cette fonction lit chaque point/sommet de chacune des entités dans une géométrie et si la coordonnée de longitude est inférieure à \degrees{0} elle lui ajoute \degrees{360}. Le résultat est une version de \degrees{0} -- \degrees{360} version des données sur une carte centré à \degrees{180}.
 
 \begin{figure}[ht]
    \begin{center}
    
    \includegraphics[clip=true, width=9cm]{vectorWrapping}
-   \caption{Carte dépassant la ligne des 180\degres{} de longitude après application de la fonction ST\textunderscore Shift\textunderscore Longitude}
+   \caption{Carte dépassant la ligne des \degrees{180} de longitude après application de la fonction ST\textunderscore Shift\textunderscore Longitude}
 \label{fig:vector_wrapping}
 \end{center}
 \end{figure}
@@ -425,7 +425,7 @@ Une solution est de transformer les valeurs longitudinales en utilisant \pg et l
 
 \begin{itemize}[label=--]
 \item Importer des données vers \pg (\ref{sec:loading_postgis_data}) en utilisant par exemple l'extension de gestion de \pg (PostGIS Manager) ou l'extension SPIT
-\item Utiliser l'interface en ligne de commande \pg pour exécuter la commande suivante (c'est un exemple où \og TABLE\fg est bien le nom de votre table PostGIS) \\ 
+\item Utiliser l'interface en ligne de commande \pg pour exécuter la commande suivante (c'est un exemple où TABLE est bien le nom de votre table PostGIS) \\ 
 \texttt{gis\_data=\# update TABLE set the\_geom=ST\_shift\_longitude(the\_geom);} 
 \item Si tout ce passe bien, vous devriez recevoir une confirmation sur le nombre d'entités qui ont été mise à jour, puis vous pouvez charger la carte et voir la différence (Figure \ref{fig:vector_wrapping})
 \end{itemize}
@@ -505,7 +505,7 @@ Dans cette fenêtre vous pouvez donner un style à votre couche vecteur. Selon l
 Les options de style suivantes s'appliquent quasiment à tous les types de rendus :
 \begin{description}
 %\item[Outline style] - pen-style for your outline of your feature. you can also set this to 'no pen'.
-\item[Style du contour :] style de la ligne qui fait le contour de vos entités. Vous pouvez également le définir à \og no pen\fg, pas de contour
+\item[Style du contour :] style de la ligne qui fait le contour de vos entités. Vous pouvez également le définir à no pen, pas de contour
 %\item[Outline color] - color of the ouline of your feature
 \item[Couleur du contour :] couleur du contour de vos entités
 %\item[Outline width] - width of your features
@@ -1111,7 +1111,7 @@ Nous pouvons maintenant utiliser l'action. Fermez la fenêtre \dialog{Propriét�
 \end{figure}
 
 %When we click on the action, it brings up Firefox and navigates to the URL \url{http://www.google.com/search?q=Tustumena}. It is also possible to add further attribute fields to the action. Therefore you can add a ``+'' to the end of the action text, select another field and click on \button{Insert Field}. In this example there is just no other field available that would make sense to search for.
-Quand vous cliquez sur l'action, cela ouvre Firefox et charge l'URL \url{http://www.google.com/search?q=Tustumena}. Il est également possible d'ajouter d'autres champs attributs à l'action. Pour faire cela, vous pouvez ajouter un \og +\fg à la fin du texte de l'action, sélectionnez un autre champ et cliquez sur \button{Insérer un champ}. Dans cet exemple, la recherche sur un autre champ n'aurait pas de sens.
+Quand vous cliquez sur l'action, cela ouvre Firefox et charge l'URL \url{http://www.google.com/search?q=Tustumena}. Il est également possible d'ajouter d'autres champs attributs à l'action. Pour faire cela, vous pouvez ajouter un + à la fin du texte de l'action, sélectionnez un autre champ et cliquez sur \button{Insérer un champ}. Dans cet exemple, la recherche sur un autre champ n'aurait pas de sens.
 
 %You can define multiple actions for a layer and each will show up in the \dialog{Identify Results} dialog. You can also invoke actions from the attribute table by selecting a row and right-clicking, then choosing the action from the popup menu.
 Vous pouvez définir de multiples actions pour une couche et chacune apparaitra dans la fenêtre \dialog{Résultats identifiés}. Vous pouvez également invoquer des actions depuis la table d'attributs en sélectionnant une colonne et en faisant un clic droit puis en choisissant l'action dans le menu qui apparaît.
@@ -1142,7 +1142,7 @@ Dans l'onglet \tab{Attributs} vous trouverez un colonne \texttt{Outils d'éditio
 \begin{itemize}[label=--]
 \item édition de ligne : un champ d'édition qui permet d'entrer du texte simple (ou de restreindre à des nombres pour des attributs de type numériques)
 %\item Classification: Displays a combo box with the values used for classification, if you have chosen 'unique value' as legend type in the symbology tab of the properties dialog.
-\item Classification : Affiche une boîte combo avec les valeurs utilisées pour la classification, si vous avez choisi \og valeur unique\fg comme type de légende dans la symbologie
+\item Classification : Affiche une boîte combo avec les valeurs utilisées pour la classification, si vous avez choisi valeur unique comme type de légende dans la symbologie
 %\item Range: Allows to set numeric values from a specific range. The edit widget can be either a slider or a spin box.
 \item Portée : Permet d'indiquer des valeurs numériques depuis une portée spécifiée. L'outil d'édition peut être une barre coulissante ou une spinbox
 %\item Unique value: The user can select one of the values already used in the attribute table. If editable is activated, a line edit is shown with autocompletion support, otherwise a combo box is used.
@@ -1217,7 +1217,8 @@ La tolérance d'accrochage est la distance que \qg utilise pour \usertext{cherch
 
 \begin{enumerate}
 %\item A general, project wide snapping tolerance can be defined choosing \mainmenuopt{Settings} > \dropmenuopttwo{mActionOptions}{Options}. In the \tab{Digitizing} tab you can select between to vertex, to segment or to vertex and segment as default snap mode. You can also define a default snapping tolerance and a search radius for vertex edits. Remember the tolerance is in layer units. In our digitizing project (working with the Alaska dataset), the units are in feet. Your results may vary, but something on the order of 300ft should be fine at a scale of 1:10 000 should be a reasonable setting.
-\item Une tolérance générale, commune à tout le projet, peut-être définie dans \mainmenuopt{Préférences} > \dropmenuopttwo{mActionOptions}{Options}. Dans l'onglet \tab{Numérisation}, vous pouvez choisir le mode d'accrochage par défaut : sur un sommet, sur un segment ou sur un sommet ou un segment. Vous pouvez également définir une tolérance d'accrochage par défaut et un rayon de recherche pour les éditions de sommets. La tolérance peut être définie dans l'unité de la couche ou en pixel, l'avantage du pixel est qu'elle n'a pas à être changée pour tenir compte des zooms. Dans notre projet de numérisation (le travail sur le jeu de données Alaska), les unités sont en pieds. Le résultat peut varier, mais une tolérance de l'ordre de 300 pieds devrait être convenable pour une échelle de 1:\numprint{10000}\ieme
+\item Une tolérance générale, commune à tout le projet, peut-être définie dans \mainmenuopt{Préférences} > \dropmenuopttwo{mActionOptions}{Options}. Dans l'onglet \tab{Numérisation}, vous pouvez choisir le mode d'accrochage par défaut : sur un sommet, sur un segment ou sur un sommet ou un segment. Vous pouvez également définir une tolérance d'accrochage par défaut et un rayon de recherche pour les éditions de sommets. La tolérance peut être définie dans l'unité de la couche ou en pixel, l'avantage du pixel est qu'elle n'a pas à être changée pour tenir compte des zooms. 
+Dans notre projet de numérisation (le travail sur le jeu de données Alaska), les unités sont en pieds. Le résultat peut varier, mais une tolérance de l'ordre de 300 pieds devrait être convenable pour une échelle de 1:\numprint{10000}\ieme
 %\item A layer based snapping tolerance can be defined by choosing \mainmenuopt{Settings} > \dropmenuopttwo{mActionOptions}{Project Properties\dots}. In the \tab{General} tab, section \classname{Digitize} you can click on \button{Snapping options\dots} to enable and adjust snapping mode and tolerance on a layer basis (see Figure~\ref{fig:snappingoptions}).
 \item Une tolérance d'accrochage liée à une couche peut être définie dans \mainmenuopt{Préférences} > \dropmenuopttwo{mActionOptions}{Propriétés du projet\dots}. Dans l'onglet \tab{Général}, section \classname{Numériser}, vous pouvez cliquer sur \button{Options d'accrochage\dots} pour activer et ajuster le mode d'accrochage et la tolérance pour chaque couche  (voir Figure~\ref{fig:snappingoptions})
 \end{enumerate}
@@ -1576,7 +1577,7 @@ Si nous voulons supprimer un polygone en entier, nous pouvons le faire en sélec
 % We could then use the \toolbtntwo{mActionEditPaste}{paste tool} to put it back, giving us a one-level undo 
 % capability. Cut, copy, and paste work on the currently selected features, 
 % meaning we can operate on more than one at a time.
-L'outil \toolbtntwo{mActionEditCut}{Couper Entités} de la barre d'outils numérisation peut également être utilisé pour supprimer des entités. Ceci supprime effectivement les entités et les place également dans un \og presse-papier spatial\fg. Donc nous coupons les entités pour les supprimer. Nous pouvons ensuite utiliser l'outil \toolbtntwo{mActionEditPaste}{Coller Entités} pour les récupérer, nous donnant alors la capacité d'annuler une fois les changements. Couper, copier et coller marchent sur les entités sélectionnées ce qui signifie que nous pouvons travailler sur plus d'un objet à la fois.
+L'outil \toolbtntwo{mActionEditCut}{Couper Entités} de la barre d'outils numérisation peut également être utilisé pour supprimer des entités. Ceci supprime effectivement les entités et les place également dans un presse-papier spatial. Donc nous coupons les entités pour les supprimer. Nous pouvons ensuite utiliser l'outil \toolbtntwo{mActionEditPaste}{Coller Entités} pour les récupérer, nous donnant alors la capacité d'annuler une fois les changements. Couper, copier et coller marchent sur les entités sélectionnées ce qui signifie que nous pouvons travailler sur plus d'un objet à la fois.
 
 %\begin{Tip}[ht]\caption{\textsc{Feature Deletion Support}}.
 \begin{Tip}[ht]\caption{\textsc{Gestion de la suppression d'entités}}
@@ -2023,10 +2024,10 @@ Vous pouvez changer la définition d'une couche après son chargement en modifia
 \index{constructeur de requête!PostGIS}
 
 %With \qg it is possible also to select features using a similar query builder interface to that used in \ref{sec:query_builder}. In the above section the purpose of the query builder is to only show features meeting the filter criteria as a 'virtual layer' / subset. The purpose of the select by query function is to highlight all features that meet a particular criteria. Select by query can be used with all vector data providers.
-Dans \qg, il est possible de sélectionner des entités en utilisant une interface similaire à celle du constructeur de requêtes utilisé dans \ref{sec:query_builder}. Dans la section ci-dessus, le but du constructeur de requêtes était seulement de montrer les entités répondant aux critères de filtre comme une \og couche virtuelle\fg/ sous-ensemble. Le but de la fonction de sélection par requête est de surligner toutes les entités qui répondent à un critère particulier. La sélection par requête peut être utilisée sur tous les fournisseurs de données vecteur.
+Dans \qg, il est possible de sélectionner des entités en utilisant une interface similaire à celle du constructeur de requêtes utilisé dans \ref{sec:query_builder}. Dans la section ci-dessus, le but du constructeur de requêtes était seulement de montrer les entités répondant aux critères de filtre comme une couche virtuelle/ sous-ensemble. Le but de la fonction de sélection par requête est de surligner toutes les entités qui répondent à un critère particulier. La sélection par requête peut être utilisée sur tous les fournisseurs de données vecteur.
 
 %To do a `select by query' on a loaded layer, click on the button \toolbtntwo{mActionOpenTable}{Open Table} to open the attribute table of the layer. Then click the \button{Advanced...} button at the bottom. This starts the Query Builder that allows to define a subset of a table and display it as described in Section \ref{sec:query_builder}.
-Pour faire une \og sélection par requête\fg sur une couche chargée, cliquez sur le bouton\\ \toolbtntwo{mActionOpenTable}{Ouvrir la table des attributs} pour ouvrir la table de la couche. Ensuite cliquez sur le bouton \button{Avancée\dots} en bas de la fenêtre. Cela lance le Constructeur de requête qui permet de définir un sous-ensemble de la table et l'affiche comme décrit dans la Section \ref{sec:query_builder}.
+Pour faire une sélection par requête sur une couche chargée, cliquez sur le bouton\\ \toolbtntwo{mActionOpenTable}{Ouvrir la table des attributs} pour ouvrir la table de la couche. Ensuite cliquez sur le bouton \button{Avancée\dots} en bas de la fenêtre. Cela lance le Constructeur de requête qui permet de définir un sous-ensemble de la table et l'affiche comme décrit dans la Section \ref{sec:query_builder}.
 
 \minisec{Select by query}\label{sec:select_by_query}
 

@@ -13,7 +13,7 @@
 %vector layers and analysing \grass 2D and 3D data with more than 300 \grass 
 %modules.
 
-L'extension \grass fournit un accès aux bases de données et aux fonctionnalités de \grass.  Cela inclut la visualisation des couches d'informations \grass raster et vecteur,  la numérisation de couches vecteurs, l'édition des attributs des couches d'informations vecteurs,  la création de nouvelles couches et l'analyse 2D et 3D grâce à l'accès à près de 300 modules \grass. 
+L'extension \grass fournit un accès aux bases de données et aux fonctionnalités de \grass.  Cela inclut la visualisation des couches d'informations \grass raster et vecteur, la numérisation de couches vecteurs, l'édition des attributs des couches d'informations vecteurs,  la création de nouvelles couches et l'analyse 2D et 3D grâce à l'accès à près de 300 modules \grass. 
 
 %In this Section we'll introduce the plugin functionalities and give some 
 %examples on managing and working with \grass data. Following main features 
@@ -57,7 +57,7 @@ Dans cette section, nous présenterons les fonctionnalités de l'extension et no
 %Therefore click the menu \mainmenuopt{Plugins} > \mainmenuopt{Manage Plugins}, 
 %select \dropmenuopt{\grass} and click \button{OK}.
 
-Pour pouvoir utiliser les fonctionnalités de \grass et/ou visualiser des données vecteurs ou raster dans \qg, 
+Pour pouvoir utiliser les fonctionnalités de \grass et/ou visionner des données vecteurs ou raster dans \qg, 
 vous devez sélectionner et charger l'extension \grass à l'aide du gestionnaire d'extensions. 
 Pour le faire cliquez sur le menu \mainmenuopt{Extensions} > \mainmenuopt{Gestionnaire d'extensions}, 
 sélectionnez \dropmenuopt{\grass} et cliquez sur \button{OK}.
@@ -107,12 +107,12 @@ Avec l'extension \grass, vous pouvez charger des données raster ou vecteur à l
   %layer will be visualized.
   \item Cliquez sur \toolbtntwo{grass_add_raster}{Ajouter une couche raster \grass}, 
   choisissez le fichier \filename{gtopo30} et cliquez sur \button{OK}. 
-  Vous visualisez alors la couche d'élévation.
+  Vous visionnez alors la couche d'élévation.
   %\item Click on \toolbtntwo{grass_add_vector}{Add \grass vector layer},
   %choose the map name \filename{alaska} and click \button{OK}. The alaska
   %boundary vector layer will be overlayed on top of the \usertext{gtopo30} map. You can
   %now adapt the layer properties as described in chapter \ref{sec:vectorprops},
-  e.g. change opacity, fill and outline color.
+  % e.g. change opacity, fill and outline color.
   \item Cliquez sur \toolbtntwo{grass_add_vector} {Ajouter une couche vectorielle \grass}, choisissez la couche \filename{Alaska} et cliquez sur \button{OK}.La couche vectorielle Alaska s'affiche au-dessus du raster \usertext{gtopo30}.Vous pouvez modifier les propriétés de la couche d'information comme décrit dans le chapitre \ref{sec:vectorprops}.Vous pouvez par exemple modifier la transparence, changer la couleur du contour ou celle du remplissage.
   %\item Also load the other two vector layers \filename{rivers} and \filename{airports} and adapt their properties.
   \item Chargez également les deux autres couches vecteur \filename{rivers} et \filename{airports} et modifiez leurs propriétés.
@@ -254,7 +254,7 @@ Si cela semble faire beaucoup d'étapes, mais c'est en fait un moyen simple et r
 % \filename{WIND} file that stores the current boundary coordinate values and 
 % the currently selected raster resolution (Neteler \& Mitasova 2008 
 % \cite{neteler_mitasova08}, see Section \ref{sec:grass_region}). 
-Un utilisateur a seulement des droits d'écriture sur le \filename{Jeu de données} \grass qu'il a créé. Cela veut dire qu'au-delà de l'accès à son propre \filename{Jeu de données} \grass, chaque utilisateur peut aussi lire les données dans les autres \filename{Jeux de données}, mais il ne peut modifier et supprimer que les données que dans son propre \filename{Jeu de données}. Tous les \filename{Jeux de données} incluent un fichier \filename{WIND} qui stocke l'extension et la résolution raster courante (Neteler \& Mitasova 2008 \cite{neteler_mitasova08}, voir Section \ref{sec:grass_region}).
+Un utilisateur a seulement des droits d'écriture sur le \filename{Jeu de données} \grass qu'il a créé. Cela veut dire, qu'au-delà de l'accès à son propre \filename{Jeu de données} \grass, chaque utilisateur peut aussi lire les données dans les autres \filename{Jeux de données}, mais il ne peut modifier et supprimer que les données que dans son propre \filename{Jeu de données}. Tous les \filename{Jeux de données} incluent un fichier \filename{WIND} qui stocke l'extension et la résolution raster courante (Neteler \& Mitasova 2008 \cite{neteler_mitasova08}, voir Section \ref{sec:grass_region}).
 
 \begin{enumerate}
   %\item Start \qg and make sure the \grass plugin is loaded
@@ -328,9 +328,9 @@ Cette section donne un exemple d'importation de données raster et vecteur dans 
 % vector model.\index{\grass!topology} This means that areas are not represented
 % as closed polygons, but by one or more boundaries. A boundary between two
 % adjacent areas is digitized only once, and it is shared by both areas.
-% Boundaries must be connected without gaps. An area is identified (labeled) 
-% by the centroid of the area.
-Il est important de comprendre le modèle vecteur de \grass avant de faire de la numérisation.\index{\grass!numérisation} En général, \grass utilise un modèle vecteur topologique.\index{\grass!topologie} Cela veut dire que les surfaces ne sont pas représentées par des polygones fermés, mais par une ou plusieurs limites. Une limite entre des polygones adjacents n'est numérisée qu'une seule fois et est partagée par les deux surfaces. Les limites doivent être connectées sans trous. Une surface est identifiée (libellée) via le centroide de la surface.
+% Boundaries must be connected without gaps. An area is identified (and labeled) 
+% by the \textbf{centroid} of the area of the area.
+Il est important de comprendre le modèle vectoriel de \grass avant de faire de la numérisation.\index{\grass!numérisation} En général, \grass utilise un modèle topologique.\index{\grass!topologie} Cela veut dire que les surfaces ne sont pas représentées par des polygones fermés et distincts, mais par une ou plusieurs limites. Une limite entre des polygones adjacents n'est numérisée qu'une seule fois et est partagée par les deux surfaces{\footnote{Par exemple, si 2 parcelles sont l'une à côté de l'autre et se touchent, alors cette limite commune appartiendra aux deux sans être dupliquée.}. Les limites doivent être connectées sans trous. Une surface est identifiée (et libellée) via le centroïde de la surface.
 
 % Besides boundaries and centroids, a vector map can also contain
 % points and lines. All these geometry elements can be mixed
@@ -358,7 +358,7 @@ Il est possible de stocker plusieurs sous-couches dans une couche vecteur. Par e
 % if the geometry is forest or lake. For now, it can be only a number, in the 
 % future \grass will also support names as fields in the user interface.
 
-La \og sous-couche\fg est définie dans \grass par un chiffre. Ce chiffre définit s'il y a plusieurs sous-couches à l'intérieur d'une couche vecteur. Par exemple, il définit s'il s'agit de lac ou de forêt. Pour l'instant, il s'agit d'un nombre, mais dans des versions futures \grass pourra utiliser des noms pour les sous-couches dans l'interface utilisateur.
+La sous-couche est définie dans \grass par un chiffre. Ce chiffre définit s'il y a plusieurs sous-couches à l'intérieur d'une couche vecteur. Par exemple, il définit s'il s'agit de lac ou de forêt. Pour l'instant, il s'agit d'un nombre, mais dans des versions futures \grass pourra utiliser des noms pour les sous-couches dans l'interface utilisateur.
 
 % Attributes can be stored inside the \grass \filename{LOCATION} as DBase or 
 % SQLITE3 or in external database tables, for example PostgreSQL, MySQL,Oracle, etc.\index{\grass!attribute storage}
@@ -369,7 +369,7 @@ Les données attributaires peuvent être stockées dans le \filename{SECTEUR} au
 % integer attached to geometry primitives, and it is used as the link to one
 % key column in the database table.
 
-Les données attributaires sont liées à la géométrie par le biais d'un champ \og category\fg.\index{\grass!liens des attributs} \og Category\fg (clé, ID) est un entier attaché à la géométrie, et il est utilisé comme lien vers une colonne de clé dans la table de base de données.
+Les données attributaires sont liées à la géométrie par le biais d'un champ category.\index{\grass!liens des attributs} Category (clé, ID) est un entier attaché à la géométrie, et il est utilisé comme lien vers une colonne de clé dans la table de base de données.
 
 %\begin{Tip}\caption{\textsc{Learning the \grass Vector Model}}
 \begin{Tip}\caption{\textsc{Apprendre le modèle vecteur de \grass}}
@@ -654,7 +654,17 @@ La boîte de dialogue \toolbtntwo{grass_tools}{Ouvrir les outils \grass} donne a
 % in appendix \ref{appdx_grass_toolbox_modules}. It is also possible to 
 % customize the \grass Toolbox content. It is described in Section 
 % \ref{sec:toolbox-customizing}.
-L'invite de commande de la boîte à outils \grass vous donne accès à pratiquement tous les modules \grass (près de 300) en ligne de commande. Afin d'offrir un environnement de travail plus agréable, environ 200 d'entre eux sont fournis avec une boîte de dialogue. Ces boîtes de dialogue sont groupées par catégories mais sont aussi accessibles par une recherche libre. Vous trouverez une liste complète des modules \grass disponibles dans \qg \CURRENT dans l'annexe \ref{appdx_grass_toolbox_modules}. Il est aussi possible de personnaliser le contenu de la boîte à outils \grass. Ceci est décrit dans la section \ref{sec:toolbox-customizing}.
+L'invite de commande de la boîte à outils \grass vous donne accès à pratiquement tous les modules \grass (près de 300) en ligne de commande. Afin d'offrir un environnement de travail plus agréable, environ 200 d'entre eux sont fournis avec une boîte de dialogue. Ces boîtes de dialogue sont groupées par catégories mais sont aussi accessibles par une recherche libre. 
+
+%A complete list of GRASS modules available in the graphical Toolbox in QGIS version \CURRENT
+%is available in the GRASS wiki ( \url{http://grass.osgeo.org/wiki/GRASS-QGIS_relevant_module_list}. 
+
+Vous trouverez une liste complète des modules \grass disponibles dans \qg \CURRENT sur le wiki du projet GRASS (\url{http://grass.osgeo.org/wiki/GRASS-QGIS_relevant_module_list}) ainsi qu'une version simplifiée dans dans l'annexe \ref{appdx_grass_toolbox_modules}.
+
+
+%It is also possible to customize the GRASS Toolbox content. This procedure is described in Section
+%\ref{sec:toolbox-customizing}.
+Il est aussi possible de personnaliser le contenu de la boîte à outils \grass. Ceci est décrit dans la section \ref{sec:toolbox-customizing}.
 
 % As shown in Figure \ref{fig:grass_modules}, you can look for the appropriate 
 % \grass module using the thematically grouped \tab{Modules Tree} or the 

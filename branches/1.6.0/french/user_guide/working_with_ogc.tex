@@ -5,9 +5,9 @@
 % comment out the following line:
 %\updatedisclaimer
 
-% \qg supports WMS and WFS as data sources. The support is native; WFS is
+% \qg supports WMS and WFS as data sources. WMS-support is native; WFS and WFS-T is
 % implemented as a plugin.
-\qg gère le WMS et le WFS comme source de données. La gestion du WMS est native tandis que le service WFS est géré sous forme d'extension.
+\qg gère le WMS et le WFS comme source de données. La gestion du WMS est native tandis que les services WFS et WFS-T est géré sous forme d'extension.
 
 % \section{What is OGC Data}\index{OGC!introduction}
 \section{Qu'est-ce que les données OGC}\index{OGC!introduction}
@@ -137,35 +137,6 @@ Une fois que la nouvelle connexion du serveur WMS a été créée, elle sera sau
 Assurez-vous, lorsque vous entrez l'URL du serveur WMS, d'avoir le début de l'URL. Par exemple, vous ne devez pas avoir ce genre de paramètre  \usertext{request=GetCapabilities} ou \usertext{version=1.0.0} dans votre URL\index{WMS!serveur distant!URL}
 \end{Tip}
 
-% Table \ref{tab:wms_example_urls} shows some example WMS URLs to get you
-% started. These links were last checked in December 2006, but could change at
-% any time:
-%Le tableau \ref{tab:wms_example_urls} montre quelques exemples d'URL WMS
-%pour démarrer. Ces liens ont été vérifiés en décembre 2006, mais peuvent
-%avoir changé :
-
-%FIXME:  WMS URLs should be checked again and maybe extended in \qg 
-
-%%%\begin{table}[ht]\index{WMS!serveur distant!URL!exemples}
-%%%\centering
-%%%\caption{Exemple d'URL WMS publique}\label{tab:wms_example_urls}\medskip
- %%%\begin{tabular}{|l|l|}
-%%%\hline \textbf{Nom}        & \textbf{URL} \\
-%%%\hline Atlas du Canada      & http://atlas.gc.ca/cgi-bin/atlaswms\_en? \\
-%%%\hline DEMIS                & http://www2.demis.nl/wms/wms.asp?wms=WorldMap\& \\
-%%%\hline Geoscience Australia &
-%%%http://www.ga.gov.au/bin/getmap.pl?dataset=national \\
-%%%\hline NASA JPL OnEarth     & http://wms.jpl.nasa.gov/wms.cgi? \\
-%%%\hline Utilsiateurs \qg &
-%%%http://qgis.org/cgi-bin/mapserv?map=/var/www/maps/main.map\& \\
-%%%\hline
-%%%\end{tabular}
-%%%\end{table}
-
-% An exhaustive list of WMS servers can be found at \url{http://wms-sites.com}.
-%%%Une liste de serveurs WMS exhaustive peut être trouvé ici
-%%%\url{http://wms-sites.com}.
-
 \subsection{Charger des couches WMS}\label{sec:ogc-wms-layers}\index{WMS!client!couches}
 
 % Once you have successfully filled in your parameters you can select the
@@ -232,10 +203,10 @@ Utilisez le format PNG si vous désirez une représentation précise des donnée
 
 \minisec{Couches} \label{ogc-wms-layers}
 
-% The \tab{Layers} section lists the layers available from the selected
+% The \tab{Layers} tab lists the layers available from the selected
 % WMS server.  You may notice that some layers are expandible, this means
 % that the layer can be displayed in a choice of image styles.
-La section \tab{couche} liste les couches disponibles dans le serveur WMS. Vous pouvez remarquer que certaines couches sont extensibles, cela signifie que la couche peut être affichée en fonction de plusieurs styles.
+Le panneau \tab{couche} liste les couches disponibles dans le serveur WMS. Vous remarquerez que certaines couches sont extensibles, cela signifie que la couche peut être affichée en fonction de plusieurs styles.
 
 % You can select several layers at once, but only one image style per layer.
 % When several layers are selected, they will be combined at the WMS Server
@@ -535,17 +506,61 @@ Seuls les serveurs WMS publics sont accessibles. Il n'y a pas de possibilités p
 Si vous avez besoin d'accéder à des couches sécurisées avec d'autres méthodes sécurisés que des authentifications basiques, vous pouvez utiliser InteProxy comme proxy transparent, qui gère plusieurs méthodes d'authentification. Vous pouvez trouver plus d'informations dans le manuel InteProxy que vous pouvez trouver sur le site \url{http://inteproxy.wald.intevation.org}. \index{WMS!couches sécurisées!}\index{OGC!Authentication}
 \end{Tip}
 
+% % WMS-server
+
+
+% \section{WMS Server}\label{sec:ogc-wmsserver}
+% \index{WMS!server}
+ \section{Serveur WMS}\label{sec:ogc-wmsserver}
+ \index{WMS!serveur}
+
+% QGIS mapserver is an open source WMS 1.3 implementation which, in addition,
+% implements advanced cartographic features for thematic mapping. The QGIS
+% mapserver is a FastCGI/CGI (Common Gateway Interface) application written in
+% C%% that works together with a webserver (e.g. Apache, Lighttpd). 
+Le serveur cartographique de QGIS\footnote{Communément nommé QGIS-Mapserver, à ne pas confondre avec le serveur MapServer} implémente le protocole WMS 1.3 ainsi que des fonctions avancées de représentations thématiques. Ce serveur est une application FastCGI/CGI (Common Gateway Interface) écrite en C++ qui fonctionne avec un serveur web (p.ex. Apache, Lighttpd).
+
+% It uses QGIS as backend for the GIS logic and for map rendering. Furthermore the 
+% Qt library is used for graphics and for platform independent 
+% C%% programming. In contrast to other WMS software, the QGIS mapserver uses 
+% cartographic rules in SLD/SE as a configuration language, both for the server 
+% configuration and for the user-defined cartographic rules. 
+Il utilise QGIS comme moteur pour toute la partie SIG et le rendu des cartes. De plus, la bibliothèque Qt est utilisée pour les graphiques et pour assurer l'indépendance de la plateforme. Contrairement aux autres serveurs WMS, le serveur de QGIS recourt aux règles cartographiques au format SLD/SE comme langage de configuration et pour les règes cartographiques définies par l'utilisateur.
+
+% Moreover, the QGIS mapserver project provides the “Publish to Web” plugin, a 
+% plugin for QGIS desktop which exports the current layers and symbology as a 
+% web project for QGIS mapserver (containing cartographic visualisation rules 
+% expressed in SLD).
+Une extension "Publier vers le Web" est fournie, elle permet d'exporter les couches courantes ainsi que la symbologie en tant que projet web pour le serveur QGIS (avec des règles de visualisation cartographiques exprimées en SLD).
+
+% As QGIS desktop and QGIS mapserver use the same visualization libraries, the
+% maps that are published on the web look the same as in desktop GIS. The 
+% Publish to Web plugin currently supports basic symbolization, with more complex 
+% cartographic visualisation rules introduced manually. As the configuration is 
+% performed with the SLD standard and its documented extensions, there is only 
+% one standardised language to learn, which greatly simplifies the complexity 
+% of creating maps for the Web.
+Comme l'application bureautique et celle serveur utilise les mêmes bases, les cartes publiées sur le Web ont un aspect identique. L'extension ne supporte actuallement qu'une symbolisation basique, les règles plus avancées étant introduites manuellement. Comme la configuration est faite avec le standard SLD et ses extensions documentées, il n'y a qu'un seul langage à apprendre ce qui simplifie grandement la complexité de créer des cartes pour le Web.
+
+% Further information is available at: \\
+Plus d'informations disponbiles à ces adresses :
+\url{http://karlinapp.ethz.ch/qgis\_wms/} \\
+\url{http://www.qgis.org/wiki/QGIS\_mapserver\_tutorial} \\
+\url{http://linfiniti.com/2010/08/qgis-mapserver-a-wms-server-for-the-masses/}
 
 % \section{WFS Client}
-\section{Client WFS}\label{sec:ogc-wfs}
+\section{Client WFS/WFS-T}\label{sec:ogc-wfs}
+ \index{WFS!WFS-T}
+ \index{WFS!Transactionnel}
 
-% In \qg, a WFS layer behaves pretty much like any other vector layer. You 
-% can identify and select features and view the attribute table. An exception 
-% is that editing is not supported at this time. To start the WFS plugin you 
-% need to open \mainmenuopt{Plugins} >
-% \dropmenuopttwo{mActionShowPluginManager}{Plugin Manager...}, 
-% activate the \checkbox{WFS plugin} checkbox and click \button{OK}.
-Dans \qg, une couche WFS se comporte à peu près comme n'importe quelle autre couche vecteur. Vous pouvez identifier et sélectionner des objets et voir la table attributaire. Une exception est que l'édition n'est pas prise en charge pour l'instant (le support du WFS-T est en court). Pour lancer l'extension WFS, vous avez besoin d'ouvrir des \mainmenuopt{Extensions} > \dropmenuopttwo{mActionShowPluginManager}{Gestionnaire d'extension ...}, activez l'extension \checkbox{WFS} et cliquez sur le bouton \button{OK}.
+% In QGIS, a WFS layer behaves pretty much like any other vector layer. You
+% can identify and select features and view the attribute table. Since QGIS 1.6 
+% editing (WFS-T) is also supported, if the server provides this feature. To start 
+% the WFS plugin you need to open \mainmenuopt{Plugins} \arrow 
+% \dropmenuopttwo{mActionShowPluginManager}{Plugin Manager...}, activate the 
+% \checkbox{WFS plugin} checkbox and click \button{OK}.
+
+Dans \qg, une couche WFS se comporte à peu près comme n'importe quelle autre couche vecteur. Vous pouvez identifier et sélectionner des objets et voir la table attributaire. Depuis QGIS 1.6, l'édition est prise en charge si le serveur le propose. Pour lancer l'extension WFS, vous avez besoin d'ouvrir des \mainmenuopt{Extensions} > \dropmenuopttwo{mActionShowPluginManager}{Gestionnaire d'extension ...}, activez l'extension \checkbox{WFS} et cliquez sur le bouton \button{OK}.
 
 % A new \toolbtntwo{mIconAddWfsLayer}{Add WFS Layer} icon appears next 
 % to the WMS icon. Click on it to open the dialog. In General adding a WFS 
@@ -589,8 +604,8 @@ wfs&REQUEST=GetCapabilities
 \item Attendez que la liste des couches soit complètes.
 %   \item Click on the \clicklistitem{Canadian Land} layer
 \item Cliquez sur la couche\clicklistitem{Canadian Land}.
-%   \item Click \button{Add} to add the layer to the map
-\item Cliquez sur \button{Ajoutez} pour ajouter la couche à la carte.
+%   \item Click \button{Ok} to add the layer to the map
+\item Cliquez sur \button{Ok} pour ajouter la couche à la carte.
 %   \item Wait patiently for the features to appear
 \item Patientez que les objets apparaissent.
 \end{enumerate}
