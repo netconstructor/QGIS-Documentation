@@ -60,7 +60,7 @@ données modélisées telles que les matrices d'élévation.
 % record for each cell. They are geocoded by its pixel resolution and the x/y 
 % coordinate of a corner pixel of the raster layer. This allows \qg to
 % position the cata correctly in the map canvas.
-Contrairement aux données vecteurs, les données raster n'ont typiquement pas de
+Contrairement aux données vectorielles, les données raster n'ont typiquement pas de
 base de données d'enregistrement associée. Elles sont géocodées par leur
 résolution de pixel et leurs coordonnées x/y du coin du pixel de la couche
 raster. Cela permet à \qg de positionner les données correctement dans la zone
@@ -90,7 +90,7 @@ sélectionnant l'option du menu
 couche raster}. Plus d'une couche peut être chargée en même temps en appuyant
 sur la touche \keystroke{Control} ou \keystroke{Shift} et en cliquant sur de
 plusieurs couches dans la boîte de dialogue\\ \dialog{Ouvrez des sources de
-données raster gérées par GDAL}.\index{couches raster!charger}
+données rasters gérées par GDAL}.\index{couches raster!charger}
 
 % Once a raster layer is loaded in the map legend you can click on the layer
 % name with the right mouse button to select and activate layer specific
@@ -172,7 +172,7 @@ de la couche raster}. Il y a plusieurs onglets dans cette fenêtre :
 
 % \qg can render raster layers in two different ways :\index{raster
 % layers!supported channels}
-\qg peut afficher des couches raster de deux manières différentes
+\qg peut afficher des couches rasters de deux manières différentes
 :\index{couches layers!canaux gérés}
 
 \begin{description}
@@ -189,7 +189,7 @@ chaque bande représentant le composant rouge, vert ou bleu qui sera utilisé po
 % Within both rendertypes you can invert the color output using the 
 % \checkbox{Invert color map} checkbox.
 Pour les deux types de rendu, vous pouvez inverser la sortie couleur en
-utilisant la case à cocher \checkbox{Inverser la carte de couleur}
+utilisant la case à cocher \checkbox{Inverser la carte de couleur}.
 
 % \minisec{Single Band Rendering}
 \minisec{Rendu des bandes simples}
@@ -236,7 +236,7 @@ Quand vous sélectionnez \selectstring{couleurs indexées}{Palette de couleurs},
 % a negative impact on the rendering of the raster. This option is only
 % available for pseudocolor images.
 \qg peut restreindre les données affichées pour afficher seulement les
-cellules dont la valeur sont dans un nombre donné de déviations standards de la moyenne pour la couche.\index{couches raster!déviation standard} Cela est utile quand vous avez une ou deux cellules avec des valeurs anormalement hautes dans une grille raster qui ont un impact négatif sur le rendu du raster. Cette option est seulement disponible pour les images en pseudo-couleur.
+cellules dont la valeur sont dans un nombre donné de déviations standards de la moyenne pour la couche.\index{couches raster!déviation standard} Cela est utile quand vous avez une ou deux cellules avec des valeurs anormalement hautes dans une grille raster qui ont un impact négatif sur le rendu du raster. Cette option est seulement disponible pour les images en pseudocouleur.
 
 % \minisec{Three band color}
 \minisec{Couleur à trois bandes}
@@ -256,7 +256,7 @@ L'échantillonnage des couleurs est également disponible.
 % Set''. But this is not the correct way. To display the Red band, 
 % set the image type to grayscale, then select Red as the band to use for Gray.
 Si vous désirez visualiser une seule bande (par exemple la bande rouge)
-d'une image multibande, vous pouvez penser que vous pourriez définir les bandes Vertes et Bleue à \og Non définie\fg. Mais ce n'est pas la manière correcte. Pour afficher la bande Rouge définissez le type d'image à nuance de gris, puis sélectionnez Rouge comme bande à utiliser pour le Gris.
+d'une image multibande, vous pouvez penser que vous pourriez définir les bandes Vertes et Bleue à Non définie. Mais ce n'est pas la manière correcte. Pour afficher la bande Rouge définissez le type d'image à nuance de gris, puis sélectionnez Rouge comme bande à utiliser pour le Gris.
 \end{Tip} 
 
 % \subsection{Transparency Tab} \label{rastertab:transparency}
@@ -272,8 +272,9 @@ d'une image multibande, vous pouvez penser que vous pourriez définir les bandes
 différents.\index{couches raster!transparence} Utiliser la barre coulissante de transparence pour indiquer à quel niveau de transparence les couches sous-jacentes (s'il y en a) pourront être visible à travers cette couche raster. Cela est très utile, si vous désirez superposer plus d'une couche raster, par exemple une carte des reliefs ombrés superposée par une carte raster classifiée. Cela rendra la carte encore plus proche de la 3\ieme dimension.
 
 % Additionally you can enter a rastervalue, which should be treated as
-% {\em NODATA}.
-De plus, vous pouvez entrer une valeur raster qui pourra être traitée comme {\em NODATA}
+% {\em NODATA}. This can be done manually or with the 
+% \toolbtntwo{mActionContextHelp}{Add values from display} icon.
+De plus, vous pouvez entrer une valeur raster qui pourra être traitée comme {\em NODATA}. Cela peut être effectué manuellement ou en utilisant l'icône \toolbtntwo{mActionContextHelp}{Ajouter les valeurs depuis l'affichage}.
 
 % An even more flexible way to customize the transparency can be done in the
 % \guiheading{Custom transparency options} section.
@@ -388,7 +389,7 @@ Le système de référence spatial est également affiché ici comme chaîne PRO
 % given layers statistics have not yet been collected.\index{raster
 % layers!metadata}
 L'onglet \tab{Méta-données} affiche toute la richesse d'information sur la
-couche raster, dont les statistiques sur chaque bande dans la couche raster actuelle. Les statistiques sont recueillies sur l'idée de la \og nécessité de savoir\fg, de sorte qu'il est possible qu'une couche n'ait pas de statistique collectée.\index{couches raster!méta-données} 
+couche raster, dont les statistiques sur chaque bande dans la couche raster actuelle. Les statistiques sont recueillies sur l'idée de la nécessité de savoir, de sorte qu'il est possible qu'une couche n'ait pas de statistique collectée.\index{couches raster!méta-données} 
 
 % This tab is mainly for information. You cannot change any values printed
 % inside this tab. To update the statistics you need to change to tab
@@ -432,7 +433,7 @@ Quand la case \checkbox{construire les pyramides en interne si possible} est coc
 % created they cannot be removed. If you wish to preserve a 'non-pyramided'
 % version of your raster, make a backup copy prior to building pyramids.
 S'il vous plait notez que construire des pyramides peut altérer les fichiers
-données originaux et une fois créé ils ne peuvent plus être supprimé. Si vous désirez préserver une version \og sans pyramide\fg de vos raster, réalisez une copie de sauvegarde avant de les construire.
+données originaux et une fois créé ils ne peuvent plus être supprimé. Si vous désirez préserver une version sans pyramide de vos raster, réalisez une copie de sauvegarde avant de les construire.
 
 % \subsection{Histogram Tab}\label{label_histogram}
 \subsection{Onglet histograme}\label{label_histogram}
@@ -464,5 +465,50 @@ Vous pouvez définir le nombre de colonnes du graphique à utiliser et décider 
 % click the \button{Apply} button. Gathering statistics for a layer can be time
 % consuming. Please be patient while \qg examines your
 % data!\index{raster layers!statistics}
-Rassembler des statistiques pour une couche, sélectionnez un rendu en pseudo-couleur et cliquez sur le bouton \button{Appliquer}. Regrouper des statistiques pour une couche peut prendre du temps. Soyez patient pendant que \qg examine  vos données !\index{couches raster!statistiques}
+Rassembler des statistiques pour une couche, sélectionnez un rendu en pseudocouleur et cliquez sur le bouton \button{Appliquer}. Regrouper des statistiques pour une couche peut prendre du temps. Soyez patient pendant que \qg examine  vos données !\index{couches raster!statistiques}
 \end{Tip}
+
+% \section{Raster Calculator}\label{sec:raster_calc}
+% \index{Raster!raster calculator}
+% \index{Raster calculator}
+ \section{Calculatrice Raster}\label{sec:raster_calc}
+ \index{raster!calculatrice raster}
+ \index{calculatrice raster}
+
+% The \dialog{Raster Calculator} in the \mainmenuopt{Layer} menu allows to 
+% perform calculations on basis of existing raster pixel values. The results 
+% are written to a new raster layer with a GDAL supported format. 
+La fenêtre \dialog{Raster Calculator} du menu \mainmenuopt{Couche} permet d'opérer des calculs sur la base des valeurs d'un raster existant. Le résultat est écrit dans un nouveau raster (dans un format supporté par GDAL)
+ 
+ \begin{figure}[ht]
+   \centering
+     \includegraphics[clip=true, width=11.5cm]{raster_calculator}
+%     \caption{Raster Calculator \nixcaption}\label{fig:raster_calculator}
+     \caption{Calculatrice raster \nixcaption}\label{fig:raster_calculator}
+ \end{figure}
+
+% The \textbf{Fields list} contains all loaded raster layers that can be used. 
+% To add a raster to the raster calculator expression field, double
+% click its name in the Fields list. You can then use the operators to construct 
+% calculation expressions or you can just type it into the box.
+
+La liste \textbf{Bandes Raster} contient toutes les couches rasters actuellement chargées pouvant être utilisé. Pour ajouter un raster à la formule de calcul, faites un double-clic sur son nom dans la liste. Vous pouvez alors utiliser les opérateurs pour construire une formule ou bien les taper directement dans la boîte de saisie.
+
+% In the \textbf{Result layer} section you have to define an output layer. You can 
+% then define the extent of the calculation area based on an input raster layer or 
+% based on X,Y coordinates and on Columns and Rows to set the resolution of the 
+% output layer. If the input layer has a different resolution, the values will be 
+% resampled with nearest neighbor algorithm.  
+Dans la partie \textbf{Couche de résultat}, vous devez définir la couche en sortie. Vous pouvez préciser l'étendue de la zone de calcul en vous basant sur une couche raster en entrée ou en utilisant des coordonnées X et Y ainsi que des lignes et des colonnes pour indiquer la résolution. Si la couche en entrée a une résolution différence, les valeurs seront interpolées avec l'algorithme du plus proche voisin.
+
+% The \textbf{Operators section} contains all usable operators. To add an operator
+% to the raster calculator expression box, click the appropriate button. Mathematical
+% calculations ( % , - , * \dots) and trigonometric functions ( sin, cos, tan, \dots) 
+% are available. Stay tuned for more operators to come!
+La partie \textbf{Opérateurs} contient tous les opérateurs utilisables. Pour ajouter un opérateur à la formule, cliquez sur le bouton approprié. Les calculs mathématiques (+ , - , *,\dots) et les fonctions trigonométriques (sin, cos, tan,\dots) sont disponibles, d'autres feront leur apparition !
+
+% With the \checkbox{Result to project} checkbox the result layer will automatically 
+% added to the legend area and can be visualized. 
+Le fait de cocher la \checkbox{Ajouter le résultat au projet} chargera automatiquement le raster produit dans votre session pour y être affiché.
+
+  \FloatBarrier

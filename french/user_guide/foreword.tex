@@ -3,11 +3,11 @@
 \pagestyle{scrheadings}
 \addchap{Avant-propos}\label{label_forward}
 
-Bienvenue dans le monde merveilleux des Systèmes d'Informations Géographiques (SIG) ! Quantum GIS est un SIG libre qui a débuté en mai 2002 et s'est établi en tant que projet en juin 2002 sur SourceForge. Nous avons travaillé dur pour faire de ce logiciel SIG (qui sont traditionnellement des logiciels propriétaires assez coûteux) un choix viable pour toute personne ayant un ordinateur. \qg est utilisable sur la majorité des Unix, Mac OS X et Windows. \qg utilise la bibliothèque logicielle Qt 4 (\url{http://www.nokia.com}) et le langage C++, ce qui ce traduit par une interface graphique simple et réactive.
+Bienvenue dans le monde merveilleux des Systèmes d'Informations Géographiques (SIG) ! Quantum GIS est un SIG libre qui a débuté en mai 2002 et s'est établi en tant que projet en juin 2002 sur SourceForge. Nous avons travaillé dur pour faire de ce logiciel SIG (qui sont traditionnellement des logiciels propriétaires assez coûteux) un choix viable pour toute personne ayant un ordinateur. \qg est utilisable sur la majorité des Unix, Mac OS X et Windows. \qg utilise la bibliothèque logicielle Qt (\url{http://qt.nokia.com}) et le langage C++, ce qui ce traduit par une interface graphique simple et réactive.
 
-\qg se veut simple à utiliser, fournissant des fonctionnalités courantes. Le but initial était de fournir un visualisateur de données SIG. \qg a depuis atteint un stade dans son évolution où beaucoup y recourent pour leurs besoins quotidiens. \qg supporte un grand nombre de formats raster et vecteur, avec un support de nouveaux formats facilités par l'architecture des modules d'extension (lisez l'Annexe \ref{appdx_data_formats} pour une liste complète des formats actuellement supportés)
+\qg se veut simple à utiliser, fournissant des fonctionnalités courantes. Le but initial était de fournir un visionneur de données SIG. \qg a, depuis, atteint un stade dans son évolution où beaucoup y recourent pour leurs besoins quotidiens. \qg supporte un grand nombre de formats raster et vecteur, avec le support de nouveaux formats facilité par l'architecture des modules d'extension (lisez l'Annexe \ref{appdx_data_formats} pour une liste complète des formats actuellement supportés)
 
-\qg est distribué sous la licence GPL. Ceci vous permet de pouvoir regarder et modifier le code source, tout en vous garantissant un accès à un programme SIG sans coût et librement modifiable. Vous devez avoir reçu une copie complète de la licence avec votre exemplaire de \qg, vous la trouverez également dans l'Annexe \ref{gpl_appendix}.
+\qg est distribué sous la licence GNU GPL (General Public License). Ceci signifie que vous pouvez étudier et modifier le code source, tout en ayant la garantie d'avoir accès à un programme SIG non onéreux et librement modifiable. Vous devez avoir reçu une copie complète de la licence avec votre exemplaire de \qg, que vous pouvez également trouver dans l'Annexe \ref{gpl_appendix}.
 
 \begin{Tip}\caption{\textsc{Documentation à jour}}\index{documentation}
 La dernière version de ce document est disponible sur \url{http://download.osgeo.org/qgis/doc/manual/}, ou dans la section documentation du site de \qg \url{http://qgis.osgeo.org/documentation/}
@@ -15,22 +15,21 @@ La dernière version de ce document est disponible sur \url{http://download.osge
 
 \addsec{Fonctionnalités}\label{label_majfeat}
 
-\qg offre beaucoup d'outils SIG standards par défaut et via les extensions. Voici un bref résumé en six catégories qui vous donnera un premier aperçu.
+\qg offre beaucoup d'outils SIG standards par défaut et via les extensions de multiples contributeurs. Voici un bref résumé en six catégories qui vous donnera un premier aperçu.
 
 \minisec{Visualiser des données}
 
 Vous pouvez afficher et superposer des couches de données rasters et vecteurs dans différents formats et projections \footnote{\qg ne proposant actuellement de projection à la volée que pour les données de type vecteur, les données de type raster doivent être dans la même projection pour pouvoir être associées entre elles.} sans avoir à faire de conversion dans un format commun. Les formats supportés incluent :
 
 \begin{itemize}[label=--]
-\item les tables spatiales de \ppg, les formats vecteurs supportés par la bibliothèque OGR installée, ce qui inclut les fichiers de forme ESRI (shapefiles), MapInfo, STDS et GML (voir l'Annexe \ref{appdx_ogr} pour la liste complète) .
-\item les formats raster supportés par la bibliothèque GDAL (Geospatial Data Abstraction Library) tels que GeoTiff, Erads Img., ArcInfo Ascii Grid, JPEG, PNG (voir l'Annexe \ref{appdx_gdal} pour la liste complète).
-
-\item les formats raster et vecteur provenant des bases de données GRASS. 
+\item les tables spatiales de \ppg, les formats vecteurs supportés par la bibliothèque OGR installée, ce qui inclut les fichiers de forme ESRI (shapefiles), MapInfo, STDS et GML (voir l'Annexe \ref{appdx_ogr} pour la liste complète),
+\item les bases de données SpatiaLite (lire la section \ref{label_spatialite}),
+\item les formats raster supportés par la bibliothèque GDAL (Geospatial Data Abstraction Library) tels que GeoTiff, Erdas img., ArcInfo ascii grid, JPEG, PNG (voir l'Annexe \ref{appdx_gdal} pour la liste complète),
+\item les formats raster et vecteur provenant des bases de données GRASS, 
 \item les données spatiales provenant des services réseaux compatibles OGC comme le Web Map Service (WMS) ou le Web Feature Service (WFS) (voir la  section \ref{working_with_ogc}),
 \item les données OpenStreetMap (voir la section \ref{plugins_osm}).
-
-\item les bases de données SpatiaLite (lire la section \ref{label_spatialite}) 
 \end{itemize}
+
 \minisec{Parcourir les données et créer des cartes} 
 
 Vous pouvez créer des cartes et les parcourir de manière interactive avec une interface abordable. Les outils disponibles dans l'interface sont :
@@ -43,7 +42,7 @@ Vous pouvez créer des cartes et les parcourir de manière interactive avec une 
 \item identification et sélection des entités
 \item affichage, édition et recherche des attributs
 \item étiquetage des entités
-\item personnalisation de la symbologie des données raster et vecteur
+\item personnalisation de la sémiologie des données raster et vecteur
 \item ajout d'une couche de graticule lors de la composition
 \item ajout d'une barre d'échelle, d'une flèche indiquant le nord et d'une étiquette de droits d'auteur
 \item sauvegarde et chargement de projets
@@ -54,18 +53,22 @@ Vous pouvez créer des cartes et les parcourir de manière interactive avec une 
 Vous pouvez créer, éditer, gérer et exporter des données vectorielles dans plusieurs formats. \qg permet ce qui suit :
 
 \begin{itemize}[label=--]
-\item outils de numérisation pour les formats d'OGR et les couches vecteurs de GRASS
-\item créer et éditer des fichiers de forme (shapefiles) et les couches vecteur de GRASS
-\item géoréférencer des images avec l'extension de géoréférencement
-\item outils d'import/export du format GPX pour les données GPS, avec la conversion des autres formats GPS vers le GPX ou l'envoi/réception directement vers une unité GPS
-\item créer des couches \pg à partir de fichiers shapefiles avec l'extension SPIT
-\item gérer les attributs de tables des couches vecteur grâce à l'extension de gestion des tables ou celle de tables attributaires (voir la section \ref{sec:attribute table})
+\item numérisation pour les formats gérés par OGR et les couches vectorielles de GRASS
+\item création et éditiont des fichiers de forme (shapefiles), des couches vectorielles de GRASS et des tables géométriques SpatiaLite.
+\item géoréférencement des images avec l'extension de géoréférencement
+\item importation, exportation du format GPX pour les données GPS, avec la conversion des autres formats GPS vers le GPX ou l'envoi, la réception directement vers une unité GPS (le port USB a été ajouté à la liste des ports utilisables sous \nix{})
+\item visualisation et édition des données OpenStreetMap
+\item création de couches \pg à partir de fichiers shapefiles grâce au module d'extension SPIT
+\item prise en charge améliorée des tables PostGIS
+\item gestion des attributs des couches vectorielles grâce à l'extension de gestion des tables ou celle de tables attributaires (voir la section \ref{sec:attribute table})
 \item enregistrer des captures d'écran en tant qu'images géoréférencées
 \end{itemize}
 
+Les couches raster doivent être importées dans GRASS pour pouvoir être éditées et exportées vers d'autres formats.
+
 \minisec{Analyser les données} 
 
-Vous pouvez opérer des analyses spatiales sur des données \ppg et autres formats OGR en utilisant l'extension ftools. \qg permet actuellement l'analyse vectorielle, l'échantillonnage, la gestion de la géométrie et des bases de données. Vous pouvez aussi utiliser les outils GRASS intégrés qui comportent plus de 300 modules (voir la section \ref{sec:grass})
+Vous pouvez opérer des analyses spatiales sur des données \ppg et autres formats OGR en utilisant l'extension fTools. \qg permet actuellement l'analyse vectorielle, l'échantillonnage, la gestion de la géométrie et des bases de données. Vous pouvez aussi utiliser les outils GRASS intégrés qui comportent plus de 300 modules (voir la section \ref{sec:grass})
 
 \minisec{Publier une carte sur Internet}
 
@@ -73,7 +76,7 @@ Vous pouvez opérer des analyses spatiales sur des données \ppg et autres forma
 
 \minisec{Étendre les fonctionnalités de \qg grâce à des extensions} 
 
-\qg peut être adapté à vos besoins particuliers du fait de son architecture d'extensions. \qg fournit des bibliothèques qui peuvent être employées pour créer des extensions, vous pouvez même créer de nouvelles applications en C++ ou python !
+\qg peut être adapté à vos besoins particuliers du fait de son architecture extensible à base de modules. \qg fournit des bibliothèques qui peuvent être employées pour créer des extensions, vous pouvez même créer de nouvelles applications en C++ ou python !
 
 \minisec{Extensions principales}
 
@@ -83,15 +86,15 @@ Vous pouvez opérer des analyses spatiales sur des données \ppg et autres forma
 \item Décorations (Étiquette de droit d'auteur, flèche indiquant le nord et barre d'échelle)
 \item Insertion de diagrammes (place des diagrammes sur une couche vectorielle)
 \item Convertisseur Dxf2Shp (convertit les fichiers DXF en fichier SHP)
-\item Outils GPS Tools (importe et exporte des données GPS)
+\item Outils GPS (importe et exporte des données GPS)
 \item GRASS (intégration du SIG GRASS)
 \item Géoréférenceur GDAL (ajoute une projection à un raster)
-\item Extension d'Interpolation (interpole une surface en utilisant les sommets d'une couche vectorielle)
+\item Extension d'interpolation (interpole une surface en utilisant les sommets d'une couche vectorielle)
 \item Export Mapserver (exporte un fichier de projet QGIS dans le format de carte de MapServer)
 \item Convertisseur de couche OGR (convertit un fichier vectoriel dans plusieurs formats)
-\item Extenstion OpenStreetMap (permet de visualiser et d'éditer des données OSM)
+\item Extension OpenStreetMap (permet de visualiser et d'éditer des données OSM)
 \item support des GeoRaster d'Oracle Spatial
-\item Installateur d'extension Python (télécharge et installe des extensions python pour \qg)
+\item Installateur d'extensions python (télécharge et installe des extensions python pour \qg)
 \item Impression rapide (Imprimer une carte en un minimum d'effort)
 \item Analyse de terrain raster
 \item SPIT, outil d'importation de Shapefile vers \ppg
@@ -99,7 +102,7 @@ Vous pouvez opérer des analyses spatiales sur des données \ppg et autres forma
 \item eVIS (visualisation d'évènements multimédias)
 \item fTools (outils d'analyse et de gestion de vecteurs)
 \item Console Python (accédant à l'environnement QGIS)
-\item Outils graphiques pour GDAL
+\item Interfaces graphiques pour les modules GDAL
 \end{enumerate}
 
 %\minisec{External Python Plugins}
@@ -109,27 +112,65 @@ Vous pouvez opérer des analyses spatiales sur des données \ppg et autres forma
 
 \subsubsection{Quoi de neuf dans la version ~\CURRENT} 
 
-Voici les ajouts et améliorations les plus notables :
+Veuillez noter que cette version est un jalon important dans la série des publications. Comme tel, elle incorpore de nouvelles fonctionnalités et étend l'interface de programmation par rapport à \qg 1.0.x et \qg 1.5.0. Nous recommandons d'utiliser cette version préférentiellement aux précédentes.
+
+Cette version n'inclut pas moins de 177 résolutions de problèmes, ainsi que des améliorations et de nouvelles fonctionnalités.
+
+\textbf{Améliorations générales}
+
 \begin{itemize}[label=--]
 %  \item TODO(anne): rearrange the list on ManualTasks wikipage!
- \item Ajout d'une aide contextuelle dans les dialogues
- \item Outil de mesure d'angle
- \item Outil de suivi GPS 
- \item Plusieurs nouvelles extensions de qualité 'Spatial Query, GDAL Tools, Google Earth \dots"
- \item Ajout d'une table d'attributs sur la composition de carte
- \item Enregistrer une couche vectorielle pendant l'édition
- \item Intégration du nouveau moteur d'étiquetage et affichage des étiquettes dans une composition
- \item Ajout d'un mode "Glisser-Déposer" pour les légendes de carte
- \item Nouvelle interface pour le géoréférenceur
- \item Option BBOX pour le WFS 
- \item L'outil de jointure d'attribut supporte maintenant les fichiers dbf et csv
- \item Indique le nombre d'entités dans la table attributaire
- \item La console Python fonctionne aussi en-dehors de \qg
- \item Nouvel outil d'annotation
- \item Barre de zoom pour les couches WMS
- \item Amélioration de la recherche de projections
- \item Ajout de SCR compatibles avec GDAL (sans les paramètres +towgs84) pour les codes epsg polonais : 2172-2180, 3120, 3328-3335 et 4179 comme epsg+40000
- \item Changement automatique des unités de la carte dans la fenêtre de projet lors de la sélection d'un SCR
- \item Nouveau dialogue de connexion aux rasters d'Oracle
- \item Ajout du support SpatiaLite et de la création de multiples couches SpatiaLites via \qg
+\item Ajout du support gpsd à l'outil GPS de suivi en direct
+\item Une nouvelle extension permet l'édition hors ligne d'une base PostGIS.
+\item La calculatrice de champs insère une valeur nulle (NULL) en cas d'erreur, au lieu de s'arrêter et d'annuler le calcul des autres entités.
+% \item Update srs.db to include grid reference.
+% il s'agit des grilles gsb mais le support n'est pas assez mit en avant dans la GUI, évitons des déceptions
+\item Ajout d'une calculatrice raster native (C++) qui permet d'opérer sur des rasters de manière efficace.
+\item Interaction améliorée avec la zone affichant les coordonnées dans la barre de statut, les coordonnées peuvent être copiées et collées.
+\item Beaucoup d'améliorations et de nouveaux opérateurs pour la calculatrice de champs (concaténations, décompte des lignes, etc.).
+\item Ajout d'une option --configpath qui remplace le chemin par défaut (~/.qgis) pour la configuration utilisateur et oblige QSettings à l'utiliser. Cela permet à l'utilisateur de transporter son installation de QGIS sur une clé USB avec tous ses extensions et paramètres.
+\item Support expérimental du WFS-T.
+\item Amélioration et nettoyage du géoréférenceur.
+\item Support pour les entiers longs dans l'éditeur d'attributs.
+\item Incorporation du projet QGIS Mapserver, il permet de diffuser votre projet QGIS via le protocole OGC WMS.
+\item Sous-menus pour les barres d'outils de sélection et de mesure.
+\item Ajout du support des tables non spatiales.
+\item Ajout du support de la recherche de chaînes de caractères pour les identifiants d'entités (\$id) et autres améliorations.
+\item Ajout d'une méthode de rechargement des couches de la carte. Cela permet aux prestataires de données utilisant le cache de se synchroniser avec les changements de la source de données.
+\end{itemize}
+
+\textbf{Améliorations de la gestion de la liste des couches}
+
+\begin{itemize}[label=--]
+\item Ajout d'une nouvelle option dans le menu contextuel des rasters pour adapter les valeurs min et max utilisées par le mode de représentation, aux pixels actuellement visibles. 
+\item Possibilité de spécifier des options OGR lors de la sauvegarde d'une couche via le clic droit sur la couche.
+\item La liste des couches permet de sélectionner et d'effacer plusieurs couches à la fois.
+\end{itemize}
+
+\textbf{Étiquetage (nouvelle génération uniquement)}
+
+\begin{itemize}[label=--]
+\item Position des étiquettes définies par des données attributaires.
+\item Retour à la ligne, définition attributaire de la police et du tampon.
+\end{itemize}
+
+\textbf{Propriétés des couches et symbologies}
+
+\begin{itemize}[label=--]
+\item 3 nouveaux modes de classifications ajoutés au rendu gradué incluant les ruptures naturelles (Jenks), la déviation standard et les jolies ruptures (basées sur pretty de R).
+\item Amélioration de la vitesse de chargement de la fenêtre de propriétés des couches.
+\item Rotation et taille définies par des attributs pour les rendus catégorisés et gradués.
+\item Utilisation de l'échelle pour les symboles de lignes afin de modifier la largeur de la ligne.
+\item Remplacement de l'implémentation de l'histogramme raster par celui de Qwt. Il peut être sauvegardé en tant qu'image, la valeur réelle des pixels est affichée sur l'axe x.
+\item Possibilité de sélectionner interactivement les pixels du canevas pour renseigner la valeur de transparence dans les propriétés raster.
+\item Possibilité de définir un dégradé de couleur à partir de la liste déroulante des dégradés du mode de rendu gradué des vecteurs.
+\item Raccourci vers le gestionnaire de style dans le panneau du mode de symbole unique.
+\end{itemize}
+
+\textbf{Composeur de carte}
+
+\begin{itemize}[label=--]
+\item Ajout de l'affichage et de la manipulation des hauteurs et largeur des objets d'une composition.
+\item La suppression des objets est désormais possible avec \keystroke{Backspace}
+\item Tri de la table attribut de la composition.
 \end{itemize}
