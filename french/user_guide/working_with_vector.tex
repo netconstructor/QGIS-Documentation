@@ -2,7 +2,7 @@
 
 \chapter{Travailler avec des données vectorielles}\label{label_workingvector}
 %\index{vector layers|(}
-\index{couches vecteur|(}
+\index{couches vectorielles|(}
 
 %\qg supports vector data in a number of formats, including those supported by the OGR library data provider plugin, such as ESRI shapefiles, \index{shapefiles}\index{ESRI!shapefiles}\index{SHP files} \map MIF (interchange format)\index{MIF files}\index{MapInfo!MIF files} and \map TAB (native format).\index{TAB files}\index{MapInfo!TAB files}
 %You find a list of OGR supported vector formats in Appendix~\ref{appdx_ogr}.
@@ -25,7 +25,7 @@ Le travail sur des couches vectorielles GRASS est décrit dans la Section \ref{s
 %\index{ESRI!shapefiles}
 %\index{SHP files}
 \section{Shapefiles ESRI}
-\index{couches vecteur!shapefiles ESRI}
+\index{couches vectorielles!shapefiles ESRI}
 \index{shapefiles}
 \index{ESRI!shapefiles}
 \index{fichiers SHP}
@@ -133,7 +133,7 @@ Voici les étapes de création d'un index spatial :
 %\subsection{Loading a \map Layer}
 %\index{vector layers!MapInfo}
 \subsection{Charger une couche MapInfo}
-\index{couches vecteur!MapInfo}
+\index{couches vectorielles!MapInfo}
 
 %To load a \map layer, click on the \toolbtntwo{mActionAddNonDbLayer}{Add a vector layer} toolbar bar button or type \keystroke{V}, change the file type filter to \selectstring{Files of Type}{[OGR] \map (*.mif *.tab *.MIF *.TAB)} and select the layer you want to load.
 Pour charger une couche MapInfo, cliquez sur \toolbtntwo{mActionAddNonDbLayer}{Ajouter une couche vecteur} dans la barre d'outils ou tapez \keystroke{V}, changez le type de filtre pour\\ \selectstring{Fichiers de type [OGR] \map (*.mif *.tab *.MIF *.TAB)} et sélectionnez la couche que vous souhaitez charger.
@@ -141,7 +141,7 @@ Pour charger une couche MapInfo, cliquez sur \toolbtntwo{mActionAddNonDbLayer}{A
 %\subsection{Loading an ArcInfo Coverage}
 %\index{vector layers!ArcInfo Coverage}
 \subsection{Charger une couverture ArcInfo binaire}
-\index{couches vecteur!couverture ArcInfo binaire}
+\index{couches vectorielles!couverture ArcInfo binaire}
 
 %\includegraphics[width=0.7cm]{mActionAddNonDbLayer} To load an ArcInfo binary coverage, click on the
 %\toolbtntwo{mActionAddNonDbLayer}{Add Vector Layer} toolbar button or type
@@ -156,7 +156,7 @@ De manière similaire vous pouvez directement charger les fichiers vecteurs UK N
 %\section{PostGIS Layers}
 \section{Couches PostGIS}
 %\index{vector layers!PostGIS|see{PostGIS}}
-\index{couches vecteur!PostGIS|voir{PostGIS}}
+\index{couches vectorielles!PostGIS}
 %\index{PostGIS!layers}
 \index{PostGIS!couches}
 \label{label_postgis}
@@ -189,11 +189,15 @@ Pour charger une couche PostGIS, vous devez :\index{PostgreSQL!charger des couch
 %The \dialog{Add \pg Table(s)} dialog will be displayed. To access the connection manager\index{PostgreSQL!connection manager}, click on the \button{New} button to display the \dialog{Create a New \pg Connection} dialog. The parameters required for a connection are shown in table \ref{tab:postgis_connection_parms}.
 La fenêtre \dialog{Ajouter une ou plusieurs tables PostGIS} apparaît. Pour accéder au gestionnaire de connexion\index{PostgreSQL!gestionnaire de connexion}, cliquez sur le bouton \button{Nouveau} pour faire apparaitre la fenêtre\\ \dialog{Créer une nouvelle connexion PostGIS}. Les paramètres requis pour la connexion sont présentés dans le tableau \ref{tab:postgis_connection_parms}.
 
-\begin{table}[ht]\index{PostgreSQL!connection parameters}
-\centering
-%\caption{PostGIS Connection Parameters}\label{tab:postgis_connection_parms}\medskip
-
-\begin{tabular}{|l|p{11cm}|}
+\begin{center}
+{\setlength{\extrarowheight}{10pt}
+\small
+\begin{longtable}{|p{2.5cm}|p{10cm}|}
+  \hline \multicolumn{2}{|c|}{\textbf{Paramètres de connexion PostGIS}} \\ 
+\hline \textbf{Paramètre}&\textbf{Description} \\
+\endfirsthead
+\hline \textbf{Paramètre}&\textbf{Description} \\
+\endhead
 %\hline Name & A name for this connection. Can be the same as \textsl{Database}.\\
 \hline Nom & Un nom pour cette connexion. Il peut être identique à \textsl{Base de données}.\\
 %\hline Host \index{PostgreSQL!host} & Name of the database host. This must be a resolvable host name the same as would be used to open a telnet connection or ping the host. If the database is on the same computer as \qg, simply enter 'localhost' here.\\
@@ -219,9 +223,10 @@ La fenêtre \dialog{Ajouter une ou plusieurs tables PostGIS} apparaît. Pour acc
 \end {itemize}
 Il faut noter qu'une accélération massive du rendu des couches \pg peut être obtenue en désactivant le SSL dans l'éditeur de connexion. \\
 \hline
-\end{tabular}
-\caption{Paramètres de connexion PostGIS}\label{tab:postgis_connection_parms}
-\end{table}
+%\caption{PostGIS Connection Parameters}\label{tab:postgis_connection_parms}\medskip
+\caption{Paramètres de connexion PostGIS}\label{tab:postgis_connection_parms}\index{PostgreSQL!connection parameters}
+\end{longtable}}
+\end{center} 
 
 %Optional you can activate follwing checkboxes:
 Vous pouvez également activer les options suivantes :
@@ -396,27 +401,27 @@ gis_data=# \q
 gsherman@madison:~/current$
 \end{verbatim}
 
-\subsection{Couches vecteurs dépassants les \degrees{180} de longitude}
-\index{vector layers!crossing}
+\subsection{couches vectorielles dépassants les \degre{180} de longitude}
+\index{couches vectorielles!croiser}
 
-Beaucoup de logiciels de SIG ne traitent pas les cartes vecteurs  ayant un système de référence géographique dépassant la ligne des \degrees{180} de longitude. Il en résulte que sous \qg on verra 2 emplacements distincts et éloignés qui devraient être proches l'un de l'autre. Sur la figure \ref{fig:vector_not_wrapping} le petit point tout à gauche sur le canevas cartographique (Chatham Island) devrait être dans la grille, à droite des îles principales de Nouvelle-Zélande.
+Beaucoup de logiciels de SIG ne traitent pas les cartes vecteurs  ayant un système de référence géographique dépassant la ligne des \degre{180} de longitude. Il en résulte que sous \qg on verra 2 emplacements distincts et éloignés qui devraient être proches l'un de l'autre. Sur la figure \ref{fig:vector_not_wrapping} le petit point tout à gauche sur le canevas cartographique (Chatham Island) devrait être dans la grille, à droite des îles principales de Nouvelle-Zélande.
 
 \begin{figure}[ht]
    \begin{center}
    \includegraphics[clip=true, width=\textwidth]{vectorNotWrapping}
-   \caption{Carte en lat/lon dépassant les \degrees{180} de longitude \nixcaption}
+   \caption{Carte en lat/lon dépassant les \degre{180} de longitude \nixcaption}
    \label{fig:vector_not_wrapping}
 \end{center}
 \end{figure}
 
 Une solution est de transformer les valeurs longitudinales en utilisant \pg et la fonction \textbf{ST\textunderscore Shift\textunderscore Longitude}
-\footnote{\url{http://postgis.refractions.net/documentation/manual-1.4/ST_Shift_Longitude.html}}. Cette fonction lit chaque point/sommet de chacune des entités dans une géométrie et si la coordonnée de longitude est inférieure à \degrees{0} elle lui ajoute \degrees{360}. Le résultat est une version de \degrees{0} -- \degrees{360} version des données sur une carte centré à \degrees{180}.
+\footnote{\url{http://postgis.refractions.net/documentation/manual-1.4/ST_Shift_Longitude.html}}. Cette fonction lit chaque point/sommet de chacune des entités dans une géométrie et si la coordonnée de longitude est inférieure à \degre{0} elle lui ajoute \degre{360}. Le résultat est une version de \degre{0} -- \degre{360} version des données sur une carte centré à \degre{180}.
 
 \begin{figure}[ht]
    \begin{center}
    
    \includegraphics[clip=true, width=9cm]{vectorWrapping}
-   \caption{Carte dépassant la ligne des \degrees{180} de longitude après application de la fonction ST\textunderscore Shift\textunderscore Longitude}
+   \caption{Carte dépassant la ligne des \degre{180} de longitude après application de la fonction ST\textunderscore Shift\textunderscore Longitude}
 \label{fig:vector_wrapping}
 \end{center}
 \end{figure}
@@ -441,8 +446,8 @@ La première fois que vous chargerez une base Spatialite, commencez par cliquer 
 
 %\section{The Vector Properties Dialog}\label{sec:vectorprops}
 %\index{vector layers!properties dialog}
-\section{La fenêtre Propriété des couches vecteur}\label{sec:vectorprops}
-\index{couches vecteur!fenêtre propriété}
+\section{La fenêtre Propriété des couches vectorielles}\label{sec:vectorprops}
+\index{couches vectorielles!fenêtre propriété}
 
 %The \dialog{Layer Properties} dialog for a vector layer provides information about the layer, symbology settings and labeling options. If your vector layer has been loaded from a \psq / \pg datastore, you can also alter the underlying SQL for the layer - either by hand editing the SQL on the \tab{General} tab or by invoking the \dialog{Query Builder} dialog on the \tab{General} tab. To access the \dialog{Layer Properties} dialog, double-click on a layer in the legend or right-click on the layer and select \dropmenuopt{Properties} from the popup menu.
 La fenêtre \dialog{Propriétés de la couche} pour une couche vectorielle fournit des informations sur la couche, les paramètres de représentation et les options d'étiquetage. Si votre couche a été chargée depuis une base \ppg, vous pouvez également modifier la requête SQL d'appel de la couche, soit manuellement en éditant le SQL dans l'onglet \tab{Général} soit en appelant la fenêtre \dialog{Constructeur de requête} depuis l'onglet \tab{Général}. Pour accéder à la fenêtre \dialog{Propriétés de la couche}, double-cliquez sur la couche dans la légende ou faites un clic droit sur la couche et sélectionnez \dropmenuopt{Propriétés} dans le menu qui apparait.
@@ -458,20 +463,20 @@ La fenêtre \dialog{Propriétés de la couche} pour une couche vectorielle fourn
 %\subsection{Symbology Tab}\label{sec:symbology}
 %\index{vector layers!symbology}
 \subsection{Onglet Convention des signes}\label{sec:symbology}
-\index{couches vecteur!symbologie}
+\index{couches vectorielles!symbologie}
 
 %\qg supports a number of symbology renderers to control how vector features are displayed. Currently the following renderers are available:
 \qg gère différents types de représentation cartographique pour contrôler la manière pour les entités vectorielles seront affichées. Actuellement, voici les possibilités :
 
 \begin{description}
 %\item[Single symbol] - a single style is applied to every object in the layer.\index{vector layers!renderers!single symbol}
-\item[Symbole unique :]  un style unique est appliqué à tous les objets de la couche.\index{couches vecteur!rendus!symbole unique}
+\item[Symbole unique :]  un style unique est appliqué à tous les objets de la couche.\index{couches vectorielles!rendus!symbole unique}
 %\item[Graduated symbol] - objects within the layer are displayed with different symbols classified by the values of a particular field.\index{vector layers!renderers!graduated symbol}
-\item[Symbole gradué :]  les objets de la couche sont représentés avec des symboles différents selon la valeur qu'ils ont dans un champ définit.\index{couches vecteur!rendus!symbole gradué}
+\item[Symbole gradué :]  les objets de la couche sont représentés avec des symboles différents selon la valeur qu'ils ont dans un champ définit.\index{couches vectorielles!rendus!symbole gradué}
 %\item[Continuous color] - objects within the layer are displayed with a spread of colours classified by the numerical values within a specified field.\index{vector layers!renderers!continuous color}
-\item[Couleur continue :] les objets de la couche sont représentés avec une échelle de couleurs classées selon les valeurs numériques d'un champ définit.\index{couches vecteur!rendus!couleur continue}
+\item[Couleur continue :] les objets de la couche sont représentés avec une échelle de couleurs classées selon les valeurs numériques d'un champ définit.\index{couches vectorielles!rendus!couleur continue}
 %\item[Unique value] - objects are classified by the unique values within a specified field with each value having a different symbol.\index{vector layers!renderers!unique value}
-\item[Valeur unique :]  les objets sont classés par valeur unique dans un champ définit et à chaque valeur correspond un symbole différent.\index{couches vecteur!rendus!valeur unique}
+\item[Valeur unique :]  les objets sont classés par valeur unique dans un champ définit et à chaque valeur correspond un symbole différent.\index{couches vectorielles!rendus!valeur unique}
 \end{description}
 
 %To change the symbology for a layer, simply double click on its legend entry and the vector \dialog{Layer Properties} dialog will be  shown.\index{symbology!changing}
@@ -497,7 +502,7 @@ Pour changer la symbologie d'une couche, double-cliquez simplement dessus dans l
 % your computer as fill pattern for vector layers.
 
 %\minisec{Style Options} \label{sec:style_options} \index{vector layers!styles}
-\minisec{Options de style} \label{sec:style_options}\index{couches vecteur!styles}
+\minisec{Options de style} \label{sec:style_options}\index{couches vectorielles!styles}
 %Within this dialog you can style your vector layer. Depending on the selected rendering option you have the possibility to also classify your mapfeatures.
 Dans cette fenêtre vous pouvez donner un style à votre couche vecteur. Selon l'option de rendu sélectionnée, vous avez la possibilité de classer vos entités.
 
@@ -524,14 +529,14 @@ Si vous voulez utiliser en permanence un style particulier chaque fois que la co
 
 %\minisec{Vector transparency} \label{sec:vect_transparency}
 %\index{vector layers!transparency}
-\minisec{Transparence d'une couche vectorielle} \label{sec:vect_transparency} \index{couches vecteur!transparence}
+\minisec{Transparence d'une couche vectorielle} \label{sec:vect_transparency} \index{couches vectorielles!transparence}
 
 %\qg allows to set a transparency for every vector layer. This can be done with
 %the slider \\
 %\slider{Transparency} inside the \tab{symbology} tab (see
 %fig. \ref{subfig:single_symbol}). This is very useful for overlaying several
 %vector layers.
-\qg permet de définir une transparence pour chaque couche vecteur. Ceci peut-être fait avec le curseur \slider{Transparence} de l'onglet \tab{Convention des signes} (voir fig. \ref{fig:vector_symbology}). Ceci est très utile pour superposer plusieurs couches vecteur sur un même canevas.
+\qg permet de définir une transparence pour chaque couche vecteur. Ceci peut-être fait avec le curseur \slider{Transparence} de l'onglet \tab{Convention des signes} (voir fig. \ref{fig:vector_symbology}). Ceci est très utile pour superposer plusieurs couches vectorielles sur un même canevas.
 
 %\minisec{Understanding the new generation symbology}
 \minisec{Comprendre la nouvelle symbologie}
@@ -618,8 +623,11 @@ Le moteur de rendu est responsable de l'affichage d'une entité avec le symbole 
 %\dialog{Layer Properties} dialog. The new dialog allows to choose one of the
 %three renderers: single symbol, categorized and graduated. Depending on the
 %chosen renderer, the symbology tab provides different settings and options, that
-%will be described in the following sections.
-Il vous faut d'abord activer la nouvelle symobologie en cliquant sur le bouton \button{Nouvelle symbologie} dans les \dialog{Propriétés de la couche}. L'interface vous propose alors de choisir entre 3 rendus : symbole unique, catégorisé ou gradué. Selon le moteur de rendu choisi, cette fenêtre proposera des options différentes.
+%will be described in the following sections. The new generation symbology dialog 
+%also provides a \button{Style Manager} button which gives access to the Style 
+%Manager (see section \ref{subsec:stylemanager}). The Style Manager allows you to 
+%edit and remove existing symbols and add new ones. 
+Il vous faut d'abord activer la nouvelle symbologie en cliquant sur le bouton \button{Nouvelle symbologie} dans les \dialog{Propriétés de la couche}. L'interface vous propose alors de choisir entre 3 types de rendu : symbole unique, catégorisé ou gradué. Selon le moteur de rendu choisi, cette fenêtre proposera des options différentes. Un bouton \button{Gestionnaire de style} donne accès au gestionnaire de style (voir section \ref{subsec:stylemanager}), celui-ci permet d'éditer et de supprimer des symboles existants ou d'en ajouter des nouveaux.
 
 %\minisec{Single Symbol Renderer}
 \minisec{Symbole unique}
@@ -636,7 +644,13 @@ Il vous faut d'abord activer la nouvelle symobologie en cliquant sur le bouton \
 %After having done any needed changes, the symbol can be added to the list of
 %current style symbols (using the \button{Add to style} button) and then easily
 %be used in the future.
-Le moteur de rendu pour symbole unique est utilisé pour représenter toutes les entités de la couche avec un seul symbole défini par l'utilisateur. Les propriétés, qui peuvent être ajustées dans la fenêtre de symbologie, dépendent du type de géométrie de la couche, mais partagent une structure similaire. En haut à gauche figure un aperçu du symbole tel qu'il apparaîtra. En bas est affichée la liste des symboles déjà existants dans le style courant, prêts à être sélectionné d'un simple clic. Le symbole courant peut être modifié en utilisant le bouton \button{Propriétés} qui ouvre une fenêtre \dialog{Propriétés du symbole}, ou en utilisant le bouton \button{}
+Le moteur de rendu pour symbole unique est utilisé pour représenter toutes les entités de la couche avec un seul symbole défini par l'utilisateur. Les propriétés, qui peuvent être ajustées dans la fenêtre de symbologie, dépendent du type de géométrie de la couche, mais partagent une structure similaire. En haut à gauche figure un aperçu du symbole tel qu'il apparaîtra. En bas est affichée la liste des symboles déjà existants dans le style courant, prêts à être sélectionné d'un simple clic. Le symbole courant peut être modifié en utilisant le bouton \button{Propriétés} qui ouvre une fenêtre \dialog{Propriétés du symbole}, ou en utilisant le bouton \button{Ajouter au style}
+
+%\textbf{Note}: To modify line width, besides modifying the symbol itself, you
+%can use data-defined Size Scale (available through \button{Advanced} next to 
+%\button{Add to Style}).
+\textbf{Note}: Pour modifier la largeur d'une ligne sans modifier le symbole, vous pouvez définir des proportions (\button{Avancéd},à côté de 
+\button{Ajouter au style}).
 
 \begin{figure}[ht]
 \centering
@@ -669,9 +683,12 @@ Le rendu catégorisé est utilisé pour afficher toutes les entités d'une couch
 \item la couleur (en utlisant la liste de rampe de couleur)
 \end{itemize}
 
+%The Advanced button in the lower right corner of the dialog allows to set
+%the fields containing rotation and size scale information.
 %For convenience, the list in the bottom part of the tab lists the values of
 %all currently selected attributes together, including the symbols that will
 %be rendered.
+le bouton \button{Avancé} dans le coin inférieur droit de la fenêtre permet de définir les champs contenant les informations relatives à la rotation et la proportion.
 Par faciliter les choix de représentation, la liste dans la partie inférieure de la fenêtre affiche les valeurs de tous les attributs actuellement sélectionnés, ce qui inclut les symboles qui seront affichés.
 
 %The example in figure \ref{fig:catsymNG} shows the category rendering dialog
@@ -685,12 +702,28 @@ L'exemple de la figure \ref{fig:catsymNG} montre le rendu des catégories de la 
    \includegraphics[clip=true, width=10cm]{categorysymbol_ng_line}
 \end{figure}
 
+%You can create a custom color ramp choosing New color ramp... from the Color 
+%ramp dropdown menu. A dialog will prompt for the ramp type: Gradient, Random,
+%ColorBrewer, then each one has options for number of steps and/or multiple
+%stops in the color ramp. See \ref{fig:ccrg} for an example of custom color
+%ramp.
+
+Vous pouvez créer une palette de couleur personnalisée en cliquant sur 'Nouvelle palette de couleur' dans la liste déroulante des rampes/palettes. Une fenêtre vous demandera de choisir le type : gradué, aléatoire, Colorbrewer. Chacun des ces choix à sa propre série d'options, observez la figure \ref{fig:ccrg} pour un exemple de palette personnalisée.
+
+\begin{figure}[ht]
+   \centering
+%   \caption{Example of custom gradient color ramp with multiple stops \nixcaption}\label{fig:ccrg}
+   \caption{Exemple de palette de couleur graduée avec plusieurs arrêts \nixcaption}\label{fig:ccrg}
+   \includegraphics[clip=true, width=10cm]{customColorRampGradient.png}
+\end{figure}
+
 %\minisec{Graduated rendering}
 \minisec{Symboles gradués}
 
 %The Graduated Renderer is used to render all the features from a layer, using
 %a single user-defined symbol, whose color reflects the classification of a selected
-%feature's attribute to a class.
+%feature's attribute to a class. Like Categorized Renderer, it allows to define
+%rotation and size scale from specified columns.
 Le rendu gradué est utilisé pour afficher toutes les entités d'une couche, en utilisant un symbole de couche défini par l'utilisateur dont la couleur reflètera la classification d'une valeur d'un attribut.
 
 %Analogue to the categorized rendered, the symbology tab allows you to select:
@@ -706,10 +739,25 @@ De la même façon que le rendu catégorisé, vous pouvez modifier les points su
 \end{itemize}
 
 %Additionally, you can specify the number of classes and also the mode how to
-%classify features inside the classes (using the Mode list). The listbox in the
-%bottom part of the symbology tab lists the classes together with their ranges,
+%classify features inside the classes (using the Mode list). The available modes are:
+De plus, vous pouvez choisir le nombre de classes et le mode de classification. Les modes disponibles sont :
+
+\begin{itemize}
+% \item Equal Interval
+\item Intervalles égaux
+% \item Quantile
+\item Quantiles
+% \item Natural Breaks (Jenks)
+\item Ruptures naturelles (Jenks)
+% \item Standard Deviation
+\item Déviation standarde
+% \item Pretty Breaks
+\item  Ruptures "Jolies" (Pretty de GRASS)
+\end{itemize}
+
+%The listbox in the  bottom part of the symbology tab lists the classes together with their ranges,
 %labels and symbols that will be rendered.
-De plus, vous pouvez choisir le nombre de classes et le mode de classification. La liste de la partie inférieure de la fenêtre indique les classes ainsi que leurs plages, étiquettes et symboles.
+La liste de la partie inférieure de la fenêtre indique les classes ainsi que leurs plages, étiquettes et symboles.
 
 %The example in figure \ref{fig:gradsymNG} shows the graduated rendering dialog
 %for the rivers layer of the \qg sample dataset.
@@ -831,7 +879,7 @@ Le gestionnaire de style est une petite application qui liste les symboles et le
 
 \begin{figure}[ht]
    \centering
-   \includegraphics[clip=true, width=7cm]{stylemanager}
+   \includegraphics[clip=true, width=5.5cm]{stylemanager}
 %   \caption{Style Manager to manage symbols and color ramps \nixcaption}\label{fig:stylemanager}
    \caption{Gestion des symboles et des palettes de couleurs \nixcaption}\label{fig:stylemanager}
 \end{figure}
@@ -839,7 +887,7 @@ Le gestionnaire de style est une petite application qui liste les symboles et le
 %\subsection{General Tab}\label{vectorgeneraltab}
 \subsection{Onglet Général}\label{vectorgeneraltab}
 %The \tab{General} tab is essentially like that of the raster dialog. It allows you to change the display name, set scale dependent rendering options, create a spatial index of the vector file (only for OGR supported formats and PostGIS) and view or change the projection of the specific vetor layer.
-L'onglet \tab{Général} des couches vecteur est très proche de celui des couches raster. Il vous permet de changer le nom affiché, définir des rendus différents selon l'échelle, créer un index spatial du fichier vecteur (uniquement pour les formats gérés par OGR et \pg) et visualiser ou changer la projection de la couche.
+L'onglet \tab{Général} des couches vectorielles est très proche de celui des couches raster. Il vous permet de changer le nom affiché, définir des rendus différents selon l'échelle, créer un index spatial du fichier vecteur (uniquement pour les formats gérés par OGR et \pg) et visualiser ou changer la projection de la couche.
 
 %The \button{Query Builder} button allows you to create a subset of the features in the layer - but this button currently only is available when you open the attribute table and select the \button{Advanced ...} button.
 Le bouton \button{Constructeur de requête} vous permet de créer un sous-ensemble d'entité au sein de la couche - mais ce bouton de fonctionne actuellement que lorsque vous ouvrez la table attributaire et cliquez sur le bouton \button{\dots} à côté de la recherche avancée.
@@ -938,7 +986,7 @@ Notez que l'onglet \tab{Étiquettes} propose une \classname{Prévisualisation} m
 %/////////////////////////////////////////////
 
 %\subsection{New Labeling}\index{New labeling}\label{newlabel}
-\subsection{Nouvel Étiquetage}\index{New labeling}\label{newlabel}
+\subsection{Nouvel Étiquetage}\index{Nouvel étiquetage}\label{newlabel}
 
 %The new \toolbtntwo{labeling}{Labeling} core application provides smart labeling
 %for vector point,  line and polygon layers and only requires a few parameters.
@@ -1013,7 +1061,7 @@ Les actions sont utiles si vous voulez exécuter fréquemment une application ex
 \minisec{Définir des actions}\index{actions!définir}
 
 %Attribute actions are defined from the vector \dialog{Layer Properties} dialog. To define an action, open the vector \dialog{Layer Properties} dialog and click on the \tab{Actions} tab. Provide a descriptive name for the action. The action itself must contain the name of the application that will be executed when the action is invoked. You can add one or more attribute field values as arguments to the application. When the action is invoked any set of characters that start with a \% followed by the name of a field will be replaced by the value of that field. The special characters \%\% \index{\%\%}will be replaced by the value of the field that was selected from the identify results or attribute table (see Using Actions below).  Double quote marks can be used to group text into a single argument to the program, script or command. Double quotes will be ignored if preceded by a backslash.
-Les actions sur les attributs sont définies dans la fenêtre \dialog{Propriétés de la couche} des couches vecteur. Pour définir une action, ouvrez la fenêtre de \dialog{Propriétés de la couche} et cliquez sur l'onglet \tab{Actions}. Donnez un nom descriptif à l'action. L'action elle-même doit contenir le nom de l'application qui sera exécutée quand l'action sera invoquée. Vous pouvez ajouter un ou plusieurs champs d'attributs comme argument pour l'application. Quand l'action est invoquée n'importe quelle chaîne de caractère précédée de \% et correspondant au nom d'un champ sera remplacé par la valeur de ce champ. Le caractère spécial \%\% \index{\%\%} sera remplacé par la valeur d'un champ qui a été sélectionné par le résultat d'un Identifier ou dans la table d'attributs (voir Utiliser les actions, ci-dessous). Des guillemets peuvent être utilisés pour grouper du texte en un seul argument pour le programme, le script ou la commande. Les guillemets seront ignorés s'ils sont précédés d'un antislash.
+Les actions sur les attributs sont définies dans la fenêtre \dialog{Propriétés de la couche} des couches vectorielles. Pour définir une action, ouvrez la fenêtre de \dialog{Propriétés de la couche} et cliquez sur l'onglet \tab{Actions}. Donnez un nom descriptif à l'action. L'action elle-même doit contenir le nom de l'application qui sera exécutée quand l'action sera invoquée. Vous pouvez ajouter un ou plusieurs champs d'attributs comme argument pour l'application. Quand l'action est invoquée n'importe quelle chaîne de caractère précédée de \% et correspondant au nom d'un champ sera remplacé par la valeur de ce champ. Le caractère spécial \%\% sera remplacé par la valeur d'un champ qui a été sélectionné par le résultat d'un Identifier ou dans la table d'attributs (voir Utiliser les actions, ci-dessous). Des guillemets peuvent être utilisés pour grouper du texte en un seul argument pour le programme, le script ou la commande. Les guillemets seront ignorés s'ils sont précédés d'un antislash.
 
 %If you have field names that are substrings of other field names (e.g., \usertext{col1} and \usertext{col10}) you should indicate so, by surrounding the field name (and the \% character) with square brackets (e.g., \usertext{[\%col10]}). This will prevent the \usertext{\%col10} field name being mistaken for the \usertext{\%col1} field name with a \usertext{0} on the end. The brackets will be removed by \qg when it substitutes in the value of the field. If you want the substituted field to be surrounded by square brackets, use a second set like this: \usertext{[[\%col10]]}.
 Si vous avez des noms de champs qui sont contenus dans d'autres noms de champs (par exemple, \usertext{col1} et \usertext{col10}), vous devez l'indiquer en entourant le nom de champ (le caractère \%) par des crochets (par exemple \usertext{[\%col10]}). Ceci évitera de prendre le nom de champ \usertext{\%col10} pour \usertext{\%col1} avec un \usertext{0} à la fin. Les crochets seront retirés quand \qg substituera le nom par la valeur du champ. Si vous voulez que le champ à substituer soit entouré de crochets, utilisez un deuxième jeu de crochets comme ici : \usertext{[[\%col10]]}.
@@ -1158,7 +1206,7 @@ Dans l'onglet \tab{Attributs} vous trouverez un colonne \texttt{Outils d'éditio
 \end{itemize}
 
 \subsection{Diagramme}\label{sec:diagram}
-\index{couches vecteurs!diagramme}
+\index{couches vectorielles!diagramme}
 L'onglet \tab{Diagramme} permet d'ajouter une couche de graphiques sur une couche vecteur. Pour activer cette fonctionnalité, ouvrez le gestionnaire d'extension pour y sélectionner l'extension Diagramme Incrusté. Après ça, un nouvel onglet apparaît dans les \dialog{Propriétés de couches} vecteurs où les paramètres de diagrammes peuvent être saisis (voir figure~\ref{fig:diagramtab}).
 
 \begin{figure}[ht]
@@ -1309,8 +1357,8 @@ La deuxième option topologique, \checkbox{Éviter les intersections de nouveaux
 
 %\subsection{Editing an Existing Layer}
 \subsection{Numériser une couche existante}
-\index{couches vecteur!numériser}
-\index{numeriser!une couche existante}
+\index{couches vectorielles!numériser}
+\index{numériser!une couche existante}
 \label{sec:edit_existing_layer}
 
 %By default, \qg loads layers read-only: This is a safeguard to avoid accidentally editing a layer if there is a slip of the mouse. However, you can choose to edit any layer as long as the data provider supports it, and the underlying data source is writable (i.e. its files are not read-only).
@@ -1323,7 +1371,7 @@ L'édition d'une couche est plus flexible lorsqu'il s'agit de sources de donnée
 % select and unselect both under \mainmenuopt{Settings} > \dropmenuopt{Toolbars}.
 % Using the basic digitizing tools you can perform the following functions:
 
-En général, l'édition des couches vecteurs est répartie dans une barre de numérisation et une barre de numérisation avancée telle que décrite dans la section \ref{sec:advanced_edit}. Vous pouvez sélectionner les deux dans \mainmenuopt{Préférences} > \dropmenuopt{Barre d'Outils}. En utilisant les outils basiques de numérisation, vous pouvez accomplir les actions suivantes :
+En général, l'édition des couches vectorielles est répartie dans une barre de numérisation et une barre de numérisation avancée telle que décrite dans la section \ref{sec:advanced_edit}. Vous pouvez sélectionner les deux dans \mainmenuopt{Préférences} > \dropmenuopt{Barre d'Outils}. En utilisant les outils basiques de numérisation, vous pouvez accomplir les actions suivantes :
 
 %\begin{Tip}[ht]\caption{\textsc{Data Integrity}}
 \begin{Tip}[ht]\caption{\textsc{Intégrité des données}}
@@ -1331,7 +1379,7 @@ En général, l'édition des couches vecteurs est répartie dans une barre de nu
 Sauvegarder vos données avant de se lancer dans une édition est toujours une bonne idée. Bien que les auteurs de \qg ont fait beaucoup d'efforts pour préserver l'intégrité de vos données, nous n'offrons aucune garantie.
 \end{Tip}
 %traduction
-\begin{table}[ht]\index{vector layers!basic editing tools}
+\begin{table}[ht]\index{couches vectorielles!outils d'édition basique}
 \centering
 
 \begin{tabular}{|l|p{5.5cm}|l|p{5.5cm}|}
@@ -1380,7 +1428,7 @@ Toutes les sessions d'édition débutent par la sélection de l'option\\ \dropme
 % layer is in edit mode, markers will appear at the vertices, and additional
 % tool buttons on the editing toolbar will become available.
 
-Alternativement, vous pouvez utiliser le bouton \index{Basculer en mode édition}\toolbtntwo{mActionToggleEditing}{Basculer en mode édition} dans la barre de numérisation pour débuter ou terminer une session d'édition.\index{numerisation!icones} Une fois que la couche est éditable, les marqueurs vont apparaître sur les sommets et de nouveaux outils seront disponibles dans la barre d'outils.
+Alternativement, vous pouvez utiliser le bouton \index{Basculer en mode édition}\toolbtntwo{mActionToggleEditing}{Basculer en mode édition} dans la barre de numérisation pour débuter ou terminer une session d'édition.\index{numériser!icônes} Une fois que la couche est éditable, les marqueurs vont apparaître sur les sommets et de nouveaux outils seront disponibles dans la barre d'outils.
 
 %\begin{Tip}[ht]\caption{\textsc{Save Regularly}}
 \begin{Tip}[ht]\caption{\textsc{Fréquence de sauvegarde}}
@@ -1393,7 +1441,7 @@ Toute session d'édition commence par un clic sur \dropmenuopttwo{mActionToggleE
 
 %\minisec{Adding Features}
 %\index{vector layers!adding!feature}
-\minisec{Ajouter des entités} \index{couches vecteur!déplacer!entités}
+\minisec{Ajouter des entités} \index{couches vectorielles!déplacer!entités}
 
 %Before you start adding features, use the \toolbtntwo{mActionPan}{pan} and \toolbtntwo{mActionZoomIn}{zoom-in}/\toolbtntwo{mActionZoomOut}{zoom-out} tools to first navigate to the area of interest.
 Avant de commencer à ajouter des entités, utiliser les outils \toolbtntwo{mActionPan}{Se déplacer dans la carte} et \toolbtntwo{mActionZoomIn}{zoom +}/\toolbtntwo{mActionZoomOut}{zoom -} pour naviguer vers la zone d'intérêt.
@@ -1420,7 +1468,7 @@ La fenêtre des attributs apparaît, ce qui vous permet d'entrer les information
   \begin{center}
   %\caption{Enter Attribute Values Dialog after digitizing a new vector feature \nixcaption}\label{fig:vector_digitising}\smallskip
    \includegraphics[clip=true, width=8cm]{editDigitizing}
-  \caption{Fenêtre Entrez les valeurs d'attributs après la numérisation d'une nouvelle entité vecteur \nixcaption}\label{fig:vector_digitising}
+  \caption{Fenêtre de saisie d'attributs suivant la création d'une nouvelle entité \nixcaption}\label{fig:vector_digitising}
 \end{center}
 \end{figure}
 
@@ -1435,7 +1483,7 @@ Pour l'édition des shapefiles au moins, les types des attributs sont validés a
 %\minisec{Node Tool}
 %\index{vector layers!node!tool}
 \minisec{Outil de nœud}
-\index{vector layers!node!tool}
+\index{couches vectorielles!noeud!outil}
 
 %For both PostgreSQL/PostGIS and shapefile-based layers, the
 %\toolbtntwo{mActionNodeTool}{Node Tool} provides manipulation capabilites
@@ -1465,7 +1513,7 @@ La version actuelle de \qg présente 3 types de marqueurs - un cercle semi-trans
 \end{Tip}
 
 %\minisec{Basic operations}\index{vector layers!Node Tool}
-\minisec{Opérations basiques}\index{vector layers!Node Tool}
+\minisec{Opérations basiques}\index{couches vectorielles!outil!noeud}
 
 %Start by activating the \toolbtntwo{mActionNodeTool}{Node Tool} and selecting
 %some features by clicking on it. Red boxes appear at each vertex of this feature.
@@ -1511,9 +1559,9 @@ Commecez par cliquez sur le bouton \toolbtntwo{mActionNodeTool}{Outil de nœud} 
 %\index{editing!cutting features}
 %\index{editing!copying features}
 %\index{editing!pasting features}
-\index{couches vecteur!couper!entité}
-\index{couches vecteur!copier!entité}
-\index{couches vecteur!coller!entité}
+\index{couches vectorielles!couper!entité}
+\index{couches vectorielles!copier!entité}
+\index{couches vectorielles!coller!entité}
 \index{éditer!couper des entités}
 \index{éditer!copier des entités}
 \index{éditer!coller des entités}
@@ -1563,7 +1611,7 @@ Si vos couches source et cible utilisent la même projection, les entités coll�
 %\minisec{Deleting Selected Features}
 %\index{vector layers!deleting!feature}
 \minisec{Supprimer des entités sélectionnées}
-\index{couches vecteur!effacer!entité}
+\index{couches vectorielles!effacer!entité}
 
 % If we want to delete an entire polygon, we can do that by first selecting 
 % the polygon using the regular \toolbtntwo{mActionSelect}{Select Features} tool. You can select 
@@ -1613,11 +1661,11 @@ C'est toujours une bonne idée de sauvegarder vos sources de données avant de l
 % \label{sec:advanced_edit}
 
 \subsection{Numérisation avancée}
-\index{couches vecteurs!numérisation avancée}
-\index{numérisation avancée!une couche existante}
+\index{couches vectorielles!numérisation avancée}
+\index{couches vectorielles!numérisation avancée!couche existante}
 \label{sec:advanced_edit}
 
-\begin{table}[h]\index{couches vecteurs!outils de numérisation avancée}
+\begin{table}[h]\index{couches vectorielles!outils de numérisation avancée}
 \centering
 %\small
 \begin{tabular}{|l|p{5.5cm}|l|p{5.5cm}|}
@@ -1652,10 +1700,10 @@ C'est toujours une bonne idée de sauvegarder vos sources de données avant de l
 \end{table}
 
 \minisec{Annuler et refaire}
-\index{couches vecteurs!annuler}
-\index{couches vecteurs!refaire}
+\index{couches vectorielles!annuler}
+\index{couches vectorielles!refaire}
 
-Les outils \toolbtntwo{mActionUndo}{Annuler} et \toolbtntwo{mActionRedo}{Refaire} permettent à l'utilisateur d'annuler ou revenir sur un certain nombre d'opérations sur les données vecteurs. La vue de base est une fenêtre où toutes les opérations sont répertoriées (voir figure~\ref{fig:vector_redoundo}). Cette fenêtre n'est pas affichée par défaut, mais peut être affichée par un clic droit sur une barre d'outils puis en cochant Annuler/Refaire L'outil est actif même quand la fenêtre n'est pas active.
+Les outils \toolbtntwo{mActionUndo}{Annuler} et \toolbtntwo{mActionRedo}{Refaire} permettent à l'utilisateur d'annuler ou revenir sur un certain nombre d'opérations sur les données vectorielless. La vue de base est une fenêtre où toutes les opérations sont répertoriées (voir figure~\ref{fig:vector_redoundo}). Cette fenêtre n'est pas affichée par défaut, mais peut être affichée par un clic droit sur une barre d'outils puis en cochant Annuler/Refaire L'outil est actif même quand la fenêtre n'est pas active.
 \par
 Quand on clique sur Annuler, l'état de toutes les entités retourne à l'état connu avant que les changements du à une opération quelconque aient été appliqué.
 \par
@@ -1671,7 +1719,7 @@ Une action peut être déclenchée en cliquant sur les boutons Annuler ou Refair
 % \minisec{Simplify Feature}
 % \index{vector layers!simplify}
 \minisec{Simplifier une entité}
-\index{couches vecteurss!simplifier}
+\index{couches vectorielles!simplifier}
 
 %The \toolbtntwo{mActionSimplify}{Simplify Feature} tool allows to reduce the
 %number of vertices of a feature, as long as the geometry doesn't change. You
@@ -1685,7 +1733,7 @@ L'outil \toolbtntwo{mActionSimplify}{Simplifier une entité} permet de réduire 
 % \minisec{Add Ring}
 % \index{vector layers!add!ring}
 \minisec{Ajouter un anneau}
-\index{couches vecteurs!ajouter!anneau}
+\index{couches vectorielles!ajouter!anneau}
 
 % You can create ring polygons using the \toolbtntwo{mActionAddRing}{Add Ring}
 % icon in the toolbar. This means inside an existing area it is
@@ -1698,7 +1746,7 @@ Vous pouvez créer des anneaux de polygones en utilisant l'icône \toolbtntwo{mA
 % \minisec{Add Part}
 % \index{vector layers!add!island}
 \minisec{Ajouter une partie}
-\index{couches vecteurs!ajouter!partie}
+\index{couches vectorielles!ajouter!partie}
 
 %You can \toolbtntwo{mActionAddIsland}{add part} polygons to a selected multipolygon.
 %The new part polygon has to be digitized outside the selected multipolygon.
@@ -1707,7 +1755,7 @@ Vous pouvez \toolbtntwo{mActionAddIsland}{ajouter une partie} à un multipolygon
 % \minisec{Delete Ring}
 % \index{vector layers!delete!ring}
 \minisec{Effacer un anneau}
-\index{couches vecteurs!effacer!anneau}
+\index{couches vectorielles!effacer!anneau}
 
 % The \toolbtntwo{mActionDeleteRing}{Delete Ring} tool allows to delete ring
 % polygons inside an existing area. This tool only works with polygon layers. 
@@ -1719,7 +1767,7 @@ L'outil \toolbtntwo{mActionDeleteRing}{Effacer un anneau} permet de supprimer un
 % \minisec{Delete Part}
 % \index{vector layers!delete!part}
 \minisec{Effacer une partie}
-\index{couches vecteurs!effacer!partie}
+\index{couches vectorielles!effacer!partie}
 
 %The \toolbtntwo{mActionDeletePart}{Delete Part} tool allows to delete parts
 %from multifeatures (e.g. to delete polygons from a multipolygon feature). It
@@ -1731,7 +1779,7 @@ L'outil \toolbtntwo{mActionDeletePart}{Effacer une partie} permet de supprimer d
 % \minisec{Reshape Features}
 % \index{vector layers!reshape!feature}
 \minisec{Remodeler une entité}
-\index{couches vecteurs!remodeler!entité}
+\index{couches vectorielles!remodeler!entité}
 
 %You can reshape line and polygon features using the
 %\toolbtntwo{mActionReshape}{Reshape Features} icon on the toolbar. It
@@ -1751,17 +1799,17 @@ Il est possible de retoucher des lignes ou des polygones grâce à l'outil\\ \to
 % \minisec{Split Features}
 % \index{vector layers!split!feature}
 \minisec{Couper une entité}
-\index{couches vecteurs!couper!entité}
+\index{couches vectorielles!couper!entité}
 
 %You can split features using the \toolbtntwo{mActionSplitFeatures}{Split
 %Features} icon on the toolbar. Just draw a line across the feature you
 %want to split.
-Vous pouvez diviser une entité en utilisant le bouton \toolbtntwo{mActionSplitFeatures}{Couper Entités} situés dans la barre de numérisation. Pour pcouper, dessinez une ligne en travers de l'entité avec cet outil.
+Vous pouvez diviser une entité en utilisant le bouton \toolbtntwo{mActionSplitFeatures}{Couper Entités} situés dans la barre de numérisation. Pour couper, dessinez une ligne en travers de l'entité avec cet outil et terminez avec un clic droit.
 
 % \minisec{Merge selected features}
 % \index{vector layers!merge!features}
 \minisec{Fusionner les entités sélectionnées}
-\index{couches vecteurs!fusionner!entité}
+\index{couches vectorielles!fusionner!entité}
 
 % The \toolbtntwo{mActionMergeFeatures}{Merge Selected Features} tool allows to
 % merge features that have common boundaries and the same attributes.  
@@ -1770,7 +1818,7 @@ L'outil \toolbtntwo{mActionMergeFeatures}{Fusionner les entités sélectionnées
 %\minisec{Rotate Point Symbols}
 \minisec{Rotation d'un symbole de point}
 %\index{vector layers!rotate!symbol}
-\index{couches vecteurs!rotation!symbole}
+\index{couches vectorielles!rotation!symbole}
 
 %The \toolbtntwo{mActionRotatePointSymbols}{Rotate Point Symbols} tool
 %allows to change the rotation of point symbols in the map canvas, if
@@ -1798,7 +1846,7 @@ Pour changer l'orientation, sélectionnez une entité ponctuelle sur le canevas 
 \textbf{Note}: Si vous gardez la touche \keystroke{Ctrl} enfoncée, la rotation se fera par paliers de 15 degrés.
 
 %\subsection{Creating a new Shapefile and Spatialite layer}\label{sec:create shape}\index{editing!creating a new shape layer}
-\subsection{Créer de nouvelles couches Shapefile et Spatialite}\label{sec:create shape}\index{editing!creating a new shape layer}
+\subsection{Créer de nouvelles couches Shapefile et Spatialite}\label{sec:create shape}\index{éditer!créer une nouvelle couche .shp}
 
 %\qg allows to create new Shapefile layers and new Spatialite layers.
 %Creation of a new GRASS layer is supported within the GRASS-plugin. Please refer
@@ -1815,7 +1863,7 @@ Pour créer une nouvelle couche Shapefile à éditer, allez dans \toolbtntwo{mAc
 \begin{figure}[ht]
   \begin{center}
   %\caption{Creating a New Vector Dialog \nixcaption}\label{fig:newvectorlayer}\smallskip
-  \includegraphics[clip=true, width=8cm]{editNewVector}
+  \includegraphics[clip=true, width=7cm]{editNewVector}
   \caption{Fenêtre Nouvelle couche Shapefile \nixcaption}\label{fig:newvectorlayer}
 \end{center}
 \end{figure}
@@ -1836,7 +1884,7 @@ Notez que \qg ne gère pas encore la création d'entité 2.5D (c.-à-d. des enti
 Pour terminer la création de la nouvelle couche, ajouter les attributs désirés en cliquant sur le bouton \button{Ajouter un attribut} et en spécifiant le nom et le type de l'attribut. Seuls les attributs de type \selectstring{Type}{réel}, \selectstring{Type}{entier}, et \selectstring{Type}{string} sont gérés. De plus, selon le type d'attribut vous pouvez définir la largeur et la précision de la nouvelle colonne. Une fois satisfait de vos attributs, cliquez sur \button{OK} et donnez un nom pour le shapefile. \qg va automatiquement ajouter l'extension \filename{.shp} au nom que vous lui avez spécifié. Une fois la couche créée, elle sera ajoutée à la carte et vous pouvez l'éditer de la manière décrite dans la Section \ref{sec:edit_existing_layer} ci-dessus.
 
 %\minisec{Creating a new SpatiaLite layer}\label{sec:create spatialite}\index{editing!creating a new spatialite layer}
-\minisec{Créer une nouvelle couche SpatiaLite}\label{sec:create spatialite}\index{editing!creating a new spatialite layer}
+\minisec{Créer une nouvelle couche SpatiaLite}\label{sec:create spatialite}\index{éditer!créer une nouvelle couche spatialite}
 
 %To create a new SpatiaLite layer for editing, choose \button{new} \arrow
 %\toolbtntwo{mActionNewVectorLayer}{New SpatiaLite Layer} from the
@@ -1846,7 +1894,7 @@ Pour créer une nouvelle couche SpatiaLite à éditer, allez dans \toolbtntwo{mA
 
 \begin{figure}[ht]
    \centering
-   \includegraphics[clip=true, width=8cm]{editNewSpatialite}
+   \includegraphics[clip=true, width=7cm]{editNewSpatialite}
 %   \caption{Creating a New Spatialite layer Dialog \nixcaption}\label{fig:newspatialitelayer}
    \caption{Fenêtre de création d'une nouvelle couche Spatialite \nixcaption}\label{fig:newspatialitelayer}
 \end{figure}
@@ -1949,6 +1997,18 @@ Pour afficher uniquement les enregistrements que vous avez sélectionnés, utili
 \item \toolbtntwo{mActionCalculateField}{Ouvrir la calculatrice de champ}
 \end{itemize}
 
+%\minisec{Save selected features as new layer}
+%\index{editing!save selection as new layer}
+\minisec{Enregistrer les entités sélectionnées dans une nouvelle couches}
+\index{éditer!enregistrer la sélection dans une nouvelle couche}
+
+%The selected features can be saved as any OGR supported vector format and also
+%transformed into another Coordinate Reference System (CRS). Just open the right mouse
+%menu of the layer and click on \dropmenuopt{Save selection as} to define the
+%name of the output file, its format and CRS (see Section \ref{label_legend}). It is 
+%also possible to specify OGR creation options within the dialog.
+Les entités sélectionnées peuvent être enregistrés dans un nouveau fichier (dans tout format supporté par OGR) et transformé dans n'importe quel système de coordonnées (SCR). Il suffit de faire un clic droit sur la couche où est la sélection dans la liste des couches, de cliquer sur \dropmenuopt{Sauvegarder la sélection sous} pour définir le nom du fichier en sortie, le format et le SCR (voir section \ref{label_legend}). Il est possible de définir des options de création OGR à cette étape.
+
 %\begin{Tip}[ht]\caption{\textsc{Manipulating Attribute data}}
 %\qgistip{Currently only \pg layers are supported for adding or dropping
 %attribute columns within this dialog. In future versions of \qg, other
@@ -1957,6 +2017,24 @@ Pour afficher uniquement les enregistrements que vous avez sélectionnés, utili
 \begin{Tip}[ht]\caption{\textsc{Manipuler les données attributaires}}
 Actuellement seules les couches \pg sont supportés pour ce quide l'ajout ou la suppression de colonnes. Les prochaines versions de \qg étendront ce support à d'autres sources de données grâce aux apports des versions de GDAL/OGR postérieures à la 1.6.0.
 \end{Tip}
+
+%\minisec{Working with non spatial attribute tables}
+%\index{editing!working with non spatial tables}
+\minisec{Travailler avec tables non-spatialisées}
+\index{éditer!travailler avec tables non-spatiales}
+
+%QGIS allows also to load non spatial tables. This includes currently tables supported 
+%by OGR, delimited text and the PostgreSQL provider. The tables can be used for field 
+%lookups or just generally browsed and edited using the table view. When you load the 
+%table you will see it in the legend field. It can be opened e.g. with the 
+%\dropmenuopttwo{mActionOpenTable}{Open Attribute Table} tool and is then editable 
+%like any other layer attribute table. 
+QGIS permet de charger des tables n'ayant pas d'informations spatiales, cela comprend les tables supportées par OGR, les fichers de texte délimité et le prestataire PostgreSQL. les tables peuvent être utilisé pour regarder les champs, pour des requêtes ou pour de l'édition. Lorsque vous chargez une table de ce type, elle apparaîtra dans la liste des couches, elle peut être ouverte avec l'outil \dropmenuopttwo{mActionOpenTable} comme une table attributaire.
+
+%As an example you can use columns of the non spatial table to define attribute values or 
+%a range of values that are allowed to be added to a specific vector layer during digitizing. 
+%Have a closer look at the edit widget in section~\ref{label_attributes} to find out more.
+Vous pouvez ainsi utiliser ces colonnes pour définir des valeurs d'attributs ou un intervalle de valeurs qui sont autorisées à être ajouté à une couche vectorielle spécifique durant une numérisation. Jetez un oeil du côté de l'outil d'édition pour en savoir plus (voir section \ref{label_attributes}).
 
 %\section{Query Builder}\label{sec:query_builder}
 \section{Constructeur de requêtes}\label{sec:query_builder}
@@ -2024,7 +2102,7 @@ Vous pouvez changer la définition d'une couche après son chargement en modifia
 \index{constructeur de requête!PostGIS}
 
 %With \qg it is possible also to select features using a similar query builder interface to that used in \ref{sec:query_builder}. In the above section the purpose of the query builder is to only show features meeting the filter criteria as a 'virtual layer' / subset. The purpose of the select by query function is to highlight all features that meet a particular criteria. Select by query can be used with all vector data providers.
-Dans \qg, il est possible de sélectionner des entités en utilisant une interface similaire à celle du constructeur de requêtes utilisé dans \ref{sec:query_builder}. Dans la section ci-dessus, le but du constructeur de requêtes était seulement de montrer les entités répondant aux critères de filtre comme une couche virtuelle/ sous-ensemble. Le but de la fonction de sélection par requête est de surligner toutes les entités qui répondent à un critère particulier. La sélection par requête peut être utilisée sur tous les fournisseurs de données vecteur.
+Dans \qg, il est possible de sélectionner des entités en utilisant une interface similaire à celle du constructeur de requêtes utilisé dans \ref{sec:query_builder}. Dans la section ci-dessus, le but du constructeur de requêtes était seulement de montrer les entités répondant aux critères de filtre comme une couche virtuelle/ sous-ensemble. Le but de la fonction de sélection par requête est de surligner toutes les entités qui répondent à un critère particulier. La sélection par requête peut être utilisée sur tous les prestataires de données vectorielles.
 
 %To do a `select by query' on a loaded layer, click on the button \toolbtntwo{mActionOpenTable}{Open Table} to open the attribute table of the layer. Then click the \button{Advanced...} button at the bottom. This starts the Query Builder that allows to define a subset of a table and display it as described in Section \ref{sec:query_builder}.
 Pour faire une sélection par requête sur une couche chargée, cliquez sur le bouton\\ \toolbtntwo{mActionOpenTable}{Ouvrir la table des attributs} pour ouvrir la table de la couche. Ensuite cliquez sur le bouton \button{Avancée\dots} en bas de la fenêtre. Cela lance le Constructeur de requête qui permet de définir un sous-ensemble de la table et l'affiche comme décrit dans la Section \ref{sec:query_builder}.
@@ -2046,12 +2124,12 @@ that allows to define a subset of a table and display it as described in Section
 
 %\section{Field Calculator}\label{sec:field_calculator}
 \section{Calculatrice de champ}\label{sec:field_calculator}
-\index{PostgreSQL!field calculator}
-\index{PostGIS!field calculator}
-\index{OGR!field calculator}
-\index{field calculator!PostgreSQL}
-\index{field calculator!PostGIS}
-\index{field calculator!OGR}
+\index{PostgreSQL!calculatrice de champ}
+\index{PostGIS!calculatrice de champ}
+\index{OGR!calculatrice de champ}
+\index{calculatrice de champ!PostgreSQL}
+\index{calculatrice de champ!PostGIS}
+\index{calculatrice de champ!OGR}
 
 %The \toolbtntwo{mActionCalculateField}{Field Calculator} button in the
 %attribute table allows to perform calculations on basis of existing
@@ -2103,10 +2181,9 @@ La zone des \textbf{valeurs} liste les valeurs du champs. Pour lister toutes les
 %The \textbf{Operators section} contains all usable operators. To add an operator
 %to the Field calculator expression box, click the appropriate button. Mathematical
 %calculations ( + , - , * \dots), trigonometric functions ( sin, cos, tan, \dots),
-%extract geometric information ( length and area ) are available and will be
-%extended in future versions.
-La zone des \textbf{opérateurs} contient tous les opérateurs utilasble sur la couche. Pour ajouter un opérateur à une expression, faites un clic sur le bouton de l'opérateur désiré. Les opérateurs disponibles actuellement sont les calculs mathématiques ( + , - , *,\dots), trigonoméune longueur de 10
-triques ( sin, cos, tan,\dots), géométriques (longueur ou surface). Cette liste sera étendue dans les prochaines versions de \qg.
+%extract geometric information ( length and area ) together with
+%concatenator (||) and row counter. Stay tuned for more operators to come!
+La zone des \textbf{opérateurs} contient tous les opérateurs utilasble sur la couche. Pour ajouter un opérateur à une expression, faites un clic sur le bouton de l'opérateur désiré. Les opérateurs disponibles actuellement sont les calculs mathématiques ( + , - , *,\dots), trigonométriques (sin, cos,tan,\dots), géométriques (longueur ou surface), la concaténation\footnote{Ce terme signifie la mise bout à bout de chaînes de caractères, p. ex. "Brian is in" || "the kitchen" donnera "Brian is in the kitchen".} (||) et le décompte des lignes. Cette liste sera encore étendue dans les prochaines versions de \qg.
 
 %A short example illustrates how the field calculator works. We want to calculate
 %the length of the 'railroads' layer from the \filename{\qg\_example\_dataset}:
