@@ -3,7 +3,7 @@
 
 
 %\section{\qg Plugins}\label{sec:plugins}\index{plugins}
-\chapter{Les extensions de \qg}\label{sec:extensions}\index{extensions}
+\chapter{Les extensions de \qg}\label{sec:plugins}\index{extensions}
 
 % when the revision of a section has been finalized, 
 % comment out the following line:
@@ -13,7 +13,7 @@
 %This allows new features/functions to be easily added to the application.
 %Many of the features in \qg are actually implemented as \textbf{core} or \textbf{external} plugins.\index{plugins!types} 
 
-\qg repose sur un système d'extensions. Ce dernier permet d'ajouter facilement de nouvelles fonctions au logiciel. De nombreuses nouvelles fonctions de \qg sont implémentées comme des extensions \textbf{principales} ou \textbf{complémentaires}. \index{plugins!types} 
+\qg repose sur un système d'extensions. Ce dernier permet d'ajouter facilement de nouvelles fonctions au logiciel. De nombreuses nouvelles fonctions de \qg sont implémentées comme des extensions \textbf{principales} ou \textbf{complémentaires}. \index{extensions!types} 
 
 \begin{itemize}[label=--]
 %\item \textbf{Core Plugins} are maintained by the \qg Development Team and are automatically part of every \qg distribution.
@@ -30,7 +30,7 @@
 %\section{Managing Plugins}\label{sec:managing_plugins}
 %\index{plugins!managing} 
 \section{Gérer les extensions}\label{sec:managing_plugins}
-\index{plugins!managing} 
+\index{extensions!gestion} 
 
 %Managing plugins in general means loading or unloading them using
 %the \filename{Plugin Manager}. External plugins can be installed and
@@ -44,7 +44,7 @@ Les extensions complémentaires doivent d'abord être installées à l'aide de \
 \subsection{Installer une extension principale}\label{sec:load_core_plugin} 
 
 %Loading a \qg Core Plugin is done from the main menu \mainmenuopt{Plugins} > \dropmenuopttwo{mActionShowPluginManager}{Manage Plugins...}.\index{plugins!manager}
-On active une extension principale à l'aide du menu\\ \mainmenuopt{Extensions} > \dropmenuopttwo{mActionShowPluginManager}{Gestionnaire d'extension\dots}.\index{plugins!manager}
+On active une extension principale à l'aide du menu\\ \mainmenuopt{Extensions} > \dropmenuopttwo{mActionShowPluginManager}{Gestionnaire d'extension\dots}.\index{extensions!gestion}
 
 \begin{figure}[ht]
    \begin{center}
@@ -75,7 +75,7 @@ Pour installer une extension, cocher la case à gauche du nom puis cliquez sur \
 %You can then start \qg and add the plugins one at a time from the \filename{Plugin Manager} to 
 %determine which plugin is causing the problem.}
 %\end{Tip} 
-\begin{Tip}\caption{\textsc{Extensions et plantages}}\index{crashes}
+\begin{Tip}\caption{\textsc{Extensions et plantages}}\index{plantage}
 Si votre installation de \qg plante au démarrage, une extension est peut-être en cause. Vous pouvez éviter le chargement des extensions en éditant votre fichier de configuration (voir \ref{subsec:gui_options} pour localiser ce fichier). Localisez la configuration de l'extension et changez toutes les valeurs à false pour empêcher leur chargement. \nix {Par exemple, pour éviter le chargement de l'extension Ajouter une couche texte délimité, sa référence dans \$HOME/.config/QuantumGIS/qgis.conf doit ressembler à \usertext{Add Delimited Text Layer=false}.} Faites de même pour chaque extension dans la section [Extension]. Vous pouvez ensuite démarrer \qg et ajouter les extensions une à la fois depuis le \filename{Gestionnaire d'extension} pour déterminer celle qui est la source du problème.
 \end{Tip}
 
@@ -95,8 +95,8 @@ Une seule étape est nécessaire pour installer une extension externe dans \qg :
 \end{enumerate}
 
 %\subsection{Using the \qg Python Plugin Installer}\index{plugins!installing}\label{sec:python_plugin_installer}
-\subsection{Utiliser l'installeur d'extension python de \qg}\index{plugins!installing}\label{sec:python_plugin_installer}
-\index{plugins!Python Plugin Installer}\index{plugins!upgrading}
+\subsection{Utiliser l'installeur d'extension python de \qg}\index{extensions!installation}\label{sec:python_plugin_installer}
+\index{extensions!mise à jour}
 
 \begin{figure}[ht]
    \begin{center}
@@ -219,7 +219,7 @@ Les extensions expérimentales sont généralement inadaptées à une utilisatio
 
 
 %\section{Data Providers}\index{data providers}
-\section{Fournisseurs de données}\index{data providers}
+\section{Prestataires de données}\index{prestataires de données}
 
 %Data Providers are "special" plugins that provides access to a data store.
 %By default, \qg supports PostGIS layers and disk-based data stores supported by the GDAL/OGR library (Appendix \ref{appdx_ogr}).
@@ -227,7 +227,7 @@ Les extensions expérimentales sont généralement inadaptées à une utilisatio
 
 %Data Provider plugins are registered automatically by \qg at startup.
 %They are not managed by the Plugin Manager but used behind the scenes when a data type is added as a layer in \qg.
-Les Fournisseurs de données sont des extensions "spéciales" donnant accès à un dépôt de données.
+Les prestataires de données sont des extensions "spéciales" donnant accès à un dépôt de données.
 Par défaut, \qg supporte les couches PostGIS et les bases de données couvertes par la bibliothèque GDAL/OGR(Appendix \ref{appdx_ogr}).
 L'utilisation d'extensions pour fournir des données permet d'élargir les sources de données utilisables par \qg.
 
