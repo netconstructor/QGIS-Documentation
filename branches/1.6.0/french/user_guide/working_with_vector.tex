@@ -401,27 +401,27 @@ gis_data=# \q
 gsherman@madison:~/current$
 \end{verbatim}
 
-\subsection{couches vectorielles dépassants les \degre{180} de longitude}
+\subsection{couches vectorielles dépassants les \degrees{180} de longitude}
 \index{couches vectorielles!croiser}
 
-Beaucoup de logiciels de SIG ne traitent pas les cartes vecteurs  ayant un système de référence géographique dépassant la ligne des \degre{180} de longitude. Il en résulte que sous \qg on verra 2 emplacements distincts et éloignés qui devraient être proches l'un de l'autre. Sur la figure \ref{fig:vector_not_wrapping} le petit point tout à gauche sur le canevas cartographique (Chatham Island) devrait être dans la grille, à droite des îles principales de Nouvelle-Zélande.
+Beaucoup de logiciels de SIG ne traitent pas les cartes vecteurs  ayant un système de référence géographique dépassant la ligne des \degrees{180} de longitude. Il en résulte que sous \qg on verra 2 emplacements distincts et éloignés qui devraient être proches l'un de l'autre. Sur la figure \ref{fig:vector_not_wrapping} le petit point tout à gauche sur le canevas cartographique (Chatham Island) devrait être dans la grille, à droite des îles principales de Nouvelle-Zélande.
 
 \begin{figure}[ht]
    \begin{center}
    \includegraphics[clip=true, width=\textwidth]{vectorNotWrapping}
-   \caption{Carte en lat/lon dépassant les \degre{180} de longitude \nixcaption}
+   \caption{Carte en lat/lon dépassant les \degrees{180} de longitude \nixcaption}
    \label{fig:vector_not_wrapping}
 \end{center}
 \end{figure}
 
 Une solution est de transformer les valeurs longitudinales en utilisant \pg et la fonction \textbf{ST\textunderscore Shift\textunderscore Longitude}
-\footnote{\url{http://postgis.refractions.net/documentation/manual-1.4/ST_Shift_Longitude.html}}. Cette fonction lit chaque point/sommet de chacune des entités dans une géométrie et si la coordonnée de longitude est inférieure à \degre{0} elle lui ajoute \degre{360}. Le résultat est une version de \degre{0} -- \degre{360} version des données sur une carte centré à \degre{180}.
+\footnote{\url{http://postgis.refractions.net/documentation/manual-1.4/ST_Shift_Longitude.html}}. Cette fonction lit chaque point/sommet de chacune des entités dans une géométrie et si la coordonnée de longitude est inférieure à \degrees{0} elle lui ajoute \degrees{360}. Le résultat est une version de \degrees{0} -- \degrees{360} version des données sur une carte centré à \degrees{180}.
 
 \begin{figure}[ht]
    \begin{center}
    
    \includegraphics[clip=true, width=9cm]{vectorWrapping}
-   \caption{Carte dépassant la ligne des \degre{180} de longitude après application de la fonction ST\textunderscore Shift\textunderscore Longitude}
+   \caption{Carte dépassant la ligne des \degrees{180} de longitude après application de la fonction ST\textunderscore Shift\textunderscore Longitude}
 \label{fig:vector_wrapping}
 \end{center}
 \end{figure}
@@ -437,8 +437,8 @@ Une solution est de transformer les valeurs longitudinales en utilisant \pg et l
 
 \section{Couches SpatiaLite} 
 \index{SpatiaLite layers!properties dialog}
-\index{vector layers!SpatlaLIte|see{SpatiaLite}}
-\index{SpatiaLite!layers}
+\index{couches vectorielles!SpatiaLite|see{SpatiaLite}}
+\index{SpatiaLite!couches}
 \label{label_spatialite} 
 
 \includegraphics[width=0.7cm]{mActionAddSpatiaLiteLayer}
@@ -714,7 +714,7 @@ Vous pouvez créer une palette de couleur personnalisée en cliquant sur 'Nouvel
    \centering
 %   \caption{Example of custom gradient color ramp with multiple stops \nixcaption}\label{fig:ccrg}
    \caption{Exemple de palette de couleur graduée avec plusieurs arrêts \nixcaption}\label{fig:ccrg}
-   \includegraphics[clip=true, width=10cm]{customColorRampGradient.png}
+   \includegraphics[clip=true, width=8cm]{customColorRampGradient.png}
 \end{figure}
 
 %\minisec{Graduated rendering}
@@ -1467,7 +1467,7 @@ La fenêtre des attributs apparaît, ce qui vous permet d'entrer les information
 \begin{figure}[ht]
   \begin{center}
   %\caption{Enter Attribute Values Dialog after digitizing a new vector feature \nixcaption}\label{fig:vector_digitising}\smallskip
-   \includegraphics[clip=true, width=8cm]{editDigitizing}
+   \includegraphics[clip=true, width=6cm]{editDigitizing}
   \caption{Fenêtre de saisie d'attributs suivant la création d'une nouvelle entité \nixcaption}\label{fig:vector_digitising}
 \end{center}
 \end{figure}
@@ -2106,21 +2106,6 @@ Dans \qg, il est possible de sélectionner des entités en utilisant une interfa
 
 %To do a `select by query' on a loaded layer, click on the button \toolbtntwo{mActionOpenTable}{Open Table} to open the attribute table of the layer. Then click the \button{Advanced...} button at the bottom. This starts the Query Builder that allows to define a subset of a table and display it as described in Section \ref{sec:query_builder}.
 Pour faire une sélection par requête sur une couche chargée, cliquez sur le bouton\\ \toolbtntwo{mActionOpenTable}{Ouvrir la table des attributs} pour ouvrir la table de la couche. Ensuite cliquez sur le bouton \button{Avancée\dots} en bas de la fenêtre. Cela lance le Constructeur de requête qui permet de définir un sous-ensemble de la table et l'affiche comme décrit dans la Section \ref{sec:query_builder}.
-
-\minisec{Select by query}\label{sec:select_by_query}
-
-With \qg it is possible also to select features using a similar query builder
-interface to that used in \ref{sec:query_builder}. In the above section
-the purpose of the query builder is to only show features meeting the
-filter criteria as a 'virtual layer' / subset. The purpose of the select by
-query function is to highlight all features that meet a particular criteria.
-Select by query can be used with all vector data providers.
-
-To do a `select by query' on a loaded layer, click on the
-button \toolbtntwo{mActionOpenTable}{Open Table} to open the attribute table of the layer. Then
-click the \button{Advanced...} button at the bottom. This starts the Query Builder
-that allows to define a subset of a table and display it as described in Section
-\ref{sec:query_builder}.
 
 %\section{Field Calculator}\label{sec:field_calculator}
 \section{Calculatrice de champ}\label{sec:field_calculator}
