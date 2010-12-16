@@ -13,7 +13,7 @@
 %vector layers and analysing \grass 2D and 3D data with more than 300 \grass 
 %modules.
 
-L'extension \grass fournit un accès aux bases de données et aux fonctionnalités de \grass.  Cela inclut la visualisation des couches d'informations \grass raster et vecteur, la numérisation de couches vecteurs, l'édition des attributs des couches d'informations vecteurs,  la création de nouvelles couches et l'analyse 2D et 3D grâce à l'accès à près de 300 modules \grass. 
+L'extension \grass fournit un accès aux bases de données et aux fonctionnalités de \grass.  Cela inclut la visualisation des couches d'informations \grass raster et vecteur, la numérisation de couches vectorielles, l'édition des attributs des couches d'informations vecteurs,  la création de nouvelles couches et l'analyse 2D et 3D grâce à l'accès à près de 300 modules \grass. 
 
 %In this Section we'll introduce the plugin functionalities and give some 
 %examples on managing and working with \grass data. Following main features 
@@ -74,7 +74,7 @@ Vous pouvez maintenant charger des données raster et vecteur depuis un \filenam
 %\section{Loading \grass raster and vector layers}\label{sec:load_grassdata}\index{\grass!loading data}
 \section{Charger des données \grass raster et vecteur}\label{sec:load_grassdata}\index{\grass!chargement de données}
 
-Avec l'extension \grass, vous pouvez charger des données raster ou vecteur à l'aide  du bouton approprié dans la barre de menu. Ici nous utiliserons comme exemple,  le jeu de données \qg Alaska (voir Section \ref{label_sampledata}).  Il contient un \filename{SECTEUR} \grass avec 3 couches vecteurs et 1 raster d'élévation.
+Avec l'extension \grass, vous pouvez charger des données raster ou vecteur à l'aide  du bouton approprié dans la barre de menu. Ici nous utiliserons comme exemple,  le jeu de données \qg Alaska (voir Section \ref{label_sampledata}).  Il contient un \filename{SECTEUR} \grass avec 3 couches vectorielles et 1 raster d'élévation.
 
 \begin{enumerate}
   %\item Create a new folder \filename{grassdata}, download the \qg alaska
@@ -283,7 +283,7 @@ Un utilisateur a seulement des droits d'écriture sur le \filename{Jeu de donné
 % dataset. Therefore we use a landcover raster map \filename{landcover.img} 
 % and a vector GML File \filename{lakes.gml} from the \qg alaska 
 % dataset \ref{label_sampledata}.
-Cette section donne un exemple d'importation de données raster et vecteur dans le \filename{SECTEUR} \grass \filename{Alaska} fournit dans le jeu de données \qg Alaska. Nous utiliserons une couche raster d'occupation du sol \filename{landcover.img} et une couche vecteur au format GML \filename{lakes.gml}, toutes deux présentes dans le jeu de données Alaska.
+Cette section donne un exemple d'importation de données raster et vecteur dans le \filename{SECTEUR} \grass \filename{Alaska} fournit dans le jeu de données \qg Alaska. Nous utiliserons une couche raster d'occupation du sol \filename{landcover.img} et une couche vectorielle au format GML \filename{lakes.gml}, toutes deux présentes dans le jeu de données Alaska.
 
 \begin{enumerate}
   %\item Start \qg and make sure the \grass plugin is loaded.
@@ -341,7 +341,7 @@ Il est important de comprendre le modèle vectoriel de \grass avant de faire de 
 % used in special cases such as vector network analysis. Normally you should
 % prefere to store different geometry elements in different layers.}
 
-Outre les limites et centroïdes, une couche vecteur peut également contenir des points et des lignes. Tous ces éléments de géométrie peuvent être mélangés dans une couche vecteur et seront représentés dans différentes «sous-couches» dans une carte vectorielle \grass. Ainsi, une couche \grass n'est pas un vecteur ou un raster, mais un niveau à l'intérieur d'une couche vecteur. Il est important de bien distinguer ceci.
+Outre les limites et centroïdes, une couche vectorielle peut également contenir des points et des lignes. Tous ces éléments de géométrie peuvent être mélangés dans une couche vectorielle et seront représentés dans différentes «sous-couches» dans une carte vectorielle \grass. Ainsi, une couche \grass n'est pas un vecteur ou un raster, mais un niveau à l'intérieur d'une couche vectorielle. Il est important de bien distinguer ceci.
 \footnote{Même s'il est possible de mélanger des éléments de géométries différentes, c'est inhabituel et même dans \grass, on l'utilise dans des cas particuliers tel que l'analyse de réseau. Normalement, vous devriez stocker des éléments de géométries différentes dans des couches différentes}
 
 % It is possible to store more 'layers' in one vector dataset. For example,
@@ -351,14 +351,14 @@ Outre les limites et centroïdes, une couche vecteur peut également contenir de
 % the boundary between lake and forest is a road, so it can have a different 
 % attribute table.
 
-Il est possible de stocker plusieurs sous-couches dans une couche vecteur. Par exemple, des champs, de la forêt et des lacs peuvent être stockés dans une couche vecteur. Les forêts et les lacs adjacents partagent les mêmes limites, mais ils auront des tables attributaires différentes. Il est aussi possible de faire correspondre une table attributaire aux limites. Par exemple, la limite entre un lac et une forêt peut être une route qui peut avoir une table attributaire différente.
+Il est possible de stocker plusieurs sous-couches dans une couche vectorielle. Par exemple, des champs, de la forêt et des lacs peuvent être stockés dans une couche vectorielle. Les forêts et les lacs adjacents partagent les mêmes limites, mais ils auront des tables attributaires différentes. Il est aussi possible de faire correspondre une table attributaire aux limites. Par exemple, la limite entre un lac et une forêt peut être une route qui peut avoir une table attributaire différente.
 
 % The 'layer' of the feature is defined by 'layer' inside \grass. 'Layer' is the 
 % number which defines if there are more than one layer inside the dataset, e.g. 
 % if the geometry is forest or lake. For now, it can be only a number, in the 
 % future \grass will also support names as fields in the user interface.
 
-La sous-couche est définie dans \grass par un chiffre. Ce chiffre définit s'il y a plusieurs sous-couches à l'intérieur d'une couche vecteur. Par exemple, il définit s'il s'agit de lac ou de forêt. Pour l'instant, il s'agit d'un nombre, mais dans des versions futures \grass pourra utiliser des noms pour les sous-couches dans l'interface utilisateur.
+La sous-couche est définie dans \grass par un chiffre. Ce chiffre définit s'il y a plusieurs sous-couches à l'intérieur d'une couche vectorielle. Par exemple, il définit s'il s'agit de lac ou de forêt. Pour l'instant, il s'agit d'un nombre, mais dans des versions futures \grass pourra utiliser des noms pour les sous-couches dans l'interface utilisateur.
 
 % Attributes can be stored inside the \grass \filename{LOCATION} as DBase or 
 % SQLITE3 or in external database tables, for example PostgreSQL, MySQL,Oracle, etc.\index{\grass!attribute storage}
@@ -379,31 +379,31 @@ Le meilleur moyen d'apprendre le modèle vecteur de \grass et ses possibilités 
 \end{Tip} 
 
 %\section{Creating a new \grass vector layer}\label{sec:creating_new_grass_vectors}\index{\grass!Creating new vectors|see{editing!creating a new layer}}
-\section{Création d'une nouvelle couche vecteur \grass}\label{sec:creating_new_grass_vectors}\index{\grass!Créer de nouvelles couches vecteur|voir{éditer!créer une nouvelle couche}}
+\section{Création d'une nouvelle couche vectorielle \grass}\label{sec:creating_new_grass_vectors}\index{\grass!Créer de nouvelles couches vecteur|voir{éditer!créer une nouvelle couche}}
 
 % To create a new \grass vector layer with the \grass plugin click the 
 % \toolbtntwo{grass_new_vector_layer}{Create new \grass vector} toolbar icon. 
 % Enter a name in the text box and you can start digitizing point, line or 
 % polygone geometries, following the procedure described in Section 
 % \ref{grass_digitising}. 
-Pour créer une nouvelle couche vecteur \grass à l'aide de l'extension \grass, cliquez sur \toolbtntwo{grass_new_vector_layer}{Créez une nouvelle couche vectorielle \grass} dans la barre d'outils. Entrez le nom dans la boîte de dialogue et vous pouvez commencer à digitaliser un point une ligne ou un polygone en suivant les instructions de la section \ref{grass_digitising}.
+Pour créer une nouvelle couche vectorielle \grass à l'aide de l'extension \grass, cliquez sur \toolbtntwo{grass_new_vector_layer}{Créez une nouvelle couche vectorielle \grass} dans la barre d'outils. Entrez le nom dans la boîte de dialogue et vous pouvez commencer à digitaliser un point une ligne ou un polygone en suivant les instructions de la section \ref{grass_digitising}.
 
 % In \grass it is possible to organize all sort of geometry types (point, line 
 % and area) in one layer, because \grass uses a topological vector model, so you 
 % don't need to select the geometry type when creating a new \grass vector. This 
 % is different from Shapefile creation with \qg, because Shapefiles use the 
 % Simple Feature vector model (see Section \ref{sec:create shape}).
-Dans \grass, il est possible de gérer plusieurs types de géométrie (point, ligne et surface) dans une seule couche d'information, car \grass utilise un modèle vecteur topologique. Vous n'avez donc pas besoin de sélectionner un type de géométrie quand vous créez une couche vecteur \grass. C'est différent de la création de shapefile avec \qg, car les shapefiles utilisent un modèle vecteur d'entité simple (Simple Feature vector model) (voir Section \ref{sec:create shape}).
+Dans \grass, il est possible de gérer plusieurs types de géométrie (point, ligne et surface) dans une seule couche d'information, car \grass utilise un modèle vecteur topologique. Vous n'avez donc pas besoin de sélectionner un type de géométrie quand vous créez une couche vectorielle \grass. C'est différent de la création de shapefile avec \qg, car les shapefiles utilisent un modèle vecteur d'entité simple (Simple Feature vector model) (voir Section \ref{sec:create shape}).
 
 %\begin{Tip}\caption{\textsc{Creating an attribute table for a new \grass vector layer}}
-\begin{Tip}\caption{\textsc{Création d'une table attributaire pour une nouvelle couche vecteur \grass}}
+\begin{Tip}\caption{\textsc{Création d'une table attributaire pour une nouvelle couche vectorielle \grass}}
 % If you want to assign attributes to your digitized geometry features, make sure to create an attribute table with columns before you start digitizing (see Figure \ref{fig:grass_digitizing_table}).
 Si vous souhaitez renseigner les données attributaires de vos entités numérisées, assurez-vous d'avoir créé une table attributaire avec des champs avant ce commencer votre numérisation (voir Figure \ref{fig:grass_digitizing_table}).
 %\end{Tip} 
 \end{Tip}
 
 %\section{Digitizing and editing a \grass vector layer}\index{\grass!digitizing tools}\label{grass_digitising}
-\section{Numérisation et édition de couche vecteur \grass}\index{\grass!outils de numérisation}\label{grass_digitising}
+\section{Numérisation et édition de couche vectorielle \grass}\index{\grass!outils de numérisation}\label{grass_digitising}
 
 % The digitizing tools for \grass vector layers are accessed using the
 % \toolbtntwo{grass_edit}{Edit \grass vector layer} icon on the toolbar. Make 
@@ -411,7 +411,7 @@ Si vous souhaitez renseigner les données attributaires de vos entités numéris
 % before clicking on the edit tool. Figure \ref{fig:grass_digitizing_category} 
 % shows the \grass edit dialog that is displayed when you click on the edit tool. 
 % The tools and settings are discussed in the following sections.
-Les outils de numérisation pour les couches vecteurs de \grass sont accessibles via\\ \toolbtntwo{grass_edit}{Éditer une couche vectorielle \grass} dans la barre d'outils. Assurez-vous d'avoir ouvert une couche vectorielle \grass ainsi que d'avoir sélectionné la sous-couche dans la légende avant d'utiliser l'outil d'édition. La figure \ref{fig:grass_digitizing_category} montre la boîte de dialogue \grass qui s'affiche quand vous cliquez sur l'outil d'édition. Les outils et les paramètres d'édition sont détaillés dans les paragraphes suivants.
+Les outils de numérisation pour les couches vectorielles de \grass sont accessibles via\\ \toolbtntwo{grass_edit}{Éditer une couche vectorielle \grass} dans la barre d'outils. Assurez-vous d'avoir ouvert une couche vectorielle \grass ainsi que d'avoir sélectionné la sous-couche dans la légende avant d'utiliser l'outil d'édition. La figure \ref{fig:grass_digitizing_category} montre la boîte de dialogue \grass qui s'affiche quand vous cliquez sur l'outil d'édition. Les outils et les paramètres d'édition sont détaillés dans les paragraphes suivants.
 
 %\begin{Tip}\caption{\textsc{Digitizing polygones in \grass}}
 \begin{Tip}\caption{\textsc{Numérisation de polygones dans \grass}}
@@ -526,7 +526,7 @@ L'onglet \tab{Categorie} vous permet de définir la manière dont les valeurs du
 % number in the 'Field (layer)' entry box and press return. In the Table tab
 % you can create your new table connected to your new layer.
 % }
-Si vous souhaitez avoir plusieurs sous-couches dans votre couche vecteur, ajouter simplement un nouveau chiffre dans la zone de saisie 'Couche' et appuyez sur entrée. Dans l'onglet Table, vous pouvez créer de nouvelles tables attributaires connectées à votre nouvelle sous-couche.
+Si vous souhaitez avoir plusieurs sous-couches dans votre couche vectorielle, ajouter simplement un nouveau chiffre dans la zone de saisie 'Couche' et appuyez sur entrée. Dans l'onglet Table, vous pouvez créer de nouvelles tables attributaires connectées à votre nouvelle sous-couche.
 \end{Tip}
 
 %\minisec{Settings Tab}\label{label_settingtab}\index{\grass!snapping tolerance}
@@ -747,7 +747,7 @@ Les exemples suivants décriront les possibilités de certains modules \grass.
 
 %The first example creates a vector contour map from an elevation raster (DEM). Assuming you have the Alaska \filename{LOCATION} set up as explained
 %in Section \ref{sec:import_loc_data}. 
-Le premier exemple créé un couche vecteur de courbe de niveau à partir d'un modèle numérique de terrain (MNT). Nous considérerons que le jeu de données exemple \filename{SECTEUR} a été installé comme décrit au paragraphe \ref{sec:import_loc_data}.
+Le premier exemple créé une couche vectorielle de courbe de niveau à partir d'un modèle numérique de terrain (MNT). Nous considérerons que le jeu de données exemple \filename{SECTEUR} a été installé comme décrit au paragraphe \ref{sec:import_loc_data}.
 
 \begin{itemize}[label=--]
 %\item First open the location by clicking the \toolbtntwo{grass_open_mapset}{Open mapset} button and choosing the Alaska location. 
@@ -758,14 +758,14 @@ Le premier exemple créé un couche vecteur de courbe de niveau à partir d'un m
 %\item Now open the Toolbox with the \toolbtntwo{grass_tools}{Open \grass tools} button. 
 \item Ouvrez la boite à outils à l'aide du bouton \toolbtntwo{grass_tools}{Ouvrir les outils \grass}
 %\item In the list of tool categories double click Raster -> Surface Management -> Generate vector contour lines. 
-\item Dans la liste des outils double-cliquez sur Raster -> Surface Management -> Generate vector contour lines.
+\item Dans la liste des outils double-cliquez sur Raster -> Gestion de surface -> Générer des lignes vectorielles de contours.
 % \item Now a single click on the tool \classname{r.contour} will open the tool dialog as explained above \ref{grass_modules}. The
 % \usertext{gtopo30} raster should appear as the \inputtext{Name of input raster}{gtopo30}. 
-\item Maintenant, cliquez sur l'outil \classname{r.contour}, cela ouvrira une boite de dialogue comme expliquez ci-dessus \ref{grass_modules}.Le raster \usertext{gtopo30} devrait apparaitre dans le champ\\ \inputtext{Name of input raster}{gtopo30}
+\item Maintenant, cliquez sur l'outil \classname{r.contour}, cela ouvrira une boite de dialogue comme expliquez ci-dessus \ref{grass_modules}.Le raster \usertext{gtopo30} devrait apparaitre dans le champ\\ \inputtext{Non du raster en entrée}{gtopo30}
 %\item Type into the \inputtext{Increment between Contour levels}{100} the value 100. (This will create contour lines at intervals of 100 meters.)
 \item Dans le champ \inputtext{Increment between Contour levels}{100} saisissez la valeur 100. (Cela va créer des courbes de niveau tous les 100m)
 %\item Type into the \inputtext{Name for output vector map}{ctour\_100} the name \usertext{ctour\_100}. 
-\item Saisisez dans le champ \inputtext{Name for output vector map}{ctour\_100} le nom \usertext{ctour\_100}
+\item Saisisez dans le champ \inputtext{Nom de la couche vectorielle en sortie}{ctour\_100} le nom \usertext{ctour\_100}
 %\item Click \button{Lancer} to start the process. Wait for several moments until the message \usertext{Successfully finished} appears in the output window.
 %Then click \button{Vue} and \button{close}
 \item Cliquer sur \button{Lancer} pour lancer la commande. Attendez quelques instants que le message \usertext{Terminé avec succès} apparaisse à l'écran.
@@ -797,13 +797,13 @@ Une fois l'affichage terminé, voujspouvez ouvrir la fenêtre propriétés de la
 % detailed vector, but you are creating a very small scale map, so the detail
 % is unnecessary. 
 
-Zoomez sur une petite région montagneuse du centre de l'Alaska. Avec un fort zoom, vous constaterez que les courbes de niveau sont constitués de lignes brisées avec des angles vifs. \grass offre le possibilité de généraliser les cartes vecteurs à l'aide de l'outil \classname{v.generalize}, tout en conservant leur forme générale. L'outil utilise différents algorithmes ayant différents objectifs. Certains de ces algorithmes (par exemple : Douglas Peuker et réduction de vertex) simplifient les lignes en supprimant des vertex. La couche simplifiée se chargera plus rapidement. cette commande peut être utilisée lorsque vous avez une couche vecteur très détaillée et que vous créez une carte à petite échelle. les détails ne sont donc pas nécessaires.
+Zoomez sur une petite région montagneuse du centre de l'Alaska. Avec un fort zoom, vous constaterez que les courbes de niveau sont constitués de lignes brisées avec des angles vifs. \grass offre le possibilité de généraliser les cartes vecteurs à l'aide de l'outil \classname{v.generalize}, tout en conservant leur forme générale. L'outil utilise différents algorithmes ayant différents objectifs. Certains de ces algorithmes (par exemple : Douglas Peucker et réduction de vertex) simplifient les lignes en supprimant des vertex. La couche simplifiée se chargera plus rapidement. cette commande peut être utilisée lorsque vous avez une couche vectorielle très détaillée et que vous créez une carte à petite échelle. les détails ne sont donc pas nécessaires.
 
 %\begin{Tip}\caption{\textsc{The simplify tool}}\index{\grass!display results}
 \begin{Tip}\caption{\textsc{l'outil de simplification}}\index{\grass!afficher les résultats}
 % \qgistip{Note that the \qg fTools plugin has a \dropmenuopt{Simplify geometries} tool that works just like the \grass \classname{v.generalize}
 % Douglas-Peuker algorithm. 
-Vous remarquerez que fTools dispose aussi d'un outil de simplification \dropmenuopt{Simplifier la géometrie} qui fonctionne comme l'algorithme Douglas-Peuker de \grass \classname{v.generalize}.
+Vous remarquerez que fTools dispose aussi d'un outil de simplification \dropmenuopt{Simplifier la géometrie} qui fonctionne comme l'algorithme Douglas-Peucker de \grass \classname{v.generalize}.
 \end{Tip}
 
 % However, the purpose of this example is different. The contour lines created
@@ -817,21 +817,21 @@ Cependant, le but de cet exemple est différent. Les courbes de niveau créées 
 % \item Open the \grass toolbox and double click the categories Vector -> Develop map -> Generalization, then click on the \classname{v.generalize} module to open its options window. 
 \item Ouvrez la boite à outils \grass et double cliquez sur Vecteur -> Développer la carte -> Généralisation. Cliquez alors sur le module \classname{v.generalize} pour ouvrir sa fenêtre d'options
 %\item Check that the \usertext{ctour\_100} vector appears as the \inputtext{Name of input vector}{ctour\_100}.
-\item Vérifier que la couche vecteur \usertext{ctour\_100} apparait dans le champs\\ \inputtext{Nom de la couche vectorielle en entrée}{ctour\_100}
+\item Vérifier que la couche vectorielle \usertext{ctour\_100} apparait dans le champs\\ \inputtext{Nom de la couche vectorielle en entrée}{ctour\_100}
 %\item From the list of algorithms choose Chaiken's. Leave all other options at their default, and scroll down to the last row to enter the \inputtext{Name for output vector map}{ctour\_100\_smooth}, and click \button{Run}.
 \item Dans la liste des algorithmes choisissez Chaiken. Laisser les autres options par défault et descendez à la dernière ligne pour donner le nom de la couche d'information à créer  \inputtext{Nom de la couche vectorielle en sortie}{ctour\_100\_smooth}, et cliquer sur \button{Lancer}
 % \item The process takes several moments. Once \usertext{Successfully finished} appears in the output windows, click \button{Vue} and then
 % \button{close}.
 \item Cela peut prendre plusieurs minutes. Lorsque le texte \usertext{Terminé avec succès} apparait, cliquez sur le bouton \button{Vue} et ensuite sur \button{Fermer}
 %\item You may change the color of the vector to display it clearly on the raster background and to contrast with the original contour lines. You will notice that the new contour lines have smoother corners than the original while staying faithful to the original overall shape.
-\item Vous pouvez changer la couleur de cette couche vecteur pour qu'elle apparaisse clairement sur le raster et qu'elle contraste aussi avec la couche de départ.Vous remarquerez que les nouvelles courbes de niveau ont des angles plus arrondis que l'original tout en restant fidèle à la forme globale d'origine
+\item Vous pouvez changer la couleur de cette couche vectorielle pour qu'elle apparaisse clairement sur le raster et qu'elle contraste aussi avec la couche de départ.Vous remarquerez que les nouvelles courbes de niveau ont des angles plus arrondis que l'original tout en restant fidèle à la forme globale d'origine
 \end{itemize}
 
 \begin{figure}[ht]
  \begin{center}
  %%\caption{\grass module v.generalize to smooth a vector map \nixcaption}\label{fig:grass_toolbox_vgeneralize}
  \includegraphics[clip=true, width=12cm]{grass_toolbox_vgeneralize}
- \caption{Module \grass v.generalize pour généraliser les couches vecteurs \nixcaption}\label{fig:grass_toolbox_vgeneralize}
+ \caption{Module \grass v.generalize pour généraliser les couches vectorielles \nixcaption}\label{fig:grass_toolbox_vgeneralize}
  \end{center}
 \end{figure}
 
@@ -929,7 +929,7 @@ Le module \classname{r.shaded.relief} possède un paramètre \usertext{zmult} qu
 \minisec{Statistiques raster avec des couches vectorielles}
 
 %The next example shows how a \grass module can aggregate raster data and add columns of statistics for each polygon in a vector map. 
-L'exemple suivant comment un module \grass peut aggréger des données et ajouter des colonnes de statistiques pour des polygones d'un couche vecteur.
+L'exemple suivant comment un module \grass peut aggréger des données et ajouter des colonnes de statistiques pour des polygones d'un couche vectorielle.
 
 \begin{itemize}[label=--]
 %\item Again using the Alaska data, refer to \ref{sec:import_loc_data} to import the trees shapefile from the \usertext{vmap0\_shapefiles} directory
@@ -944,7 +944,7 @@ L'exemple suivant comment un module \grass peut aggréger des données et ajoute
 \item Entrez comme nom de couche en sortie \inputtext{output vector map}{\usertext{forest\_areas}} et lancez le module.
 % \item Now load the \usertext{forest\_areas} vector and display the types of forests - deciduous, evergreen, mixed - in different colors: In the layer
 % \dropmenuopt{Properties} window, \tab{symbology} tab, choose \selectstring{Legend type}{Unique value} and set the \inputtext{Classification field}{VEGDESC} to VEGDESC. (Refer to the explanation of the symbology tab \ref{sec:symbology} in the vector section).
-\item Maintenant ouvrez la couche vecteur \usertext{forest\_areas} et affichez les types de forêts avec différentes couleurs : caduques, sempervirens, mélangés. Dans la fenêtre\\ \dropmenuopt{Propriétés}, onglet \tab{symbologie} , choisissez \selectstring{Type de légende}{Valeur unique} comme type de thématisation et le champ de \inputtext{Classification field}{VEGDESC} au champ VEGDESC. (Reportez vous aux explications de l'onglet Symbologie \ref{sec:symbology} dans la partie vecteur).
+\item Maintenant ouvrez la couche vectorielle \usertext{forest\_areas} et affichez les types de forêts avec différentes couleurs : caduques, sempervirens, mélangés. Dans la fenêtre\\ \dropmenuopt{Propriétés}, onglet \tab{symbologie} , choisissez \selectstring{Type de légende}{Valeur unique} comme type de thématisation et le champ de \inputtext{Classification field}{VEGDESC} au champ VEGDESC. (Reportez vous aux explications de l'onglet Symbologie \ref{sec:symbology} dans la partie vecteur).
 
 %\item Next reopen the \grass toolbox and open Vector -> Vector update by other maps.
 \item Réouvrez la boite à outils \grass et ouvrez Vector -> Vector update par d'autres couches
