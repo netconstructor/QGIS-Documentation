@@ -1,8 +1,8 @@
 %  !TeX  root  =  user_guide.tex
 
-\chapter{Travailler avec des données vectorielles}\label{label_workingvector}
+\chapter{Les données vectorielles}\label{label_workingvector}
 %\index{vector layers|(}
-\index{couches vectorielles|(}
+\index{couches vectorielles}
 
 %\qg supports vector data in a number of formats, including those supported by the OGR library data provider plugin, such as ESRI shapefiles, \index{shapefiles}\index{ESRI!shapefiles}\index{SHP files} \map MIF (interchange format)\index{MIF files}\index{MapInfo!MIF files} and \map TAB (native format).\index{TAB files}\index{MapInfo!TAB files}
 %You find a list of OGR supported vector formats in Appendix~\ref{appdx_ogr}.
@@ -419,7 +419,6 @@ Une solution est de transformer les valeurs longitudinales en utilisant \pg et l
 
 \begin{figure}[ht]
    \begin{center}
-   
    \includegraphics[clip=true, width=9cm]{vectorWrapping}
    \caption{Carte dépassant la ligne des \degrees{180} de longitude après application de la fonction ST\textunderscore Shift\textunderscore Longitude}
 \label{fig:vector_wrapping}
@@ -442,7 +441,7 @@ Une solution est de transformer les valeurs longitudinales en utilisant \pg et l
 \label{label_spatialite} 
 
 \includegraphics[width=0.7cm]{mActionAddSpatiaLiteLayer}
-La première fois que vous chargerez une base Spatialite, commencez par cliquer sur le bouton \toolbtntwo{mActionAddSpatiaLiteLayer}{Ajouter une couche SpatiaLite} ou en sélectionnant l'option\\ \dropmenuopttwo{mActionAddSpatiaLiteLayer}{Ajouter une couche SpatiaLite\dots} depuis le menu \mainmenuopt{Couche} ou en tapant \keystroke{L}. Ceci fait apparaitre une fenêtre qui vous permet soit de vous connecter à une base déjà connue de \qg, que vous pouvez choisir dans une liste déroulante, ou définissant une nouvelle connexion. Pour ce faire, cliquez sur \button{Nouveau} et utilisez le navigateur de fichier pour pointer votre base SpatiaLite qui se termine par une extension \filename{.sqlite }.
+La première fois que vous chargerez une base Spatialite, commencez par cliquer sur le bouton \toolbtntwo{mActionAddSpatiaLiteLayer}{Ajouter une couche SpatiaLite} ou en sélectionnant l'option\\ \dropmenuopttwo{mActionAddSpatiaLiteLayer}{Ajouter une couche SpatiaLite\dots} depuis le menu \mainmenuopt{Couche} ou en tapant \keystroke{L}. Ceci fait apparaitre une fenêtre qui vous permet soit de vous connecter à une base déjà connue de \qg, que vous pouvez choisir dans une liste déroulante, ou définissant une nouvelle connexion. Pour se faire, cliquez sur \button{Nouveau} et utilisez le navigateur de fichier pour pointer votre base SpatiaLite qui se termine par une extension \filename{.sqlite }.
 
 %\section{The Vector Properties Dialog}\label{sec:vectorprops}
 %\index{vector layers!properties dialog}
@@ -466,17 +465,17 @@ La fenêtre \dialog{Propriétés de la couche} pour une couche vectorielle fourn
 \index{couches vectorielles!symbologie}
 
 %\qg supports a number of symbology renderers to control how vector features are displayed. Currently the following renderers are available:
-\qg gère différents types de représentation cartographique pour contrôler la manière pour les entités vectorielles seront affichées. Actuellement, voici les possibilités :
+\qg gère différents types de représentation cartographique pour contrôler la manière pour les entités vectorielles seront affichées. Actuellement, voici les possibilités de base (d'autres plus avancées sont amenées à les remplacer, voir \ref{working_with_new_symbology}) :
 
 \begin{description}
 %\item[Single symbol] - a single style is applied to every object in the layer.\index{vector layers!renderers!single symbol}
-\item[Symbole unique :]  un style unique est appliqué à tous les objets de la couche.\index{couches vectorielles!rendus!symbole unique}
+\item \textbf{Symbole unique:}   un style unique est appliqué à tous les objets de la couche.\index{couches vectorielles!rendus!symbole unique}
 %\item[Graduated symbol] - objects within the layer are displayed with different symbols classified by the values of a particular field.\index{vector layers!renderers!graduated symbol}
-\item[Symbole gradué :]  les objets de la couche sont représentés avec des symboles différents selon la valeur qu'ils ont dans un champ définit.\index{couches vectorielles!rendus!symbole gradué}
+\item \textbf{Symbole gradué:}  les objets de la couche sont représentés avec des symboles différents selon la valeur qu'ils ont dans un champ défini.\index{couches vectorielles!rendus!symbole gradué}
 %\item[Continuous color] - objects within the layer are displayed with a spread of colours classified by the numerical values within a specified field.\index{vector layers!renderers!continuous color}
-\item[Couleur continue :] les objets de la couche sont représentés avec une échelle de couleurs classées selon les valeurs numériques d'un champ définit.\index{couches vectorielles!rendus!couleur continue}
+\item \textbf{Couleur continue:} les objets de la couche sont représentés avec une échelle de couleurs classées selon les valeurs numériques d'un champ défini.\index{couches vectorielles!rendus!couleur continue}
 %\item[Unique value] - objects are classified by the unique values within a specified field with each value having a different symbol.\index{vector layers!renderers!unique value}
-\item[Valeur unique :]  les objets sont classés par valeur unique dans un champ définit et à chaque valeur correspond un symbole différent.\index{couches vectorielles!rendus!valeur unique}
+\item \textbf{Valeur unique:}  les objets sont classés par valeur unique dans un champ défini et à chaque valeur correspond un symbole différent.\index{couches vectorielles!rendus!valeur unique}
 \end{description}
 
 %To change the symbology for a layer, simply double click on its legend entry and the vector \dialog{Layer Properties} dialog will be  shown.\index{symbology!changing}
@@ -497,10 +496,6 @@ Pour changer la symbologie d'une couche, double-cliquez simplement dessus dans l
   \caption{Options de symbolisation \nixcaption}
 \end{figure}
 
-% FIXME: outdated
-% Since \usertext{version v0.9} there is a function to use image files stored on
-% your computer as fill pattern for vector layers.
-
 %\minisec{Style Options} \label{sec:style_options} \index{vector layers!styles}
 \minisec{Options de style} \label{sec:style_options}\index{couches vectorielles!styles}
 %Within this dialog you can style your vector layer. Depending on the selected rendering option you have the possibility to also classify your mapfeatures.
@@ -510,15 +505,15 @@ Dans cette fenêtre vous pouvez donner un style à votre couche vecteur. Selon l
 Les options de style suivantes s'appliquent quasiment à tous les types de rendus :
 \begin{description}
 %\item[Outline style] - pen-style for your outline of your feature. you can also set this to 'no pen'.
-\item[Style du contour :] style de la ligne qui fait le contour de vos entités. Vous pouvez également le définir à no pen, pas de contour
+\item \textbf{Style de la bordure:} style de la ligne qui fait le contour de vos entités. Vous pouvez également le définir à \selectstring{Style de la bordure:}{Pas de crayon} ce qui ne fera apparaître aucun trait pour la bordure.
 %\item[Outline color] - color of the ouline of your feature
-\item[Couleur du contour :] couleur du contour de vos entités
+\item \textbf{Couleur de la bordure:} couleur du contour de vos entités.
 %\item[Outline width] - width of your features
-\item[Épaisseur du contour :] épaisseur du contour de vos entités
+\item \textbf{Largeur de la bordure:} épaisseur du contour de vos entités.
 %\item[Fill color] - fill-color of your features.
-\item[Couleur de remplissage :] couleur de remplissage de vos entités
+\item \textbf{Couleur de remplissage:} couleur de remplissage de vos entités.
 %\item[Fill style] - Style for filling. Beside the given brushes you can select \selectstring{Fill style}{? texture} and click the \browsebutton button for selecting your own fill-style. Currently the fileformats \filename{*.jpeg, *.xpm, and *.png} are supported.
-\item[Style de remplissage :] Style pour le remplissage. En plus des pinceaux proposés, vous pouvez sélectionner \selectstring{Fill style ? texture} et cliquez sur le \browsebutton bouton pour sélectionner votre propre style de remplissage. Actuellement, les formats de fichier \filename{*.svg, *.jpeg, *.xpm et *.png} sont supportés.
+\item \textbf{Style de remplissage:} En plus des pinceaux proposés, vous pouvez sélectionner \selectstring{Style de remplissage:}{texture} et cliquer sur le bouton \browsebutton pour sélectionner votre propre style de remplissage. Actuellement, les formats de fichier \filename{*.svg, *.jpeg, *.xpm et *.png} sont supportés.
 \end{description}
 
 %Once you have styled your layer you also could save your layer-style to a separate file (with \filename{*.qml}-ending). To do this, use the button \button{Save Style \ldots}. No need to say that \button{Load Style \ldots} loads your saved layer-style-file.
@@ -563,7 +558,7 @@ Il y a trois types de symboles : le symbole marqueur (pour les points), le symbo
 %fill color, fill pattern and outline).
 \item \textbf{Remplissage simple}: Affichage d'un polygone où peut être spécifié la couleur et le motif de remplissage, le type de trait de contour.
 %\item \textbf{SVG marker}: Rendering with a SVG picture.
-\item \textbf{marqueur SVG}: Affichage utilisant une image SVG.
+\item \textbf{Marqueur SVG}: Affichage utilisant une image SVG.
 %\item \textbf{Marker line}: A line rendered by repeating a marker symbol.
 \item \textbf{Ligne de marqueur}: Affichage d'une ligne en répétant un symbole de marqueur.
 \end{itemize}
@@ -613,10 +608,10 @@ Un style regroupe un ensemble de symboles et de palettes de couleurs. Vous pouve
 %renderer, because it is in fact only a special case of the graduated renderer.
 %The categorized and graduated renderer can be created by specifying a symbol
 %and a color ramp - they will set the colors for symbols appropriately.
-Le moteur de rendu est responsable de l'affichage d'une entité avec le symbole adéquat. Là encore, il existe trois types de rendus : symbole unique, catégorisé (nommé couleur unique dans l'ancienne symbologie) et gradué. Il n'y a pas de rendu de couleur continue, car il s'agit d'un cas spécifique du rendu gradué. Les rendus catégoriés et gradués peuvent être crées en spécifiant un symbole et une palette de couleur - les couleurs des différents symboles changeront selon.
+Le moteur de rendu est responsable de l'affichage d'une entité avec le symbole adéquat. Là encore, il existe trois types de rendus : symbole unique, catégorisé (nommé couleur unique dans l'ancienne symbologie) et gradué. Il n'y a pas de rendu de couleur continue, car il s'agit d'un cas spécifique du rendu gradué. Les rendus catégorisés et gradués peuvent être crées en spécifiant un symbole et une palette de couleur - les couleurs des différents symboles changeront selon.
 
 %\subsection{Working with the New Generation Symbology}
-\subsection{Travailler avec cette nouvelle symbologie}
+\subsection{Travailler avec cette nouvelle symbologie}\label{working_with_new_symbology}
 
 %First you have to enable the new generation symbology clicking on the
 %\button{New symbology} button in the \tab{Symbology} tab of the
@@ -627,10 +622,10 @@ Le moteur de rendu est responsable de l'affichage d'une entité avec le symbole 
 %also provides a \button{Style Manager} button which gives access to the Style 
 %Manager (see section \ref{subsec:stylemanager}). The Style Manager allows you to 
 %edit and remove existing symbols and add new ones. 
-Il vous faut d'abord activer la nouvelle symbologie en cliquant sur le bouton \button{Nouvelle symbologie} dans les \dialog{Propriétés de la couche}. L'interface vous propose alors de choisir entre 3 types de rendu : symbole unique, catégorisé ou gradué. Selon le moteur de rendu choisi, cette fenêtre proposera des options différentes. Un bouton \button{Gestionnaire de style} donne accès au gestionnaire de style (voir section \ref{subsec:stylemanager}), celui-ci permet d'éditer et de supprimer des symboles existants ou d'en ajouter des nouveaux.
+Il vous faut d'abord activer la nouvelle symbologie en cliquant sur le bouton \button{Nouvelle symbologie} dans les \dialog{Propriétés de la couche}. L'interface vous propose alors de choisir entre 3 types de rendu : symbole unique, catégorisé ou gradué. Selon le moteur de rendu choisi, cette fenêtre proposera des options différentes. Un bouton \button{Gestionnaire de style} donne accès au gestionnaire de style (voir section \ref{subsec:stylemanager}), celui-ci permet d'éditer et de supprimer des symboles existants ou d'en ajouter de nouveaux.
 
 %\minisec{Single Symbol Renderer}
-\minisec{Symbole unique}
+\minisec{Symboles uniques}
 
 %The Single Symbol Renderer is used to render all features of the layer using a
 %single user-defined symbol. The properties, that can be adjusted in the
@@ -644,12 +639,12 @@ Il vous faut d'abord activer la nouvelle symbologie en cliquant sur le bouton \b
 %After having done any needed changes, the symbol can be added to the list of
 %current style symbols (using the \button{Add to style} button) and then easily
 %be used in the future.
-Le moteur de rendu pour symbole unique est utilisé pour représenter toutes les entités de la couche avec un seul symbole défini par l'utilisateur. Les propriétés, qui peuvent être ajustées dans la fenêtre de symbologie, dépendent du type de géométrie de la couche, mais partagent une structure similaire. En haut à gauche figure un aperçu du symbole tel qu'il apparaîtra. En bas est affichée la liste des symboles déjà existants dans le style courant, prêts à être sélectionné d'un simple clic. Le symbole courant peut être modifié en utilisant le bouton \button{Propriétés} qui ouvre une fenêtre \dialog{Propriétés du symbole}, ou en utilisant le bouton \button{Ajouter au style}
+Le moteur de rendu pour symbole unique est utilisé pour représenter toutes les entités de la couche avec un seul symbole défini par l'utilisateur. Les propriétés, qui peuvent être ajustées dans la fenêtre de symbologie, dépendent du type de géométrie de la couche, mais partagent une structure similaire. En haut à gauche figure un aperçu du symbole tel qu'il apparaîtra. En bas est affichée la liste des symboles déjà existants dans le style courant, prêts à être sélectionnés d'un simple clic. Le symbole courant peut être modifié en utilisant le bouton \button{Propriétés} qui ouvre une fenêtre \dialog{Propriétés du symbole}, ou en utilisant le bouton \button{Ajouter au style}
 
 %\textbf{Note}: To modify line width, besides modifying the symbol itself, you
 %can use data-defined Size Scale (available through \button{Advanced} next to 
 %\button{Add to Style}).
-\textbf{Note}: Pour modifier la largeur d'une ligne sans modifier le symbole, vous pouvez définir des proportions (\button{Avancéd},à côté de 
+\textbf{Note}: Pour modifier la largeur d'une ligne sans modifier le symbole, vous pouvez définir des proportions en cliquant sur (\button{Avancé},à côté de 
 \button{Ajouter au style}).
 
 \begin{figure}[ht]
@@ -672,7 +667,7 @@ Le moteur de rendu pour symbole unique est utilisé pour représenter toutes les
 %The Categorized Renderer is used to render all features from a layer, using a
 %single user-defined symbol, which color reflects the value of a selected
 %feature's attribute. The Symbology tab allows you to select:
-Le rendu catégorisé est utilisé pour afficher toutes les entités d'une couche en recourant à un symbole défini par l'utilisateur dont la couleur reflètera la valeur d'un attribut donné. Vous pouvez sélectionner :
+Le rendu catégorisé est utilisé pour afficher toutes les entités d'une couche en recourant à un symbole défini par l'utilisateur dont la couleur reflètera la valeur d'un attribut donné (p. ex. réprésenter avec un fond rouge tous les polygones ayant un attribut "danger"). Vous pouvez sélectionner :
 
 \begin{itemize}[label=--]
 %\item The attribute (using the Column listbox)
@@ -680,7 +675,7 @@ Le rendu catégorisé est utilisé pour afficher toutes les entités d'une couch
 %\item The symbol (using the Symbol Properties dialog)
 \item le symbole (en utilisant le bouton Symbole)
 %\item The colors (using the Color Ramp listbox)
-\item la couleur (en utlisant la liste de rampe de couleur)
+\item la couleur (en utilisant la liste de rampes/palettes de couleur)
 \end{itemize}
 
 %The Advanced button in the lower right corner of the dialog allows to set
@@ -689,7 +684,7 @@ Le rendu catégorisé est utilisé pour afficher toutes les entités d'une couch
 %all currently selected attributes together, including the symbols that will
 %be rendered.
 le bouton \button{Avancé} dans le coin inférieur droit de la fenêtre permet de définir les champs contenant les informations relatives à la rotation et la proportion.
-Par faciliter les choix de représentation, la liste dans la partie inférieure de la fenêtre affiche les valeurs de tous les attributs actuellement sélectionnés, ce qui inclut les symboles qui seront affichés.
+Pour faciliter les choix de représentation, la liste dans la partie inférieure de la fenêtre affiche les valeurs de tous les attributs actuellement sélectionnés, ce qui inclut les symboles qui seront affichés.
 
 %The example in figure \ref{fig:catsymNG} shows the category rendering dialog
 %used for the rivers layer of the \qg sample dataset.
@@ -708,7 +703,7 @@ L'exemple de la figure \ref{fig:catsymNG} montre le rendu des catégories de la 
 %stops in the color ramp. See \ref{fig:ccrg} for an example of custom color
 %ramp.
 
-Vous pouvez créer une palette de couleur personnalisée en cliquant sur 'Nouvelle palette de couleur' dans la liste déroulante des rampes/palettes. Une fenêtre vous demandera de choisir le type : gradué, aléatoire, Colorbrewer. Chacun des ces choix à sa propre série d'options, observez la figure \ref{fig:ccrg} pour un exemple de palette personnalisée.
+Vous pouvez créer une palette de couleur personnalisée en cliquant sur 'Nouvelle palette de couleur' dans la liste déroulante des rampes/palettes. Une fenêtre vous demandera de choisir le type : gradué, aléatoire, mélangeur de couleur (ColorBrewer). Chacun des ces choix à sa propre série d'options, observez la figure \ref{fig:ccrg} pour un exemple de palette personnalisée.
 
 \begin{figure}[ht]
    \centering
@@ -724,7 +719,7 @@ Vous pouvez créer une palette de couleur personnalisée en cliquant sur 'Nouvel
 %a single user-defined symbol, whose color reflects the classification of a selected
 %feature's attribute to a class. Like Categorized Renderer, it allows to define
 %rotation and size scale from specified columns.
-Le rendu gradué est utilisé pour afficher toutes les entités d'une couche, en utilisant un symbole de couche défini par l'utilisateur dont la couleur reflètera la classification d'une valeur d'un attribut.
+Le rendu gradué est utilisé pour afficher toutes les entités d'une couche, en utilisant un symbole de couche défini par l'utilisateur dont la couleur reflètera la plage d'appartenance d'une valeur d'un attribut (p. ex. une plage d'altitude de 0 à 100m).
 
 %Analogue to the categorized rendered, the symbology tab allows you to select:
 De la même façon que le rendu catégorisé, vous pouvez modifier les points suivants :
@@ -740,7 +735,7 @@ De la même façon que le rendu catégorisé, vous pouvez modifier les points su
 
 %Additionally, you can specify the number of classes and also the mode how to
 %classify features inside the classes (using the Mode list). The available modes are:
-De plus, vous pouvez choisir le nombre de classes et le mode de classification. Les modes disponibles sont :
+De plus, vous pouvez choisir le nombre de classes et le méthode de classification. Les modes disponibles sont :
 
 \begin{itemize}
 % \item Equal Interval
@@ -748,11 +743,11 @@ De plus, vous pouvez choisir le nombre de classes et le mode de classification. 
 % \item Quantile
 \item Quantiles
 % \item Natural Breaks (Jenks)
-\item Ruptures naturelles (Jenks)
+\item Seuils naturels (Jenks)
 % \item Standard Deviation
 \item Déviation standarde
 % \item Pretty Breaks
-\item  Ruptures "Jolies" (Pretty de GRASS)
+\item  Seuils doux (Pretty de GRASS)
 \end{itemize}
 
 %The listbox in the  bottom part of the symbology tab lists the classes together with their ranges,
@@ -814,7 +809,7 @@ Le rendu de déplacement de point offre une visualisation de tous les points d'u
 %is the list of symbol layers. To start the symbol properties dialog, click the
 %\dropmenuopttwo{mActionOptions}{Properties} button in the \tab{Symbology} tab of the
 %\dialog{Layer Properties} dialog.
-Le panneau des propriétés permet à l'utilisateur de spécifier les différentes propriétés du symbole qui sera affiché. En haut à gauche figure un aperçu du symbole tel qu'il sera affiché sur le canevas de la carte. Juste en dessous est placée une liste des différentes couches du symbole. Pour accéder à cette fenêtre, cliquez sur le bouton \dropmenuopttwo{mActionOptions}{Propriétés} du panneau \tab{Convention des signes} de la fenêtre des \dialog{Propriétés de la couche}
+Le panneau des propriétés permet à l'utilisateur de spécifier les différentes propriétés du symbole qui sera affiché. En haut à gauche figure un aperçu du symbole tel qu'il sera affiché sur le canevas de la carte. Juste en dessous est placée une liste des différentes couches du symbole. Pour accéder à cette fenêtre, cliquez sur le bouton \dropmenuopttwo{mActionOptions}{Propriétés} du panneau \tab{Convention des signes} de la fenêtre des \dialog{Propriétés de la couche}.
 
 %The control panels allow adding or removing layers, changing the position of layers,
 %or locking layers for color changes. In the right part of the dialog, there are
@@ -875,7 +870,7 @@ Vous pouvez ajouter ou supprimer des couches, changer l'ordre de position des co
 %ramps available in a style. It also allows you to add and/or remove items. To
 %launch the Style Manager, click on \mainmenuopt{Settings} \arrow \dropmenuopt{Style
 %Manager} in the main menu.
-Le gestionnaire de style est une petite application qui liste les symboles et les palettes de couleurs disponibles dans un style. Pour l'utiliser, cliquez sur \mainmenuopt{Préférences} \arrow \dropmenuopt{Gestionnaire de Style}.
+Le gestionnaire de styles est une petite application qui liste les symboles et les palettes de couleurs disponibles dans un style. Pour l'utiliser, cliquez sur \mainmenuopt{Préférences} \arrow \dropmenuopt{Gestionnaire de Style}.
 
 \begin{figure}[ht]
    \centering
@@ -890,7 +885,7 @@ Le gestionnaire de style est une petite application qui liste les symboles et le
 L'onglet \tab{Général} des couches vectorielles est très proche de celui des couches raster. Il vous permet de changer le nom affiché, définir des rendus différents selon l'échelle, créer un index spatial du fichier vecteur (uniquement pour les formats gérés par OGR et \pg) et visualiser ou changer la projection de la couche.
 
 %The \button{Query Builder} button allows you to create a subset of the features in the layer - but this button currently only is available when you open the attribute table and select the \button{Advanced ...} button.
-Le bouton \button{Constructeur de requête} vous permet de créer un sous-ensemble d'entité au sein de la couche - mais ce bouton de fonctionne actuellement que lorsque vous ouvrez la table attributaire et cliquez sur le bouton \button{\dots} à côté de la recherche avancée.
+Le bouton \button{Constructeur de requête} vous permet de créer un sous-ensemble d'entité au sein de la couche - mais ce bouton ne fonctionne actuellement que lorsque vous ouvrez la table attributaire et cliquez sur le bouton \button{\dots} à côté de la recherche avancée.
 
 %\subsection{Metadata Tab}
 \subsection{Onglet Métadadonnées}
