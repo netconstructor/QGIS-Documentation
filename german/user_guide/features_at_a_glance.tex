@@ -98,15 +98,23 @@ Sprachen finden Sie mit dem entsprechenden Länderkürzel unter
 Es ist auch möglich, beim Starten von QGIS ein Projekt zu laden. Fügen Sie
 dazu die Option \texttt{---project} mit dem Namen ihres Projektes hinzu und
 QGIS lädt alle darin enthaltenen Daten direkt beim Start.
-%% FIXME
-\minisec{Command line option \usertext{---noplugins}}
-Wenn es Probleme mit den Plugins beim Hochfahren gibt können Sie das Laden der Plugins beim Hochfahren ausschalten. Sie können hinterher im Plugin Manager geladen werden.
 
-\minisec{Command line option \usertext{---optionspath}}
-You can have multiple configurations and decide which one to use when starting QGIS using this option. See \ref{subsec:gui_options} to check where does the operating system save the settings files. Presently there is no way to specify in which file where to write the settings, therefore you can create a copy of the original settings file and rename it.
+\minisec{Kommandozeilenoption \usertext{---noplugins}}
+Wenn es Probleme mit den Plugins beim Hochfahren gibt, können Sie das Laden der 
+Plugins beim Hochfahren ausschalten. Sie können dann hinterher im Plugin Manager geladen werden.
 
-\minisec{Command line option \usertext{---configpath}}
-This option is similar to the one above, but furthermore overrides the default path (~/.qgis) for user configuration and forces QSettings to use this directory, too. This allows users to e.g. carry QGIS installation on a flash drive together with all plugins and settings
+\minisec{Kommandozeilenoption \usertext{---optionspath}}
+Sie können mehrere Konfigurationen speichern und dann beim Starten entscheiden, 
+welche sie verwenden wollen, wenn Sie diese Option verwenden. Siehe \ref{subsec:gui_options}, um 
+zu sehen, wo ihr Betriebssystem die Einstellungen speichert. Derzeit gibt es keine Möglichkeit einen 
+neuen Dateinamen anzugeben, daher müssen Sie aktuell noch eine Kopie der ursprünglichen 
+Einstellungen unter einem anderen Namen erstellen.
+
+\minisec{Kommandozeilenoption \usertext{---configpath}}
+Diese Option ist ähnlich der obigen, ermöglicht aber darüber hinaus das Überschreiben des 
+Standard-Pfades (z.B. ~/.qgis) für die Benutzerkonfiguration. Dadurch wird QSettings gezwungen, 
+das angegebene Verzeichnis zum Ablegen der konfiguration zu verwenden. Dies ermöglicht z.B. 
+die QGIS-Installation auf einem Flash-Laufwerk samt Plugins und Einstellungen.
 
 \minisec{Kommandozeilenoption \usertext{---extent}}
 Um QGIS in einem bestimmten Ausschnitt Ihrer Daten zu starten, kann diese
@@ -655,16 +663,13 @@ Dadurch wird die Darstellung der Symbole gruppiert. Bitte beachten Sie, dass
 dies nur möglich ist, wenn zwei Vektorlayer vom gleichen Typ (Punkt, Linie
 oder Polygon) sind und gleiche Attribute beinhalten.
 
-%%FIXME
-It is also possible to select more than one Layer or Group at the same time 
-by holding down the \keystroke{CTRL}-Key while selecting the Layers with the 
-left mouse button. You can than move all selected Layers to a new Group at 
-the same time.
+Es ist auch möglich, mehr als einen Layer oder eine Gruppe zur gleichen Zeit auszuwählen
+indem Sie die \keystroke{Strg}-Taste gedrückt halten und dann die Layer mit der linken 
+Maustaste auswählen. Sie können dann alle ausgewählten Layer in eine neue Gruppe verschieben.
 
-You are also able to delete more than one Layer or Group at once by selecting 
-several Layers with the \keystroke{CTRL}-Key and pressing \keystroke{CTRL-D} 
-afterwards. This way all selected Layers or Groups will be removed from the 
-layer list.
+Sie können auch mehr als einen Layer oder eine Gruppe auf einmal löschen, indem Sie
+mehrere Layer mit der \keystroke{Strg}-Taste auswählen und dann \keystroke{Strg-D} 
+drücken. So werden alle ausgewählten Ebenen oder Gruppen aus der Layerliste entfernt.
 
 \subsection{Kartenfenster}\label{label_mapview}
 \index{Kartenfenster}
@@ -929,22 +934,21 @@ selektieren dann den Layer und benutzen dann das Messwerkzeug.
 \includegraphics[clip=true, width=0.3\textwidth]{measure_angle}}
 \end{figure}
 
-%% FIXME
-\subsection{Select and deselect features}\label{sec:selection}
+\subsection{Objekte auswählen und Auswahl aufheben}\label{sec:selection}
 
-The QGIS toolbar provides several tools to select features in the map canvas. 
-To select one or several features just click on 
-\includegraphics[width=0.7cm]{mActionSelect} and select the tools:
+Die Werkzeugleiste bietet mehrere Werkzeuge, um Objekte im Kartenfenster auszuwählen.
+Um ein oder mehrere Objete auszuwählen, klicken Sie auf \includegraphics[width = 0.7cm]{mActionSelect} 
+und wählen Sie dann das ensprechende Werkzeug:
 
 \begin{description}
-\item \radiobuttonon{Select features}
-\item \radiobuttonoff{Select features by rectangle}
-\item \radiobuttonoff{Select features by polygon}
-\item \radiobuttonoff{Select features by freehand}
-\item \radiobuttonoff{Select features by radius}
+\item \radiobuttonon{Objekte wählen}
+\item \radiobuttonoff{Objekte durch Rechteck wählen}
+\item \radiobuttonoff{Objekte durch Polygon wählen}
+\item \radiobuttonoff{Objekte freihändig wählen}
+\item \radiobuttonoff{Objekte durch Radius wählen}
 \end{description} 
 
-To deselect all selected features click on 
+Um die Auswahl von Objekten wieder aufzuheben, klicken Sie auf den Knopf 
 \includegraphics[width=0.7cm]{mActionDeselectAll}.
 
 \section{QGIS Projekte}\label{sec:projects}\index{Projektdatei}
