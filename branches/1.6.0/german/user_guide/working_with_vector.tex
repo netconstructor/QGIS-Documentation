@@ -762,11 +762,10 @@ Knopf \button{neue Darstellung} im Reiter \tab{Darstellung} des Dialogs
 Darstellungsarten auszuwählen: Einzelsymbol, Kategorisiert und Abgestuft. In 
 Abhängigkeit von der ausgewählten Darstellungart bietet der Reiter 
 \tab{Darstellung} unterschiedliche Optionen und Einstellungsmöglichkeiten, die 
-im folgenden Abschnitt beschrieben werden. %%FIXME 
-The new generation symbology dialog also provides a \button{Style Manager} 
-button which gives access to the Style Manager (see section 
-\ref{subsec:stylemanager}). The Style Manager allows you to edit and remove 
-existing symbols and add new ones. 
+im folgenden Abschnitt beschrieben werden. Über die neue Darstellung können Sie 
+auch den \button{Stilmanager} öffnen (siehe Kapitel \ref{subsec:stylemanager}). 
+Der Stilmanager ermöglicht es, neue Symbole zu erstellen und vorhandene zu editieren 
+oder zu löschen. 
 
 \minisec{Einzelsymbol Darstellung}
 
@@ -784,10 +783,10 @@ dann in einem Standard-Farbdialog eine neue Farbe definieren. Nachdem Sie alle
 notwendigen Anpassungen gemacht wurden, können Sie das neue Symbol mit den Knopf 
 \button{Zum Stil hinzufügen} zu der Liste bereits vorhandener Symbole hinzufügen.  
 
-%%FIXME
-\textbf{Note}: To modify line width, besides modifying the symbol itself, you
-can use data-defined Size Scale (available through \button{Advanced} next to 
-\button{Add to Style}).
+\textbf{Bemerkung}: Um die Breite einer Linie zu ändern, können Sie abgesehen 
+von der direkten Anpassung des Symbols auch ein Größenskalierungsfeld angeben 
+(erreichbar über den Knopf \button{Erweitert} neben dem Knopf 
+\button{Zum Stil hinzufügen}).
 
 \begin{figure}[h]
 \centering
@@ -810,9 +809,8 @@ ausgewählt werden:
 \item Die Farbe (über die Auswahl Farbanstieg)
 \end{itemize}
 
-%%FIXME
-The Advanced button in the lower right corner of the dialog allows to set
-th fields containing rotation and size scale information.
+Der Knopf \button{Erweitert} in der unteren rechten Ecke des Dialogs ermöglicht 
+die Auswahl von Attributspalten für die Drehung und Größenskalierung.
 Zur Veranschaulichung wird im unteren Teil des Reiters eine Liste mit allen 
 Attributen und der jeweils verwendeten Symbolfarbe angezeigt. Das Beispiel in 
 Abbildung \ref{fig:catsymNG} zeigt den Dialog Kategorisierte Darstellung für 
@@ -825,16 +823,16 @@ den Vektorlayer \filename{rivers} des QGIS-Beispieldatensatzes.
 \end{center}
 \end{figure}
 
-%%FIXME
-You can create a custom color ramp choosing New color ramp... from the Color 
-ramp dropdown menu. A dialog will prompt for the ramp type: Gradient, Random,
-ColorBrewer, then each one has options for number of steps and/or multiple
-stops in the color ramp. See \ref{fig:ccrg} for an example of custom color
-ramp.
+Sie können einen individuellen Farbverlauf erstellen, indem Sie im Bereich 
+Farbverlauf \dialog{Neuer Farbverlauf} auswählen. Dadurch öffnet sich ein 
+neuer Dialog und Sie können auswählen zwischen Gradient, Zufällig und Farbbrauer. 
+Jede dieser Optionen ermöglicht dann, die Farbschritte festzulegen. Ein Beispiel 
+finden Sie in Abbildung \ref{fig:ccrg}.
+
 
 \begin{figure}[ht]
    \centering
-   \caption{Example of custom gradient color ramp with multiple stops \nixcaption}\label{fig:ccrg}
+   \caption{Beispiel eines individuellen Farbverlaufs mit mehreren Farbstufen \nixcaption}\label{fig:ccrg}
    \includegraphics[clip=true, width=10cm]{customColorRampGradient.png}
 \end{figure}
 
@@ -855,24 +853,24 @@ folgende Einstellungen:
 
 Zusätzlich können Sie die Anzahl der Klassen und den Modus für die Klassifizierung 
 festlegen. Im unteren Teil des Reiters wird eine Liste der Klassen, mit deren 
-Darstellung, der Range und dem Label angezeigt. %%FIXME 
+Darstellung, der Range und dem Label angezeigt. Die vohandenen Modi sind:
 The available modes are:
 
 \begin{itemize}
- \item Equal Interval
+ \item Gleiches Intervall
  \item Quantile
- \item Natural Breaks (Jenks)
- \item Standard Deviation
- \item Pretty Breaks
+ \item Natürliche Unterbrechungen (Jenks)
+ \item Standardabweichung
+ \item Schöne Unterbrechungen
 \end{itemize}
 
-The listbox in the bottom part of the symbology tab lists the classes 
-together with their ranges, labels and symbols that will be rendered.
+Das Listenfeld im unteren Bereich des Reiters \tab{Darstellung} zeigt die 
+festgelegten Werteklassen und -bereiche, Beschriftungen und Symbole, die dargestellt 
+werden.
 
 Das Beispiel in Abbildung \ref{fig:gradsymNG} zeigt den Dialog 
 \dialog{Abgestufte Darstellung} für den Vektorlayer rivers des 
 QGIS-Beispieldatensatzes.
-
 
 \begin{figure}[ht]
    \begin{center}
@@ -2266,15 +2264,15 @@ GDAL Version >= 1.6.
 \item \toolbtntwo{mActionCalculateField}{Feldrechner öffnen}
 \end{itemize}
 
-%% FIXME
-\minisec{Save selected features as new layer}
-\index{editing!save selection as new layer}
+\minisec{Ausgewählte Objekte als neuer Layer speichern}
+\index{Editieren!Auswahl als neuen Layer speichern}
 
-The selected features can be saved as any OGR supported vector format and also
-transformed into another Coordinate Reference System (CRS). Just open the right mouse
-menu of the layer and click on \dropmenuopt{Save selection as} to define the
-name of the output file, its format and CRS (see Section \ref{label_legend}). It is 
-also possible to specify OGR creation options within the dialog.
+Ausgewählte Objekte können in jedem von OGR unterstützten Vektor-Format gespeichert 
+werden und auch in ein anderes Koordinatensystem Bezugssystem (KBS) transformiert 
+werden. Öffnen Sie einfach das rechte Maustaste-Menü des Layers und klicken Sie auf 
+\dropmenuopt{Auswahl speichern als}. Dann definieren Sie den Namen der Ausgabedatei, 
+das Format und KBS (siehe Abschnitt \ref{label_legend}). Sie können zusätzlich auch 
+OGR-Erzeugungsoptionen angeben.
 
 \begin{Tip}[ht]\caption{\textsc{Attributdaten manipulieren}}
 Momentan wird nur für PostGIS-Layer das Hinzufügen und Löschen von
@@ -2284,20 +2282,20 @@ implementiert wurde. Ohne jegliche Garantie kann als Notlösung solange das
 externe Python Plugin 'Table Manager' verwendet werden.
 \end{Tip}
 
-%%FIXME
-\minisec{Working with non spatial attribute tables}
-\index{editing!working with non spatial tables}
+\minisec{Arbeiten mit nicht räumlichen Attributtabellen}
+\index{Editieren!Arbeiten mit nicht räumlichen Tabellen}
 
-QGIS allows also to load non spatial tables. This includes currently tables supported 
-by OGR, delimited text and the PostgreSQL provider. The tables can be used for field 
-lookups or just generally browsed and edited using the table view. When you load the 
-table you will see it in the legend field. It can be opened e.g. with the 
-\dropmenuopttwo{mActionOpenTable}{Open Attribute Table} tool and is then editable 
-like any other layer attribute table. 
+QGIS ermöglicht es auch, 'nicht-räumliche' Tabellen zu laden. Dies umfasst 
+derzeit von OGR unterstützte Tabellenformate, Textdateien und PostgreSQL. Die 
+Tabellen können zur Spaltenabfrage eingesetzt werden oder einfach zum 
+allgemeinen Durchsuchen und bearbeitet mit Hilfe des Attributwerkzeuge. Beim 
+Laden der Tabelle wird diese mit einem entsprechenden Icon im Legendenbereich 
+angezeigt und kann dann z.B. mit dem \dropmenuopttwo{mActionOpenTable}{Attributtabelle öffnen} 
+Werkzeug wie jede Attributtabelle eines Layer editiert werden.
 
-As an example you can use columns of the non spatial table to define attribute values or 
-a range of values that are allowed to be added to a specific vector layer during digitizing. 
-Have a closer look at the edit widget in section~\ref{label_attributes} to find out more.
+Als Beispiel können Sie Spalten einer 'nicht-räumlichen' Tabelle verwenden, um 
+Werte festzulegen, die während des Digitalisierens angegeben werden können Schauen 
+Sie dazu auch in den Abschnitt \ref{label_attributes}.
 
 \section{Abfrageeditor}\label{sec:query_builder}
 \index{Abfrageeditor}
