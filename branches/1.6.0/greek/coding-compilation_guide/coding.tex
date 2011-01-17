@@ -5,19 +5,19 @@
 % \updatedisclaimer
 
 \hypertarget{toc1}{}
-\section{QGIS Coding Standards}
+\section{Τα standard της κωδικοποίησης του QGIS}
 
-The following chapters provide coding information for QGIS Version \CURRENT.
-This document corresponds almost to a \LaTeX~ conversion of the CODING.t2t
-file coming with the QGIS sources from July, 27th 2010. 
+Τα επόμενα κεφάλαια παρέχουν πληροφορίες κώδικα για την έκδοση \CURRENT.
+Το έγγραφο αυτό ανταποκρίνεται σχεδόν σε \LaTeX~ μετατροπή του αρχείου CODING.t2t
+που έρχεται μαζί με τον πηγαίο κώδικα του QGIS απο την 27η του ιουλίου 2010. 
 
-These standards should be followed by all QGIS developers.
+Αυτά τα standards θα έπρεπε να ακολουθηθούν απο όλους τους δημιουργούς κώδικα του QGIS.
 
 \hypertarget{toc2}{}
-\subsection{Classes}
+\subsection{Κλάσεις}
 \hypertarget{toc3}{}
-\subsubsection{Names}
-Class in QGIS begin with Qgs and are formed using mixed case. 
+\subsubsection{Ονόματα}
+Οι κλάσεις στο QGIS ξεκινούν με Qgs και σχηματίζονται χρησιμοποιώντας κεφαλαία αλλά και μικρά γράμματα. 
 
 \begin{verbatim}
 Examples:
@@ -27,23 +27,20 @@ Examples:
 \end{verbatim}
 
 \hypertarget{toc4}{}
-\subsubsection{Members}
-Class member names begin with a lower case \textit{m} and are formed using mixed
-case.
+\subsubsection{Μέλη}
+Τα ονόματα κλάσεων μελών ξεκινούν με ένα μικρό γράμμα \textit{m} και σχηματίζονται χρησιμοποιώντας μικρά και κεφαλαία γράμματα.
 
 \begin{verbatim}
   mMapCanvas  
   mCurrentExtent
 \end{verbatim}
 
-All class members should be private.
-\textbf{Public class members are STRONGLY discouraged}
+Όλες οι κλάσσεις μέλη θα έπρεπε να είναι private.
+\textbf{Οι κλάσεις μέλη συνίσταται έντονα να μην είναι Public}
 
 \hypertarget{toc5}{}
-\subsubsection{Accessor Functions}
-Class member values should be obtained through accesssor functions. The
-function should be named without a \textit{get} prefix. Accessor functions for the
-two private members above would be: 
+\subsubsection{Συναφής λειτουργίες (Accessor functions)}
+Οι τιμές των κλάσεων μελών θα έπρεπε να παίρνονται απο τις συναφείς λειτουργίες. Η λειτουργία πρέπει να ονομάζεται χωρίς το επιπρόσθετο get. Οι συναφείς λειτουργίες για τα δύο παραπάνω private  μέλη θα ήταν: 
 
 \begin{verbatim}
   mapCanvas()
@@ -51,9 +48,8 @@ two private members above would be:
 \end{verbatim}
 
 \hypertarget{toc6}{}
-\subsubsection{Functions}
-Function names begin with a lowercase letter and are formed using mixed case.
-The function name should convey something about the purpose of the function.
+\subsubsection{Λειτουργίες (Functions)}
+Τα ονόματα των λειτουργιών ξεκινούν με ένα μικρό γράμμα και σχηματίζονται χρησιμοποιώντας μικρούς αλλα και μεγάλους χαρακτήρες. Το όνομα της λειτουργίας θα έπρεπε να μεταφέρει κάτι σχετικά με το σκοπό της λειτουργίας.
 
 \begin{verbatim}
   updateMapExtent()
@@ -61,11 +57,11 @@ The function name should convey something about the purpose of the function.
 \end{verbatim}
 
 \hypertarget{toc7}{}
-\subsection{Qt Designer}
+\subsection{Ο σχεδιαστής Qt}
 \hypertarget{toc8}{}
-\subsubsection{Generated Classes}
-QGIS classes that are generated from Qt Designer (ui) files should have a
-\textit{Base} suffix. This identifies the class as a generated base class.
+\subsubsection{Παραγόμενες  κλάσεις}
+Οι κλάσεις του QGIS που παράγονται απο αρχεία (ui) του σχεδιαστή Qt θα πρέπει να έχουν ένα επίθημα
+\textit{Base}. Αυτό αναγνωρίζει την κλάση ως μία παραγόμενη κλάση βάσης.
 
 \begin{verbatim}
 Examples:
@@ -73,25 +69,21 @@ Examples:
   QgsUserOptionsBase
 \end{verbatim}
 \hypertarget{toc9}{}
-\subsubsection{Dialogs}
+\subsubsection{Διάλογοι}
 
-All dialogs should implement the following:
+Όλοι οι διάλογοι θα έπρεπε να παρέχουν τα ακόλουθα:
 
 \begin{itemize}
-\item Tooltip help for all toolbar icons and other relevant widgets
-\item WhatsThis help for \textbf{all} widgets on the dialog
-\item An optional (though highly recommended) context sensitive \textit{Help} button
-   that directs the user to the appropriate help page by launching their web
-   browser
+\item Εργαλεία βοήθειας για όλα το εικονίδια της εργαλειοθήκης και άλλα σχετικά widget
+\item “Τι είναι αυτή η βοήθεια” για \textbf{όλα} τα widget στο διάλογο
+\item Ένα προαιρετικό (παρ'όλα αυτά πολύ προτεινόμενο) ευαίσθητου περιεχομένου κουμπί \textit{Help} το οποίο κατευθύνει το χρήστη στην κατάλληλη σελίδα βοηθείας ξεκινώντας τον φυλλομετρητή περιήγησης
 \end{itemize}
 
 \hypertarget{toc10}{}
-\subsection{C++ Files}
+\subsection{Αρχεία C++}
 \hypertarget{toc11}{}
-\subsubsection{Names}
-C++ implementation and header files should be have a .cpp and .h extension
-respectively.  Filename should be all lowercase and, in the case of classes,
-match the class name.
+\subsubsection{Ονόματα}
+Η εφαρμογή C++ και τα προσαγωγά αρχεία (header files) θα πρέπει να έχουν μια .cpp και .h κατάληξη αντίστοιχα. Το όνομα αρχείου θα πρέπει να είναι με μικρούς χαρακτήρες και, στην περίπτωση των κλάσεων, ταιριάξτε το όνομα της κλάσης.
 
 \begin{verbatim}
 Example:
@@ -99,15 +91,11 @@ Example:
     qgsfeatureattribute.cpp and qgsfeatureattribute.h
 \end{verbatim}
 
-/!$\backslash$ \textbf{Note:} in case it is not clear from the statement above, for a filename 
-to match a class name it implicitly means that each class should be declared 
-and implemented in its own file. This makes it much easier for newcomers to 
-identify where the code is relating to specific class.
+/!$\backslash$ \textbf{Σημείωση:} σε περίπτωση που δεν είναι ξεκάθαρο απο την παραπάνω δήλωση, για να ταιριάξει ένα όνομα αρχείου με το όνομα μιας κλάσης εννοείται ότι κάθε κλάση πρέπει να δηλωθεί και να εφαρμοστεί στο δικό της αρχείο. Έτσι για νέους χρήστες είναι πιο εύκολο να αναγνωρίσουν τον κώδικα που σχετίζεται με συγκεκριμένες κλάσεις.
 
 \hypertarget{toc12}{}
-\subsubsection{Standard Header and License}
-Each source file should contain a header section patterned after the following
-example:
+\subsubsection{Καθιερωμένη επικεφαλίδα και άδεια}
+Κάθε πηγαίο αρχείο θα πρέπει να περιέχει σχεδιασμένο ένα τμήμα επικεφαλίδας μετά το επόμενο παράδειγμα:
 
 \begin{verbatim}
 /***************************************************************************
@@ -127,27 +115,24 @@ example:
 \end{verbatim}
 
 \hypertarget{toc13}{}
-\subsubsection{SVN Keyword}
-Each source file should contain the \$Id\$ keyword. This will be expanded by SVN
-to contain useful information about the file, revision, last committer, and
-date/time of last checkin.
+\subsubsection{Λέξη κλειδι SVN}
+Κάθε πηγαίο αρχείο πρέπει να περιέχει τη λέξη-κλειδί \$Id\$. Αυτή θα επεκταθεί απο το SVN έτσι ώστε να περιέχει χρήσιμες πληροφορίες σχετικά με το αρχείο, την αναθεώρηση, τον τελευταίο χρήστη που ασχολήθηκε με αυτό, και την ημερομηνία/ώρα της τελευταίας εισόδου.
 
-Place the keyword right after the standard header/license that is found at the
-top of each source file:
+Βάλτε τη λεξη-κλειδί ακριβώς μετά τη standard επικεφαλίδα/άδεια που βρίσκεται στην κορυφή κάθε πηγαίου αρχείου:
 
 \begin{verbatim}
   /* $Id$ */
 \end{verbatim}
 
-You also need to set 
+Χρειάζεται επίσης να θέσετε
 
 svn propset svn:keywords "Id"
 
-for the new files.
+για τα καινούγρια αρχεία.
 
 \hypertarget{toc14}{}
-\subsection{Variable Names}
-Variable names begin with a lower case letter and are formed using mixed case.
+\subsection{Ονόματα μεταβλητών}
+Τα ονόματα των μεταβλητών ξεκινούν με μικρό χαρακτήρα και σχηματίζονται χρησιμοποιώντας μικρούς αλλά και μεγάλους χαρακτήρες.
 
 \begin{verbatim}
 Examples:
@@ -156,8 +141,8 @@ Examples:
 \end{verbatim}
 
 \hypertarget{toc15}{}
-\subsection{Enumerated Types}
-Enumerated types should be named in CamelCase with a leading capital e.g.:
+\subsection{Αριθμημένοι τύποι}
+Οι αριθμημένοι τύποι θα έπρεπε να ονομάζονται με λέξεις οι φράσεις οι οποίες ενώνονται χωρίς διαστήματα, με το αρχικό γράμμα κάθε στοιχείου να είναι κεφαλαίο (CamelCase) π.χ.:
 
 \begin{verbatim}
     enum UnitType
@@ -169,37 +154,32 @@ Enumerated types should be named in CamelCase with a leading capital e.g.:
     } ;
 \end{verbatim}
 
-Do not use generic type names that will conflict with other types. e.g. use
-"UnkownUnit" rather than "Unknown"
+Μη χρησιμοποιείται γενικούς τύπους ονομάτων που θα έρθουν σε αντίθεση με άλλους τύπους π.χ. χρησιμοποιήστε καλύτερα "UnkownUnit" 
+αντί για "Unknown"
 
 \hypertarget{toc16}{}
-\subsection{Global Constants}
-Global constants should be written in upper case underscore separated e.g.:
+\subsection{Γενικές σταθερές}
+Οι γενικές σταθερές θα πρέπει να γράφονται με κεφαλαίους χαρακτήρες διαχωρισμένους με μία κάτω παύλα π.χ.:
 
 \begin{verbatim}
 const long GEOCRS_ID = 3344;
 \end{verbatim}
 
 \hypertarget{toc17}{}
-\subsection{Editing}
-Any text editor/IDE can be used to edit QGIS code, providing the following
-requirements are met.
+\subsection{Επεξεργασία}
+Κάθε επεξεργαστής κειμένου/IDE μπορεί να χρησιμοποιηθεί για την επεξεργασία κώδικα QGIS, με την προϋπόθεση ότι οι παρακάτω απαιτήσεις θα ισχύουν.
 
 \hypertarget{toc18}{}
-\subsubsection{Tabs}
-Set your editor to emulate tabs with spaces. Tab spacing should be set to 2
-spaces.
+\subsubsection{Στηλοθέτες}
+Θέστε τον επεξεργαστή σας έτσι ώστε να εξομοιώνει τους στηλοθέτες με διαστήματα. Το διάστημα στηλοθέτησης θα πρέπει να αντιστοιχεί σε 2 διαστήματα.
 
 \hypertarget{toc19}{}
-\subsubsection{Indentation}
-Source code should be indented to improve readability. There is a .indent.pro
-file in the QGIS src directory that contains the switches to be used when
-indenting code using the GNU indent program. If you don't use GNU indent, you
-should emulate these settings.
+\subsubsection{Εσοχές κειμένου}
+Ο πηγαίος κώδικας θα πρέπει να έχει εσοχές έτσι ώστε να βελτιώνεται η αναγνωσιμότητα. Υπάρχει ένα .indent.pro αρχείο στον QGIS src κατάλογο που εμπεριέχει τους “διακόπτες” που χρησιμοποιούνται όταν φτιάχνουμε εσοχές στον κώδικα χρησιμοποιώντας το αντίστοιχο GNU πρόγραμμα. Αν δεν χρησιμοποιήσετε αυτό το αντίστοιχο GNU πρόγραμμα, θα πρέπει να προσομοιώσετε αυτές τις ρυθμίσεις..
 
 \hypertarget{toc20}{}
-\subsubsection{Braces}
-Braces should start on the line following the expression:
+\subsubsection{Παρενθέσεις}
+Οι παρενθέσεις πρέπει να ξεκινούν απο τη γραμμή που ακολουθείται απο έκφραση:
 
 \begin{verbatim}
   if(foo == 1)
@@ -213,20 +193,13 @@ Braces should start on the line following the expression:
   }
 \end{verbatim}
 
-There is a scripts/prepare-commit.sh that looks up the changed files and
-reindents them using astyle.  This should be run before committing.
+Υπάρχει ένα  scripts/prepare-commit.sh που προσέχει τα αλλαγμένα αρχεία και τα “ξαναδιπλώνει” χρησιμοποιώντας το astyle. Αυτό πρέπει να τρέξει πριν γίνει οτιδήποτε.
 
-As newer versions of astyle indent differently than the version used to do a
-complete reindentation of the source, the script uses an old astyle version,
-that we include in our repository.
+Καθώς οι πιο καινούργιες εκδόσεις του astyle εγκολπώνουν καλύτερα απο την έκδοση που χρησιμοποιήθηκε για να κάνει μια πλήρη εγκόλπωση του πηγαίου, το script χρησιμοποιεί μια παλιά έκδοση του astyle, που συμπεριλαμβάνουμε στα αποθετήριά μας.
 
 \hypertarget{toc21}{}
-\subsection{API Compatibility}
-From QGIS 1.0 we will provide a stable, backwards compatible API. This will
-provide a stable basis for people to develop against, knowing their code will
-work against any of the 1.x QGIS releases (although recompiling may be
-required).Cleanups to the API should be done in a manner similar to the
-Trolltech developers e.g.
+\subsection{Συμβατότητα API}
+Για το QGIS 1.0 θα παρέχουμε ένα σταθερό, αντιστρόφως συμβατό API. Αυτό θα παρέχει μια σταθερή βάση για όσους θα αναπτύσουν αντίθετα, ξέροντας ότι ο κώδικάς τους θα δουλέψει αντίθετα σε οποιαδήποτε απο τις 1.x QGIS εκδόσεις (παρολο που η σύνταξη μπορεί να απαιτηθεί ξανα). Καθαρισμός στο API θα πρεπε να γίνει με έναν τρόπο παρόμοιο με αυτό που αναπτύσεται στην Trolltech π.χ..
 
 \begin{verbatim}
 class Foo 
@@ -247,69 +220,56 @@ class Foo
 \end{verbatim}
 
 \hypertarget{toc22}{}
-\subsection{Coding Style}
-Here are described some programming hints and tips that will hopefully reduce
-errors, development time, and maintenance.
+\subsection{Στυλ κωδικοποίησης}
+Εδώ περιγράφονται μερικές προγραμματιστικές συμβουλές και βοήθειες οι οποίες ευελπίστως θα μειώσουν τα λάθη, το χρόνο ανάπτυξης και τη συντήρηση.
 
 \hypertarget{toc23}{}
-\subsubsection{Where-ever Possible Generalize Code}
+\subsubsection{Οπουδήποτε δυνατόν γενικευμένος κώδικας}
 \begin{verbatim}
-If you are cut-n-pasting code, or otherwise writing the same thing more than
-once, consider consolidating the code into a single function.
+Αν αποκόπτετε και αντιγράφετε κώδικα, ή αλλιώς γράφετε το ίδιο πράγμα παρα πάνω απο μία φορά, σκεφτείτε να παγειώσετε τον κώδικα σε μία μοναδική λειτουργία.
 \end{verbatim}
 
-This will:
+Αυτό θα:
 
 \begin{itemize}
-\item allow changes to be made in one location instead of in multiple places
-\item help prevent code bloat
-\item make it more difficult for multiple copies to evolve differences over time,
-    thus making it harder to understand and maintain for others
+\item επιτρέψει αλλαγές να γίνουν σε ένα μέρος αντί για πολλά
+\item βοηθήσει στην αποφυγή φουσκομένου κώδικα
+\item Το κάνει πιο δύσκολο για πολλαπλά αντίγραφα να αναπτύξουν διαφορές με την πάροδο του χρόνου, κάνοντας έτσι πιο δύσκολη την κατανόηση και τη διατήρηση για τους άλλους
 \end{itemize}
 
 \hypertarget{toc24}{}
-\subsubsection{Prefer Having Constants First in Predicates}
-Prefer to put constants first in predicates. 
+\subsubsection{Να προτιμάτε να έχετε τις σταθερές πρώτες σε προϋποθέσεις}
+Να προτιμάτε να βάζετε τις σταθερές πρώτες σε προϋποθέσεις. 
 
 \begin{verbatim}
 "0 == value" instead of "value == 0"
 \end{verbatim}
 
-This will help prevent programmers from accidentally using "=" when they meant
-to use "==", which can introduce very subtle logic bugs.  The compiler will
-generate an error if you accidentally use "=" instead of "==" for comparisons
-since constants inherently cannot be assigned values.
+Αυτό θα αποτρέψει τους προγραμματιστές απο το να χρησιμοποιήσουν κατά λάθος το “=” ενώ θα ήθελαν να χρησιμοποιήσουν το “==” το οποίο μπορεί να εισάγει πολύ δυσδιάκριτα λογικά bugs. Ο συντάκτης θα δημιουργήσει ένα λάθος αν κατα λάθος χρησιμοποιήσετε “=” αντί για “==” για συγκρίσεις απο τη στιγμή που οι σταθερές δεν μπορούν “κληρονομημένα” να πάρουν τιμές.
 
 \hypertarget{toc25}{}
-\subsubsection{Whitespace Can Be Your Friend}
-Adding spaces between operators, statements, and functions makes it easier for
-humans to parse code.
+\subsubsection{Τα διαστήματα μπορεί να γίνουν οι καλύτεροι σας φίλοι}
+Προσθέτοντας διαστήματα ανάμεσα στους τελεστές, τα στοιχεία και τις λειτουργίες κάνει πιο εύκολο στους ανθρώπους να μεταφράσουν τον κώδικα.
 
-Which is easier to read, this:
+Είναι πιο εύκολο να διαβαστεί αυτό:
 
 \begin{verbatim}
 if (!a&&b)
 \end{verbatim}
 
-or this:
+ή αυτό:
 
 \begin{verbatim}
 if ( ! a && b )
 \end{verbatim}
 
 \hypertarget{toc26}{}
-\subsubsection{Add Trailing Identifying Comments}
-Adding comments at the end of function, struct and class implementations makes
-it easier to find them later.
+\subsubsection{Προσθέστε σχόλια αναγνώρισης της πορείας}
+Η προσθήκη σχολίων στο τέλος των λειτουργιών, η δόμηση και εφαρμογή των κλάσεων κάνει πιο εύκολη την εύρεση τους αργότερα.
 
-Consider that you're at the bottom of a source file and need to find a very
-long function -- without these kinds of trailing comments you will have to page
-up past the body of the function to find its name.  Of course this is ok if you
-wanted to find the beginning of the function; but what if you were interested
-at code near its end?  You'd have to page up and then back down again to the
-desired part.
+Θεωρείστε ότι είστε στο τέλος ενός πηγαίου αρχείου και χρειάζεται να βρείτε μια μεγάλη λειτουργία – χωρίς αυτά τα σχόλια ανίχνευσης θα πρέπει να ανεβείτε προς τα πάνω όλη τη λειτουργία για να βρείτε το όνομα της. Βέβαια αν θέλετε να βρείτε την αρχή της λειτουργίας τότε είναι εντάξει. Αλλά τι θα γινόταν αν σας ενδιέφερε ο κώδικας κοντά στο τέλος; Θα έπρεπε να ανεβείτε προς τα πάνω και μετά πάλι προς τα κάτω για να βρείτε το επιθυμητό κομμάτι.
 
-e.g.,
+π.χ.,
 
 \begin{verbatim}
 void foo::bar()
@@ -319,12 +279,10 @@ void foo::bar()
 \end{verbatim}
 
 \hypertarget{toc27}{}
-\subsubsection{Use Braces Even for Single Line Statements}
-Using braces for code in if/then blocks or similar code structures even for
-single line statements means that adding another statement is less likely to
-generate broken code.
+\subsubsection{6.9.5 Χρησιμοποιήστε παρενθέσεις ακόμα και για στοιχεία κώδικα μίας γραμμής}
+Η χρήση παρενθέσεων σε if/then κομμάτια κώδικα ή παρεμφερείς δομήσεις κώδικα ακόμα και για στοιχεία κώδικα μιας γραμμής σημαίνει ότι η προσθήκη ενός ακόμα στοιχείου είναι λιγοτερο πιθανό να προκαλέσει κατεστραμένο κώδικα.
 
-Consider:
+Θεωρείστε:
 
 \begin{verbatim}
   if (foo)
@@ -333,11 +291,9 @@ Consider:
     baz();
 \end{verbatim}
 
-Adding code after bar() or baz() without adding enclosing braces would create
-broken code.  Though most programmers would naturally do that, some may forget
-to do so in haste.
+Η προσθήκη κώδικα μετά το bar() ή το baz() χωρίς την προσθήκη παρενθέσεων θα προκαλούσε σπασμένο κώδικα. Παρ'όλο που οι περισσότεροι προγραμματιστές θα το κάναν αυτό, μερικοί θα ξεχνούσαν να το κάνουν απο βιασύνη.
 
-So, prefer this:
+Έτσι προτιμήστε αυτό:
 
 \begin{verbatim}
  if (foo)
@@ -351,7 +307,7 @@ So, prefer this:
 \end{verbatim}
 
 \hypertarget{toc28}{}
-\subsubsection{Book recommendations}
+\subsubsection{Προτεινόμενα βιβλία}
 \begin{itemize}
 \item \htmladdnormallink{Effective C++}{http://www.awprofessional.com/title/0321334876}, Scott Meyers
 \item \htmladdnormallink{More Effective C++}{http://www.awprofessional.com/bookstore/product.asp?isbn=020163371X\&rl=1}, Scott Meyers
@@ -360,80 +316,72 @@ So, prefer this:
 \end{itemize}
 
 
-You should also really read this article from Qt Quarterly on \\
+Διαβάστε επίσης και το παρακάτω άρθρο του Qt Quarterly απο \\
 \url{http://doc.trolltech.com/qq/qq13-apis.html}
 
 
 \hypertarget{toc29}{}
-\section{SVN Access}
-This page describes how to get started using the QGIS Subversion repository
+\section{Πρόσβαση SVN}
+Αυτή η σελίδα περιγράφει πως να ξεκινήσετε χρησιμοποιώντας το αποθετήριο του QGIS Subverion
 
 \hypertarget{toc30}{}
-\subsection{Accessing the Repository}
-To check out QGIS HEAD:
+\subsection{Έχοντας πρόσβαση στο αποθετήριο}
+Για να δείτε το QGIS HEAD:
 
 \begin{verbatim}
   svn --username [your user name] co https://svn.osgeo.org/qgis/trunk/qgis
 \end{verbatim}
 
 \hypertarget{toc31}{}
-\subsection{Anonymous Access}
-You can use the following commands to perform an anonymous checkout from the
-QGIS Subversion repository.  Note we recommend checking out the trunk (unless
-you are a developer or really HAVE to have the latest changes and don't mind
-lots of crashing!).
+\subsection{Ανώνυμη είσοδος}
+Μπορείτε να χρησιμοποιήσετε τις ακόλουθες εντολές για κάνετε έναν ανώνυμο έλεγχο απο το αποθετήριο του QGIS sybversion. Σημείωστε ότι προτείνουμε να χρησημοιήσετε την κύρια γραμμή ανάπτυξης (trunk) (εκτός αν είστε προγραμματιστής ή είναι πραγματικά ανάγκη να έχετε τις τελευταίες αλλαγές και δεν σας ενοχλούν τα πολλά “κρασαρίσματα”!).
 
-You must have a subversion client installed prior to checking out the code. See
-the Subversion website for more information. The Links page contains a good
-selection of SVN clients for various platforms.
+Πρέπει να έχετε εγκατεστημένο ένα subverion client πριν ελέγξετε τον κώδικα. Δείτε την ιστοσελίδα του Subverion για περισσότερες λεπτομέρειες. Η σελίδα των Συνδέσμων περιέχει μια καλή επιλογή των SVN clients για διάφορες πλατφόρμες.
 
-To check out a branch
+Για να ελέγξετε
 
 \begin{verbatim}
   svn co https://svn.osgeo.org/qgis/branches/<branch name>
 \end{verbatim}
 
-To check out SVN stable trunk:
+Για να ελέγξετε τη σταθερή SVN γραμμή ανάπτυξης:
 
 \begin{verbatim}
   svn co https://svn.osgeo.org/qgis/trunk/qgis qgis_trunk
 \end{verbatim}
 
-\textbf{Note:} If you are behind a proxy server, edit your \~{}/subversion/servers
-file to specify your proxy settings first!
+\textbf{Σημείωση:} αν βρίσκεστε πίσω απο έναν διακομηστή εξουσιοδότησης (proxy server), επεξεργαστείτε το αρχείο \~{}/subversion/servers
+για να καθορίσετε τις ρυθμίσεις εξουσιοδήτησης!
 
-\textbf{Note:} In QGIS we keep our most stable code in the version 1\_0 branch.
-Trunk contains code for the so called 'unstable' release series. Periodically
-we will tag a release off trunk, and then continue stabilisation and selective
-incorporation of new features into trunk.
+\textbf{Σημείωση:} Στο QGIS κρατάμε τον πιο σταθερό κώδικα στην έκδοση 1\_0 branch.
+Η γραμμή ανάπτυξης περιέχει κώδικα για τη σειρά “ασταθών” εκδόσεων. Περιοδικά θα τιτλοφορούμε μια έκδοση της γραμμής ανάπτυξης και μετά θα συνεχίζουμε την σταθεροποίηση και την επιλεκτική ενσωμάτωση καινούργιων χαρακτηριστικών στη γραμμή ανάπτυξης.
 
-See the INSTALL file in the source tree for specific instructions on building
-development versions. 
+Δείτε το αρχείο εγκατάστασης (ΙNSTALL file) στον πηγαίο φάκελο ακριβής οδηγίες πάνω στο χτίσιμο εκδόσεων ανάπτυξης. 
 
 \hypertarget{toc32}{}
-\subsection{QGIS documentation sources}
-If you're interested in checking out Quantum GIS documentation sources:
+\subsection{Πηγές εγγράφων του QGIS}
+Αν σας ενδιαφέρει να δείτε τις πηγές εγγράφων του QGIS:
 
 \begin{verbatim}
   svn co https://svn.osgeo.org/qgis/docs/trunk qgis_docs
 \end{verbatim}
 
-You can also take a look at DocumentationWritersCorner for more information.
+Μπορείτε επίσης να ρίξετε μια ματιά στο DocumentationWritersCorner για περισσότερες πληροφορίες.
 
 \hypertarget{toc33}{}
-\subsection{SVN Documentation}
-The repository is organized as follows:
+\subsection{Έγγραφα για το SVN}
+Το αποθετήριο είναι οργανωμένο όπως παρακάτω:
 
 \htmladdnormallink{http://wiki.qgis.org/images/repo.png}{http://wiki.qgis.org/images/repo.png}
 
-See the Subversion book 
+Δείτε το βιβλίο του Subversion 
 \htmladdnormallink{http://svnbook.red-bean.com}{http://svnbook.red-bean.com} 
-for information on becoming a SVN master.
+για περισσότερες πληροφορίες σχετικά με το πως να εξειδικευτείτε στο SVN.
 
 \hypertarget{toc34}{}
-\subsection{Development in branches}
+\subsection{Ανάπτηξη σε παρακλάδια}
 \hypertarget{toc35}{}
-\subsubsection{Purpose}
+\subsubsection{7.5.1Σκοπός}
 The complexity of the QGIS source code has increased considerably during the
 last years. Therefore it is hard to anticipate the side effects that the
 addition of a feature will have. In the past, the QGIS project had very long
@@ -445,42 +393,29 @@ This section describes the procedure for branching and merging in the QGIS
 project.
 
 \hypertarget{toc36}{}
-\subsubsection{Procedure}
+\subsubsection{Διαδικασία}
 \begin{itemize}
-\item \textbf{Initial announcement on mailing list:}
-Before starting, make an announcement on the developer mailing list to see if
-another developer is already working on the same feature. Also contact the
-technical advisor of the project steering committee (PSC). If the new feature
-requires any changes to the QGIS architecture, a request for comment (RFC) is
-needed. 
+\item \textbf{Αρχική ανακοίνωση στην ταχυδρομική λίστα:}
+Πριν ξεκινήσετε, κάντε μια ανακοίνωση στην ταχυδρομική λίστα για να δείτε αν κάποιος άλλος προγραμματιστής εργάζεται ήδη στο συγκεκριμένο αντικείμενο. Επίσης επικοινωνήστε με τον τεχνικό σύμβουλο της εξεταστικής επιτροπής του σχεδίου (PSC). Αν το καινούργιο αντικείμενο απαιτεί κάποια αλλαγή στην αρχιτεκτονική του QGIS, χρειάζεται μια αίτηση για έκφραση άποψης (RFC). 
 
-\item \textbf{Create a branch:} 
-Create a new svn branch for the development of the new feature (see
-UsingSubversion for the svn syntax). Now you can start developing.
+\item \textbf{Δημιουργήστε ένα παρακλάδι:} 
+Δημιουργήστε ένα καινούργιο svn παρακλάδι για την ανάπτυξη ενός καινούργιου αντικειμένου (βλ. Χρησιμοποιώντας το Subversion για τη σύνταξη του svn). Τώρα μπορείτε να ξεκινήσετε την ανάπτυξη.
 
-\item \textbf{Merge from trunk regularly:}
-It is recommended to merge the changes in trunk to the branch on a regular
-basis. This makes it easier to merge the branch back to trunk later.
+\item \textbf{Συγχωνεύστε απο τη γραμμή ανάπτυξης τακτικά:}
+Συνίσταται να συγχωνεύετε τις αλλαγές στη γραμμή ανάπτυξης στο παρακλάδι τακτικά. Έτσι γίνεται ευκολότερο να συμπτυχθεί ξανά το παρακλάδι με τη γραμμή ανάπτυξης αργότερα.
 
-\item \textbf{Documentation on wiki:} 
-It is also recommended to document the intended changes and the current status
-of the work on a wiki page.
+\item \textbf{Τεκμηρίωση - έγγραφα στο wiki:} 
+Συνίσταται επίσης να καταγράψετε τις σχεδιασμένες αλλαγές και τη τρέχουσα κατάσταση της εργασίας σε μία wiki σελίδα.
 
-\item \textbf{Testing before merging back to trunk:} 
-When you are finished with the new feature and happy with the stability, make
-an announcement on the developer list.  Before merging back, the changes will
-be tested by developers and users. Binary packages (especially for OsX and
-Windows) will be generated to also involve non-developers. In trac, a new
-Component will be opened to file tickets against.  Once there are no remaining
-issues left, the technical advisor of the PSC merges the changes into trunk.
-
+\item \textbf{Έλεγχος πριν απο τη σύμπτηξη πάλι με τη γραμμή ανάπτυξης:} 
+Όταν τελειώσετε με το καινούργιο αντικέινενο και είστε ευχαριστημένοι με τη σταθερότητα, κάντε μια ανακοίνωση στη λίστα των προγραμματιστών. Πριν απο τη σύμπτηξη, οι αλλαγές θα ελεγχούν απο προγραμματιστές και χρήστες. Τα δυαδικά πακέτα (ειδικά για τα OsX και τα Windows) θα αναπαραχθούν για να συμπεριλάβουν επίσης άτομα που δεν είναι προγραμματιστές. Εν τέλει, ένα καινούργιο Στοιχείο θα ανοιχθεί. Όταν δεν θα έχουν μείνει άλλα θέματα άνοιχτα, ο τεχνικός σύμβουλος θα ενώσει τις αλλαγές στη γραμμή ανάπτυξης.
 \end{itemize}
 
 
 \hypertarget{toc37}{}
-\subsubsection{Creating a branch}
-We prefer that new feature developments happen out of trunk so that trunk
-remains in a stable state. To create a branch use the following command:
+\subsubsection{Δημιουργώντας ένα παρακλάδι}
+Προτιμούμε η ανάπτυξη καινούργιων στοιχείων να γίνεται εκτός της γραμμής ανάπτυξης έτσι ώστε η γραμμή ανάπτυξης να παραμένει σε σταθερή κατάσταση. 
+Για να δημιουργήσετε ένα παρακλάδι χρησιμοποιήστε την παρακάτω εντολή:
 
 \begin{verbatim}
 svn copy https://svn.osgeo.org/qgis/trunk/qgis \
@@ -489,11 +424,8 @@ svn commit -m "New feature branch"
 \end{verbatim}
 
 \hypertarget{toc38}{}
-\subsubsection{Merge regularly from trunk to branch}
-When working in a branch you should regularly merge trunk into it so that your
-branch does not diverge more than necessary. In the top level dir of your
-branch, first type \texttt{`svn info`} to determine the revision numbers of your
-branch which will produce output something like this:
+\subsubsection{Συμπτείξτε τακτικά απο τη γραμμή ανάπτυξης στο παρακλάδι}
+Όταν δουλεύετε σε ένα παρακλάδι θα πρέπει τακτικά να συμπτήσετε τη γραμμή ανάπτυξης μέσα του έτσι ώστε το παρακλάδι να μην αποκλίνει παραπάνω απ'όσο χρειάζεται. Στον τελευταίο προς τα πάνω κατάλογο του παρακλαδιού σας, πρώτα πληκτρολογήστε ‘svn info‘ για να καθορίσετε τους αριθμούς αναθεώρησης του παρακλαδιού που θα παράγει αποτέλεσμα όπως το παρακάτω::
 
 \begin{verbatim}
 timlinux@timlinux-desktop:~/dev/cpp/qgis_raster_transparency_branch svn info
@@ -510,16 +442,13 @@ Data da Ultima Mudanca: 2007-02-02 09:29:47 -0200 (Sex, 02 Fev 2007)
 Propriedades da Ultima Mudanca: 2007-01-09 11:32:55 -0200 (Ter, 09 Jan 2007)
 \end{verbatim}
 
-The second revision number shows the revision number of the start revision of
-your branch and the first the current revision. You can do a dry run of the
-merge like this:
+Ο δεύτερος αριθμός αναθεώρησης δείχνει τον αριθμό αναθεώσης της αρχικής αναθεώρησης του παρακλαδιού και ο πρώτος την τρέχουσα αναθεώρηση. Μπορείτε να δείτε τη σύμπτηξη με τον παρακάτω τρόπο:
 
 \begin{verbatim}
 svn merge --dry-run -r 6495:6546 https://svn.osgeo.org/qgis/trunk/qgis
 \end{verbatim}
 
-After you are happy with the changes that will be made do the merge for real
-like this:
+Αφού είστε ευχαριστημένοι με τις αλλαγές που θα προκύψουν κάντε τη σύμπτηξη όπως παρακάτω:
 
 \begin{verbatim}
 svn merge -r 6495:6546 https://svn.osgeo.org/qgis/trunk/qgis
@@ -527,27 +456,18 @@ svn commit -m "Merged upstream changes from trunk to my branch"
 \end{verbatim}
 
 \hypertarget{toc39}{}
-\subsection{Submitting Patches}
-There are a few guidelines that will help you to get your patches into QGIS
-easily, and help us deal with the patches that are sent to use easily.
+\subsection{Υποβάλλοντας τα Patches}
+Υπάρχουν μερικές οδηγίες που θα σας βοηθήσουν να βάλετε τα patches σας στο QGIS εύκολα, και θα μας βοηθήσει να διευθετήσουμε τα patches που στέλνονται εύκολα.
 
 \hypertarget{toc40}{}
-\subsubsection{Patch file naming}
-If the patch is a fix for a specific bug, please name the file with the bug
-number in it e.g.  \textbf{bug777fix.diff}, and attach it to the original bug report
-in trac (\htmladdnormallink{https://trac.osgeo.org/qgis/}{https://trac.osgeo.org/qgis/}).
+\subsubsection{Ονομασία των patch αρχείων}
+Αν το patch είναι διόρθωση για ένα συγκεκριμένο patch, παρακαλούμε ονομάστε το αρχείο με τον αριθμό του bug μέσα, π.χ.  \textbf{bug777fix.diff},  και επισυνάψτε το στην αρχική αναφορά των bug στο  trac (\htmladdnormallink{https://trac.osgeo.org/qgis/}{https://trac.osgeo.org/qgis/}).
 
-If the bug is an enhancement or new feature, its usually a good idea to create
-a ticket in trac (\htmladdnormallink{https://trac.osgeo.org/qgis/}{https://trac.osgeo.org/qgis/}) first and then attach you 
+Αν το bug είναι μια αναβάθμιση ή ενα καινούργιο αντικείμενο, συνήθως είναι καλή ιδέα να δημιουργήσετε ένα εισητήριο στο trac (\htmladdnormallink{https://trac.osgeo.org/qgis/}{https://trac.osgeo.org/qgis/}) και μετά να επισυνάψετε 
 
 \hypertarget{toc41}{}
-\subsubsection{Create your patch in the top level QGIS source dir}
-This makes it easier for us to apply the patches since we don't need to
-navigate to a specific place in the source tree to apply the patch. Also when I
-receive patches I usually evaluate them using kompare, and having the patch
-from the top level dir makes this much easier. Below is an example of how you
-can include multiple changed files into your patch from the top level
-directory:
+\subsubsection{Δημιουργήστε το patch στον πιο πάνω πηγαίο επίπεδο του QGIS καταλόγου}
+Αυτό το κάνει πιο εύκολο για μας να εφαρμόσουμε τα patch απο τη στιγμή που δεν χρειάζεται να πλοηγηθούμε σε ένα συγκεκριμένο μέρος στον πηγαίο αρχικό κατάλογο για να εφαρμόσουμε το patch. Επίσης όταν λαμβάνω patches συνήθως τα αξιολογώ χρησιμοποιώντας το kompare, και έχοντας το patch απο τον πιο πάνω κατάλογο κάνει αυτή τη δουλειά πιο εύκολη. Παρακάτω είναι ένα παράδειγμα σχετικά με το πως μπορείτε να συμπεριλάβετε πολλαπλά αλλαγμένα αρχεία μέσα στο patch σας απο τον κατάλογο που βρίσκεται στην κορυφή:
 
 \begin{verbatim}
 cd qgis
@@ -555,10 +475,8 @@ svn diff src/ui/somefile.ui src/app/somefile2.cpp > bug872fix.diff
 \end{verbatim}
 
 \hypertarget{toc42}{}
-\subsubsection{Including non version controlled files in your patch}
-If your improvements include new files that don't yet exist in the repository,
-you should indicate to svn that they need to be added before generating your
-patch e.g.
+\subsubsection{Συμπεριλαμβάνοντας στο patch αρχεία που δεν ελέγχονται απο έκδοση}
+Αν οι βελτιώσεις σας συμπεριλαμβάνουν καινούργια αρχεία που δεν υπάρχουν ακόμη στο αποθετήριο, θα πρέπει να επισημάνετε στο svn ότι χρειάζεται να προστεθούν πριν αναπαράγετε το patch σας π.χ.
 
 \begin{verbatim}
 cd qgis
@@ -567,44 +485,26 @@ svn diff > bug7887fix.diff
 \end{verbatim}
 
 \hypertarget{toc43}{}
-\subsubsection{Getting your patch noticed}
-QGIS developers are busy folk. We do scan the incoming patches on bug reports
-but sometimes we miss things.  Don't be offended or alarmed. Try to identify a
-developer to help you - using the Project Organigram at \url{http://www.qgis.org/wiki/Project_Organigram} and contact them
-asking them if they can look at your patch. If you don't get any response, you
-can escalate your query to one of the Project Steering Committee members
-(contact details also available on the 'Project Organigram').
+\subsubsection{Κάνοντας το patch σας παρατηρήσιμο}
+Οι προγραμματιστές του QGIS είναι πολυάσχολοι. Πράγματι κάνουμε έλεγχο στα εισερχόμενα patches στις αναφορές των bug αλλά μερικές φορές μας ξεφεύγουν πράγματα. Μην προσβληθείτε ή ενοχληθείτε. Προσπαθείστε να βρείτε έναν προγραμματιστή να σας βοηθήσει – χσηριμοποιώντας το Οργανόγραμμα του Project στη σελίδα http://www.qgis.org/wiki/Project_Organigram και επικοινωνήστε μαζί τους ρωτώντας τους αν μπορούν να ρίξουν μια ματιά στο patch σας. Αν δεν λάβετε καμία απάντηση, μπορείτε να κλιμακώσετε το ερώτημά σας σε ένα απο τα μέλη της Οργανωτικής Επιτροπής (πληροφορίες επικοινωνίας είναι διαθέσιμες επίσης στο “Οργανόγραμμα του Project”). 
 
 \hypertarget{toc44}{}
-\subsubsection{Due Diligence}
-QGIS is licensed under the GPL. You should make every effort to ensure you only
-submit patches which are unencumbered by conflicting intellectual property
-rights. Also do not submit code that you are not happy to have made available
-under the GPL.
+\subsubsection{Προγραμματισμένη επιμέλεια}
+Τo QGIS είναι αδειοδοτημένο υπο την GPL. Θα πρέπει να κάνετε οποιαδήποτε προσπάθεια έτσι ώστε να σιγουρευτείτε ότι θα υποβάλετε μόνο τα patches που δεν είναι βεβαρημένα με αντικρουόμενα πνευματικά διακαιώματα. Επίσης μην υποβάλετε κώδικα τον οποίο δεν θέλετε να είναι διαθέσιμος υπο την GPL άδεια.
 
 \hypertarget{toc45}{}
-\subsection{Obtaining SVN Write Access}
-Write access to QGIS source tree is by invitation. Typically when a person
-submits several (there is no fixed number here) substantial patches that
-demonstrate basic competence and understanding of C++ and QGIS coding
-conventions, one of the PSC members or other existing developers can nominate
-that person to the PSC for granting of write access. The nominator should give
-a basic promotional paragraph of why they think that person should gain write
-access. In some cases we will grant write access to non C++ developers e.g. for
-translators and documentors.  In these cases, the person should still have
-demonstrated ability to submit patches and should ideally have submitted several
-substantial patches that demonstrate their understanding of modifying the code
-base without breaking things, etc.
+\subsection{Αποκτώντας SVN δικαιώματα γραψίματος}
+Η πρόσβαση γραψίματος στον πηγαίο κατάλογο του QGIS γίνεται με πρόσκληση. Τυπικά, όταν κάποιο άτομο υποβάλει μερικά (δεν υπάρχει συγκεκριμένος αριθμός εδώ) ουσιώδη patches τα οποία υποδυκνείουν ουσιώδη επάρκεια και κατανόηση της C++ και της QGIS συμβατότητας κωδικοποίησης, ένα απο τα μέλη της Οργανωτικής Επιτροπής ή άλλοι υπάρχοντες προγραμματιστές μπορούν να υποδείξουν αυτό το άτομο στην Οργανωτική Επιτροπή πρόσβασης εγγραφής. Ο υποστηρικτής υποψηφιοτητας θα πρέπει να δώσει μια βασική προωθητική παράγραφο του γιατί πιστεύουν ότι αυτό το άτομο πρέπει να έχει πρόσβαση εγγραφής. Σε μερικές περιπτώσεις θα παρέχουμε πρόσβαση γραψίματος σε μη προγραμματιστές της C++ π.χ. για μεταφραστές και κειμενογράφους. Σε αυτές τις περιπτώσεις, το άτομο θα έχει ακόμα την υποδυκνειόμενη ικανότητα να υποβάλει patches και ιδανικά θα πρέπει να έχει υποβάλει μερικά ουσιώδη patches τα οποία υποδυκνείουν την κατανόηση τους στη μετατροπή του κώδικα βάσης να σπάσει οτιδήποτε κλπ .
 
 \hypertarget{toc46}{}
-\subsubsection{Procedure once you have access}
-Checkout the sources:
+\subsubsection{Διαδικασία αφ'ότου έχετε αποκτήσει πρόσβαση}
+Ελέγξτε τις πηγές: 
 
 \begin{verbatim}
 svn co https://svn.osgeo.org/qgis/trunk/qgis qgis
 \end{verbatim}
 
-Build the sources (see INSTALL document for proper detailed instructions)
+Χτίστε τον πηγαίο κώδικα (δείτε το έγγραφο INSTALL για λεπτομερείς οδηγίες)
 
 \begin{verbatim}
 cd qgis
@@ -614,118 +514,74 @@ make
 make install  (maybe you need to do with sudo / root perms)
 \end{verbatim}
 
-Make your edits
+Κάντε τις αλλαγές σας
 
 \begin{verbatim}
 cd ..
 \end{verbatim}
 
-Make your changes in sources. Always check that everything compiles before
-making any commits.  Try to be aware of possible breakages your commits may
-cause for people building on other platforms and with older / newer versions of
-libraries.
+Κάντε τις αλλαγές σας στους πηγαίους κώδικες. Πάντα να ελέγχετε οτι τα πάντα συντάσονται πριν κάνετε οποιαδήποτε αποθήκευση. Προσπαθείτε να έχετε επίγνωση πιθανών σπασιμάτων που οι αποθηκεύσεις μπορεί να προκαλέσουν για άτομα τα οποία χτίζουν σε άλλες πλατφόρμες και με παλαιότερες / νεότερες εκδόσεις βιβλιοθηκών.
 
-Add files (if you added any new files). The svn status command can be used to
-quickly see if you have added new files.
+Προσθέστε αρχεία (αν έχετε οποιαδήποτε καινούργια αρχεία). Η εντολή κατάστασης του SVN για να ελέγξετε γρήγορα αν έχετε προσθέσει καινούργια αρχεία.
 
 \begin{verbatim}
 svn status src/pluguns/grass/modules
 \end{verbatim}
 
-Files listed with ? in front are not in SVN and possibly need to be added by
-you:
+Τα αρχεία που βρίσκονται στη λίστα με ? απο μπροστά δεν βρίσκονται στο SVN και πιθανώς χρειάζεται να προστεθούν απο εσάς:
 
 \begin{verbatim}
 svn add src/pluguns/grass/modules/foo.xml
 \end{verbatim}
 
-Commit your changes
+Αποθηκεύστε τις αλλαγές σας
 
 \begin{verbatim}
 svn commit src/pluguns/grass/modules/foo.xml
 \end{verbatim}
 
-Your editor (as defined in \$EDITOR environment variable) will appear and you
-should make a comment at the top of the file (above the area that says 'don't
-change this'. Put a descriptive comment and rather do several small commits if
-the changes across a number of files are unrelated. Conversely we prefer you to
-group related changes into a single commit.
+Ο επεξεργαστής κειμένου (όπως έχει οριστεί στη μεταβλητή περιβάλλοντος \$EDITOR) θα εμφανιστεί και θα έπρεπε να κάνετε ένα σχόλιο στην αρχή του αρχείου (πάνω απο την περιοχή που λέει “don't change this”). Βάλτε ένα περιγραφικό σχόλιο και καλύτερα κάντε μερικές μικρές αποθηκεύσεις αν οι αλλαγές γύρα απο έναν αριθμό αρχείων δεν σχετίζονται. Αντιστρόφως, προτιμούμαι να ομαδοποιείτε σχετιζόμενες αλλαγές σε μία μοναδική αποθήκευση.
 
-Save and close in your editor. The first time you do this, you should be
-prompted to put in your username and password. Just use the same ones as your
-trac account.
+Αποθηκεύστε και κλείστε τον επεξεργαστή κειμένου. Την πρώτη φορά που θα το κάνετε αυτό, θα παραπεμφθείτε να βάλετε το όνομα χρήστη και τον κωδικό σας. Χρησιμοποιήστε τα ίδια που είχατε στον trac λογαριασμό σας.
 
 
 \hypertarget{toc47}{}
-\section{Unit Testing}
-As of November 2007 we require all new features going into trunk to be
-accompanied with a unit test. Initially we have limited this requirement to
-\textbf{qgis\_core}, and we will extend this requirement to other parts of the code base
-once people are familiar with the procedures for unit testing explained in the
-sections that follow.
+\section{Δοκιμή μονάδας}
+Απο το Νοέμβριο του 2007 απαιτούμε όλα τα καινούργια αντικείμενα που πηγαίνουν στη γραμμή ανάπτυξης να συνοδεύονται απο μία μονάδα ελέγχου. Αρχικά έχουμε περιορίσει αυτή την απαίτηση στο \textbf{qgis\_core}, και θα επεκτείνουμε αυτή την απαίτηση σε άλλα μέρη του κώδικα βάσης όταν οι άνθρωποι οικειοποιηθούν τις διαδικασίες για τον έλεγχο μονάδας που εξηγούνται στα κεφάλαια που ακολουθούν.
 
 \hypertarget{toc48}{}
-\subsection{The QGIS testing framework  - an overview}
-Unit testing is carried out using a combination of QTestLib (the Qt testing
-library) and CTest (a framework for compiling and running tests as part of the
-CMake build process).  Lets take an overview of the process before I delve into
-the details:
+\subsection{Το πλαίσιο ελέγχου του QGIS – μία επισκόπηση}
+Ο έλεγχος μονάδας διεξάγεται χρησιμοποιώντας ένα συνδιασμό απο QTestLib (η βιβλιοθήκη ελέγχου του Qt) και το Ctest ( ένα πλαίσιο για σύνταξη και διεξαγωγή ελέγχων ως μέρος της διαδικασίς του Cmake). Ας κάνουμε μια επισκόπηση της διαδικασίας πριν ανατρέξουμε σε λεπτομέρειες:
 
 \begin{itemize}
-\item \textbf{There is some code you want to test}, e.g. a class or function. Extreme
-   programming advocates suggest that the code should not even be written yet 
-   when you start building your tests, and then as you implement your code you can
-   immediately validate each new functional part you add with your test. In
-   practive you will probably need to write tests for pre-existing code in QGIS
-   since we are starting with a testing framework well after much application
-   logic has already been implemented.
+\item \textbf{Υπάρχει κάποιος κώδικας που θέλετε να ελέγξετε}, π.χ. μία κλάσση ή μία λειτουργία. Οι ακραίοι υποστηρικτές του προγραμματισμού προτείνουν ότι ο κώδικας δεν θα έπρεπε καν να γραφεί όταν αρχίζετε να χτίζετε τους ελέχγους σας, και έπειτα καθώς θα εφαρμόζετε τον κώδικά σας μπορείτε αμέσως να αξιολογήσετε κάθε νεό λειτουργικό μέρος που προσθέτετε με τον έλεγχο σας. Στην πρακτική πιθανόν να χρειαστεί να γράψετε tests για προϋπάρχων κώδικα στο QGIS απο τη στιγμή που αρχίζουμε με ένα πλαίσιο ελέγχου καλά αφού πολλυ εφαρμόσιμη λογική έχει ήδη εφαρμοστεί.
 
-\item \textbf{You create a unit test.} This happens under $<$QGIS Source Dir$>$/tests/src/core 
-   in the case of the core lib. The test is basically a client that creates an
-   instance of a class and calls some methods on that class. It will check the
-   return from each method to make sure it matches the expected value. If any
-   one of the calls fails, the unit will fail.
+\item \textbf{Δημιουργείτε μία μονάδα ελέγχου.} Αυτό γίνεται υπο το $<$QGIS Source Dir$>$/tests/src/core 
+   στην περίπτωση του core lib. Ο έλεγχος βασικά είναι ενας πελάτης-client ο οποίος δημιουργεί ένα αντικείμενο κλάσης και καλεί μερικές μεθόδους σε αυτή την κλάση. Θα ελέγξει το αποτέλεσμα απο κάθε μέθοδο για να σιγουρευτεί για ότι ταιριάζει την αναμενόμενη τιμή. Αν οποιοδήποτε απο τα καλέσματα αποτύχει, μονάδα θα αποτύχει επίσης.
 
-\item \textbf{You include QtTestLib macros in your test class.} This macro is processed by 
-   the Qt meta object compiler (moc) and expands your test class into a
-   runnable application. 
+\item \textbf{Συμπεριλάβετε τα QtTestLib macros στην κλαση ελέγχου.} Αυτό το macro επεξεργάζεται απο τον συντάκτη αντικειμένων meta (meta object compiler – moc) και επεκτείνει την κλάση ελέγχου σε μία εφαρμογή. 
 
-\item \textbf{You add a section to the CMakeLists.txt} in your tests directory that will
-   build your test.
+\item \textbf{Προσθέστε ένα κεφάλαιο CmakeLists.txt} στον κατάλογο ελέγχων που θα χτίσει τον έλεγχο σας (test).
 
-\item \textbf{You ensure you have ENABLE\_TESTING enabled in ccmake / cmakesetup.} This 
-   will ensure your tests actually get compiled when you type make.
+\item \textbf{Σιγουρευτείτε ότι έχετε ενεργοποιημένο το ENABLE_TESTING στο ccmake / cmakesetup.} Αυτό θα σιγουρέψει ότι οι έλεγχοι σας πραγματικά συντάσονται όταν πληκτρολογείτε make.
 
-\item \textbf{You optionally add test data to $<$QGIS Source Dir$>$/tests/testdata} if your 
-   test is data driven (e.g. needs to load a shapefile). These test data should
-   be as small as possible and wherever possible you should use the existing
-   datasets already there. Your tests should never modify this data in situ,
-   but rather may a temporary copy somewhere if needed.
+\item \textbf{Προαιρετικά προσθέστε δεδομένα ελέγχου στο $<$QGIS Source Dir$>$/tests/testdata} αν ο έλεγχος σας καθοδηγείται απο δεδομένα (π.χ, χρειάζεται να φορτώσει ένα shapefile). Αυτά τα δεδομένα ελέγχου θα πρέπει να είναι όσο το δυνατόν μικρότερα και όπου είναι δυνατόν χρησιμοποιήστε τα υπάρχοντα δεδομένα που είναι ήδη εκεί. Οι έλεγχοι σας δεν πρέπει ποτέ να μετατεουν αυτά τα δεδομένα μέσα στην τοποθεσία, αλλά είναι προτιμότερο να γίνει ένα προσωρινό αντίγραφο οπουδήποτε αν είναι απαραίτητο
 
-\item \textbf{You compile your sources and install.} Do this using normal make \&\& (sudo) 
-   make install procedure.
+\item \textbf{Συντάσετε τους πηγαίους κώδικες και εγκαθιταστείτε.} Κάντε το αυτό χρησιμοποιώντας την κανονική make \&\& (sudo) 
+    make install διαδικασία.
 
-\item \textbf{You run your tests.} This is normally done simply by doing \textbf{make test} 
- after the make install step, though I will explain other aproaches that offer
- more fine grained control over running tests.
+\item \textbf{Τρέχετε τον έλεγχο σας.}  Αυτό κανονικά γίνεται απλά κάνοντας ένα \textbf{make test} 
+ μετά την make install διαδικασία, παρ'όλα αυτά θα εξηγήσω άλλες προσεγγίσεις που προσφέρουν πιο λεπτομερή έλεγχο στη διεξαγωγή των ελέγχων.
 
 \end{itemize}
 
 
-Right with that overview in mind, I will delve into a bit of detail. I've
-already done much of the configuration for you in CMake and other places in the
-source tree so all you need to do are the easy bits - writing unit tests!
+Με αυτή τη γενική επισκόπηση στο μυαλό, θα ανατρέξω σε λίγο περιοσσότερη λεπτομέρεια. Έχω ήδη κάνει το περισσότερο μέρος της ρύθμισης για εσάς στο Cmake και άλλα μέρη στον πηγαίο κατάλογο οπότε αυτό που χρειάζεται να κάνετε είναι το εύκολο μέρος – να γράφετε ελέγχους μονάδας!
 
 \hypertarget{toc49}{}
-\subsection{Creating a unit test}
-Creating a unit test is easy - typically you will do this by just creating a
-single .cpp file (not .h file is used) and implement all your test methods as
-public methods that return void. I'll use a simple test class for
-QgsRasterLayer throughout the section that follows to illustrate. By convention
-we will name our test with the same name as the class they are testing but
-prefixed with 'Test'.  So our test implementation goes in a file called
-testqgsrasterlayer.cpp and the class itself will be TestQgsRasterLayer. First
-we add our standard copyright banner:
+\subsection{Δημιουργώντας έναν έλεγχο μονάδας}
+Το να δημιουργήσετε έναν έλεγχο μονάδας είναι εύκολο – τυπικά αυτό θα το κάνετε δημιουργώντας ένα .cpp αρχείο (κανένα .h αρχείο δεν χρησιμοποιείται) και εφαρμόστε όλες τις μεθόδους ελέγχου σαν μεθόδους public που επιστρέφουν void. Θα χρησιμοποιηω μία απλή κλάση ελέγχου για το QgsRasterLayer στο κεφάλαιο που ακολουθεί για την επεξήγηση. Όπως συνηθίζεται θα ονομάσουμε τον έλεγχο μας με το ίδιο όνομα όπως στην κλάση που ελέγχουν αλλά με το πρόθημα “Test”. Οπότε η εφαρμογή του ελέγχου μας πηγαίνει σε ένα αρχέιο που ονομάζεται testqgsrasterlayer.cpp και η κλάση θα είναι η TestQgsRasterLayer.
+ Πρώτα προσθέτουμε το πλαίσιο κειμένου περί πνευματικής ιδιοκτησίας:
 
 \begin{verbatim}
 /***************************************************************************
@@ -744,18 +600,16 @@ we add our standard copyright banner:
  ***************************************************************************/
 \end{verbatim}
 
-Next we use start our includes needed for the tests we plan to run. There is 
-one special include all tests should have:
+Μετά χρησιμοποιούμε τα include που μας χρειάζονται για τους ελέγχους που σχεδιάζουμε να τρέξουμε. Υπάρχει ένα συγκεκριμένο include όπου όλο οι έλεγχοι θα έπρεπε να έχουν:
 
 \begin{verbatim}
 #include <QtTest>
 \end{verbatim}
 
-\textbf{Note} that we use the new style Qt4 includes - i.e. QtTest is included not
-qttest.h
+\textbf{Σημειώστε}ότι χρησιμοποιούμε όλα τα  Qt4 includes 
+νέου στυλ – δηλαδή το QtTest συμπεριλαμβάνεται όχι το qttest.h.
 
-Beyond that you just continue implementing your class as per normal, pulling 
-in whatever headers you may need:
+Πέρα απο αυτό απλά συνεχίζετε να εφαρμόζετε την κλάση σας ως συνήθως, βάζοντας οποιαδήποτε κεφαλίδα μπορεί να χρειαστείτε:
 
 \begin{verbatim}
 //Qt includes...
@@ -772,11 +626,8 @@ in whatever headers you may need:
 #include <qgsapplication.h>
 \end{verbatim}
 
-Since we are combining both class declaration and implementation in a single
-file the class declaration comes next. We start with our doxygen documentation.
-Every test case should be properly documented. We use the doxygen \textbf{ingroup}
-directive so that all the UnitTests appear as a module in the generated Doxygen
-documentation. After that comes a short description of the unit test:
+Απο τη στιγμή που συνδυάζουμε και την δήλωση της κλάσης και την εφαρμογή σε ένα μοναδικό αρχείο η δήλωση της κλάσης έρχεται αμέσως μετά. Ξεκινάμε με τα έγγραφα τεκμηρίωσης  doxygen.Οποιαδήποτε περίπτωση ελέγχου θα πρέπει να τεκμηριωθεί σωστά. Χρησιμοποιούμε την doxygen \textbf{ingroup}
+οδηγία έτσι ώστε όλα τα UnitTests να εμφανιστούν στα παραγόμενα Doxygen έγγραφα τεκμηρίωσης. Μετά απο αυτό έρχεται μια μικρή της μονάδας ελέγχου:
 
 \begin{verbatim}
 /** \ingroup UnitTests
@@ -784,7 +635,7 @@ documentation. After that comes a short description of the unit test:
  */
 \end{verbatim}
 
-The class \textbf{must} inherit from QObject and include the Q\_OBJECT macro.
+Η κλάση \textbf{πρέπει} να “κληρονομήσει” απο την QΟbject και το Q\_OBJECT macro.
 
 \begin{verbatim}
 class TestQgsRasterLayer: public QObject
@@ -792,14 +643,8 @@ class TestQgsRasterLayer: public QObject
   Q_OBJECT;
 \end{verbatim}
 
-All our test methods are implemented as \textbf{private slots}. The QtTest framework
-will sequentially call each private slot method in the test class. There are
-four 'special' methods which if implemented will be called at the start of the
-unit test (\textbf{initTestCase}), at the end of the unit test
-(\textbf{cleanupTestCase}).  Before each test method is called, the \textbf{init()}
-method will be called and after each test method is called the \textbf{cleanup()}
-method is called. These methods are handy in that they allow you to allocate
-and cleanup resources prior to running each test, and the test unit as a whole.
+Όλοι οι μέθοδοι ελέγχου εφαρμόζονται ως \textbf{private slots}. Το QtTest πλαίσιο θα καλέσει επακολούθως κάθε private slot μέθοδο στην κλάση ελέγχου. Υπάρχουν τέσσερεις “ειδικές” μέθοδοι οι οποίες αν εφαρμοστούν θα καλεστούν στην αρχή της μονάδας ελέγχου (\textbf{initTestCase}), στο τέλος της μονάδας ελέγχου (\textbf{cleanupTestCase}). Πριν κάθε μέθοδος ελέγχου καλεστεί, η μέθοδος \textbf{init()}
+θα καλεστεί  και αφού κάθε μέθοδος ελέγχου καλεστεί καλείται και η μέθοδος \textbf{cleanup()}. Αυτές οι μέθοδοι είναι εξυπηρετικοί στο ότι σας επιτρέπουν να μοιράσετε και να καθαρίσετε τις πηγές πρίν τρέξετε οποιοδήποτε έλεγχο, και τον λελεγχο μονάδας σαν ολότητα. 
 
 \begin{verbatim}
 private slots:
@@ -813,21 +658,9 @@ private slots:
   void cleanup();
 \end{verbatim}
 
-Then come your test methods, all of which should take \textbf{no parameters} and
-should \textbf{return void}. The methods will be called in order of declaration.  I
-am implementing two methods here which illustrates to types of testing. In the
-first case I want to generally test the various parts of the class are working,
-I can use a \textbf{functional testing} approach. Once again, extreme programmers
-would advocate writing these tests \textbf{before} implementing the class. Then as
-you work your way through your class implementation you iteratively run your
-unit tests. More and more test functions should complete sucessfully as your
-class implementation work progresses, and when the whole unit test passes, your
-new class is done and is now complete with a repeatable way to validate it.
+Μετά έρχονται οι μέθοδο ελέγχου, όλο εκ των οποίων δεν θα έπρεπε να παίρνουν \textbf{καθόλου παραμέτρους} και θα πρέπει να \textbf{επιστρέφουν void}. Οι μέθοδοι θα καλεστούν με τη σειρά που δηλώθηκαν. Εφαρμόζω δύο μεθόδους εδώ που δείχνουν δύο μεθόδους ελέγχου. Στην πρώτη περίπτωση θέλω να ελέγξω γενικά τα διάφορα μέρη της κλάσης που δουλέυουν, οπότε μπορώ να χρησιμοποιήσω μια προσέγγιση  \textbf{λειτουργικού ελέγχου}. Για άλλη μία φορά, οι ακραίοι προγραμματιστές θα τασόταν υπερ του να γράφονται αυτοί οι έλεγχοι \textbf{πριν} την εφαρμογή της κλάσης. Έπειτα καθώς θα δουλεύετε με την εφαρμογή της κλάσης κατ'επανάληψη τρέχτε τις μονάδες ελέγχου. Όλο και περισσότερες λειτουργίες ελέγχου πρέπει να ολοκληρωθούν επιτυχημένα καθώς η εργασία εφαρμογής της κλάσης προχωράει, και όταν η μονάδα ελέγχου περάσει, η καινούργια σας κλάση έχει τελειώσει και τώρα έιναι ολοκληρωμένη με έναν επαναλαμβανόμενο τρόπον να την αξιολογήσετε. 
 
-Typically your unit tests would only cover the \textbf{public} API of your class,
-and normally you do not need to write tests for accessors and mutators.  If it
-should happen that an acccessor or mutator is not working as expected you would
-normally implement a \textbf{regression} test to check for this (see lower down).
+Τυπικά οι μονάδες ελέγχου σας θα κάλυπταν μόνο το \textbf{public} API της κλάσης σας και κανονικά δεν χρειάζεται να γράψετε ελέγχους για accessors (απλές και μικρές μέθοδοι που παρέχουν τα μέσα για την κατάσταση ενός αντικειμένου που θα ανακτηθεί απο άλλα μέρη του προγράμματος) και mutators (μέθοδοι που χρησιμοποιούνται για να ελέγξουν τις αλλαγές σε μία μεταβλητή).  Αν ένας accesor ή mutator δεν δουλεύει όπως αναμενόταν κανονικά θα εφαρμόζατε έναν έλεγχο \textbf{παλινδρόμησης} για να το ελέγξετε (δείτε παρακάτω).
 
 \begin{verbatim}
   //
@@ -840,31 +673,11 @@ normally implement a \textbf{regression} test to check for this (see lower down)
   // more functional tests here ...
 \end{verbatim}
 
-Next we implement our \textbf{regression tests}. Regression tests should be
-implemented to replicate the conditions of a particular bug. For example I
-recently received a report by email that the cell count by rasters was off by
-1, throwing off all the statistics for the raster bands. I opened a bug (ticket
-\#832) and then created a regression test that replicated the bug using a small
-test dataset (a 10x10 raster). Then I ran the test and ran it, verifying that
-it did indeed fail (the cell count was 99 instead of 100). Then I went to fix
-the bug and reran the unit test and the regression test passed. I committed the
-regression test along with the bug fix. Now if anybody breakes this in the
-source code again in the future, we can immediatly identify that the code has
-regressed. Better yet before committing any changes in the future, running our
-tests will ensure our changes don't have unexpected side effects - like breaking
-existing functionality.
+Μετά εφαρμόζουμε τους \textbf{ελέγχους παλινδρόμησής}. Οι έλεγχοι παλινδρόμησης θα πρέπει να εφαρμοστούν για να αναπαράγουν πανομοιότυπα τις καταστάσεις ενός συγκεκριμένου bug. Για παράδειγμα πρόσφατα έλαβα με e-mail μια αναφορά  ότι η μέτρηση κελιών απο τα raster ήταν εκτός για 1, αλλάζοντας τα στατιστικά για τις μπάντες του raster. Άνοιξα ένα bug (αριθμός\#832) και μέτα δημιούργησα έναν έλεγxο παλινδρόμησης που αναπαρήγαγε πανομοιότυπα το bug χρησιμοποιώντας ένα μικρό σύνολο δεδομένων ελέγχου (ένα 10x10 raster). Μετά έτρεξα τον έλεγχο (test) επαληθεύοντας ότι όντως απέτυχε (η μέτρηση κελιών ήταν 99 αντί για 100). Μετά πηγα να φτιάξω το bug και ξαναέτρεξα τον έλεγχο μονάδας και ο έλεγχος παλινδρόμησης πέρασε. Έκανα τον έλεγχο παλινδρόμησης μαζί με το φτιάξιμο του bug. Τώρα αν κάποιος τo σπάσει αυτό στον πηγαίο κώδικα ξανά στο μέλλον, μπορούμε αμέσως να αναγνωρίσουμε ότι ο κώδικας έχει επαναληφθεί. Ακόμα καλύτερα πριν γίνουν οποιεσδήποτε αλλαγές στο μέλλον, το τρεξιμο των ελέγχων μας θα σιγουρέψει ότι οι αλλαγές μας δεν έχουν μη αναμενόμενες παρενέργειες – όπως το σπάσιμο της υπάρχουσας λειτουργικότητας.
 
-There is one more benifit to regression tests - they can save you time.  If you
-ever fixed a bug that involved making changes to the source, and then running
-the application and performing a series of convoluted steps to replicate the
-issue, it will be immediately apparent that simply implementing your regression
-test \textbf{before} fixing the bug will let you automate the testing for bug
-resolution in an efficient manner.
+Υπάρχει ακόμα ένα όφελος στους ελέγχους παλινδρόμησης -  μπορούν να σας εξοικονομήσουν χρόνο. Αν ποτέ φτιάξατε κάποιο bug που συμπεριλάμβανε αλλαγές στον πηγαίο κώδικα, και μετά το τρέξιμο της εφαρμογής και τη διεξαγωγή ενός αριθμού περίπλοκων βημάτων για την ακριβή αναπαραγωγή του προβλήματος, θα γίνει αμέσως εμφανές ότι απλά εφαρμόζοντας τον έλεγχο παλινδρόμησης \textbf{πριν} φτιάξετε το bug, θα σας επιτρέψει να αυτοματοποιήσετε τον έλεγχο για την επίλυση των bug με έναν επαρκή τρόπο. 
 
-To implement your regression test, you should follow the naming convention of
-regression$<$TicketID$>$ for your test functions. If no trac ticket exists for the
-regression, you should create one first.  Using this approach allows the person
-running a failed regression test easily go and find out more information.
+Για να εφαρμόσετε τον έλεγχο παλινδρόμησης σας, ακολουθήστε την πρότυπη ονομασία της παλινδρόμησης $<$TicketID$>$ για τις λειτουργίες του ελέγχου. Αν δεν υπάρχει αριθμός trac για την παλινδρόμηση σας, δημιουργήστε πρώτα έναν. Χρησιμοποιώντας αυτή την προσέγγιση επιτρέπει στο άτομο που τρέχει έναν επιτυχημένο έλεγχο παλινδρόμησης να βρεί εύκολα περισσότερες πληροφορίες. 
 
 \begin{verbatim}
   //
@@ -880,14 +693,7 @@ running a failed regression test easily go and find out more information.
   // more regression tests go here ...
 \end{verbatim}
 
-Finally in our test class declaration you can declare privately any data
-members and helper methods your unit test may need. In our case I will declare
-a QgsRasterLayer * which can be used by any of our test methods. The raster
-layer will be created in the initTestCase() function which is run before any
-other tests, and then destroyed using cleanupTestCase() which is run after all
-tests. By declaring helper methods (which may be called by various test
-functions) privately, you can ensure that they wont be automatically run by the
-QTest executeable that is created when we compile our test.
+Τελικά στη δήλωση της κλάσης ελέγχου μπορείτε να δηλώσετε ως private οποιαδήποτε δεδομένα και βοηθητικές μεθόδους όπου η μονάδα ελέγχου σας μπορεί να χρειάζεται. Στη δική μας περίπτωση θα δηλώσω ένα QgsRasterLayer * που μπορεί να χρησιμοποιηθεί απο οποιαδήποτε απο τις μεθόδους ελέγχου. Το επίπεδο raster θα δημιουργηθεί στη λειτουργία initTestCase() η οποία τρέχει πρίν απο οποιδήποτε άλλο έλεγχο, και μετα θα καταστραφεί χρησιμοποιώντας τη μέθοδο cleanupTestCase() η οποία τρέχει μετά απο όλους τους ελέχγους. Δηλώνοντας τις βοηθητικές μεθόδους (οι οποίες μπορούν να καλεστούν απο διάφορες λειτουργίες ελέγχου) ως private, μπορείτε να σιγουρευτείτε ότι δεν θα τρέξουν αυτόματα απο το εκτελέσιμο QΤest που δημιουργείται όταν συντάσουμε τον έλεχγο.
 
 \begin{verbatim}
   private:
@@ -898,8 +704,7 @@ QTest executeable that is created when we compile our test.
 
 \end{verbatim}
 
-That ends our class declaration. The implementation is simply inlined in the
-same file lower down. First our init and cleanup functions:
+Αυτό τελειώνει την δήλωση της κλάσης μας. Η εφαρμογή είναι απλά ευθυγραμμισμένη στο ίδιο αρχείο παρακάτω. Πρώτα οι αρχικές και οι λειτουργίες καθαρισμού: 
 
 \begin{verbatim}
 void TestQgsRasterLayer::initTestCase()
@@ -936,28 +741,14 @@ void TestQgsRasterLayer::cleanupTestCase()
 
 \end{verbatim}
 
-The above init function illustrates a couple of interesting things.
+Η παραπάνω αρχική λειτουργία δείχνει μερικά ενδιαφέροντα πράγματα. 
 
- 1. I needed to manually set the QGIS application data path so that
-   resources such as srs.db can be found properly.
- 2. Secondly, this is a data driven test so we needed to provide a 
-   way to generically locate the 'tenbytenraster.asc file. This was 
-   achieved by using the compiler define \textbf{TEST\_DATA\_PATH}. The 
-   define is created in the CMakeLists.txt configuration file under 
-   $<$QGIS Source Root$>$/tests/CMakeLists.txt and is available to all 
-   QGIS unit tests. If you need test data for your test, commit it 
-   under $<$QGIS Source Root$>$/tests/testdata. You should only commit 
-   very small datasets here. If your test needs to modify the test 
-   data, it should make a copy of if first.
+ 1. Χρειάστεηκε να θέσω χειροκίνητα τη διαδρομή δεδομένων της QGIS εφαρμογής έτσι ώστε οι πηγές όπως η srs.db να μπορούν βρεθούν κανονικά.
+ 2. Δεύτερον, αυτός είναι ένας έλεγχος που οδηγείται απο δεδομένα έτσι χρειάστηκε να παρέχουμε έναν τρόπο για να εντοπίσουμε γενικά το αρχέιο 'tenbytenraster.as'. Αυτό έγινε εφικτό χρησιμοποιώντας τον ορισμό του συντάκτη \textbf{TEST\_DATA\_PATH}.  Ο χαραλτηρισμός δημιουργείται στο αρχείο καθορισμού CmakeLists.txt στο $<$QGIS Source Root$>$/tests/CMakeLists.txt και είναι διαθέσιμο σε όλες τις μονάδες ελέγχου του QGIS. Αν χρειάζεστε πειραματικά δεδομένα για τον έλεγχό σας, κάντε το στο $<$QGIS Source Root$>$/tests/testdata. Θα πρέπει να κάνετε πολύ μικρά δεδομένα εδώ. Αν ο έλεγχος σας χρειάζεται να κάνει αλλαγές στα πειραματικά δεδομένα σας, θα πρέπει να κάνει ένα αντίγραφό του πρώτα.
 
-Qt also provides some other interesting mechanisms for data driven 
-testing, so if you are interested to know more on the topic, consult 
-the Qt documentation.
+Το Qt παρέχει κάποιους ενδιαφέροντες μηχανισμούς για έλεγχο που διεξάγεται απο δεδομένα, οπότε αν χρειάζεστε να μάθετε περισσότερα σχετικά με αυτό το θέμα, συμβουλευτείτε τα έγγραφα τεκμηρίωσης του Qt. 
 
-Next lets look at our functional test. The isValid() test simply checks the
-raster layer was correctly loaded in the initTestCase.  QVERIFY is a Qt macro
-that you can use to evaluate a test condition.  There are a few other use
-macros Qt provide for use in your tests including:
+Έπειτα ας ρίξουμε μια ματιά στον λειτουργικό μας έλεγχο. Ο έλεγος sValid() απλά ελέγχει το επίπεδο πληροφορίας του raster αν φορτώθηκε σωστά στο initTestCase. To QVERIFY είναι ένα Qt macro που μπορείτε να χρησιμοποιήσετε για να αξιολογήσετε την κατάσταση του ελέγχου. Υπάρχουν και μερικά άλλα macros που το Qt παρέχει για χρήση στους ελέγχους σας συμπεριλαμβάνοντας:
 
 \begin{verbatim}
 QCOMPARE ( actual, expected )
@@ -974,8 +765,7 @@ QVERIFY ( condition )
 QWARN ( message ) 
 \end{verbatim}
 
-Some of these macros are useful only when using the Qt framework for data
-driven testing (see the Qt docs for more detail).
+Μερικά απο αυτά τα macros είναι χρήσιμα μόνο όταν χρησιμοποιείται το Qt framework για ελέγχους που κατευθύνονται απο δεδομένα (δείτε τα Qt docs για περισσότερες λεπτομέρειες).
 
 \begin{verbatim}
 void TestQgsRasterLayer::isValid()
@@ -984,13 +774,9 @@ void TestQgsRasterLayer::isValid()
 }
 \end{verbatim}
 
-Normally your functional tests would cover all the range of functionality of
-your classes public API where feasible. With our functional tests out the way,
-we can look at our regression test example.
+Κανονικά οι λειτουργικοί σας έλεγχοι καλύπτουν ολο το εύρος λειτουργικότητας των public API των κλάσεων όπου είναι εφικτό. Με τους λειτουργικούς μας ελέγχους, μπορούμε να δούμε το παράδειγμα του ελέγχου παλινδρόμησης.
 
-Since the issue in bug \#832 is a misreported cell count, writing our test if
-simply a matter of using QVERIFY to check that the cell count meets the
-expected value:
+Απο τη στιγμή που το πρόβλημα στο  bug \#832 είναι ένα λανθασμένα αναφερμένο μέτρημα κελιών (cell count), το γράψιμο του ελέγχου είναι απλά ένα θέμα χρήσης του QVERIFY για να ελέγξει ότι η μέτρηση των κελιών ανταποκρίνεται στην αναμενόμενη τιμή:
 
 \begin{verbatim}
 void TestQgsRasterLayer::regression832()
@@ -1003,24 +789,18 @@ void TestQgsRasterLayer::regression832()
 }
 \end{verbatim}
 
-With all the unit test functions implemented, there one final thing we need to
-add to our test class:
+Με όλες τις λειτουργίες της μονάδας ελέγχου εφαρμοσμένες, υπάρχει ένα τελευταίο πράγμα που πρέπει να προσθέσουμε στην κλάση ελέγχου μας:
 
 \begin{verbatim}
 QTEST_MAIN(TestQgsRasterLayer)
 #include "moc_testqgsrasterlayer.cxx"
 \end{verbatim}
 
-The purpose of these two lines is to signal to Qt's moc that his is a QtTest
-(it will generate a main method that in turn calls each test funtion.  The last
-line is the include for the MOC generated sources. You should replace
-'testqgsrasterlayer' with the name of your class in lower case.
+Ο σκοπός αυτών των δύο γραμμών είναι να δώσουν σήμα στον moc (Meta Object Compiler) του Qt ότι πρόκειται για ένα QtTest (θα αναπαράγει μια κύρια μέθοδο που καλεί κάθε λειτουργία ελέγχου). Η τελευταία γραμμή είναι το include για τις αναπαραγόμενες πηγές του MOC. Αντικαταστήστε το ’testqgsrasterlayer’ με το όνομα της κλάσης σας με μικρούς χαρακτήρες.
 
 \hypertarget{toc50}{}
-\subsection{Adding your unit test to CMakeLists.txt}
-Adding your unit test to the build system is simply a matter of editing the
-CMakeLists.txt in the test directory, cloning one of the existing test blocks,
-and then replacing your test class name into it.  For example:
+\subsection{Προσθέτοντας τη μονάδα ελέγχου στο CmakeLists.txt}
+Προσθέτοντας τη μονάδα ελέγχου στο σύστημα χτισίματος είναι απλά θέμα επεξεργασίας του CmakeLists.txt στον κατάλογο ελέγχου, κλονοποίησης ενός απο τα υπάρχοντα τετράγωνα ελέγχου, και μετά αντικατάστασης του ονόματος της κλάσης ελέγχου μέσα του. Για παράδειγμα:
 
 \begin{verbatim}
 # QgsRasterLayer test
@@ -1028,9 +808,8 @@ ADD_QGIS_TEST(rasterlayertest testqgsrasterlayer.cpp)
 \end{verbatim}
 
 \hypertarget{toc51}{}
-\subsection{The ADD\_QGIS\_TEST macro explained}
-I'll run through these lines briefly to explain what they do, but if you are
-not interested, just do the step explained in the above section and section.
+\subsection{Επεξήγηση του ADD\_QGIS\_TEST macro}
+Θα ανατρέξω αυτές τις γραμμές εν συντομία για να εξηγήσω τι κάνουν, αλλά αν δεν ενδιαφέρεστε, απλά κάντε το βήμα που εξηγείται στο παραπάνω κεφάλαιο.
 
 \begin{verbatim}
 MACRO (ADD_QGIS_TEST testname testsrc)
@@ -1064,17 +843,13 @@ MACRO (ADD_QGIS_TEST testname testsrc)
 ENDMACRO (ADD_QGIS_TEST)
 \end{verbatim}
 
-Lets look a little more in detail at the individual lines. First we define the
-list of sources for our test. Since we have only one source file (following the
-methodology I described above where class declaration and definition are in the
-same file) its a simple statement:
+Ας δούμε με λίγο παραπάνω λεπτομέρεια τις δυγκεκριμένες γραμμές. Πρώτα ορίζουμε τη λίστα των πηγών μας για τον έλεγχο μας. Απο τη στιγμή που έχουμε ένα μόνο πηγαίο αρχείο (ακολουθώντας τη μεθοδολογία που περιέγραψα παραπάνω όπου η δήλωση των κλάσεων και ο ορισμός ειναι στο ίδιο αρχείο) είναι μια απλή δήλωση:
 
 \begin{verbatim}
 SET(qgis_${testname}_SRCS ${testsrc} ${util_SRCS})
 \end{verbatim}
 
-Since our test class needs to be run through the Qt meta object compiler (moc)
-we need to provide a couple of lines to make that happen too:
+Απο τη στιγμή που η κλάση ελέγχου χρειάζεται νε τρέξει δια μέσου του Qt Meta Object Compiler (MOC) πρέπει να παρέχουμε μερικές γραμμές για να το κάνουμε αυτό εφικτό επίσης:
 
 \begin{verbatim}
 SET(qgis_${testname}_MOC_CPPS ${testsrc})
@@ -1082,30 +857,20 @@ QT4_WRAP_CPP(qgis_${testname}_MOC_SRCS ${qgis_${testname}_MOC_CPPS})
 ADD_CUSTOM_TARGET(qgis_${testname}moc ALL DEPENDS ${qgis_${testname}_MOC_SRCS})
 \end{verbatim}
 
-Next we tell cmake that it must make an executeable from the test class.
-Remember in the previous section on the last line of the class implementation I
-included the moc outputs directly into our test class, so that will give it
-(among other things) a main method so the class can be compiled as an
-executeable:
+Μετά λέμε στο cmake ότι πρέπει να φτιάξει ένα εκτελέσιμο απο την κλαση ελέγχου. Θυμηθείτε ότι στο προηγούμενο κεφάλαιο στην τελευταία γραμμή της εφαρμογής της κλάσης συμπεριέλαβα τα αποτελέσματα του moc κατευθείαν μέσα στην κλάση ελέγχου, έτσι θα της δώσει (ανάμεσα στα πολλά) μια κύρια μέθοδο έτσι ώστε η κλαση να μπορεί να συνταχθεί ως ένα εκτελέσιμο:
 
 \begin{verbatim}
 ADD_EXECUTABLE(qgis_${testname} ${qgis_${testname}_SRCS})
 ADD_DEPENDENCIES(qgis_${testname} qgis_${testname}moc)
 \end{verbatim}
 
-Next we need to specify any library dependencies. At the moment classes have
-been implemented with a catch-all QT\_LIBRARIES dependency, but I will be
-working to replace that with the specific Qt libraries that each class needs
-only. Of course you also need to link to the relevant qgis libraries as
-required by your unit test.
+Έπειτα πρέπει να καθορίσουμε οποιεσδήποτε εξαρτησίες βιβλιοθηκών. Προς το παρόν οι κλάσεις έχουν εφαρμοστεί με μία εξαρτησία catch-all QT\_LIBRARIES, αλλά θα εργάζομαι για να το αντικαταστήσω αυτό με με τις συγκεκριμένες Qt βιβλιοθήκες όπου κάθε κλάση χρειάζεται μόνο. Φυσικά χρειάζεται επίσης να συνδεθείτε με τις σχετικές qgis βιβλιοθήκες όπως απαιτείται απο τη μονάδα ελέγχου.
 
 \begin{verbatim}
 TARGET_LINK_LIBRARIES(qgis_${testname} ${QT_LIBRARIES} qgis_core)
 \end{verbatim}
 
-Next I tell cmake to install the tests to the same place as the qgis binaries
-itself. This is something I plan to remove in the future so that the tests can
-run directly from inside the source tree.
+Μετά λεώ στο cmake να εγκαταστήσει τους ελέγχους στο ίδιο μέρος όπου όπως τα ίδια τα δυαδικά (binaries) του qgis. Υπάρχει κάτι που σκοπεύω να αφαιρέσω στο μέλλον έτσι ώστε οι έλεγχοι να τρέχουν κατευθείαν μέσα απο το πηγαίο δέντρο.
 
 \begin{verbatim}
 SET_TARGET_PROPERTIES(qgis_${testname}
@@ -1130,39 +895,26 @@ ELSE (APPLE)
 ENDIF (APPLE)
 \end{verbatim}
 
-Finally the above uses ADD\_TEST to register the test with cmake / ctest . Here
-is where the best magic happens - we register the class with ctest. If you
-recall in the overview I gave in the beginning of this section we are using
-both QtTest and CTest together. To recap, \textbf{QtTest} adds a main method to your
-test unit and handles calling your test methods within the class. It also
-provides some macros like QVERIFY that you can use as to test for failure of
-the tests using conditions. The output from a QtTest unit test is an
-executeable which you can run from the command line.  However when you have a
-suite of tests and you want to run each executeable in turn, and better yet
-integrate running tests into the build process, the \textbf{CTest} is what we use. 
+Εν τέλει τα παραπάνω χρησιμοποιούνε το ADD_TEST για να καταχωρήσουν τον έλεγχο με το cmake / ctest. Σ'αυτό το σημείο γίνεται το καλύτερο μαγικό – καταχωρούμε την κλάση με ctest. Αν θυμάστε στην επισκόπηση που έκανα στην αρχή του κεφαλαίου χρησιμοποιούμε το QtTest και το CTest μαζί. Για να ανακεφαλαιώσουμε, \textbf{QtTest} προσθέτει μια κύρια μέθοδο στη μονάδα ελέγχου και χειρίζεται το κάλεσμα των μεθόδων ελέγχου μέσα στην κλάση. Παρέχει επίσης μερικά macros όπως το QVERIFY που μπορείτε να χρησιμοποιήσετε, όπως για τον έλεγχο αποτυχίας των ελέγχων χρησιμοποιώντας όρους. Το αποτέλεσμα μίας μονάδας ελέγχου QtTest είναι ένα εκτελέσιμο το οποίο μπορείτε να τρέξετε απο τη γραμμή εντολών. Παρ'όλα αυτά όταν έχετε έναν αριθμό ελέγχων και θέλετε να τρέξετε κάθε εκτελέσιμο σε σειρά, και ακόμα καλύτερα να ενοποιήστε τους τρέχοντες ελέγχους σε μία διαδικασία build, το \textbf{CTest} είναι αυτό που θα χρησιμοποιήσουμε. 
 
 \hypertarget{toc52}{}
-\subsection{Building your unit test}
-To build the unit test you need only to make sure that ENABLE\_TESTS=true in the
-cmake configuration. There are two ways to do this:
+\subsection{Χτίζοντας τη μονάδα ελέγχου}
+Για να χτίσετε τη μονάδα ελέγχου χρειάζεται μόνο να σιγουρευτείτε ότι ENABLE\_TESTS=true στη ρύθμιση του cmake. Υπάρχουν δύο τρόποι να το κάνετε αυτό:
 
- 1. Run ccmake .. (cmakesetup .. under windows) and interactively set 
- the ENABLE\_TESTS flag to ON.
- 1. Add a command line flag to cmake e.g. cmake -DENABLE\_TESTS=true ..
+ 1. Τρέξτε το ccmake .. (cmakesetup .. στα windows) και διαδραστικά θέστε το ENABLE\_TESTS flag σε ON.
+ 1. Προσθέστε μια γραμμή ελέγχου flag στο cmake π.χ. cmake -DENABLE\_TESTS=true ..
 
-Other than that, just build QGIS as per normal and the tests should build too.
+Πέρα απο αυτό, απλά χτίστε το QGIS ως συνήθως και κανονικά οι έλεγχοι θα χτιστούν επίσης.
 
 \hypertarget{toc53}{}
-\subsection{Run your tests}
-The simplest way to run the tests is as part of your normal build process:
+\subsection{Τρέξτε τους ελέγχους σας}
+Ο πιο απλός τρόπος να τρέξετε τους ελέγχους είναι μέρος της κανονικής διαδικασίας χτισίματος:
 
 \begin{verbatim}
 make && make install && make test
 \end{verbatim}
 
-The make test command will invoke CTest which will run each test that was
-registered using the ADD\_TEST CMake directive described above. Typical output
-from make test will look like this:
+Η εντολή make test θα καλέσει το Ctest που θα τρέξει κάθε έλεγχο που ήταν καταχωρημένος χρησιμοποιώντας την ADD\_TEST CMake οδηγία που περιγράφηκε παραπάνω. Το τυπικό αποτέλεσμα του make test θα φαίνεται κάπως έτσι:
 
 \begin{verbatim}
 Running tests...
@@ -1180,9 +932,7 @@ Test project /Users/tim/dev/cpp/qgis/build
   make: *** [test] Error 8
 \end{verbatim}
 
-If a test fails, you can use the ctest command to examine more closely why it
-failed. User the -R option to specify a regex for which tests you want to run
-and -V to get verbose output:
+Αν ένας έλεγχος αποτύχει, μπορείτε να χρησιμοποιήσετε την εντολή ctest για να εξετάσετε πιο λεπτομερώς γιατί απέτυχε. Χρησιμοποιήστε την επιλογή -R για να καθορίστε μια κανονική έκφραση σχετικά με το ποιούς ελέγχους θέλετε να τρέξετε και -V για να πάρετε περισσότερα αποτελέσματα:
 
 \begin{verbatim}
 [build] ctest -R appl -V
@@ -1224,61 +974,29 @@ PASS   : TestQgsApplication::cleanupTestCase()
   Errors while running CTest
 \end{verbatim}
 
-Well that concludes this section on writing unit tests in QGIS. We hope you
-will get into the habit of writing test to test new functionality and to check
-for regressions. Some aspects of the test system (in particular the
-CMakeLists.txt parts) are still being worked on so that the testing framework
-works in a truly platform way. I will update this document as things
-progress.
+Αυτά είναι τα συμπεράσματα αυτού του κεφαλαίου πάνω στη γραφή ελέγχων του QGIS. Ελπίζουμε ότι  θα συνηθίσετε να γράφετε ελέγχους για να δοκιμάζετε νέες λειτουργικότητες και να ελέγχτετε για παλινδρομήσεις. Μερικές διαστάσεις του συστήματος ελέγχου (συγκεκριμένα τα μέρη του CmakeLists.txt) ακόμα επεξεργάζονται έτσι ώστε το πλαίσιο ελέγχου να δουελεύει με έναν πραγματικό τρόπο πλατφόρμας. Θα ενημερώνω αυτό το έγγραφο όσο τα πράγματα θα εξελίσονται.
 
 
 \hypertarget{toc54}{}
-\section{HIG (Human Interface Guidelines)}
-In order for all graphical user interface elements to appear consistant and to
-all the user to instinctively use dialogs, it is important that the following
-guidelines are followed in layout and design of GUIs.
+\section{Οδηγίες για το Ανθρώπινο Περιβάλλον Εργασίας}
+Για να παρουσιαστούν σταθερά όλα τα στοιχεία του γραφικού περιβάλλοντος εργασίας και όλοι οι χρήστες να χρησιμοποιούν μηχανικά διαλόγους, είναι σημαντικό ότι οι παρακάτω οδηγίες ακολουθούνται σε διάταξη και σχεδιασμό των Γραφικών Περιβαλλόντων Εργασίας.
 
  \begin{enumerate}
- \item Group related elements using group boxes:
-   Try to identify elements that can be grouped together and then use group
-   boxes with a label to identify the topic of that group.  Avoid using group
-   boxes with only a single widget / item inside.
- \item Capitalise first letter only in labels:
-   Labels (and group box labels) should be written as a phrase with leading
-   capital letter, and all remaing words written with lower case first letters 
- \item Do not end labels for widgets or group boxes with a colon:
-   Adding a colon causes visual noise and does not impart additional meaning,
-   so don't use them. An exception to this rule is when you have two labels next
-   to each other e.g.: Label1 {Plugin}{Path:} Label2 [/path/to/plugins]
- \item Keep harmful actions away from harmless ones:
-   If you have actions for 'delete', 'remove' etc, try to impose adequate space
-   between the harmful action and innocuous actions so that the users is less
-   likely to inadvertantly click on the harmful action.
- \item Always use a QButtonBox for 'OK', 'Cancel' etc buttons:
-   Using a button box will ensure that the order of 'OK' and 'Cancel' etc,
-   buttons is consistent with the operating system / locale / desktop
-   environment that the user is using.
- \item Tabs should not be nested. If you use tabs, follow the style of the
-   tabs used in QgsVectorLayerProperties / QgsProjectProperties etc.
-   i.e. tabs at top with icons at 22x22.
- \item Widget stacks should be avoided if at all possible. They cause problems with 
-   layouts and inexplicable (to the user) resizing of dialogs to accommodate 
-   widgets that are not visible.
- \item Try to avoid technical terms and rather use a laymans equivalent e.g. use
-   the word 'Transparency' rather than 'Alpha Channel' (contrived example),
-   'Text' instead of 'String' and so on.
- \item Use consistent iconography. If you need an icon or icon elements, please
-   contact Robert Szczepanek on the mailing list for assistance.
- \item Place long lists of widgets into scroll boxes. No dialog should exceed 580
-   pixels in height and 1000 pixels in width.
- \item Separate advanced options from basic ones. Novice users should be able to
-   quickly access the items needed for basic activities without needing to
-   concern themselves with complexity of advanced features. Advanced features
-   should either be located below a dividing line, or placed onto a separate tab.
- \item Don't add options for the sake of having lots of options. Strive to keep the
-   user interface minimalistic and use sensible defaults.
- \item If clicking a button will spawn a new dialog, an ellipsis (...) should be
-   suffixed to the button text.
+ \item Στοιχεία που σχετίζονται με ομάδες χρησιμοποιούν ομαδικά κουτιά: προσπαθήστε να αναγνωρίσετε τα στοιχεία τα οποία μπορεί να ομαδοποιηθούν μαζί και μετά χρησιμοποιήστε ομαδικά κουτιά με μια ετικέτα για να αναγνωρίστε αυτή την ομάδα. Αποφύγετε να χρησιμποιήσετε ομαδικά κουτιά με ένα μονό widget / αντικείμενο μέσα.
+ \item  Κάντε κεφαλαίο τον πρώτο χαρακτήρα μόνο στις ταμπέλες: οι ταμπέλες (και οι ταμπέλες ομαδικών κουτιών) θα έπρεπε να γραφούν ως μία φράση με τον πρώτο χαρακτήρα κεφαλαίο, και όλες οι εναπομείναντες λέξεις να γραφούν με το πρώτο γράμμα ως μικρό χαρακτήρα. 
+ \item Μην τελειώνετε τις ταμπέλες για τα widgets ή τα ομαδικά κουτιά με ένα “ ; “ : η προσθήκη του προκαλεί οπτικό θόρυβο και δεν προσδίδει επιπρόσθετο νόημα, οπότε μη τα χρησιμοποιείτε. Μια εξαίρεση σ'αυτό τον κανόνα είναι όταν έχετε δυο ταμπέλες η μία δίπλα στην άλλη π.χ.: Label1 {Plugin}{Path:} Label2 [/path/to/plugins]
+ \item Κρατήστε τις επιβλαβείς ενέργεις μακριά απο τις αβλαβείς: αν έχετε ενέργεις για “διαγραφή”, “μετακίνηση” κλπ, προσπαθήστε να επιφέρετε επαρκή διάστημα ανάμεσα στις επιβλαβείς ενέργειες και τις αβλαβείς ενέργεις έτσι ώστε να ελαχιστοποιείται η πιθανότητα οι χρήστες να κάνουν κλικ κατα λάθος σε μια επιβλαβή ενέργεια.
+ \item Πάντα χρησιμοποιείται ένα QbuttonBox
+ για τα κουμπιά “ΟΚ”, “Cancel” κλπ: χρησιμοποιώντας ένα τετράγωνο κουτί θα σιγουρέψει ότι η εντολή απο τα κουμπιά “OK”, “Cancel” κλπ είναι συναφής με το λειτουργικό σύστημα / LOCALE / περιβάλλον εργασίας που χρησιμοποιεί ο χρήστης.
+ \item Οι στηλοθέτες δεν θα πρέπει να είναι ομαδοποιημένοι. Αν χρησιμοποιείτε στηλοθέτες, ακολουθήστε το στύλ των στηλοθετών που χρησιμποιείτε στο QgsVectorLayerProperties / QgsProjectProperties
+ κλπ π.χ. στηλοθέτες στην κορυφή με τα εικονίδια στα 22x22.
+ \item Οι σωροί απο widget θα πρέπει να αποφευχθολυν εντελώς αν είναι δυνατόν. Προκαλούν προβληματα με τη διαρύθμιση και ανεξήγητη (για το χρήστη) αναταξινόμηση των διαλόγων που φιλοξενούν τα widget που δεν είναι ορατά.
+ \item Προσπαθήστε να αποφύγετε τεχνικούς όρους και καλύτερα χρησιμποιήστε κοινότυπες αντίστοιχες λέξεις π.χ. χρησιμποιήστε τη λέξη “Transparency” απ'οτι “Alpha Channel” (επιτηδευμένο παράδειγμα), “Text” αντι για “String” κλπ.
+ \item Χρησιμποιήστε συναφή εικονογραφία. Αν χρειάζεστε μια εικόνα ή ένα στοιχείο εικόνας παρακαλώ επικοινωνήστε με τον Robert Szczepanek στην ταχυδρομική λίστα για βοήθεια.
+ \item Τοποθετείστε μεγάλες λίστες απο widgets σε κυλιόμενα κουτιά. Κανένας διάλογος δεν θα έπρεπε να υπερβαίνει τα 580 pixels σε ύψος και τα 1000 pixel σε πλάτος.
+ \item Διαχωρίστε τις προχωρημένες επιλογές απο τις βασικές. Οι αρχάριοι χρήστες θα πρέπει να μπορούν να έχουν γρήγορη πρόσβαση στα αντικείμενα που χριεάζονται για τις βασικές δραστηριότητες χωρίς να χρειάζεται να απασχολούν τον εαυτό τους με την πολυπλοκότητα των προχωρημένων χαρακτηριστικών. Τα προχωρημένα χαρακτηριστικά πρέπει είτε να τοοθετηθούν κάτω απο μια διαχωριστική γραμμή, ή να τοποθετηθούν σε ένα ξεχωριστό στηλοθέτη.
+ \item Μη προσθέτε επιλογές για χάρη του να έχετε πολλές επιλογές. Προσπαθείτε να κρατάτε το περιβάλλον του χρήστη μινιμαλιστικό και χρησιμοποιήστε συνετά υποκατάστατα.
+ \item Αν το πάτημα ενός κουμπιού ανοίξει έναν καινούργιο διάλογο, μια έλληψη (…) θα προστεθεί στο κουμπί ελέγχου.
  \end{enumerate}
 
 
