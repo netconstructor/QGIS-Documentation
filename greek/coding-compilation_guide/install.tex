@@ -4,21 +4,19 @@
 % comment out the following line:
 % \updatedisclaimer
 
-\section{Installation Guide}
+\section{Οδηγός εγκατάστασης}
 
-The following chapters provide build and installation information for QGIS Version 1.6. This document
-corresponds almost to a LATEX conversion of the INSTALL.t2t file coming with the QGIS sources from
-November, 29th 2010.
-A current version is also available at the wiki, see: http://www.qgis.org/wiki/Installation\_Guide
+Τα επόμενα κεφάλαι παρεουν πληροφορίες για την εγκατάσταση του QGIS έκδοση 1.6. Αυτό το έγγραφο ανταποκρίνεται σχεδον σε μία LATEX μετατροπή του αρχείου INSTALL.t2t το οποίο έρχεται με τον κώδικα του QGIS απο τις 29 Νοεμβρίου 2010.
+Μια τρέχουσα έκδοση είναι ήδη διαθέσιμη, δείτε στο σύνδεσμο: http://www.qgis.org/wiki/Installation\_Guide
 
 \hypertarget{toc2}{}
-\subsection{Overview}
-QGIS, like a number of major projects (eg. KDE 4.0), uses CMake
-(\htmladdnormallink{http://www.cmake.org}{http://www.cmake.org}) for building from source.
+\subsection{Γενική επισκόπηση}
+Το QGIS, όπως και ενας αριθμός απο μεγάλα project (π.χ. KDE 4.0) χρησιμοποιεί το CMake
+(\htmladdnormallink{http://www.cmake.org}{http://www.cmake.org}) για την εγκατάσταση απο πηγαίο κώδικα.
 
-Following a summary of the required dependencies for building:
+Ακολουθώντας μία περίληψη των απαιτούμενων εξαρτησιών για την εγκατάσταση:
 
-Required build tools:
+Απαιτούμενα εργαλεία:
 
 \begin{itemize}
 \item CMake $>$= 2.6.0
@@ -27,7 +25,7 @@ Required build tools:
 \end{itemize}
 
 
-Required build deps:
+Απαιτούμενες εξαρτησίες:
 
 \begin{itemize}
 \item Qt $>$= 4.4.0
@@ -39,61 +37,50 @@ Required build deps:
 \end{itemize}
 
 
-Optional dependencies:
+Προαιρετικές εξαρτησίες:
 
 \begin{itemize}
-\item for GRASS plugin - GRASS $>$= 6.0.0 (libraries compiled with exceptions support on Linux 32bit)
-\item for georeferencer - GSL $>$= 1.8
-\item for postgis support and SPIT plugin - PostgreSQL $>$= 8.0.x
-\item for gps plugin - expat $>$= 1.95 and gpsbabel
-\item for mapserver export and PyQGIS - Python $>$= 2.3 (2.5+ preferred)
-\item for python support - SIP $>$= 4.8, PyQt $>$= must match Qt version
-\item for qgis mapserver - FastCGI
+\item για το GRASS plugin - GRASS $>$= 6.0.0 (βιβλιοθήκες συντεταγμένες με εξαιρέσεις που υποστηρίοζουν Linux 32bit)
+\item για τον georeferencer - GSL $>$= 1.8
+\item για υποστήριξη postgis και το SPIT plugin - PostgreSQL $>$= 8.0.x
+\item για το gps plugin - expat $>$= 1.95 και gpsbabel
+\item Για εξαγωγή σε mapserver και PyQGIS - Python $>$= 2.3 (2.5+ preferred)
+\item Για υποστήριξη python - SIP $>$= 4.8, PyQt $>$= πρέπει να ταιριάζει στην έκδοση Qt
+\item για τον qgis mapserver - FastCGI
 \end{itemize}
 
 
 
 \hypertarget{toc3}{}
-\subsection{Building on GNU/Linux}
+\subsection{Εγκαθιστώντας σε GNU/Linux}
 \hypertarget{toc4}{}
-\subsubsection{Building QGIS with Qt 4.x}
-\textbf{Requires:} Ubuntu / Debian derived distro
+\subsubsection{Εγκαθιστώντας το QGIS με Qt 4.x}
+\textbf{Προαπαιτούμενα:} Ubuntu / διανομή βασισμένη σε Debian.
 
-These notes are for Ubuntu - other versions and Debian derived distros may
-require slight variations in package names.
+Αυτές οι σημειώσεις είναι για Ubuntu – άλλες εκδόσεις και οι διανομές οι οποίες βασίζονται σε Debian ίσως απαιτούν ελαφρές παραλαγές στα ονόματα των πακέτων.
 
-These notes are for if you want to build QGIS from source. One of the major
-aims here is to show how this can be done using binary packages for \textbf{*all*}
-dependencies - building only the core QGIS stuff from source. I prefer this
-approach because it means we can leave the business of managing system packages
-to apt and only concern ourselves with coding QGIS! 
+Αυτές οι σημειώσεις κάνουν για την περίπτωση που θέλετε να εγκαταστήσετε το QGIS απο τον πηγαίο κώδικα. Ένας απο τους κύριοθυς στόχους εδώ ειναι να δείξουμε πως μπορεί αυτό να γίνει χρησιμοποιώντας δυαδικά πακέτα για \textbf{*ΟΛΕΣ*}
+τις εξαρτησίες - χτίζοντας μόνο το βασικά αντικείμενα του QGIS απο τον πηγαίο κώδικα. Προτιμώ αυτή την προσέγγιση γιατί αυτό σημαίνει οτι μπορούμε να αφήσουμε το κομμάτι της διαχείρισης των πακέτων του συστήματος στο aptitude και να ανησυχήσουμε μόνο για την κωδικοποίση του QGIS!  
 
-This document assumes you have made a fresh install and have a 'clean' system.
-These instructions should work fine if this is a system that has already been
-in use for a while, you may need to just skip those steps which are irrelevant
-to you.
+Με αυτό τον οδηγό θεωρείται ότι έχετε κάνει μια καινούργια εγκατάσταση και έχετε ένα “καθαρό” σύστημα. Αυτές οι οδηγίες θα έπρεπε να δουλεύουν κανονικά αν αυτό είναι ένα σύστημα το οποίο έχει ήδη χρησιμοποιηθεί για κάποιο διάστημα, ίσως χρειαστεί να παραβλέψετε εκείνα τα βήματα τα οποία ειναι άσχετα με σας.
 
-/!$\backslash$ \textbf{Note:} Refer to the section ''Building Debian packages'' for building 
-debian packages.  Unless you plan to develop on QGIS, that is probably the
-easiest option to compile and install QGIS.
+/!$\backslash$ \textbf{Σημείωση:} Ανατρέξτε στο κεφάλαιο “Χτίζοντας πακέτα Debian” για το πως να το κάνετε αυτό. Εκτός αν σκοπεύετε να αναπτύξετε στο QGIS, αυτή είναι προφανώς η πιό εύκολη επιλογή για να συντάξετε και να εγκαταστήσετε το QGIS.
 
 \hypertarget{toc5}{}
-\subsubsection{Prepare apt}
-The packages qgis depends on to build are available in the "universe" component
-of Ubuntu. This is not activated by default, so you need to activate it:
+\subsubsection{Ετοιμάστε το apt}
+Το πακέτο qgis εξαρτάται απο τη διαθεσιμότητα του στο στοιχείο “Universe” του Ubuntu. Αυτό δεν ενεργοποιείται εξ'ορισμού οπότε χρειάζεται να το ενεργοποιήσετε: 
 
-1. Edit your /etc/apt/sources.list file.  
-2. Uncomment the all the lines starting with "deb"
+1. Επεξεργαστείτε το αρχείο /etc/apt/sources.list  
+2. Αφαιρέστε απο σχόλιο το όλες οι γραμμές που ξεκινούνε απο “deb”.
 
-Also you will need to be running (K)Ubuntu 'edgy' or higher in order for 
-all dependencies to be met.
+Επίσης θα χρειαστεί να τρέχετε (K)Ubuntu 'edgy' ή παραπάνω έτσι ώστε όλες οι εξαρτησίες να είναι σωστές.
 
-Now update your local sources database with \texttt{sudo apt-get update} 
+Τώρα ενημερώστε την βάση δεδομένων των τοπικών πηγών χρησιμοποιώντας το \texttt{sudo apt-get update} 
 
 \hypertarget{toc6}{}
-\subsubsection{Install build dependencies}
+\subsubsection{Εγκαταστήστε τις εξαρτησίες}
 \begin{center}\begin{tabular}{|l|l|}
-\hline \textbf{Distribution} & \textbf{install command for packages} \\
+\hline \textbf{Διανομή} & \textbf{Εντολή εγκατάστσης των πακέτων} \\
 hardy & apt-get install  bison cmake fcgi-dev flex grass-dev libexpat1-dev \\
 & libgdal1-dev libgeos-dev libgsl0-dev libpq-dev libqt4-core libqt4-dev libqt4-gui \\
 & libqt4-sql libsqlite3-dev proj pyqt4-dev-tools python python-dev python-qt4 \\
@@ -134,14 +121,9 @@ hardy & apt-get install  bison cmake fcgi-dev flex grass-dev libexpat1-dev \\
 & python-dev python-qt4 python-qt4-dev python-sip python-sip-dev \\
 \hline \end{tabular}\end{center}
 
-(extracted from the respective control files in \texttt{debian/})
+(αποσυμπιεσμένα απο τα αντίστοιχα αρχεία ελέγχου σε αποσυμπιεσμένα απο τα αντίστοιχα αρχεία ελέγχου σε debian/\texttt{debian/})
 
-/!$\backslash$ \textbf{A Special Note:} If you are following this set of instructions on
-a system where you already have Qt3 development tools installed, there will
-be a conflict between Qt3 tools and Qt4 tools. For example, qmake will
-point to the Qt3 version not the Qt4. Ubuntu Qt4 and Qt3 packages are
-designed to live alongside each other. This means that for example if you
-have them both installed you will have three qmake exe's:
+/!$\backslash$ \textbf{Μία ειδική σημείωση:} αν ακολουθείτε αυτές τις οδηγίες σε ένα σύστημα στο οποίο έχετε ήδη εργαλεία ανάπτυξης Qt3 εγκατεστημένα, θα υπάρξει μια σύγκρουση ανάμεσα στα εργαλεία Qt3 και Qt4. Για παράδειγμα, το qmake θα κατευθυνθέι προς την Qt3 έκδοση και όχι την Qt4. Τα πακέτα Qt4 και Qt3  του Ubuntu είναι σχεδιασμένα να υπάρχουν το ένα πλάι στο άλλο. Αυτό σημαίνει ότι αν τα έχετε και τα δύο εγκατεστημένα θα έχετε τρία qmake exe: 
 
 \begin{verbatim}
 /usr/bin/qmake -> /etc/alternatives/qmake 
@@ -149,13 +131,9 @@ have them both installed you will have three qmake exe's:
 /usr/bin/qmake-qt4 
 \end{verbatim}
 
-The same applies to all other Qt binaries. You will notice above that the
-canonical 'qmake' is managed by apt alternatives, so before we start to
-build QGIS, we need to make Qt4 the default. To return Qt3 to default later
-you can use this same process.
+Το ίδιο ισχύει και για όλα τα υπόλοιπα δυαδικά Qt. Θα παρατηρήσετε παραπάνω ότι το 'qmake' της Canonical διαχειρίζεται απο τις εναλλακτικές του apt, έτσι πριν ξεκινήσουμε να “χτίζουμε” το QGIS, πρέπει να θέσουμε το Qt4 ως εξ'ορισμού. Για να ξαναθέσετε το Qt3 ως εξ' ορισμού μπορείτε να χρησιμοποιήσετε την ίδια διαδικασία. 
 
-You can use apt alternatives to correct this so that the Qt4 version of
-applications is used in all cases:
+Μπορείτε να χρησιμοποιήσετε τα εναλλακτικά apt για να το διορθώσετε αυτό έτσι ώστε η έκδοση Qt4 να χρησιμοποιείται σε όλες τις περιπτώσεις: 
 
 \begin{verbatim}
 sudo update-alternatives --config qmake
@@ -169,16 +147,13 @@ sudo update-alternatives --config lrelease
 sudo update-alternatives --config linguist 
 \end{verbatim}
 
-Use the simple command line dialog that appears after running each of the
-above commands to select the Qt4 version of the relevant applications.
+Χρησιμποιήστε τον απλό διάλογο γραμμής εντολών που εμφανίζεται μετά το τρέξιμο κάθε μίας απο τις παραπάνω εντολές για να διαλέξετε την έκδοση Qt4 της σχετικής εφαρμογής.
 
-/!$\backslash$ \textbf{Note:} For python language bindings SIP $>$= 4.5 and PyQt4 $>$= 4.1 is required! Some stable GNU/Linux
-distributions (e.g. Debian or SuSE) only provide SIP $<$ 4.5 and PyQt4 $<$ 4.1. To include support for python 
-language bindings you may need to build and install those packages from source.
+/!$\backslash$ \textbf{Σημείωση:} Για τις συνδέσεις της Python  απαιτείται SIP $>$= 4.5 και PyQt4 $>$= 4.1! Μερικές σταθερές διανομές GNU/Linux (π.χ. Debian ή SuSE) παρέχουν μόνο SIP $<$ 4.5 και PyQt4 $<$ 4.1. Για να συμπεριλάβετε υποστήριξη για τις συνεσεις τις Python ίσως χρειαστεί να 'χτίσετε' και να εγκαταστήσετε αυτά τα πακέτα απο τον πηγαίο κώδικα.
 
 \hypertarget{toc7}{}
-\subsubsection{Setup ccache (Optional)}
-You should also setup ccache to speed up compile times:
+\subsubsection{Θέστε το ccache (Προαιρετικό)}
+Θα πρέπει επίσης να θέσετε το ccache για να επιταχύνετε τους χρόνους συνταξης:
 
 \begin{verbatim}
 cd /usr/local/bin 
@@ -187,41 +162,35 @@ sudo ln -s /usr/bin/ccache g++
 \end{verbatim}
 
 \hypertarget{toc8}{}
-\subsubsection{Prepare your development environment}
-As a convention I do all my development work in \$HOME/dev/$<$language$>$, so in
-this case we will create a work environment for C++ development work like
-this:
+\subsubsection{Ετοιμάστε το περιβάλλον ανάπτυξής σας.}
+Σαν κανόνα κάνω όλη μου την ανάπτυξη στο \$HOME/dev/$<$language$>$, οπότε σε αυτή την περίπτωση θα δημιουργήσουμε ένα περιβάλλον εργασίας για δουλειά σε C++ όπως παρακάτω: 
 
 \begin{verbatim}
 mkdir -p ${HOME}/dev/cpp 
 cd ${HOME}/dev/cpp 
 \end{verbatim}
 
-This directory path will be assumed for all instructions that follow.
+Αυτός ο κατάλογος θα θεωρείται για όλες τις οδηγίες που ακολουθούν. 
 
 \hypertarget{toc9}{}
-\subsubsection{Check out the QGIS Source Code}
-There are two ways the source can be checked out. Use the anonymous method
-if you do not have edit privaleges for the QGIS source repository, or use
-  the developer checkout if you have permissions to commit source code
-  changes.
+\subsubsection{Ελέγξτε τον πηγαίο κώδικα του QGIS}
+Υπάρχουν δύο τρόποι ώστε ο πηγαίος κώδικας μπορεί βα ελεγθεί. Χρησιμοποιήστε την ανώνυμη μέθοδο αν δεν έχετε προνόμια επεξεργασίας για το αποθετήριο του QGIS, ή χρησιμοποιήστε τον έλεγχο του παράγων ανάπτυξης αν έχετε άδεια να κάνετε αλλαγές στον πηγαίο κώδικα.
 
-1. Anonymous Checkout
+1. 1. Ανώνυμος έλεγχος
 
 \begin{verbatim}
 cd ${HOME}/dev/cpp 
 svn co https://svn.osgeo.org/qgis/trunk/qgis qgis
 \end{verbatim}
 
-2. Developer Checkout
+2. 2. Έλεγχος του παράγων ανάπτυξης
 
 \begin{verbatim}
 cd ${HOME}/dev/cpp 
 svn co --username <yourusername> https://svn.osgeo.org/qgis/trunk/qgis qgis 
 \end{verbatim}
 
-The first time you check out the source you will be prompted to accept the
-qgis.org certificate. Press 'p' to accept it permanently:
+Την πρώτη φορά που θα ελέγξετε τον πηγαίο κώδικα θα παραπεμφθείτε να δεχτείτε το πιστοποιητικό  του qgis.org. Πιέστε 'p' για να το δεχτείτε μόνιμα:
 
 \begin{verbatim}
 Error validating server certificate for 'https://svn.qgis.org:443':
@@ -237,17 +206,14 @@ Error validating server certificate for 'https://svn.qgis.org:443':
 \end{verbatim}
 
 \hypertarget{toc10}{}
-\subsubsection{Starting the compile}
-I compile my development version of QGIS into my \~{}/apps directory to avoid
-conflicts with Ubuntu packages that may be under /usr. This way for example
-you can use the binary packages of QGIS on your system along side with your
-development version. I suggest you do something similar:
+\subsubsection{Ξεκινώντας τη σύνταξη}
+Συντάσω την έκδοση ανάπτυξης του QGIS στον κατάλογο \~{}/apps για να αποφύγω συγκρούσεις με τα  πακέτα Ubuntu τα οποία μπορεί να είναι κάτω απο το /usr. Με αυτό τον τρόπο για παράδειγμα μπορείτε να χρησιμοποιήσετε τα δυαδικά πακέτα του QGIS στο συστημά σας μαζί με την έκδοση ανάπτυξης. Προτείνω να κάνετε κάτι ανάλογο:
 
 \begin{verbatim}
 mkdir -p ${HOME}/apps 
 \end{verbatim}
 
-Now we create a build directory and run ccmake:
+Τώρα δημιουργούμε έναν κατάλογο 'χτισίματος' και τρέχουμε την εντολή cmake: 
 
 \begin{verbatim}
 cd qgis
@@ -256,163 +222,142 @@ cd build
 ccmake ..
 \end{verbatim}
 
-When you run ccmake (note the .. is required!), a menu will appear where 
-you can configure various aspects of the build. If you do not have root
-access or do not want to overwrite existing QGIS installs (by your
-packagemanager for example), set the CMAKE\_BUILD\_PREFIX to somewhere you
-have write access to (I usually use /home/timlinux/apps). Now press
-'c' to configure, 'e' to dismiss any error messages that may appear.
-and 'g' to generate the make files. Note that sometimes 'c' needs to 
-be pressed several times before the 'g' option becomes available.
-After the 'g' generation is complete, press 'q' to exit the ccmake 
-interactive dialog.
+Όταν τρέχετε το cmake (παρατηρήστε ότι το .. είναι απαραίτητο), ένα μενού θα εμφανιστεί στο οποίο μπορείτε να ρυθμίσετε διάφορες όψεις του 'χτισίματος'. Αν δεν έχετε πρόσβαση διαχειριστή ή δεν θέλετε να γράψετε απο πάνω απο τις υπάρχουσες εγκαταστάσεις του QGIS (απο τον διαχειριστή πακέτων για παράδειγμα), θέστε το CMAKE\_BUILD\_PREFIX κάπου που να έχετε πρόσβαση εγγραφής (συνήθως χρησιμοποιώ /home/timlinux/apps
+). Τώρα πιέστε 'c' για να διαμορφώσετε, 'e' για να απομακρύνετε μηνύματα λάθους που μπορεί να εμφανιστούν και 'g' για να αναπαράγετε τα αρχεία make. Σημειώστε ότι μερικές φορές το 'c' χρειάζεται να πατηθεί μερικές φορές πριν η επιλογή 'g' γίνει διαθέσιμη. Μόλις ολοκληρωθεί η αναπαραγωγή του 'g' πιέστε q για να βγείτε απο τον διάλογο cmake. 
 
-Now on with the build:
+Tώρα συνεχίζουμε με το χτίσιμο:
 
 \begin{verbatim}
 make
 make install
 \end{verbatim}
 
-It may take a little while to build depending on your platform.
+Θα πάρει λίγο χρόνο μέχρι να χτίσει τις εξαρτησίες στην πλατοφόρμα σας.
 
 \hypertarget{toc11}{}
-\subsubsection{Building Debian packages}
-Instead of creating a personal installation as in the previous step you can
-also create debian package.  This is done from the qgis root directory, where
-you'll find a debian directory.
+\subsubsection{Χτίζοντας Debian πακέτα}
+Αντί να δημιουργήσουμε μία προσσωπική εγκατάσταση όπως στο προηγούμενο βήμα μπορείτε επίσης να δημιουργήσετε debian πακέτα. Αυτό γίνεται απο τον αρχικό κατάλογο root του QGIS, στον οποίο θα βρείτε έναν κατάλογο debian.
 
-First you need to install the debian packaging tools once:
+Πρώτα πρέπει να εγκαταστήσετε τα εργαλεία πακεταρίσματος debian μια φορά: 
 
 \begin{verbatim}
 apt-get install build-essential
 \end{verbatim}
 
-First you need to create an changelog entry for your distribution. For example for Ubuntu Lucid:
+Πρώτα πρέπει να δημιουργήσετε μια καταχώρηση changelog για τη διανομή σας. Για παράδειγμα για τα Ubuntu Lucid:  
 
 \begin{verbatim}
 dch -l ~lucid  --force-distribution --distribution lucid "lucid build"
 \end{verbatim}
 
-The QGIS packages will be created with:
+Τα QGIS πακέτα θα δημιουργηθούν με: 
 
 \begin{verbatim}
 dpkg-buildpackage -us -uc -b
 \end{verbatim}
 
-/!$\backslash$ \textbf{Note:} If \texttt{dpkg-buildpackage} complains about unmet build dependencies
-you can install them using \texttt{apt-get} and re-run the command.
+/!$\backslash$ \textbf{Σημείωση:} Αν το \texttt{dpkg-buildpackage} "παραπονεθεί" για ανεξαρτησίες που δεν βρέθηκαν μπορείτε να τις εγκατασήσετε χρησιμοποιώντας \texttt{apt-get} και να ξανατρέξετε την εντολή.
 
-/!$\backslash$ \textbf{Note:} If you have \texttt{libqgis1-dev} installed, you need to remove it first
-using \texttt{dpkg -r libqgis1-dev}.  Otherwise \texttt{dpkg-buildpackage} will complain about a
-build conflict.
+/!$\backslash$ \textbf{Σημείωση:} Αν έχετε εγκατεστημένο το \texttt{libqgis1-dev}, πρέπει να το αφαιρέστε πρώτα χρησιμοποιώντας το \texttt{dpkg -r libqgis1-dev}.   Αλλιώς το \texttt{dpkg-buildpackage} θα “παραπονεθεί” για αντίφαση στο χτίσιμο.
 
-The packages are created in the parent directory (ie. one level up).
-Install them using dpkg.  E.g.:
+Τα πακέτα δημιουργούνται στον αρχικό κατάλογο (δηλαδή ένα επίπεδο παραπάνω). Εγκαταστήστε τα χρησιμοποιώντας dpkg. Π.χ.:
 
 \begin{verbatim}
 sudo debi
 \end{verbatim}
 
 \hypertarget{toc12}{}
-\subsubsection{Running QGIS}
-Now you can try to run QGIS:
+\subsubsection{Τρέχοντας το QGIS}
+Τώρα μπορείτε να δοκιμάσετε να τρέξετε το QGIS:
 
 \begin{verbatim}
 $HOME/apps/bin/qgis 
 \end{verbatim}
 
-If all has worked properly the QGIS application should start up and appear
-on your screen.
+Αν όλα έχουν δουλέψει κανονικά η εφαρμογή του QGIS θα πρέπει να αρχίσει και να εμφανιστεί στην οθόνη σας. 
 
 \hypertarget{toc13}{}
-\subsubsection{A practical case: Building QGIS and GRASS from source on Ubuntu with ECW and MrSID formats support}
-The following procedure has been tested on Ubuntu 8.04, 8.10 and 9.04 32bit. If you want 
-to use different versions of the software (gdal, grass, qgis), just make the 
-necessary adjustments to the following code. This guide assumes that you don't have 
-installed any previous version of gdal, grass and qgis.
+\subsubsection{5.2.10 Μια πρακτική εφαρμογή: Χτίζοντας το QGIS και το GRASS απο τον πηγαίο κώδικα στα Ubutnu με ECW και MrSID υποστίριξη διάταξης}
+Η παρακάτω διαδικασία έχει ελεγθεί σε Ubuntu 8.04, 8.10 και 9.04 32bit. Αν θέλετε να χρησιμοποιήσετε διαφορετικές εκδόσεις του προγράμματος (gdal, grass, qgis), απλά κάντε τις απαραίτητες ρυθμίσεις στον παρακάτω κώδικα. Αυτός ο οδηγός θεωρεί ότι δεν έχετε εγκαταστήσει προηγούμενες εκδόσεις του gdal, grass και qgis. 
 
-\minisec{Step 1: install base packages}
-First you need to install the necessary packages required to download the source 
-code and compile it. Open the terminal and issue the following command:
+\minisec{Βήμα 1: Εγκαταστήστε τα βασικά πακέτα}
+Πρώτα πρέπει να εγκαταστήσετε τα απαραίτητα πακέτα που χρειάζονται για να κατεβάσετε τον πηγαίο κώδικα και να τον συντάξετε. Ανοίξτε το τερματικό και γράψτε την παρακάτω εντολή:
 
 \begin{verbatim}
 sudo apt-get install build-essential g++ subversion
 \end{verbatim}
 
-\minisec{Step 2: compile and install the ecw libraries}
-Go to the ERDAS web site \htmladdnormallink{http://www.erdas.com/}{http://www.erdas.com/} and follow the links
+\minisec{Βήμα 2: Συντάξτε και εγκατασήστε τις βιβλιοθήκες ecw}
+Πηγαίνετε στο site του ERDAS \htmladdnormallink{http://www.erdas.com/}{http://www.erdas.com/} και ακολουθήστε τους συνδέσμους
 "'''products --$>$ ECW JPEG2000 Codec SDK --$>$ downloads'''" 
-then download the "'''Image Compression SDK Source Code 3.3'''" (you'll need to make a registration 
-and accept a license).
+έπειτα κατεβάστε το "'''Image Compression SDK Source Code 3.3'''" (θα χρειαστεί να κάνετε μια εγγραφή και να δεχθείτε μια άδεια).
 
-Uncompress the arquive in a proper location (this guide assumes 
-that all the downloaded source code will be placed in the user home) 
-and the enter the newly created folder
+Αποσυμπιέστε το αρχείο σε μια κανονική τοποθεσία (αυτός ο οδηγός θεωρεί ότι όλος ο κατεβασμένος πηγαίος κώδικας θα τοποθετηθεί στον κατάλογο home του χρήστη) και έπειτα εισάγετε τον προσφάτως δημιουργημένο φάκελο 
 
 \begin{verbatim}
 cd /libecwj2-3.3
 \end{verbatim}
 
-Compile the code with the standard commands
+Συντάξτε τον κώδικα με τις καθιερωμένες εντολές: 
 
 \begin{verbatim}
 ./configure
 \end{verbatim}
 
-then
+έπειτα
 
 \begin{verbatim}
 make
 \end{verbatim}
 
-then
+έπειτα
 
 \begin{verbatim}
 sudo make install
 \end{verbatim}
 
-leave the folder 
+φύγετε απο το φάκελο  
 
 \begin{verbatim}
 cd ..
 \end{verbatim}
 
-\minisec{Step 3: download the MrSID binaries}
-Go to the LIZARDTECH web site \htmladdnormallink{http://www.lizardtech.com/}{http://www.lizardtech.com/} and follow the links
+\minisec{Βήμα 3: Κατεβάστε τα δυαδικά του MrSID}
+Πηγαίνετε στο site της LIZARDTECH \htmladdnormallink{http://www.lizardtech.com/}{http://www.lizardtech.com/} και ακολουθήστε τους συνδέσμους
 "'''download --$>$ Developer SDKs'''", 
-then download the "'''GeoExpress SDK for Linux (x86) - gcc 4.1 32-bit'''"
-(you'll need to make a registration and accept a license).
+έπειτα κατεβάστε το "'''GeoExpress SDK for Linux (x86) - gcc 4.1 32-bit'''"
+(θα χρειαστεί να κάνετε μια εγγραφή και να δεχτείτε μια άδεια).
 
-Uncompress the downloaded file. The resulting directory name should be similar to "Geo\_DSDK-7.0.0.2167"
+Αποσυμπιέστε το κατεβασμένο αρχείο. Ο κατάλογος που θα προκύψει θα πρέπει να είναι παρόμοιος με το "Geo\_DSDK-7.0.0.2167"
 
-\minisec{Step 4: compile and install the gdal libraries}
-Download the latest gdal source code
+\minisec{Βήμα 4: Συντάξετε και εγκαταστήστε τις βιβλιοθήκες gdal}
+Κατεβάστε τον πιο πρόσφατο gdal πηγαίο κώδικα
 
 \begin{verbatim}
 svn checkout https://svn.osgeo.org/gdal/trunk/gdal gdal
 \end{verbatim}
 
-then copy a few files from the MrSID binaries folder to the folder with the gdal source code
-('''replace "USERNAME" with your actual account username''')
+έπειτα αντιγράψτε μερικά αρχεία απο τον φάκελο των δυαδικών MrSID
+ στον φάκελο με τον πηγαίο κώδικα gdal
+('''αντικαταστήστε το “USERNAME” με το πραγματικό όνομα του λογαριασμού.''')
 
 \begin{verbatim}
 cp /home/USERNAME/Geo_DSDK-7.0.0.2167/include/*.* /home/USERNAME/gdal/frmts/mrsid/
 \end{verbatim}
 
-enter the gdal source code folder
+εισάγετε το φάκελο του πηγαίου κώδικα gdal 
 
 \begin{verbatim}
 cd /gdal
 \end{verbatim}
 
-and run configure with a few specific parameters
+και τρέξτε το configure με μερικές συγκεκριμένες παραμέτρους
 
 \begin{verbatim}
 ./configure --without-grass --with-mrsid=../Geo_DSDK-7.0.0.2167 --without-jp2mrsid
 \end{verbatim}
 
-at the end of the configuration process you should read something like
+στο τέλος της διαδικασίας ρύθμισης θα έπρεπε να διαβάζετε κάτι σαν το παρακάτω 
 
 \begin{verbatim}
 ...
@@ -425,26 +370,25 @@ MrSID support              yes
 ...
 \end{verbatim}
 
-then compile normally
+και έπειτα συντάξτε κανονικά
 
 \begin{verbatim}
 make
 \end{verbatim}
 
-and
+και 
 
 \begin{verbatim}
 sudo make install
 \end{verbatim}
 
-finish the process by creating the necessary links to the most recent shared libraries
+τελειώστε τη διαδικασία δημιουργώντας τους απαραίτητους συνδέσμους στις πιο πρόσφατες βιβλιοθήκες
 
 \begin{verbatim}
 sudo ldconfig
 \end{verbatim}
 
-at this point you may want to check if gdal was compiled correctly with MrSID and ECW
-support by issuing one (or both) of the following commands
+σε αυτό το σημείο ίσως θέλετε να ελέγξετε αν η gdal βιβλιοθήκη συνετάχθη σωστά με την υποστήριξη του MrSID και ECW με μία (ή και τις δύο) απο τις παρακάτω εντολές
 
 \begin{verbatim}
 gdalinfo --formats | grep 'ECW'
@@ -454,15 +398,14 @@ gdalinfo --formats | grep 'ECW'
 gdalinfo --formats | grep 'SID'
 \end{verbatim}
 
-leave the folder 
+βγείτε απο το φάκελο
 
 \begin{verbatim}
 cd ..
 \end{verbatim}
 
-\minisec{Step 5: compile and install GRASS}
-Before downloading and compile GRASS source code you need to install a few
-other libraries and programs. We can do this trough apt
+\minisec{Βήμα 5ο: Συντάξτε και εγκαταστήστε το GRASS}
+Πρίν κατεβάσετε και συντάξετε τον πηγαίο κώδικα του GRASS χρειάζεται να εγκαταστήσετε μερικές άλλες βιβλιοθήκες και προγράμματα. Αυτό μπορεί να γίνει μέσω του apt
 
 \begin{verbatim}
 sudo apt-get install flex bison libreadline5-dev libncurses5-dev lesstif2-dev debhelper \
@@ -474,11 +417,10 @@ python-qt4 swig python-wxversion python-wxgtk2.8 libwxgtk2.8-0 libwxbase2.8-0 tc
 tk8.4-dev tk8.4 libfftw3-dev libfftw3-3
 \end{verbatim}
 
-At this point we can get the GRASS source code: you may want to download it
-trough svn or maybe you want just to download the latest available source code arquive.
-For example the GRASS 6.4rc4 is available at \htmladdnormallink{http://grass.itc.it/grass64/source/grass-6.4.0RC4.tar.gz}{http://grass.itc.it/grass64/source/grass-6.4.0RC4.tar.gz}
+Σε αυτό το σημείο μπορούμε να πάρουμε τον πηγαίο κώδικα του GRASS: ίσως θέλετε να το κατεβάσετε μέσω του svn ή ίσως θέλετε να κατεβάσετε τον τελευταίο διαθέσιμο πηγαίο κώδικα.
+ Για παράδειγμα το GRASS 6.4rc4 είναι διαθέσιμο στην ιστοσελίδα \htmladdnormallink{http://grass.itc.it/grass64/source/grass-6.4.0RC4.tar.gz}{http://grass.itc.it/grass64/source/grass-6.4.0RC4.tar.gz}
 
-Uncompress the arquive, enter the newly created folder and run configure with a few specific parameters
+Αποσυμπιέστε το αρχείο, εισάγετε τον μόλις δημιουργημένο φάκελο και τρέξτε την εντολή configure με μερικές συγκεκριμένες παραμέτρους
 
 \begin{verbatim}
 CFLAGS="-fexceptions" ./configure --with-tcltk-includes=/usr/include/tcl8.4 \
@@ -486,81 +428,76 @@ CFLAGS="-fexceptions" ./configure --with-tcltk-includes=/usr/include/tcl8.4 \
 --with-python=/usr/bin/python2.5-config
 \end{verbatim}
 
-The additional gcc option -fexceptions is necessary to enable exceptions support in GRASS libraries. It is currently the only way to avoid QGIS crashes if a fatal error happens in GRASS library. See also \htmladdnormallink{http://trac.osgeo.org/grass/ticket/869}{http://trac.osgeo.org/grass/ticket/869}
+Η επιπρόσθετη gcc επιλογή -fexceptions είναι απαραίτητη για να επιτρέψει την υποστήριξη στις GRASS βιβλιοθήκες. Αυτή τη στιγμή είναι ο μοναδικός τρόπος για την αποφυγή “κρασαρισμάτων” του QGIS αν ένα μηραίο λάθος συμβεί στη βιβλιοθήκη του GRASS. Δείτε επίσης \htmladdnormallink{http://trac.osgeo.org/grass/ticket/869}{http://trac.osgeo.org/grass/ticket/869}
 
-Then as usual (it will take a while)
+Μετά ως συνήθως (θα πάρει λίγο χρόνο)
 
 \begin{verbatim}
 make
 \end{verbatim}
 
-and
+και
 
 \begin{verbatim}
 sudo make install
 \end{verbatim}
 
-leave the folder 
+φύγετε απο το φάκελο
 
 \begin{verbatim}
 cd ..
 \end{verbatim}
 
-you have now compiled and installed GRASS (also with the new wxpyhton interface) so you
-may want to give it a try
+τώρα έχετε συντάξει και εγκαταστήσει το GRASS (μαζί με το καινούργιο περιβάλλον wxpyhton) οπότε ίσως θα θέλατε να κάνετε μία δοκιμή 
 
 \begin{verbatim}
 grass64 -wxpython
 \end{verbatim}
 
-\minisec{Step 6: compile and install QGIS}
-As for GRASS you can obtain the QGIS source code from different sources,
-for instance from svn or just by downloading one of the source code arquives available
-at \htmladdnormallink{http://www.qgis.org/download/sources.html}{http://www.qgis.org/download/sources.html}
+\minisec{Βήμα 6: Συντάξτε και εγκαταστήστε το QGIS}
+Όσον αφορά το GRASS μπορείτε να αποκτήσετε τον πηγαίο κώδικα του QGIS απο διάφορες πηγές, για παράδειγμα απο το svn ή απλά κατεβάζοντας ένα απο τα αρχεία του πηγαίου κώδικα που είναι διαθέσιμα στη σελίδα \htmladdnormallink{http://www.qgis.org/download/sources.html}{http://www.qgis.org/download/sources.html}
 
-For example download the QGIS 1.1.0 source code here \htmladdnormallink{http://download.osgeo.org/qgis/src/qgis\_1.1.0.tar.gz}{http://download.osgeo.org/qgis/src/qgis\_1.1.0.tar.gz}
+Για παράδειγμα, κατεβάστε τον πηγαίο κώδικα του QGIS 1.1.0 απο τη σελίδα \htmladdnormallink{http://download.osgeo.org/qgis/src/qgis\_1.1.0.tar.gz}{http://download.osgeo.org/qgis/src/qgis\_1.1.0.tar.gz}
 
-uncompress the arquive and enter the newly created folder
+αποσυμπιέστε το αρχείο και εισάγετε τον καινούργιο δημιουργημένο φάκελο
 
 \begin{verbatim}
 cd /qgis_1.1.0
 \end{verbatim}
 
-then run ccmake
+μετά τρέξτε ccmake
 
 \begin{verbatim}
 ccmake .
 \end{verbatim}
 
-press the "c" key, then when the option list will appear we need to manually
-configure the "GRASS\_PREFIX" parameter. Scroll down until the "GRASS\_PREFIX" will appear, 
-press enter and manually set it to
+πιέστε το πλήκτρο  “c” , έπειτα όταν η λίστα επιλογών εμφανιστεί χρειάζεται να ρυθμίσουμε χειροκίνητα την παράμετρο  "GRASS\_PREFIX". Κυλίστε προς τα κάτω μέχρι η παράμετρος "GRASS\_PREFIX" να εμφανιστεί, 
+πιέστε enter και χειροκίνητα θέστε το στο
 
 \begin{verbatim}
 /usr/local/grass-6.4.0RC4
 \end{verbatim}
 
-then press enter again.
+και πιέστεε enter ξανά.
 
-Press the "c" again and the option "Press [g] to generate and exit" will appear.
-Press the "g" key to generate and exit.
+Πιέστε “c” ξανά και η επιλογή "Press [g] to generate and exit" θα εμφανιστεί.
+Πιέστε το πλήκτρο “g” για να το αναπαράγετε και κλείστε.
 
-then as usual (it will take a while)
+Μετά ως συνήθως (θα πάρει λίγη ώρα) 
 
 \begin{verbatim}
 make
 \end{verbatim}
 
-and
+και
 
 \begin{verbatim}
 sudo make install
 \end{verbatim}
 
-At the end of the process you should have QGIS and GRASS working with MrSID and ECW
-raster format support.
+Στο τέλος της διαδικασίας το QGIS και το GRASS θα δουλεύουν με την MrSID και ECW raster υποστήριξη. 
 
-To run QGIS just use this command 
+Για να τρέξετε το QGIS απλά τρέξτε την εντολή
 
 \begin{verbatim}
 qgis
@@ -568,39 +505,35 @@ qgis
 
 
 \hypertarget{toc14}{}
-\subsection{Building on Windows}
+\subsection{“Χτίζοντας” στα Windows}
 \hypertarget{toc15}{}
-\minisec{Building with Microsoft Visual Studio}
-This section describes how to build QGIS using Visual Studio on Windows.  This
-is currently also who the binary QGIS packages are made (earlier versions used
-MinGW).
+\minisec{Χτίζοντας με το Visual studio της Microsoft}
+Αυτό το κεφάλαιο περιγράφει πως να εγκαταστήσετε το QGIS χρησιμοποιώντας το Visual Studio. Εκεί είναι επίσης που χτίζονται τα δυαδικά πακέτα QGIS (οι παλαιότερες εκδόσεις χρησιμοποιούσαν το MinGW).
 
-This section describes the setup required to allow Visual Studio to be used to
-build QGIS. 
+Αυτό το κεφάλαιο περιγράφει τις ρυθμίσεις που απαιτούνται για να επιτραπεί το Visual Studio να χρησιμοποιηθεί για το χτίσιμο του QGIS.  
 
-\minisec{Visual C++ Express Edition}
-The free (as in free beer) Express Edition installer is available under:
+\minisec{Η έκδοση Visual C++ Express}
+Ο ελεύθερος (ελεύθερος όπως με την έννοια "δωρεάν μπύρα") Express Edition εγκαταστάτης είναι διαθέσιμος στην ιστοσελίδα:
 
 	\begin{quotation}
 \htmladdnormallink{http://download.microsoft.com/download/d/c/3/dc3439e7-5533-4f4c-9ba0-8577685b6e7e/vcsetup.exe}{http://download.microsoft.com/download/d/c/3/dc3439e7-5533-4f4c-9ba0-8577685b6e7e/vcsetup.exe}
 	\end{quotation}
 
-The optional products are not necessary.  In the process the Windows SDKs for
-Visual Studio 2008 will also be downloaded and installed.
+Tα προαιρετικά προϊόντα δεν είναι απαραίτητα. Κατα τη διαδικασία τα SDK των Windows για το Visual Studio 2008 θα κατέβουν και θα εγκατασταθούν επίσης. 
 
-You also need the Microsoft Windows Server� 2003 R2 Platform SDK (for setupapi):
+Θα χρειαστείτε επίσης το Microsoft Windows Server� 2003 R2 Platform SDK (για το setupapi):
 
 	\begin{quotation}
 \htmladdnormallink{http://download.microsoft.com/download/f/a/d/fad9efde-8627-4e7a-8812-c351ba099151/PSDK-x86.exe}{http://download.microsoft.com/download/f/a/d/fad9efde-8627-4e7a-8812-c351ba099151/PSDK-x86.exe}
 	\end{quotation}
 
-You only need Microsoft Windows Core SDK / Build Environment (x86 32-Bit).
+Χρειάζεστε μόνο το Microsoft Windows Core SDK / Build Environment (x86 32-Bit).
 
-\minisec{Other tools and dependencies}
-Download and install following packages:
+\minisec{Άλλα εργαλεία και εξαρτησίες}
+Κατεβάστε και εγκαταστήστε τα ακόλουθα πακέτα:
 
 \begin{center}\begin{tabular}{|l|l|}
-\hline \textbf{Tool} & \textbf{Website} \\
+\hline \textbf{Εργαλείο} & \textbf{Ιστοσελίδα} \\
 \hline CMake & \htmladdnormallink{http://www.cmake.org/files/v2.8/cmake-2.8.2-win32-x86.exe}{http://www.cmake.org/files/v2.8/cmake-2.8.2-win32-x86.exe} \\
 \hline Flex & \htmladdnormallink{http://gnuwin32.sourceforge.net/downlinks/flex.php}{http://gnuwin32.sourceforge.net/downlinks/flex.php} \\
 \hline Bison & \htmladdnormallink{http://gnuwin32.sourceforge.net/downlinks/bison.php}{http://gnuwin32.sourceforge.net/downlinks/bison.php} \\
@@ -608,12 +541,9 @@ Download and install following packages:
 \hline OSGeo4W & \htmladdnormallink{http://download.osgeo.org/osgeo4w/osgeo4w-setup.exe}{http://download.osgeo.org/osgeo4w/osgeo4w-setup.exe} \\
 \hline \end{tabular}\end{center}
 
-OSGeo4W does not only provide ready packages for the current QGIS release and
-nightly builds of the trunk, but also offers most of the dependencies needs to
-build it.
+Το OSGeo4W δεν παρέχει μόνο έτοιμα πακέτα για την τρέχουσα QGIS έκδοση, αλλά παρέχει επίσης και τις περισσότερες εξαρτησίες που χρειάζονται για την εγκατάσταση.
 
-For the QGIS build you need to install following packages from OSGeo4W (select
-\textit{Advanced Installation}):
+Για το QGIS θα χρεαστεί να εγκαταστήσετε τα ακόλουθα πακέτα απο το OSGeo4W (επιλέξτε \textit{Advanced Installation}):
 
 \begin{itemize}
 \item expat
@@ -629,21 +559,14 @@ For the QGIS build you need to install following packages from OSGeo4W (select
 \end{itemize}
 
 
-This will also select packages the above packages depend on.
+Αυτό θα επιλέξει επίσης πακέτα πάνω στα οποία τα παραπάνω πακέτα θα εξαρτηθούν.
 
-Additionally QGIS also needs the include file \texttt{unistd.h}, which normally
-doesn't exist on Windows.  It's shipped with Flex/Bison in \texttt{GnuWin32$\backslash$include}
-and needs to be copied into the \texttt{VC$\backslash$include} directory of your Visual C++
-installation.
+Επιπρόσθετα το QGIS χρειάζεται επίσης το αρχείο συμπερίληψης \texttt{unistd.h}, το οποίο κανονικά δεν υπάρχει στα Windows. Είναι μαζί με το Flex/Bison στο \texttt{GnuWin32$\backslash$include} και χρειάζεται να αντιγραφεί στον κατάλογο \texttt{VC$\backslash$include} της Visual C++ εγκατάστασής σας.
 
-Earlier versions of this document also covered how to build all above
-dependencies.  If you're interested in that, check the history of this page in the Wiki
-or the SVN repository.
+Παλαιότερες εκδόσεις αυτού του εγγράφου επίσης συμπεριλάμβαναν πως να χτίσετε όλες τις παραπάνω εξαρτησίες. Αν σας ενδιαφέρει αυτό, ελέξγτε το ιστορικό αυτής της σελίδας στο Wiki ή στο αποθετήριο SVN.
 
-\minisec{Setting up the Visual Studio project with CMake}
-To start a command prompt with an environment that both has the VC++ and the OSGeo4W
-variables create the following batch file (assuming the above packages were
-installed in the default locations):
+\minisec{Ρυθμίζοντας το Visual Studio project με Cmake}
+Για να ξεκινήσετε ένα διάλογο εντολών με ένα περιβάλλον το οποίο έχει το VC++ και τις  OSGeo4W μεταβλητές δημιουργήστε το ακόλουθο αρχείο batch (υποθέτοντας ότι τα παραπάνω πακέτα είχαν εγκατασταθεί στις εξ'ορισμού τοποθεσίες): 
 
 \begin{verbatim}
 @echo off
@@ -668,158 +591,134 @@ call "%OSGEO4W_ROOT%\bin\o4w_env.bat"
 @cmd
 \end{verbatim}
 
-Start the batch file and on the command prompt checkout the QGIS source from
-svn to the source directory \texttt{qgis-trunk}:
+Ξεκινήστε το αρχείο batch και στο διάλογο εντολών ελέξτε τον πηγαίο κώδικα του QGIS απο το SVN στον πηγαίο κατάλογο \texttt{qgis-trunk}:
 
 \begin{verbatim}
 svn co https://svn.osgeo.org/qgis/trunk/qgis qgis-trunk
 \end{verbatim}
 
-Create a 'build' directory somewhere. This will be where all the build output
-will be generated.
+Δημιουργήστε έναν “build” κατάλογο κάπου. Εκεί θα αναπαράγονται όλα τα build αποτελέσματα.
 
-Now run \texttt{cmake-gui} and in the \textit{Where is the source code:} box, browse to
-the top level QGIS directory.
+Τώρα τρέξτε \texttt{cmake-gui} και στο κουτί \textit{Where is the source code:}, περιηγηθείτε στο αρχικό επίπεδο του QGIS καταλόγου.
 
-In the \textit{Where to build the binaries:} box, browse to the 'build' directory you
-created.
+Στην επιλογή \textit{Where to build the binaries:}, περιηγηθείτε στον κατάλογο “build” που δημιουργήσατε.
 
-Hit \texttt{Configure} to start the configuration and select \texttt{Visual Studio 9 2008}
-and keep \texttt{native compilers} and click \texttt{Finish}.
+Επιλέξτε \texttt{Configure} για να ξεκινήσετε τη ρύθμιση και επιλέξτε \texttt{Visual Studio 9 2008}
+κρατήστε το \texttt{native compilers} και επιλέξτε \texttt{Finish}.
 
-The configuration should complete without any further questions and allow you to
-click \texttt{Generate}.
+Η ρύθμιση θα έπρεπε να τελειώσει χωρίς καμία περαιτέρω ερώτηση και να σας επιτρέψει να διαλέξετε το \texttt{Generate}.
 
-Now close \texttt{cmake-gui} and continue on the command prompt by starting
-\texttt{vcexpress}.  Use File / Open / Project/Solutions and open the
-qgis-x.y.z.sln File in your project directory.
+Τώρα κλείστε το \texttt{cmake-gui} και συνεχίστε στο παράθυρο εντολών ξεκινώντας το
+\texttt{vcexpress}.  Χρησιμοποιήστε  File / Open / Project/Solutions και ανοίξτε το qgis-x.y.z.sln αρχείο στον κατάλογο του project σας.
 
-You probably want to change the \texttt{Solution Configuration} from \texttt{Debug}
-to \texttt{RelWithDebInfo} (Release with Debug Info)  or \texttt{Release} before you
-build QGIS using the ALL\_BUILD target.
+Πιθανώς να θέλετε να αλλάξετε τo \texttt{Solution Configuration} απο \texttt{Debug}
+σε \texttt{RelWithDebInfo} (έκδοση με Debug Info) ή \texttt{Release} πρίν χτίσετε το QGIS στοχεύοντας στο ALL\_BUILD.
 
-After the build completed you should install QGIS using the INSTALL target.
+Μετά την ολοκήρωση του χτισίματος εγκαταστήστε το QGIS χρησιμοποιώντας το INSTALL.
 
-Install QGIS by building the INSTALL project. By default this will install to
-c:$\backslash$Program Files$\backslash$qgis$<$version$>$ (this can be changed by changing the
-CMAKE\_INSTALL\_PREFIX variable in cmake-gui). 
+Εγκαταστήστε το QGIS χτίζοντας το σχέδιο INSTALL. Εξ ορισμού αυτό θα εγκατασταθεί στον προορισμό 
+c:$\backslash$Program Files$\backslash$qgis$<$version$>$ (αυτό μπορεί να αλλάξει αλλάζοντας τη μεταβλητή
+CMAKE\_INSTALL\_PREFIX σε cmake-gui). 
 
-You will also either need to add all the dependency DLLs to the QGIS install
-directory or add their respective directories to your PATH.
+Θα χρειαστεί επίσης ή να προσθέσετε όλα τα DLL αρχεία εξαρτησεων στον κατάλογο εγκατάστασης του QGIS ή να προσθέτετε τους αντίστοιχους καταλόγους στον κατάλογό σας.
 
-\minisec{Packaging}
-To create a windows 'all in one' standalone  package ''under ubuntu'' (yes you
-read correctly) do the following:
+\minisec{Πακετάρισμα}
+TΓια να δημιουργήσετε ένα Windows ανεξάρτητο “όλα σε ένα” πακέτο “με Ubuntu” (σωστά διαβάσατε) κάντε τα ακόλουθα:
 
 \begin{verbatim}
 sudo apt-get install nsis
 \end{verbatim}
 
-Now 
+Tώρα 
 
 \begin{verbatim}
 cd qgis/ms-windows/osgeo4w
 \end{verbatim}
 
-And run the nsis creation script:
+Και τρέξτε το script  δημιουργίας nsis:
 
 \begin{verbatim}
 creatensis.pl
 \end{verbatim}
 
-When the script completes, it should have created a QGIS installer executable
-in the ms-windows directory.
+Όταν το script ολοκληρωθεί, θα πρέπει να έχει δημιουργήσει έναν εγκαταστάτη του QGIS εκτελέσιμο στον κατάλογο ms-windows.
 
-\minisec{Osgeo4w packaging}
-The actual packaging process is currently not documented, for now please take a
-look at:
+\minisec{Πακετάρισμα του Osgeo4w}
+Η ουσιαστική διαδικασία του πακεταρίσματος προς το παρόν δεν έχει τεκμηριωθεί, πρός το παρόν ρίξτε μία ματιά στο:
 
 \textit{ms-windows/osgeo4w/package.cmd}
 
 \hypertarget{toc16}{}
-\subsubsection{Building using MinGW}
+\subsubsection{Χτίζοντας με τη χρήση του MinGW}
 \textbf{Note:} This section might be outdated as nowadays Visual C++ is use to build
 the "official" packages.
 
-\textbf{Note:} For a detailed account of building all the dependencies yourself you
-can visit Marco Pasetti's website here:
+\textbf{Σημείωση:} Για ένα λεπτομερή οδηγό σχετικά με το πως να χτίζετε τις εξαρτησίες απο μόνοι σας μπορείτε να επισκεφθείτε την ιστοσελίδα του Marco Pasetti:
 
 \htmladdnormallink{http://www.webalice.it/marco.pasetti/qgis+grass/BuildFromSource.html}{http://www.webalice.it/marco.pasetti/qgis+grass/BuildFromSource.html}
 
-Read on to use the simplified approach with pre-built libraries...
+Διαβάστε για το πως να χρησιμοποιήσετε μια απλοποιημένη προσέγγιση με βιβλιοθήκες που είναι “προ-χτισμένες”...
 
 \minisec{MSYS}
-MSYS provides a unix style build environment under windows. We have created a
-zip archive that contains just about all dependencies.
+Το MSYS παρέχει ένα περιβάλλον σε στυλ unix υπό windows. Έχουμε δημιουργήσει ένα αρχείο zip το οποίο περιέχει όλες τις εξαρησίες. 
 
-Get this: 
+Πάρτε το απο: 
 
 \htmladdnormallink{http://download.osgeo.org/qgis/win32/msys.zip}{http://download.osgeo.org/qgis/win32/msys.zip}
 
-and unpack to c:$\backslash$msys
+και αποσυμπιέστε το στο c:$\backslash$msys
 
-If you wish to prepare your msys environment yourself rather than using 
-our pre-made one, detailed instructions are provided elsewhere in this
-document.
+Αν επιθυμείτε να ετοιμάσετε το msys περιβάλλον σας απο μόνοι σας παρά να χρησιμοποιήσετε το ήδη δημιουργημένο απο εμάς, λεπτομερείς οδηγίες παρέχονται σε αυτό το έγγραφο
 
 \minisec{Qt}
-Download Qt opensource precompiled edition exe and install (including the
-download and install of mingw) from here:
+Κατεβάστε την προσυνταγμένη έκδοση ανοιχτού κώδικα exe του Qt και εγκαταστήστε (συμπεριλαμβάνοντας την εγκατάσταση του mingw) απο τον παρακάτω σύνδεσμο:
 
 \htmladdnormallink{http://qt.nokia.com/downloads/}{http://qt.nokia.com/downloads/}
 
-When the installer will ask for MinGW, you don't need to download and install
-it, just point the installer to c:$\backslash$msys$\backslash$mingw
+Όταν ο εγκαταστάτης ζητήσει για το MinGW, δεν χρειάζεται να το κατεβάσετε και να το εγκαταστήσετε, απλά καθοδηγείστε τον εγκαταστάτη προς το c:$\backslash$msys$\backslash$mingw
 
-When Qt installation is complete:
+Όταν η εγκατάσταση του Qt ολοκληρωθεί:
 
-Edit C:$\backslash$Qt$\backslash$4.7.0$\backslash$bin$\backslash$qtvars.bat and add the following lines:
+Ανοίξτε το C:$\backslash$Qt$\backslash$4.7.0$\backslash$bin$\backslash$qtvars.bat και προσθέστε τις ακόλουθες γραμμές:
 
 \begin{verbatim}
 set PATH=%PATH%;C:\msys\local\bin;c:\msys\local\lib 
 set PATH=%PATH%;"C:\Program Files\Subversion\bin" 
 \end{verbatim}
 
-I suggest you also add C:$\backslash$Qt$\backslash$4.7.0$\backslash$bin$\backslash$ to your Environment Variables Path in
-the windows system preferences.
+Προετείνεται να προσθέσετε επίσης και C:$\backslash$Qt$\backslash$4.7.0$\backslash$bin$\backslash$ στον κατάλογο των Μεταβλητων Περιβάλλοντος σας στις προτιμήσεις του συστήματος σας.
 
-If you plan to do some debugging, you'll need to compile debug version of Qt:
+Αν σκοπεύετε να κάνετε debugging, θα χρειαστεί να συντάξετε την debug έκδοση του Qt:
 C:$\backslash$Qt$\backslash$4.7.0$\backslash$bin$\backslash$qtvars.bat compile\_debug
 
-Note: there is a problem when compiling debug version of Qt 4.7, the script ends with
-this message  "mingw32-make: *** No rule to make target `debug'.  Stop.". To 
-compile the debug version you have to go out of src directory and execute the
-following command:
+Σημείωση: υπάρχει ένα πρόβλημα όταν συντάσεται η debug έκδοση του Qt 4.7, το script τελειώνει με το μήνυμα "mingw32-make: *** No rule to make target ‘debug’. Stop." Για να συντάξετε την debug έκδοση πρέπει να βγείτε εκτός του src καταλόγου και να εκτελέσετε την παρακάτω εντολή: 
 
 \begin{verbatim}
 c:\Qt\4.7.0 make 
 \end{verbatim}
 
-\minisec{Flex and Bison}
-Get Flex
+\minisec{Flex και Bison}
+Πάρτε το Flex
 \htmladdnormallink{http://sourceforge.net/project/showfiles.php?group\_id=23617\&package\_id=16424}{http://sourceforge.net/project/showfiles.php?group\_id=23617\&package\_id=16424}
-(the zip bin) and extract it into c:$\backslash$msys$\backslash$mingw$\backslash$bin
+και αποσυμπιέστε το στο c:$\backslash$msys$\backslash$mingw$\backslash$bin
 
-\minisec{Python stuff (optional)}
-Follow this section in case you would like to use Python bindings for QGIS.  To
-be able to compile bindings, you need to compile SIP and PyQt4 from sources as
-their installer doesn't include some development files which are necessary.
+\minisec{Υλικά Python (προαιρετικό)}
+Ακολουθήστε αυτό το κεφάλαιο σε περίπτωση που θα θέλατε να χρησιμοποιήσετε τους δεσμούς της Python για το QGIS. Για να μπορείτε να τους συντάξετε, χρειάζεται να συντάξετε τα SIP και PyQt4 απο τον πηγαίο κώδικα αφού ο εγκαταστάτης τους δεν συμπεριλαμβάνει κάποια αρχεία ανάπτυξης τα οποία είναι απαραίτητα.
 
-\paragraph{}\textbf{Download and install Python - use Windows installer}\\
+\paragraph{}\textbf{Κατεβάστε και εγκαταστήστε την Python – χρησιμοποιήστε εγκαταστάτη των Windows.}\\
 
-(It doesn't matter to what folder you'll install it)
+(Δεν έχει σημασία σε ποιόν φάκελο θα το εγκαταστήσετε)
 
 \htmladdnormallink{http://python.org/download/}{http://python.org/download/}
 
-\paragraph{}\textbf{Download SIP and PyQt4 sources}\\
+\paragraph{}\textbf{Κατεβάστε τουε πηγαίους κώδικες SIP και PyQt4}\\
 
 \url{http://www.riverbankcomputing.com/software/sip/download}
 \url{http://www.riverbankcomputing.com/software/pyqt/download}
 
-Extract each of the above zip files in a temporary directory. Make sure
-to get versions that match your current Qt installed version.
+Αποσυμπιέστε κάθε ένα απο τα παραπάνω zip αρχεία σε έναν προσωρινό κατάλογο. Σιγουρευτείτε έτσι ώστε να πάρετε εκδόσεις οι οποίες να ταιριάζουν την τρέχουσα Qt εγκατεστημένη έκδοση.
 
-\paragraph{}\textbf{Compile SIP}\\
+\paragraph{}\textbf{Συντάξτε το SIP}\\
 
 \begin{verbatim}
 c:\Qt\4.7.0\bin\qtvars.bat 
@@ -828,7 +727,7 @@ make
 make install 
 \end{verbatim}
 
-\paragraph{}\textbf{Compile PyQt}\\
+\paragraph{}\textbf{Συντάξτε το PyQt}\\
 
 \begin{verbatim}
 c:\Qt\4.7.0\bin\qtvars.bat 
@@ -837,59 +736,52 @@ make
 make install 
 \end{verbatim}
 
-\paragraph{}\textbf{Final python notes}\\
+\paragraph{}\textbf{Οι τελικές Python σημειώσεις}\\
 
-/!$\backslash$ You can delete the directories with unpacked SIP and PyQt4 sources after a
-successfull install, they're not needed anymore.
+/!$\backslash$ Μπορείτε να σβήσετε τους καταλόγους με τους απακετάριστους SIP και PyQt4 πηγαίους κώδικες, έπειτα απο μία επιτυχημένη εγκατάσταση, δεν είναι πλέον απαραίτητοι.
 
 \minisec{Subversion}
-In order to check out QGIS sources from the repository, you need Subversion
-client. This installer should work fine:
+Για να ελέγξετε τους πηγαίους κώδικες του QGIS απο το αποθετήριο, χρειάζεστε Subversion client. O εγκαταστάτης θα έπρεπε να δουλεύει καλά:
 
 \htmladdnormallink{http://www.sliksvn.com/pub/Slik-Subversion-1.6.13-win32.msi}{http://www.sliksvn.com/pub/Slik-Subversion-1.6.13-win32.msi}
 
 \minisec{CMake}
-CMake is build system used by Quantum GIS. Download it from here:
+Το cmake είναι σύστημα “build” που χρησιμοπιείται απο το QGIS. Κατεβάστε το απο τον παρακάτω σύνδεσμο:
 
 \htmladdnormallink{http://www.cmake.org/files/v2.8/cmake-2.8.2-win32-x86.exe}{http://www.cmake.org/files/v2.8/cmake-2.8.2-win32-x86.exe}
 
 \minisec{QGIS}
-Start a cmd.exe window ( Start -$>$ Run -$>$ cmd.exe ) Create development 
-directory and move into it
+Ξεκινήστε ένα cmd.exe window ( Start -$>$ Run -$>$ cmd.exe ) Δημιουργήστε κατάλογο ανάπτυξης και μετακινηθείτε μέσα σ'αυτόν
 
 \begin{verbatim}
 md c:\dev\cpp 
 cd c:\dev\cpp 
 \end{verbatim}
 
-Check out sources from SVN:
+Ελέξτε τον πηγαίο κώδικα απο το SVN:
 
-For svn trunk:
+Για αποθετήριο του SVN:
 
 \begin{verbatim}
 svn co https://svn.osgeo.org/qgis/trunk/qgis 
 \end{verbatim}
 
-For svn 1.5 branch
+Για παρακλάδι του SVN 1.5
 
 \begin{verbatim}
 svn co https://svn.osgeo.org/qgis/branches/Release-1_5_0 qgis1.5.0
 \end{verbatim}
 
-\minisec{Compiling}
-As a background read the generic building with CMake notes at the end of 
-this document.
+\minisec{Σύνταξη}
+Σαν background, διαβάστε το γενικό χτίσιμο με Cmake σημειώσεις στο τέλος αυτού του εγγράφου.
 
-Start a cmd.exe window ( Start -$>$ Run -$>$ cmd.exe ) if you don't have one
-already.  Add paths to compiler and our MSYS environment:
+Ξεκινήστε ένα cmd.exe window ( Start -$>$ Run -$>$ cmd.exe ) αν δεν έχετε ξεκινήσει ήδη ένα. Προσθέστε τις διαδρομές καταλόγων (paths) στον συντάκτη και στο MSYS περιβάλλον μας: 
 
 \begin{verbatim}
 c:\Qt\4.7.0\bin\qtvars.bat 
 \end{verbatim}
 
-For ease of use add c:$\backslash$Qt$\backslash$4.7.0$\backslash$bin$\backslash$ to your system path in system
-properties so you can just type qtvars.bat when you open the cmd console.
-Create build directory and set it as current directory:
+Για ευκολία χρήσης προσθέστε c:$\backslash$Qt$\backslash$4.7.0$\backslash$bin$\backslash$ στη διαδρομή του συστήματος σας στις ιδιότητες του συστήματος οπότε μπορείτε απλά να πληκτρολογήσετε qtvars.bat όταν ανοίγετε τη cmd κονσόλα. Δημιουργήστε κατάλογο χτισίματος και θέστε τον ως τρέχοντα κατάλογο:
 
 \begin{verbatim}
 cd c:\dev\cpp\qgis 
@@ -897,83 +789,73 @@ md build
 cd build 
 \end{verbatim}
 
-\minisec{Configuration}
+\minisec{Ρύθμιση}
 \begin{verbatim}
 cmakesetup ..  
 \end{verbatim}
 
-\textbf{Note:} You must include the '..' above.
+\textbf{Σημείωση:} πρέπει να συμπεριλάβετε τα εισαγωγικά ’..’ παραπάνω.
 
-Click 'Configure' button.  When asked, you should choose 'MinGW Makefiles' as
-generator.
+Κάντε κλικ στο κουμπί Configure. Όταν ζητηθέι, επιλέξτε ’MinGW Makefiles’  για την αναπαραγωγή.
 
-There's a problem with MinGW Makefiles on Win2K. If you're compiling on this
-platform, use 'MSYS Makefiles' generator instead.
+Υπάρχει ένα πρόβλημα με τα MinGW αρχεία make στο Win2K. Αν συντάσετε σ'αυτή την πλατφόρμα χρησιμοποιήστε τα  ’MSYS Makefiles’ για αναπαραγωγή.
 
-All dependencies should be picked up automatically, if you have set up the
-Paths correctly. The only thing you need to change is the installation
-destination (CMAKE\_INSTALL\_PREFIX) and/or set 'Debug'.
+Όλες οι εξαρτησίες θα επιλεγούν αυτόματα, αν έχετε θέσει τις διαδρομές αυτόματα. Το μόνο πράγμα που χρειάζεται να αλλάξετε είναι ο προορισμός εγκατάστασης (CMAKE\_INSTALL\_PREFIX) και/ή να θέσετε 'Debug'.
 
-For compatibility with NSIS packaging scripts I recommend to leave the install
-prefix to its default c:$\backslash$program files$\backslash$
+Για συμβατότητα με τα script πακεταρίσματος προτείνω να αφήσετε το prefix εγκατάστασης στην εξ'οριμού τοποθεσία c:$\backslash$program files$\backslash$
 
-When configuration is done, click 'OK' to exit the setup utility.
+Όταν τελειώσει η ρύθμιση, κάντε κλικ στο ΟΚ για να κλείσετε τη λειτουργία του setup.
 
-\minisec{Compilation and installation}
+\minisec{Σύνταξη και εγκατάσταση}
 \begin{verbatim}
  make make install 
 \end{verbatim}
 
-\minisec{Run qgis.exe from the directory where it's installed (CMAKE\_INSTALL\_PREFIX)}
-Make sure to copy all .dll:s needed to the same directory as the qgis.exe
-binary is installed to, if not already done so, otherwise QGIS will complain
-about missing libraries when started.
+\minisec{Τρέξτε το qgis.exe απο τον κατάλογο στον οποίο έχει εγκατασταθεί (CMAKE\_INSTALL\_PREFIX)}
+Σιγουρευτείτε να αντιγράψετε όλα τα .dll:s που χρειάζονται στον ίδιο κατάλογο όπου το qgis.exe δυαδικό έχει εγκατασταθεί επίσης, αν δεν έχει γίνει ήδη, αλλιώς το QGIS θα παραπονεθεί για βιβλιθήκες που λείπουν όταν ξεκινήσει.
 
-A possibility is to run qgis.exe when your path contains c:$\backslash$msys$\backslash$local$\backslash$bin and
-c:$\backslash$msys$\backslash$local$\backslash$lib directories, so the DLLs will be used from that place.
+Μια πιθανότητα είναι να τρέξετε το qgis.exe όταν η διαδρομή σας περιέχει c:$\backslash$msys$\backslash$local$\backslash$bin και
+c:$\backslash$msys$\backslash$local$\backslash$lib καταλόγους, ώστε τα DLL να χρησιμοποιηθούν απο αυτό το μέρος.
 
-\minisec{Create the installation package: (optional)}
-Download and install NSIS from (\htmladdnormallink{http://nsis.sourceforge.net/Main\_Page}{http://nsis.sourceforge.net/Main\_Page})
+\minisec{Δημιουργήστε το πακέτο εγκατάστασης (προαιρετικό)}
+Κατεβάστε και εγκαταστήστε το NSIS απο (\htmladdnormallink{http://nsis.sourceforge.net/Main\_Page}{http://nsis.sourceforge.net/Main\_Page})
 
-Now using windows explorer, enter the win\_build directory in your QGIS source
-tree. Read the READMEfile there and follow the instructions. Next right click
-on qgis.nsi and choose the option 'Compile NSIS Script'. 
+Τώρα χρησιμοποιώντας τον windows explorer, εισάγετε τον win\_build φάκελο στον QGIS πηγαίο κατάλογο. Διαβάστε το READMEfile εκεί και ακολουθήστε τις οδηγίες. Έπειτα κάντε δεξί κλικ στο qgis.nsi και επιλέξτε το 'Compile NSIS Script'. 
 
 \hypertarget{toc17}{}
-\subsubsection{Creation of MSYS environment for compilation of Quantum GIS}
-\minisec{Initial setup}
+\subsubsection{5.3.2 Δημιουργία του MSYS περιβάλλοντος για σύνταξη του Quantum GIS}
+\minisec{Αρχικό setup}
 \paragraph{}\textbf{MSYS}\\
 
-This is the environment that supplies many utilities from UNIX world in Windows and is needed
-by many dependencies to be able to compile.
+Αυτό ειναι το περιβάλλον που προμηθεύει πολλές ωφέλειες απο τον κόσμο των Unix στα windows και χρειάζεται απο πολλές εξαρτησίες για να μπορεί να συνταχθεί.
 
-Download from here:
+Κατεβάστε το απο δω:
 
 	\begin{quotation}
 \htmladdnormallink{http://puzzle.dl.sourceforge.net/sourceforge/mingw/MSYS-1.0.11-2004.04.30-1.exe}{http://puzzle.dl.sourceforge.net/sourceforge/mingw/MSYS-1.0.11-2004.04.30-1.exe}
 	\end{quotation}
 
-Install to \texttt{c:$\backslash$msys}
+Κάντε την εγκατάσταση στο \texttt{c:$\backslash$msys}
 
-All stuff we're going to compile is going to get to this directory (resp. its subdirs).
+Οτιδήποτε πρόκειται να συντάξουμε θα παέι σε αυτό το φάκελο.
 
 \paragraph{}\textbf{MinGW}\\
 
-Download from here:
+Κατεβάστε το απο δω:
 
 	\begin{quotation}
 \htmladdnormallink{http://puzzle.dl.sourceforge.net/sourceforge/mingw/MinGW-5.1.3.exe}{http://puzzle.dl.sourceforge.net/sourceforge/mingw/MinGW-5.1.3.exe}
 	\end{quotation}
 
-Install to \texttt{c:$\backslash$msys$\backslash$mingw}
+Κάντε την εγκατάσταση στο \texttt{c:$\backslash$msys$\backslash$mingw}
 
-It suffices to download and install only \texttt{g++} and \texttt{mingw-make} components.
+Επαρκή να κατεβάσετε και να εγκαταστήσετε μόνο τα στοιχεία \texttt{g++} και \texttt{mingw-make}. 
 
-\paragraph{}\textbf{Flex and Bison}\\
+\paragraph{}\textbf{Flex και Bison}\\
 
-Flex and Bison are tools for generation of parsers, they're needed for GRASS and also QGIS compilation.
+Τα Flex και Bison είναι εργαλεία για την αναπαραγωγή των “parsers”, χρειάζονται για το GRASS όπως επίσης και τη σύνταξη τoυ QGIS.
 
-Download the following packages:
+Κατεβάστε τα ακόλουθα πακέτα:
 
 	\begin{quotation}
 \htmladdnormallink{http://gnuwin32.sourceforge.net/downlinks/flex-bin-zip.php}{http://gnuwin32.sourceforge.net/downlinks/flex-bin-zip.php}
@@ -987,13 +869,12 @@ Download the following packages:
 \htmladdnormallink{http://gnuwin32.sourceforge.net/downlinks/bison-dep-zip.php}{http://gnuwin32.sourceforge.net/downlinks/bison-dep-zip.php}
 	\end{quotation}
 
-Unpack them all to \texttt{c:$\backslash$msys$\backslash$local}
+Αποσυμπιέστε τα όλα στην τοποθεσία \texttt{c:$\backslash$msys$\backslash$local}
 
-\minisec{Installing dependencies}
-\paragraph{}\textbf{Getting ready}\\
+\minisec{Εγκαθιστώντας τιε εξαρτησίες}
+\paragraph{}\textbf{Η ετοιμασία}\\
 
-Paul Kelly did a great job and prepared a package of precompiled libraries for GRASS.
-The package currently includes:
+O Paul Kelly έκανε μια σπουδαία δουλειά και ετοίμασε ένα πακέτο απο συνταγμένες βιβλιοθήκες για το GRASS. Το πακέτο συμπεριλαμβάνει:
 
 \begin{itemize}
 \item zlib-1.2.3
@@ -1006,32 +887,31 @@ The package currently includes:
 \item gdal-1.4.1
 \end{itemize}
 
-It's available for download here:
+Είναι διαθέσιμο για κατέβασμα απο την τοποθεσία:
 
 	\begin{quotation}
 \htmladdnormallink{http://www.stjohnspoint.co.uk/grass/wingrass-extralibs.tar.gz}{http://www.stjohnspoint.co.uk/grass/wingrass-extralibs.tar.gz}
 	\end{quotation}
 
-Moreover he also left the notes how to compile it (for those interested):
+Επιπλέον άφησε τις σημειώσεις για το πως να το συντάξετε (για όσους ενδιαφέρονται):
 
 	\begin{quotation}
 \htmladdnormallink{http://www.stjohnspoint.co.uk/grass/README.extralibs}{http://www.stjohnspoint.co.uk/grass/README.extralibs}
 	\end{quotation}
 
-Unpack the whole package to \texttt{c:$\backslash$msys$\backslash$local}
+Αποσυμπιέστε όλο το πακέτο στην τοποθεσία \texttt{c:$\backslash$msys$\backslash$local}
 
 \paragraph{}\textbf{GRASS}\\
 
-Grab sources from CVS or use a weekly snapshot, see:
+Πάρτε τον πηγαίο κώδικα απο το CVS, βλέπετε παρακάτω:
 
 	\begin{quotation}
 \htmladdnormallink{http://grass.itc.it/devel/cvs.php}{http://grass.itc.it/devel/cvs.php}
 	\end{quotation}
 
-In MSYS console go to the directory where you've unpacked or checked out sources
-(e.g. \texttt{c:$\backslash$msys$\backslash$local$\backslash$src$\backslash$grass-6.3.cvs})
+Στην MSYS κονσόλα πηγαίνετε στον κατάλογο στον οποίο αποσυμπιέσατε (π.χ. \texttt{c:$\backslash$msys$\backslash$local$\backslash$src$\backslash$grass-6.3.cvs})
 
-Run these commands:
+Τρέξτε τις παρακάτω εντολές:
 
 \begin{verbatim}
 export PATH="/usr/local/bin:/usr/local/lib:$PATH"
@@ -1046,9 +926,9 @@ make
 make install
 \end{verbatim}
 
-It should get installed to \texttt{c:$\backslash$msys$\backslash$local$\backslash$grass-6.3.cvs}
+Θα έπρεπε να εγκατασταθεί στην τοποθεσία \texttt{c:$\backslash$msys$\backslash$local$\backslash$grass-6.3.cvs}
 
-By the way, these pages might be useful:
+Παρεπιπτόντως αυτές οι σελίδες μπορεί να φανούν χρήσιμες:
 
 \begin{itemize}
 \item \htmladdnormallink{http://grass.gdf-hannover.de/wiki/WinGRASS\_Current\_Status}{http://grass.gdf-hannover.de/wiki/WinGRASS\_Current\_Status}
@@ -1057,27 +937,27 @@ By the way, these pages might be useful:
 
 \paragraph{}\textbf{GEOS}\\
 
-Download the sources:
+Κατεβάστε τους πηγαίους κώδικες:
 
 	\begin{quotation}
 \htmladdnormallink{http://geos.refractions.net/geos-2.2.3.tar.bz2}{http://geos.refractions.net/geos-2.2.3.tar.bz2}
 	\end{quotation}
 
-Unpack to e.g. \texttt{c:$\backslash$msys$\backslash$local$\backslash$src}
+Απουμπιέστε στην τοποθεσία π.χ. \texttt{c:$\backslash$msys$\backslash$local$\backslash$src}
 
-To compile, I had to patch the sources: in file \texttt{source/headers/timeval.h} line 13.
-Change it from:
+Για να συντάξετε, έπρεπε να προσθέσω τους πηγαίους κώδικες: στο αρχείο \texttt{source/headers/timeval.h}  γραμμη 13.
+Αλλάξτε το απο:
 
 \begin{verbatim}
 #ifdef _WIN32
 \end{verbatim}
-to:
+σε:
 
 \begin{verbatim}
 #if defined(_WIN32) && defined(_MSC_VER)
 \end{verbatim}
 
-Now, in MSYS console, go to the source directory and run:
+Τώρα στην MSYS κονσόλα, πηγαίνετε στον πηγαίο κατάλογο και τρέξτε:
 
 \begin{verbatim}
 ./configure --prefix=/usr/local
@@ -1087,35 +967,35 @@ make install
 
 \paragraph{}\textbf{SQLITE}\\
 
-You can use precompiled DLL, no need to compile from source:
+Μπορείτε να χρησιμοποιήσετε προσυνταγμένα DLL, δεν χρειάζεται να συντάξετε απο τον πηφαίο κώδικα:
 
-Download this archive:
+Κατεβάστε το αρχείο:
 
 	\begin{quotation}
 \htmladdnormallink{http://www.sqlite.org/sqlitedll-3\_3\_17.zip}{http://www.sqlite.org/sqlitedll-3\_3\_17.zip}
 	\end{quotation}
 
-and copy sqlite3.dll from it to \texttt{c:$\backslash$msys$\backslash$local$\backslash$lib}
+και αντιγράψτε το sqlite3.dll στο \texttt{c:$\backslash$msys$\backslash$local$\backslash$lib}
 
-Then download this archive:
+Έπειτα κατεβάστε αυτό το αρχείο:
 
 	\begin{quotation}
 \htmladdnormallink{http://www.sqlite.org/sqlite-source-3\_3\_17.zip}{http://www.sqlite.org/sqlite-source-3\_3\_17.zip}
 	\end{quotation}
 
-and copy sqlite3.h to \texttt{c:$\backslash$msys$\backslash$local$\backslash$include}
+και αντιγράψτε το sqlite3.h στο \texttt{c:$\backslash$msys$\backslash$local$\backslash$include}
 
 \paragraph{}\textbf{GSL}\\
 
-Download sources:
+Κατεβάστε τον πηγαίο κώδικα:
 
 	\begin{quotation}
 \htmladdnormallink{ftp://ftp.gnu.org/gnu/gsl/gsl-1.9.tar.gz}{ftp://ftp.gnu.org/gnu/gsl/gsl-1.9.tar.gz}
 	\end{quotation}
 
-Unpack to \texttt{c:$\backslash$msys$\backslash$local$\backslash$src}
+Αποσυμπιέστε στο \texttt{c:$\backslash$msys$\backslash$local$\backslash$src}
 
-Run from MSYS console in the source directory:
+Απο την MSYS τρέξτε κονσόλα στον πηγαίο κατάλογο:
 
 \begin{verbatim}
 ./configure
@@ -1125,15 +1005,15 @@ make install
 
 \paragraph{}\textbf{EXPAT}\\
 
-Download sources:
+Κατεβάστε τους πηγαίους κώδικες:
 
 	\begin{quotation}
 \htmladdnormallink{http://dfn.dl.sourceforge.net/sourceforge/expat/expat-2.0.0.tar.gz}{http://dfn.dl.sourceforge.net/sourceforge/expat/expat-2.0.0.tar.gz}
 	\end{quotation}
 
-Unpack to \texttt{c:$\backslash$msys$\backslash$local$\backslash$src}
+Αποσυμπιέστε στην θέση \texttt{c:$\backslash$msys$\backslash$local$\backslash$src}
 
-Run from MSYS console in the source directory:
+Τρέξτε απο την MSYS κονσόλα στον πηγαίο κατάλογο:
 
 \begin{verbatim}
 ./configure
@@ -1143,137 +1023,102 @@ make install
 
 \paragraph{}\textbf{POSTGRES}\\
 
-We're going to use precompiled binaries. Use the link below for download:
+Θα χρησιμοποιήσουμε προσυνταγμένα αρχεία (binary). Χρησιμοποιήστε το σύνδεσμο παρακάτω για να κατεβάσετε:
 
 	\begin{quotation}
 \url{http://wwwmaster.postgresql.org/download/mirrors-ftp}
 	\end{quotation}
 
-copy contents of pgsql directory from the archive to \texttt{c:$\backslash$msys$\backslash$local}
+αντιγράψτε το περιεχόμενο του pgsql καταλόγου απο το αρχείο στο \texttt{c:$\backslash$msys$\backslash$local}
 
-\minisec{Cleanup}
-We're done with preparation of MSYS environment. Now you can delete all stuff in \texttt{c:$\backslash$msys$\backslash$local$\backslash$src} - it takes quite a lot
-of space and it's not necessary at all.
+\minisec{Καθάρισμα}
+Τελειώσαμε με την ετοιμασία του MSYS περιβάλλοντος. Τώρα μπορείτε να διαγράψετε οτιδήποτε βρίσκεται στην τοποθεσία \texttt{c:$\backslash$msys$\backslash$local$\backslash$src} - πιάνει πολλύ χώρο και δεν είναι καθόλου απαραίτητο.
 
 
 \hypertarget{toc18}{}
-\subsection{MacOS X: building using frameworks and Cmake}
-In this approach I will try to avoid as much as possible building dependencies
-from source and rather use frameworks wherever possible.
+\subsection{5.4 MacOS X: χτίσιμο με τη χρήση frameworks και του Cmake}
+Σ'αυτή την προσέγγιση θα προσπαθήσω να αποφύγω όσο το δυνατόν περισσότερο το χτίσιμο των εξαρτησιών απο τον πηγαίο κώδικα και θα χρησιμοποιήσω frameworks όπου είναι δυνατόν.
 
-The base system here is Mac OS X 10.4 (\underline{Tiger}), with a single architecture build.
-Included are a few notes for building on Mac OS X 10.5 (\underline{Leopard}) and 10.6 (\underline{Snow Leopard}).
-Make sure to read each section completely before typing the first command you see.
+Το βασικό σύστημα είναι Mac OS X 10.4 (\underline{Tiger}), με μία μοναδική χτισμένη αρχιτεκτονική.
+Συμπεριλαμβάνονται μερικές σημειώσεις για το χτίσιμο σε  Mac OS X 10.5 (\underline{Leopard}) και 10.6 (\underline{Snow Leopard}).
+Σιγουρευτείτε ότι θα διαβάσετε κάθε κεφάλαιο ολόκληρο πριν γράψετε την πρώτη εντολή που θα δείτε.
 
-\underline{General note on Terminal usage:}  When I say "cd" to a folder in a Terminal,
-it means type "cd " (without the quotes, make sure to type a space after) and
-then type the path to said folder, then $<$return$>$.  A simple way to do this without having to know
-and type the full path is, after type the "cd " part, drag the folder (use the icon
-in its window title bar, or drag a folder from within a window) from the Desktop
-to the Terminal, then tap $<$return$>$.
+\underline{Γενική σημείωση πάνω στη χρήση του τερματικού:}  όταν λέω “cd” για ένα φάκελο στο τερματικό, σημαίνει ότι θα γράψετε “cd” (χωρίς τα εισαγωγικά, σιγουρευτείτε ότι θα πατήσετε space μετά) και μετά τη διαδρομή στον φάκελο που αναφέραμε και μετά $<$return$>$. Ένας απλός τρόπος να το κάνετε αυτό χωρίς να χρειάζεται να ξέρετε και να γράψετε την πλήρες διαδρομή είναι, μετά το κομμάτι με το “cd”, σείρετε το φάκελο (χρησιμοποιήστε το εικονίδιο του στην μπάρα τίτλου του παραθύρου του ή σύρετε ένα παράθυρο απο το εσωτερικό ενος παραθύρου) απο την επιφάνειες εργασίας στο τερματικό και μετά πατήστε $<$return$>$.
 
-\underline{Parallel Compilation:} On multiprocessor/multicore Macs, it's possible to speed
-up compilation, but it's not automatic.  Whenever you type "make" (but NOT "make install"),
-instead type:
+\underline{Παράλληλη σύνταξη:} σε πολυεπεξεργαστές/πολυπύρηνα Macs, είναι δυνατόν να επιταχύνουμε τη σύνταξη, αλλά δεν γίνεται αυτόματα. Όποτε θα πληκτρολογείτε “make” (αλλά όχι “make install”), αντιθέτως πατήστε:
 
 \begin{verbatim}
 make -j [n]
 \end{verbatim}
 
-Replace [n] with the number of cores and/or processors your Mac has.  On recent
-models with hyperthreading processors this can be double the physical count of
-processors and cores.
+Αντικαταστήστε το  [n] με τον αριθμό των πυρήνων και/ή των επεξεργαστών που έχει το ο Mac σας. Στα πρόσφατα μοντέλα με hyper-threading επεξεργαστές μπορεί αν είναι ο διπλός αριθμός επεξεργαστών και πυρήνων.
 
-ie: Mac Pro "8 Core" model (2 quad core processors) = 8
+π.χ. Mac Pro "8 Core" μοντέλο (2 επεξεργαστές) = 8
 
-ie: Macbook Pro i5 (hyperthreading) = 2 cores X 2 = 4
+π.χ. Macbook Pro i5 (hyperthreading) = 2 πυρήνες  X 2 = 4
 
 \hypertarget{toc19}{}
-\subsubsection{Install Qt4 from .dmg}
-You need a minimum of Qt-4.4.0. I suggest getting the latest.
+\subsubsection{Εγκατάσταση του Qt4 απο το .dmg}
+Χρειάζεστε τουλάχιστον το Qt4-4.4.0 Προτείνω να πάρετε το τελευταίο.
 
-\underline{Snow Leopard note:} If you are building on Snow Leopard, you will need to
-decide between 32-bit support in the older, Qt Carbon branch, or 64-bit
-support in the Qt Cocoa branch. Appropriate installers are available for both
-as of Qt-4.5.2.  Qt 4.6+ is recommended for Cocoa.
+\underline{Σημείωση γαι το Snow Leopard:} Εν χτίζετε στο Snow Leopard, θα χρειαστεί να αποφασίσετε ανάμεσα στην 32-bit υποστήριξη στο παλαιότερο Qt Carbon παρακλάδι ή 64-bit υποστήριξη στο Qt Cocoa παρακλάδι. Οι κατάλληλοι εγκαταστάτες είναι διαθέσιμοι και για τα δύο του Qt-4.5.2. Qt 4.6+ προτείνεται για το Cocoa. 
 
-\underline{PPC note:} There appear to be issues with Qt Cocoa on PPC Macs.  QT Carbon
-is recommended on PPC Macs.
+\underline{Σημείωση για το PPC:} Φαίνεται να υπάρχουν προβλήματα με το Qt Cocoa στα PPC Macs. Προτείνεται το Qt Carbon στα PPC Macs. 
 
 \begin{verbatim}
 http://qt.nokia.com/downloads
 \end{verbatim}
 
-If you want debug frameworks, Qt also provides a dmg with these.  These are in
-addition to the non-debug frameworks.
+Αν θέλετε debug frameworks, το Qt παρέχει επίσης ένα dmg με αυτά. Αυτά είναι επιπρόσθετα στα non-debug frameworks.
 
-Once downloaded open the dmg and run the installer. Note you need admin
-privileges to install.
+Αφού έχουν κατέβει ανοίξτε το dmg και ανοίξτε τον εγκαταστάτη. Σημειώστε ότι χρειάζεστε προνόμια διαχειριστή για να εγκαταστήσετε.
 
-\underline{Qt note:} Starting in Qt 4.4, libQtCLucene was added, and in 4.5
-libQtUiTools was added, both in /usr/lib.  When using a system SDK
-these libraries will not be found.  To fix this problem,
-add symlinks to /usr/local:
+\underline{Σημείωση για το Qt:} Ξεκινώντας στο Qt4.4, προστέθηκε το libQtCLucene, και στην έκδοση 4.5 τα libQtUiTools προστέθηκαν, και τα δύο στη θέση /usr/lib. Όταν χρησιμοποιήσετε ένα SDK σύστημα αυτές οι βιβλιοθήκες δεν θα βρεθούν. Για να διορθώσετε αυτό το πρόβλημα, προσθέστε συμβολικούς συνδέσμους (symlinks) στη θέση /usr/local:
 
 \begin{verbatim}
 sudo ln -s /usr/lib/libQtUiTools.a /usr/local/lib/
 sudo ln -s /usr/lib/libQtCLucene.dylib /usr/local/lib/
 \end{verbatim}
 
-These should then be found automatically on Leopard and above.  Earlier systems
-may need some help by adding '-L/usr/local/lib' to CMAKE\_SHARED\_LINKER\_FLAGS,
-CMAKE\_MODULE\_LINKER\_FLAGS and CMAKE\_EXE\_LINKER\_FLAGS in the cmake build.
+Αυτά θα έπρεπε να βρεθούν αυτόματα μετά στο Leopard και παραπάνω. Πιο πρόσφατα συστήματα ίσως χρειαστούν λίγη βοήθεια προσθέτοντας '-L/usr/local/lib' στο CMAKE\_SHARED\_LINKER\_FLAGS, CMAKE\_MODULE\_LINKER\_FLAGS και CMAKE\_EXE\_LINKER\_FLAGS στο χτίσιμο του cmake.
 
 \hypertarget{toc20}{}
-\subsubsection{Install development frameworks for QGIS dependencies}
-Download William Kyngesburye's excellent GDAL Complete package that includes
-PROJ, GEOS, GDAL, SQLite3, and image libraries, as frameworks.  There is also
-a GSL framework.
+\subsubsection{Εγκαταστήστε τα frameworks ανάπτυξης για τις εξαρτησίες του QGIS}
+Κατεβάστε το πλήρες και άριστο GDAL πακέτο του William Kyngesburye το οποίο περιλαμβάνει τα PROJ, GEOS, GDAL, SQLite3 και εικονικές βιβλιθήκες, ως frameworks. Υπάρχει επίσης και ένα GSL framework.
 
 \begin{verbatim}
 http://www.kyngchaos.com/wiki/software/frameworks
 \end{verbatim}
 
-Once downloaded, open and install the frameworks.
+Αφού κατέβουν, ανοίξτε και εγκαταστήστε τα frameworks.
 
-William provides an additional installer package for Postgresql (for PostGIS support).
-Qgis just needs the libpq client library, so unless you want to setup the full
-Postgres + PostGIS server, all you need is the client-only package.
-It's available here:
+Ο William παρέχει ένα επιπρόσθετο πακέτο εγκαταστάτη για την Postgresql (για υποστήριξη PostGIS). Το QGIS χρειάζεται απλά την “client” libpq βιβλιθήκη, οπότε εκτός αν θέλετε να ρυθμίσετε ολόκληρο τον Postgres + PostGIS server, το μόνο που χρειάζεστε είναι το πακέτο client-only. Είναι διαθέσιμο στο παρακάτω σύνδεσμο:
 
 \begin{verbatim}
 http://www.kyngchaos.com/wiki/software/postgres 
 \end{verbatim}
 
-Also available is a GRASS application:
+Επίσης διαθέσιμη είναι και μια GRASS εφαρμογή:
 
 \begin{verbatim}
 http://www.kyngchaos.com/wiki/software/grass
 \end{verbatim}
 
-\minisec{Additional Dependencies: General compatibility note}
-There are some additional dependencies that, at the time of writing, are not
-provided as frameworks or installers so we will need to build these from source.
-If you are wanting to build Qgis as a 64-bit application, you will need to 
-provide the appropriate build commands to produce 64-bit support in dependencies.
-Likewise, for 32-bit support on Snow Leopard, you will need to override the
-default system architecture, which is 64-bit, according to instructions for
-individual dependency packages.
+\minisec{Επιπρόσθετες εξαρτησίες: σημείωση γενικής συμβατότητας}
+Υπάρχουν μερικές επιπρόσθετες εξαρτησίες, όταν γράφτηκε αυτό το εγχειρίδιο, δεν παρέχονται σαν frameworks ή εγκαταστάτες οπότε θα χρειαστεί να τα χτίσετε απο τομ πηγαίο κώδικα. Αν θέλετε να χτίσετε το Qgis σαν μια 64-bit εφαρμογή, θα χρειαστεί να παρέχετε τις κατάλληλες build εντολές για να παράγετε 64-bit υποστήριξη στις εξαρτησίες. Παρόμοια, για την 32-bit υποστήριξη στο Snow Leopard, χρειάζεται να παρακάμψετε την εξ'ορισμού αρχιτεκτονική του συστήματος, η οποία είναι 64-bit, σύμφωνα με τις οδηγίες για τα πακέτα μεμονομένων εξαρτησιών.
 
-Stable release versions are preferred.  Beta and other development versions may
-have problems and you are on your own with those.
+Προτιμούνται οι σταθερές εκδόσεις. Οι εκδόσεις Beta όπως και άλλες εκδόσεις μπορεί να εχουν προβλήματα και με αυτά δεν θα έχετε βοήθεια.
 
-\minisec{Additional Dependencies: Expat}
-\underline{Snow Leopard note:} Snow Leopard includes a usable expat, so this step is 
-not necessary on Snow Leopard.
+\minisec{Επιπρόσθετες εξαρτησίες: Expat}
+\underline{Σημείωση για το Snow Leopard:} Το Snow Leopard περιέχει ένα χρήσιμο expat, οπότε αυτό το βήμα δεν είναι απαραίτητο στο Snow Leopard.
 
-Get the expat sources:
+Πάρτε τον πηγαίο κώδικα του expat απο:
 
 \begin{verbatim}
 http://sourceforge.net/project/showfiles.php?group_id=10127 
 \end{verbatim}
 
-Double-click the source tarball to unpack, then, in Terminal.app, cd to the source folder and:
+Κάντε διπλό κλικ στο πηγαίο tarball για να αποσυμπιεστεί, μετά, στο Τερματικό, γράψτε cd στον πηγαίο φάκελο και:
 
 \begin{verbatim}
 ./configure
@@ -1281,29 +1126,25 @@ make
 sudo make install 
 \end{verbatim}
 
-\minisec{Additional Dependencies: Python}
-\underline{Leopard and Snow Leopard note:} Leopard and Snow Leopard include a usable
-Python 2.5 and 2.6, respectively. So there is no need to install Python on
-Leopard and Snow Leopard. You can still install Python from python.org if preferred.
+\minisec{Επιπρόσθετες εξαρτησίες: Python}
+\underline{Σημείωση για το Leopard και το Snow Leopard:} Το Leopard και το Snow Leopard συμπεριλαμβάνουν ένα χρήσιμο Python 2.5. και 2.6, αντίστοιχα. Οπότε δεν χρειάζεται να εγκαταστήσετε την Python στο Leopard και στο Leopard Snow. Μπορείτε βέβαια αν θέλετε να εγκαταστήσετε την Python απο το python.org.
 
-If installing from python.org, make sure you install at least the latest Python 2.x from 
+Αν εγκαταστήσετε απο το python.org, σιγουρευτείτε ότι θα εγκαταστήσετε τουλάχιστον την τελευταία  Python 2.x απο 
 
 \begin{verbatim}
 http://www.python.org/download/
 \end{verbatim}
 
-Python 3 is a major change, and may have compatibility issues, so try it at your own risk.
+H Python 3 είναι μια μεγάλη αλλαγή, και μπορεί να έχει προβλήματα συμβατότητας, οπότε το δοκιμάζετε με δικό σας ρίσκο..
 
-\minisec{Additional Dependencies: SIP}
-Retrieve the python bindings toolkit SIP from
+\minisec{Επιπρόσθετες εξαρτησίες: SIP}
+Ανακτήστε την εργαλειοθήκη συνδέσεων της Python SIP απο τη σελίδα
 
 \begin{verbatim}
 http://www.riverbankcomputing.com/software/sip/download
 \end{verbatim}
 
-Double-click the source tarball to unpack it, then, in Terminal.app, cd to the source folder
-and (this installs by default into the Python framework, and is appropriate only for 
-python.org Python installs):
+κάντε διπλό κλικ στο πηγαίο tarball για να το ανοίξετε, μετά, στο Τερματικό, γράψτε cd στον πηγαίο φάκελο και μετά (εγκαθίσταται εξ'ορισμού στο Python framework, και είναι κατάλληλο μόνο για εγκαταστάσεις Python απο το python.org): 
 
 \begin{verbatim}
 python configure.py 
@@ -1311,117 +1152,96 @@ make
 sudo make install 
 \end{verbatim}
 
-\underline{Leopard notes}
+\underline{Σημειώσεις Leopard}
 
-If building on Leopard, using Leopard's bundled Python, SIP wants to install in the
-system path -- this is not a good idea.  Use this configure command instead of the 
-basic configure above:
+Αν χτίσετε πάνω σε Leopard,χρησιμοποιώντας την πακεταρισμένη Python του Leopard, στο SIP θα εγκατασταθεί στη διαδρομή του συστήματος – αυτό δεν είναι καλή ιδέα. Αντιθέτως, χρησιμοποιήστε την παρακάτω εντολή ρύθμισης αντί για τη βασική ρύθμιση παραπάνω:
 
 \begin{verbatim}
 python configure.py -n -d /Library/Python/2.5/site-packages -b /usr/local/bin \
 -e /usr/local/include -v /usr/local/share/sip -s MacOSX10.5.sdk
 \end{verbatim}
 
-\underline{Snow Leopard notes}
+\underline{Σημειώσεις για το Snow Leopard}
 
-Similar to Leopard, you should install outside the system Python path.
-Also, you need to specify the architecture you want (requires at least SIP 4.9),
-and make sure to run the versioned python binary (this one responds to the
-'arch' command, 'python' does not). If you are using 32-bit Qt (Qt Carbon):
+Παρόμοια με το Leopard, η εγκατάσταση θα έπρεπε να γίνει εκτός της διαδρομής του συστήματος της Python. Επίσης χρειάζεται να καθορίσετε την αρχιτεκτονική που θέλετε (απαιτείται τουλάχιστον SIP 4.9), και σιγουρευτείτε ότι θα τρέξετε τη δυαδική (binary) έκδοση της python (αυτό ανταποκρίνεται στην εντολή “arch”, ενώ η python όχι). Αν χρησιμοποιείται Qt 32-bit (Qt Carbon):
 
 \begin{verbatim}
 python2.6 configure.py -n -d /Library/Python/2.6/site-packages -b /usr/local/bin \
 -e /usr/local/include -v /usr/local/share/sip --arch=i386 -s MacOSX10.6.sdk
 \end{verbatim}
 
-For 64-bit Qt (Qt Cocoa), use this configure line:
+Για Qt 64-bit (Qt Cocoa), χρησιμοποιείστε αυτή τη γραμμή ρύθμισης:
 
 \begin{verbatim}
 python2.6 configure.py -n -d /Library/Python/2.6/site-packages -b /usr/local/bin \
 -e /usr/local/include -v /usr/local/share/sip --arch=x86_64 -s MacOSX10.6.sdk
 \end{verbatim}
 
-\minisec{Additional Dependencies: PyQt}
-Retrieve the python bindings toolkit for Qt from
+\minisec{Επιπρόσθετες εξαρτησίες: PyQt}
+Ανακτήστε την εργαλειοθήκη συνδέσεων της Python για την Qt απο το σύνδεσμο
 
 \begin{verbatim}
 http://www.riverbankcomputing.com/software/pyqt/download
 \end{verbatim}
 
-Double-click the source tarball to unpack it, then, in Terminal.app, cd to the source folder
-and (this installs by default into the Python framework, and is appropriate only for
-python.org Python installs):
+Κάντε διπλό κλικ στο πηγαίο tarball για να το ανοίξετε, μετά, στο Τερματικό γράψτε cd στον πηγαίο κώδικα και (θα εγκατασταθεί εξ' οσιμού στο framework της Python), και είναι κατάλληλο μόνο για εγκαταστάσεις της Python απο το python.org):
 
 \begin{verbatim}
 python configure.py 
 yes 
 \end{verbatim}
 
-There is a problem with the configuration that needs to be fixed now
-(it affects PyQwt compilation later).  Edit pyqtconfig.py and change the qt\_dir line to:
+Υπάρχει ένα πρόβλημα με τη ρύθμιση που οποία χρειάζεται να φτιαχτεί τώρα (επηρεάζει τη μετέπειτα σύνταξη του PyQwt).  Ανοίξτε το pyqtconfig.py
+ και αλλάξτε τη qt\_dir line σε:
 
 \begin{verbatim}
     'qt_dir': '/usr',
 \end{verbatim}
 
-Then continue with compilation and installation (this is a good place to use
-parallel compilation, if you can):
+Μετά συνεχίστε με τη σύνταξη και την εγκατάσταση (αυτό είναι καλό μέρος για να συνεχίσετε την παράλληλη σύνταξη, αν μπορείτε):
 
 \begin{verbatim}
 make 
 sudo make install 
 \end{verbatim}
 
-\underline{Leopard notes}
+\underline{Σημειώσεις για το Leopard}
 
-If building on Leopard, using Leopard's bundled Python, PyQt wants to install
-in the system path -- this is not a good idea.  Use this configure command
-instead of the basic configure above:
+Αν χτίσετε πάνω σε Leopard,χρησιμοποιώντας την πακεταρισμένη Python του Leopard, το PyQt θα εγκατασταθεί στη διαδρομή του συστήματος – δεν είναι καλή ιδέα. Χρησιμοποιήστε την παρακάτω εντολή ρύθμισης, αντί για τη βασική ρύθμιση παραπάνω:
 
 \begin{verbatim}
 python configure.py -d /Library/Python/2.5/site-packages -b /usr/local/bin
 \end{verbatim}
 
-If there is a problem with undefined symbols in QtOpenGL on Leopard, edit
-QtOpenGL/makefile and add -undefined dynamic\_lookup to LFLAGS.
-Then make again.
+Αν υπάρχει κάποιο πρόβλημα με απροσδιόριστα σύμβολα στο QtOpenGL του Leopard, επιμεληθείτε το QtOpenGL/makefile και προσθέστε -απροσδιόριστο dynamic\_lookup στο LFLAGS.
+Μετά ξαναδώστε την εντολή make.
 
-\underline{Snow Leopard notes}
+\underline{Σημειώσεις για το Snow Leopard}
 
-Similar to Leopard, you should install outside the system Python path.
-Also, you need to specify the architecture you want (requires at least PyQt 4.6),
-and make sure to run the versioned python binary (this one responds to the
-'arch' command, which is important for pyuic4, 'python' does not).
-If you are using 32-bit Qt (Qt Carbon):
+όπως και στο Leopard η εγκατάσταση πρέπει να γίνει έξω απο τη διαδρομή εγκατάστασης του Python. Επίσης χρειάζεται να καθοριστεί η αρχιτεκτονική που θέλετε (απαιτείται τουλάχιστον PyQt 4.6) και σιγουρευτείτε να τρέξετε τη δυαδική (binary) έκδοση της Python (αυτή ανατποκρίνεται στην εντολή 'arch', η οποία ειναι σημαντική για το pyuic4, ενώ η Python δεν ανταποκρίνεται). Αν χρησιμοποιείται 32-bit Qt (Qt Carbon):
 
 \begin{verbatim}
 python2.6 configure.py -d /Library/Python/2.6/site-packages -b /usr/local/bin \
 --use-arch i386
 \end{verbatim}
 
-For 64-bit Qt (Qt Cocoa), use this configure line:
+Για 64-bit Qt (Qt Cocoa), χρησιμποιήστε αυτή τη γραμμή ρύθμισης:
 
 \begin{verbatim}
 python2.6 configure.py -d /Library/Python/2.6/site-packages -b /usr/local/bin \
 --use-arch x86_64
 \end{verbatim}
 
-\minisec{Additional Dependencies: Qwt/PyQwt}
-The GPS tracking feature uses Qwt.  Some popular 3rd-party plugins use PyQwt.
-You can take care of both with the PyQwt source from:
+\minisec{Επιπρόσθετες εξαρτησίες: Qwt/PyQwt}
+Το εργαλείο ανίχνευσης του GPS χρησιμοποιεί Qwt. Μερικά διάσημα εξωγενή plugin χρησιμοποιούν PyQwt. Μπορείτε να τα προσέξετε και τα δύο με τον πηγαίο κώδικα του PyQwt απο τη σελίδα:
 
 \begin{verbatim}
 http://pyqwt.sourceforge.net/
 \end{verbatim}
 
-Double-click the tarball to unpack it.  The following assumes PyQwt v5.2.0 (comes with Qwt 5.2.1).
-Normal compilation does both Qwt and PyQwt at the same time, but Qwt is staically linked
-into PyQwt, and Qgis can't use it.  So, we need to split the build.
+Κάντε διπλό κλικ στο tarball για να το ανοίξετε. Τα ακόλουθα παίρνουν σαν δεδομένο το PyQwt v5.2.0 (έρχεται μαζί με το Qwt 5.2.1). Η κανονική σύντξη κάνει και το Qwt αλλά και το PyQwt ταυτόχρονα, αλλά το Qwt είναι στατικά συνδεδεμένο με το PyQwt, και το Qgis δεν μπορεί να το χρησιμοποιήσει. Οπότε πρέπει να χωρίσουμε το BUILD .
 
-First edit qwtconfig.pri in the qwt-5.2 subdir and change some settings so
-you don't get a bloated debug static library (too bad they are not configurable from
-qmake).  Scroll down to the 'release/debug mode' block.  Edit the last 'CONFIG +='
-line, within an 'else' block, and change 'debug' to 'release'.  Like so:
+Πρώτα επιμεληθείτε το qwtconfig.pri στον υποκατάλογο qwt-5.2 και αλλάξτε μερικές ρυθμίσεις έτσι ώστε να μην πάρετε μια φουσκωμένη στατική βιβλιοθήκη debug(κρίμα που αυτά δεν είναι ρυθμύσιμα απο απο το qmake). Κυλίστε προς τα κάτω στο τετράγωνο ’release/debug mode’. Επιμεληθείτε την τελευταία γραμμή που λέει:’CONFIG +=’, μέσα σε ένα τετράγωνο else, και αλλάξτε το 'debug' σε 'release'.  Όπως φαίνεται παρακάτω:
 
 \begin{verbatim}
     else {
@@ -1429,21 +1249,21 @@ line, within an 'else' block, and change 'debug' to 'release'.  Like so:
     }
 \end{verbatim}
 
-Also uncomment (remove \# prefix) the line 'CONFIG += QwtDll'.  Like so:
+Επίσης αφαιρέστε τα σχόλια απο τη γραμμή (αφαιρέστε το \# prefix) 'CONFIG += QwtDll'. Όπως φαίνετααι παρακάτω:
 
 \begin{verbatim}
 CONFIG           += QwtDll
 \end{verbatim}
 
-If you are building for Qt Carbon 32bit on Snow Leopard, add a line at the bottom:
+Αν χτίζετε για Qt Carbon 32-bit στο Snow Leopard, προσθέστε, μια γραμμή στο τέλος:
 
 \begin{verbatim}
 CONFIG += x86
 \end{verbatim}
 
-Save and close.
+Σώστε το και κλείστε το.
 
-Now, cd into the qwt-5.2 subdir in a Terminal.  Type these commands to build and install:
+Τώρα, μπείτε με εντολή 'cd' στον υποκατάλογο qwt-5.2 σε ένα Τερματικό. Γράψτε τις παρακάτω εντολές για να χτίσετε και να εγκαταστήσετε:
 
 \begin{verbatim}
 qmake -spec macx-g++
@@ -1453,10 +1273,9 @@ sudo install_name_tool -id /usr/local/qwt-5.2.1-svn/lib/libqwt.5.dylib \
 /usr/local/qwt-5.2.1-svn/lib/libqwt.5.dylib
 \end{verbatim}
 
-The Qwt shared library is now installed in /usr/local/qwt-5.x.x[-svn] (x.x is the 
-minor.point version, and it may be an SVN version).  Remember this for QGIS and PyQwt configuration.
+Η κοινή Qwt βιβλιοθήκη είναι πλέον εγκατεστημένη στο /usr/local/qwt-5.x.x[-svn] (xx είναι η μικρότερου σημείου εκδοση και μπορεί να είναι μια SVN έκδοση). Θυμηθείτε το αυτό για τη ρύθμιση του QGIS και PyQwt. .
 
-Now for PyQwt.  Still in the Terminal:
+Τώρα για το PyQwt. Γράφουμε στο τερματικό:
 
 \begin{verbatim}
 cd ../configure
@@ -1466,13 +1285,12 @@ make
 sudo make install
 \end{verbatim}
 
-Make sure to use the qwt install path from the Qwt build above.
+Σιγουρευτείτε να χρησιμοποιήσετε τη διαδρομή εγκατάστασης qwt απο το ήδη χτισμένο Qwt παραπάνω.
 
-\underline{Snow Leopard note}
+\underline{Σημείωση για το Snow Leopard}
 
-If using Qt Carbon, you need to specify which architectures to build, otherwise
-it will default to a combination that does not work (ie x86\_64 for a Carbon Qt).
-This is not needed for Qt Cocoa. Configure as follows:
+Αν χρησιμοποιείται το Qt Carbon, χρειάζεται να καθορίσετε ποιές αρχιτεκτονικές θα χτίσετε, αλλίώς θα οδηγηθείτε σε ένα συνδιασμό ο οποίος δεν δουλεύει (δηλαδή x86_64 για ένα Carbon Qt
+). Δεν είναι απαραίτητο για το Qt Cocoa. Ρυθμίστε όπως παρακάτω:
 
 \begin{verbatim}
 python configure.py --extra-cflags="-arch i386" --extra-cxxflags="-arch i386" \
@@ -1480,18 +1298,16 @@ python configure.py --extra-cflags="-arch i386" --extra-cxxflags="-arch i386" \
 --extra-lib-dirs=/usr/local/qwt-5.2.1-svn/lib --extra-libs=qwt
 \end{verbatim}
 
-\minisec{Additional Dependencies: Bison}
-\underline{Leopard and Snow Leopard note:} Leopard and Snow Leopard include Bison 2.3, so this step can be skipped on Leopard and Snow Leopard.
+\minisec{Επιπρόσθετες εξαρτησίες: Bison}
+\underline{Σημείωση για το Leopard και το Snow Leopard:} Το Leopard και το Snow Leopard συμπεριλαμβάνουν το Bison 2.3, οπότε αυτό το βήμα μπορεί να προσπεραστεί για το Leopard και το Leopard Snow.
 
-The version of bison available by default on Mac OS X 10.4 is too old so you need to
-get a more recent one on your system. Download at least version 2.3 from:
+Η έκδοση του Bison που είναι εξ' ορισμού διαθέσιμη στο Mac OS X 10.4 είναι πολύ παλιά οπότε πρέπει να βάλετε μια πιο πρόσφατη στο σύστημά σας. Κατεβάστε τουλάχιστον την έκδοση 2.3 απο:
 
 \begin{verbatim}
 ftp.gnu.org/gnu/bison/
 \end{verbatim}
 
-Now build and install it to a prefix of /usr/local. Double-click the source
-tarball to unpack it, then cd to the source folder and:
+Τώρα χτίστε και εγκαταστήστε το με προεπιλογή το /usr/local. Κάντε διπλό κλικ στο πηγαίο tarball για να το ανοίξετε και μετά πατήστε 'cd' στον πηγαίο φάκελο και:
 
 \begin{verbatim}
 ./configure --prefix=/usr/local 
@@ -1500,19 +1316,16 @@ sudo make install
 \end{verbatim}
 
 \hypertarget{toc21}{}
-\subsubsection{Install CMake for OSX}
-(Only needed for a cmake build.)
+\subsubsection{Εγκατάσταση του Cmake για OSX}
+(Χρειάζεται μόνο για το χτίσιμο του cmake.)
 
-Get the latest source release from here:
+Πάρτε την τελευταία πηγαία έκδοση απο τον παρακάτω σύνδεσμο:
 
 \begin{verbatim}
 http://www.cmake.org/cmake/resources/software.html
 \end{verbatim}
 
-Binary installers are available for OS X, but they are not recommended
-(2.4 versions install in /usr instead of /usr/local, and 2.6 versions are a
-strange application). Instead, download the source, double-click the source tarball,
-then cd to the source folder and:
+Δυαδικοί (binary) εγκαταστάτες είναι διαθέσιμοι για OS X, αλλά δεν προτείνονται (οι εκδόσεις 2.4  εγκαθίστανται στο /usr αντί για /usr/local, και οι εκδόσεις είναι μια περίεργη εφαρμογή). Αντιθέτως κατεβάστε τον πηγαίο κώδικα, κάντε διπλό κλικ στο πηγαίο tarball και μετά γράψτε 'cd' στον πηγαίο φάκελο και:
 
 \begin{verbatim}
 ./bootstrap --docdir=/share/doc/CMake --mandir=/share/man
@@ -1521,59 +1334,53 @@ sudo make install
 \end{verbatim}
 
 \hypertarget{toc22}{}
-\subsubsection{Install subversion for OSX}
-\underline{Leopard and Snow Leopard note:} Leopard and Snow Leopard (Xcode 3+)
-include SVN, so this step can be skipped on Leopard and Snow Leopard.
+\subsubsection{Εγκατάσταση του subversion για OSX}
+\underline{Σημείωση για Leopard και Snow Leopard:}To Leopard και το Snow Leopard 
+(Xcode 3+) συμπεριλαμβάνουν το SVN, οπότε αυτό το βήμα μπορεί να παρακαμφθεί όσον αφορά το Leopard και το Snow Leopard.
 
-The [\htmladdnormallink{http://sourceforge.net/projects/macsvn/MacSVN}{http://sourceforge.net/projects/macsvn/MacSVN}] project has a downloadable
-build of svn. If you are a GUI inclined person you may want to grab their gui
-client too. Get the command line client here:
+Το σχέδιο [\htmladdnormallink{http://sourceforge.net/projects/macsvn/MacSVN}{http://sourceforge.net/projects/macsvn/MacSVN}] έχει μία build έκδοση του svn που μπορεί να κατεβαστεί. Αν είστε ένα άτομο με κλίση προς τα Γραφικά Περιβάλλοντα Εργασίας ίσως θέλετε να έχετε και τον γραφικό πελάτη (client) επίσης. Αποκτήστε τον πελάτη γραμμής εντολών (command line client) απο:
 
 \begin{verbatim}
 curl -O http://ufpr.dl.sourceforge.net/sourceforge/macsvn/Subversion_1.4.2.zip 
 \end{verbatim}
 
-Once downloaded open the zip file and run the installer.
+Αφού κατέβει αανοίξτε το αρχείο zip και τρέξτε τον εγκαταστάτη.
 
-You also need to install BerkleyDB available from the same
-\htmladdnormallink{http://sourceforge.net/projects/macsvn/}{website}. At the time of writing the
-file was here:
+Χρειάζεται επίσης να εγκαταστήσετε το BerkleyDB διαθέσιμο απο την ίδια τοπθεσία.
+\htmladdnormallink{http://sourceforge.net/projects/macsvn/}{website}. Όταν γράφτηκε αυτό το εγχειρίδιο το αρχείο ωρισκόταν εδω:
 
 \begin{verbatim}
 curl -O http://ufpr.dl.sourceforge.net/sourceforge/macsvn/Berkeley_DB_4.5.20.zip 
 \end{verbatim}
 
-Once again unzip this and run the installer therein.
+Άλλη μια φορά αποσυμπιέστε και τρέξτε τον εγκαταστάτη.
 
-Lastly we need to ensure that the svn commandline executeable is in the path.
-Add the following line to the end of /etc/bashrc using sudo:
+Στο τέλος πρέπει να σιγουρευτούμε ότι το εκτελέσιμο svn commandline βρίσκεται στη διαδρομή (path).
+Προσθέστε την παρακάτω γραμμή στο τέλος του /etc/bashrc χρησιμοποιώντας sudo:
 
 \begin{verbatim}
 sudo vim /etc/bashrc 
 \end{verbatim}
 
-And add this line to the bottom before saving and quiting:
+Και προσθέστε αυτή τη γραμμή στο τέλος πρίν σώσετε και κλείσετε:
 
 \begin{verbatim}
 export PATH=/usr/local/bin:$PATH:/usr/local/pgsql/bin 
 \end{verbatim}
 
-/usr/local/bin needs to be first in the path so that the newer bison (that will
-be built from source further down) is found before the bison (which is very
-old) that is installed by MacOSX
+Το /usr/local/bin πρέπει να είναι πρώτα μέσα στη διαδρομή έστι ώστε το νεότερο bison (το οποίο θα εγκατασταθεί απο τον πηγαίο κώδικα παράκατω) βρίσκεται πριν απο το bison (το οποίο είναι πολλύ παλίο) το οποίο έχει εγκατασταθεί απο το MacOSX
 
-Now close and reopen your shell to get the updated vars.
+Τώρα κλείστε και ξανανοίξτε το τερματικό για να πάρετε τις ανανεωμένες μεταβλητές.
 
 \hypertarget{toc23}{}
-\subsubsection{Check out QGIS from SVN}
-Now we are going to check out the sources for QGIS. First we will create a
-directory for working in (or some folder of your choice):
+\subsubsection{Έλεγχος του QGIS απο το SVN}
+Τώρα θα ελέγξουμε τους πηγαίους κώδικες για το QGIS. Πρώτα δημιουργήσουμε ένα κατάλογο εργασίας στο (ή κάποιο άλλο φάκελο της επιλογής σας):
 
 \begin{verbatim}
 mkdir -p ~/dev/cpp cd ~/dev/cpp 
 \end{verbatim}
 
-Now we check out the sources:
+Τώρα έλεγχουμε τις πηγές:
 
 Trunk:
 
@@ -1581,14 +1388,13 @@ Trunk:
 svn co https://svn.osgeo.org/qgis/trunk/qgis qgis 
 \end{verbatim}
 
-For a release branch version x.y.z:
+Για μια branch έκδοση x.y.z:
 
 \begin{verbatim}
 svn co https://svn.qgis.org/qgis/branches/Release-x_y_z qgis-x.y.z
 \end{verbatim}
 
-The first time you check out QGIS sources you will probably get a message like
-this:
+Την πρώτη φορά που θα ελέγξετε τους πηγαίους κώδικες του QGIS πολύ πιθανόν να σας εμφανιστεί ένα μήνυμα που θα μοιάζει με το ακόλουθο:
 
 \begin{verbatim}
  Error validating server certificate for 'https://svn.qgis.org:443':
@@ -1601,16 +1407,12 @@ this:
    (R)eject, accept (t)emporarily or accept (p)ermanently?  
 \end{verbatim}
 
-I suggest you press 'p' to accept the key permanently.
+Προτείνω να επιλέξετε το 'p' και να δεχτείτε το κλειδί μόνιμα.
 
 \hypertarget{toc24}{}
-\subsubsection{Configure the build}
-CMake supports out of source build so we will create a 'build' dir for the
-build process. OS X uses \$\{HOME\}/Applications as a standard user app folder (it gives it the system app folder icon).
-If you have the correct permissions you may want to build
-straight into your /Applications folder. The instructions below assume you are
-building into a pre-existing \$\{HOME\}/Applications directory.
-In a Terminal cd to the qgis source folder previously downloaded, then:
+\subsubsection{Ρυθμίστε το χτίσιμο}
+Το Cmake υποστηρίζει χτίσιμο εκτός του πηγαίου κώδικα οπότε θα δημιουργήσουμε έναν κατάλογο “build” για τη διαδικασία του χτισίματος. Το OS X χρησιμοποιεί τον \$\{HOME\}/Applications σαν έναν σταθερό κατάλογο εφαρμογών (του δίνει το εικονίδιο φακέλου των εφαρμογών του συστήματος). Αν έχετε τις κατάλληλες άδειες ίσως να θέλετε να χτίσετε κατευθείαν στο φάκελο σας /Applications. Οι οδηγίες παρακάτω θεωρούν ότι χτίζετε σε έναν προϋπάρχων \$\{HOME\}/Applications κατάλογο.
+Ανοίξτε τερματικό και γράψτε 'cd' για να εισέλθετε στον πηγαίο φάκελο του qgis που κατεβάσατε προηγουμένως και μετά:
 
 \begin{verbatim}
 mkdir build
@@ -1622,12 +1424,9 @@ cmake -D CMAKE_INSTALL_PREFIX=~/Applications -D CMAKE_BUILD_TYPE=Release \
 ..
 \end{verbatim}
 
-This will automatically find and use the previously installed frameworks, and the GRASS
-application if installed.
+Αυτό θα βρεί και θα εγκαταστήσει αυτόματα τα προηγουμένως εγκατεστημένα frameworks, καθώς και την εφαρμογή GRASS αν έχει εγκατασταθεί.
 
-Or, to use a Unix-style build of GRASS, use the following cmake invocation
-(minimum GRASS version as stated in the Qgis requirements, substitute the GRASS
-path and version as required):
+Ή, για να χρησιμοποιήσετε χτίσιμο του GRASS σε στυλ Unix, χρησιμοποιήστε την παρακάτω cmake εντολή (η πιο παλία έκδοση του GRASS θα είναι αυτή που δηλώθηκε στις απαιτήσεις του QGIS, αντικαταστήστε τη διαδρομή και την έκδοση του GRASS όπως απαιτείται):
 
 \begin{verbatim}
 cmake -D CMAKE_INSTALL_PREFIX=~/Applications -D CMAKE_BUILD_TYPE=Release \
@@ -1638,8 +1437,7 @@ cmake -D CMAKE_INSTALL_PREFIX=~/Applications -D CMAKE_BUILD_TYPE=Release \
 ..
 \end{verbatim}
 
-\underline{Snow Leopard note:} To handle 32-bit Qt (Carbon), create a 32bit python wrapper
-script and add arch flags to the configuration:
+\underline{Σημείωση για το Snow Leopard:} Για να χειριστείτε το 32-bit Qt (Carbon), δημιουργήστε ένα 32-bit python wrapper script και προσθέστε arch flags στη ρύθμιση:
 
 \begin{verbatim}
 sudo cat >/usr/local/bin/python32 <<EOF
@@ -1657,34 +1455,29 @@ cmake -D CMAKE_INSTALL_PREFIX=~/Applications -D CMAKE_BUILD_TYPE=Release \
 ..
 \end{verbatim}
 
-\underline{Bundling note:} Older Qt versions may have problems with some Qt plugins and Qgis.
-The way to handle this is to bundle Qt inside the Qgis application.  You can do this now
-or wait to see if there are immediate crashes when running Qgis.  It's also a good
-idea to bundle Qt if you need to copy Qgis to other Macs (where you would have to
-install Xcode just so Qt would install!).
+\underline{Σημείωση πακέτου:} Οι παλαιότερες εκδόσεις του Qt μπορεί να έχουν προβήματα με μερικά Qt plugins και το Qgis.  O τρόπος να το αντιμετωπισετε αυτό είναι να πακετάρετε το Qt μέσα στην Qgis εφαρμογή. Μπορείτε να το κάνετε αυτό τώρα ή περιμένετε να δείτε αν υπάρχουν άμεσα “κρασαρίσματα”  όταν τρέξετε το Qgis. Επίσης μια καλή ιδέα είναι να πακετάρετε το Qt αν χρειάζεται να αντιγράψετε το Qgis σε άλλα Mac (εκεί όπου θα έπρεπε να εγκατασήσετε το Xcode έτσι και το Qt θα εγκαθίσταται!) .
 
-To bundle Qt, add the following line before the last line in the above cmake configurations:
+Για να πακετάρετε το Qt, προσθέστε την παρακάτω γραμμή πρίν την τελευταία γραμμή στην παραπάνω ρύθμιση του cmake:
 
 \begin{verbatim}
 -D QGIS_MACAPP_BUNDLE=1 \
 \end{verbatim}
 
 \hypertarget{toc25}{}
-\subsubsection{Building}
-Now we can start the build process (remember the parallel compilation note at
-the beginning, this is a good place to use it, if you can):
+\subsubsection{Χτίσιμο}
+Τώρα μπορούμε να ξεκινήσουμε τη διαδικασία του χτισίματος (θυμηθείτε την σημείωση της παράλληλης σύνταξης στην αρχή, αυτό είναι ένα καλό μέρος για να τη χρησιμοποιήσετε, αν μπορείτε):
 
 \begin{verbatim}
 make 
 \end{verbatim}
 
-If all built without errors you can then install it:
+Αν χτίσετε χωρίς λάθη μπορείτε μετά να το εγκαταστήσετε:
 
 \begin{verbatim}
 make install 
 \end{verbatim}
 
-or, for a /Applications build:
+ή, για ένα /Applications χτίσιμο:
 
 \begin{verbatim}
 sudo make install
