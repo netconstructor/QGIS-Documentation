@@ -1,40 +1,40 @@
 %  !TeX  root  =  user_guide.tex
 
-\chapter{Features at a Glance}\label{feature_glance}
+\chapter{Panoramica sulle caratteristiche}\label{feature_glance}
 
 % when the revision of a section has been finalized,
 % comment out the following line:
 %\updatedisclaimer
 
-After a first and simple sample session in Section \ref{label_getstarted} we now
-want to give you a more detailed overview of the features of QGIS.
-Most features presented in the following chapters will be explained and described in
-own sections later in the manual.
+Dopo un primo sguardo e una semplice sessione d'esempio nella Sezione \ref{label_getstarted},
+forniamo in questo capitolo una panoramica maggiormente dettagliata delle caratteristiche di QGIS. 
+Molte delle caratteristiche presentate nei successivi capitoli saranno spiegate
+e descritte nelle apposite sezioni del manuale.
 
-\section{Starting and Stopping QGIS}\label{label_startinqgis}
+\section{Avvio e chiusura di QGIS}\label{label_startinqgis}
 
-In Section \ref{samplesession} you already learned how to start QGIS. We will
-repeat this here and you will see that QGIS also provides further command line options.
+Nella sezione \ref{samplesession} abbiamo già imparato come avviare QGIS. Ripeteremo 
+questa operazione qui per mostrare come QGIS fornisca ulteriori opzioni all'avvio da riga di comando.
 
 \begin{itemize}
-\item \nix{Assuming that QGIS is installed in the PATH, you can start QGIS
-by typing: \usertext{qgis}  at a command prompt or by double clicking on the QGIS
-application link (or shortcut) on the desktop or in the application menu.}
-\item \win{Start QGIS using the Start menu or desktop shortcut,
-or double click on a QGIS project file.}
-\item \osx{Double click the icon in your Applications folder. If you need to start QGIS
-in a shell, run /path-to-installation-executable/Contents/MacOS/Qgis.}
+\item \nix{Assumendo che QGIS sia installato nel vostro PATH, si può avviare QGIS 
+digitando: \usertext{qgis}  al prompt dei comandi o facendo doppio click sul
+collegamento all'applicazione (o allo shortcut) sul desktop o nel menu delle applicazioni.} 
+\item \win{Avviare QGIS usando il menu Avvio (Start) o il collegamento sul desktop, 
+o facendo doppio click su un progetto QGIS precedentemente salvato.}
+\item \osx{Fare doppio click sull'icona QGIS nella cartella Applicazioni (Applications). Se si vuole avviare QGIS
+in una shell, eseguire /percorso-installatione-eseguibile/Contents/MacOS/Qgis.}
 \end{itemize}
 
-To stop QGIS, click the menu options \{\nix{}\win{File} \osx{QGIS}\} \arrow Quit,
-or use the shortcut \keystroke{Ctrl+Q}.
+Per uscire da QGIS, cliccare sul menu \{\nix{}\win{File} \osx{QGIS}\} > Esci,
+o usare la scorciatoia da tastiera \keystroke{Ctrl+Q}.
 
-\subsection{Command Line Options}\index{command line options}
+\subsubsection{Opzioni da linea di comando}\index{opzioni da linea di comando}
 \label{label_commandline}
 
-\nix QGIS supports a number of options when started from the command line. To
-get a list of the options, enter \usertext{qgis ---help} on the command line.
-The usage statement for QGIS is:
+\nix QGIS supporta un certo numero di opzioni se avviato da riga di comando.
+Per avere una lista delle opzioni possibili, digitare \usertext{qgis ---help} al prompt dei comandi.
+La sintassi d'uso di QGIS è:
 
 \small
 \begin{verbatim}
@@ -67,218 +67,209 @@ Usage: qgis [options] [FILES]
 \end{verbatim}
 \normalsize
 
-\begin{Tip} \caption{\textsc{Example Using command line arguments}}
-You can start QGIS by specifying one or more data files
-on the command line. For example, assuming you are in the
-qgis\_sample\_data directory, you could start QGIS with a vector layer
-and a raster file set to load on startup using the following command:
+\begin{Tip} \caption{\textsc{Esempio di utilizzo delle opzioni da riga di comando}}
+QGIS può essere avviato specificando uno o più files da riga di comando.
+Per esempio, assunto che ci si trovi nella directory qgis\_sample\_data, 
+si può avviare QGIS con un layer vettoriale e un file raster inserendo il seguente comando:
 \usertext{qgis ./raster/landcover.img ./gml/lakes.gml}
 \end{Tip}
 
-\minisec{Command line option \usertext{---snapshot}}
-This option allows you to create a snapshot in PNG format from the current view.
-This comes in handy when you have a lot of projects and want to
-generate snapshots from your data.
+\minisec{Opzione da linea di comando \usertext{---snapshot}}
+L'opzione consente di creare una schermata (snapshot) della vista corrente in formato PNG.
+Può essere utile quando si hanno molti progetti e si vogliono
+generare schermate dai propri dati.
 
-Currently it generates a PNG-file with 800x600 pixels. This can be adapted
-using the \usertext{---width} and \usertext{---height} command line
-arguments. A filename can be added after \usertext{---snapshot}.
+Il file PNG generato ha una risoluzione di 800x600 pixels. Si può modificare l'immagine 
+usando gli argomenti \usertext{---width} e \usertext{---height} da riga di comando. 
+Dopo l'opzione \usertext{---snapshot} può essere specificato il nome del file con cui si vuole salvare l'immagine.
 
-\minisec{Command line option \usertext{---lang}}
-Based on your locale QGIS, selects the correct localization. If you would like
-to change your language, you can specify a language code. For example:
-\usertext{---lang=it}
-starts QGIS in italian localization. A list of currently supported
-languages with language code and status is provided at
+\minisec{Opzione da linea di comando \usertext{---lang}}
+L'interfaccia di QGIS si presenta nella lingua definita dal setting del locale di sistema.
+Se si desidera l'interfaccia in un'altra lingua, può essere specificato all'avvio. Ad esempio:
+\usertext{---lang=en} fa sì che QGIS si avvii localizzato in inglese.
+Un elenco delle lingue correntemente supportate è fornito all'indirizzo
 \url{http://www.qgis.org/wiki/GUI_Translation_Progress}
 
-\minisec{Command line option \usertext{---project}}
-Starting QGIS with an existing project file is also possible. Just
-add the command line option \usertext{---project} followed by your project
-name and QGIS will open with all layers loaded described in the given file.
+\minisec{Opzione da linea di comando \usertext{---project}}
+È possibile avviare QGIS anche con un file di progetto. Basta semplicemente
+aggiungere l'opzione da riga di comando \usertext{---project} seguita dal percorso e dal nome
+del progetto e QGIS si aprirà caricando tutti i layer indicati nel file specificato.
 
-\minisec{Command line option \usertext{---extent}}
-To start with a specific map extent use this option. You need to add the bounding box of your extent in the following order separated by a comma:
+\minisec{Opzione da linea di comando \usertext{---extent}}
+Per fare sì che QGIS si avvii visualizzando una specifica porzione di mappa, è necessario
+specificare i limiti dell'estensione che si intende visualizzare secondo il seguente ordine,
+con ogni valore separato da virgole:
 \begin{verbatim}
 --extent xmin,ymin,xmax,ymax
 \end{verbatim}
 
-\minisec{Command line option \usertext{---nologo}}
-This command line argument hides the splash screen when you start QGIS.
+\minisec{Opzione da linea di comando \usertext{---nologo}}
+Questo argomento da riga di comando nasconde lo splash screen quando QGIS viene avviato.
 
-\minisec{Command line option \usertext{---noplugins}}
-If you have trouble at startup with plugins, you can avoid loading them at startup. They will still be available in Plugins Manager afterwards.
+\minisec{Opzione da linea di comando \usertext{---noplugins}}
+Se si verificano problemi all’avvio con i plugin, è possibile evitare di caricarli. Saranno comunque disponibili in seguito nel Gestore plugin.
 
-\minisec{Command line option \usertext{---optionspath}}
-You can have multiple configurations and decide which one to use when starting QGIS using this option. See \ref{subsec:gui_options} to check where does the operating system save the settings files. Presently there is no way to specify in which file where to write the settings, therefore you can create a copy of the original settings file and rename it.
+\minisec{Opzione da linea di comando \usertext{---optionspath}}
+Potreste avere più di una configurazione, con questa opzione potete decidere quale usare al momento di caricare QGIS. Vedere la sezione \ref{subsec:gui_options} per controllare dove il vostro sistema operativo salva i file d'impostazione. Al momento non c’è modo di specificare in quale file salvare le impostazioni, per cui potete creare una copia del file di impostazione e rinominarlo.
 
-\minisec{Command line option \usertext{---configpath}}
-This option is similar to the one above, but furthermore overrides the default path (~/.qgis) for user configuration and forces QSettings to use this directory, too. This allows users to e.g. carry QGIS installation on a flash drive together with all plugins and settings
+\minisec{Opzione da linea di comando \usertext{---configpath}}
+Questa opzione è simile alla precedente, ma inoltre sovrascrive il percorso di default (~/.qgis) per le configurazioni utente e forza anche QSettings ad usare questo percorso. Questo permette all'utente, per esempio, di portare l'installazione di QGIS su una flash drive insieme a tutti i plugin ed impostazioni.
 
-\section{QGIS GUI}\index{main window}
+\section{Interfaccia grafica di QGIS}\index{finestra principale}
 \label{label_qgismainwindow}
 
-When QGIS starts, you are presented with the GUI as shown below
-(the numbers 1 through 6 in yellow ovals refer to the six major areas of the
-interface as discussed below):
+All'avvio di QGIS viene visualizzata l'interfaccia grafica riprodotta dalla seguente immagine  
+(i numeri da 1 a 6 negli ovali gialli fanno riferimento alle sei principali aree della
+interfaccia come di seguito specificato):
 
 \begin{figure}[ht]
    \centering
     \includegraphics[clip=true, width=12cm]{startup}
-    \caption{QGIS GUI with Alaska sample data \nixcaption (KDE)} \label{fig:startup}
+    \caption{Interfaccia grafica di QGIS con dati campione dell’Alaska \nixcaption (KDE)} \label{fig:startup}
 \end{figure}
 
-\textbf{Note:} Your window decorations (title bar, etc.) may appear
-different depending on your operating system and window manager.\\
+\textbf{Nota:} L’aspetto delle finestre (barra del titolo, ecc.) può apparire diverso a seconda del sistema operativo e il gestore di finestre adottato.\\
 
-The QGIS GUI is divided into six areas:
+L'interfaccia di QGIS è divisa in sei aree:
 
 \begin{tabular}{p{5cm} p{5cm}}
 %\centering
-1. Menu Bar & 4. Map View \\
-2. Tool Bar & 5. Map Overview \\
-3. Map Legend & 6. Status Bar \\
+1. Barra Menu & 4. Vista Mappa \\
+2. Barra Strumenti & 5. Panoramica \\
+3. Legenda & 6. Barra di Stato \\
 \end{tabular}
 
-These six components of the QGIS interface are described in more detail in
-the following sections. Two more sections present keyboard shortcuts and
-context help.
+Le sei componenti dell'interfaccia di QGIS saranno descritte con maggior dettaglio
+nelle sezioni seguenti. Due ulteriori sezioni descriveranno le scorciatoie da tastiera e la guida contestuale.
 
 % \newpage
 
-\subsection{Menu Bar}\label{label_menubar}
-\index{menus}
+\subsection{Barra menu}\label{label_menubar}
+\index{barra menu}
 
-The menu bar provides access to various QGIS features using a standard
-hierarchical menu. The top-level menus and a summary of some of the
-menu options are listed below, together with the icons of the corresponding
-tools as they appear on the toolbar, as well as keyboard
-shortcuts.\footnote{Keyboard shortcuts can now be configured manually
-(shortcuts presented in this section are the defaults), using the Configure
-Shortcuts tool under Settings Menu.}
-Although most menu options have a corresponding tool and vice-versa,
-the menus are not organized quite like the toolbars.
-The toolbar containing the tool is listed after each menu option as a checkbox
-entry. For more information about tools and toolbars, see Section
+La barra dei menu fornisce accesso alle varie caratteristiche di QGIS utilizzando un menu gerarchico
+standard. Le voci gerarchicamente più elevate e una sintesi di alcune opzioni di menu sono elencate di seguito, assieme alle icone dello strumento corrispondente così come appaiono nella barra strumenti e alle scorciatoie da tastiera usate per richiamarle.\footnote{Le scorciatoie da tastiera possono essere configurate manualmente (quelle presentate in questa sezione sono di default), usando lo strumento Configura le scorciatoie nel menu Modifica.}
+Sebbene molte voci di menu abbiano uno strumento corrispondente e viceversa, i menu non sono organizzati esattamente come le barre strumenti.
+La barra strumenti che contiene la voce descritta, è indicata dopo ogni voce di menu con l’aspetto di una casella di controllo (checkbox). Per ulteriori informazioni su strumenti e barre degli strumenti, si veda la Sezione
 \ref{label_toolbars}.
 
 \begin{tabbing}
 \hspace{5.5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
-\hspace{1cm} Menu Option \> Shortcut \> Reference \> Toolbar\\
+\hspace{1cm} Voce di Menu \> Scorciatoia \> Riferimento \> Barra strumenti\\
 \end{tabbing}
 
 \begin{itemize}
 \item \mainmenuopt{File}
 \begin{tabbing}
 \hspace{4.5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
-\dropmenuopttwo{mActionFileNew}{New Project}
+\dropmenuopttwo{mActionFileNew}{Nuovo progetto}
 	\> \keystroke{Ctrl+N}
-	\> see Section \ref{sec:projects}
+	\> vedi sezione \ref{sec:projects}
 	\> \dropmenucheck{File} \\
-\dropmenuopttwo{mActionFileOpen}{Open Project}
+\dropmenuopttwo{mActionFileOpen}{Apri progetto}
 	\> \keystroke{Ctrl+O}
-	\> see Section \ref{sec:projects}
+	\> vedi sezione \ref{sec:projects}
 	\> \dropmenucheck{File} \\
-\dropmenuopt{Open Recent Projects}
+\dropmenuopt{Apri progetti recenti}
 	\>
-	\> see Section \ref{sec:projects} \\
-\dropmenuopttwo{mActionFileSave}{Save Project}
+	\> vedi sezione \ref{sec:projects} \\
+\dropmenuopttwo{mActionFileSave}{Salva progetto}
 	\> \keystroke{Ctrl+S}
-	\> see Section \ref{sec:projects}
+	\> vedi sezione \ref{sec:projects}
 	\> \dropmenucheck{File} \\
-\dropmenuopttwo{mActionFileSaveAs}{Save Project As}
+\dropmenuopttwo{mActionFileSaveAs}{Salva progetto con nome}
 	\> \keystroke{Ctrl+Shift+S}
-  \> see Section \ref{sec:projects}
+  \> vedi sezione \ref{sec:projects}
 	\> \dropmenucheck{File} \\
-\dropmenuopttwo{mActionSaveMapAsImage}{Save as Image}
+\dropmenuopttwo{mActionSaveMapAsImage}{Salva come immagine}
 	\>
-	\> see Section \ref{sec:output} \\
-\dropmenuopttwo{mActionNewComposer}{New Print Composer}
+	\> vedi sezione \ref{sec:output} \\
+\dropmenuopttwo{mActionNewComposer}{Nuovo sistema di stampa}
         \> \keystroke{Ctrl+P}
-        \> see Section \ref{label_printcomposer}
+        \> vedi Sezione \ref{label_printcomposer}
         \> \dropmenucheck{File} \\
-\dropmenuopttwo{mActionComposerManager}{Composer manager}
-	\>
-	\> see Section \ref{label_printcomposer}
+\dropmenuopttwo{mActionComposerManager}{Gestore di stampe}
+	\> 
+	\> vedi sezione \ref{label_printcomposer}
 	\> \dropmenucheck{File} \\
 \dropmenuopt{Print Composers}
 	\>
-	\> see Section \ref{label_printcomposer} \\
-\dropmenuopttwo{mActionFileExit}{Exit}
+	\> vedi sezione \ref{label_printcomposer} \\
+\dropmenuopttwo{mActionFileExit}{Esci} 
 	\> \keystroke{Ctrl+Q} \\
 \end{tabbing}
 
-\item \mainmenuopt{Edit}
+\item \mainmenuopt{Modifica}
 \begin{tabbing}
 \hspace{4.5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
-\dropmenuopttwo{mActionUndo}{Undo}
+\dropmenuopttwo{mActionUndo}{Annulla}
         \> \keystroke{Ctrl+Z}
-        \> see Section \ref{sec:advanced_edit}
-        \> \dropmenucheck{Advanced Digitizing} \\
-\dropmenuopttwo{mActionRedo}{Redo}
+        \> vedi sezione \ref{sec:advanced_edit}
+        \> \dropmenucheck{Digitalizzazione avanzata} \\
+\dropmenuopttwo{mActionRedo}{Ripristina}
         \> \keystroke{Ctrl+Shift+Z}
-        \> see Section \ref{sec:advanced_edit}
-        \> \dropmenucheck{Advanced Digitizing} \\
-\dropmenuopttwo{mActionEditCut}{Cut Features}
+        \> vedi sezione \ref{sec:advanced_edit}
+        \> \dropmenucheck{Digitalizzazione avanzata} \\
+\dropmenuopttwo{mActionEditCut}{Taglia geometria}
 	\> \keystroke{Ctrl+X}
-	\> see Section \ref{sec:edit_existing_layer}
-	\> \dropmenucheck{Digitizing} \\
-\dropmenuopttwo{mActionEditCopy}{Copy Features}
+	\> vedi sezione \ref{sec:edit_existing_layer}
+	\> \dropmenucheck{Digitalizzazione} \\
+\dropmenuopttwo{mActionEditCopy}{Copia geometria}
 	\> \keystroke{Ctrl+C}
-	\> see Section \ref{sec:edit_existing_layer}
-	\> \dropmenucheck{Digitizing} \\
-\dropmenuopttwo{mActionEditPaste}{Paste Features}
+	\> vedi sezione \ref{sec:edit_existing_layer}
+	\> \dropmenucheck{Digitalizzazione} \\
+\dropmenuopttwo{mActionEditPaste}{Incolla geometria}
 	\> \keystroke{Ctrl+V}
-	\> see Section \ref{sec:edit_existing_layer}
-	\> \dropmenucheck{Digitizing} \\
-\dropmenuopttwo{mActionEditPaste}{Move Feature}
+	\> vedi sezione \ref{sec:edit_existing_layer}
+	\> \dropmenucheck{Digitalizzazione} \\
+\dropmenuopttwo{mActionEditPaste}{Muovi elemento/i}
         \>
-        \> see Section \ref{sec:edit_existing_layer}
-        \> \dropmenucheck{Digitizing} \\
-\dropmenuopttwo{mActionDeleteSelected}{Delete Selected}
+        \> vedi sezione \ref{sec:edit_existing_layer}
+        \> \dropmenucheck{Digitalizzazione} \\
+\dropmenuopttwo{mActionDeleteSelected}{Elimina il selezionato}
         \>
-        \> see Section \ref{sec:edit_existing_layer}
-        \> \dropmenucheck{Digitizing} \\
-\dropmenuopttwo{mActionSimplify}{Simplify Feature}
+        \> vedi sezione \ref{sec:edit_existing_layer}
+        \> \dropmenucheck{Digitalizzazione} \\
+\dropmenuopttwo{mActionSimplify}{Semplifica geometria}
         \>
-        \> see Section \ref{sec:advanced_edit}
-        \> \dropmenucheck{Advanced Digitizing} \\
-\dropmenuopttwo{mActionAddRing}{Add Ring}
+        \> vedi sezione \ref{sec:advanced_edit}
+        \> \dropmenucheck{Digitalizzazione avanzata} \\
+\dropmenuopttwo{mActionAddRing}{Aggiungi buco}
         \>
-        \> see Section \ref{sec:advanced_edit}
-        \> \dropmenucheck{Advanced Digitizing} \\
+        \> vedi sezione \ref{sec:advanced_edit}
+        \> \dropmenucheck{Digitalizzazione avanzata} \\
 \dropmenuopttwo{mActionAddIsland}{Add Part}
         \>
-        \> see Section \ref{sec:advanced_edit}
-        \> \dropmenucheck{Advanced Digitizing} \\
+        \> vedi sezione \ref{sec:advanced_edit}
+        \> \dropmenucheck{Digitalizzazione avanzata} \\
 \dropmenuopttwo{mActionDeleteRing}{Delete Ring}
         \>
-        \> see Section \ref{sec:advanced_edit}
-        \> \dropmenucheck{Advanced Digitizing} \\
+        \> vedi sezione \ref{sec:advanced_edit}
+        \> \dropmenucheck{Digitalizzazione avanzata} \\
 \dropmenuopttwo{mActionDeletePart}{Delete Part}
         \>
-        \> see Section \ref{sec:advanced_edit}
-        \> \dropmenucheck{Advanced Digitizing} \\
+        \> vedi sezione \ref{sec:advanced_edit}
+        \> \dropmenucheck{Digitalizzazione avanzata} \\
 \dropmenuopttwo{mActionReshape}{Reshape Features}
         \>
-        \> see Section \ref{sec:advanced_edit}
-        \> \dropmenucheck{Advanced Digitizing} \\
+        \> vedi sezione \ref{sec:advanced_edit}
+        \> \dropmenucheck{Digitalizzazione avanzata} \\
 \dropmenuopttwo{mActionSplitFeatures}{Split Features}
         \>
-        \> see Section \ref{sec:advanced_edit}
-        \> \dropmenucheck{Advanced Digitizing} \\
+        \> vedi sezione \ref{sec:advanced_edit}
+        \> \dropmenucheck{Digitalizzazione avanzata} \\
 \dropmenuopttwo{mActionMergeFeatures}{Merge selected Features}
         \>
-        \> see Section \ref{sec:advanced_edit}
-        \> \dropmenucheck{Advanced Digitizing} \\
+        \> vedi sezione \ref{sec:advanced_edit}
+        \> \dropmenucheck{Digitalizzazione avanzata} \\
 \dropmenuopttwo{mActionNodeTool}{Node Tool}
         \>
-        \> see Section \ref{sec:edit_existing_layer}
-        \> \dropmenucheck{Digitizing} \\
+        \> vedi sezione \ref{sec:edit_existing_layer}
+        \> \dropmenucheck{Digitalizzazione} \\
 \dropmenuopttwo{mActionRotatePointSymbols}{Rotate Point Symbols}
         \>
-        \> see Section \ref{sec:advanced_edit}
-        \> \dropmenucheck{Advanced Digitizing} \\
+        \> vedi sezionen \ref{sec:advanced_edit}
+        \> \dropmenucheck{Digitalizzazione avanzata} \\
 \end{tabbing}
 
 After activating \toolbtntwo{mActionToggleEditing}{Toggle editing} mode
@@ -1222,7 +1213,7 @@ option \mainmenuopt{View} \arrow \dropmenuopt{Show Bookmarks}. The \\
 You can not edit the bookmark name or coordinates.
 
 \subsection{Zooming to a Bookmark}
-From the \dialog{Geospatial Bookmarks} dialog, select the desired bookmark by clicking on it,
+>From the \dialog{Geospatial Bookmarks} dialog, select the desired bookmark by clicking on it,
 then click \button{Zoom To}.
 You can also zoom to a bookmark by double-clicking on it.
 
