@@ -1,50 +1,34 @@
 %  !TeX  root  =  user_guide.tex
 \frontmatter
 \pagestyle{scrplain}
-\addchap{Preamble}
+\addchap{前言}
 \vspace{1cm}
 
 % when the revision of a section has been finalized, 
 % comment out the following line:
 %\updatedisclaimer
 
-This document is the original user guide of the described 
-software Quantum GIS. The software and hardware described in this 
-document are in most cases registered trademarks and are therefore subject 
-to the legal requirements. Quantum GIS is subject to the GNU General Public 
-License. Find more information on the Quantum GIS Homepage
+本文档是Quantum GIS软件的用户手册的最初版本。本文提及的大部分软件和硬件都注册了商标，因而使用需要法律授权。Quantum GIS软件依据GNU通用公共许可证发行。更多信息请访问Quantum GIS项目主页:
 \url{http://www.qgis.org}.
 \par\bigskip
-The details, data, results etc.~in this document have been 
-written and verified to the best of knowledge and responsibility of the 
-authors and editors. Nevertheless, mistakes concerning the content are possible.
+尽管本文作者尽力地编写文档中的内容、数据和结果，编者也尽责地审核文档内容，但遗漏和错误还是可能在所难免。
 \par\bigskip
-Therefore, all data are not liable to any duties or guarantees. The authors, editors 
-and publishers do not take any responsibility or liability for failures and 
-their consequences. Your are always welcome to indicate possible mistakes.
+因此，作者对文中的所有数据不承担任何责任，也不作任何保证。由于本文的疏误而导致的损失以及其他后果，本文作者、编者和出版者不承担任何责任。如果发现文中存在的错误，欢迎你向我们提出。
 \par\bigskip
-This document has been typeset with \LaTeX. It is available as \LaTeX~source
-code via \href{http://wiki.qgis.org/qgiswiki/DocumentationWritersCorner}{subversion} 
-and online as PDF document via \url{http://qgis.osgeo.org/documentation/manuals.html}. 
-Translated versions of this document can be downloaded via the documentation 
-area of the QGIS project as well. For more information about contributing to
-this document and about translating it, please visit: \url{http://www.qgis.org/wiki/} 
+本文档使用 \LaTeX~进行排版。 \LaTeX~源文件可以通过 \href{http://wiki.qgis.org/qgiswiki/DocumentationWritersCorner}{subversion} 
+获取，PDF文档可以在 \url{http://qgis.osgeo.org/documentation/manuals.html} 获取。 
+本文档的各翻译版本可以在QGIS项目的文档区域下载。关于如何参与本文档的编写或翻译工作，更多内容请访问： \url{http://www.qgis.org/wiki/} 
 
 \vspace{1cm}
 \noindent
-\textbf{Links in this Document}
+\textbf{文档中的链接}
 \par\bigskip
-This document contains internal and external links.  Clicking on an
-internal link moves within the document, while clicking on an external link
-opens an internet address.  In PDF form, internal links are shown in blue,
-while external links are shown in red and are handled by the
-system browser. In HTML form, the browser displays and handles both
-identically. 
+文档中包含了大量内部链接和外部链接。点击内部链接可以在文档里跳转，而点击外部链接会打开一个互联网页面。在PDF格式的文档中，内部链接显示为蓝色，而外部链接显示为红色，且会调用系统默认浏览器打开。在HTML格式的文档中，浏览器会同样地处理和显示两种链接。
 
 \newpage
 
 \begin{flushleft}
-\textbf{User, Installation and Coding Guide Authors and Editors:}
+\textbf{用户手册，安装与编程指南的作者及编者:}
   \par\bigskip\noindent
 \begin{tabular}{p{4cm} p{4cm} p{4cm}}
 Tara Athan & Radim Blazek & Godofredo Contreras \\
@@ -53,28 +37,20 @@ Anne Ghisla & Stephan Holl & N. Horning \\
 Magnus Homann & K. Koy & Lars Luthman \\ 
 Werner Macho & Carson J.Q. Farmer & Tyler Mitchell \\
 Claudia A. Engel & Brendan Morely & David Willis \\
-Jürgen E. Fischer & Marco Hugentobler & Gavin Macaulay \\
+Jurgen E. Fischer & Marco Hugentobler & Gavin Macaulay \\
 Gary E. Sherman & Tim Sutton \\ \
 \end{tabular}
 \end{flushleft}
 
-With thanks to Bertrand Masson for the layout, to Tisham Dhar for preparing the initial msys (MS Windows)
-environment documentation, to Tom Elwertowski and William Kyngesburye for
-help in the MAC OSX Installation Section and to Carlos Dávila, Paolo
-Cavallini and Christian Gunning for revisions. If we have neglected to 
-mention any contributors, please accept our apologies for this oversight.
+感谢Bertrand Masson，他为排版做了恒多工作；感谢Tisham Dhar，他收集准备了微软Windows环境的原始资料；感谢Tom Elwertowski和William Kyngesburye，他们帮助完成了MAC OSX系统上的安装说明部分；感谢Carlos Davila，Paolo
+Cavallini和Christian Gunning，他们共同对本文进行了校正。如果此处对其他一些贡献者没有提及，我们愿致上最诚挚的歉意。
 \par\bigskip\noindent
-\textbf{Copyright \copyright~2004 - 2010 \QG Development Team}
+\textbf{\QG 开发团队 2004 - 2010 \copyright~版权所有}
 \par\bigskip\noindent
-\textbf{Internet :} \url{http://www.qgis.org}
+\textbf{网站 :} \url{http://www.qgis.org}
 
-\addsec{License of this document}
+\addsec{文档许可}
 
-Permission is granted to copy, distribute and/or modify this document under 
-the terms of the GNU Free Documentation License, Version 1.3 or any later 
-version published by the Free Software Foundation; with no Invariant 
-Sections, no Front-Cover Texts and no Back-Cover Texts.  A copy of the 
-license is included in section \ref{label_fdl} entitled "GNU Free Documentation 
-License".
+本文档的非固定部分、非封面文字和非封底文字可以在自由软件基金会发布的GNU开放文档许可证（1.3或以上版本）允许范围内自由复制、分发和/或修改。授权许可证的一个副本可参见 \ref{label_fdl} “GNU 开放文档许可证".
 
 \newpage

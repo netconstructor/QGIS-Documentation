@@ -3,8 +3,8 @@
 
 .SUFFIXES: .dvi .tex .jpg .eps .ps .fig .pdf .html .tif
 
-LATEX = latex
-PDFLATEX = pdflatex
+LATEX = xelatex
+PDFLATEX = xelatex
 MAKE = make
 
 APPENDIX = $(wildcard appendices/*.tex)

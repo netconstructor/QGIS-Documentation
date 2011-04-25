@@ -6,7 +6,7 @@
 \pagenumbering{roman}
 
 %%% encoding, utf8 should work for any localization
-\usepackage[utf8]{inputenc} 
+%\usepackage[utf8]{inputenc} 
 \usepackage[T1]{fontenc} 
 
 %%% prevent overlapping numbers in toc.tex lists
@@ -156,6 +156,10 @@ Read at your own risk!}}
 %\usepackage[frenchb]{babel} 
 % used to get better list in french
 %\frenchbsetup{StandardLists=true}
+%\defaultfontfeatures{Mapping=tex-text}
+\usepackage[boldfont,slantfont,CJKnumber,CJKaddspaces]{xeCJK}
+\punctstyle{kaiming} 
+\setCJKmainfont[BoldFont={SimHei},ItalicFont={KaiTi}]{SimSun}
 
 
 %%% Macros QGIS Versions  
@@ -185,7 +189,7 @@ Read at your own risk!}}
 
 % filename
 % usage: \filename{lakes.shp}
-\newcommand{\filename}[1]{\texttt{#1}}
+\renewcommand{\filename}[1]{\texttt{#1}}
 
 % usertext generic style for text that the user should type in from the keyboard
 % % Note: for user input into a labelled text field in the GUI, see \inputtext
