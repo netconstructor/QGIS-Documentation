@@ -1,40 +1,29 @@
 %  !TeX  root  =  user_guide.tex
 
-\chapter{Features at a Glance}\label{feature_glance}
+\chapter{功能速览}\label{feature_glance}
 
 % when the revision of a section has been finalized,
 % comment out the following line:
 %\updatedisclaimer
 
-After a first and simple sample session in Section \ref{label_getstarted} we now
-want to give you a more detailed overview of the features of QGIS.
-Most features presented in the following chapters will be explained and described in
-own sections later in the manual.
+章 \ref{label_getstarted}中对 \qg 功能进行了简单示范，下面将展开进行更加详尽的叙述。以下章节中提到的大部分功能将在文档各自相应的部分中得到解释和描述。
 
-\section{Starting and Stopping QGIS}\label{label_startinqgis}
+\section{启动和退出 \qg}\label{label_startinqgis}
 
-In Section \ref{samplesession} you already learned how to start QGIS. We will
-repeat this here and you will see that QGIS also provides further command line options.
+在章 \ref{samplesession}中已经介绍了如何启动QGIS。这里我们将再重复一次，并且您将看到 \qg 还提供了更多的命令行选项。
 
 \begin{itemize}
-\item \nix{Assuming that QGIS is installed in the PATH, you can start QGIS
-by typing: \usertext{qgis}  at a command prompt or by double clicking on the QGIS
-application link (or shortcut) on the desktop or in the application menu.}
-\item \win{Start QGIS using the Start menu or desktop shortcut,
-or double click on a QGIS project file.}
-\item \osx{Double click the icon in your Applications folder. If you need to start QGIS
-in a shell, run /path-to-installation-executable/Contents/MacOS/Qgis.}
+\item \nix{假设QGIS已经在PATH中安装，可通过以下方式启动QGIS：在命令提示符下键入 \usertext{qgis}或者在桌面或应用程序菜单中双击QGIS应用程序链接（或快捷方式）。}
+\item \win{用开始菜单或桌面快捷方式打开QGIS或者双击QGIS工程文件。}
+\item \osx{双击应用程序文件夹中的图标。 如果需要在Shell中启动QGIS，运行 /path-to-installation-executable/Contents/MacOS/Qgis。}
 \end{itemize}
 
-To stop QGIS, click the menu options \{\nix{}\win{File} \osx{QGIS}\} \arrow Quit,
-or use the shortcut \keystroke{Ctrl+Q}.
+要停止 \qg，需要单击菜单项 \{\nix{}\win{File}\osx{QGIS}\} \arrow 退出，或者使用快捷键 \keystroke{Ctrl+Q}。
 
-\subsection{Command Line Options}\index{command line options}
+\subsection{命令行选项}\index{command line options}
 \label{label_commandline}
 
-\nix QGIS supports a number of options when started from the command line. To
-get a list of the options, enter \usertext{qgis ---help} on the command line.
-The usage statement for QGIS is:
+\nix 从命令行启动时，QGIS支持很多命令选项。在命令行输入 \usertext{qgis ---help}，就能看到一个选项列表。QGIS的用法说明是：
 
 \small
 \begin{verbatim}
@@ -67,53 +56,39 @@ Usage: qgis [options] [FILES]
 \end{verbatim}
 \normalsize
 
-\begin{Tip} \caption{\textsc{Example Using command line arguments}}
-You can start QGIS by specifying one or more data files
-on the command line. For example, assuming you are in the
-qgis\_sample\_data directory, you could start QGIS with a vector layer
-and a raster file set to load on startup using the following command:
-\usertext{qgis ./raster/landcover.img ./gml/lakes.gml}
+\begin{Tip} \caption{\textsc{使用命令行参数示例}}
+您可以通过在命令行上指定一个或多个数据文件来启动QGIS。例如，假设您在qgis\_sample\_data目录中，就可以通过命令 \usertext{qgis ./raster/landcover.img ./gml/lakes.gml}在启动QGIS时加载一个矢量图层和一个栅格图层。
 \end{Tip}
 
-\minisec{Command line option \usertext{---snapshot}}
-This option allows you to create a snapshot in PNG format from the current view.
-This comes in handy when you have a lot of projects and want to
-generate snapshots from your data.
+\minisec{命令行选项 \usertext{---snapshot}}
+这个选项可以在当前窗口创建一个PNG格式的快照。当用户有很多项目并且想从数据中生成快照时，这就变得非常便利。
 
-Currently it generates a PNG-file with 800x600 pixels. This can be adapted
-using the \usertext{---width} and \usertext{---height} command line
-arguments. A filename can be added after \usertext{---snapshot}.
+目前它能生成具有800×600像素的PNG文件。可用 \usertext{---width}和 \usertext{---height}命令行参数来完成。文件名可加在\usertext{---snapshot}之后。
 
-\minisec{Command line option \usertext{---lang}}
-Based on your locale QGIS, selects the correct localization. If you would like
-to change your language, you can specify a language code. For example:
-\usertext{---lang=it}
-starts QGIS in italian localization. A list of currently supported
-languages with language code and status is provided at
-\url{http://www.qgis.org/wiki/GUI_Translation_Progress}
+\minisec{命令行选项 \usertext{---lang}}
+根据情况QGIS选择需要的本地化语言。如果想改变语言可指定语言码。例如： \usertext{---lang=it}启动意大利版QGIS。\url{http://www.qgis.org/wiki/GUI_Translation_Progress}提供了目前所支持语言的代码和状态。
 
-\minisec{Command line option \usertext{---project}}
-Starting QGIS with an existing project file is also possible. Just
-add the command line option \usertext{---project} followed by your project
-name and QGIS will open with all layers loaded described in the given file.
+\minisec{命令行选项 \usertext{---project}}
+也可以用QGIS启动一个现有的工程文件。只需要在工程名后添加 \usertext{--project}，QGIS就可打开加载在给定文件中的所有图层。
 
-\minisec{Command line option \usertext{---extent}}
-To start with a specific map extent use this option. You need to add the bounding box of your extent in the following order separated by a comma:
+\minisec{命令行选项 \usertext{---extent}}
+打开一个特定的地图范围需要用到此选项。需要通过下面这个用逗号分开的命令来添加一个范围边界框：
+
 \begin{verbatim}
 --extent xmin,ymin,xmax,ymax
 \end{verbatim}
 
-\minisec{Command line option \usertext{---nologo}}
-This command line argument hides the splash screen when you start QGIS.
+\minisec{命令行选项 \usertext{---nologo}}
+当启动QGIS时，此命令行参数隐藏启动画面。
 
-\minisec{Command line option \usertext{---noplugins}}
-If you have trouble at startup with plugins, you can avoid loading them at startup. They will still be available in Plugins Manager afterwards.
+\minisec{命令行选项 \usertext{---noplugins}}
+如果QGIS带插件启动时出现问题，你可以在启动时取消加载插件。这些插件在之后从插件管理器中启用。
 
-\minisec{Command line option \usertext{---optionspath}}
-You can have multiple configurations and decide which one to use when starting QGIS using this option. See \ref{subsec:gui_options} to check where does the operating system save the settings files. Presently there is no way to specify in which file where to write the settings, therefore you can create a copy of the original settings file and rename it.
+\minisec{命令行选项 \usertext{---optionspath}}
+当你有不同的软件设置时，您可以使用本选项来决定使用哪一个配置文件启动QGIS。可以在章 \ref{subsec:gui_options}中查看操作系统保存设置文件的位置。到目前为止还不能设置配置文件的保存位置，所以您可以保存一份原始配置文件的副本并重命名。
 
-\minisec{Command line option \usertext{---configpath}}
-This option is similar to the one above, but furthermore overrides the default path (~/.qgis) for user configuration and forces QSettings to use this directory, too. This allows users to e.g. carry QGIS installation on a flash drive together with all plugins and settings
+\minisec{命令行选项 \usertext{---configpath}}
+本选项和上一个选项类似，但是会修改默认的配置文件位置（～/.qgis）以进行用户自定义配置，并且还会强制Qt设置QSettings使用该配置目录。这就允许用户，比如，在闪存盘上安装QGIS及其插件和设置。
 
 \section{QGIS GUI}\index{main window}
 \label{label_qgismainwindow}
