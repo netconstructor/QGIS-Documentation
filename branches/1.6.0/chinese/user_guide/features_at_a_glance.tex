@@ -93,453 +93,427 @@ Usage: qgis [options] [FILES]
 \section{QGIS GUI}\index{main window}
 \label{label_qgismainwindow}
 
-When QGIS starts, you are presented with the GUI as shown below
-(the numbers 1 through 6 in yellow ovals refer to the six major areas of the
-interface as discussed below):
+当启动QGIS时，可看到如下所示的GUI（黄色椭圆形中的数字1到6是指以下所讨论的六个主要界面区域）：
 
 \begin{figure}[ht]
    \centering
     \includegraphics[clip=true, width=12cm]{startup}
-    \caption{QGIS GUI with Alaska sample data \nixcaption (KDE)} \label{fig:startup}
+    \caption{显示 Alaska 地区示例数据的 QGIS GUI \nixcaption (KDE)} \label{fig:startup}
 \end{figure}
 
-\textbf{Note:} Your window decorations (title bar, etc.) may appear
-different depending on your operating system and window manager.\\
+\textbf{注意：} 您的窗口装饰（标题栏等）可能因操作系统和窗口管理器的不同而不同。\\
 
-The QGIS GUI is divided into six areas:
+QGIS GUI被划分为六个区域：
 
 \begin{tabular}{p{5cm} p{5cm}}
 %\centering
-1. Menu Bar & 4. Map View \\
-2. Tool Bar & 5. Map Overview \\
-3. Map Legend & 6. Status Bar \\
+1. 菜单栏  & 4. 地图显示区 \\
+2. 工具栏 & 5. 地图预览区 \\
+3. 图例显示区 & 6. 状态栏 \\
 \end{tabular}
 
-These six components of the QGIS interface are described in more detail in
-the following sections. Two more sections present keyboard shortcuts and
-context help.
+下面各节对QGIS界面这六大部分进行了更加详尽的描述。还有两节介绍了键盘快捷键和上下文帮助。
 
 % \newpage
 
-\subsection{Menu Bar}\label{label_menubar}
+\subsection{菜单栏}\label{label_menubar}
 \index{menus}
 
-The menu bar provides access to various QGIS features using a standard
-hierarchical menu. The top-level menus and a summary of some of the
-menu options are listed below, together with the icons of the corresponding
-tools as they appear on the toolbar, as well as keyboard
-shortcuts.\footnote{Keyboard shortcuts can now be configured manually
-(shortcuts presented in this section are the defaults), using the Configure
-Shortcuts tool under Settings Menu.}
-Although most menu options have a corresponding tool and vice-versa,
-the menus are not organized quite like the toolbars.
-The toolbar containing the tool is listed after each menu option as a checkbox
-entry. For more information about tools and toolbars, see Section
-\ref{label_toolbars}.
+菜单栏通过标准的分层菜单向用户提供了各种QGIS功能。下面列出了顶层菜单和一些菜单选项的汇总及其对应的工具栏上的图标和键盘快捷键。 \footnote{键盘快捷键现在可以手动配置（本节中给出快捷键是默认的版本），只需要点击设置菜单项下的自定义快捷键命令}虽然大部分菜单选项都有相应的工具，反之亦然，但是菜单并没有像工具栏一样安排有序。每次进入菜单选项选择复选框后工具栏中包含的所有工具都会被列出。更多关于工具和工具栏的信息详见章节 \ref{label_toolbars}。
 
 \begin{tabbing}
 \hspace{5.5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
-\hspace{1cm} Menu Option \> Shortcut \> Reference \> Toolbar\\
+\hspace{1cm} 菜单选项 \> 快捷键 \> 参考章节 \> 工具条\\
 \end{tabbing}
 
 \begin{itemize}
-\item \mainmenuopt{File}
+\item \mainmenuopt{文件}
 \begin{tabbing}
 \hspace{4.5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
-\dropmenuopttwo{mActionFileNew}{New Project}
+\dropmenuopttwo{mActionFileNew}{新建工程}
 	\> \keystroke{Ctrl+N}
-	\> see Section \ref{sec:projects}
-	\> \dropmenucheck{File} \\
-\dropmenuopttwo{mActionFileOpen}{Open Project}
+	\> 参见章 \ref{sec:projects}
+	\> \dropmenucheck{文件} \\
+\dropmenuopttwo{mActionFileOpen}{打开工程}
 	\> \keystroke{Ctrl+O}
-	\> see Section \ref{sec:projects}
-	\> \dropmenucheck{File} \\
-\dropmenuopt{Open Recent Projects}
+	\> 参见章 \ref{sec:projects}
+	\> \dropmenucheck{文件} \\
+\dropmenuopt{打开最近工程}
 	\>
-	\> see Section \ref{sec:projects} \\
-\dropmenuopttwo{mActionFileSave}{Save Project}
+	\> 参见章 \ref{sec:projects} \\
+\dropmenuopttwo{mActionFileSave}{保存工程}
 	\> \keystroke{Ctrl+S}
-	\> see Section \ref{sec:projects}
-	\> \dropmenucheck{File} \\
-\dropmenuopttwo{mActionFileSaveAs}{Save Project As}
+	\> 参见章 \ref{sec:projects}
+	\> \dropmenucheck{文件} \\
+\dropmenuopttwo{mActionFileSaveAs}{工程另存为}
 	\> \keystroke{Ctrl+Shift+S}
-  \> see Section \ref{sec:projects}
-	\> \dropmenucheck{File} \\
-\dropmenuopttwo{mActionSaveMapAsImage}{Save as Image}
+  \> 参见章 \ref{sec:projects}
+	\> \dropmenucheck{文件} \\
+\dropmenuopttwo{mActionSaveMapAsImage}{另存为图像}
 	\>
-	\> see Section \ref{sec:output} \\
-\dropmenuopttwo{mActionNewComposer}{New Print Composer}
+	\> 参见章 \ref{sec:output} \\
+\dropmenuopttwo{mActionNewComposer}{新建打印设置}
         \> \keystroke{Ctrl+P}
-        \> see Section \ref{label_printcomposer}
-        \> \dropmenucheck{File} \\
-\dropmenuopttwo{mActionComposerManager}{Composer manager}
+        \> 参见章 \ref{label_printcomposer}
+        \> \dropmenucheck{文件} \\
+\dropmenuopttwo{mActionComposerManager}{打印设置}
 	\>
-	\> see Section \ref{label_printcomposer}
-	\> \dropmenucheck{File} \\
-\dropmenuopt{Print Composers}
+	\> 参见章 \ref{label_printcomposer}
+	\> \dropmenucheck{文件} \\
+\dropmenuopt{打印设置}
 	\>
-	\> see Section \ref{label_printcomposer} \\
-\dropmenuopttwo{mActionFileExit}{Exit}
+	\> 参见章 \ref{label_printcomposer} \\
+\dropmenuopttwo{mActionFileExit}{退出}
 	\> \keystroke{Ctrl+Q} \\
 \end{tabbing}
 
-\item \mainmenuopt{Edit}
+\item \mainmenuopt{编辑}
 \begin{tabbing}
 \hspace{4.5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
-\dropmenuopttwo{mActionUndo}{Undo}
+\dropmenuopttwo{mActionUndo}{撤销}
         \> \keystroke{Ctrl+Z}
-        \> see Section \ref{sec:advanced_edit}
-        \> \dropmenucheck{Advanced Digitizing} \\
-\dropmenuopttwo{mActionRedo}{Redo}
+        \> 参见章 \ref{sec:advanced_edit}
+        \> \dropmenucheck{高级数字化} \\
+\dropmenuopttwo{mActionRedo}{重做}
         \> \keystroke{Ctrl+Shift+Z}
-        \> see Section \ref{sec:advanced_edit}
-        \> \dropmenucheck{Advanced Digitizing} \\
-\dropmenuopttwo{mActionEditCut}{Cut Features}
+        \> 参见章 \ref{sec:advanced_edit}
+        \> \dropmenucheck{高级数字化} \\
+\dropmenuopttwo{mActionEditCut}{图元剪切}
 	\> \keystroke{Ctrl+X}
-	\> see Section \ref{sec:edit_existing_layer}
-	\> \dropmenucheck{Digitizing} \\
-\dropmenuopttwo{mActionEditCopy}{Copy Features}
+	\> 参见章 \ref{sec:edit_existing_layer}
+	\> \dropmenucheck{数字化} \\
+\dropmenuopttwo{mActionEditCopy}{图元复制}
 	\> \keystroke{Ctrl+C}
-	\> see Section \ref{sec:edit_existing_layer}
-	\> \dropmenucheck{Digitizing} \\
-\dropmenuopttwo{mActionEditPaste}{Paste Features}
+	\> 参见章 \ref{sec:edit_existing_layer}
+	\> \dropmenucheck{数字化} \\
+\dropmenuopttwo{mActionEditPaste}{图元粘贴}
 	\> \keystroke{Ctrl+V}
-	\> see Section \ref{sec:edit_existing_layer}
-	\> \dropmenucheck{Digitizing} \\
-\dropmenuopttwo{mActionEditPaste}{Move Feature}
+	\> 参见章 \ref{sec:edit_existing_layer}
+	\> \dropmenucheck{数字化} \\
+\dropmenuopttwo{mActionEditPaste}{图元移动}
         \>
-        \> see Section \ref{sec:edit_existing_layer}
-        \> \dropmenucheck{Digitizing} \\
-\dropmenuopttwo{mActionDeleteSelected}{Delete Selected}
+        \> 参见章 \ref{sec:edit_existing_layer}
+        \> \dropmenucheck{数字化} \\
+\dropmenuopttwo{mActionDeleteSelected}{删除选中图元}
         \>
-        \> see Section \ref{sec:edit_existing_layer}
-        \> \dropmenucheck{Digitizing} \\
-\dropmenuopttwo{mActionSimplify}{Simplify Feature}
+        \> 参见章 \ref{sec:edit_existing_layer}
+        \> \dropmenucheck{数字化} \\
+\dropmenuopttwo{mActionSimplify}{图元简化}
         \>
-        \> see Section \ref{sec:advanced_edit}
-        \> \dropmenucheck{Advanced Digitizing} \\
-\dropmenuopttwo{mActionAddRing}{Add Ring}
+        \> 参见章 \ref{sec:advanced_edit}
+        \> \dropmenucheck{高级数字化} \\
+\dropmenuopttwo{mActionAddRing}{添加环}
         \>
-        \> see Section \ref{sec:advanced_edit}
-        \> \dropmenucheck{Advanced Digitizing} \\
-\dropmenuopttwo{mActionAddIsland}{Add Part}
+        \> 参见章 \ref{sec:advanced_edit}
+        \> \dropmenucheck{高级数字化} \\
+\dropmenuopttwo{mActionAddIsland}{添加部分}
         \>
-        \> see Section \ref{sec:advanced_edit}
-        \> \dropmenucheck{Advanced Digitizing} \\
-\dropmenuopttwo{mActionDeleteRing}{Delete Ring}
+        \> 参见章 \ref{sec:advanced_edit}
+        \> \dropmenucheck{高级数字化} \\
+\dropmenuopttwo{mActionDeleteRing}{删除环}
         \>
-        \> see Section \ref{sec:advanced_edit}
-        \> \dropmenucheck{Advanced Digitizing} \\
-\dropmenuopttwo{mActionDeletePart}{Delete Part}
+        \> 参见章 \ref{sec:advanced_edit}
+        \> \dropmenucheck{高级数字化} \\
+\dropmenuopttwo{mActionDeletePart}{删除部分}
         \>
-        \> see Section \ref{sec:advanced_edit}
-        \> \dropmenucheck{Advanced Digitizing} \\
-\dropmenuopttwo{mActionReshape}{Reshape Features}
+        \> 参见章 \ref{sec:advanced_edit}
+        \> \dropmenucheck{高级数字化} \\
+\dropmenuopttwo{mActionReshape}{图元调整}
         \>
-        \> see Section \ref{sec:advanced_edit}
-        \> \dropmenucheck{Advanced Digitizing} \\
-\dropmenuopttwo{mActionSplitFeatures}{Split Features}
+        \> 参见章 \ref{sec:advanced_edit}
+        \> \dropmenucheck{高级数字化} \\
+\dropmenuopttwo{mActionSplitFeatures}{图元分割}
         \>
-        \> see Section \ref{sec:advanced_edit}
-        \> \dropmenucheck{Advanced Digitizing} \\
-\dropmenuopttwo{mActionMergeFeatures}{Merge selected Features}
+        \> 参见章 \ref{sec:advanced_edit}
+        \> \dropmenucheck{高级数字化} \\
+\dropmenuopttwo{mActionMergeFeatures}{合并选中图元}
         \>
-        \> see Section \ref{sec:advanced_edit}
-        \> \dropmenucheck{Advanced Digitizing} \\
-\dropmenuopttwo{mActionNodeTool}{Node Tool}
+        \> 参见章 \ref{sec:advanced_edit}
+        \> \dropmenucheck{高级数字化} \\
+\dropmenuopttwo{mActionNodeTool}{结点工具}
         \>
-        \> see Section \ref{sec:edit_existing_layer}
-        \> \dropmenucheck{Digitizing} \\
-\dropmenuopttwo{mActionRotatePointSymbols}{Rotate Point Symbols}
+        \> 参见章 \ref{sec:edit_existing_layer}
+        \> \dropmenucheck{数字化} \\
+\dropmenuopttwo{mActionRotatePointSymbols}{旋转点状符号}
         \>
-        \> see Section \ref{sec:advanced_edit}
-        \> \dropmenucheck{Advanced Digitizing} \\
+        \> 参见章 \ref{sec:advanced_edit}
+        \> \dropmenucheck{高级数字化} \\
 \end{tabbing}
 
-After activating \toolbtntwo{mActionToggleEditing}{Toggle editing} mode
-for a layer, you will find a capture feature icon in the \mainmenuopt{Edit}
-menu depending on the layer type (point, line or polygon). \\
+在对图层激活 \toolbtntwo{mActionToggleEditing}{启动编辑} 工具后，您会在菜单 \mainmenuopt{编辑} 下发现一个捕捉图元的图标，具体取决于图层类型（点，线或面）。\\
 
 \begin{tabbing}
 \hspace{4.5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
-\dropmenuopttwo{mActionCapturePoint}{Capture Point}
+\dropmenuopttwo{mActionCapturePoint}{点捕捉}
         \>
-        \> see Section \ref{sec:edit_existing_layer}
-        \> \dropmenucheck{Digitizing} \\
-\dropmenuopttwo{mActionCaptureLine}{Capture Line}
+        \> 参见章 \ref{sec:edit_existing_layer}
+        \> \dropmenucheck{数字化} \\
+\dropmenuopttwo{mActionCaptureLine}{线捕捉}
         \>
-        \> see Section \ref{sec:edit_existing_layer}
-        \> \dropmenucheck{Digitizing} \\
-\dropmenuopttwo{mActionCapturePolygon}{Capture Polygon}
+        \> 参见章 \ref{sec:edit_existing_layer}
+        \> \dropmenucheck{数字化} \\
+\dropmenuopttwo{mActionCapturePolygon}{多边形捕捉}
         \>
-        \> see Section \ref{sec:edit_existing_layer}
-        \> \dropmenucheck{Digitizing} \\
+        \> 参见章 \ref{sec:edit_existing_layer}
+        \> \dropmenucheck{数字化} \\
 \end{tabbing}
 
 
-\item \mainmenuopt{View}
+\item \mainmenuopt{视图}
 \begin{tabbing}
 \hspace{4.5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
-\dropmenuopttwo{mActionPan}{Pan Map}
+\dropmenuopttwo{mActionPan}{地图漫游}
 	\>
-	\> \> \dropmenucheck{Map Navigation} \\
-\dropmenuopttwo{mActionZoomIn}{Zoom In}
+	\> \> \dropmenucheck{地图导航} \\
+\dropmenuopttwo{mActionZoomIn}{地图放大}
 	\> \keystroke{Ctrl++}
-	\> \> \dropmenucheck{Map Navigation} \\
-\dropmenuopttwo{mActionZoomOut}{Zoom Out}
+	\> \> \dropmenucheck{地图导航} \\
+\dropmenuopttwo{mActionZoomOut}{地图缩小}
 	\> \keystroke{Ctrl+-}
-	\> \> \dropmenucheck{Map Navigation} \\
-\dropmenuopttwo{mActionSelect}{Select Features}
+	\> \> \dropmenucheck{地图导航} \\
+\dropmenuopttwo{mActionSelect}{图元选择}
 	\> 
-	\> see Section \ref{sec:selection} 
-	\> \dropmenucheck{Attributes} \\
-\dropmenuopttwo{mActionDeselectAll}{Deselect Features from all layers}
+	\> 参见章 \ref{sec:selection} 
+	\> \dropmenucheck{属性} \\
+\dropmenuopttwo{mActionDeselectAll}{取消所有选中图元}
         \>
-        \> \> \dropmenucheck{Attributes} \\
-\dropmenuopttwo{mActionIdentify}{Identify Features}
+        \> \> \dropmenucheck{属性} \\
+\dropmenuopttwo{mActionIdentify}{图元标记}
 	\> \keystroke{Ctrl-Alt-I}
-	\> \> \dropmenucheck{Attributes} \\
-\dropmenuopttwo{mActionMeasure}{Measure Line}
+	\> \> \dropmenucheck{属性} \\
+\dropmenuopttwo{mActionMeasure}{直线量测}
 	\> \keystroke{Ctrl-Alt-M}
-	\> \> \dropmenucheck{Attributes} \\
-\dropmenuopttwo{mActionMeasureArea}{Measure Area}
+	\> \> \dropmenucheck{属性} \\
+\dropmenuopttwo{mActionMeasureArea}{面积量测}
 	\> \keystroke{Ctrl-Alt-J}
-	\> \> \dropmenucheck{Attributes} \\
-\dropmenuopttwo{mActionMeasureAngle}{Measure Angle}
+	\> \> \dropmenucheck{属性} \\
+\dropmenuopttwo{mActionMeasureAngle}{角度量测}
 	\>
-	\> \> \dropmenucheck{Attributes} \\
-\dropmenuopttwo{mActionOpenTable}{Zoom Full}
+	\> \> \dropmenucheck{属性} \\
+\dropmenuopttwo{mActionOpenTable}{按屏幕缩放}
 	\> \keystroke{Ctrl-Alt-F}
-	\> \> \dropmenucheck{Map Navigation} \\
-\dropmenuopttwo{mActionZoomToLayer}{Zoom To Layer}
+	\> \> \dropmenucheck{地图导航} \\
+\dropmenuopttwo{mActionZoomToLayer}{按图层缩放}
 	\>
-	\> \> \dropmenucheck{Map Navigation} \\
-\dropmenuopttwo{mActionZoomToSelected}{Zoom To Selection}
+	\> \> \dropmenucheck{地图导航} \\
+\dropmenuopttwo{mActionZoomToSelected}{按选择区缩放}
 	\> \keystroke{Ctrl+J}
-	\> \> \dropmenucheck{Map Navigation} \\
-\dropmenuopttwo{mActionZoomLast}{Zoom Last}
+	\> \> \dropmenucheck{地图导航} \\
+\dropmenuopttwo{mActionZoomLast}{返回最后一次缩放}
 	\>
-	\> \> \dropmenucheck{Map Navigation} \\
-\dropmenuopttwo{mActionZoomNext}{Zoom Next}
+	\> \> \dropmenucheck{地图导航} \\
+\dropmenuopttwo{mActionZoomNext}{重做下一次缩放}
 	\>
-	\> \> \dropmenucheck{Map Navigation} \\
-\mainmenuopt{Zoom Actual Size}
+	\> \> \dropmenucheck{地图导航} \\
+\mainmenuopt{按实际大小缩放}
 	\>
 	\> \>  \\
-\dropmenuopttwo{mActionMapTips}{Map Tips}
+\dropmenuopttwo{mActionMapTips}{地图小技巧}
 	\>
-	\> \> \dropmenucheck{Attributes} \\
-\dropmenuopttwo{mActionNewBookmark}{New Bookmark}
+	\> \> \dropmenucheck{属性} \\
+\dropmenuopttwo{mActionNewBookmark}{新建书签}
 	\> \keystroke{Ctrl+B}
-	\> see Section \ref{sec:bookmarks}
-\> \dropmenucheck{Attributes} \\
-\dropmenuopttwo{mActionShowBookmarks}{Show Bookmarks}
+	\> 参见章 \ref{sec:bookmarks}
+\> \dropmenucheck{属性} \\
+\dropmenuopttwo{mActionShowBookmarks}{显示书签}
 	\> \keystroke{Ctrl-Alt-B}
-	\> see Section \ref{sec:bookmarks}
-	\> \dropmenucheck{Attributes} \\
-\dropmenuopttwo{mActionDraw}{Refresh}
+	\> 参见章 \ref{sec:bookmarks}
+	\> \dropmenucheck{属性} \\
+\dropmenuopttwo{mActionDraw}{刷新}
 	\> \keystroke{Ctrl+R}
-	\> \> \dropmenucheck{Map Navigation} \\
-\mainmenuopt{Tile scale slider}
+	\> \> \dropmenucheck{地图导航} \\
+\mainmenuopt{平铺缩放条}
 	\>
-	\> see Section \ref{sec:tilesets}
-	\> \dropmenucheck{Tile scale} \\
+	\> 参见章 \ref{sec:tilesets}
+	\> \dropmenucheck{平铺缩放条} \\
 \mainmenuopt{Live GPS tracking}
 	\>
-	\> see Section \ref{sec:gpstracking}
-	\> \dropmenucheck{GPS Information} \\
+	\> 参见章 \ref{sec:gpstracking}
+	\> \dropmenucheck{GPS 信息} \\
 \end{tabbing}
 
-\item \mainmenuopt{Layer}
+\item \mainmenuopt{图层}
 \begin{tabbing}
 \hspace{5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
-\dropmenuopt{New}
+\dropmenuopt{新建}
 	\>
-	\> see Section \ref{sec:create shape}
-	\> \dropmenucheck{Manage Layers} \\
-\mainmenuopt{Raster calculator}
+	\> 参见章 \ref{sec:create shape}
+	\> \dropmenucheck{图层管理} \\
+\mainmenuopt{栅格图层计算}
         \>
-        \> see Section \ref{sec:raster_calc}
+        \> 参见章 \ref{sec:raster_calc}
         \>  \\
-\dropmenuopttwo{mActionAddNonDbLayer}{Add Vector Layer}
+\dropmenuopttwo{mActionAddNonDbLayer}{添加矢量图层}
 	\> \keystroke{Ctrl+Shift+V}
 	\>
-	see Section \ref{label_workingvector}
-	\> \dropmenucheck{Manage Layers} \\
-\dropmenuopttwo{mActionAddRasterLayer}{Add Raster Layer}
+	参见章 \ref{label_workingvector}
+	\> \dropmenucheck{图层管理} \\
+\dropmenuopttwo{mActionAddRasterLayer}{添加栅格图层}
 	\> \keystroke{Ctrl+Shift+R}
 	\>
-	see Section \ref{label_raster}
-	\> \dropmenucheck{Manage Layers} \\
-\dropmenuopttwo{mActionAddLayer}{Add PostGIS Layer}
+	参见章 \ref{label_raster}
+	\> \dropmenucheck{图层管理} \\
+\dropmenuopttwo{mActionAddLayer}{添加PostGIS图层}
 	\> \keystroke{Ctrl+Shift+D}
 	\>
-	see Section \ref{label_postgis}
-        \> \dropmenucheck{Manage Layers} \\
-\dropmenuopttwo{mActionAddSpatiaLiteLayer}{Add SpatiaLite Layer}
+	参见章 \ref{label_postgis}
+        \> \dropmenucheck{图层管理} \\
+\dropmenuopttwo{mActionAddSpatiaLiteLayer}{添加SpatiaLite图层}
         \> \keystroke{Ctrl+Shift+L}
         \>
-        see Section \ref{label_spatialite}
-	\> \dropmenucheck{Manage Layers} \\
-\dropmenuopttwo{mActionAddWmsLayer}{Add WMS Layer}
+        参见章 \ref{label_spatialite}
+	\> \dropmenucheck{图层管理} \\
+\dropmenuopttwo{mActionAddWmsLayer}{添加WMS图层}
 	\> \keystroke{Ctrl+Shift+W}
 	\>
-	see Section \ref{sec:ogc-wms}
-	\> \dropmenucheck{Manage Layers} \\
-\dropmenuopttwo{mActionOpenTable}{Open Attribute Table}
+	参见章 \ref{sec:ogc-wms}
+	\> \dropmenucheck{图层管理} \\
+\dropmenuopttwo{mActionOpenTable}{打开属性表}
 	\> \>
-	\> \dropmenucheck{Attributes} \\
-\dropmenuopttwo{mActionFileSave}{Save edits}
+	\> \dropmenucheck{属性} \\
+\dropmenuopttwo{mActionFileSave}{保存修改}
         \> \>
-        \> \dropmenucheck{Digitizing} \\
-\dropmenuopttwo{mActionToggleEditing}{Toggle editing}
+        \> \dropmenucheck{数字化} \\
+\dropmenuopttwo{mActionToggleEditing}{启动编辑状态}
 	\> \>
-	\> \dropmenucheck{Digitizing} \\
-\mainmenuopt{Save as...}
+	\> \dropmenucheck{数字化} \\
+\mainmenuopt{另存为。。。}
 	\\
-\mainmenuopt{Save selection as vector file...}
+\mainmenuopt{选区另存为矢量图层。。。}
 	\> 
 	\> See \ref{sec:attribute table}
 	\> \\
-\dropmenuopttwo{mActionRemoveLayer}{Remove Layer}
+\dropmenuopttwo{mActionRemoveLayer}{移除图层}
 	\> \keystroke{Ctrl+D}
 	\>
-	\> \dropmenucheck{Properties} \\
-\mainmenuopt{Properties}
+	\> \dropmenucheck{特性} \\
+\mainmenuopt{特性}
 	\\
-\mainmenuopt{Query...}
+\mainmenuopt{查询。。。}
 	\\
-\dropmenuopttwo{mActionInOverview}{Add to Overview}
+\dropmenuopttwo{mActionInOverview}{添加到预览}
 	\> \keystroke{Ctrl+Shift+O}
 	\>
-	\> \dropmenucheck{Manage Layers} \\
-\dropmenuopttwo{mActionAddAllToOverview}{Add All To Overview}
+	\> \dropmenucheck{图层管理} \\
+\dropmenuopttwo{mActionAddAllToOverview}{全部添加到预览}
 	\>
 	\>
 	\\
-\dropmenuopttwo{mActionRemoveAllFromOverview}{Remove All From Overview}
+\dropmenuopttwo{mActionRemoveAllFromOverview}{从预览移除全部}
 	\>
 	\>
 	\\
-\dropmenuopttwo{mActionHideAllLayers}{Hide All Layers}
+\dropmenuopttwo{mActionHideAllLayers}{隐藏所有图层}
 	\> \keystroke{Ctrl+Shift+H}
 	\>
-	\> \dropmenucheck{Manage Layers} \\
-\dropmenuopttwo{mActionShowAllLayers}{Show All Layers}
+	\> \dropmenucheck{图层管理} \\
+\dropmenuopttwo{mActionShowAllLayers}{显示所有图层}
 	\> \keystroke{Ctrl+Shift+U}
 	\>
-	\> \dropmenucheck{Manage Layers} \\
-\dropmenuopttwo{labeling}{Labeling}
+	\> \dropmenucheck{图层管理} \\
+\dropmenuopttwo{labeling}{标注}
 	\>
 	\>
 	\\
 \end{tabbing}
 
-\item \mainmenuopt{Settings}
+\item \mainmenuopt{设置}
 \begin{tabbing}
 \hspace{5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
-\dropmenuopt{Panels}
+\dropmenuopt{面板}
 	\>
 	\>
 	\\
-\dropmenuopt{Toolbars}
+\dropmenuopt{工具条}
 	\>
 	\>
 	\\
-\mainmenuopt{Toggle Full Screen Mode}
+\mainmenuopt{启动全屏模式}
 	\>\keystroke{Ctrl-F}
 	\>
 	\\
-\dropmenuopttwo{mActionProjectProperties}{Project Properties}
+\dropmenuopttwo{mActionProjectProperties}{工程设置}
 	\> \keystroke{Ctrl-Alt-P}
-	\> see Section \ref{sec:projects} \\
-\dropmenuopttwo{mActionCustomProjection}{Custom CRS}
-        \> \> see Section \ref{sec:customprojections} \\
-\mainmenuopt{Style Manager}
+	\> 参见章 \ref{sec:projects} \\
+\dropmenuopttwo{mActionCustomProjection}{自定义CRS}
+        \> \> 参见章 \ref{sec:customprojections} \\
+\mainmenuopt{样式管理}
         \> \> \\
-\dropmenuopttwo{mActionOptions}{Configure shortcuts}
+\dropmenuopttwo{mActionOptions}{自定义快捷键}
         \> \> \\
-\dropmenuopttwo{mActionOptions}{Options}
-        \> \> see Section \ref{subsec:gui_options} \\
+\dropmenuopttwo{mActionOptions}{选项}
+        \> \> 参见章 \ref{subsec:gui_options} \\
 \end{tabbing}
 
-\item \mainmenuopt{Plugins} - (Futher menu items are added by plugins as they are loaded.)
+\item \mainmenuopt{插件} - （添加由插件扩展的菜单项。）
 \begin{tabbing}
 \hspace{5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
-\dropmenuopttwo{mActionShowPluginManager}{Manage Plugins}
-	\> \> see Section \ref{sec:managing_plugins} \dropmenucheck{Plugins}
+\dropmenuopttwo{mActionShowPluginManager}{插件管理}
+	\> \> 参见章 \ref{sec:managing_plugins} \dropmenucheck{插件}
 	\\
-	\mainmenuopt{Python Console}
+	\mainmenuopt{Python终端}
         \> \>
         \\
 \end{tabbing}
 
-\item \mainmenuopt{Help}
+\item \mainmenuopt{帮助}
 \begin{tabbing}
 \hspace{5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
-\dropmenuopttwo{mActionHelpContents}{Help Contents}
+\dropmenuopttwo{mActionHelpContents}{帮助上下文}
 	\> \keystroke{F1}
 	\>
-	\> \dropmenucheck{Help}\\
-\dropmenuopttwo{mActionQgisHomePage}{QGIS Home Page}
+	\> \dropmenucheck{帮助}\\
+\dropmenuopttwo{mActionQgisHomePage}{QGIS主页}
 	\> \keystroke{Ctrl+H}
 	\>
 	\\
-\dropmenuopttwo{mActionCheckQgisVersion}{Check QGIS Version}
+\dropmenuopttwo{mActionCheckQgisVersion}{查看QGIS版本}
 	\\
-\dropmenuopttwo{mActionHelpAbout}{About}
+\dropmenuopttwo{mActionHelpAbout}{关于}
 	\\
 \end{tabbing}
 
 \end{itemize}
 
-\textbf{Note:} \nix The Menu Bar items listed above are the default ones in KDE window
-manager. In GNOME, Settings menu is missing and its items are to be found
-there:
+\textbf{注意：} \nix 上面列出的菜单栏项在KDE窗口管理器中都是默认的。在GNOME中没在“设置”菜单项，但在以下这些地方可以找到：
+
 \begin{tabbing}
-\dropmenuopttwo{mActionProjectProperties}{Project Properties} \hspace{3cm}\=
-\dropmenucheck{File menu} \\
-\dropmenuopttwo{mActionOptions}{Options} \hspace{3cm}\>
-\dropmenucheck{Edit}\\
-\dropmenuopttwo{mActionOptions}{Configure Shortcuts} \hspace{3cm}\>
-\dropmenucheck{Edit}\\
-\mainmenuopt{Style Manager} \hspace{3cm}\>
-\dropmenucheck{Edit}\\
-\dropmenuopttwo{mActionCustomProjection}{Custom CRS}\hspace{3cm}\>
-\dropmenucheck{Edit} \\
-\dropmenuopt{Panels} \hspace{3cm}\>
-\dropmenucheck{View} \\
-\dropmenuopt{Toolbars}   \hspace{3cm}\>
-\dropmenucheck{View} \\
-\mainmenuopt{Toggle Full Screen Mode} \hspace{3cm}\>
-\dropmenucheck{View} \\
-\mainmenuopt{Tile scale slider} \hspace{3cm}\>
-\dropmenucheck{View} \\
-\mainmenuopt{Live GPS tracking} \hspace{3cm}\>
-\dropmenucheck{View} \\
+\dropmenuopttwo{mActionProjectProperties}{工程设置} \hspace{3cm}\=
+\dropmenucheck{文件菜单} \\
+\dropmenuopttwo{mActionOptions}{选项} \hspace{3cm}\>
+\dropmenucheck{编辑}\\
+\dropmenuopttwo{mActionOptions}{自定义快捷键} \hspace{3cm}\>
+\dropmenucheck{编辑}\\
+\mainmenuopt{样式管理} \hspace{3cm}\>
+\dropmenucheck{编辑}\\
+\dropmenuopttwo{mActionCustomProjection}{自定义CRS}\hspace{3cm}\>
+\dropmenucheck{编辑} \\
+\dropmenuopt{面板} \hspace{3cm}\>
+\dropmenucheck{视图} \\
+\dropmenuopt{工具条}   \hspace{3cm}\>
+\dropmenucheck{视图} \\
+\mainmenuopt{启动全屏模式} \hspace{3cm}\>
+\dropmenucheck{视图} \\
+\mainmenuopt{平铺缩放条} \hspace{3cm}\>
+\dropmenucheck{视图} \\
+\mainmenuopt{GPS实时跟踪} \hspace{3cm}\>
+\dropmenucheck{视图} \\
 \end{tabbing}
 
 %See Appendix \ref{app_menu} for complete descriptions of the menu items.
 
-\subsection{Toolbars}\label{label_toolbars}
+\subsection{工具条}\label{label_toolbars}
 \index{toolbars}
 
-The toolbars provide access to most of the same functions as the menus,
-plus additional tools for interacting with the map. Each toolbar item has
-popup help available. Hold your mouse over the item and a short description of
-the tool's purpose will be displayed.
-
-Every menubar can be moved around according to your needs. Additionally every
-menubar can be switched off using your right mouse button context menu holding
-the mouse over the toolbars.
+工具栏提供了大部分与菜单相同的功能，另外还提供了与地图进行交互访问的工具。每个工具栏项都可弹出帮助，将鼠标停留在工具项上就会显示该工具的简单描述。
+每个菜单条都可以据需要而移动。另外，在工具栏点击鼠标右键显示快捷菜单可选择关闭菜单条。
 
 \begin{Tip}
-\caption{\textsc{Restoring toolbars}} \index{layout!toolbars}
-If you have accidentally hidden all your toolbars, you can get them
-back by choosing menu option \mainmenuopt{Settings} \arrow \dropmenuopt{Toolbars}.
+\caption{\textsc{重置工具条}} \index{layout!toolbars}
+如果不小心隐藏所有工具栏，可以选择 \mainmenuopt{设置} \arrow \dropmenuopt{工具条} 使之再度出现。
 \end{Tip}
 
-\subsection{Map Legend}\label{label_legend}
+\subsection{地图图例}\label{label_legend}
 \index{legend}
 
 The map legend area is used to set the visibility and z-ordering of layers.
@@ -631,7 +605,7 @@ This way all selected Layers or Groups will be removed from the Layerlist.
 %that has pyramids built for it to improve rendering efficiency (see
 %Section \ref{raster_pyramids}).\\
 %\includegraphics[width=0.7cm]{no_pyramid} This is a
-%raster that has no pyramid layers (see Section \ref{raster_pyramids}).\\
+%raster that has no pyramid layers (参见章 \ref{raster_pyramids}).\\
 %\includegraphics[width=0.7cm]{inoverview} This layer is
 %shown in the overview map area as well as in the main map window.\\
 %\includegraphics[width=0.7cm]{editable} This is a vector
@@ -701,7 +675,7 @@ status of lengthy operations.
 If a new plugin or a plugin update is available, you will see a message in the
 status bar. On the right side of the status bar is a small
 checkbox which can be used to temporarily prevent layers being rendered to the
-map view (see Section \ref{subsec:redraw_events} below). At the far right of
+map view (参见章 \ref{subsec:redraw_events} below). At the far right of
 the status bar is a projector icon. Clicking on this opens the projection
 properties for the current project.
 
@@ -973,7 +947,7 @@ georeferences the image.
 dialog where you can layout and print the current map canvas (see
 Section~\ref{label_printcomposer}).
 \item The \toolbtntwo{quick_print}{Quick Print} plugin allows
-to print a simple map with minimal effort (see Section \ref{quickprint}).
+to print a simple map with minimal effort (参见章 \ref{quickprint}).
 \end{itemize}
 
 \section{GUI Options}\label{subsec:gui_options}
@@ -1183,7 +1157,7 @@ Spatial Bookmarks allow you to ``bookmark'' a geographic location and return to 
 To create a bookmark:
 \begin{enumerate}
 \item Zoom or pan to the area of interest.
-\item Select the menu option \mainmenuopt{View} \arrow \dropmenuopt{New Bookmark} or press \keystroke{Ctrl-B}.
+\item Select the menu option \mainmenuopt{视图} \arrow \dropmenuopt{New Bookmark} or press \keystroke{Ctrl-B}.
 \item Enter a descriptive name for the bookmark (up to 255 characters).
 \item Click \button{OK} to add the bookmark or \button{Cancel} to exit without adding the bookmark.
 \end{enumerate}
@@ -1192,7 +1166,7 @@ Note that you can have multiple bookmarks with the same name.
 
 \subsection{Working with Bookmarks}
 To use or manage bookmarks, select the menu
-option \mainmenuopt{View} \arrow \dropmenuopt{Show Bookmarks}. The \\
+option \mainmenuopt{视图} \arrow \dropmenuopt{Show Bookmarks}. The \\
 \dialog{Geospatial Bookmarks} dialog allows you to zoom to or delete a bookmark.
 You can not edit the bookmark name or coordinates.
 
@@ -1210,7 +1184,7 @@ delete by clicking \button{No}.
 \section{Live GPS tracking}\label{sec:gpstracking}
 
 To activate Live GPS tracking in QGIS you need to select
-\mainmenuopt{View} \arrow \dropmenuopt{Live GPS tracking}. You will get a new
+\mainmenuopt{视图} \arrow \dropmenuopt{Live GPS tracking}. You will get a new
 docked Window on the left side of the canvas.
 
 There are 4 possible screens in this GPS tracking window
