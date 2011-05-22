@@ -123,7 +123,7 @@ QGIS GUI被划分为六个区域：
 
 \begin{tabbing}
 \hspace{5.5cm}\=\hspace{3cm}\=\hspace{3.5cm}\= \kill
-\hspace{1cm} 菜单选项 \> 快捷键 \> 参考章节 \> 工具条\\
+\hspace{1cm} 菜单选项 \> 快捷键 \> 参考章节 \> 工具栏\\
 \end{tabbing}
 
 \begin{itemize}
@@ -424,7 +424,7 @@ QGIS GUI被划分为六个区域：
 	\>
 	\>
 	\\
-\dropmenuopt{工具条}
+\dropmenuopt{工具栏}
 	\>
 	\>
 	\\
@@ -490,7 +490,7 @@ QGIS GUI被划分为六个区域：
 \dropmenucheck{编辑} \\
 \dropmenuopt{面板} \hspace{3cm}\>
 \dropmenucheck{视图} \\
-\dropmenuopt{工具条}   \hspace{3cm}\>
+\dropmenuopt{工具栏}   \hspace{3cm}\>
 \dropmenucheck{视图} \\
 \mainmenuopt{启动全屏模式} \hspace{3cm}\>
 \dropmenucheck{视图} \\
@@ -502,18 +502,18 @@ QGIS GUI被划分为六个区域：
 
 %See Appendix \ref{app_menu} for complete descriptions of the menu items.
 
-\subsection{工具条}\label{label_toolbars}
+\subsection{工具栏}\label{label_toolbars}
 \index{toolbars}
 
 工具栏提供了大部分与菜单相同的功能，另外还提供了与地图进行交互访问的工具。每个工具栏项都可弹出帮助，将鼠标停留在工具项上就会显示该工具的简单描述。
 每个菜单条都可以据需要而移动。另外，在工具栏点击鼠标右键显示快捷菜单可选择关闭菜单条。
 
 \begin{Tip}
-\caption{\textsc{重置工具条}} \index{layout!toolbars}
-如果不小心隐藏所有工具栏，可以选择 \mainmenuopt{设置} \arrow \dropmenuopt{工具条} 使之再度出现。
+\caption{\textsc{重置工具栏}} \index{layout!toolbars}
+如果不小心隐藏所有工具栏，可以选择 \mainmenuopt{设置} \arrow \dropmenuopt{工具栏} 使之再度出现。
 \end{Tip}
 
-\subsection{地图图例}\label{label_legend}
+\subsection{图例显示区}\label{label_legend}
 \index{legend}
 
 地图图例区用于设置图层可见性和叠置次序。叠置顺序是指接近说明顶层的图层在较低层的图层之上。每个说明条目的复选框都可用于显示或者隐藏图层。\index{layer!visibility}
@@ -522,13 +522,13 @@ QGIS GUI被划分为六个区域：
 
 \begin{itemize}
 
-\item \textbf{栅格图层的右键菜单按钮}
+\item \textbf{栅格图层的右键菜单}
 \begin{itemize}
 \item \dropmenuopt{按图层边界缩放}
 \item \dropmenuopt{按最佳比例缩放(100\%)}
 \item \dropmenuopt{显示预览}
 \item \dropmenuopt{移除}
-\item \dropmenuopt{属性}
+\item \dropmenuopt{图层属性}
 \item \dropmenuopt{重命名}
 \item \dropmenuopt{添加图层组}
 \item \dropmenuopt{展开全部}
@@ -536,55 +536,43 @@ QGIS GUI被划分为六个区域：
 %%\item \dropmenuopt{Show file groups}
 \end{itemize}
 
-\item \textbf{Right mouse button menu for vector layers}
+\item \textbf{矢量图层的右键菜单}
 \begin{itemize}
-\item \dropmenuopt{Zoom to layer extent}
-\item \dropmenuopt{Show in overview}
-\item \dropmenuopt{Remove}
-\item \dropmenuopt{Open attribute table}
-\item \dropmenuopt{Toggle editing (not available for GRASS layers)}
-\item \dropmenuopt{Save as}
-\item \dropmenuopt{Save selection as}
-\item \dropmenuopt{Query}
-\item \dropmenuopt{Properties}
+\item \dropmenuopt{按图层边界缩放}
+\item \dropmenuopt{显示预览}
+\item \dropmenuopt{移除}
+\item \dropmenuopt{打开属性表}
+\item \dropmenuopt{开始编辑（对 GRASS 图层不可用）}
+\item \dropmenuopt{另存为}
+\item \dropmenuopt{选区另存为}
+\item \dropmenuopt{查询}
+\item \dropmenuopt{图层特性}
 %% \item \dropmenuopt{Make to toplevel item}
-\item \dropmenuopt{Rename}
-\item \dropmenuopt{Add Group}
-\item \dropmenuopt{Expand all}
-\item \dropmenuopt{Collapse all}
+\item \dropmenuopt{重命名}
+\item \dropmenuopt{添加图层组}
+\item \dropmenuopt{展开全部}
+\item \dropmenuopt{收起全部}
 %%\item \dropmenuopt{Show file groups}
 \end{itemize}
 
-\item \textbf{Right mouse button menu for layer groups}
+\item \textbf{矢量图层的右键菜单}
 \begin{itemize}
-\item \dropmenuopt{Remove}
-\item \dropmenuopt{Rename}
-\item \dropmenuopt{Add Group}
-\item \dropmenuopt{Expand all}
-\item \dropmenuopt{Collapse all}
+\item \dropmenuopt{移除}
+\item \dropmenuopt{重命名}
+\item \dropmenuopt{添加图层组}
+\item \dropmenuopt{展开全部}
+\item \dropmenuopt{收起全部}
 %%\item \dropmenuopt{Show file groups}
 \end{itemize}
 
 \end{itemize}
 
-If several vector data sources have the same vector type and the same
-attributes, their symbolisations may be grouped. This means that if the
-symbolisation of one data source is changed, the others automatically have
-the new symbolisation as well. To group symbologies, open the right click
-menu in the legend window and choose \dropmenuopt{Add Group}. The file
-groups of the layers appear. It is now possible to drag a file from one file
-group into another one. If this is done, the symbologies are grouped. Note
-that QGIS only permits the drag if the two layers are able to share
-symbology (same vector geometry type and same attributes).
+如果几个矢量数据源有相同的矢量类型和属性，那么它们的符号可被分组。也就是说如果一个数据源的符号改变，则其他几个也作出改变。在图例窗口中打开右键菜单选择 \dropmenuopt{添加图层组}，出现图层文件组。就可以将文件从一个文件组拖拽到另一个文件组。这样就使符号分组。注意QGIS只能拖拽两个具有相同符号体系（相同的矢量几何体类型和相同的属性）的图层。
 
-It is also possible to select more than one Layer or Group at the same time 
-by holding down the \keystroke{CTRL}-Key while selecting the Layers with the 
-left mouse button. You can than move all selected Layers to a new Group at 
-the same time.
+用鼠标左键选择图层的同时按住 \keystroke{CTRL}-键，就可以选择多个图层或图层组。然后您可以将选中图层全部加入一个新的图层组。
 
-You are also able to delete more than one Layer or Group at once by selecting 
-several Layers with the \keystroke{CTRL}-Key and pressing \keystroke{CTRL-D} afterwards.
-This way all selected Layers or Groups will be removed from the Layerlist.
+
+同样地，您也可以先按住 \keystroke{CTRL}-键选择几个图层，然后按 \keystroke{CTRL-D}-来一次性地删除多个图层或图层组。这样选中的图层或图层组就会从图层列表中移除。
 
 %% isn't included in Titan anymore, except for an "toggle overview"
 %Each legend entry can show the following mini icons:
@@ -599,170 +587,102 @@ This way all selected Layers or Groups will be removed from the Layerlist.
 %\includegraphics[width=0.7cm]{editable} This is a vector
 %layer that is currently enabled for editing.\\
 
-\subsection{Map View}\label{label_mapview}
+\subsection{地图显示区}\label{label_mapview}
 \index{map!view}
 
-This is the 'business end' of QGIS - maps are displayed in this area! The
-map displayed in this window will depend on the vector and raster layers you
-have chosen to load (see sections that follow for more information on how to
-load layers). The map view can be panned (shifting the focus of the map display
-to another region) and zoomed in and out. Various other operations can be
-performed on the map as described in the toolbar description above.  The map
-view and the legend are tightly bound to each other - the maps in view reflect
-changes you make in the legend area.
+这是QGIS的“业务端点”——地图在这个区域显示！在这个窗口显示的地图将取决于所选择加载的图层（后续章节将会介绍如何加载图层）。地图视图可以平移和缩放（变换地图焦点到另一个地区）。其他各种操作可以如上述工具栏所描述的在地图上执行。地图视图和图例彼此紧密联系——图例区的改变会在视图中反映出来。
 
-\begin{Tip}\caption{\textsc{Zooming the Map with the Mouse
-Wheel}}\index{zoom!mouse wheel}
-You can use the mouse wheel to zoom in and out on the map. Place
-the mouse cursor inside the map area and roll the wheel forward (away from you) to
-zoom in and backwards (towards you) to zoom out. The mouse cursor position is the
-center where the zoom occurs. You can customize the behavior of the mouse
-wheel zoom using the \tab{Map tools} tab under the \mainmenuopt{Settings} \arrow
-\dropmenuopt{Options} menu.
+\begin{Tip}\caption{\textsc{使用鼠标滚轮缩放窗口}}\index{zoom!mouse wheel}
+您可以使用鼠标滚轮缩放地图。将鼠标光标放到地图区域内向前滚动滚轮（远离您）放大地图，向后滚动（对着您）缩小地图。光标的位置就是缩放的中心。您可以通过 \mainmenuopt{设置} \arrow \dropmenuopt{选项} 下的菜单 \tab{地图工具} 来自定义鼠标滚轮缩放。
 \end{Tip}
 
-\begin{Tip}\caption{\textsc{Panning the Map with the Arrow Keys and Space
-Bar}}\index{pan!arrow keys}
-You can use the arrow keys to pan in the map. Place the mouse cursor
-inside the map area and click on the right arrow key to pan East, left arrow
-key to pan West, up arrow key to pan North and down arrow key to pan South.
-You can also pan the map using the space bar: just move the mouse while
-holding down space bar.
+\begin{Tip}\caption{\textsc{使用方向键和空格键来进行地图平移}}\index{pan!arrow keys}
+您可以使用方向键平移地图。把鼠标光标放在地图区域，敲击右方向键则地图向东平移，左方向键向西平移，上方向键向北平移，下方向键向南平移。您也可以用空格键平移地图：只需要按住空格键的同时移动鼠标即可。
 \end{Tip}
 
-\subsection{Map Overview}\label{label_mapoverview}
+\subsection{预览区地图}\label{label_mapoverview}
 \index{map!overview}
 
-The map overview panel provides a full extent view of layers added to it. It
-can be selected under the menu \mainmenuopt{Settings} \arrow \dropmenuopt{Panels}.
-Within the view is a rectangle showing the current map extent. This allows
-you to quickly determine which area of the map you are currently viewing. Note
-that labels are not rendered to the map overview even if the layers in the
-map overview have been set up for labeling.
+地图全览面版提供了加载图层的完整范围的视图。可在 \mainmenuopt{设置} \arrow \dropmenuopt{面板} 菜单下选择地图概观。该视图是一个显示当前地图范围的矩形框。这使您可以快速确定当前正在查看的地图区。请注意即使在地图概观的图层已经设置标签，标签也不会在地图概观中显示出来。
 
-You can add a single layer to the overview by right-clicking on it in the
-legend and select \checkbox{Show in overview}. You can also add layers to,
-or remove all layers from the overview using the Overview tools on the toolbar.
+您可以通过在图例窗口中右键点击图层，并选中 \checkbox{显示预览} 将一个单独的图层增加到地图概观中。您还可以通过工具栏中的概观工具来添加图层或移除概观中的所有图层。
 
-If you click and drag the red rectangle in the overview that shows your
-current extent, the main map view will update accordingly.
+如果在地图概观中单击并拖动显示当前范围的红色矩形框，地图的主要视图将会作出相应的更新。
 
-\subsection{Status Bar}\label{label_statusbar}
+\subsection{状态栏}\label{label_statusbar}
 
-The status bar shows you your current position in map coordinates (e.g.
-meters or decimal degrees) as the mouse pointer is moved across the map view.
-To the left of the coordinate display in the status bar is a small button that
-will toggle between showing coordinate position or the view extents of the
-map view as you pan and zoom in and out.
+当鼠标指针在整个地图视图上移动时，状态栏显示出您在地图坐标系统中的当前位置（例如米或者十进制度数）。在状态栏显示坐标的左边是一个小按钮，用于显示坐标位置和显示平移与缩放地图范围之间的切换。
 
-A progress bar in the status bar shows progress of rendering
-as each layer is drawn to the map view. In some cases, such as the gathering
-of statistics in raster layers, the progress bar will be used to show the
-status of lengthy operations.
+状态栏的进度条显示了每个图层添加到地图视图的渲染进度。在某些情况下，如在栅格图层统计数据收集，进度栏将被用于显示冗长的操作状态。
 
-If a new plugin or a plugin update is available, you will see a message in the
-status bar. On the right side of the status bar is a small
-checkbox which can be used to temporarily prevent layers being rendered to the
-map view (参见章 \ref{subsec:redraw_events} below). At the far right of
-the status bar is a projector icon. Clicking on this opens the projection
-properties for the current project.
+如果一个新的插件或者插件更新可用时，你会在状态栏看到消息。在状态栏右侧是一个小的复选框用于暂时阻止图层被渲染到地图视图（参见后面的章 \ref{subsec:redraw_events}）。在状态栏的最右侧是一个投影图标。点击它打开当前项目的投影属性。
 
-\begin{Tip}\caption{\textsc{Calculating the correct Scale of your Map Canvas}}\index{scale!calculate}
-When you start QGIS, degrees is the default unit, and it tells QGIS
-that any coordinate in your layer is in degrees. To get correct scale values,
-you can either change this to meter manually in the \tab{General} tab under
-\mainmenuopt{Settings} \arrow \dropmenuopt{Project Properties} or you can select a project
-Coordinate Reference System (CRS) clicking on the
-\toolbtntwo{mIconProjectionDisabled}{projector}
-icon in the lower right-hand corner of the statusbar. In the last case, the
-units are set to what the project projection specifies, e.g. '+units=m'.
+\begin{Tip}\caption{\textsc{计算您的地图区正确的缩放比例}}\index{scale!calculate}
+当启动QGIS时，经纬度是默认的单位，它告诉QGIS图层的任何坐标都是用经纬度表示的。为了得到正确的缩放值，您可以在 \mainmenuopt{设置} \arrow \dropmenuopt{工程属性} 菜单下的 \tab{通用} 标签页中手动改成“米”，也可以在右下角状态栏处点击图标 \toolbtntwo{mIconProjectionDisabled}{projector} 。这样就可以根据工程投影的设定来确定地图单位，比如‘+units=m’
 \end{Tip}
 
-\subsection{Keyboard shortcuts}\label{shortcuts}
+\subsection{键盘快捷键}\label{shortcuts}
 \index{Keyboard shortcuts}
 
-QGIS provides default keyboard shortcuts for many features. You find them in
-Section \ref{label_menubar} below. Additionally the menu option \mainmenuopt{Settings} \arrow
-\dropmenuopt{Configure Shortcuts} allows to change the default keyboard
-shortcuts and to add new keyboard shortcuts to QGIS features.
+QGIS为许多功能提供了默认的快捷键，参见后面的 \ref{label_menubar} 。除此之外，菜单选项 \mainmenuopt{设置} \arrow
+\dropmenuopt{自定义快捷键} 允许改变默认快捷键并为QGIS功能添加新的快捷键。
 
 \begin{figure}[ht]
    \centering
    \includegraphics[clip=true, width=8cm]{shortcuts}
-   \caption{Define shortcut options \nixcaption (KDE)} \label{fig:shortcuts}
+   \caption{自定义快捷键 \nixcaption (KDE)} \label{fig:shortcuts}
 \end{figure}
 
-Configuration is very simple. Just select a feature from the list and click
-on \button{Change}, \button{Set none} or \button{Set default}. Once you have
-found your configuration, you can save it as XML file and load it to another
-QGIS installation.
+自定义非常简单，只需从列表中选择一个功能并点击 \button{更改} ， \button{取消快捷键} 或者 \button{设为默认} 。一旦用户建立了自己的配置，就可以将其存储为XML文件并加载到另一个QGIS装置。
 
-\subsection{Context help}\label{context_help}
+\subsection{帮助上下文}\label{context_help}
 \index{Context help}
 
-When you need help on specific topic, you can access context help via the Help
-button available in most dialogs - please note that third-party plugins can point to
-dedicated web pages.
+当您需要特定主题的帮助时，可以通过在大部分对话框都可获得的Help按钮进入内容帮助——请注意第三方插件可以指向专门的网页。
 
-\section{Rendering}\label{subsec:redraw_events}\index{rendering}
+\section{渲染}\label{subsec:redraw_events}\index{rendering}
 
-By default, QGIS renders all visible layers whenever the map canvas must be
-refreshed. The events that trigger a refresh of the map canvas include:
+默认情况下，每当地图画布必须被刷新的时候QGIS就会渲染所有可视图层。引发刷新地图画布的事件包括：
 
 \begin{itemize}
-\item Adding a layer
-\item Panning or zooming
-\item Resizing the QGIS window
-\item Changing the visibility of a layer or layers
+\item 添加图层
+\item 平移或缩放
+\item QGIS窗口大小调整
+\item 改变图层或图层集的可见度
 \end{itemize}
 
-QGIS allows you to control the rendering process in a number of ways.
+QGIS允许用户用许多方式控制渲染过程。
 
-\subsection{Scale Dependent Rendering}\index{rendering!scale dependent}
+\subsection{缩放相关的渲染}\index{rendering!scale dependent}
 \label{label_scaledepend}
 
-Scale dependent rendering allows you to specify the minimum and maximum
-scales at which a layer will be visible.  To set scale dependency rendering,
-open the \dialog{Properties} dialog by double-clicking on the layer in the
-legend. On the \tab{General} tab, set the minimum and maximum scale values and then
-click on the \checkbox{Use scale dependent rendering} checkbox.
+缩放相关的渲染可以指定每个图层可见的最小和最大比例。在图例显示区双击图层打开 \dialog{图层属性} 对话框可以设置缩放相关的渲染。在 \tab{通用} 标签页中，设置最小和最大比例值然后点击复选框 \checkbox{使用缩放相关的渲染} 即可。
 
-You can determine the scale values by first zooming to the level you want
-to use and noting the scale value in the QGIS status bar.\index{scale}
+用户可以通过缩放想要使用的水平并注意QGIS状态栏的缩放值来确定缩放数值。 \index{scale}
 
-\subsection{Controlling Map Rendering}\label{label_controlmap}
+\subsection{地图渲染控制}\label{label_controlmap}
 
-Map rendering can be controlled in the following ways:
+地图渲染可通过以下方式控制：
 
-\minisec{a) Suspending Rendering}\index{rendering!suspending}
+\minisec{a) 暂停渲染}\index{rendering!suspending}
 \label{label_suspendrender}
 
-To suspend rendering, click the \checkbox{Render} checkbox in the lower right
-corner of the statusbar. When the \checkbox{Render} box is not checked, QGIS
-does not redraw the canvas in response to any of the events described in
-Section \ref{subsec:redraw_events}. Examples of when you might want to suspend
-rendering include:
+在状态栏右下角点击 \checkbox{渲染} 复选框可暂停渲染。当 \checkbox{渲染} 复选框未选中时，QGIS都不会响应 \ref{subsec:redraw_events} 中所描述的任何事件来重绘画布。可能需要暂停渲染的例子有：
 
 \begin{itemize}
-\item Add many layers and symbolize them prior to drawing
-\item Add one or more large layers and set scale dependency before drawing
-\item Add one or more large layers and zoom to a specific view before drawing
-\item Any combination of the above
+
+\item 添加许多图层并更改其绘制的优先级
+\item 绘图之前添加一个或者多个大图层并设置缩放比例
+\item 绘图之前添加一个或者多个大图层并缩放至特定视图
+\item 上述情形的任意组合
 \end{itemize}
 
-Checking the \checkbox{Render} box enables rendering and causes and immediate
-refresh of the map canvas.
+选中 \checkbox{渲染} 复选框可以渲染并且即使刷新地图画布。
 
-\minisec{b) Setting Layer Add Option}\label{label_settinglayer}
+\minisec{b) 设置图层添加的选项}\label{label_settinglayer}
 \index{rendering!options}\index{layers!initial visibility}
 
-You can set an option to always load new layers without drawing them. This
-means the layer will be added to the map, but its visibility checkbox in the
-legend will be unchecked by default. To set this option, choose
-menu option \mainmenuopt{Settings} \arrow \dropmenuopt{Options} and click on the
-\tab{Rendering \& SVG} tab. Uncheck the \\
-\checkbox{By default new layers added to the map should be displayed} checkbox.
-Any layer added to the map will be off (invisible) by default.
+用户可以设置一个选项，使之总是可以装载新的图层而不用绘图。这意味着该图层将被添加到地图中，但是其在图例窗口中的可见性复选框将默认为未选中。选择菜单选项 \mainmenuopt{设置}  \arrow \dropmenuopt{选项} 并点击 \tab{绘制 \& SVG} 标签页。取消选中 \checkbox{默认不显示新添加图层} 复选框之后，添加到地图的所有新图层都将默认关闭（不可见）。
 
 %\minisec{Stopping Rendering}\index{rendering!halting}
 %\label{label_stoprender}
