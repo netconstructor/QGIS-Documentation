@@ -694,120 +694,79 @@ QGIS允许用户用许多方式控制渲染过程。
 %\textbf{NOTE}: It is currently not possible to stop rendering - this was disabled
 %in qt4 port because of User Interface (UI) problems and crashes.
 
-\minisec{c) Updating the Map Display During Rendering}
+\minisec{c) 渲染时更新地图显示}
 \label{label_updatemap}\index{rendering!update during drawing}
 
-You can set an option to update the map display as features are drawn. By
-default, QGIS does not display any features for a layer until the entire
-layer has been rendered. To update the display as features are read from the
-datastore, choose menu option \mainmenuopt{Settings} \arrow \dropmenuopt{Options}
-click on the \tab{Rendering \& SVG} tab. Set the feature count to an
-appropriate value to update the display during rendering. Setting a value of 0
-disables update during drawing (this is the default). Setting a value too low
-will result in poor performance as the map canvas is continually updated
-during the reading of the features. A suggested value to start with is 500.
+您可以在绘制图元时设置更新地图显示。默认情况下，QGIS不显示图层的任何要素直到全部图层被渲染。选择菜单 \mainmenuopt{设置} \arrow \dropmenuopt{选项} 项并点击 \tab{渲染 \& SVG} 标签，可对数据储存处读取的要素显示进行更新。将特征值设置为一个适当的值可在渲染过程中显示更新。将值设置为0将禁用绘图更新（这是默认值）。设置值过低会导致在读取要素过程中地图画布不断更新时较差性能。建议设置初始值为500。
 
-\minisec{d) Influence Rendering Quality}
+\minisec{d) 影响渲染质量}
 \label{label_renderquality}\index{rendering!quality}
 
-To influence the rendering quality of the map you have 3 options. Choose menu
-option \mainmenuopt{Settings} \arrow \dropmenuopt{Options} click on the
-\tab{Rendering \& SVG} tab and select or deselect following checkboxes.
+有三个选项可影响地图的渲染质量。选择菜单选项 \mainmenuopt{设置} \arrow \dropmenuopt{选项}，点击 \tab{渲染 \& SVG} 标签页，选中或取消选中以下复选框。
 
 \begin{itemize}
-\item \checkbox{Make lines appear less jagged at the expense of some drawing
-performance}
-\item \checkbox{Fix problems with incorrectly filled polygons}
+\item \checkbox{牺牲部分绘制速度以提高线条抗锯齿}
+\item \checkbox{修复多边形填充错误}
 \end{itemize}
 
-\section{Measuring}\label{sec:measure}\index{measure}
+\section{量度}\label{sec:measure}\index{measure}
 
-Measuring works within projected coordinate systems only (e.g., UTM). If
-the loaded map is defined with a geographic coordinate system
-(latitude/longitude), the results from line or area measurements will be
-incorrect. To fix this you need to set an appropriate map coordinate system
-(See Section~\ref{label_projections}). Both measuring modules also use the
-snapping settings from the digitizing module. This is useful, if you want to
-measure along lines or areas in vector layers.
+测量只能在投影坐标系中进行（例如 UTM）。如果加载的是一个地理坐标系（经/纬度）下的地图，那么线或区域的测量结果将是错误的。为了解决这个问题用户需要设置一个合适的地图坐标系统（参见节 \ref{label_projections} ）。两种测量模块还使用了数字化模块捕捉设置。这对于在矢量图层沿着线或者区测量是有用的。
 
-To select a measure tool click on \includegraphics[width=0.7cm]{mActionMeasure} and 
-select the tool you want to use.
+要选择测量工具，请单击 \includegraphics[width=0.7cm]{mActionMeasure} ，然后选择需要的工具。
 
-\subsection{Measure length, areas and angles}
+\subsection{长度、面积和角度量度}
 \index{measure:line length}
 \index{measure:areas}
 \index{measure:angles}
 
 \includegraphics[width=0.7cm]{mActionMeasure}
-QGIS is also able to measure real distances between given
-points according to a defined ellipsoid. To configure this, choose menu option
-\mainmenuopt{Settings} \arrow \dropmenuopt{Options},
-click on the \tab{Map tools} tab and choose the appropriate ellipsoid. There
-you can also define a rubberband color and your preferred measurement units
-(meters or feet). The tool then allows you to click points on the map. Each
-segment-length as well as the total shows up in the measure-window. To stop measuring click your right mouse button. \\
-\includegraphics[width=0.7cm]{mActionMeasureArea} Areas can also be measured.
-In the measure window the accumulated area-size appears  \\
-In addition, the measuring tool will snap to the currently selected layer, provided that layer has its snapping tolerance set. (See Section~\ref{snapping_tolerance}). So if you want to measure exactly along a line feature, or around a polygon feature, first set its snapping tolerance, then select the layer. Now, when using the measuring tools, each mouse click (within the tolerance setting) will snap to that layer. \\
+QGIS也可以依据定义的椭圆体测量给定点之间的实地距离。若要进行设置，选择菜单选项 \mainmenuopt{设置} \arrow \dropmenuopt{选项}，然后点击 \tab{地图工具} 标签并选择适当的参考椭球体。也可在此处定义一个橡皮条颜色和首选测量单位（米或者英尺）。然后该工具就允许用户点击地图上的点。每段长度以及总长度都会显示在测量窗口。点击鼠标右键就可停止测量。 \\
+
+\includegraphics[width=0.7cm]{mActionMeasureArea} 面积也可以量度。在测量窗口显示出累计的面积大小。此外，测量工具将捕捉到当前选中图层，该图层提供捕捉容限值设置（参见节 \ref{snapping_tolerance} ）。所以，如果想测量精确的线要素或面要素首先设置其捕捉容限值，然后选中图层。那么当使用测量工具时，每个鼠标点击（在设置公差范围内）都将捕捉此图层。 \\
+
 \includegraphics[width=0.7cm]{mActionMeasureAngle}
-You can also measure angles, selecting Measure Angle tool. The cursor becomes
-cross-shaped. Click to draw the first segment of the angle you wish to
-measure, then move the the cursor to draw the desired angle. The measure
-is displayed in a popup dialog.
+选中测量角度工具也可测量角度。光标变成十字形的。点击绘制您希望测量的的角度的第一段，然后移动光标绘制要求的角度。测量结果会显示在一个弹出的对话框。
 
 \begin{figure}[ht]
 \centering
-   \subfloat[Measure lines] {\label{subfig:measure_line}\includegraphics[clip=true, width=0.3\textwidth]{measure_line}}
+   \subfloat[长度量度] {\label{subfig:measure_line}\includegraphics[clip=true, width=0.3\textwidth]{measure_line}}
      \hspace{0.33cm}
-   \subfloat[Measure areas]{\label{subfig:measure_area}\includegraphics[clip=true, width=0.3\textwidth]{measure_area}}
+   \subfloat[面积量度]{\label{subfig:measure_area}\includegraphics[clip=true, width=0.3\textwidth]{measure_area}}
      \hspace{0.33cm}
-   \subfloat[Measure angles]{\label{subfig:measure_angle}\includegraphics[clip=true, width=0.3\textwidth]{measure_angle}}
-   \caption{Measure tools in action \nixcaption} \label{fig:measure}
+   \subfloat[角度量度]{\label{subfig:measure_angle}\includegraphics[clip=true, width=0.3\textwidth]{measure_angle}}
+   \caption{实践中的量度工具 \nixcaption} \label{fig:measure}
 \end{figure}
 
-\subsection{Select and deselect features}\label{sec:selection}
+\subsection{选择和取消选择图元}\label{sec:selection}
 
-The QGIS toolbar provides several tools to select features in the map canvas. 
-To select one or several features just click on 
-\includegraphics[width=0.7cm]{mActionSelect} and select the tools:
+QGIS 工具条上可以有好几种工具来选中地图显示区内的图元。要单选或多选图元，只需要单击 \includegraphics[width=0.7cm]{mActionSelect} ，然后悬着工具：
 
 \begin{description}
-\item \radiobuttonon{Select features}
-\item \radiobuttonoff{Select features by rectangle}
-\item \radiobuttonoff{Select features by polygon}
-\item \radiobuttonoff{Select features by freehand}
-\item \radiobuttonoff{Select features by radius}
+\item \radiobuttonon{选择图元}
+\item \radiobuttonoff{矩形选择}
+\item \radiobuttonoff{多边形选择}
+\item \radiobuttonoff{自由形状选择}
+\item \radiobuttonoff{半径选择}
 \end{description} 
 
-To deselect all selected features click on \includegraphics[width=0.7cm]{mActionDeselectAll}.
+单击 \includegraphics[width=0.7cm]{mActionDeselectAll} 可以取消所有图元的选择.
 
-\section{Projects}\label{sec:projects}\index{projects}
+\section{工程}\label{sec:projects}\index{projects}
 
-The state of your QGIS session is considered a Project.  QGIS
-works on one project at a time.  Settings are either considered
-as being per-project, or as a default for new projects (see
-Section \ref{subsec:gui_options}). QGIS can save the state of your
-workspace into a project file using the menu options
-\mainmenuopt{File} \arrow \dropmenuopttwo{mActionFileSave}{Save Project}
-or \mainmenuopt{File} \arrow \dropmenuopttwo{mActionFileSaveAs}{Save Project As}.
+一个 QGIS 项目被组织成为一个工程。QGIS一次只能工作于某一个工程。工程属性或者是分工程设置，或者作为新工程的默认值进行设置（参见节 \ref{subsec:gui_options}）。通过菜单 \mainmenuopt{文件} \arrow \dropmenuopt{mActionFileSave}{保存工程} 或者 \mainmenuopt{文件} \arrow \dropmenuopt{mActionFileSave}{工程另存为} 可以将您的工作空间保存为工程文件。
 
-Load saved projects into a QGIS session using
-\mainmenuopt{File} \arrow \dropmenuopttwo{mActionFileOpen}{Open Project}
-or \mainmenuopt{File} \arrow \\
-\dropmenuopt{Open Recent Project}.
+通过 \mainmenuopt{文件} \arrow \dropmenuopt{mActionFileSave}{打开工程} 或者  \mainmenuopt{文件} \arrow \dropmenuopt{mActionFileSave}{打开最近工程} 可以在 QGIS 会话中加载保存的工程文件。
 
-If you wish to clear your session and start fresh, choose
-\mainmenuopt{File} \arrow \dropmenuopttwo{mActionFileNew}{New Project}.
-Either of these menu options will prompt you to save the existing project
-if changes have been made since it was opened or last saved.
+如果您希望清空当前会话并重新开始，选择 \mainmenuopt{文件} \arrow \dropmenuopttwo{mActionFileNew}{新建工程} 。在打开或者最后一次保存一个工程后，如果工程文件已经被修改，那么以上各菜单选项都会提示您保存已有工程文件。
 
-The kinds of information saved in a project file include:
+工程文件中保存的信息包括：
 
 \begin{itemize}
-\item Layers added
-\item Layer properties, including symbolization
-\item Projection for the map view
-\item Last viewed extent
+\item 已添加的图层
+\item 包括图例在内的图层属性
+\item 地图的投影
+\item 最后的视图范围
 \end{itemize}
 
 The project file is saved in XML format, so it is possible to edit
