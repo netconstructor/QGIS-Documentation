@@ -780,62 +780,47 @@ QGIS 工具条上可以有好几种工具来选中地图显示区内的图元。
 
 \begin{itemize}
 \item 在 \tab{通用} 标签页中可以设置工程标题、选择区、背景颜色、图层单位、准确度和保存路径到图层等选项。并且此处也可以设置拓扑编辑和图层级别的节点捕捉选项。
-\item The \tab{CRS} Coordinate Reference System tab enables you to choose the
-CRS for this project, and to enable on-the-fly reprojection of vector layers
-when displaying layers from a different CRS.
-\item With the third \tab{Identifiable layers} tab you set (or disable) which
-layers will respond to the identify tool. (See the Map tools paragraph from
-the \ref{subsec:gui_options} section to enable identifying of multiple layers.)
+\item \tab{参考坐标系统} 坐标系统标签页可以设置工程的参考坐标系，并且在显示其它坐标系统的矢量文件时可以动态转换投影。
+\item 第三个 \tab{可查询图层} 标签页中你可以设置（或禁用）相应到属性查询工具的图层，见（ \ref{subsec:gui_options} 部分可以启用多图层的属性查询。）
 \end{itemize}
 
-\section{Output}\label{sec:output}
+\section{输出}\label{sec:output}
 \index{output!save as image!print composer!quick print}
 
-There are several ways to generate output from your QGIS session. We have
-discussed one already in Section \ref{sec:projects}: saving as a project file.
-Here is a sampling of other ways to produce output files:
+有许多方法可以从你的QGIS会话中生成输出文件。 \ref{sec:projects} 部分中已经讨论了一种方法：保存为工程文件。
+
+此处提供了一些产生其它输出文件的例子：
 
 \begin{itemize}
-\item Menu option \dropmenuopttwo{mActionSaveMapAsImage}{Save as Image} opens
-a file dialog where you select the name, path and type of image (PNG or JPG
-format). A world file with extension PNGW or JPGW saved in the same folder
-georeferences the image.
-\item Menu option \dropmenuopttwo{mActionFilePrint}{Print Composer} opens a
-dialog where you can layout and print the current map canvas (see
-Section~\ref{label_printcomposer}).
-\item The \toolbtntwo{quick_print}{Quick Print} plugin allows
-to print a simple map with minimal effort (参见章 \ref{quickprint}).
+\item 菜单项 \dropmenuopttwo{mActionSaveMapAsImage}{保存为图像} 会打开一个文件对话框，你可以在其中选择文件名、文件路径和文件类型（PNG或JPG）。相同文件夹下以PNGW或JPGW后缀保存的引用参照文件（world file）对该图像进行地理索引。
+\item 菜单项 \dropmenuopttwo{mActionFilePrint}{打印设置} 会打开一个对话框，你可以设置输出样式并打印当前的地图显示区，参见 \ref{label_printcomposer} 。
+\item \toolbtntwo{quick_print}{快速打印} 插件使得可以通过最少的设置来进行打印，参见章 \ref{quickprint} 。
 \end{itemize}
 
-\section{GUI Options}\label{subsec:gui_options}
+\section{GUI选项}\label{subsec:gui_options}
 
-\includegraphics[width=0.7cm,clip=true]{mActionOptions} Some basic options
-for QGIS can be selected using the \dialog{Options} dialog. Select the
-menu option \mainmenuopt{Settings} \arrow
-\dropmenuopttwo{mActionOptions}{Options}. The tabs where you can
-optmize your options are:
+\includegraphics[width=0.7cm,clip=true]{mActionOptions} 可以在 \dialog{选项} 对话框中设置一些QGIS的选项。选择菜单项 \mainmenuopt{设置} \arrow
+\dropmenuopttwo{mActionOptions}{选项} 。你可以自定义选项设置的标签页如下：
 
-\minisec{General Tab}
+\minisec{通用标签页}
 
 \begin{itemize}
-\item \checkbox{Promt to save project changes when required}
-\item \checkbox{Warn when opening a project file saved with an older version of QGIS}
-\item Change Selection and backgroud Color
-\item Change the icon theme (choose between default, classic, gis and newgis)
-\item \checkbox{Capitalise layer names in legend}
-\item \checkbox{Display classification attribute names in legend}
-\item \checkbox{Create raster icons in legend}
-\item \checkbox{Hide splash screen at startup}
-\item \checkbox{Open identify results in a dock window (QGIS restart
-required)}
-\item \checkbox{Open attribute table in a dock window}
-\item \checkbox{Add PostGIS layers with double click and select in extended mode}
-\item \checkbox{Add new layers to selected group}
-\item Attribute table behavior (choose between Show all features (default), Show selected features,
-show features in current canvas)
+\item \checkbox{需要时提示保存工程文件}
+\item \checkbox{打开一个旧版本工程文件时提出警告}
+\item 改变选择项颜色和背景色
+\item 改变图标主题（在默认（default）、传统（classic）、gis和newgis）
+\item \checkbox{图例中的图层名大写}
+\item \checkbox{图例中显示分类属性}
+\item \checkbox{图例中创建栅格图标}
+\item \checkbox{启动时隐藏飞溅屏幕} 即 splash screen
+\item \checkbox{查询窗口结果以Dock窗口的形式显示（QGIS需要重启）}
+\item \checkbox{属性表窗口以Dock窗口的形式显示}
+\item \checkbox{扩展模式中双击和选择来添加PostGIS图层}
+\item \checkbox{添加图层至选择组}
+\item 属性表行为（在显示所有图元（默认）、显示选择的图元二者中进行选择，图元显示在当前的地图区域）
 \end{itemize}
 
-\minisec{Rendering \& SVG Tab}
+\minisec{绘制 \& SVG标签页}
 
 \begin{itemize}
 \item \checkbox{By default new layers added to the map should be displayed}
