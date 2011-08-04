@@ -885,217 +885,157 @@ QGIS 工具条上可以有好几种工具来选中地图显示区内的图元。
 \minisec{代理标签页}
 
 \begin{itemize}
-\item \checkbox{Define timeout for network requests in ms}
-\item \checkbox{Use proxy for web access} and define host, port, user, and password.
-\item Set the \dropmenuopt{Proxy type} according to your needs
+\item \checkbox{设置网络连接的等待时间（毫秒）}
+\item \checkbox{使用代理进行网络连接} 并设置主机名、端口、用户名和口令密码。
+\item 根据您的需要选择 \dropmenuopt{代理类型}
  \begin{itemize}
-  \item \dropmenuopt{Default Proxy}: Proxy is determined based on the application proxy set using
-  \item \dropmenuopt{Socks5Proxy}: Generic proxy for any kind of connection. Supports TCP, UDP, binding to a port (incoming connections) and authentication.
-  \item \dropmenuopt{HttpProxy}: Implemented using the "CONNECT" command, supports only outgoing TCP connections; supports authentication.
-  \item \dropmenuopt{HttpCachingProxy}: Implemented using normal HTTP commands, it is useful only in the context of HTTP requests
-  \item \dropmenuopt{FtpCachingProxy}: Implemented using an FTP proxy, it is useful only in the context of FTP requests
+  \item \dropmenuopt{默认代理类型}: 使用应用程序使用的代理。
+  \item \dropmenuopt{Socks5 代理}: 支持所有类型连接的通用代理。其支持TCP、UDP、端口绑定（接入连接）和代理验证。
+  \item \dropmenuopt{Http 代理}: 使用“CONNECT”命令进行设置，仅支持接出的TCP连接，同时支持代理验证。
+  \item \dropmenuopt{Http 缓冲代理}: 使用常规的HTTP命令进行设置，仅在发送HTTP请求时有效。
+  \item \dropmenuopt{Ftp缓冲代理}: 使用FTP代理服务器连接，仅在发送FTP请求时有效。
  \end{itemize}
 \end{itemize}
 
-Excluding some URLs can be added to the textbox below the proxy-settings (see
-fig. \ref{fig:proxy-settings}) by pressing the \button{Add}-button. After that
-double-click into the just created URL-field and enter the URL you would like
-to exclude from using the proxy. Obviously the button \button{Remove} removes the selected
-entry.
+通过单击 \button{添加} 按钮向代理设置（参见图 \ref{fig:proxy-settings} ）下的文本框中添加URL地址可以排除该地址。双击进入可编辑的URL字段区域，然后输入您想要排除的URL值，可以不通过代理访问该地址。同样地，按钮 \button{移除} 会删除新建的规则。
 
-If you need more detailed information about the different proxy-settings,
-please refer to the manual of the unterlaying QT-library-documentation at
-\url{http://doc.trolltech.com/4.5/qnetworkproxy.html#ProxyType-enum}.
+如果您还想了解更多的关于不同代理设置的信息，请自行查阅 \url{http://doc.trolltech.com/4.5/qnetworkproxy.html#ProxyType-enum} 下的QT库使用说明文档。
 
 \begin{figure}[ht]
    \centering
    \includegraphics[clip=true, width=14cm]{proxy-settings}
-   \caption{Proxy-settings in \qg \nixcaption}
+   \caption{\qg 里的代理设置 \nixcaption}
    \label{fig:proxy-settings}
 \end{figure}
 
-\begin{Tip} \caption{\textsc{Using Proxies}}
-Using proxies can sometimes be tricky. It is useful to 'trial and
-error' the above proxy types and check if they succeed in your case.
+\begin{Tip} \caption{\textsc{使用代理}}
+使用代理有时候会比较麻烦，需要不断地尝试以上的代理类型以适合您的具体状况。
 \end{Tip}
 
-You can modify the options according to your needs. Some of the changes may
-require a restart of QGIS before they will be effective.
+您可以根据需求修改选项。有些改变可能要求重启QGIS才能生效。
 
 \begin{itemize}
-\item \nix{settings are saved in a texfile: \$HOME/.config/QuantumGIS/qgis.conf}
-\item \osx{you can find your settings in: \$HOME/Library/Preferences/org.qgis.qgis.plist}
-\item \win{settings are stored in the registry under:}
+\item \nix{设置文件以文本文件格式保存在：\$HOME/.config/QuantumGIS/qgis.conf}
+\item \osx{设置文件保存在： \$HOME/Library/Preferences/org.qgis.qgis.plist}
+\item \win{设置信息保存在注册表项：}
 \begin{verbatim}
 \\HKEY\CURRENT\USER\Software\QuantumGIS\qgis
 \end{verbatim}
 \end{itemize}
 
-\section{Annotation Tools}\label{sec:annotations}
+\section{注释工具}\label{sec:annotations}
 \index{annotations}
 \index{text annotation|\see{annotations}}
 
-The \includegraphics[width=0.7cm,clip=true]{mActionTextAnnotation} text
-annotation tools in the attribute toolbar provides the possibility to
-place formated text in a balloon on the QGIS map canvas. Use the text
-annotation tool and click into the map canvas.
+使用属性工具条上的 \includegraphics[width=0.7cm,clip=true]{mActionTextAnnotation}文本注释工具可以在QGIS的显示区域内以格式化文本的形式显示一个注释气球。选择注释工具然后在地图显示区域内单击即可。
 
 \begin{figure}[ht]
    \centering
    \includegraphics[clip=true, width=12cm]{annotation}
-   \caption{Annotation text dialog \nixcaption}
+   \caption{文本注释对话框 \nixcaption}
    \label{fig:annotation}
 \end{figure}
 
-Double click on the item opens a dialog with various options. There is the
-text editor to enter the formated text and other item settings. E.g. there
-is the choice of having the item placed on a map position (displayed by
-a marker symbol) or to have the item on a screen position (not related
-to the map). The item can be moved by map position (drag the map marker)
-or by moving only the balloon. The icons are part of gis theme, and are used
-by default in the other themes too.
+双击文档打开一个多选项对话框。包括进入规定文本格式的文本编辑器和其他设置项。例如，是将注释放置在一个地图位置（通过点要素显示）上还是一个屏幕位置（与地图无关）上。此注释可在地图中移动（拖拽地图标记）或者只移动气球。
 
-The \includegraphics[width=0.7cm,clip=true]{mActionAnnotation} move annotation
-tool allows to move the annotation on the map canvas.
+注释移动工具 \includegraphics[width=0.7cm,clip=true]{mActionAnnotation}可以在地图上移动注释文本。
 
-\subsection{Form annotations}\index{annotations}
+\subsection{窗体注释}\index{annotations}
 \index{form annotation|\see{annotations}}
 
-Additionally you can also create your own annotation forms. The
-\includegraphics[width=0.7cm,clip=true]{mActionFormAnnotation} form annotation
-tool is useful to display attributes of a vector layer in a customised qt
-designer form (see Figure \ref{fig:custom-annotations}). It is similar to the
-designer forms for the identify tool, but displayed in an annotation item.
-Also see QGIS blog \url{http://blog.qgis.org/node/143} for more information.
+此外，用户也可以创建一个自己的注释表格。表格注释工具对于在自定义设计器的表格中显示一个矢量图层的属性是很有用的（参见图 \ref{fig:custom-annotations}）。其类似于识别工具的设计形式，但是在注释项中显示。详情参见QGIS博客: \url{http://blog.qgis.org/node/143}
 
 \begin{figure}[ht]
    \centering
    \includegraphics[clip=true, width=10cm]{custom_annotation}
-   \caption{Customized qt designer annotation form \nixcaption}
+   \caption{自定义QT Designer的注释窗体 \nixcaption}
    \label{fig:custom-annotations}
 \end{figure}
 
 \newpage
 
-\section{Spatial Bookmarks}\label{sec:bookmarks}
+\section{空间位置书签}\label{sec:bookmarks}
 \index{bookmarks}
 \index{spatial bookmarks|\see{bookmarks}}
 
-Spatial Bookmarks allow you to ``bookmark'' a geographic location and return to it later.
+空间位置书签使得您可以 ``bookmark'' 一个地理位置并可以在以后重新访问之。
 
-\subsection{Creating a Bookmark}
-To create a bookmark:
+\subsection{创建书签}
+要创建书签：
 \begin{enumerate}
-\item Zoom or pan to the area of interest.
-\item Select the menu option \mainmenuopt{视图} \arrow \dropmenuopt{New Bookmark} or press \keystroke{Ctrl-B}.
-\item Enter a descriptive name for the bookmark (up to 255 characters).
-\item Click \button{OK} to add the bookmark or \button{Cancel} to exit without adding the bookmark.
+\item 缩放并定位至目标区域。
+\item 选择 \mainmenuopt{视图} \arrow \dropmenuopt{新建标签} 命令或按 \keystroke{Ctrl-B} 键。
+\item 为新书签输入一个有意义的名字（最多255字符。
+\item 单击 \button{确定} 按钮以添加该书签，或 \button{取消} 按钮以取消添加并退出。
 \end{enumerate}
 
-Note that you can have multiple bookmarks with the same name.
+注：您可以添加多个同名的书签。
 
-\subsection{Working with Bookmarks}
-To use or manage bookmarks, select the menu
-option \mainmenuopt{视图} \arrow \dropmenuopt{Show Bookmarks}. The \\
-\dialog{Geospatial Bookmarks} dialog allows you to zoom to or delete a bookmark.
-You can not edit the bookmark name or coordinates.
+\subsection{使用书签}
+要使用或者管理书签，请选择 \mainmenuopt{视图} \arrow \dropmenuopt{显示书签} 命令。 \dialog{地理位置书签} 对话框允许您缩放至书签位置，或者删除书签。
 
-\subsection{Zooming to a Bookmark}
-From the \dialog{Geospatial Bookmarks} dialog, select the desired bookmark by clicking on it,
-then click \button{Zoom To}.
-You can also zoom to a bookmark by double-clicking on it.
+书签的名字和坐标不允许编辑。
 
-\subsection{Deleting a Bookmark}
-To delete a bookmark from the \dialog{Geospatial Bookmarks}
-dialog, click on it then click \button{Delete}.
-Confirm your choice by clicking \button{Yes} or cancel the
-delete by clicking \button{No}.
+\subsection{缩放至书签位置}
+在 \dialog{地理位置书签} 对话框中单击选中目标书签位置，然后单击 \button{缩放至} 按钮。
 
-\section{Live GPS tracking}\label{sec:gpstracking}
+双击某书签也可以直接访问之。
 
-To activate Live GPS tracking in QGIS you need to select
-\mainmenuopt{视图} \arrow \dropmenuopt{Live GPS tracking}. You will get a new
-docked Window on the left side of the canvas.
+\subsection{删除书签}
+在 \dialog{地理位置书签} 对话框中单击选中目标书签位置，然后单击 \button{删除} 按钮可以删除该书签位置。选择 \button{是} 确认删除， \button{否}取消删除。
 
-There are 4 possible screens in this GPS tracking window
-(see Figure \ref{fig:gpstrack_live} and Figure \ref{fig:gpstrack_options}).
+\section{动态GPS追踪}\label{sec:gpstracking}
+
+要激活QGIS的动态GPS追踪功能，您需要选择 \mainmenuopt{视图} \arrow \dropmenuopt{动态GPS追踪} 菜单项。地图区的左边会弹出一个新的Dock窗口。
+
+GPS追踪窗口里有4中显示试图（参见图 \ref{fig:gpstrack_live} 和图 \ref{fig:gpstrack_options} ）。
 
 \begin{description}
- \item[(a)] \includegraphics[width=0.5cm,clip=true]{mActionToggleEditing}
-GPS position coordinates and for manually entering Vertices and Features
- \item[(b)] \includegraphics[width=0.5cm,clip=true]{gpstrack_barchart}
-GPS signal strength of satellite connections
- \item[(c)] \includegraphics[width=0.5cm,clip=true]{gpstrack_polarchart}
-GPS polar screen showing number and polar position of satellites
- \item[(d)] \includegraphics[width=0.5cm,clip=true]{mActionOptions}
-GPS options screen (see Figure \ref{fig:gpstrack_options}).
+ \item[(a)] \includegraphics[width=0.5cm,clip=true]{mActionToggleEditing} GPS位置坐标视图，用于手工输入顶点和图元
+ \item[(b)] \includegraphics[width=0.5cm,clip=true]{gpstrack_barchart} GPS卫星连接信号强度视图
+ \item[(c)] \includegraphics[width=0.5cm,clip=true]{gpstrack_polarchart} GPS卫星视图，用于显示卫星数量和位置
+ \item[(d)] \includegraphics[width=0.5cm,clip=true]{mActionOptions} GPS选项设置视图（参见 \ref{fig:gpstrack_options}).
 \end{description}
 
-With a plugged in GPS receiver (has to be supported by your operating system)
-a simple click on \button{Connect} connects the GPS to QGIS. A second click
-(now \button{Disconnect} disconnects the GPS-Reciever from you Computer. For 
-GNU/Linux gpsd support is integrated to support connection to most GPS 
-receivers. Therefore you first have to configure gpsd properly to connect QGIS to it.
+插入GPS接收机之后（需要操作系统的支持），单击 \button{连接} 按钮可以将GPS连接到QGIS。之后单击 \button{断开连接} 会断开GPS接收机与您电脑之间的连接。GNU/Linux系统的QGIS集成了gpsd支持可以连接大部分的GPS接收机，因此需要您正确地配置了gpsd以连接QGIS和GPS。
 
-[ IMPORTANT ]: If you want to record your position to the canvas you have to
-create a new vector layer first and switch it to editable status to be able
-to record your track.
+[ 重要提示 ]: 要想在地图区追踪GPS位置，需要创建一个新的图层并设置其为可编辑状态。
 
 \begin{figure}[ht]
 \centering
-   \subfloat[Position coordinates] {\label{subfig:gpstrack_main}\includegraphics[clip=true, width=0.3\textwidth]{gpstrack_main}}
+   \subfloat[位置坐标视图] {\label{subfig:gpstrack_main}\includegraphics[clip=true, width=0.3\textwidth]{gpstrack_main}}
      \hspace{0.33cm}
-   \subfloat[GPS signal strenght]{\label{subfig:gpstrack_stren}\includegraphics[clip=true, width=0.3\textwidth]{gpstrack_stren}}
+   \subfloat[GPS信号视图]{\label{subfig:gpstrack_stren}\includegraphics[clip=true, width=0.3\textwidth]{gpstrack_stren}}
      \hspace{0.33cm}
-   \subfloat[GPS polar window]{\label{subfig:gpstrack_polar}\includegraphics[clip=true, width=0.3\textwidth]{gpstrack_polar}}
-\caption{Live GPS tracking \nixcaption} \label{fig:gpstrack_live}
+   \subfloat[GPS卫星视图]{\label{subfig:gpstrack_polar}\includegraphics[clip=true, width=0.3\textwidth]{gpstrack_polar}}
+\caption{动态GPS追踪 \nixcaption} \label{fig:gpstrack_live}
 \end{figure}
 
 \begin{figure}[ht]
    \centering
    \includegraphics[clip=true, width=4cm]{gpstrack_options}
-   \caption{GPS tracking options window \nixcaption}
+   \caption{GPS追踪选项设置窗口 \nixcaption}
    \label{fig:gpstrack_options}
 \end{figure}
 
-\subsection{Position coordinates}
-\includegraphics[width=0.5cm,clip=true]{mActionToggleEditing} If the GPS is
-recieving signals from satellites you will see your position in latitude,
-longitude and elevation as you can see in Figure \ref{subfig:gpstrack_main}
+\subsection{位置坐标视图}
+\includegraphics[width=0.5cm,clip=true]{mActionToggleEditing} 如果您的GPS能接收到信号，你会发现GPS点的位置以纬度、经度和高程的格式给出，参见图 \ref{subfig:gpstrack_main}
 
-\subsection{GPS signal strength}
-\includegraphics[width=0.5cm,clip=true]{gpstrack_barchart} Here you can see
-the signal strenght of the satellites you are revieving signals from
-(Figure \ref{subfig:gpstrack_stren}).
+\subsection{GPS信号视图}
+\includegraphics[width=0.5cm,clip=true]{gpstrack_barchart} 您可以在这里查看GPS接受的信号的强度（参见图 \ref{subfig:gpstrack_stren} ）。
 
-\subsection{GPS polar window}
-\includegraphics[width=0.5cm,clip=true]{gpstrack_polarchart} If you want
-to know where in the sky all the connected satellites are, you have to
-switch to the polar screen (Figure \ref{subfig:gpstrack_polar}).
-You can also see the ID numbers of the satellites you are recieving signals from.
+\subsection{GPS卫星视图}
+\includegraphics[width=0.5cm,clip=true]{gpstrack_polarchart} 如果您想要知道GPS连接的卫星在天空中的位置的话，您需要切换到卫星视图（参见图 \ref{subfig:gpstrack_polar}。您好可以查看信号卫星的ID编号。
 
-\subsection{GPS options}
-\includegraphics[width=0.5cm,clip=true]{mActionOptions} In case of connection
-problems you can switch from \radiobuttonon{Autodetect} to \radiobuttonon{Use
-path/port below} and select the path/port your GPS receiver is connected to.
-A click on \button{Connect} again initiates the connection to the GPS
-receiver.
+\subsection{GPS选项设置}
+\includegraphics[width=0.5cm,clip=true]{mActionOptions} 为了避免连接问题，您可以切换 \radiobuttonon{自动检测} 到 \radiobuttonon{使用自定义路径和端口} ，然后选择GPS接收机连接到的路径和端口。单击 \button{连接} 会重新建立到GPS接收机的连接。
 
-With the slider \slider{GPS Cursor Size} you can shrink and grow the position
-cursor on the canvas. Activating \radiobuttonon{Auto-add vertices} within GPS
-digitizing your track will automatically be recorded in the active vector layer
-(of course the layer has to be in edit mode).
+使用 \slider{GPS指针大小} 可以调整地图上位置指针的大小。选中 \radiobuttonon{自动添加顶点} ，对GPS的追踪结果会自动记录到当前激活的矢量图层（可编辑状态）。
 
-With GPS map recenter you can decide in which way the canvas will be
-updated if your recorded coordinates start either to move out of canvas
-or there is any change at all.
+使用GPS地图记录器（recenter）可以设定记录的坐标点发生修改或超出地图范围时，地图的更新方式。
 
-Track color and width sets the color of and the width of your drawn track.
+追踪颜色和线宽决定绘制追踪路径的颜色和线宽。
 
-If you want to set a feature manually you have to go back to
-\includegraphics[width=0.5cm,clip=true]{mActionToggleEditing} ''Position Coordinates''
-and click on \button{Add feature}. Also when you did not activate ''Auto-add vertices``
-and want to record vertices manually you have to go back there and
-click \button{Add vertex}
+如果您想要手动设置某个图元，你需要返回 \includegraphics[width=0.5cm,clip=true]{mActionToggleEditing} ''位置坐标视图'' 并单击 \button{添加图元} 按钮。同理，如果您没有激活 ''自动添加顶点`` 功能，你只能返回该处并单击 \button{添加顶点} 手动添加顶点。
 
 \FloatBarrier
