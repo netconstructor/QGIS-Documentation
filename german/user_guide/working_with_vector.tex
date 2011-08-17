@@ -9,28 +9,29 @@
 % comment out the following line:
 \updatedisclaimer
 
-QGIS unterstützt eine Vielzahl unterschiedlicher Vektorformate, inklusive
-allen Formaten, die durch die OGR-Bibliothek unterstützt werden, wie etwa
-das ESRI Shape,\index{Shapedateien}\index{ESRI!Shapedateien}\index{SHP Dateien}
-MapInfo MIF (Austauschformat)\index{MIF Dateien}\index{MapInfo!MIF Dateien}
-und MapInfo TAB (Natives Format).\index{TAB Dateien}\index{MapInfo!TAB
-Dateien} 
-Eine Liste von Vektorformaten, die durch die OGR-Bibliothek unterstützt
-werden, finden Sie in Anhang~\ref{appdx_ogr}. 
+QGIS benutzt die OGR-Bibliothek, um Vektorformate zu lesen und zu schreiben,
+\footnote{GRASS Vektor und PostgreSQL Support wird durch native Datenprovider 
+Plugins bereitgestellt.} wie etwa das ESRI Shape,\index{Shapedateien}\
+index{ESRI!Shapedateien}\index{SHP Dateien} MapInfo MIF (Austauschformat)
+\index{MIF Dateien}\index{MapInfo!MIF Dateien} und MapInfo TAB 
+(Natives Format).\index{TAB Dateien}\index{MapInfo!TAB Dateien}. Derzeit werden 
+etwa 60 Vektorformate unterstützt. Eine komplette Liste finden Sie unter der 
+URL: \url{http://www.gdal.org/ogr/ogr_formats.html}.
 
-QGIS unterstützt auch PostGIS-Layer\index{PostGIS}\index{PostgreSQL!PostGIS}
-in einer PostgreSQL Datenbank mit Hilfe des PostGIS-Plugins. Unterstützung
-für weitere Datenformate (z.B.: ASCII-Tabellen oder GPS-Daten) sind mittels
-weiterer Plugins realisiert.\index{Getrennter Text}
-
-In diesem Abschnitt wird beispielhaft beschrieben, wie man mit ESRI Shapes,
-PostGIS- und SpatiaLite-Layern arbeitet. Viele Funktionen in QGIS sind
-unabhängig vom
-verwendeten Datenformat und verhalten sich daher identisch. Dies ist gewollt
-und bezieht sich u.a. auf Abfrage, Selektion, Beschriftung und Attributfunktionen.
+\textbf{Note}: Einige der aufgelisteten Formate können auf ihrem Rechner aus unterschiedlichen Gründen nicht unterstützt werden. Einige brauchen z.B. 
+kommerzielle Bibliotheken oder die GDAL Installation auf Ihrem Rechner, wurde 
+ohne die Unterstützung für das entsprechende Format erstellt. Nur Formate, die 
+getestet wurden, können ausgewählt werden, wenn Sie eine Vektordatei in QGIS 
+laden. Alle anderen werden angezeigt, wenn Sie *.* auswählen.
 
 Das Arbeiten mit GRASS GIS Vektorlayern bildet an manchen Stellen eine Ausnahme
 und wird daher in Kapitel \ref{sec:grass} explizit beschrieben.
+
+In diesem Abschnitt wird beispielhaft beschrieben, wie man mit ESRI Shapes,
+PostGIS- und SpatiaLite-Layern arbeitet. Viele Funktionen in QGIS sind
+unabhängig vom verwendeten Datenformat und verhalten sich daher identisch. Dies 
+ist gewollt und bezieht sich u.a. auf Abfrage, Selektion, Beschriftung und 
+Attributfunktionen.
 
 \section{ESRI Shapes}
 \index{Vektorlayer!ESRI Shapedateien}
@@ -208,19 +209,6 @@ Abfragen bereitszustellen. Vektorfunktionen wie Selektieren und Abfragen
 funktionieren besser als bei Ebenen, die durch die OGR-Bibliothek geladen
 wurden.
 
-Um PostGIS benutzen zu können, brauchen Sie folgende
-Schritte:\index{PostgreSQL!Layer laden}
-
-\begin{itemize}[label=--]
-\item Verknüpfen Sie QGIS mit einer PostgreSQL Datenbank (falls dies noch
-nicht geschehen ist)\index{PostgreSQL!Verbindung}
-\item Stellen Sie eine Verbindung zur Datenbank her
-\item Wählen Sie einen PostGIS Layer aus
-\item Optional nutzen Sie eine SQL \usertext{WHERE}-Abfrage, um zu
-definieren, welche Objekte des Layers angezeigt werden sollen.
-\item Laden Sie den Layer
-\end{itemize}
-
 \subsection{Erstellen einer PostGIS Anbindung}\index{PostgreSQL!Verbindung}\label{sec:postgis_stored}
 
 Beim ersten Einbinden einer PostGIS-Datenbank muss eine Anbindung erstellt
@@ -242,11 +230,13 @@ und Sie können die notwendigen Parameter aus Tabelle
  \begin{tabular}{|l|p{5in}|}
 \hline Name & Ein Name für die Verbindung. Kann derselbe wie für die
 Datanbank sein \\
+\hline Service & Service Parameter, der anstelle von Host / Port und potenziell 
+auch Datenbank verwendet werden kann. Kann unter pg\_service.conf definiert werden. \\
 \hline Host \index{PostgreSQL!Host} & Name des Datenbank-Hosts. Dies muss ein
 auflösbarer Name für den HOST sein, genau wie beim Benutzen von telnet oder ping \\
-\hline Datenbank \index{PostgreSQL!Datenbank} & Name der Datenbank  \\
 \hline Port \index{PostgreSQL!Port}& Port Nummer der Datenbank auf dem
 Server. Standard ist 5432.\\
+\hline Datenbank \index{PostgreSQL!Datenbank} & Name der Datenbank  \\
 \hline SSL Modus \index{PostgreSQL!SSL Modus}& Wie die SSL-Verbindung mit dem
 Server festgelegt wird. Die Optionen sind:
 \begin {itemize}
@@ -274,6 +264,7 @@ Optional können noch die folgenden Kontrollkästchen aktiviert werden:
 \item \checkbox{Passwort speichern}
 \item \checkbox{Nur in geometry\_columns nachschauen}
 \item \checkbox{Nur im 'public' Schema nachschauen}
+\item \checkbox{Auch geometrielose Tabellen anzeigen}
 \item \checkbox{Gechätzte Tabellenmetadaten nutzen}
 \end{itemize}
 
@@ -306,6 +297,9 @@ geöffnet ist, klicken Sie auf den Knopf
 \toolbtntwo{mActionAddLayer}{PostGIS-Layer hinzufügen} in der Werkzeugleiste
 \item Wählen Sie eine Verbindung aus dem Drop-Down Menü und klicken auf
 \button{Verbinden}
+\item Wählen Sie \checkbox{Auch geometrielose Tabellen anzeigen} an oder ab.
+\item Optional aktivieren Sie den Bereich \checkbox{Suchoptionen}, um eine 
+Auswahl anzuzeigender Objekte zu treffen.
 \item Suchen Sie einen Layer, den Sie laden möchten
 \item Wählen Sie den Layer durch doppelklicken aus. Sie können mehrere Ebenen
 auswählen, indem Sie die \keystroke{Umschalt}-Taste beim Auswählen gedrückt
@@ -398,10 +392,11 @@ angezeigt\index{PostGIS!SPIT!laden}.
 Klicken Sie nun auf das \toolbtntwo{spiticon}{SPIT}-Icon in der
 Werkzeugleiste, um den Dialog \dialog{Shapefile nach PostGIS Import Tool} zu
 öffnen. Wählen Sie über den Knopf \button{Verbinden} eine PostGIS Datenbank
-aus, fügen Sie dann mit dem Knopf \button{Hinzufügen} ein oder mehrere
-Shapes zu der Liste hinzu und klicken dann für den Import auf den Knopf
-\button{OK}. Der Fortschritt des Imports sowie Warnungen oder Fehlermeldungen
-werden für jedes Shape angezeigt.
+aus, definieren Sie ein paar Importparameter, wenn Sie möchten. Fügen Sie 
+dann mit dem Knopf \button{Hinzufügen} ein oder mehrere Shapes zu der Liste 
+hinzu und klicken dann für den Import auf den Knopf \button{OK}. Der 
+Fortschritt des Imports sowie Warnungen oder Fehlermeldungen werden für 
+jedes Shape angezeigt.
 
 \begin{Tip}\caption{\textsc{Shapes mit für PostgreSQL reservierten
 Ausdrücken importieren}}\index{PostGIS!SPIT!reservierte Ausdrücke}
@@ -562,6 +557,26 @@ klicken Sie auf den Knopf \button{Neu} und verwenden dann den Dateibrowser,
 um eine entsprechende SpatiaLite Datenbank auszuwählen. Dabei handelt es sich
 um eine Datei mit der Endung \filename{.sqlite}.
 
+Wenn Sie einen Vektorlayer im SpatiaLite Format abspeichern wollen, wählen Sie 
+den Layer in der Legende aus, benutzen Sie das Kontextmenü der rechten Maustaste 
+und klicken Sie auf \dropmenuopt{Speichern als}. Geben Sie den Namen der Ausgabe an, 
+wählen Sie sqlite als Format aus und das KBS. Danach fügen Sie noch 'SPATIALITE=YES' 
+in das Fenster 'Datenquelle'. Damit sagen Sie OGR, dass eine SpatiaLite Datenbank 
+erstellt werden soll. Siehe \url{http://www.gdal.org/ogr/drv_sqlite.html}
+
+\minisec{Einen neuen SpatiaLite Layer erzeugen}
+
+Wenn Sie einen neuen SpatiaLite Layer erzeugen wollen, finden Sie in Kapitel 
+\ref{sec:create spatialite} eine Anleitung.
+
+\begin{Tip}\caption{\textsc{SpatiaLite Datenmanagement Plugin}}\index{SpatiaLite! Datenmanagement}. Für das Managen von SpatiaLite Daten können Sie das 'Qspatialite' 
+Plugin aus dem 'QGIS Contributed Repository' nehmen. Sie können es mit dem Python 
+Plugin Installer installieren. Es bietet QGIS Integration (Import von QGIS Layern, 
+Ansicht und Abfrage räumlicher Tabellen), einen SQL-Editor mit Syntax-Highlighting 
+und Auto-Vervollständigung, einen SQL Query Builder für Komplexe Abfragen und 
+weitere Funktionalitäten.
+\end{Tip}
+
 \section{Vektorlayereigenschaften}\label{sec:vectorprops}
 \index{Vektorlayer!Layereigenschaften}
 
@@ -589,8 +604,327 @@ der Legende oder wählen mit der rechten Maustaste \dialog{Eigenschaften} aus.
 \subsection{Darstellung}\label{sec:symbology}
 \index{Vektorlayer!Darstellung}
 
-QGIS bietet eine Vielzahl von Funktionen, um die Darstellung von
-Vektorobjekten zu kontrollieren. Derzeit sind folgende Legendentypen vorhanden:
+Ab der \qg Version 1.4 wurde parallel eine neue Darstellung integriert, um 
+die alte zu verbessern und letztlich auch abzulösen. \qg 1.7 benutzt die 
+neue Darstellung jetzt als Default-Einstellung. Ihnen stehen dadurch eine 
+Vielzahl von Verbesserungen und neuen Funktionalitäten zur Verfügung.
+
+Eine Beschreibung der alten Darstellung finden Sie in Abschnitt 
+\ref{sec:oldsymbology}.
+
+\subsection{Neue Darstellung - Symbology-NG}
+
+In QGIS \CURRENT ist parallel zur oben beschriebenen Darstellung eine 
+neue Darstellung integriert worden. Diese bietet eine Vielzahl von 
+Verbesserungen und neuer Funktionalitäten und wird in einer der zukünftigen 
+QGIS Versionen die aktuelle Standarddarstellung ablösen.
+
+Um derzeit in die neue Darstellung zu wechseln, ist es notwendig, auf den 
+Knopf \button{Neue Darstellung} im Reiter \tab{Darstellung} des 
+\dialog{Layereigenschaften} Dialogs zu drücken. Sie können die neue 
+Darstellung auch als Standard setzen im Reiter \tab{Darstellung \& SVG} 
+des Menüs \mainmenuopt{Einstellungen} \arrow \dropmenuopt{Optionen}. Aktivieren Sie 
+dazu das Kontrollkästchen \checkbox{Darstellung der nächsten Generation 
+verwenden}.
+
+\minisec{Die neue Darstellung verstehen}
+
+Es gibt drei verschiedene Symboltypen: Zeichensymbole (für Punkte), 
+Liniensymbole (für Linien) und Füll- und Randsymbole (für Polygone). 
+Symbole können aus einer oder mehreren Symbolebenen bestehen. Sie können 
+die Farbe eines Symbols festlegen, und diese gilt dann für alle weiteren 
+Symbolebenen. Bei einigen Symbolen kann die Symbolfarbe gesperrt sein, 
+bei diesen kann die Farbe dann nicht geändert werden. Dies ist nützlich, 
+wenn man die Farbe eines Multilayer-Symbols definiert.
+
+\minisec{Vorhandene Typen von Symbolebenen}
+
+\begin{itemize}[label=--]
+\item Punktlayer
+\begin{itemize}[label=--]
+\item \textbf{Schriftmarkierung}: Darstellung mit einer definierten Schrift.
+\item \textbf{Einfache Markierung}: Darstellung mit einem definierten Symbol.
+\item \textbf{SVG Markierung}: Darstellen mit einem SVG-Bild.
+\end{itemize}
+\item Linienlayer
+\begin{itemize}[label=--]
+\item \textbf{Liniendekoration}: Hinzufügen einer Liniendekoration, z.B. Pfeil, um die Richtung der Linie darzustellen.
+\item \textbf{Markierungslinie}: Darstellen einer Linie durch wiederholung eines Symbols.
+\item \textbf{Einfache Linie}: Darstellen einer Linie (mit festgelegter Breite, Farbe und Stiftstil).
+\end{itemize}
+\item Linienlayer
+\begin{itemize}[label=--]
+\item \textbf{Zentrierte Füllung}: Darstellung eines Zentroids mit einem definierten Symbol.
+\item \textbf{SVG-Füllung}: Füllen einer Fläche mit einem SVG-Bild. 
+\item \textbf{Einfache Füllung}: Füllen einer Fläche (mit festgelegter Farbe, Füll- und Randstil). 
+\item \textbf{Rand: Liniendekoration}: Darstellen einer Randlinie durch Hinzufügen einer Liniendekoration.
+\item \textbf{Rand: Markierungslinie}: Darstellen einer Randlinie durch wiederholung eines Symbols.
+\item \textbf{Rand: Einfache Linie}: Darstellen einer Randlinie (mit festgelegter Breite, Farbe und Stiftstil).
+\end{itemize}
+\end{itemize}
+
+\minisec{Farbverläufe}
+
+Farbverläufe werden verwendet, um eine Spannweite von Farben zu definieren, die 
+für die Darstellung verwendet werden sollen. Die Symbolfarbe wird entsprechend des 
+definierten Farbverlaufs angewendet. Es gibt drei Typen: 
+
+\begin{itemize}[label=--]
+\item \textbf{Gradient}: Linearer Gradient von einer zu anderen Farben.
+\item \textbf{Random}: Zufällig erstellte Farben aus einem festgelegten Farbraum.
+\item \textbf{Farbbrauer}: Erstellen von Farbbereichen aus einem Farbschema und 
+einer definierten Anzahl von Farbklassen.
+\end{itemize}
+
+Sie können neue Farbverläufe im Reiter \tab{Farbverlauf} des Stilmanagers definieren 
+(siehe Kapitel \ref{subsec:stylemanager}), indem Sie auf \button{Hinzufügen} klicken 
+und dann einen Farbverlauftyp auswählen. 
+
+\minisec{Stile}
+
+Ein Stil gruppiert eine Reihe unterschiedlicher Symbole und Farbanstiege. 
+Dadurch ist es möglich, eigene, bevorzugte oder häufig benutzte Symbole 
+festzulegen und abzuspeichern. Stile (Symbole und Farbanstiege) haben 
+immer einen Namen, über den Sie gesucht werden können. Es gibt mindestens 
+einen veränderbaren Standard-Stil in QGIS und Sie können weitere Stile hinzufügen. 
+
+\minisec{Darstellungen}
+
+Über die Darstellung wird festgelegt, wie Objekte als Symbole angezeigt werden. 
+Es gibt vier Arten der Darstellung: Einzelsymbol, Kategorisiert (in der alten 
+Darstellung auch Eindeutiger Wert genannt), Abgestuft und Regelbasierend. Die Vorgabe 
+Fortlaufende Farbe gibt es nicht, da es sich dabei um einen Spezialfall der 
+kategorisierten Darstellung handelt. Die kategorisierte und abgestufte Darstellung 
+wird erreicht, indem ein Symbol mit einem Farbanstieg definiert wird - die 
+Farben der Symbole werden dann passend gesetzt. 
+
+\subsection{Mit der neuen Darstellung arbeiten}
+
+Der Dialog ermöglicht es, aus den vier Darstellungsarten auszuwählen: Einzelsymbol, Kategorisiert, Abgestuft und Regelbasierend. In 
+Abhängigkeit von der ausgewählten Darstellungart bietet der Reiter 
+\tab{Darstellung} unterschiedliche Optionen und Einstellungsmöglichkeiten, die 
+im folgenden Abschnitt beschrieben werden. Über die neue Darstellung können Sie 
+auch den \button{Stilmanager} öffnen (siehe Kapitel \ref{subsec:stylemanager}). 
+Der Stilmanager ermöglicht es, neue Symbole zu erstellen und vorhandene zu editieren 
+oder zu löschen. 
+
+\minisec{Einzelsymbol Darstellung}
+
+Die Einzelsymbol Darstellung wird verwendet, um alle Objekte eines Vektorlayers 
+mit einem, definierten Symbol darzustellen. Die Eigenschaften, die dabei im Reiter
+\tab{Darstellung} festgelegt werden können, hängen teilweise vom Layertyp ab, 
+aber alle Layertypen (Punkt, Linie und Polygon) nutzen folgende Strukturen. In der 
+oberen linken Ecke des Reiters wird ein Preview des Symbols angezeigt, das dann 
+auch dargestellt wird. 
+
+Im unteren Bereich des Reiters, wird eine Liste bereits vorhandener Symbole 
+angezeigt, die direkt ausgewählt werden können. Das aktuelle 
+Symbol kann bearbeitet werden, in dem man auf den Knopf \button{Ändern} 
+drückt, woraufhin sich der Dialog \dialog{Symboleigenschaften} öffnet. Oder Sie 
+drücken auf den Knopf \button{Ändern} mit dem aktuellen Farbsymbol und können 
+dann in einem Standard-Farbdialog eine neue Farbe definieren. 
+
+Nachdem Sie alle notwendigen Anpassungen gemacht wurden, können Sie das neue 
+Symbol mit den Knopf \button{Als Stil speichern} zu der Liste bereits 
+vorhandener Symbole hinzufügen.  
+
+\begin{figure}[h]
+\centering
+\caption{Optionen für die Darstellung von Einzelsymbolen \nixcaption}
+   \subfloat[Eigenschaften von Punkt-Einzelsymbolen] {\label{subfig:singleNG1}\includegraphics[clip=true, width=0.3\textwidth]{singlesymbol_ng_point}}\hspace{0.33cm}
+   \subfloat[Eigenschaften von Linien-Einzelsymbolen] {\label{subfig:singleNG2}\includegraphics[clip=true, width=0.3\textwidth]{singlesymbol_ng_line}}\hspace{0.33cm}
+   \subfloat[Eigenschaften von Polygon-Einzelsymbolen] {\label{subfig:singleNG3}\includegraphics[clip=true, width=0.3\textwidth]{singlesymbol_ng_area}}
+\end{figure}
+
+\minisec{Kategorisierte Darstellung}
+
+Die kategorisierte Darstellung wird verwendet, um alle Objekte eines Vektorlayers
+mit einem, definierten Symbol darzustellen. Dabei reflektiert der Farbwert des 
+Symbols den Wert eines Objektattributs. Im Reiter \tab{Darstellung} kann 
+ausgewählt werden:
+
+\begin{itemize}[label=--]
+\item Das Attribut (über die Auswahl Spalte)
+\item Das Symbol (über die Auswahl Symbol)
+\item Die Farbe (über die Auswahl Farbanstieg)
+\end{itemize}
+
+Der Knopf \button{Erweitert} in der unteren rechten Ecke des Dialogs ermöglicht 
+die Auswahl von Attributspalten für die Drehung und Größenskalierung.
+Zur Veranschaulichung wird im unteren Teil des Reiters eine Liste mit allen 
+Attributen und der jeweils verwendeten Symbolfarbe angezeigt. Das Beispiel in 
+Abbildung \ref{fig:catsymNG} zeigt den Dialog Kategorisierte Darstellung für 
+den Vektorlayer \filename{rivers} des QGIS-Beispieldatensatzes. 
+
+\begin{figure}[ht]
+   \begin{center}
+   \caption{Optionen für die Darstellung von kategorisierter Symbole \nixcaption}\label{fig:catsymNG}\smallskip
+   \includegraphics[clip=true, width=10cm]{categorysymbol_ng_line}
+\end{center}
+\end{figure}
+
+Sie können einen individuellen Farbverlauf erstellen, indem Sie im Bereich 
+Farbverlauf \dialog{Neuer Farbverlauf} auswählen. Dadurch öffnet sich ein 
+neuer Dialog und Sie können auswählen zwischen Gradient, Zufällig und Farbbrauer. 
+Jede dieser Optionen ermöglicht dann, die Farbschritte festzulegen. Ein Beispiel 
+finden Sie in Abbildung \ref{fig:ccrg}.
+
+
+\begin{figure}[ht]
+   \centering
+   \caption{Beispiel eines individuellen Farbverlaufs mit mehreren Farbstufen \nixcaption}\label{fig:ccrg}
+   \includegraphics[clip=true, width=10cm]{customColorRampGradient.png}
+\end{figure}
+
+\minisec{Abgestufte Darstellung}
+
+Die abgestufte Darstellung wird verwendet, um alle Objekte eines Vektorlayers
+mit einem, definierten Symbol darzustellen, Dabei reflektiert der Farbwert die 
+Klassifikation von Objektattributen innerhalb definierter Klassen.
+
+Analog zur kategorisierten Darstellung ermöglicht der Reiter \tab{Darstellung} 
+folgende Einstellungen:
+
+\begin{itemize}[label=--]
+\item Das Attribut (über die Auswahl Spalte)
+\item Das Symbol (über die Auswahl Symbol)
+\item Die Farbe (über die Auswahl Farbanstieg)
+\end{itemize}
+
+Zusätzlich können Sie die Anzahl der Klassen und den Modus für die Klassifizierung 
+festlegen. Im unteren Teil des Reiters wird eine Liste der Klassen, mit deren 
+Darstellung, der Range und dem Label angezeigt. Die vohandenen Modi sind:
+The available modes are:
+
+\begin{itemize}
+ \item Gleiches Intervall
+ \item Quantile
+ \item Natürliche Unterbrechungen (Jenks)
+ \item Standardabweichung
+ \item Schöne Unterbrechungen
+\end{itemize}
+
+Das Listenfeld im unteren Bereich des Reiters \tab{Darstellung} zeigt die 
+festgelegten Werteklassen und -bereiche, Beschriftungen und Symbole, die dargestellt 
+werden.
+
+Das Beispiel in Abbildung \ref{fig:gradsymNG} zeigt den Dialog 
+\dialog{Abgestufte Darstellung} für den Vektorlayer rivers des 
+QGIS-Beispieldatensatzes.
+
+\begin{figure}[ht]
+   \begin{center}
+   \caption{Optionen für die Darstellung abgestufter Symbole \nixcaption}\label{fig:gradsymNG}\smallskip
+   \includegraphics[clip=true, width=10cm]{graduatesymbol_ng_line}
+\end{center}
+\end{figure}
+
+\minisec{Regelbasierende Darstellung}
+
+Die regelbasierende Darstellung wird verwendet, um die Objekte eines Layers nach 
+selbst festgelegten Regeln darstellen zu können, die dann die Zugehörigkeit zu 
+einer bestimmten Klasse zeigt. Die Regeln basieren auf SQL-Abfragen. Sie können 
+dazu auch den Abfrageeditor verwenden. Der Dialog erlaubt auch das gruppieren 
+von Regeln durch Filter und Massstabsangaben. Ausserdem gibt es noch die Möglichkeit, 
+die Kontrollkästchen \checkbox{Symbolebenen aktivieren} und \checkbox{Nur erste 
+passende Regel verwenden} auszuwählen. 
+
+Das Beispiel in Abbildung~\ref{fig:rulesymNG} zeigt den Dialog der regelbasierenden 
+Darstellung für den Layer 'rivers' des QGIS Beispieldatensatzes.
+
+\begin{figure}[ht]
+   \centering
+   \includegraphics[clip=true, width=10cm]{rulesymbol_ng_line}
+   \caption{Dialog für regelbasierende Darstellung \nixcaption}\label{fig:rulesymNG}
+\end{figure}
+
+\minisec{Punkt-Verschiebung}
+
+Für Punktlayer gibt es eine Darstellungsart, mit der es möglich ist, sämtliche 
+Punkte eines Layers auch dann darzustellen, wenn sie sich teilweise an derselben Stelle 
+befinden. Dies kann zum Beispiel bei Zeitrihen der Fall sein. Die Punkte werden dabei 
+um ein Zentrumssymbol herum auf einem Versatzkreis angeordnet und dargestellt, 
+siehe Abbildung~\ref{fig:poidissymNG}. Die Punkt-Verschiebung steht nur zur Verfügung, 
+wenn Sie das Kern-Plugin Verschiebungserweiterung geladen haben.
+
+\begin{figure}[ht]
+   \centering
+   \includegraphics[clip=true, width=10cm]{poi_displacement}
+   \caption{Dialog für Punkt-Verschiebung \nixcaption}\label{fig:poidissymNG}
+\end{figure}
+
+\minisec{Symboleigenschaften}
+
+Der Dialog \dialog{Symboleigenschaften} erlaubt es, ein Symbol zu definieren. Im 
+oberen linken Bereich befindet sich immer ein Preview des aktuellen Symbols. 
+Darunter sind die Symbollayer aufgelistet, aus denen sich das Symbol zusammensetzt. 
+Um den Dialog \dialog{Symboleigenschaften} zu öffnen, drücken Sie den Knopf 
+\dropmenuopttwo{mActionOptions}{Eigenschaften} im Reiter \tab{Symbology} des 
+Dialogs \dialog{Layereigenschaften}.
+
+Mit den Kontrollknöpfen können Symbollayer hinzugefügt oder entfernt werden, ihre 
+Reihenfolge verändert oder die Layerfarbe gesperrt werden. Im rechten Teil des 
+Dialogs werden die Symbollayereigenschaften dargestellt. Am wichtigsten ist hier 
+die Symbollayertyp Auswahl. Die Optionen sind abhängig vom Layertyp (Punkt, Linie 
+Polygon).   
+
+\begin{description}
+\item Optionen für den Symbollayertyp bei Punktlayern
+\begin{itemize}[label=--]
+\item \textbf{SimpleMarker}: Randfarbe, Füllfarbe, Größe, Winkel, X-,Y-Versatz
+\item \textbf{SvgMarker}: Größe, Winkel, X-,Y-Versatz, SVG Bild
+\end{itemize}
+\item Optionen für den Symbollayertyp bei Linienlayern
+\begin{itemize}[label=--]
+\item \textbf{LineDecoration}: Farbe
+\item \textbf{MarkerLine}: Marker, Markerintervall, Makerrotation, Linienversatz
+\item \textbf{SimpleLine}: Farbe, Stiftbreite, Stiftstil, Versatz, Verbindungsstil und Endstil; 
+\end{itemize}
+\item Optionen für den Symbollayertyp bei Polygonlayern
+\begin{itemize}[label=--]
+\item \textbf{SimpleFill}: Farbe, Füllstil, Randfarbe, Randstil, Randbreite.
+\end{itemize}
+\end{description}
+
+\begin{figure}[h]
+\centering
+\caption{Symboleigenschaften festlegen \nixcaption}
+   \subfloat[Linie aus drei einfachen Linien] {\label{subfig:symprops1}\includegraphics[clip=true, width=0.3\textwidth]{symbolproperties1}}\hspace{0.33cm}
+   \subfloat[Symboleigenschaften für Punkte] {\label{subfig:symprops2}\includegraphics[clip=true, width=0.3\textwidth]{symbolproperties2}}\hspace{0.33cm}
+   \subfloat[Füllstil für Polygone] {\label{subfig:symprops3}\includegraphics[clip=true, width=0.3\textwidth]{symbolproperties3}}
+\end{figure}
+
+\subsection{Stilmanager zum managen von Symbolen und Farbanstiegen}\label{subsec:stylemanager}
+
+Der Stilmanager ist eine kleine Applikation, in der alle vohandenen Symbole 
+und Farbanstiege aufgelistet werden. Es ermöglicht außerdem, Symbole hinzuzufügen 
+und/oder zu entfernen. Starten Sie den Stilmanager, indem Sie auf 
+\mainmenuopt{Einstellungen} \arrow \dropmenuopt{Stilmanager} im Hauptmenü klicken.
+
+\begin{figure}[ht]
+   \begin{center}
+   \caption{Stilmanager zum managen von Symbolen und Farbanstiegen \nixcaption}\label{fig:stylemanager}\smallskip
+   \includegraphics[clip=true, width=7cm]{stylemanager}
+\end{center}
+\end{figure}
+
+\subsection{Alte Darstellung}\label{sec:oldsymbology}
+\index{Vektorlayer!Alte Darstellung}
+
+\textbf{Bemwerkung}: \qg 1.7 unterstützt weiterhin die Verwendung der alten 
+Darstellung, auch wenn wir empfehlen, mit der neuen Darstellung zu arbeiten, 
+siehe Kapitel \ref{sec:symbology}, da die alte Darstellung in einer der 
+kommenden Versionen verschwinden wird.
+
+Wenn Sie die alte Darstellung verwenden wollen, klicken Sie auf den Knopf 
+\button{Alte Darstellung} im \tab{Darstellung} Reiter der \dialog{Layereigenschaften}.
+
+Sie können auch einstellen, dass die alte Darstellung wieder der Standard ist, 
+in dem Sie das Kontrollkästchen \checkbox{Darstellung der nächsten Generation verwenden} 
+im Reiter \tab{Darstellung} im Menü \mainmenuopt{Einstellungen} \arrow 
+\dropmenuopt{Optionen} deaktivieren. 
+
+Die alte QGIS Darstellung unterstützt folgende Darstellungsarten:
 
 \begin{description}
 \item[Einfaches Symbol] - eine definierte Darstellung wird allen Objekten des
@@ -669,7 +1003,7 @@ speichern}. Wenn Sie die Darstellung des Layers verändern, aber lieber wieder
 zur abgespeicherten Standard-Stildefinition zurückkehren möchten, drücken Sie
 den Knopf \button{Standardstil wiederherstellen}.
 
-\minisec{Transparenz}\label{sec:vect_transparency}
+\minisec{Vektor Transparenz}\label{sec:vect_transparency}
 \index{Vektorlayer!Transparenz}
 
 Innerhalb des Reiters \tab{Darstellung} kann auch die Transparenz für den
@@ -678,290 +1012,7 @@ Layer festgelegt werden. Dazu verschieben Sie den Regler
 sehen. Dies ist sehr nützlich, wenn Sie mehrere Vektorebenen miteinander
 überlagern möchten.
 
-\subsection{Neue Darstellung - Symbology-NG}
-
-In QGIS \CURRENT ist parallel zur oben beschriebenen Darstellung eine 
-neue Darstellung integriert worden. Diese bietet eine Vielzahl von 
-Verbesserungen und neuer Funktionalitäten und wird in einer der zukünftigen 
-QGIS Versionen die aktuelle Standarddarstellung ablösen.
-
-Um derzeit in die neue Darstellung zu wechseln, ist es notwendig, auf den 
-Knopf \button{Neue Darstellung} im Reiter \tab{Darstellung} des 
-\dialog{Layereigenschaften} Dialogs zu drücken. Sie können die neue 
-Darstellung auch als Standard setzen im Reiter \tab{Darstellung \& SVG} 
-des Menüs \mainmenuopt{Einstellungen} \arrow \dropmenuopt{Optionen}. Aktivieren Sie 
-dazu das Kontrollkästchen \checkbox{Darstellung der nächsten Generation 
-verwenden}.
-
-\minisec{Die neue Darstellung verstehen}
-
-Es gibt drei verschiedene Symboltypen: Zeichensymbole (für Punkte), 
-Liniensymbole und Füllsymbole (für Polygone). Symbole können aus einer 
-oder mehreren Symbolebenen bestehen. Sie können die Farbe eines Symbols 
-festlegen, und diese gilt dann für alle weiteren Symbolebenen. Bei einigen 
-Symbolen kann die Symbolfarbe gesperrt sein, bei diesen kann die Farbe 
-dann nicht geändert werden. Dies ist nützlich, wenn man die Farbe eines 
-Multilayer-Symbols definiert. Genauso ist es auch möglich, die Breite von 
-Liniensymbolen oder die Größe und den Darstellungswinkel von Zeichensymbolen 
-festzulegen.
-
-\minisec{Vorhandene Typen von Symbolebenen}
-
-\begin{itemize}[label=--]
-\item \textbf{SimpleMarker}: Darstellung mit einem defnierten Symbol.
-\item \textbf{SimpleLine}: Darstellen einer Linie (mit festgelegter Breite, 
-Farbe und Linienart).
-\item \textbf{SimpleFill}: Darstellen eines Polygons (mit festgelegter 
-Füllfarbe, Fullmuster und Umrandungslinie).
-\item \textbf{SvgMarker}: Darstellen mit einem SVG-Bild.
-\item \textbf{MarkerLine}: Darstellung einer Linie durch die Wiederholung 
-von Symbolen.
-\end{itemize}
-
-\minisec{Farbanstieg}
-
-Farbanstiege werden verwendet, um eine Spannweite von Farben zu definieren, die 
-für die Darstellung verwendet werden sollen. Die Symbolfarbe wird entsprechend des 
-definierten Farbanstiegs angewendet. Es gibt drei Typen: 
-
-\begin{itemize}[label=--]
-\item \textbf{Gradient}: Linearer Gradient von einer zu anderen Farben.
-\item \textbf{Random}: Zufällig erstellte Farben aus einem festgelegten Farbraum.
-\item \textbf{Colorbrewer}: Erstellen von Farbbereichen aus einem Farbschema und 
-einer definierten Anzahl von Farbklassen.
-\end{itemize}
-
-Sie können neue Farbanstiege im Stilmanager definieren (siehe Kapitel 
-\ref{subsec:stylemanager}), indem Sie auf \button{Element hinzufügen} klicken, 
-als Stilelementtyp Color ramp auswählen und dann einen Farbanstiegtyp 
-auswählen. 
-
-\minisec{Stile}
-
-Ein Stil gruppiert eine Reihe unterschiedlicher Symbole und Farbanstiege. 
-Dadurch ist es möglich, eigene, bevorzugte oder häufig benutzte Symbole 
-festzulegen und abzuspeichern. Stile (Symbole und Farbanstiege) haben 
-immer einen Namen, über den Sie gesucht werden können. Es gibt einen 
-veränderbaren Standard-Stil in QGIS und Sie können weitere Stile hinzufügen. 
-
-\minisec{Darstellungen}
-
-Über die Darstellung wird festgelegt, wie Objekte als Symbole angezeigt werden. 
-Es gibt drei Arten der Darstellung: Einzelsymbol, Kategorisiert (in der alten 
-Darstellung auch Eindeutiger Wert genannt) und Abgestuft. Die Vorgabe 
-Fortlaufende Farbe gibt es nicht, da es sich dabei um einen Spezialfall der 
-kategorisierten Darstellung handelt. Die kategorisierte und abgestufte Darstellung 
-wird erreicht, indem ein Symbol mit einem Farbanstieg definiert wird - die 
-Farben der Symbole werden dann passend gesetzt. 
-
-\subsection{Mit der neuen Darstellung arbeiten}
-
-Als erstes muss die neue Darstellung aktiviert werden, indem Sie auf den 
-Knopf \button{neue Darstellung} im Reiter \tab{Darstellung} des Dialogs 
-\dialog{Layereigenschaften} drücken. Der neue Dialog ermöglicht es, aus drei 
-Darstellungsarten auszuwählen: Einzelsymbol, Kategorisiert und Abgestuft. In 
-Abhängigkeit von der ausgewählten Darstellungart bietet der Reiter 
-\tab{Darstellung} unterschiedliche Optionen und Einstellungsmöglichkeiten, die 
-im folgenden Abschnitt beschrieben werden. Über die neue Darstellung können Sie 
-auch den \button{Stilmanager} öffnen (siehe Kapitel \ref{subsec:stylemanager}). 
-Der Stilmanager ermöglicht es, neue Symbole zu erstellen und vorhandene zu editieren 
-oder zu löschen. 
-
-\minisec{Einzelsymbol Darstellung}
-
-Die Einzelsymbol Darstellung wird verwendet, um alle Objekte eines Vektorlayers 
-mit einem, definierten Symbol darzustellen. Die Eigenschaften, die dabei im 
-\tab{Symbology} Reiter festgelegt werden können, hängen teilweise vom Layertyp ab, 
-aber alle Layertypen (Punkt, Linie und Polygon) nutzen folgende Strukturen. In der 
-oberen linken Ecke des Reiters wird ein Preview des Symbols angezeigt, das dann 
-auch dargestellt wird. Im unteren Bereich des Reiters, wird eine Liste bereits 
-vorhandener Symbole angezeigt, die direkt ausgewählt werden können. Das aktuelle 
-Symbol kann bearbeitet werden, in dem man auf den Knopf \button{Eigenschaften} 
-drückt, woraufhin sich der Dialog \dialog{Symboleigenschaften} öffnet. Oder Sie 
-drücken auf den Knopf \button{Ändern} mit dem aktuellen Farbsymbol und können 
-dann in einem Standard-Farbdialog eine neue Farbe definieren. Nachdem Sie alle 
-notwendigen Anpassungen gemacht wurden, können Sie das neue Symbol mit den Knopf 
-\button{Zum Stil hinzufügen} zu der Liste bereits vorhandener Symbole hinzufügen.  
-
-\textbf{Bemerkung}: Um die Breite einer Linie zu ändern, können Sie abgesehen 
-von der direkten Anpassung des Symbols auch ein Größenskalierungsfeld angeben 
-(erreichbar über den Knopf \button{Erweitert} neben dem Knopf 
-\button{Zum Stil hinzufügen}).
-
-\begin{figure}[h]
-\centering
-\caption{Neue Optionen für die Darstellung von Einzelsymbolen \nixcaption}
-   \subfloat[Eigenschaften von Punkt-Einzelsymbolen] {\label{subfig:singleNG1}\includegraphics[clip=true, width=0.3\textwidth]{singlesymbol_ng_point}}\hspace{0.33cm}
-   \subfloat[Eigenschaften von Linien-Einzelsymbolen] {\label{subfig:singleNG2}\includegraphics[clip=true, width=0.3\textwidth]{singlesymbol_ng_line}}\hspace{0.33cm}
-   \subfloat[Eigenschaften von Polygon-Einzelsymbolen] {\label{subfig:singleNG3}\includegraphics[clip=true, width=0.3\textwidth]{singlesymbol_ng_area}}
-\end{figure}
-
-\minisec{Kategorisierte Darstellung}
-
-Die kategorisierte Darstellung wird verwendet, um alle Objekte eines Vektorlayers
-mit einem, definierten Symbol darzustellen. Dabei reflektiert der Farbwert des 
-Symbols den Wert eines Objektattributs. Im Reiter \tab{Darstellung} kann 
-ausgewählt werden:
-
-\begin{itemize}[label=--]
-\item Das Attribut (über die Auswahl Spalte)
-\item Das Symbol (über die Auswahl Symbol)
-\item Die Farbe (über die Auswahl Farbanstieg)
-\end{itemize}
-
-Der Knopf \button{Erweitert} in der unteren rechten Ecke des Dialogs ermöglicht 
-die Auswahl von Attributspalten für die Drehung und Größenskalierung.
-Zur Veranschaulichung wird im unteren Teil des Reiters eine Liste mit allen 
-Attributen und der jeweils verwendeten Symbolfarbe angezeigt. Das Beispiel in 
-Abbildung \ref{fig:catsymNG} zeigt den Dialog Kategorisierte Darstellung für 
-den Vektorlayer \filename{rivers} des QGIS-Beispieldatensatzes. 
-
-\begin{figure}[ht]
-   \begin{center}
-   \caption{Neue Optionen für die Darstellung von kategorisierter Symbole \nixcaption}\label{fig:catsymNG}\smallskip
-   \includegraphics[clip=true, width=10cm]{categorysymbol_ng_line}
-\end{center}
-\end{figure}
-
-Sie können einen individuellen Farbverlauf erstellen, indem Sie im Bereich 
-Farbverlauf \dialog{Neuer Farbverlauf} auswählen. Dadurch öffnet sich ein 
-neuer Dialog und Sie können auswählen zwischen Gradient, Zufällig und Farbbrauer. 
-Jede dieser Optionen ermöglicht dann, die Farbschritte festzulegen. Ein Beispiel 
-finden Sie in Abbildung \ref{fig:ccrg}.
-
-
-\begin{figure}[ht]
-   \centering
-   \caption{Beispiel eines individuellen Farbverlaufs mit mehreren Farbstufen \nixcaption}\label{fig:ccrg}
-   \includegraphics[clip=true, width=10cm]{customColorRampGradient.png}
-\end{figure}
-
-\minisec{Abgestufte Darstellung}
-
-Die abgestufte Darstellung wird verwendet, um alle Objekte eines Vektorlayers
-mit einem, definierten Symbol darzustellen, Dabei reflektiert der Farbwert die 
-Klassifikation von Objektattributen innerhalb definierter Klassen.
-
-Analog zur kategorisierten Darstellung ermöglicht der Reiter \tab{Darstellung} 
-folgende Einstellungen:
-
-\begin{itemize}[label=--]
-\item Das Attribut (über die Auswahl Spalte)
-\item Das Symbol (über die Auswahl Symbol)
-\item Die Farbe (über die Auswahl Farbanstieg)
-\end{itemize}
-
-Zusätzlich können Sie die Anzahl der Klassen und den Modus für die Klassifizierung 
-festlegen. Im unteren Teil des Reiters wird eine Liste der Klassen, mit deren 
-Darstellung, der Range und dem Label angezeigt. Die vohandenen Modi sind:
-The available modes are:
-
-\begin{itemize}
- \item Gleiches Intervall
- \item Quantile
- \item Natürliche Unterbrechungen (Jenks)
- \item Standardabweichung
- \item Schöne Unterbrechungen
-\end{itemize}
-
-Das Listenfeld im unteren Bereich des Reiters \tab{Darstellung} zeigt die 
-festgelegten Werteklassen und -bereiche, Beschriftungen und Symbole, die dargestellt 
-werden.
-
-Das Beispiel in Abbildung \ref{fig:gradsymNG} zeigt den Dialog 
-\dialog{Abgestufte Darstellung} für den Vektorlayer rivers des 
-QGIS-Beispieldatensatzes.
-
-\begin{figure}[ht]
-   \begin{center}
-   \caption{Neue Optionen für die Darstellung abgestufter Symbole \nixcaption}\label{fig:gradsymNG}\smallskip
-   \includegraphics[clip=true, width=10cm]{graduatesymbol_ng_line}
-\end{center}
-\end{figure}
-
-\minisec{Regelbasierende Darstellung}
-
-Die regelbasierende Darstellung wird verwendet, um die Objekte eines Layers nach 
-selbst festgelegten Regeln darstellen zu können, die dann die Zugehörigkeit zu 
-einer bestimmten Klasse zeigt.
-
-Das Beispiel in Abbildung~\ref{fig:rulesymNG} zeigt den Dialog der regelbasierenden 
-Darstellung für den Layer 'rivers' des QGIS Beispieldatensatzes.
-
-\begin{figure}[ht]
-   \centering
-   \includegraphics[clip=true, width=10cm]{rulesymbol_ng_line}
-   \caption{Dialog für regelbasierende Darstellung \nixcaption}\label{fig:rulesymNG}
-\end{figure}
-
-\minisec{Punkt-Verschiebung}
-
-Für Punktlayer gibt es eine Darstellungsart, mit der es möglich ist, sämtliche 
-Punkte eines Layers auch dann darzustellen, wenn sie sich teilweise an derselben Stelle 
-befinden. Dies kann zum Beispiel bei Zeitrihen der Fall sein. Die Punkte werden dabei 
-um ein Zentrumssymbol herum auf einem Versatzkreis angeordnet und dargestellt, 
-siehe Abbildung~\ref{fig:poidissymNG}.  
-
-\begin{figure}[ht]
-   \centering
-   \includegraphics[clip=true, width=10cm]{poi_displacement}
-   \caption{Dialog für Punkt-Verschiebung \nixcaption}\label{fig:poidissymNG}
-\end{figure}
-
-\minisec{Symboleigenschaften}
-
-Der Dialog \dialog{Symboleigenschaften} erlaubt es, ein Symbol zu definieren. Im 
-oberen linken Bereich befindet sich immer ein Preview des aktuellen Symbols. 
-Darunter sind die Symbollayer aufgelistet, aus denen sich das Symbol zusammensetzt. 
-Um den Dialog \dialog{Symboleigenschaften} zu öffnen, drücken Sie den Knopf 
-\dropmenuopttwo{mActionOptions}{Eigenschaften} im Reiter \tab{Symbology} des 
-Dialogs \dialog{Layereigenschaften}.
-
-Mit den Kontrollknöpfen können Symbollayer hinzugefügt oder entfernt werden, ihre 
-Reihenfolge verändert oder die Layerfarbe gesperrt werden. Im rechten Teil des 
-Dialogs werden die Symbollayereigenschaften dargestellt. Am wichtigsten ist hier 
-die Symbollayertyp Auswahl. Die Optionen sind abhängig vom Layertyp (Punkt, Linie 
-Polygon).   
-
-\begin{description}
-\item Optionen für den Symbollayertyp bei Punktlayern
-\begin{itemize}[label=--]
-\item \textbf{SimpleMarker}: Randfarbe, Füllfarbe, Größe, Winkel, X-,Y-Versatz
-\item \textbf{SvgMarker}: Größe, Winkel, X-,Y-Versatz, SVG Bild
-\end{itemize}
-\item Optionen für den Symbollayertyp bei Linienlayern
-\begin{itemize}[label=--]
-\item \textbf{LineDecoration}: Farbe
-\item \textbf{MarkerLine}: Marker, Markerintervall, Makerrotation, Linienversatz
-\item \textbf{SimpleLine}: Farbe, Stiftbreite, Stiftstil, Versatz, Verbindungsstil und Endstil; 
-\end{itemize}
-\item Optionen für den Symbollayertyp bei Polygonlayern
-\begin{itemize}[label=--]
-\item \textbf{SimpleFill}: Farbe, Füllstil, Randfarbe, Randstil, Randbreite.
-\end{itemize}
-\end{description}
-
-\begin{figure}[h]
-\centering
-\caption{Symboleigenschaften festlegen \nixcaption}
-   \subfloat[Linie aus drei einfachen Linien] {\label{subfig:symprops1}\includegraphics[clip=true, width=0.3\textwidth]{symbolproperties1}}\hspace{0.33cm}
-   \subfloat[Symboleigenschaften für Punkte] {\label{subfig:symprops2}\includegraphics[clip=true, width=0.3\textwidth]{symbolproperties2}}\hspace{0.33cm}
-   \subfloat[Füllstil für Polygone] {\label{subfig:symprops3}\includegraphics[clip=true, width=0.3\textwidth]{symbolproperties3}}
-\end{figure}
-
-\subsection{Stilmanager zum managen von Symbolen und Farbanstiegen}\label{subsec:stylemanager}
-
-Der Stilmanager ist eine kleine Applikation, in der alle vohandenen Symbole 
-und Farbanstiege aufgelistet werden. Es ermöglicht außerdem, Symbole hinzuzufügen 
-und/oder zu entfernen. Starten Sie den Stilmanager, indem Sie auf 
-\mainmenuopt{Einstellungen} \arrow \dropmenuopt{Stilmanager} im Hauptmenü klicken.
-
-\begin{figure}[ht]
-   \begin{center}
-   \caption{Stilmanager zum managen von Symbolen und Farbanstiegen \nixcaption}\label{fig:stylemanager}\smallskip
-   \includegraphics[clip=true, width=7cm]{stylemanager}
-\end{center}
-\end{figure}
+%% FIXME (hier weiter)
 
 \subsection{Beschriftungen}\index{Beschriftung}
 
