@@ -7,7 +7,7 @@
 
 % when the revision of a section has been finalized,
 % comment out the following line:
-\updatedisclaimer
+% \updatedisclaimer
 
 QGIS benutzt die OGR-Bibliothek, um Vektorformate zu lesen und zu schreiben,
 \footnote{GRASS Vektor und PostgreSQL Support wird durch native Datenprovider 
@@ -601,8 +601,8 @@ OGR-unterstützte Formate den \dialog{Query Builder} Dialog über den Knopf
 Layereigenschaften zu öffnen, doppelklicken Sie auf den Namen des Layers in
 der Legende oder wählen mit der rechten Maustaste \dialog{Eigenschaften} aus.
 
-\subsection{Darstellung}\label{sec:symbology}
-\index{Vektorlayer!Darstellung}
+\subsection{Stil}\label{sec:symbology}
+\index{Vektorlayer!Stil}
 
 Ab der \qg Version 1.4 wurde parallel eine neue Darstellung integriert, um 
 die alte zu verbessern und letztlich auch abzulösen. \qg 1.7 benutzt die 
@@ -620,9 +620,9 @@ Verbesserungen und neuer Funktionalitäten und wird in einer der zukünftigen
 QGIS Versionen die aktuelle Standarddarstellung ablösen.
 
 Um derzeit in die neue Darstellung zu wechseln, ist es notwendig, auf den 
-Knopf \button{Neue Darstellung} im Reiter \tab{Darstellung} des 
+Knopf \button{Neue Darstellung} im Reiter \tab{Stil} des 
 \dialog{Layereigenschaften} Dialogs zu drücken. Sie können die neue 
-Darstellung auch als Standard setzen im Reiter \tab{Darstellung \& SVG} 
+Darstellung auch als Standard setzen im Reiter \tab{Stil} 
 des Menüs \mainmenuopt{Einstellungen} \arrow \dropmenuopt{Optionen}. Aktivieren Sie 
 dazu das Kontrollkästchen \checkbox{Darstellung der nächsten Generation 
 verwenden}.
@@ -702,7 +702,7 @@ Farben der Symbole werden dann passend gesetzt.
 
 Der Dialog ermöglicht es, aus den vier Darstellungsarten auszuwählen: Einzelsymbol, Kategorisiert, Abgestuft und Regelbasierend. In 
 Abhängigkeit von der ausgewählten Darstellungart bietet der Reiter 
-\tab{Darstellung} unterschiedliche Optionen und Einstellungsmöglichkeiten, die 
+\tab{Stil} unterschiedliche Optionen und Einstellungsmöglichkeiten, die 
 im folgenden Abschnitt beschrieben werden. Über die neue Darstellung können Sie 
 auch den \button{Stilmanager} öffnen (siehe Kapitel \ref{subsec:stylemanager}). 
 Der Stilmanager ermöglicht es, neue Symbole zu erstellen und vorhandene zu editieren 
@@ -712,7 +712,7 @@ oder zu löschen.
 
 Die Einzelsymbol Darstellung wird verwendet, um alle Objekte eines Vektorlayers 
 mit einem, definierten Symbol darzustellen. Die Eigenschaften, die dabei im Reiter
-\tab{Darstellung} festgelegt werden können, hängen teilweise vom Layertyp ab, 
+\tab{Stil} festgelegt werden können, hängen teilweise vom Layertyp ab, 
 aber alle Layertypen (Punkt, Linie und Polygon) nutzen folgende Strukturen. In der 
 oberen linken Ecke des Reiters wird ein Preview des Symbols angezeigt, das dann 
 auch dargestellt wird. 
@@ -740,7 +740,7 @@ vorhandener Symbole hinzufügen.
 
 Die kategorisierte Darstellung wird verwendet, um alle Objekte eines Vektorlayers
 mit einem, definierten Symbol darzustellen. Dabei reflektiert der Farbwert des 
-Symbols den Wert eines Objektattributs. Im Reiter \tab{Darstellung} kann 
+Symbols den Wert eines Objektattributs. Im Reiter \tab{Stil} kann 
 ausgewählt werden:
 
 \begin{itemize}[label=--]
@@ -782,7 +782,7 @@ Die abgestufte Darstellung wird verwendet, um alle Objekte eines Vektorlayers
 mit einem, definierten Symbol darzustellen, Dabei reflektiert der Farbwert die 
 Klassifikation von Objektattributen innerhalb definierter Klassen.
 
-Analog zur kategorisierten Darstellung ermöglicht der Reiter \tab{Darstellung} 
+Analog zur kategorisierten Darstellung ermöglicht der Reiter \tab{Stil} 
 folgende Einstellungen:
 
 \begin{itemize}[label=--]
@@ -804,7 +804,7 @@ The available modes are:
  \item Schöne Unterbrechungen
 \end{itemize}
 
-Das Listenfeld im unteren Bereich des Reiters \tab{Darstellung} zeigt die 
+Das Listenfeld im unteren Bereich des Reiters \tab{Stil} zeigt die 
 festgelegten Werteklassen und -bereiche, Beschriftungen und Symbole, die dargestellt 
 werden.
 
@@ -917,11 +917,11 @@ siehe Kapitel \ref{sec:symbology}, da die alte Darstellung in einer der
 kommenden Versionen verschwinden wird.
 
 Wenn Sie die alte Darstellung verwenden wollen, klicken Sie auf den Knopf 
-\button{Alte Darstellung} im \tab{Darstellung} Reiter der \dialog{Layereigenschaften}.
+\button{Alte Darstellung} im \tab{Stil} Reiter der \dialog{Layereigenschaften}.
 
 Sie können auch einstellen, dass die alte Darstellung wieder der Standard ist, 
 in dem Sie das Kontrollkästchen \checkbox{Darstellung der nächsten Generation verwenden} 
-im Reiter \tab{Darstellung} im Menü \mainmenuopt{Einstellungen} \arrow 
+im Reiter \tab{Stil} im Menü \mainmenuopt{Einstellungen} \arrow 
 \dropmenuopt{Optionen} deaktivieren. 
 
 Die alte QGIS Darstellung unterstützt folgende Darstellungsarten:
@@ -967,7 +967,7 @@ angezeigt wird. \index{Vektorlayer!Darstellung!Verändern}
 \minisec{Stiloption} \label{sec:style_options}
 \index{Vektorlayer!Stiloptionen}
 
-Innerhalb des Reiters \tab{Darstellung} können auch Stiloptionen für
+Innerhalb des Reiters \tab{Stil} können auch Stiloptionen für
 Vektorlayer definiert werden. Abhängig vom ausgewählten Legendentyp können
 Vektorobjekte auch klassifiziert dargestellt werden. Die folgenden
 Stiloptionen stehen zur Verfügung: 
@@ -1006,22 +1006,27 @@ den Knopf \button{Standardstil wiederherstellen}.
 \minisec{Vektor Transparenz}\label{sec:vect_transparency}
 \index{Vektorlayer!Transparenz}
 
-Innerhalb des Reiters \tab{Darstellung} kann auch die Transparenz für den
+Innerhalb des Reiters \tab{Stil} kann auch die Transparenz für den
 Layer festgelegt werden. Dazu verschieben Sie den Regler
 \slider{Transparenz} wie in Abbildung~\ref{fig:vector_symbology} zu
 sehen. Dies ist sehr nützlich, wenn Sie mehrere Vektorebenen miteinander
 überlagern möchten.
 
-%% FIXME (hier weiter)
-
 \subsection{Beschriftungen}\index{Beschriftung}
 
-Im Reiter \tab{Beschriftungen} können Sie Objekte beschriften und die
-Anordnung, den Schriftstil, die Ausrichtung, Pufferung und Position der
-Beschriftung festlegen.
+Analog zur Darstellung, stellt \qg \CURRENT derzeit auch zwei Beschriftungen 
+zur Verfügung. Der Reiter \tab{Beschriftungen} enthält noch die alte 
+Beschriftung. Die neue Beschriftung ist noch als Kern-Erweiterung implementiert, 
+und wird die alte Beschriftung in einer der kommenden Versionen ersetzen.
 
-Als Beispiel stellen wir die Beschriftung der Karte lakes.shp des QGIS
-Beispieldatensatzes \filename{qgis\_example\_dataset} vor:
+Wir empfehlen die neue Beschriftung zu verwenden. Sie ist in Kapitel 
+\ref{newlabel} beschrieben.
+
+Mit der alten Beschriftungen können Sie Objekte beschriften und die
+Anordnung, den Schriftstil, die Ausrichtung, Pufferung und Position der
+Beschriftung festlegen. Als Beispiel stellen wir die Beschriftung der 
+Karte lakes.shp des QGIS Beispieldatensatzes \filename{qgis\_example\_dataset} 
+vor:
 
 \begin{enumerate}
 \item Laden der Shapes \filename{alaska.shp} und \filename{lakes.shp}
@@ -1037,7 +1042,9 @@ Beschriftung im \guilabel{NAMES} Feld enthalten.
 aktivieren Sie das Kontrollkästchen \checkbox{Mehrzeilige Beschriftungen?}.
 QGIS wird dann die Zeilenumbrüche entsprechend setzen. Dabei handelt es sich
 um das \textbf{einfache} Zeichen \textbackslash n, (nicht zwei einzelne
-Zeichen, wie ein Backslash \textbackslash gefolgt von dem Zeichen n). 
+Zeichen, wie ein Backslash \textbackslash gefolgt von dem Zeichen n). Um 
+Zeilenumbrüche in ein Attributfeld einzufügen, konfigurieren Sie bitte 
+das Bearbeitungselement für die Spalte auf Texteditor.
 \item Klicken Sie auf \button{Anwenden}.
 \end{enumerate}
 
@@ -1069,8 +1076,7 @@ besser lesen kann. Um die Beschriftungen der Karte \filename{lakes.shp} zu
 Puffern sind folgende Schritte notwendig:
 
 \begin{enumerate}
-\item Klicken Sie auf Puffer und aktivieren Sie das Kontrollkästchen
-\checkbox{Beschriftungen freistellen}.
+\item Aktivieren Sie das Kontrollkästchen \checkbox{Beschriftungen freistellen}.
 \item Wählen Sie eine Größe und eine Farbe
 \item Klicken Sie auf \button{Anwenden}, um das Ergebnis zu betrachten.
 \end{enumerate}
@@ -1090,7 +1096,7 @@ notwendigen Parameter anhand von Inhalten aus Attributspalten definieren.
 Beachten Sie, dass es im unteren Bereich auch ein kleines
 \classname{Vorschau}-Feld gibt, in dem alle Änderungen angezeigt werden.
 
-\subsection{Neue Beschriftung}\index{Beschriftung!Neu}
+\subsection{Neue Beschriftung}\label{newlabel}\index{Beschriftung!Neu}
 
 Das neue \toolbtntwo{labeling}{Beschriftung} bietet eine verbesserte Beschriftung
 für Vektorlayer (Punkte, Linien und Polygone) und benötigt nur wenige Parameter.
@@ -1174,6 +1180,20 @@ Dazu können Sie noch auswählen, ob alle Beschriftungskandidaten angezeigt werden
 sollten (zur Fehlerbeseitigung) oder ob alle Beschriftungen dargestellt werden
 sollen, also inklusive der kollidierenden.
 
+\minisec{Schlüsselworte für Beschriftung in der Attributspalte}
+
+Es gibt eine Reihe von Schlüsselworten, die verwendet werden können, um die 
+Platzierung von Beschriftungen mittels einer Attributspalte festzulegen.
+
+\begin{itemize}[label=--]
+\item \textbf{Für horizontale Ausrichtung}: left, center, right
+\item \textbf{Für vertikale Ausrichtung}: bottom, base, half, top
+\item \textbf{Farben können mit SVG Angaben definiert werden}, z.B. \#ff0000
+\item \textbf{für Fett, Unterstrichen, Durchgestrichen und Kursiv gilt}: 0 = false 1 = true
+\end{itemize}
+
+Eine Kombination von of Schlüsselworten funktioniert auch, z.B.: base right oder bottom left.
+
 \subsection{Attribute}\index{Attribute}\label{label_attributes}
 
 Innerhalb des Reiters \tab{Attribute} kann die Eingabe von Attributwerten für
@@ -1184,7 +1204,10 @@ umschalten} klicken, können Sie für PostGIS Daten auch die Knöpfe
 \toolbtntwo{mActionNewAttribute}{Neue Attributspalte} und
 \toolbtntwo{mActionDeleteAttribute}{Lösche Attributspalte} nutzen. Das
 Hinzufügen einer neuen Attributspalte wird dabei nur unterstützt, wenn die
-auf ihrem Rechner installierte GDAL Version >= 1.6 ist,
+auf ihrem Rechner installierte GDAL Version >= 1.6 ist. Im GDAL/OGR Bugtracker 
+befindet sich noch ein Patch (Ticket 2671), der darauf wartet eingefügt zu 
+werden, um eine Attributspalte zu löschen. Solange können Sie das externe 
+Python Plugin 'Table Manager' dazu verwenden.
 
 \minisec{Feld zur Definition eines Bearbeitungselements für eine Attributspalte}
 
@@ -1203,35 +1226,35 @@ Attributspalte erlaubt sind. Auf Grundlage der Einträge werden
 unterschiedliche Eingabefenster während des Editierens erstellt:
 
 \begin{itemize}[label=--]
-\item Eingabezeile: Eingabefeld für einfachen Text oder numerische Attribute.
+\item \textbf{Eingabezeile}: Eingabefeld für einfachen Text oder numerische Attribute.
 Dies ist der Standard.
-\item Klassifikation: Auswahlliste mit den Attributwerten, die im Reiter
-\tab{Darstellung} als Legendentyp 'Eindeutiger Wert' für die Klassifikation
+\item \textbf{Klassifikation}: Auswahlliste mit den Attributwerten, die im Reiter
+\tab{Stil} als Legendentyp 'Eindeutiger Wert' für die Klassifikation
 benutzt werden.
-\item Bereich: Erlaubt die Eingabe von Werten eines gegebenen Bereichs sowie
+\item \textbf{Bereich}: Erlaubt die Eingabe von Werten eines gegebenen Bereichs sowie
 der Schrittweite. Das Bearbeitungselement kann dabei entweder als Schieber
 oder als Drehfeld dargestellt werden.
-\item Eindeutige Werte: Der Benutzer kann einen Wert wählen, der bereits in
+\item \textbf{Eindeutige Werte}: Der Benutzer kann einen Wert wählen, der bereits in
 dem Attribut verwendet wird. Wenn \checkbox{Änderbar} ausgewählt wird, wird
 eine Eingabezeile mit Autovervollständigung angezeigt. Anderseits wird eine
 Auswahlliste dargestellt.
-\item Dateiname: Ermöglicht die Dateiauswahl durch einen Auswahldialog.
-\item Wertabbildung: Es wird eine Auswahlliste mit vordefinierten Elementen
+\item \textbf{Dateiname}: Ermöglicht die Dateiauswahl durch einen Auswahldialog.
+\item \textbf{Wertabbildung}: Es wird eine Auswahlliste mit vordefinierten Elementen
 angezeigt. Die Eingabe im Feld Wert entspricht dabei dem Attribut, das
 gespeichert wird. Der Eintrag im Feld Beschreibung wird in der Auswahlliste
 angezeigt.
-\item Aufzählung: Hier wird eine Auswahlliste mit Werten angezeigt, die als
+\item \textbf{Aufzählung}: Hier wird eine Auswahlliste mit Werten angezeigt, die als
 Spaltentyp benutzt werden können. Der Datenprovider muss diese Funktion
 unterstützen. Dies ist aktuell nur für Postgres als Datenprovider der Fall.
-\item Unveränderbar: In diesem Fall ist das Attribut unveränderlich. Der
+\item \textbf{Unveränderbar}: In diesem Fall ist das Attribut unveränderlich. Der
 Benutzer kann es also nicht verändern.
-\item Versteckt: Eine versteckte Attributspalte ist für den Anwender unsichtbar. 
+\item \textbf{Versteckt}: Eine versteckte Attributspalte ist für den Anwender unsichtbar. 
 Der Inhalt wird ausgeblendet.
-\item Kontrollkästchen: Zeigt ein Kontrollkästchen. Es kann festgelegt werden, 
+\item \textbf{Kontrollkästchen}: Zeigt ein Kontrollkästchen. Es kann festgelegt werden, 
 welches Attribute bzw. welcher Wert eingetragen wird, wenn das Kontrollkästchen 
 aktiv oder inaktiv ist.
-\item Texteditor: Öffnet ein Textfeld, in dem mehrzeiliger Text eingetragen werden kann.
-\item Kalender: Öffnet ein Kalenderfenster, um ein Datum auszuwählen und in die 
+\item \textbf{Texteditor}: Öffnet ein Textfeld, in dem mehrzeiliger Text eingetragen werden kann.
+\item \textbf{Kalender}: Öffnet ein Kalenderfenster, um ein Datum auszuwählen und in die 
 Attributtabelle einzutragen. Der Spaltentyp muss String sein.
 \end{itemize}
 
@@ -1241,7 +1264,10 @@ Der Reiter \tab{Allgemein} im Dialog \dialog{Layereigenschaften} ermöglicht
 es, den Anzeigenamen in der Legende zu verändern, einen räumlichen Index für
 PostGIS- sowie OGR-Layer zu erstellen, das Koordinatenbezugssystem des Layers
 zu definieren und einen Minimum- und Maximumwert für Ma"sstabsabhängiges
-Zeichnen festzulegen.
+Zeichnen festzulegen. Zusätzlich können Sie an dieser Stelle auch über den 
+Knopf \button{IU zur Bearbeitung} ein User Interface einbinden, dass Sie selbst 
+erstellen können mit den 'QT Creator IDE and Tools' Anwendungen von der URL 
+\url{http://qt.nokia.com/products/developer-tools}. 
 
 Der Knopf \button{Query Builder} ermöglicht es, SQL-Abfragen an die
 Attributdaten des Layers zu richten. Dieser Knopf ist momentan nur bei
@@ -1434,32 +1460,45 @@ Karte klicken. Man kann auch zu bestimmten Attributen webbasierte
 Information ablegen (z.B. in einer HTML-Datei) und diese dann
 über eine Aktion anzeigen lassen, etwa so wie in dem Google Beispiel.
 
-\subsection{Diagram Overlay}\label{sec:diagram}
+\subsection{Verknüpfungen}\label{sec:joins}
+\index{Vektorlayer!Verknüpfungen}
+
+Der Reiter \tab{Verknüpfungen} ermöglicht es, eine in QGIS geladene Attributtabelle 
+mit einem Vektorlayer zu verknüpfen. Im Dialog \dialog{Verknüpfung hinzufügen} wählen 
+Sie eine Attributtabelle als Layer aus, ein darin enthaltene Verknüpfungsfeld und 
+das dazu passende Zielfeld im Vektorlayer. QGIS erlaubt die Verknüpfung mit 
+Datenformaten, die von OGR und PostgreSQL unterstützt werden sowie ASCII Tabellen, 
+die mit dem Plugin 'Textdatei als Layer importieren' gelesen wurden.
+
+Zusätzlich stehen noch folgende Funktionen zur Auswahl:
+
+\begin{itemize}[label=--]
+\item \checkbox{Verknüpfung im Speicher cachen}
+\item \checkbox{Index auf Feld erzeugen}
+\end{itemize}
+
+\subsection{Diagramme}\label{sec:diagram}
 \index{Vektorlayer!Diagram Overlay}
 
-Der Reiter \tab{Diagram Overlay} ermöglicht es, ein Diagramm als Grafik über
-einen Vektorlayer zu visualisieren. Um diese Funktion zu aktivieren, müssen
-Sie zuerst den Plugin Manager öffnen und das 'Diagram Overlay' Plugin laden.
-Danach erscheint ein zusätzlicher Reiter im Dialog
-\dialog{Layereigenschaften}, über den die Eigenschaften des Diagramms
-festlegegt werden können (siehe Abbildung~\ref{fig:diagramtab}). 
+Der Reiter \tab{Diagramme} ermöglicht es, ein Diagramm als Grafik über
+einen Vektorlayer zu visualisieren (siehe Abbildung~\ref{fig:diagramtab}). 
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{Vektor Layereigenschaften mit Diagram Overlay Reiter \nixcaption}
+   \caption{Vektor Layereigenschaften mit Diagramm Überlagerung \nixcaption}
    \label{fig:diagramtab}\smallskip
    \includegraphics[clip=true, width=13cm]{diagram_tab}
 \end{center}
 \end{figure}
 
-Die aktuelle Implementierung des Moduls ermöglicht es, Tortendiagramme, 
-Balkendiagramme und proportionale SVG-Symbole auf Basis von Attributspalten 
-zu erstellen, und die Größe der Diagramme entsprechend einer Klassifikation 
-linear zu skalieren. Als Beispiel sollen auf dem Hintergrund des Layers 
-\filename{alaska.shp} Balkendiagramme mit Klimawerten gezeichnet werden. 
-Die Werte dafür entnehmen wir der
-Attributtabelle des Vektorlayers \filename{climate.shp}. Beide Layer sind
-Teil des QGIS Beispieldatensatzes (siehe Kapitel~\ref{label_sampledata}).   
+Die aktuelle Implementierung des Moduls ermöglicht es, Kuchen- und Textdiagramme 
+auf Basis von Attributspalten zu erstellen, und die Größe der Diagramme entsprechend 
+einer Klassifikation linear zu skalieren. Die Anordnung der Diagramme findet in 
+Abstimmung mit der neuen Beschriftung statt. Als Beispiel sollen auf dem Hintergrund 
+des Layers \filename{alaska.shp} Kuchendiagramme mit Temperaturwerten gezeichnet werden. 
+Die Werte dafür entnehmen wir der Attributtabelle des Vektorlayers 
+\filename{climate.shp}. Beide Layer sind Teil des QGIS Beispieldatensatzes 
+(siehe Kapitel~\ref{label_sampledata}).   
 
 \begin{enumerate}
 \item Als erstes klicken Sie auf das Icon
@@ -1468,8 +1507,8 @@ Beispieldatensatz und laden die beiden Vektorlayer \filename{alaska.shp}
 und \filename{climate.shp}.
 \item Doppelklicken Sie auf den \filename{climate} Layer in der
 Kartenlegende, um den Dialog \dialog{Layereigenschaften} zu starten.
-\item Klicken Sie auf den Reiter \tab{Diagram Overlay} und wählen Sie
-\button{Balkendiagramm} als Diagrammtyp.
+\item Klicken Sie auf den Reiter \tab{Diagramme} und wählen Sie
+\button{Kuchendiagramm} als Diagrammtyp.
 \item Im Diagramm wollen wir die Werte von drei Attributspalten 
 \filename{T\_F\_JAN, T\_F\_JUL} und \filename{T\_F\_MEAN} anzeigen. Als
 erstes selektieren wir \filename{T\_F\_JAN} als Attribute und klicken auf
@@ -1477,19 +1516,18 @@ erstes selektieren wir \filename{T\_F\_JAN} als Attribute und klicken auf
 \filename{T\_F\_MEAN}.
 \item Zum linearen Skalieren der Diagrammgröße definieren wir \filename{T\_F\_JUL}
 als Klassifikationsattribut.
-\item Nun klicken wir auf \button{Maximalwert suchen}, wählen einen Wert für
+\item Nun klicken wir auf \button{Maximalwert suchen}, wählen den Wert 10 für
 die Größe und die Größeneinheit und klicken auf \button{Anwenden}, um die
 Diagramme in QGIS anzuzeigen.
-\item Sie können nun die Größe weiter anpassen oder die Farben der einzelnen
-Diagrammbalken ändern, indem Sie auf die Farbe des Attributs doppelklicken
-und dann eine entsprechende Farbe auswählen.
-Abbildung~\ref{fig:climatediagram} gibt einen ersten Eindruck.
+\item Sie können nun die Größe weiter anpassen oder die Farben ändern, 
+indem Sie auf die Farbe des Attributs doppelklicken und dann eine entsprechende 
+Farbe auswählen. Abbildung~\ref{fig:climatediagram} gibt einen ersten Eindruck.
 \item Abschließend klicken Sie \button{Ok}.
 \end{enumerate}
 
 \begin{figure}[ht]
    \begin{center}
-   \caption{Balkendiagramm mit Temperaturdaten vor dem Hintergrund des Alaska Layers \nixcaption}\label{fig:climatediagram}\smallskip
+   \caption{Kuchendiagramm mit Temperaturdaten vor dem Hintergrund des Alaska Layers \nixcaption}\label{fig:climatediagram}\smallskip
    \includegraphics[clip=true, width=13cm]{climate_diagram}
 \end{center}
 \end{figure}
@@ -1540,20 +1578,18 @@ also hinein- oder herauszoomen. Wenn Sie mit den Alaska-Daten arbeiten
 bezieht sich die Layereinheit auf \usertext{feet} und ein Wert von etwa 300ft
 bei einem Maßstab 1:10 000 sollte für die Übungen gut funktionieren.
 \item Eine Layer-basierter Fangmodus kann festgelegt werden im Menü
-\mainmenuopt{Einstellungen} \arrow
-\dropmenuopttwo{mActionOptions}{Projekteinstellungen}. Im Reiter
-\tab{Allgemein}, Sektion \classname{Digitalisierung} können Sie auf den Knopf
-\button{Snapping Optionen} drücken und für jeden in QGIS geladenen
-Vektorlayer einen Fangmodus und Fangtoleranz einstellen, aktivieren oder
-deaktivieren (vgl. Abbildung~\ref{fig:snappingoptions}). Diese layerbasierte
-Einstellung überschreibt die globalen Einstellungen, die Sie im Reiter
-\tab{Digitalisierung} definiert haben. Wenn Sie also einen Layer editieren
+\mainmenuopt{Einstellungen} \arrow \mainmenuopt{Fangoptionen}. Für jeden in 
+QGIS geladenen Vektorlayer kann Fangmodus und Fangtoleranz eingestellt, 
+aktiviert oder deaktiviert werden (vgl. Abbildung~\ref{fig:snappingoptions}). 
+Diese layerbasierte Einstellung überschreibt die globalen Einstellungen, die 
+Sie im Reiter \tab{Digitalisierung} unter \mainmenuopt{Einstellungen} \arrow 
+\mainmenuopt{Optionen} definiert haben. Wenn Sie also einen Layer editieren
 und auf die Geometrien eines anderen Layers snappen wollen, dann aktivieren
-Sie die Einrastoptionen nur für diesen Layer und setzen Sie die globale
+Sie die Fangoptionen nur für diesen Layer und setzen Sie die globale
 Fangtoleranz auf einen kleineren Wert. Die Fangtoleranz wird nur auf
 ausgewählte Layer angewendet, unabhängig von der globalen Fangtoleranz.
 Vergewissern Sie sich daher, dass die Layer, auf die Sie snappen wollen, auch
-im Dialog Einrastoptionen ausgewählt sind.  
+im Dialog Fangoptionen ausgewählt sind.  
 \end{enumerate}
 
 \begin{figure}[H]
@@ -1625,25 +1661,23 @@ diesen zu verschieben, ohne das Sie das Digitalisieren unterbrechen müssen.
 
 \subsection{Topologisches Editieren}
 
-Abgesehen von der Einstellung des Layer-basierten Fangmodus können im Reiter
-\tab{Allgemein} im Menü \mainmenuopt{Einstellungen} \arrow
-\dropmenuopttwo{mActionOptions}{Projekteigenschaften} auch topologische
-Funktionalitäten eingestellt werden. In der Sektion
-\classname{Digitalisierung} können Sie \checkbox{Ermögliche topologisches
-Editieren} und/oder \checkbox{Vermeide Überschneidung neuer Polygone} aktivieren.
+Abgesehen von der Einstellung des Layer-basierten Fangmodus können im Menü
+\mainmenuopt{Einstellungen} \arrow \mainmenuopt{Fangoptionen} auch topologische
+Funktionen aktiviert werden. Hier können Sie allgemein 
+\checkbox{Topologisches Editieren an} auswählen und/oder für jeden Layer einzeln ein Kontrollkästchen in der Spalte \checkbox{Überschneidung vermeiden} aktivieren.
 
 \minisec{Ermögliche topologisches Editieren}
 
-Das Kontrollkästchen \checkbox{Ermögliche topologisches Editieren}
-unterstützt das Editieren und Kontrollieren gemeinsamer Grenzlinien in
-Polygon-Layern. QGIS 'erkennt' gemeinsame Flächengrenzen und beim Verschieben
-des Stützpunktes einer Fläche werden dann automatisch die anderen
-Flächengrenzen angepasst und mit verschoben.
+Das Kontrollkästchen \checkbox{Topologisches Editieren an} unterstützt das 
+Editieren und Kontrollieren gemeinsamer Grenzlinien in Polygon-Layern. QGIS 
+'erkennt' gemeinsame Flächengrenzen und beim Verschieben des Stützpunktes 
+einer Fläche werden dann automatisch die anderen Flächengrenzen angepasst 
+und mit verschoben.
 
-\minisec{Vermeide Überschneidung neuer Polygone}
+\minisec{Überschneidung vermeiden}
 
-Als zweite topologische Funktion gibt es das Kontrollkästchen
-\checkbox{Vermeide Überschneidung neuer Polygone}. Damit wird es vereinfacht,
+Als zweite topologische Funktion gibt es ein Kontrollkästchen in der Spalte
+\checkbox{Überschneidung verm.}. Damit wird es vereinfacht,
 angrenzende Polygone zu digitalisieren. Wenn bereits ein Polygon digitalisiert
 wurde, kann das zweite auch mit einer Überlagerung des ersten Polygons
 erstellt werden und QGIS schneidet dann die Überlagerungen weg, so dass die
@@ -1763,8 +1797,9 @@ gestellt ist. Dadurch wird das Attributfenster geöffnet und ermöglicht die
 Attribute für das neue Objekt einzutragen. In Abbildung
 \ref{fig:vector_digitising} ist ein Beispiel für einen fiktiven Fluss in
 Alaska gezeigt. Im Reiter \tab{Digitalisierung} des Menüs \mainmenuopt{Einstellungen} 
-\arrow \dropmenuopt{Optionen} kann auch das Kontrollkästchen \checkbox{Eingabe der 
-Attributwerte bei der Erstellung neuer Objekte unterdrücken} aktiviert werden.
+\arrow \dropmenuopt{Optionen} können auch die Kontrollkästchen \checkbox{Eingabe der 
+Attributwerte bei der Erstellung neuer Objekte unterdrücken} und 
+\checkbox{Letzte Attributwerteingaben wiederverwenden} aktiviert werden.
 
 \begin{figure}[ht]
    \begin{center}
@@ -1805,17 +1840,15 @@ Sie sollten den Suchradius beim Digitalisieren über die Menüleiste unter
 \arrow \tab{Digitalisierung} größer 0 einstellen. Ansonsten ist QGIS nicht in der
 Lage, ein Objekt auszuwählen.
 
-
 \minisec{Eine einfache Übung}
 
-Beginnen Sie, indem Sie das Werkzeug
-\toolbtntwo{mActionNodeTool}{Knotenwerkzeug} aktivieren und dann ein Objekt
-selektieren. Rote Boxen erscheinen an jedem Stützpunkt des Objektes. Nun sind
-folgende Funktionen vorhanden:
+Beginnen Sie, indem Sie das \toolbtntwo{mActionNodeTool}{Knotenwerkzeug} aktivieren 
+und dann ein Objekt selektieren. Rote Boxen erscheinen an jedem Stützpunkt des 
+Objektes. Nun sind folgende Funktionen vorhanden:
 
 \begin{itemize}[label=--]
-\item \textbf{Einen Stützpunkte auswählen}: Das Auswählen ist einfach.
-Klicken Sie einfach auf einen Stützpunkt und die Farbe der Box wechselt nach
+\item \textbf{Stützpunkte auswählen}: Das Auswählen ist einfach.
+Klicken Sie auf einen Stützpunkt und die Farbe der Box wechselt nach
 Blau. Sie können mehrere Stützpunkte auswählen, indem Sie die Tasten
 \keystroke{Umschalt} gedrückt halten. Mit der Taste \keystroke{Strg} kann die
 Auswahl umgekehrt werden (selektierte Stützpunkte werden deselektiert, nicht
@@ -1839,31 +1872,10 @@ ist, können die Stützpunkte zu dem nächstgelegenen Stützpunkt oder Segment
 snappen.
 \end{itemize}
 
-\minisec{Ausgewählte Objekte löschen}
-\index{Vektorlayer!löschen!Objekte}
-
-Wenn Sie ein ganzes Polygon löschen möchten, selektieren Sie es erst mit dem
-\toolbtntwo{mActionSelect}{Wähle Objekt aus} Werkzeug. Sie können dabei auch
-mehrere Objekte gleichzeitig auswählen. Wenn Sie die Objekte ausgewählt
-haben, klicken Sie auf das Icon
-\toolbtntwo{mActionDeleteSelected}{Ausgewähltes löschen}. 
-
-Das Werkzeug \toolbtntwo{mActionEditCut}{Ausgewählte Objekte ausschneiden}
-kann auch benutzt werden, um Objekte zu löschen. Die Objekte werden gelöscht
-aber zusätzlich noch im ``spatial clipboard' abgelegt. In diesem Fall könnte
-man dann den letzten Schritt, falls ein Fehler unterlaufen ist, wieder
-rückgängig machen, indem wir auf das Werkzeug
-\toolbtntwo{mActionEditPaste}{Objekte einfügen} drücken. Ausschneiden,
-kopieren und übergeben von Objekten funktioniert mit den gerade ausgewählten
-Objekten und können nach Bedarf kombiniert verwendet werden.
-
-\begin{Tip}[h]\caption{\textsc{Unterstützung zum Löschen von Objekten}}
-Wenn Sie Shapes editieren wird das Löschen von Objekten nur
-unterstützt, wenn QGIS zu einer GDAL Version 1.3.2 oder höher verlinkt ist.
-Alle OS X, Windows und GNU/Linux Binärpakete auf der QGIS Downloadseite
-wurden mit GDAL Version 1.3.2 oder höher erstellt.
-\end{Tip}
-
+Jede Veränderung mit dem Knotenwerkzeug wird als einzelner Eintrag im Dialog 
+\dialog{Rücknahme/Wiederholung} abgelegt und unterstütz die topologischen 
+Funktionen. Ausserdem wird On-The-Fly Reprojektion wird unterstützt und Sie 
+können Stützpunkte identifizieren, wenn Sie mit der Maus drüberfahren.
 
 \minisec{Objekte ausschneiden, kopieren und einfügen}
 \index{Vektorlayer!Objekte ausschneiden}
@@ -1920,6 +1932,33 @@ Spaltennamen und -typen der Attributtabelle erstellen. Wenn auch die
 Attributdaten korrekt übernommen werden sollen, dann stellen Sie sicher, dass
 auch die Spaltennamen und -typen beider layer zueinander passen.
 
+\minisec{Ausgewählte Objekte löschen}
+\index{Vektorlayer!löschen!Objekte}
+
+Wenn Sie ein ganzes Polygon löschen möchten, selektieren Sie es erst mit dem
+\toolbtntwo{mActionSelect}{Wähle Objekt aus} Werkzeug. Sie können dabei auch
+mehrere Objekte gleichzeitig auswählen. Wenn Sie die Objekte ausgewählt
+haben, klicken Sie auf das Icon
+\toolbtntwo{mActionDeleteSelected}{Ausgewähltes löschen}. 
+
+Das Werkzeug \toolbtntwo{mActionEditCut}{Ausgewählte Objekte ausschneiden}
+kann auch benutzt werden, um Objekte zu löschen. Die Objekte werden gelöscht
+aber zusätzlich noch im ``spatial clipboard' abgelegt. In diesem Fall könnte
+man dann den letzten Schritt, falls ein Fehler unterlaufen ist, wieder
+rückgängig machen, indem wir auf das Werkzeug
+\toolbtntwo{mActionEditPaste}{Objekte einfügen} drücken. Ausschneiden,
+kopieren und übergeben von Objekten funktioniert mit den gerade ausgewählten
+Objekten und können nach Bedarf kombiniert verwendet werden.
+
+\begin{Tip}[h]\caption{\textsc{Deckungsgleichheit eingefügter Objekte}}
+Wenn der Quell- und Ziellayer die gleiche Projektion nutzen, hat das
+übergebene Objekt die identische Geometrie wie in dem Quelllayer. Wenn der
+Quell- und Ziellayer eine unterschiedliche Projektion nutzen, kann das
+übergebene Objekt eine andere Geometrie wie in dem Quelllayer besitzen. Der
+Grund liegt in auftretenden Rundungsabweichungen bei der Konvertierung
+zwischen Projektionen.
+\end{Tip}
+
 \minisec{Änderungen speichern}
 \index{editing!saving changes}
 
@@ -1968,10 +2007,10 @@ dann nochmals die Daten zu speichern.
    & Objekte trennen
    & \includegraphics[width=0.7cm]{mActionMergeFeatures}
    & Gewählte Objekte verschmelzen \\
-\hline \includegraphics[width=0.7cm]{mActionRotatePointSymbols}
-   & Punktsymbole drehen
-   &
-   & \\
+\hline \includegraphics[width=0.7cm]{mActionMergeFeatures}
+   & Attribute gewählter Objekte vereinen 
+   &\includegraphics[width=0.7cm]{mActionRotatePointSymbols}
+   & Punktsymbole drehen \\
 \hline
 \end{tabular}
 \end{table}
@@ -2094,22 +2133,20 @@ Das Werkzeug \toolbtntwo{mActionMergeFeatures}{Gewählte Objekte verschmelzen}
 erlaubt es, Objekte die eine gemeinsame Grenzlinie und die gleichen Attribute
 tragen zu verschmelzen.
 
-\begin{Tip}[h]\caption{\textsc{Deckungsgleichheit eingefügter Objekte}}
-Wenn der Quell- und Ziellayer die gleiche Projektion nutzen, hat das
-übergebene Objekt die identische Geometrie wie in dem Quelllayer. Wenn der
-Quell- und Ziellayer eine unterschiedliche Projektion nutzen, kann das
-übergebene Objekt eine andere Geometrie wie in dem Quelllayer besitzen. Der
-Grund liegt in auftretenden Rundungsabweichungen bei der Konvertierung
-zwischen Projektionen.
-\end{Tip}
+\minisec{Attribute gewählter Objekte vereinen}
+\index{Vektorlayer!verschmelzen!Attribute}
+
+Das Werkzeug \toolbtntwo{mActionMergeFeatures}{Attribute gewählter Objekte vereinen}
+erlaubt es, Attribute von Objekten, die eine gemeinsame Grenzlinie haben, zu 
+vereinen ohne die Grenzlinie zu verschmelzen.
 
 \minisec{Punktsymbole drehen}
 \index{Vektorlayer!Punktsymbole!drehen}
 
-Das \toolbtntwo{mActionRotatePointSymbols}{Punktsymbole drehen} Werkzeug 
-ermöglicht es, die gedrehte Darstellung von Punktsymbolen. Das Werkzeug 
-ist aber nur aktiv, wenn Sie eine Attributspalte mit Drehwinkeln angelegt 
-haben und diese im Reiter \tab{Symbology} des Dialogs 
+%% FIXME: noch nicht mit neuer Darstellung möglich
+Das \toolbtntwo{mActionRotatePointSymbols}{Punktsymbole drehen} Werkzeug funktioniert 
+in \qg 1.7 nur mit der alten Darstellung. Es ermöglicht, die gedrehte Darstellung von Punktsymbolen. Das Werkzeug ist aber nur aktiv, wenn Sie eine Attributspalte mit 
+Drehwinkeln angelegt haben und diese im Reiter \tab{Stil} des Dialogs 
 \dialog{Layereigenschaften} angegeben haben.
 
 \begin{figure}[ht]
@@ -2175,7 +2212,7 @@ Um einen neuen Shapelayer zu erstellen, wählen Sie \button{Neu} \arrow
 \toolbtntwo{mActionNewVectorLayer}{Neuer Shapedatei Layer} aus dem Menü
 \mainmenuopt{Layer}. Dadurch startet der Dialog \dialog{Neuer Vektorlayer}
 (vgl. Abb. \ref{fig:newvectorlayer}). Wählen Sie hier den Typ des neuen
-Layers (Punkt, Linie oder Polygon).
+Layers (Punkt, Linie oder Polygon) und das KBS (Koordinatenbezugsystem).
 
 \begin{figure}[ht]
    \begin{center}
@@ -2186,9 +2223,11 @@ Layers (Punkt, Linie oder Polygon).
 
 Um die Erstellung eines neuen Vektorlayers abzuschließen, ergänzen Sie die
 gewünschten Attributfelder, indem Sie auf den Knopf \button{Hinzufügen}
-klicken und den Namen und Datentyp angeben. Es werden nur die Datentypen
-\selectstring{Type}{real}, \selectstring{Type}{integer}, and
-\selectstring{Type}{string} unterstützt. Zusätzlich kann entsprechend des
+klicken und den Namen und Datentyp angeben. Eine Defaultspalte 'ID' wird 
+immer automatisch vorgegeben, kann aber bei Bedarf gelöscht werden. 
+
+Es werden die Datentypen \selectstring{Type}{real}, \selectstring{Type}{integer} 
+und \selectstring{Type}{string} unterstützt. Zusätzlich kann entsprechend des
 gewählten Datentyps auch die Breite und Genauigkeit der Spalteneinträge
 festgelegt werden. Wenn dies getan ist, bestätigen Sie mit
 \button{Ok} und geben einen Namen für den Vektorlayer ein. Die Endung
@@ -2299,20 +2338,20 @@ ausgewählte Datensätze durchsuchen}. Die anderen Knöpfe im unteren linken
 Bereich der Attributtabelle bieten folgende Funktionen: 
 
 \begin{itemize}[label=--]
-\item \toolbtntwo{mActionOpenTable}{Auswahl löschen}
-\item \toolbtntwo{mActionSelectedToTop}{Ausgewählte Objekte nach oben}
-\item \toolbtntwo{mActionInvertSelection}{Auswahl umkehren}
+\item \toolbtntwo{mActionOpenTable}{Auswahl löschen} auch mit \keystroke{Strg-U}.
+\item \toolbtntwo{mActionSelectedToTop}{Ausgewählte Objekte nach oben} auch mit \keystroke{Strg-T}.
+\item \toolbtntwo{mActionInvertSelection}{Auswahl umkehren} auch mit \keystroke{Strg-S}.
 \item \toolbtntwo{mActionCopySelected}{Ausgewählte Zeilen in die
 Zwischenablage kopieren} auch mit \keystroke{Strg-C}
 \item \toolbtntwo{mActionZoomToSelected}{Zu den selektierten Zeilen zoomen}
 auch mit \keystroke{Strg-J}
 \item \toolbtntwo{mActionToggleEditing}{Bearbeitungsmodus umschalten}, um
-einen einzelnen Wert zu editieren und weitere Funktionen zu aktivieren.
-\item \toolbtntwo{mActionDeleteSelected}{Gewählte Objekte löschen}
+einen einzelnen Wert zu editieren und weitere Funktionen zu aktivieren auch mit \keystroke{Strg-E}.
+\item \toolbtntwo{mActionDeleteSelected}{Gewählte Objekte löschen} auch mit \keystroke{Strg-D}.
 \item \toolbtntwo{mActionNewAttribute}{Neue Spalte} für PostGIS und OGR Layers ab 
-GDAL Version >= 1.6.
-\item \toolbtntwo{mActionDeleteAttribute}{Spalte löschen} derzeit nur für PostGIS Layers.
-\item \toolbtntwo{mActionCalculateField}{Feldrechner öffnen}
+GDAL Version >= 1.6. auch mit \keystroke{Strg-W}.
+\item \toolbtntwo{mActionDeleteAttribute}{Spalte löschen} derzeit nur für PostGIS Layers auch mit \keystroke{Strg-L}.
+\item \toolbtntwo{mActionCalculateField}{Feldrechner öffnen} auch mit \keystroke{Strg-I}.
 \end{itemize}
 
 \minisec{Ausgewählte Objekte als neuer Layer speichern}
@@ -2502,4 +2541,54 @@ definieren Sie die Ausgabefeldbreite mit 10 und die Ausgabefeldgenauogkeit mit 3
 Feldrechnerausdruck zu kopieren und drücken dann auf \button{Ok}.
 \end{enumerate}
 
+Um den Dialog des Feldrechners nicht zu überladen, sind nicht alle Operatoren 
+grafisch integriert. Sie finden alle in der folgenden Tabelle.
 
+\begin{center}
+{\setlength{\extrarowheight}{10pt}
+\small
+\begin{longtable}{|p{4cm}|p{10cm}|}
+\hline \multicolumn{2}{|c|}{\textbf{Operatoren, die vom Feldrechner unterstützt werden}}\\
+\hline \textbf{String}&\textbf{Literal string value}\\
+\endfirsthead
+\hline \textbf{String}&\textbf{Bezeichnung}\\
+\endhead
+\hline \multicolumn{2}{|r|}{{Siehe nächste Seite}} \\ \hline
+\endfoot
+\endlastfoot
+\hline NULL & null Wert \\
+\hline sqrt(\textit{a}) & Quadratwurzel \\
+\hline sin(\textit{a}) & Sinus von \textit{a} \\
+\hline cos(\textit{a}) & Cosinus von \textit{b} \\
+\hline tan(\textit{a}) & Tangens von \textit{a} \\
+\hline asin(\textit{a}) & Arcussinus von \textit{a} \\
+\hline acos(\textit{a}) & Arcuscosinus von \textit{a} \\
+\hline atan(\textit{a}) & Arcustangens von \textit{a} \\
+\hline to int(\textit{a}) & Konvertiere String \textit{a} nach Integer \\
+\hline to real(\textit{a}) & Konvertiere String \textit{a} nach Real \\
+\hline to string(\textit{a}) & Konvertiere Zahl \textit{a} nach String \\
+\hline lower(\textit{a}) & Konvertiere String \textit{a} nach Kleingeschrieben \\
+\hline upper(\textit{a}) & Konvertiere String \textit{a} nach Großgeschrieben \\
+\hline length(\textit{a}) & Länge von String \textit{a} \\
+\hline atan2(y,x) & Arcustangens von y/x mit den Vorzeichen der beiden Argumente, um das Ergebnis des Quadranten zu bestimmen. \\
+\hline replace(\textit{a}, replacethis, withthat) & Ersetze \textit{replacethis} mit \textit{withthat} im String \textit{a} \\
+\hline substr(\textit{a},from,len) & Zeichenlänge von String \textit{a} beginnend mit from (erster zeichenindex ist 1) \\
+\hline \textit{a} || \textit{b} & verkette Strings \textit{a} und \textit{b} \\
+\hline \$rownum & Nummer der aktuellen Zeile \\
+\hline \$area & Fläche von Polygons \\
+\hline \$perimeter & Durchmesser von Polygons \\
+\hline \$length & Länge von Linien \\
+\hline \$id & Objekt ID \\
+\hline \$x & x Koordinate eines Punktes \\
+\hline \$y & y Koordinate eines Punktes \\
+\hline \textit{a} $\wedge$ \textit{b} & \textit{a} angehoben um die Power von \textit{b} \\
+\hline \textit{a} * \textit{b} & \textit{a} multipliziert mit \textit{b} \\
+\hline \textit{a} / \textit{b} & \textit{a} dividiert durch \textit{b} \\
+\hline \textit{a} + \textit{b} & \textit{a} plus \textit{b} \\
+\hline \textit{a} - \textit{b} & \textit{a} minus \textit{b} \\
+\hline + \textit{a} & Positives Zeichen \\
+\hline - \textit{a} & Negativer Wert von \textit{a} \\
+\hline 
+\caption{Operatoren, die vom Feldrechner unterstützt werden}\\
+\end{longtable}}
+\end{center}
