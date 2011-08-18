@@ -5,109 +5,109 @@
 
 % when the revision of a section has been finalized,
 % comment out the following line:
-\updatedisclaimer
+% \updatedisclaimer
 
-QGIS Server is an open source WMS 1.3 implementation which, in addition,
-implements advanced cartographic features for thematic mapping. The QGIS
-Server is a FastCGI/CGI (Common Gateway Interface) application written in
-C++ that works together with a webserver (e.g. Apache, Lighttpd). It is 
-funded by the EU projects Orchestra, Sany and the city of Uster in 
-Switzerland.
+QGIS Server ist eine Open Source Implementierung des WMS 1.3, die zusätzliche 
+kartographische Funktionen für thematische Karten zur Verfügung stellt. Der QGIS
+Server ist eine FastCGI/CGI (Common Gateway Interface)-Anwendung, ist in C++ 
+geschrieben und arbeitet mit einem Webserver zusammen (z.B. Apache oder Lighttpd). 
+Es wurde mit finanziellen Mitteln des EU Projekts Orchestra, Sany und der 
+Satdt Uster aus der Schweiz entwickelt. 
 
-It uses QGIS as backend for the GIS logic and for map rendering. Furthermore the 
-Qt library is used for graphics and for platform independent 
-C++ programming. In contrast to other WMS software, the QGIS Server uses 
-cartographic rules in SLD/SE as a configuration language, both for the server 
-configuration and for the user-defined cartographic rules. 
+QGIS Server verwendet QGIS im Hintergrund für die GIS-Logik und für das Darstellen 
+der Karte. Weiterhin wird die Qt-Bibliothek für Grafiken und für die 
+plattformunabhängige C++-Programmierung verwendet. Im Gegensatz zu anderer 
+WMS-Software verwendet der QGIS Server kartographische Regeln in SLD/SE als 
+Konfigurationssprache, sowohl für die Server Konfiguration als auch für die 
+benutzerdefinierten kartographischen Regeln.
 
-Moreover, the QGIS Server project provides the 'Publish to Web' plugin, a 
-plugin for QGIS desktop which exports the current layers and symbology as a 
-web project for QGIS Server (containing cartographic visualisation rules 
-expressed in SLD).
+Darüber hinaus bietet das QGIS Server Projekt ein 'Publish to Web' Plugin. 
+Dies ist ein Plugin für den QGIS-Desktop, welches die aktuellen Layer und ihre 
+Darstellung als Web-Projekt für den QGIS Server (mit kartographischen 
+Visualisierung Regeln ausgedrückt in SLD) exportiert.
 
-As QGIS desktop and QGIS Server use the same visualization libraries, the
-maps that are published on the web look the same as in desktop GIS. The 
-Publish to Web plugin currently supports basic symbolization, with more complex 
-cartographic visualisation rules introduced manually. As the configuration is 
-performed with the SLD standard and its documented extensions, there is only 
-one standardised language to learn, which greatly simplifies the complexity 
-of creating maps for the Web.
+Da QGIS Desktop und QGIS Server die gleichen Bibliotheken für die 
+Visualisierung verwenden, sehen die Karten, die im Web veröffentlicht werden, 
+genauso aus wie im Kartenfenster des Desktop-GIS. Das Plugin unterstützt derzeit 
+grundlegenden Symbolisierung. Komplexere kartographischen Visualisierungsregeln 
+müssen noch manuell ergänzt werden. Da die Konfiguration ausschließlich auf dem 
+SLD-Standard beruht und seine Erweiterungen gut dokumentiert sind, muss man nur
+eine standardisierte Sprache lernen. Dies vereinfacht die Komplexität der 
+Erstellung von Karten für das Web enorm.
 
-In one of the following manuals we will provide a sample configuration to 
-set up a QGIS Server. But for now we recommend to read one of the following 
-URLs to get more information:
+In den folgenden Handbüchern werden wir dieses Thema noch ausweiten. Bis dahin 
+empfehlen wir Ihnen die folgenden Internetseiten für weitere Informationen:
 
-\begin{itemize}
-\item \url{http://karlinapp.ethz.ch/qgis\_wms/} \\
-\item \url{http://www.qgis.org/wiki/QGIS\_mapserver\_tutorial} \\
-\item \url{http://linfiniti.com/2010/08/qgis-mapserver-a-wms-server-for-the-masses/}
-\end{itemize}
+\url{http://karlinapp.ethz.ch/qgis\_wms/} \\
+\url{http://www.qgis.org/wiki/QGIS\_Server\_tutorial} \\
+\url{http://linfiniti.com/2010/08/qgis-Server-a-wms-server-for-the-masses/}
 
-\section{Sample installation on Debian Squeeze}
+\section{Beispielinstallation unter Debian Squeeze}
 
-At this point we will give a short and simple sample installation howto for 
-Debian Squeeze. Many other OS provide packages for QGIS Server, too. If you 
-have to build it all from source, please refer to the URLs above.
+An dieser Stelle wollen wir eine kurze und einfache Installationsanleitung für 
+das GNU/Linux Debian Squeeze geben. Viele andere OS bieten auch fertige Pakete 
+für den QGIS Server. Wenn Sie alles aus dem Quellcode erstellen wollen, lesen 
+Sie bitte die URLs oben.
 
-Apart from qgis and qgis-mapserver you need a webserver, in our case apache2. 
-You can install all packages with aptitude or apt-get install together 
-with other necessary dependency packages.
+Abgesehen von QGIS Desktop und QGIS Server benötigen Sie einen Webserver, in 
+unserem Fall apache2. Sie können alle Pakete mit aptitude oder apt-get install 
+zusammen installieren. Alle weiteren notwendigen Pakete werden dann mitinstalliert.
 
-After installation you should test, if the webserver and qgis server works as 
-expected. 
+Nach der Installation sollten Sie testen, ob der Webserver und der QGIS Server 
+wie erwartet funktionieren.
 
-Make sure the apache server is runnung with '/etc/init.d/apache2 start'. Open 
-a web browser and type URL: http://localhost. If apache is up, you should see 
-the message 'It works!'.
+Vergewissern Sie sich, dass der Apache Webserver läuft. Ansonsten starten Sie ihn 
+mit '/etc/init.d/apache2 start'. Öffen Sie nun einen Web-Browser und geben Sie sie 
+URL http://localhost ein. Wenn alles in Ordnung ist, sollten Sie die Meldung 'It 
+works' sehen.
 
-Now we test the qgis server installation. The qgis\_mapserv.fcgi is available at 
-/usr/lib/cgi-bin/qgis\_mapserv.fcgi and provides a standard wms that shows the 
-state boundaries of the Unites States of America \ref{fig:usa_wms}. Add 
-the WMS with the URL http://localhost/cgi-bin/qgis\_mapserv.fcgi as described 
-in section \ref{sec:ogc-wms-servers}.
+Jetzt testen wir die QGIS Server Installation. Die Datei qgis\_mapserv.fcgi finden Sie 
+unter /usr/lib/cgi-bin/qgis\_mapserv.fcgi und stellt einen Test-WMS bereit, der die Staatsgrenzen der Vereinigten Staaten von Amerika zeigt \ref{fig:usa_wms}. Laden Sie 
+den WMS mit der URL http://localhost/cgi-bin/qgis\_mapserv.fcgi wie in Abschnitt 
+\ref{sec:OGC-WMS-Server} beschrieben.
 
 \begin{figure}[ht]
 \centering
 \includegraphics[clip=true, width=9cm]{standard_wms_usa}
-\caption{Standard WMS with USA boundaries included in the qgis server \nixcaption}
+\caption{Standard QGIS Server WMS mit Grenzen der USA \nixcaption}
 \label{fig:usa_wms}
 \end{figure}
 
-\section{Creating a WMS from a QGIS project}
+\section{Erstellen eines WMS aus einem QGIS Projekt}
 
-To provide a new qgis wms server we have to create a qgis project file with some 
-data. Here we use the 'regions' and the 'aiport' shapefiles from the 
-qgis\_sample\_dataset. 
+Um einen neuen QGIS WMS Server zu erstellen, brauchen wir eine QGIS Projekt-Datei 
+mit einigen Layern. Hier verwenden wir die 'regions' und 'airports' Shapefiles 
+aus dem QGIS Beispieldatensatz.
 
-First load the shapefiles and define the colors and styles of the layers in 
-QGIS and define the project CRS, if not already done. In a next step open the 
-\tab{WMS Server} tab under \mainmenuopt{Settings} \arrow \mainmenuopt{Project 
-Properties} and define the fields 'Service Capabilities', 'Coordinate System 
-Restrictions' and 'Advertised Extend'. Additionally you can enable the checkbox 
-\checkbox{Add WKT geometry to feature into response} to make the layers 
-queryable (see figure \ref{fig:wmsdefinition}). Now save the session in a 
-project file 'alaska\_airports.qgs'. 
+Laden Sie zunächst die Shapefiles und definieren Sie die Farben und Stile der Layer 
+und das KBS in QGIS, wenn nicht bereits geschehen ist. Im nächsten Schritt öffnen 
+Sie den \tab{WMS Server} Reiter im Menü \mainmenuopt{Einstellungen} \arrow 
+\mainmenuopt{Projekteigenschaften} und definieren Sie die Felder 
+'Diensteigenschaften', 'Koordinatensystemeinschränkungen' und 'Angezeigt Ausmasse'. Zusätzlich können Sie das Kontrollkästchen \checkbox{WKT-Geometrien in 
+Objektinformationen einschliessen} aktivieren, um die Layer abfragbar zu machen 
+(siehe Abbildung \ref{fig:wmsdefinition}). Speichern Sie nun die Sitzung als 
+Projekt-Datei 'alaska\_airports.qgs'.
 
 \begin{figure}[ht]
 \centering
 \includegraphics[clip=true, width=9cm]{wms_server_definition}
-\caption{Definitions for a qgis project WMS server \nixcaption}
+\caption{Definitionen für einen QGIS Projekt WMS Server \nixcaption}
 \label{fig:wmsdefinition}
 \end{figure}
 
-To provide the project as a WMS, we create a new folder '/usr/lib/cgi-bin/project' 
-with admin privileges and add the project file 'alaska\_airports.qgs' and a copy 
-of the qgis\_mapserv.fcgi file - that's all.
+Um das Projekt als WMS bereitzustellen, erstellen Sie einen neuen Ordner 
+'/usr/lib/cgi-bin/project' mit Admin-Rechten und fügen Sie die Projekt-Datei 
+'alaska\_airports.qgs' und eine Kopie der qgis\_mapserv.fcgi Datei hinzu. 
+Das ist alles.
 
-Now we test our project WMS, add the WMS with the URL 
-http://localhost/cgi-bin/project/qgis\_mapserv.fcgi as described in section 
-\ref{sec:ogc-wms-servers} to QGIS and load the WMS, see figure 
-\ref{fig:wmsproject}.
+Nun testen wir den Projekt WMS. Laden Sie den WMS mit der URL 
+'http://localhost/cgi-bin/project/qgis\_mapserv.fcgi' wie in Abschnitt 
+\ref{sec:ogc-wms-servers} beschrieben in QGIS. Siehe Abbildung \ref{fig:wmsproject}.
 
 \begin{figure}[ht]
 \centering
 \includegraphics[clip=true, width=\textwidth]{wms_server_project}
-\caption{QGIS WMS Server based on a qgis project \nixcaption}
+\caption{QGIS WMS Server basierend auf einem QGIS Projekt \nixcaption}
 \label{fig:wmsproject}
 \end{figure}
 
