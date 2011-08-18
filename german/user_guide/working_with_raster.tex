@@ -6,31 +6,29 @@
 
 % when the revision of a chapter has been finalized, 
 % comment out the following line:
-\updatedisclaimer
+%\updatedisclaimer
 
 Dieses Kapitel beschreibt, wie Rasterlayer visualisiert und ihre
-Eigenschaften (Darstellung, Farben, Kanäle) festgelegt werden können. QGIS
-unterstützt eine Vielzahl von Rasterformaten. Bisher getestete Formate sind:
-\index{Rasterlayer!Datenformate}
+Eigenschaften (Darstellung, Farben, Kanäle) festgelegt werden können. 
+QGIS benutzt die GDAL-Bibliothek, um Vektorformate zu lesen und zu schreiben.
+\footnote{GRASS Rastersupport wird durch einen eigenen QGIS Datenprovider 
+bereitgestellt.} Unterstützt werden eine Vielzahl von Rasterformaten
+\index{Rasterlayer!Datenformate}, wie Arc/Info Binary Grid
+\index{Rasterlayer!Arc/Info Binary Grid}, GeoTIFF
+\index{Rasterlayer!GeoTIFF} oder ERDAS Img
+\index{Rasterlayer!ERDAS Img}.
 
-\begin{itemize}[label=--]
-\item Arc/Info Binary Grid
-\item Arc/Info ASCII Grid
-\item GRASS Raster
-\item GeoTIFF
-\item JPEG
-\item Spatial Data Transfer Standard Grids (mit einigen Einschränkungen)
-\item USGS ASCII DEM
-\item Erdas Imagine
-\end{itemize}
+Aktuell werden mehr als 100 Rasterformate durch die GDAL-Bibliothek 
+unterstützt. Sie finden eine komplette Liste unter der URL 
+\url{http://www.gdal.org/formats_list.html}.
 
-Da die Rasterimplementation in QGIS auf der GDAL-Bibliothek basiert, ist es
-wahrscheinlich, dass auch andere durch GDAL unterstützte Rasterformate
-unterstützt werden. Vergleichen Sie dazu \ref{appdx_gdal} für weitere
-Details.\index{Rasterlayer!GDAL Implementation} oder
-\url{http://www.gdal.org/formats_list.html}. Wenn Sie Rasterlayer aus einer
-GRASS Location laden möchten, lesen Sie bitte in
-Kapitel~\ref{sec:load_grassdata} weiter.
+\textbf{Note}: Einige der aufgelisteten Formate können auf ihrem Rechner aus unterschiedlichen Gründen nicht unterstützt werden. Einige brauchen z.B. 
+kommerzielle Bibliotheken oder die GDAL Installation auf Ihrem Rechner, wurde 
+ohne die Unterstützung für das entsprechende Format erstellt. Nur Formate, die 
+getestet wurden, können ausgewählt werden, wenn Sie eine Rasterdatei in QGIS 
+laden. Alle anderen werden angezeigt, wenn Sie *.* auswählen.
+
+Das Arbeiten mit GRASS Rasterdaten wird in Kapitel \ref{sec:grass} vorgestellt.
 
 \section{Was ist ein Rasterlayer?}\label{label_whatsraster}
 \index{Rasterlayer!Definition}
@@ -78,6 +76,8 @@ Optionen:\index{Rasterlayer!Layereigenschaften}
 \item \dropmenuopt{Auf besten Maßstab zoomen (100\%)}
 \item \dropmenuopt{In der Übersicht anzeigen}
 \item \dropmenuopt{Entfernen}
+\item \dropmenuopt{KBS für Layer setzen}
+\item \dropmenuopt{Layer-KBS dem Projekt zuweisen}
 \item \dropmenuopt{Eigenschaften}
 \item \dropmenuopt{Umbenennen}
 \item \dropmenuopt{Gruppe hinzufügen}
@@ -92,7 +92,7 @@ Abbildung \ref{fig:raster_properties} zeigt das Dialogfenster
 \dialog{Rastereigenschaften} mit verschiedenen Reitern:
 
 \begin{itemize}[label=--]
- \item \tab{Darstellung}
+ \item \tab{Stil}
  \item \tab{Transparenz}
  \item \tab{Farbkarte}
  \item \tab{Allgemein}
@@ -109,7 +109,7 @@ Abbildung \ref{fig:raster_properties} zeigt das Dialogfenster
 \end{center}  
 \end{figure}
 
-\subsection{Darstellung}\label{label_sombology}
+\subsection{Stil}\label{label_symbology}
 
 QGIS unterstützt zwei unterschiedliche Arten der Darstellung von
 Rasterlayern:\index{Rasterlayer!unterstützte Kanäle}
@@ -146,12 +146,12 @@ Kapitel~\ref{label_colormaptab}.
 QGIS kann so eingestellt werden, dass nur Rasterzellen gezeigt werden, die
 Werte innerhalb eines definierten Minimum und Maximum oder einer
 Standarbweichung zum Mittelwert des Layers enthalten.
-\index{Rasterlayer!Standardabweichung} Dies ist nützlich, wenn man Layer anzeigen lassen
-möchte, bei denen einzelne Zellen extrem abweichende Werte haben, was einen
-negativen Einfluss auf die Darstellung in QGIS hat. Diese Extrema des Kanals
-können Sie manuell eingeben, oder statistisch schätzen oder genau bestimmen.
-Außerdem können Sie den Kontrast der Kanäle (Bänder) mit folgenden Optionen
-verbessern:
+\index{Rasterlayer!Standardabweichung} Dies ist nützlich, wenn man Layer 
+anzeigen lassen möchte, bei denen einzelne Zellen extrem abweichende Werte 
+haben, was einen negativen Einfluss auf die Darstellung in QGIS hat. 
+Diese Extrema des Kanals können Sie manuell eingeben, oder statistisch 
+schätzen oder genau bestimmen. Außerdem können Sie den Kontrast der 
+Kanäle (Bänder) mit folgenden Optionen verbessern:
 
 \begin{itemize}[label=--]
 \item Kein Strecken (Dies ist Standardeinstellung)
@@ -167,6 +167,13 @@ Wert für den Blau- und Grünkanal auf 'Nicht gesetzt' stellen sollten. Dies
 ist aber nicht der richtige Weg. Setzen Sie hierzu den Bildtyp auf Graustufen
 und wählen dann Rot als Kanal, den Sie als Graustufenbild anzeigen möchten.
 \end{Tip}
+
+\minisec{Drei-Kanal-Farben}
+
+Wenn Ihr Datensatz mehr als 1 Kanal bereitstellt, können Sie an dieser Stelle 
+eine Vielzahl von Einstellungsmöglichkeiten nutzen, um das Erscheinungsbild der 
+Rasterkarte zu beeinflussen. Sie können z.B. die Kombination der 
+Farbkanäle ändern.
 
 \subsection{Transparenz} \label{rastertab:transparency}
 
@@ -205,12 +212,12 @@ Es ist sehr einfach und Sie können diese Schritte beliebig oft wiederholen
 und die Werte anpassen. Wenn Sie die passenden Werte gefunden haben, können
 Sie diese mit dem Knopf \toolbtntwo{mActionFileSave}{Exportieren in Datei}
 speichern bzw. bereits abgespeicherte Werte mit dem Knopf
-\toolbtntwo{mActionFileOpen}{Datei importieren} wieder laden.
+\toolbtntwo{mActionFolder}{Datei importieren} wieder laden.
 
 \subsection{Farbkarte} \label{label_colormaptab}
 
 Der Reiter \tab{Farbkarte} ist nur aktiv, wenn Sie im Reiter
-\tab{Darstellung} im Bereich Einfachbandeigenschaften als Farbabbildung den
+\tab{Stil} im Bereich Einfachbandeigenschaften als Farbabbildung den
 Eintrag Farbkarte gewählt haben (Siehe Kapitel~\ref{label_sombology}).
 
 Es gibt drei Möglichkeiten der Farbinterpolation: 
@@ -225,17 +232,19 @@ Der Knopf \button{Eintrag hinzufügen} ergänzt eine Farbe zur individuellen
 Farbtabelle. Indem Sie auf einen Wert innerhalb der Spalte Value drücken,
 können Sie einen bestimmten Pixelwert eintragen. Wenn Sie dann daneben auf
 das Feld in der Spalte Farbe klicken öffnet sich der Dialog
-\dialog{Farbauswahl} und Sie können dem Pixelwert eine Farbe zuweisen.
+\dialog{Farbauswahl} und Sie können dem Pixelwert eine Farbe zuweisen. Mit 
+dem Knopf \button{Eintrag löschen} können Sie einzelne Farbwerte wieder 
+löschen und mit \button{Sortieren} die Einträge sortieren.
 
 Alternativ können Sie auch auf den Knopf
-\toolbtntwo{mActionFileOpen}{Farbabbildung aus Datei laden} drücken, um eine
+\toolbtntwo{mActionFileOpen}{Farbabbildung aus Kanal laden} drücken, um eine
 Farbtabelle aus einer bereits vorhandenen Datei zu laden. In dem Bereich
 'Neue Farbabbildung generieren' können Sie eine neue Farbtabelle mit
 definierten Klassen erstellen. Wählen Sie dazu eine
 \selectnumber{Eintragsanzahl}{14} und drücken Sie auf den Knopf
-\button{Klassifizieren}. In dieser QGIS Version steht nur der
-\selectstring{Klassifikationsmodus}{Gleiches Interval} zur
-Verfügung.\index{Rasterlayer!Klassifizierung}.
+\button{Klassifizieren}. Aktuell steht der 
+\selectstring{Klassifikationsmodus}{Gleiches Intervall} zur Verfügung.
+\index{Rasterlayer!Klassifizierung}.
 
 \subsection{Allgemein}\label{label_generaltab}
 
@@ -289,23 +298,22 @@ vorher eine Kopie.
 
 \subsection{Histogramm}\label{raster_histogram}
 
-Der Reiter \tab{Histogramm} ermöglicht es, ein Histogramm der Werteverteilung
-eines Rasterlayers zu erstellen, und damit die Pixelverteilung
-darzustellen.\index{Rasterlayer!Histogramm} Es gibt zwei Arten der
-Visualisierung: 
+Der Reiter \tab{Histogramm} erstellt ein Histogramm der Werteverteilung
+eines Rasterlayers.\index{Rasterlayer!Histogramm}. Das Histogramm wird 
+automatisch erstellt, wenn man den Reiter öffnet.
 
-\begin{itemize}[label=--]
-\item Balkendiagramm
-\item Kurvendiagramm
-\end{itemize}
-
-Klicken Sie dazu erst auf den Knopf \button{Erneuern} und wählen Sie dann die
-Kanäle (falls mehrere vorhanden sind) aus, die angezeigt werden sollen.
-Die Berechneten Werte werden dann auch in dem Reiter \tab{Metadaten}
-ergänzt.\index{Rasterlayer|)} Zusätzlich können Sie noch die Anzahl der
-Diagrammspalten festlegen und
-auswählen, ob \checkbox{Bereichsüberschreitung erlaubt} ist, oder ob Sie
-\checkbox{Approximation erlauben}.
+%\begin{itemize}[label=--]
+%\item Balkendiagramm
+%\item Kurvendiagramm
+%\end{itemize}
+%
+%Klicken Sie dazu erst auf den Knopf \button{Erneuern} und wählen Sie dann die
+%Kanäle (falls mehrere vorhanden sind) aus, die angezeigt werden sollen.
+%Die Berechneten Werte werden dann auch in dem Reiter \tab{Metadaten}
+%ergänzt.\index{Rasterlayer|)} Zusätzlich können Sie noch die Anzahl der
+%Diagrammspalten festlegen und
+%auswählen, ob \checkbox{Bereichsüberschreitung erlaubt} ist, oder ob Sie
+%\checkbox{Approximation erlauben}.
 
 \begin{Tip}\caption{\textsc{Statistikwerte für Rasterlayer sammeln}}
 Um statistische Informationen klicken Sie auf \texttt{Erneuern}.
@@ -349,5 +357,13 @@ mit den nächsten Versionen sicherlich noch wachsen.
 
 Mit dem Kontrollkästchen \checkbox{Ergebnis zum Projekt hinzufügen} wird der 
 Ergebnislayer automatisch im QGIS Kartenfenster visualisiert. 
+
+\section{Rasteranalysen}\label{sec:raster_analysis}
+\index{Raster!Rasteranalyse}
+\index{Rasteranalyse}
+
+Abgesehen vom Rasterrechner werden alle weiteren Rasteranalysen durch das 
+GDAL Tools Plugin (siehe Kapitel \ref{label_plugingdaltools}) und ein paar 
+weitere externe Python Plugins bereitgestellt.  
 
 \FloatBarrier
