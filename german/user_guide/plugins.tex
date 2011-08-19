@@ -7,7 +7,7 @@
 
 % when the revision of a chapter has been finalized, 
 % comment out the following line:
-\updatedisclaimer
+%\updatedisclaimer
 
 QGIS wurde mit einer Plugin-Architektur geplant. Dies erlaubt das einfache
 Einfügen weiterer Funktionalitäten in das Programm. Viele der
@@ -83,6 +83,45 @@ ist.
 \label{sec:load_external_plugin}
 \index{Externe Plugins!laden} 
 
+Externe QGIS Plugins sind in der Sprache Python geschrieben. Sie sind auf
+einem Server entweder im sogenannten 'Official' oder 'User contributed'
+Repository abgelegt. Darüberhinaus gibt es noch zahlreiche, weitere externe
+Repositories, die von den jeweiligen Autoren gepflegt werden. Diese 
+können automatisch mit dem Plugin Installer verfügbar gemacht werden, wenn 
+Sie diese Erweiterung geladen und im Menü \mainmenuopt{Erweiterungen} 
+\arrow \dropmenuopttwo{plugin_installer}{Python Erweiterung herunterladen} 
+gestartet haben.
+
+Eine ausführliche Dokumentation über die Verwendung, notwendige QGIS Version, 
+Homepage, Autoren, und weitere Informationen werden mit dem externen Plugins 
+selbst bereitgestellt. Sie sind in diesem Handbuch nicht enthalten. 
+\footnote{Updates von Kern-Plugins können auch über externe Repositories 
+bereitgestellt werden.}\footnote{fTools, Mapserver Export und der Plugin 
+Installer selbst sind Python-Plugins, aber gleichzeitig auch Teil des 
+Quellcodes. Sie werden automatisch geladen und aktiviert im QGIS Plugin 
+Manager (siehe Abschnitt~\ref{sec:load_external_plugin}).}
+
+Aktuell gibt es über 120 externe Plugins aus dreizehn aufgelisteten 
+Repositories. Einige dieser Plugins bieten Funktionalität, die von vielen 
+Benutzern verwendet werden (zum Beispiel die Möglichkeit, OpenStreetMap 
+Daten oder Google Map Layer zu laden). Andere bieten sehr spezielle 
+Funktionen (zum Beispiel: Berechnung von Rohrdurchmessern für die 
+wirtschaftliche Wasserversorgung).
+
+Letztlich ist es aber ganz einfach, mit Schlüsselwörtern, der Eingrenzung 
+von Repositories oder das Filtern des Plugin Status (installiert oder nicht installiert) 
+die verfügbaren externen Plugins zu durchsuchen. Das Suchen und Filtern übernimmt der 
+Plugin Manager (siehe Abbildung~\ref{fig:plugininstaller}).
+
+\begin{Tip} \caption{\textsc{Weitere externe Plugin Repositorys hinzufügen}}
+Um ein 'User contributed' oder Anwender-Repository hinzuzufügen, öffnen
+Sie den Plugin Installer im Menü \mainmenuopt{Plugins} \arrow
+\dropmenuopttwo{plugin_installer}{Python Plugins herunterladen}. Nun wechseln
+Sie in den Reiter \tab{Repositorys} und klicken auf den Knopf \button{Plugin
+Repositorys hinzufügen}. Sie können bereits hinzugefügte Plugin Repositorys
+auch deaktivieren oder ganz aus der Liste löschen.
+\end{Tip}
+
 Um externe Plugins in QGIS integrieren zu können ist nur ein Schritt notwendig. 
 
 \begin{enumerate}
@@ -93,7 +132,7 @@ steht dann zur Verfügung.
 \end{enumerate}
 
 \subsection{Plugin Installer verwenden}\index{Plugins!Installieren}\label{sec:python_plugin_installer}
-\index{Plugins!Python Plugin Installer}\index{Plugins!aktualisieren}
+\index{Plugins!Plugin Installer}\index{Plugins!aktualisieren}
 
 \begin{figure}[ht]
    \begin{center}
@@ -105,7 +144,7 @@ steht dann zur Verfügung.
 
 Um ein externes Plugin herunterzuladen und zu installieren, klicken Sie auf
 das Menü \mainmenuopt{Plugins} \arrow \dropmenuopttwo{plugin_installer}{Python
-Plugins herunterladen}. Der \dialog{Plugin Installer} Dialog öffnet sich mit
+Erweiterungen herunterladen}. Der \dialog{Plugin Installer} Dialog öffnet sich mit
 dem Reiter \tab{Plugins} (siehe Abbildung~\ref{fig:plugininstaller}). Sie
 sehen nun eine Liste aller in den eingebundenen Repositories vorhandenen
 Python Plugins sowie die bereits auf dem Rechner installierten. Jedes Plugin
@@ -233,8 +272,8 @@ Testzwecken.
 
 Datenprovider sind 'spezielle' Plugins, welche die Verbindung zur Datenquelle
 erstellen. Standardmäßig unterstützt QGIS Postgis-Layer und disk-basierte
-Datenquellen, die von der Bibliothek GDAL/OGR unterstützt werden (siehe
-Anhang~\ref{appdx_ogr}). Ein Datenprovider Plugin erweitert QGIS beim Nutzen von
+Datenquellen, die von der Bibliothek GDAL/OGR unterstützt werden. Ein 
+Datenprovider Plugin erweitert QGIS beim Nutzen von
 anderen Datenquellen. Datenprovider Plugins werden automatisch beim 
 Starten im System registriert. Sie werden nicht durch den Pluginmanager 
 verwaltet, werden jedoch im Hintergrund benutzt, wenn ein entsprechender 
