@@ -1,39 +1,40 @@
 %  !TeX  root  =  user_guide.tex
 
-\section{Offline Editing Plugin}\label{sec:offlinedit}
+\section{Offline Bearbeitung}\label{sec:offlinedit}
 
 % when the revision of a section has been finalized, 
 % comment out the following line:
-\updatedisclaimer
+% \updatedisclaimer
 
-For data collection, it is a common situation to work with a laptop or a cell 
-phone offline in the field. Upon returning to the network, the changes need to 
-be synchronized with the master data source, e.g. a PostGIS database. If several 
-persons are working simultaneously on the same datasets, it is difficult to 
-merge the edits by hand, even if people don't change the same features.
+Bei der Datenerfassung ist es eine alltägliche Situation, um mit einem 
+Laptop oder Smartphone im Gelände offline zu arbeiten. Nach der Rückkehr 
+müssen die Änderungen wieder mit der Master-Datenquelle, z.B. einer PostGIS 
+Datenbank synchronisiert werden. Wenn mehrere Personen gleichzeitig mit 
+denselben Datenbeständen arbeiten, ist es meist schwierig, die Änderungen 
+von Hand zu verschmelzen, selbst wenn unterschiedliche Objekte verändert 
+wurden.
 
-The \toolbtntwo{offline_editing_copy}{Offline Editing} Plugin automates the 
-synchronisation by copying the content of a datasource (usually PostGIS or 
-WFS-T) to a spatialite database and storing the offline edits to dedicated 
-tables. After being connected to the network again, it is possible to apply 
-the offline edits to the master dataset.
+Die Erweiterung \toolbtntwo{offline_editing_copy}{Offline Bearbeitung} 
+automatisiert die Synchronisation durch Kopieren des Inhalts einer 
+Datenquelle (in der Regel PostGIS oder WFS-T) zu einer SpatiaLite Datenbank mit dedizierten Tabellen. Nachdem man wieder mit dem Netzwerk verbunden ist, 
+können die Offline-Änderungen wieder an die Master-Datenquell zurückgespielt 
+werden.
 
-\minisec{Using the plugin}
+\minisec{Verwendung der Erweiterung}
 
 \begin{itemize}
-\item Open some vector layers, e.g. from a PostGIS or WFS-T datasource
-\item Save it as a project
-\item Press the 'Convert to offline project' button and select the layers to 
-save. The content of the layers is saved to spatialite tables.
-\item Edit the layers offline.
-\item After being connected again, upload the changes with the 'Synchronize' 
-button.
+\item Laden Sie ein paar Vektorlayer, z.B. aus PostGIS oder WFS-T Datenquellen.
+\item Speichern Sie die Einstellungen als Projekt.
+\item Öffnen Sie den Dialog 'Offline Projekt erzeugen' und wählen Sie die Layer 
+aus, die gespeichert werden sollen. Sie werden in SpatiaLite Tabellen abgelegt.
+\item Editieren Sie die Layers offline.
+\item Nachdem Sie wieder mit dem Internet verbunden sind, laden Sie die Änderungen wieder zurück, in dem Sie den 'Synchronisieren' Knopf drücken.
 \end{itemize}
 
 \begin{figure}[ht]
    \centering
    \includegraphics[clip=true, width=12cm]{create_offline_project}   
-   \caption{Create an offline project from PostGIS or WFS layers \nixcaption}
+   \caption{Erstellen eines Offline-Projektes mit PostGIS Daten \nixcaption}
    \label{fig:offlineproject}
 \end{figure}
 
