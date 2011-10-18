@@ -1,104 +1,98 @@
-%!TeX  root  =  user_guide.tex
+%  !TeX  root  =  user_guide.tex
 
-\chapter{Using QGIS Core Plugins}\label{sec:core_plugins}\index{plugins!core}
+%\section{Using QGIS Core Plugins}\label{sec:core_plugins}\index{extensions!core}
+\chapter{Utilisation des extensions principales de \qg}\label{sec:core_plugins}\index{extensions!principales}
 
 % when the revision of a section has been finalized, 
 % comment out the following line:
-% \updatedisclaimer
+%\updatedisclaimer
+
+%\qg \CURRENT contains 22 core plugins that can be loaded using the Plugin 
+%Manager (see Table \ref{tab:core_plugins}).
+
+\qg \CURRENT contient 22 extensions principales qui peuvent être chargées depuis
+le Gestionnaire d'Extensions.
+
+% minipage is needed to appear the footnote under the table
+% SH
 
 {\setlength{\extrarowheight}{15pt}
 \small
-\begin{longtable}{|p{1.2cm}|p{3.8cm}|p{7.5cm}|p{3cm}|}
-\caption{26 QGIS Core Plugins}\label{tab:core_plugins} \\
-\hline
- \textbf{Icon} & \textbf{Plugin} & \textbf{Description} & \textbf{Manual Reference}\\
+\begin{longtable}{|p{1cm}|p{4cm}|p{8cm}|}
+\hline \textbf{Icône} & \textbf{Extension} & \textbf{Description} \\
 \endfirsthead
-\hline
-\textbf{Icon} & \textbf{Plugin} & \textbf{Description} & \textbf{Manual Reference}\\
+\hline \textbf{Icône} & \textbf{Extension} & \textbf{Description} \\
 \endhead
-\hline
+\hline 
 \includegraphics[width=0.6cm]{delimited_text}
- & Add Delimited Text Layer \index{plugins!delimited text} & Loads and displays delimited text files containing x,y coordinates & Chapter \ref{label_dltext}\\
+ & Ajouter une couche texte délimité \index{extensions!texte delimite} & Charger et afficher des fichiers texte délimité contenant des coordonnées x et y\\
 \hline
 \includegraphics[width=0.6cm]{coordinate_capture}
- & Coordinate Capture \index{plugins!coordinate capture}& Capture mouse coordinate in different CRS & Chapter \ref{coordcapt}\\
+ & Saisie de coordonnées \index{extensions!saisie de coordonnees} & Capturer les coordonnées de la souris dans différents SCR\\
 \hline 
 \includegraphics[width=0.6cm]{copyright_label}
- & Copyright Label \index{plugins!copyright}& Draws a copyright label with information & Chapter \ref{copyrightlabel}\\
+ & Etiquette de copyright \index{extensions!copyright} & Afficher une étiquette de copyright avec les informations associées\\
 \hline
-\includegraphics[width=0.6cm]{plugin}
- & Diagram Overlay \index{plugins!diagram}& Placing diagrams on vector layers & Chapter \ref{sec:diagram}\\
-\hline
-\includegraphics[width=0.6cm]{plugin}
- & Displacement plugin \index{plugins!point displacement}& Add new renderer that automatically handles point displacement in case they have the same position & Chapter \ref{new_generation_sym}\\
+\includegraphics[width=0.6cm]{diagram_overlay}
+ & Diagramme de couche \index{extensions!diagram} & Placer des graphiques (camemberts, barres) ou des symboles proportionnels sur des couches vectorielles\\
 \hline
 \includegraphics[width=0.6cm]{dxf2shp_converter}
- & DXF2Shape Converter \index{plugins!DXF2Shape}& Converts from DXF to SHP file format & Chapter \ref{dxf2shape}\\
+ & Convertisseur DXF2Shape \index{extensions!DXF2Shape} & Convertir un fichier au format DXF vers le format SHP\\
 \hline
-\includegraphics[width=0.6cm]{plugin}
- & eVis & Event Visualization Tool & Chapter \ref{sec:evis}\\
+\includegraphics[width=0.6cm]{evis_icon}
+ & eVis & Outil de Visualisation d'Événements\\
 \hline
-\includegraphics[width=0.6cm, height=0.6cm]{ftoolslogo}
- & fTools \index{plugins!ftools}& A suite of analysis, geometry, geoprocessing, and research tools & Chapter \ref{sec:ftools}\\
+\includegraphics[width=0.6cm, height=0.6cm]{ftools_logo}
+ & fTools \index{extensions!ftools} & Une suite d'outils de recherche, d'analyse, de géométrie et de géotraitement\\
+\hline
+ & Outils GDAL \index{extensions!gdaltools} & Une interface graphique simplifiée pour les programmes de traitement raster GDAL\\
 \hline
 \includegraphics[width=0.6cm]{gps_importer}
- & GPS Tools \index{plugins!gps}& Tools for loading and importing GPS data & Chapter \ref{label_plugingps}\\
+ & Outils GPS \index{extensions!gps} & Charger et importer des données GPS\\
 \hline
 \includegraphics[width=0.6cm]{grass}
- & GRASS \index{plugin!grass toolbox} & Activates the mighty GRASS Toolbox & Chapter \ref{sec:grass}\\
-\hline
-\includegraphics[width=0.6cm, height=0.6cm]{raster-info}
- & GDAL Tools \index{plugins!gdaltools} & Raster tools: simplified graphical interface for most commonly used programs & Chapter \ref{label_plugingdaltools}\\
+ & GRASS \index{extensions!\grass!boîte à outils} & Activer la puissante boîte à outils GRASS\\
 \hline
 \includegraphics[width=0.6cm]{georeferencer}
- & Georeferencer GDAL \index{plugin!georeferencer} & Adding projection info to Rasterfiles using GDAL & Chapter \ref{sec:georef}\\
+ & Géoréférencer \index{extensions!géoréférencement} & Ajouter des informations de projection aux fichiers raster\\
 \hline
 \includegraphics[width=0.6cm]{interpolation}
-& Interpolation plugin \index{plugins!Interpolation}& Interpolation on base of vertices of a vector layer & Chapter \ref{sec:interpol}\\
-\hline
-\includegraphics[width=0.6cm]{mapserver_export}
-& MapServer Export Plugin \index{plugins!MapServer Export}& Export a saved QGIS project file to a MapServer map file & Chapter \ref{sec:mapserver_export} \\
-\hline
-\includegraphics[width=0.6cm]{north_arrow}
-& North Arrow \index{plugins!north arrow}& Displays a north arrow overlayed onto the map & Chapter \ref{northarrow}\\
-\hline
-\includegraphics[width=0.6cm]{offline_editing_copy}
- & Offline Editing & Offline editing and synchronizing with database & Chapter \ref{sec:offlinedit}\\
-\hline
-\includegraphics[width=0.6cm]{osm_load}
- & OpenStreetMap & Visualize and edit OpenStreetMap data & Chapter \ref{plugins_osm}\\
-\hline
-\includegraphics[width=0.6cm]{oracle_raster}
- & Oracle Spatial Georaster \index{plugins!georaster}& Access Oracle Spatial GeoRasters & Chapter 
-\ref{sec:oracleraster}\\
-\hline
-\includegraphics[width=0.6cm]{plugin_installer}
- & Plugin Installer \index{plugins!Plugin Installer} & Download and install python plugins & Chapter \ref{sec:python_plugin_installer}\\
+& Interpolation \index{extensions!Interpolation} & Interpolation sur la base de sommets d'une couche vectorielle\\
 \hline
 \includegraphics[width=0.6cm]{raster_terrain}
-& Raster Terrain Modelling \index{plugins!Raster Terrain Modelling}& Compute slope, aspect,
-ruggedness and total curvature of DEMs & Chapter \ref{sec:rasterrain}\\
+& Modelisateur de terrain \index{extensions!Raster Terrain Modelling} & Calculer la pente, l'aspect et la courbure totale des MNT\\
 \hline
-\includegraphics[width=0.6cm]{plugin}
- & Road graph Plugin \index{plugins!road graph} & Solve shortest path problem & Chapter \ref{sec:roadgraph} \\
+\includegraphics[width=0.6cm]{mapserver_export}
+& Export MapServer \index{extensions!export MapServer} & Exporter un projet \qg au format mapfile de MapServer\\
+\hline
+\includegraphics[width=0.6cm]{north_arrow}
+& Flèche Nord \index{extensions!north arrow} & Afficher une rose des vents au premier plan de la carte\\
+\hline
+\includegraphics[width=0.6cm]{ogr_converter}
+ & Convertisseur OGR \index{extensions!convertisseur OGR} & Convertir les couches vectorielles dans les différents formats supportés par OGR\\
+\hline
+\includegraphics[width=0.6cm]{osm_icon}
+ & OpenStreetMap & Visualiser et éditer des données OpenStreetMap\\
+\hline
+\includegraphics[width=0.6cm]{oracle_raster}
+ & Georaster Oracle \index{extensions!georaster} & Accéder à des géorasters d'Oracle Spatial\\
+\hline
+\includegraphics[width=0.6cm]{plugin_installer}
+ & Installateur d'extensions \index{extensions!installation} & Télécharger et installer des extensions Python pour \qg\\
 \hline
 \includegraphics[width=0.6cm]{spiticon}
- & SPIT \index{plugins!spit} & Shapefile to Postgres/PostGIS Import Tool & Chapter \ref{sec:loading_postgis_data} \\
- \hline
-\includegraphics[width=0.6cm]{plugin}
- & SQL Anywhere plugin \index{plugins!SQL anywhere} &  Store vector layers 
-within a SQL anywhere database & Chapter \ref{sec:sqlanywhere} \\
- \hline
-\includegraphics[width=0.6cm]{scale_bar}
- & Scalebar \index{plugins!scalebar}& Draws a scale bar & Chapter \ref{scalebar} \\
+ & SPIT \index{extensions!spit} & Outil d'import de fichiers Shape vers PostgreSQL/PostGIS\\
 \hline
-\includegraphics[width=0.6cm]{spatialquery}
- & Spatial Query & Make spatial queries on vector layers & Chapter \ref{sec:spatial_query} \\
+\includegraphics[width=0.6cm]{quick_print}
+ & Impression rapide \index{extensions!impression rapide} & Imprimer rapidement une carte avec un minimum d'efforts\\
+\hline
+\includegraphics[width=0.6cm]{scale_bar}
+ & Barre d'échelle \index{extensions!barre d'échelle} & Afficher une barre d'échelle au premier plan de la carte\\
 \hline
 \includegraphics[width=0.6cm]{mIconAddWfsLayer}
- & WFS Plugin & Add WFS layers to the QGIS canvas & Chapter \ref{sec:ogc-wfs} \\
+ & WFS & Charger et afficher une couche WFS\\
 \hline
 \end{longtable}}
 
-\newpage
-
+%\caption{Les extensions principales de \qg}\label{tab:core_plugins}
+%\end{table}
